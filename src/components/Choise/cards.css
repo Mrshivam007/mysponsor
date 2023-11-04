@@ -1,0 +1,21 @@
+.line {
+    border-top: 2px solid rgba(0, 78, 169, 0.50);
+    text-align: center;
+    position: relative;
+}
+.card_line {
+    border-top: 1px solid rgba(0, 78, 169, 0.50);
+    text-align: center;
+    position: relative;
+}
+
+.heading {
+    background-color: #fff;
+    padding: 0 20px;
+    position: absolute;
+    color: black;
+    font-weight: bold;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+}
