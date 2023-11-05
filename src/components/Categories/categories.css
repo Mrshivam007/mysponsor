@@ -1,0 +1,44 @@
+.box1 {
+    position: relative;
+    margin: auto;
+    padding: 2%;
+    width: 80%;
+    height: 50%;
+    margin-bottom: 5%;
+    margin-top: -30em;
+    border-radius: 20px;
+    border: 1px solid #FFF;
+    background: rgba(0, 117, 255, 0.10);
+    box-shadow: 0px 2px 20px -4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(26.5px);
+    z-index: 1;
+}
+
+.wow1 {
+    background: linear-gradient(180deg, #4FD0FF 0%, #2589FF 100%);
+}
+
+.wow2 {
+    background: linear-gradient(180deg, #FF4C7F 0%, #FF414C 100%);
+
+}
+
+.bg-image1 {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background: url("../../assets/img/bg_ctgrs_lft.svg");
+    background-repeat: no-repeat;
+    background-position: left;
+    z-index: -1;
+}
+
+.bg-image2 {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background: url("../../assets/img/bg_ctgrs_rt.svg");
+    background-repeat: no-repeat;
+    background-position: right;
+    z-index: -1;
+}
