@@ -37,6 +37,12 @@ const Sponser = () => {
                     style={{ width: "100%" }}
                     className="sponser_card_img"
                   />
+                  <div class="text-overlay">
+                    <p className="text-lg font-weight-bold mb-0 ">
+                      Ganesh Chaturthi
+                    </p>
+                    <p>Durg, C.G.</p>
+                  </div>
                 </div>
               </div>
               <div className="body">
@@ -83,6 +89,12 @@ const Sponser = () => {
                     style={{ width: "100%" }}
                     className="sponser_card_img"
                   />
+                  <div class="text-overlay">
+                    <p className="text-lg font-weight-bold mb-0 ">
+                      Ganesh Chaturthi
+                    </p>
+                    <p>Durg, C.G.</p>
+                  </div>
                 </div>
               </div>
               <div className="body">
@@ -129,6 +141,12 @@ const Sponser = () => {
                     style={{ width: "100%" }}
                     className="sponser_card_img"
                   />
+                  <div class="text-overlay">
+                    <p className="text-lg font-weight-bold mb-0 ">
+                      Ganesh Chaturthi
+                    </p>
+                    <p>Durg, C.G.</p>
+                  </div>
                 </div>
               </div>
               <div className="body">
@@ -175,6 +193,12 @@ const Sponser = () => {
                     style={{ width: "100%" }}
                     className="sponser_card_img"
                   />
+                  <div class="text-overlay">
+                    <p className="text-lg font-weight-bold mb-0 ">
+                      Ganesh Chaturthi
+                    </p>
+                    <p>Durg, C.G.</p>
+                  </div>
                 </div>
               </div>
               <div className="body">
