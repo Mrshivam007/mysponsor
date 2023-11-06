@@ -48,3 +48,60 @@ body {
     cursor: pointer;
   }
 
+  .subhead-banner{
+    color: white;
+  }
+  .head-banner{
+    color: white;
+  }
+  .banner-text-area {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .link-banner{
+    background-color: white;
+    color: blue;
+    font-weight: bold;
+    border-radius: 16px;
+  }
+
+  @media (max-width: 767px) {
+    .page-banner {
+      background-image: none !important; /* Use !important to override inline styles */
+      margin: 0px !important;
+      background-color: white !important;
+  }
+    h3, h1 {
+        display: block;
+    }
+
+
+    .banner-text-area {
+      padding: 0% 4% !important;
+    }
+
+  .head-banner {
+    color: blue;
+
+  }
+  
+  .subhead-banner {
+      color: black;
+      font-size: 24px;
+    }
+  .para-banner {
+    display: none;
+  }
+  .link-banner {
+    display: none !important;
+  }
+    
+  .img-container {
+        display: none;
+    }
+
+}
+
+
+

@@ -12,28 +12,11 @@ const Banner = () => {
                                 {/* <div class="divider"></div> */}
                                 <p>We're an experienced and talented team of passionate consultants who breathe with search engine marketing.</p>
                                 <a href="service.html" className="btn btn-primary" style={{ marginTop: '-26px' }}>Read More</a>
-
-
-                                {/* <ul class="theme-list theme-list-light text-white">
-                                    <li>
-                                        <div class="h5">SEO Content Strategy</div>
-                                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
-                                    </li>
-                                    <li>
-                                        <div class="h5">B2B SEO</div>
-                                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
-                                    </li>
-                                </ul> */}
-                            </div>
-                            <div class="col-lg-6 py-3 wow fadeInRight">
-                                <div class="img-fluid text-center">
-                                    <img src={img1} alt="" />
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
 
         </>
     );

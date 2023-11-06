@@ -42,3 +42,28 @@
     background-position: right;
     z-index: -1;
 }
+
+@media (max-width: 767px) {
+  .bg-image1, .bg-image2{
+    display: none;
+  }
+  .category-row{
+    flex-wrap: nowrap !important;
+  }
+
+  .box1 {
+    width: 100%;
+  }
+  .category-card1 {
+    padding-right: 2% !important;
+  }
+  .category-card2 {
+    padding-left: 2% !important;
+  }
+  .category-heading {
+    font-size: 18px;
+  }
+  .category-para {
+    display: none;
+  }
+}

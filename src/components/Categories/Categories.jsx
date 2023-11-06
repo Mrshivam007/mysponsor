@@ -27,8 +27,8 @@ const Categories = () => {
       {/* Categories card */}
 
       <div className="box1">
-        <div className="row">
-          <div className="col-sm-6">
+        <div className="row category-row">
+          <div className="col-sm-6 category-card1">
             <div
               className="card-service wow1 fadeInUp"
               style={{
@@ -38,11 +38,11 @@ const Categories = () => {
               }}
             >
               <div className="body" style={{ textAlign: "left" }}>
-                <h1 className="text-light mt-4" style={{ fontWeight: "bold" }}>
+                <h1 className="category-heading text-light mt-4" style={{ fontWeight: "bold" }}>
                   Sports Events
                 </h1>
 
-                <p className="text-light" style={{ textAlign: "left" }}>
+                <p className="category-para text-light" style={{ textAlign: "left" }}>
                   Sponser Now
                 </p>
               </div>
@@ -56,7 +56,7 @@ const Categories = () => {
             </div>
           </div>
 
-          <div className="col-sm-6">
+          <div className="col-sm-6 category-card2">
             <div
               className="card-service wow2 fadeInUp"
               style={{
@@ -66,11 +66,11 @@ const Categories = () => {
               }}
             >
               <div className="body" style={{ textAlign: "left" }}>
-                <h1 className="text-light" style={{ fontWeight: "bold" }}>
+                <h1 className="category-heading text-light" style={{ fontWeight: "bold" }}>
                   Sports Events
                 </h1>
 
-                <p className="text-light mt-4" style={{ textAlign: "left" }}>
+                <p className="category-para text-light mt-4" style={{ textAlign: "left" }}>
                   Sponser Now
                 </p>
               </div>
@@ -84,10 +84,10 @@ const Categories = () => {
             </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col-sm-6">
+        <div className="row category-row">
+          <div className="col-sm-6 category-card1">
             <div
-              className="card-service wow2 fadeInUp"
+              className="card-service wow1 fadeInUp"
               style={{
                 maxWidth: "100%",
                 display: "flex",
@@ -95,11 +95,11 @@ const Categories = () => {
               }}
             >
               <div className="body" style={{ textAlign: "left" }}>
-                <h1 className="text-light" style={{ fontWeight: "bold" }}>
+                <h1 className="category-heading text-light mt-4" style={{ fontWeight: "bold" }}>
                   Sports Events
                 </h1>
 
-                <p className="text-light mt-4" style={{ textAlign: "left" }}>
+                <p className="category-para text-light" style={{ textAlign: "left" }}>
                   Sponser Now
                 </p>
               </div>
@@ -113,9 +113,9 @@ const Categories = () => {
             </div>
           </div>
 
-          <div className="col-sm-6">
+          <div className="col-sm-6 category-card2">
             <div
-              className="card-service wow1 fadeInUp"
+              className="card-service wow2 fadeInUp"
               style={{
                 maxWidth: "100%",
                 display: "flex",
@@ -123,11 +123,11 @@ const Categories = () => {
               }}
             >
               <div className="body" style={{ textAlign: "left" }}>
-                <h1 className="text-light" style={{ fontWeight: "bold" }}>
+                <h1 className="category-heading text-light" style={{ fontWeight: "bold" }}>
                   Sports Events
                 </h1>
 
-                <p className="text-light mt-4" style={{ textAlign: "left" }}>
+                <p className="category-para text-light mt-4" style={{ textAlign: "left" }}>
                   Sponser Now
                 </p>
               </div>
@@ -141,6 +141,7 @@ const Categories = () => {
             </div>
           </div>
         </div>
+
 
         <button className="btn btn-primary" style={{ width: "100%" }}>
           Browse Categories

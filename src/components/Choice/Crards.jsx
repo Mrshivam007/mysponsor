@@ -4,8 +4,8 @@ const Choice = () => {
   return (
     <>
       <div className="page-section">
-        <div className="line">
-          <h1 className="heading">Centered Heading</h1>
+        <div className="choice-line">
+          <h1 className="choice-heading">Centered Heading</h1>
         </div>
         <div className="container" style={{ marginTop: "2%" }}>
           <div className="row">
@@ -23,13 +23,13 @@ const Choice = () => {
                     Events
                   </h1>
                   <div className="card_line"></div>
-                  <p className="mt-4" style={{ textAlign: "left" }}>
+                  <p className="choice-para mt-4" style={{ textAlign: "left" }}>
                     We help you define your SEO objective & develop a realistic
                     strategy with you
                   </p>
                   <a
                     href="service.html"
-                    className="btn btn-primary"
+                    className="choice-btn btn btn-primary"
                     style={{ float: "left" }}
                   >
                     Read More
@@ -55,13 +55,13 @@ const Choice = () => {
                     Content Creator
                   </h1>
                   <div className="card_line"></div>
-                  <p className="mt-4" style={{ textAlign: "left" }}>
+                  <p className=" choice-para mt-4" style={{ textAlign: "left" }}>
                     We help you define your SEO objective & develop a realistic
                     strategy with you
                   </p>
                   <a
                     href="service.html"
-                    className="btn btn-primary"
+                    className=" choice-btn btn btn-primary"
                     style={{ float: "left" }}
                   >
                     Read More

@@ -1,3 +1,8 @@
+.choice-line {
+    border-top: 2px solid rgba(0, 78, 169, 0.50);
+    text-align: center;
+    position: relative;
+}
 .line {
     border-top: 2px solid rgba(0, 78, 169, 0.50);
     text-align: center;
@@ -9,7 +14,7 @@
     position: relative;
 }
 
-.heading {
+.choice-heading {
     background-color: #fff;
     padding: 0 20px;
     position: absolute;
@@ -18,4 +23,26 @@
     top: -24px;
     left: 50%;
     transform: translateX(-50%);
+}
+
+
+@media (max-width: 767px) {
+    .choice-line {
+        display: none;
+    }
+    .choice-heading {
+        display: none;
+    }
+    .choice-para {
+        display: none;
+    }
+    .choice-btn {
+        display: none !important;
+    }
+    .card_line {
+        display: none;
+    }
+    .page-section {
+        padding-top: 0%;
+    }
 }
