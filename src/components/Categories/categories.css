@@ -4,7 +4,7 @@
     padding: 2%;
     width: 80%;
     height: 50%;
-    margin-bottom: 5%;
+    margin-bottom: 2%;
     margin-top: -30em;
     border-radius: 20px;
     border: 1px solid #FFF;
@@ -12,6 +12,24 @@
     box-shadow: 0px 2px 20px -4px rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(26.5px);
     z-index: 1;
+}
+
+.category-line {
+  border-top: 2px solid rgba(0, 78, 169, 0.50);
+  text-align: center;
+  position: relative;
+  margin-top: 8vh;
+}
+
+.category-text {
+  background-color: #fff;
+  padding: 0 20px;
+  position: absolute;
+  color: black;
+  font-weight: bold;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .wow1 {
@@ -49,6 +67,7 @@
   }
   .category-row{
     flex-wrap: nowrap !important;
+    margin-right: 8px !important;
   }
 
   .box1 {
