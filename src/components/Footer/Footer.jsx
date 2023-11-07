@@ -1,5 +1,5 @@
 import logo from "../../assets/img/lgoo.png";
-import "./footer.css"
+import "./footer.css";
 
 const Footer = () => {
   return (
@@ -14,9 +14,9 @@ const Footer = () => {
           style={{ borderBottom: "1px solid rgba(255, 255, 255, 0.30)" }}
         >
           {/* <!--Grid row--> */}
-          <div className="row align-items-center justify-content-between ">
+          <div className="row align-items-center justify-content-around">
             {/* <!--Grid column--> */}
-            <div className="col-lg-6 col-md-12 mb-4 mb-md-0 text-left">
+            <div className="col-lg-6 col-md-12 mb-4 mb-md-0 text-left mb-md-4 text-md-center ">
               <h5 className="mb-4 footer-logo">
                 <img src={logo} style={{ width: "50%" }} />
               </h5>
@@ -34,7 +34,7 @@ const Footer = () => {
             {/* <!--Grid column-->
 
       <!--Grid column--> */}
-            <div className="col-lg-2 col-md-6 mb-4 mb-md-0 text-left footer-desktop-links">
+            <div className="col-lg-2 col-md-4 mb-4 mb-md-0 text-lg-left text-md-center footer-desktop-links">
               <h5 className="text-capitalize">Events</h5>
 
               <ul className="list-unstyled">
@@ -43,7 +43,7 @@ const Footer = () => {
                     Sponser Events
                   </a>
                 </li>
-                <li>
+                <li style={{ margin: "4% 0 4% 0" }}>
                   <a href="#!" className="text-white text-sm">
                     Events near you
                   </a>
@@ -58,7 +58,7 @@ const Footer = () => {
             {/* <!--Grid column-->
 
       <!--Grid column--> */}
-            <div className="col-lg-2 col-md-6 mb-4 mb-md-0 text-left footer-desktop-links">
+            <div className="col-lg-2 col-md-4 mb-4 mb-md-0 text-lg-left text-md-center footer-desktop-links">
               <h5 className="text-capitalize">Content creators</h5>
 
               <ul className="list-unstyled">
@@ -67,7 +67,7 @@ const Footer = () => {
                     Sponsor content creators
                   </a>
                 </li>
-                <li>
+                <li style={{ margin: "4% 0 4% 0" }}>
                   <a href="#!" className="text-white text-sm">
                     Creators near you
                   </a>
@@ -80,7 +80,7 @@ const Footer = () => {
               </ul>
             </div>
             {/* <!--Grid column--> */}
-            <div className="col-lg-2 col-md-6 mt-0 mb-4 mb-md-0 text-left footer-desktop-links">
+            <div className="col-lg-2 col-md-4 mt-0 mb-4 mb-md-0 text-lg-left text-md-center footer-desktop-links">
               <h5 className="text-capitalize">Listing</h5>
 
               <ul className="list-unstyled">
@@ -89,7 +89,7 @@ const Footer = () => {
                     List your event
                   </a>
                 </li>
-                <li>
+                <li style={{ margin: "4% 0 4% 0" }}>
                   <a href="#!" className="text-white text-sm">
                     List content creator
                   </a>
@@ -97,17 +97,26 @@ const Footer = () => {
               </ul>
               <br />
             </div>
-            
+
             <div className="container">
-            <button className="mob-footer-btn btn btn-primary" style={{ width: "100%" }}>
-              Browse Categories
-            </button>
-            <button className="mob-footer-btn btn btn-primary" style={{ width: "100%" }}>
-              Browse Categories
-            </button>
-            <button className="mob-footer-btn btn btn-primary" style={{ width: "100%" }}>
-              Browse Categories
-            </button>
+              <button
+                className="mob-footer-btn btn btn-primary"
+                style={{ width: "100%" }}
+              >
+                Browse Categories
+              </button>
+              <button
+                className="mob-footer-btn btn btn-primary"
+                style={{ width: "100%" }}
+              >
+                Browse Categories
+              </button>
+              <button
+                className="mob-footer-btn btn btn-primary"
+                style={{ width: "100%" }}
+              >
+                Browse Categories
+              </button>
             </div>
             {/* <!--Grid column--> */}
           </div>
@@ -119,7 +128,7 @@ const Footer = () => {
         <div className="container mt-4 mb-4 footer-desktop-links">
           <div className="row">
             <div
-              className="col-lg-6"
+              className="col-lg-6 col-md-6"
               style={{ borderRight: "1px solid rgba(255, 255, 255, 0.30)" }}
             >
               <p className="text-center text-xl">
@@ -128,7 +137,7 @@ const Footer = () => {
                 </a>
               </p>
             </div>
-            <div className="col-lg-6">
+            <div className="col-lg-6 col-md-6">
               <p className="text-center text-xl">
                 <a href="#!" className="text-white">
                   Contact Us

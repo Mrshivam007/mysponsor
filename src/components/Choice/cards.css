@@ -3,11 +3,13 @@
     text-align: center;
     position: relative;
 }
+
 .line {
     border-top: 2px solid rgba(0, 78, 169, 0.50);
     text-align: center;
     position: relative;
 }
+
 .card_line {
     border-top: 1px solid rgba(0, 78, 169, 0.50);
     text-align: center;
@@ -30,19 +32,54 @@
     .choice-line {
         display: none;
     }
+
     .choice-heading {
         display: none;
     }
+
     .choice-para {
         display: none;
     }
+
     .choice-btn {
         display: none !important;
     }
+
+    .line {
+        display: none;
+    }
+
+    .choice-bottom-para {
+        display: none;
+    }
+
     .card_line {
         display: none;
     }
+
     .page-section {
-        padding-top: 0%;
+        padding-top: 0% !important;
+    }
+}
+
+@media (max-width:576px) {
+    .choice-card {
+        background: url("../../assets/img/services/service-2.svg");
+        background-size: 80%;
+        background-repeat: no-repeat;
+        background-position-x: right;
+        background-position-y: center;
+    }
+
+    .choice-img {
+        display: none;
+    }
+
+    .choice-body h2 {
+        font-size: x-large;
+        position: relative;
+        top: 70%;
+        width: 100%;
+        height: 12vh;
     }
 }
