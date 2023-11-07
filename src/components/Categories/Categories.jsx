@@ -4,8 +4,8 @@ import cat_card from "../../assets/img/cat_card.svg";
 const Categories = () => {
   return (
     <>
-      <div class="line">
-        <h1 class="heading">Categories</h1>
+      <div class="categ-line mt-5 mb-5">
+        <h1 class="categ-heading">Categories</h1>
       </div>
 
       {/* Background of categories section */}
@@ -38,11 +38,17 @@ const Categories = () => {
               }}
             >
               <div className="body" style={{ textAlign: "left" }}>
-                <h1 className="category-heading text-light mt-4" style={{ fontWeight: "bold" }}>
+                <h1
+                  className="category-heading text-light mt-4"
+                  style={{ fontWeight: "bold" }}
+                >
                   Sports Events
                 </h1>
 
-                <p className="category-para text-light" style={{ textAlign: "left" }}>
+                <p
+                  className="category-para text-light"
+                  style={{ textAlign: "left" }}
+                >
                   Sponser Now
                 </p>
               </div>
@@ -66,11 +72,17 @@ const Categories = () => {
               }}
             >
               <div className="body" style={{ textAlign: "left" }}>
-                <h1 className="category-heading text-light" style={{ fontWeight: "bold" }}>
+                <h1
+                  className="category-heading text-light"
+                  style={{ fontWeight: "bold" }}
+                >
                   Sports Events
                 </h1>
 
-                <p className="category-para text-light mt-4" style={{ textAlign: "left" }}>
+                <p
+                  className="category-para text-light mt-4"
+                  style={{ textAlign: "left" }}
+                >
                   Sponser Now
                 </p>
               </div>
@@ -95,11 +107,17 @@ const Categories = () => {
               }}
             >
               <div className="body" style={{ textAlign: "left" }}>
-                <h1 className="category-heading text-light mt-4" style={{ fontWeight: "bold" }}>
+                <h1
+                  className="category-heading text-light mt-4"
+                  style={{ fontWeight: "bold" }}
+                >
                   Sports Events
                 </h1>
 
-                <p className="category-para text-light" style={{ textAlign: "left" }}>
+                <p
+                  className="category-para text-light"
+                  style={{ textAlign: "left" }}
+                >
                   Sponser Now
                 </p>
               </div>
@@ -123,11 +141,17 @@ const Categories = () => {
               }}
             >
               <div className="body" style={{ textAlign: "left" }}>
-                <h1 className="category-heading text-light" style={{ fontWeight: "bold" }}>
+                <h1
+                  className="category-heading text-light"
+                  style={{ fontWeight: "bold" }}
+                >
                   Sports Events
                 </h1>
 
-                <p className="category-para text-light mt-4" style={{ textAlign: "left" }}>
+                <p
+                  className="category-para text-light mt-4"
+                  style={{ textAlign: "left" }}
+                >
                   Sponser Now
                 </p>
               </div>
@@ -141,7 +165,6 @@ const Categories = () => {
             </div>
           </div>
         </div>
-
 
         <button className="btn btn-primary" style={{ width: "100%" }}>
           Browse Categories

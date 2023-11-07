@@ -1,27 +1,15 @@
-// import circle1 from "../../assets/img/circle1.svg";
-// import circle2 from "../../assets/img/circle2.svg";
-// import circle5 from "../../assets/img/circle5.svg";
-// import circle7 from "../../assets/img/circle7.svg";
 import sponser_card from "../../assets/img/blog/blog-1.jpg";
 import ccimg_card from "../../assets/img/mrbeast.svg";
 import "./sponser.css";
 const Sponser = () => {
   return (
     <>
-      <div className="line">
-        <h1 className="heading">Sponser Events Near You</h1>
+      <div className="sponsor-line">
+        <h1 className="sponsor-heading">Sponser Events Near You</h1>
       </div>
-
-      {/* Colored Background */}
-      {/* <div className="container-fluid" id="sponser_bg">
-        <div className="row">
-          <div className="col-lg-4" style={{background:`url${circle1}`}}></div>
-          <div className="col-lg-4" style={{background:`url${circle2}`}}></div>
-          <div className="col-lg-4" style={{background:`url${circle5}`}}></div>
-          <div className="col-lg-4" style={{background:`url${circle7}`}}></div>
-          <div className="col-lg-4" style={{background:`url${circle1}`}}></div>
-        </div>
-      </div> */}
+      <div className="sponsor-heading-mob m-4">
+        <h4 className="font-weight-bolder">Sponser Content Creators</h4>
+      </div>
 
       {/* Events Layer  */}
 
@@ -72,7 +60,7 @@ const Sponser = () => {
               </div>
 
               <button
-                className="btn btn-primary mx-auto rounded-0"
+                className="btn btn-primary rounded-0"
                 style={{ width: "100%" }}
               >
                 Sponser Now
@@ -124,7 +112,7 @@ const Sponser = () => {
               </div>
 
               <button
-                className="btn btn-primary mx-auto rounded-0"
+                className="btn btn-primary rounded-0"
                 style={{ width: "100%" }}
               >
                 Sponser Now
@@ -176,7 +164,7 @@ const Sponser = () => {
               </div>
 
               <button
-                className="btn btn-primary mx-auto rounded-0"
+                className="btn btn-primary rounded-0"
                 style={{ width: "100%" }}
               >
                 Sponser Now
@@ -228,7 +216,7 @@ const Sponser = () => {
               </div>
 
               <button
-                className="btn btn-primary mx-auto rounded-0"
+                className="btn btn-primary rounded-0"
                 style={{ width: "100%" }}
               >
                 Sponser Now
@@ -248,44 +236,48 @@ const Sponser = () => {
 
       {/* Content Creator Layer */}
 
-      <div className="line">
-        <h1 className="heading">Sponser Content Creators</h1>
+      <div className="sponsor-line mb-5">
+        <h1 className="sponsor-heading">Sponser Content Creators</h1>
       </div>
-
+      <div className="sponsor-heading-mob m-4">
+        <h4 className="font-weight-bolder">Sponser Content Creators</h4>
+      </div>
+      {/* Content Creator Cards */}
       <div className="container mb-4">
         <div className="row">
-          <div className="col-lg-6 col-sm-12">
+          <div className="col-lg-6 col-sm-12 mb-3">
             <div
-              class="card "
-              style={{ maxWidth: "489px", borderRadius: "18px" }}
+              class="card"
+              style={{ maxWidth: "100%", height: "auto", borderRadius: "18px" }}
             >
               <div class="row g-0">
-                <div class="col-md-5">
+                <div class="col-4 col-md-5 col-sm-4">
                   <img
                     src={ccimg_card}
-                    class="img-fluid rounded-start"
+                    class="img-fluid rounded-start cc-img"
                     alt=""
-                    style={{ margin: "13%" }}
                   />
                 </div>
-                <div class="col-md-5 mt-4">
+                <div class="col-6 col-md-5 col-sm-6 mt-0">
                   <div class="card-body mb">
-                    <h5 class="card-title font-weight-bold">Mr. Beast</h5>
-
-                    <p class="card-text font-weight-bold">Platform:- Youtube</p>
-
-                    <p class="card-text">
+                    <h5 class="card-title font-weight-bold d-inline">
+                      Mr. Beast
+                    </h5>
+                    <br />
+                    <span class="card-text ">Platform:- Youtube</span>
+                    <br />
+                    <span class="card-text">
                       <i className="bi bi-cash text-success"></i>
-                      <b> &nbsp;&nbsp; $10,000 &gt;</b>
-                    </p>
-
+                      &nbsp;&nbsp; 1 Million &lt;
+                    </span>
+                    <br />
                     <p class="card-text">
                       <i className="bi bi-people-fill text-danger"></i>
-                      <b> &nbsp;&nbsp; 1 Million+ </b>
+                      &nbsp;&nbsp; 50 Million
                     </p>
                   </div>
                 </div>
-                <div class="col-md-2">
+                <div class=" col-2 col-md-2 col-sm-2">
                   <button
                     className="btn btn-primary btn-block"
                     style={{
@@ -299,38 +291,39 @@ const Sponser = () => {
               </div>
             </div>
           </div>
-          <div className="col-lg-6 col-sm-12">
+          <div className="col-lg-6 col-sm-12 mb-3">
             <div
-              class="card mb-3"
-              style={{ maxWidth: "489px", borderRadius: "18px" }}
+              class="card"
+              style={{ maxWidth: "100%", height: "auto", borderRadius: "18px" }}
             >
               <div class="row g-0">
-                <div class="col-md-5">
+                <div class="col-4 col-md-5 col-sm-4">
                   <img
                     src={ccimg_card}
-                    class="img-fluid rounded-start"
+                    class="img-fluid rounded-start cc-img"
                     alt=""
-                    style={{ margin: "13%" }}
                   />
                 </div>
-                <div class="col-md-5 mt-4">
-                  <div class="card-body">
-                    <h5 class="card-title font-weight-bold">Mr. Beast</h5>
-
-                    <p class="card-text font-weight-bold">Platform:- Youtube</p>
-
-                    <p class="card-text">
+                <div class="col-6 col-md-5 col-sm-6 mt-0">
+                  <div class="card-body mb">
+                    <h5 class="card-title font-weight-bold d-inline">
+                      Mr. Beast
+                    </h5>
+                    <br />
+                    <span class="card-text ">Platform:- Youtube</span>
+                    <br />
+                    <span class="card-text">
                       <i className="bi bi-cash text-success"></i>
-                      <b> &nbsp;&nbsp; $10,000 &gt;</b>
-                    </p>
-
+                      &nbsp;&nbsp; 1 Million &lt;
+                    </span>
+                    <br />
                     <p class="card-text">
                       <i className="bi bi-people-fill text-danger"></i>
-                      <b> &nbsp;&nbsp; 1 Million+ </b>
+                      &nbsp;&nbsp; 50 Million
                     </p>
                   </div>
                 </div>
-                <div class="col-md-2">
+                <div class=" col-2 col-md-2 col-sm-2">
                   <button
                     className="btn btn-primary btn-block"
                     style={{
@@ -344,38 +337,39 @@ const Sponser = () => {
               </div>
             </div>
           </div>
-          <div className="col-lg-6 col-sm-12">
+          <div className="col-lg-6 col-sm-12 mb-3">
             <div
-              class="card mb-3"
-              style={{ maxWidth: "489px", borderRadius: "18px" }}
+              class="card"
+              style={{ maxWidth: "100%", height: "auto", borderRadius: "18px" }}
             >
               <div class="row g-0">
-                <div class="col-md-5">
+                <div class="col-4 col-md-5 col-sm-4">
                   <img
                     src={ccimg_card}
-                    class="img-fluid rounded-start"
+                    class="img-fluid rounded-start cc-img"
                     alt=""
-                    style={{ margin: "13%" }}
                   />
                 </div>
-                <div class="col-md-5 mt-4">
-                  <div class="card-body">
-                    <h5 class="card-title font-weight-bold">Mr. Beast</h5>
-
-                    <p class="card-text font-weight-bold">Platform:- Youtube</p>
-
-                    <p class="card-text">
+                <div class="col-6 col-md-5 col-sm-6 mt-0">
+                  <div class="card-body mb">
+                    <h5 class="card-title font-weight-bold d-inline">
+                      Mr. Beast
+                    </h5>
+                    <br />
+                    <span class="card-text ">Platform:- Youtube</span>
+                    <br />
+                    <span class="card-text">
                       <i className="bi bi-cash text-success"></i>
-                      <b> &nbsp;&nbsp; $10,000 &gt;</b>
-                    </p>
-
+                      &nbsp;&nbsp; 1 Million &lt;
+                    </span>
+                    <br />
                     <p class="card-text">
                       <i className="bi bi-people-fill text-danger"></i>
-                      <b> &nbsp;&nbsp; 1 Million+ </b>
+                      &nbsp;&nbsp; 50 Million
                     </p>
                   </div>
                 </div>
-                <div class="col-md-2">
+                <div class=" col-2 col-md-2 col-sm-2">
                   <button
                     className="btn btn-primary btn-block"
                     style={{
@@ -389,38 +383,39 @@ const Sponser = () => {
               </div>
             </div>
           </div>
-          <div className="col-lg-6 col-sm-12">
+          <div className="col-lg-6 col-sm-12 mb-3">
             <div
-              class="card mb-3"
-              style={{ maxWidth: "489px", borderRadius: "18px" }}
+              class="card"
+              style={{ maxWidth: "100%", height: "auto", borderRadius: "18px" }}
             >
               <div class="row g-0">
-                <div class="col-md-5">
+                <div class="col-4 col-md-5 col-sm-4">
                   <img
                     src={ccimg_card}
-                    class="img-fluid rounded-start"
+                    class="img-fluid rounded-start cc-img"
                     alt=""
-                    style={{ margin: "13%" }}
                   />
                 </div>
-                <div class="col-md-5 mt-4">
-                  <div class="card-body">
-                    <h5 class="card-title font-weight-bold">Mr. Beast</h5>
-
-                    <p class="card-text font-weight-bold">Platform:- Youtube</p>
-
-                    <p class="card-text">
+                <div class="col-6 col-md-5 col-sm-6 mt-0">
+                  <div class="card-body mb">
+                    <h5 class="card-title font-weight-bold d-inline">
+                      Mr. Beast
+                    </h5>
+                    <br />
+                    <span class="card-text ">Platform:- Youtube</span>
+                    <br />
+                    <span class="card-text">
                       <i className="bi bi-cash text-success"></i>
-                      <b> &nbsp;&nbsp; $10,000 &gt;</b>
-                    </p>
-
+                      &nbsp;&nbsp; 1 Million &lt;
+                    </span>
+                    <br />
                     <p class="card-text">
                       <i className="bi bi-people-fill text-danger"></i>
-                      <b> &nbsp;&nbsp; 1 Million+ </b>
+                      &nbsp;&nbsp; 50 Million
                     </p>
                   </div>
                 </div>
-                <div class="col-md-2">
+                <div class=" col-2 col-md-2 col-sm-2">
                   <button
                     className="btn btn-primary btn-block"
                     style={{
@@ -434,6 +429,7 @@ const Sponser = () => {
               </div>
             </div>
           </div>
+         
         </div>
       </div>
     </>

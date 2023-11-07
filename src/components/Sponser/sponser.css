@@ -1,6 +1,18 @@
-#sponser_bg {
+.sponsor-line {
+    border-top: 2px solid rgba(0, 78, 169, 0.50);
+    text-align: center;
+    position: relative;
+}
+
+.sponsor-heading {
+    background-color: #fff;
+    padding: 0 20px;
     position: absolute;
-    z-index: -2;
+    color: black;
+    font-weight: bold;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .card-blog {
@@ -19,13 +31,10 @@
 
 .cc_card_img {
     width: 100%;
-    height: 186px;
+    height: auto;
     border-radius: 6%;
 }
 
-.line {
-    margin: 5% 0% 5% 0%;
-}
 
 .text-overlay {
     position: absolute;
@@ -36,4 +45,49 @@
     color: white;
     background-color: rgba(0, 0, 0, 0);
     padding: 10px;
+}
+
+.cc-img {
+    margin: 13%;
+}
+
+.card-body {
+    margin: 15% 0% 0% 0%;
+}
+
+
+@media (max-width:576px) {
+    .card {
+        font-size: small;
+        margin: 2%;
+    }
+
+    .cc-img {
+        margin: 20% 20% 20% 20%;
+    }
+
+    .card-body {
+        margin: 0%;
+    }
+
+    .card-title {
+        font-size: medium;
+    }
+
+}
+
+@media (max-width:576px) {
+    .sponsor-line {
+        display: none;
+    }
+
+    .sponsor-heading-mob {
+        font-size: x-large;
+    }
+}
+
+@media (min-width:576px) {
+    .sponsor-heading-mob {
+        display: none;
+    }
 }
