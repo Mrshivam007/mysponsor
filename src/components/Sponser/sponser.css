@@ -3,6 +3,34 @@
     z-index: -2;
 }
 
+.sponsor-line {
+    border-top: 2px solid rgba(0, 78, 169, 0.50);
+    text-align: center;
+    position: relative;
+    margin-top: 12vh;
+  }
+
+  .sponsor-text {
+    background-color: #fff;
+    padding: 0 20px;
+    position: absolute;
+    color: black;
+    font-weight: bold;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+.sponsor-mobile-text {
+    color: #000;
+
+font-family: League Spartan;
+font-size: 32px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+letter-spacing: -0.8px;
+margin-top: 8vh;
+}
 .card-blog {
     background-color: #f2f2f2;
     border-radius: 6%;
@@ -37,3 +65,34 @@
     background-color: rgba(0, 0, 0, 0);
     padding: 10px;
 }
+
+@media (min-width: 769px) {
+    .sponsor-desktop {
+      display: block; /* Display sponsor-desktop */
+    }
+    .sponsor-mobile {
+      display: none;  /* Hide sponsor-mobile */
+    }
+.sponsor-mobile-text {
+    display: none;
+}
+  }
+  
+  /* For screens 768px or smaller (mobile) */
+  @media (max-width: 768px) {
+    .sponsor-desktop {
+      display: none;  /* Hide sponsor-desktop */
+    }
+    .sponsor-mobile {
+      display: block; /* Display sponsor-mobile */
+    }
+    .sponsor-line {
+        display: none;
+    }
+    .sponsor-mobile-text{
+        display: block;
+    }
+  }
+ 
+  
+  

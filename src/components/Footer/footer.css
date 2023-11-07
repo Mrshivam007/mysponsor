@@ -1,0 +1,35 @@
+  /* For screens 768px or smaller (mobile) */
+  @media (max-width: 768px) {
+    .footer-logo {
+      text-align: center;  /* Hide sponsor-desktop */
+    }
+    .footer-heading {
+        color: #FFF;
+        text-align: center;
+        font-family: League Spartan;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: -0.5px;
+    }
+    .footer-para {
+        display: none;
+    }
+    .footer-desktop-links{
+        display: none;
+    }
+    .mob-footer-btn {
+        background-color: white !important;
+        color: black !important;
+        margin-bottom: 1vh;
+    }
+
+  }
+
+  @media (min-width: 769px) {
+.mob-footer-btn {
+    display: none !important;
+}
+  }
+

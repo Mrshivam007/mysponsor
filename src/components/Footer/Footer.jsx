@@ -1,4 +1,5 @@
 import logo from "../../assets/img/lgoo.png";
+import "./footer.css"
 
 const Footer = () => {
   return (
@@ -16,14 +17,14 @@ const Footer = () => {
           <div className="row align-items-center justify-content-between ">
             {/* <!--Grid column--> */}
             <div className="col-lg-6 col-md-12 mb-4 mb-md-0 text-left">
-              <h5 className="mb-4">
+              <h5 className="mb-4 footer-logo">
                 <img src={logo} style={{ width: "50%" }} />
               </h5>
 
-              <h5 className="text-capitalize">
+              <h5 className="text-capitalize footer-heading">
                 India's first online sponsoring platform
               </h5>
-              <p>
+              <p className="footer-para">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste
                 atque ea quis molestias. Fugiat pariatur maxime quis culpa
                 corporis vitae repudiandae aliquam voluptatem veniam, est atque
@@ -33,7 +34,7 @@ const Footer = () => {
             {/* <!--Grid column-->
 
       <!--Grid column--> */}
-            <div className="col-lg-2 col-md-6 mb-4 mb-md-0 text-left">
+            <div className="col-lg-2 col-md-6 mb-4 mb-md-0 text-left footer-desktop-links">
               <h5 className="text-capitalize">Events</h5>
 
               <ul className="list-unstyled">
@@ -57,7 +58,7 @@ const Footer = () => {
             {/* <!--Grid column-->
 
       <!--Grid column--> */}
-            <div className="col-lg-2 col-md-6 mb-4 mb-md-0 text-left">
+            <div className="col-lg-2 col-md-6 mb-4 mb-md-0 text-left footer-desktop-links">
               <h5 className="text-capitalize">Content creators</h5>
 
               <ul className="list-unstyled">
@@ -79,7 +80,7 @@ const Footer = () => {
               </ul>
             </div>
             {/* <!--Grid column--> */}
-            <div className="col-lg-2 col-md-6 mt-0 mb-4 mb-md-0 text-left">
+            <div className="col-lg-2 col-md-6 mt-0 mb-4 mb-md-0 text-left footer-desktop-links">
               <h5 className="text-capitalize">Listing</h5>
 
               <ul className="list-unstyled">
@@ -96,6 +97,18 @@ const Footer = () => {
               </ul>
               <br />
             </div>
+            
+            <div className="container">
+            <button className="mob-footer-btn btn btn-primary" style={{ width: "100%" }}>
+              Browse Categories
+            </button>
+            <button className="mob-footer-btn btn btn-primary" style={{ width: "100%" }}>
+              Browse Categories
+            </button>
+            <button className="mob-footer-btn btn btn-primary" style={{ width: "100%" }}>
+              Browse Categories
+            </button>
+            </div>
             {/* <!--Grid column--> */}
           </div>
           {/* <!--Grid row--> */}
@@ -103,7 +116,7 @@ const Footer = () => {
         {/* <!-- Grid container --> */}
 
         {/* <!-- New Row --> */}
-        <div className="container mt-4 mb-4">
+        <div className="container mt-4 mb-4 footer-desktop-links">
           <div className="row">
             <div
               className="col-lg-6"
