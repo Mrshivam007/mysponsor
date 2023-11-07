@@ -10,11 +10,13 @@ import 'slick-carousel/slick/slick-theme.css';
 import "./sponser.css";
 const Sponser = () => {
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1, // Display one card at a time on mobile
     slidesToScroll: 1,
+    prevArrow: null, // Hide the previous arrow
+    nextArrow: null, // Hide the next arrow
   };
 
   return (
@@ -38,7 +40,7 @@ const Sponser = () => {
 
       {/* Events Layer  */}
 
-      <div className="container" id="sponser_layer">
+      <div className="container sponsor-container" id="sponser_layer">
         <div className="sponsor-desktop">
           <div className="row my-5">
             {/* <Slider {...settings}> */}
@@ -263,6 +265,15 @@ const Sponser = () => {
         </div>
         <div className="sponsor-mobile">
           {/* <div className="row my-5"> */}
+          <div className="row" style={{flexWrap: 'nowrap'}}>
+            <div className="col-lg-1" style={{alignSelf: 'center', width: '31%', marginLeft: '-7%'}}>
+              <div className="sponsor-card-indicator">
+              EVENTS
+              {/* hello */}
+              </div>
+            </div>
+            <div className="col-lg-4" style={{width: '76%'}}>
+
             <Slider {...settings}>
               <div className="col-lg-3 col-md-6 py-3">
                 <div className="card-blog">
@@ -282,7 +293,7 @@ const Sponser = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="body">
+                  <div className="body sponsor-card-detail">
                     <div className="row">
                       <div
                         className="col"
@@ -473,10 +484,12 @@ const Sponser = () => {
                 </div>
               </div>
             </Slider>
+            </div>
+            </div>
             <div className="container d-flex justify-content-center">
               <button
-                className="btn btn-outline-primary mt-4"
-                style={{ borderRadius: "15px" }}
+                className="sponsor-btn btn btn-outline-light mt-4"
+                style={{ borderRadius: "15px", backgroundColor: 'white', marginBottom: '2vh', width: '100%', color: 'blue' }}
               >
                 See More
               </button>
@@ -487,11 +500,13 @@ const Sponser = () => {
 
       {/* Content Creator Layer */}
 
-      <div className="line">
-        <h1 className="heading">Sponser Content Creators</h1>
+      <div className="sponsor-line">
+        <h1 className="sponsor-text">Sponser Content Creator</h1>
       </div>
+      <h2 className="sponsor-mobile-text">Sponser Content Creator</h2>
+      
 
-      <div className="container mb-4">
+      <div className="container mb-4" style={{marginTop: '8rem'}}>
         <div className="row">
           <div className="col-lg-6 col-sm-12 mb-3">
             <div

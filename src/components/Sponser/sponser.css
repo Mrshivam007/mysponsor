@@ -66,6 +66,24 @@ margin-top: 8vh;
     padding: 10px;
 }
 
+.slick-prev,
+.slick-next {
+  display: none !important;
+}
+
+.sponsor-card-indicator {
+  transform: rotate(270deg);
+  color: #FFF;
+  font-family: League Spartan;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.8px;
+}
+
+
+
 @media (min-width: 769px) {
     .sponsor-desktop {
       display: block; /* Display sponsor-desktop */
@@ -76,6 +94,7 @@ margin-top: 8vh;
 .sponsor-mobile-text {
     display: none;
 }
+
   }
   
   /* For screens 768px or smaller (mobile) */
@@ -91,6 +110,10 @@ margin-top: 8vh;
     }
     .sponsor-mobile-text{
         display: block;
+    }
+    .sponsor-container{
+      background-color: blue !important;
+      text-align: -webkit-right;
     }
   }
  
