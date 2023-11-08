@@ -2,18 +2,18 @@ import React from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import "./navbar.css"
 import banner from "../../assets/img/banner_image_1.svg"
-import logo from "../../assets/img/lgoo.png";
+import logo from "../../assets/img/logo/logo.png";
 import card_bg from "../../assets/img/card_bg.png";
 
 
 function navbar() {
+    
     return (
         <div>
             {/* <nav class="navbar navbar-expand-lg navbar-light sticky" style={{ backgroundColor: '#004EA9' }} data-offset="500"> */}
-            <Navbar bg="light" expand="lg" style={{display: 'flex', flexDirection: 'column', backgroundColor:"#004EA9"}}>
+            <Navbar className='desktop-nav' expand="lg" style={{ backgroundColor: "#004EA9" }}>
                 <div class="container" >
                     <a href="#" class="navbar-brand"><img src={logo} /></a>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <div class="wrapper">
                         <div class="searchBar">
                             <input id="searchQueryInput" type="text" name="searchQueryInput" placeholder="Search" value="" />
@@ -28,27 +28,48 @@ function navbar() {
                     <a class="nav-link" href="contact.html" style={{ backgroundColor: 'white', margin: '1vh', borderRadius: '50px' }}><span class="mai-heart"></span></a>
                     <a class="nav-link" href="contact.html" style={{ backgroundColor: 'white', margin: '1vh', borderRadius: '50px' }}><span class="mai-calendar"></span></a>
                     <a class="nav-link" href="contact.html" style={{ backgroundColor: 'white', margin: '1vh', borderRadius: '50px' }}><span class="mai-person"></span></a>
-                </div>                
-                <div class="container" style={{}}>
+                </div>
+            </Navbar>
+            <Navbar className='desktop-nav' expand="lg" style={{ backgroundColor: "#083C79" }}>
+                <div class="container">
+                    <Nav>
+                        <Nav.Link className='desktop-nav-item' href="index.html">Sponsor Event</Nav.Link>
+                        <Nav.Link className='desktop-nav-item' href="about.html">Sponsor Content Creators</Nav.Link>
+                        <Nav.Link className='desktop-nav-item' href="service.html">Events Near You</Nav.Link>
+                        <Nav.Link className='desktop-nav-item' href="blog.html">Top Events</Nav.Link>
+                        <Nav.Link className='desktop-nav-item' href="contact.html">Top Content Creator</Nav.Link>
+                        <Nav.Link className='desktop-nav-item' href="contact.html">List your event</Nav.Link>
+                    </Nav>
+                </div>
+            </Navbar>
 
+            <Navbar className='mobile-nav' expand="lg" style={{ display: 'flex', flexDirection: 'column', backgroundColor: "#004EA9" }}>
+                <div class="container" >
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <a href="#" class="navbar-brand" style={{ height: '52px', marginTop: '3%' }}><img src={logo} /></a>
 
-                    <Navbar.Collapse id="basic-navbar-nav" style={{justifyContent: 'center'}}>
-                        <Nav>
-                            <Nav.Link href="index.html">Sponsor Event</Nav.Link>
-                            <Nav.Link href="about.html">Sponsor Content Creators</Nav.Link>
-                            <Nav.Link href="service.html">Events Near You</Nav.Link>
-                            <Nav.Link href="blog.html">Top Events</Nav.Link>
-                            <Nav.Link href="contact.html">Top Content Creator</Nav.Link>
-                            <Nav.Link href="contact.html">List your event</Nav.Link>
-                        </Nav>
-                    </Navbar.Collapse>
+                    <a class="nav-link" href="contact.html" style={{ backgroundColor: 'white', margin: '1vh', borderRadius: '50px' }}><span class="mai-heart"></span></a>
+                </div>
+                <div className="nav-bg-color">
+                    <div class="container" style={{}}>
+                        <Navbar.Collapse id="basic-navbar-nav" style={{ justifyContent: 'center' }}>
+                            <Nav>
+                                <Nav.Link className="mobile-nav-item" href="index.html">Sponsor Event</Nav.Link>
+                                <Nav.Link className="mobile-nav-item" href="about.html">Sponsor Content Creators</Nav.Link>
+                                <Nav.Link className="mobile-nav-item" href="service.html">Events Near You</Nav.Link>
+                                <Nav.Link className="mobile-nav-item" href="blog.html">Top Events</Nav.Link>
+                                <Nav.Link className="mobile-nav-item" href="contact.html">Top Content Creator</Nav.Link>
+                                <Nav.Link className="mobile-nav-item" href="contact.html">List your event</Nav.Link>
+                            </Nav>
+                        </Navbar.Collapse>
+                    </div>
                 </div>
             </Navbar>
             <div class="container" style={{ maxWidth: '1400px' }}>
                 <div class="page-banner home-banner" style={{ height: 'auto', backgroundImage: `url(${card_bg})` }}>
                     <div class="row align-items-center flex-wrap-reverse h-100">
                         <div class=" banner-text-area col-md-6 wow fadeInLeft">
-                            <h3  className='subhead-banner' style={{ fontFamily: 'math', fontWeight: '600', marginBottom: '0px' }}>Welcome to India's first</h3>
+                            <h3 className='subhead-banner' style={{ fontFamily: 'math', fontWeight: '600', marginBottom: '0px' }}>Welcome to India's first</h3>
                             <h1 class=" head-banner mb-4" style={{ fontFamily: 'math', fontWeight: '600', marginBottom: '0px' }}>Online Sponsoring Platform</h1>
                             <p class="para-banner text-grey">Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis accusantium reprehenderit quos iusto. Earum in modi, dolorem dolore fuga obcaecati laudantium possimus aspernatur excepturi facere porro repellendus expedita et veniam.</p>
                             <a href="#" class="link-banner btn btn-primary">Sponsor Now</a>
