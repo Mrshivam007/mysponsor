@@ -1,17 +1,25 @@
 .box1 {
-    position: relative;
-    margin: auto;
-    padding: 2%;
-    width: 80%;
-    height: 50%;
-    margin-bottom: 2%;
-    margin-top: -30em;
-    border-radius: 20px;
-    border: 1px solid #FFF;
-    background: rgba(0, 117, 255, 0.10);
-    box-shadow: 0px 2px 20px -4px rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(26.5px);
-    z-index: 1;
+  position: relative;
+  margin: auto;
+  padding: 2%;
+  width: 76%;
+  height: 50%;
+  margin-bottom: 2%;
+  margin-top: 8%;
+  border-radius: 20px;
+  border: 1px solid #FFF;
+  background: rgba(0, 117, 255, 0.10);
+  box-shadow: 0px 2px 20px -4px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(26.5px);
+  z-index: 1;
+}
+
+.category-container {
+  max-width: 100% !important;
+  background-image: url("../../assets/img/bg_ctgrs_lft.svg"), url("../../assets/img/bg_ctgrs_rt.svg");
+  background-repeat: no-repeat;
+  background-position: left, right;
+  background-size: contain;
 }
 
 .category-line {
@@ -32,57 +40,157 @@
   transform: translateX(-50%);
 }
 
+.cat-card-body {
+  width: 100%;
+  background-size: contain;
+  background-position: right;
+  background-repeat: no-repeat;
+}
+
 .wow1 {
-    background: linear-gradient(180deg, #4FD0FF 0%, #2589FF 100%);
+  background: linear-gradient(180deg, #4FD0FF 0%, #2589FF 100%);
+  max-width: 100%;
+  height: auto !important;
+  display: flex;
+  margin: 0px 0px 10% 0px !important;
+  padding: 5% 5% 0% 5% !important;
+  justify-content: space-between;
+  align-items: end;
 }
 
 .wow2 {
-    background: linear-gradient(180deg, #FF4C7F 0%, #FF414C 100%);
+  background: linear-gradient(180deg, #FF4C7F 0%, #FF414C 100%);
+  max-width: 100%;
+  height: auto !important;
+  display: flex;
+  margin: 0px 0px 10% 0px !important;
+  padding: 5% 5% 0% 5% !important;
+  justify-content: space-between;
+  align-items: end;
 
 }
 
 .bg-image1 {
-    position: absolute;
-    width: 50%;
-    height: 100%;
-    background: url("../../assets/img/bg_ctgrs_lft.svg");
-    background-repeat: no-repeat;
-    background-position: left;
-    z-index: -1;
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  background: url("../../assets/img/bg_ctgrs_lft.svg");
+  background-repeat: no-repeat;
+  background-position: left;
+  z-index: -1;
 }
 
 .bg-image2 {
-    position: absolute;
-    width: 50%;
-    height: 100%;
-    background: url("../../assets/img/bg_ctgrs_rt.svg");
-    background-repeat: no-repeat;
-    background-position: right;
-    z-index: -1;
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  background: url("../../assets/img/bg_ctgrs_rt.svg");
+  background-repeat: no-repeat;
+  background-position: right;
+  z-index: -1;
+  margin-top: 2vh;
 }
 
+.category-btn {
+  display: flex;
+  width: 359px;
+  margin-top: 1%;
+  height: 51px;
+  padding: 14px 10px 10px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  background-color: #004EA9 !important;
+  border-radius: 15px !important;
+}
+
+.category-btn-text {
+  color: #FFF;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 94%;
+  margin-bottom: 0px !important;
+  letter-spacing: -0.6px;
+}
+
+
 @media (max-width: 767px) {
-  .bg-image1, .bg-image2{
+
+  .bg-image1,
+  .bg-image2 {
     display: none;
   }
-  .category-row{
+
+  .category-row {
     flex-wrap: nowrap !important;
-    margin-right: 8px !important;
+    margin-right: -8px !important;
+  }
+
+  .category-background-row {
+    display: none !important;
   }
 
   .box1 {
     width: 100%;
+    margin-top: 5%;
+    background: none;
+    box-shadow: none;
   }
+
   .category-card1 {
     padding-right: 2% !important;
   }
+
   .category-card2 {
     padding-left: 2% !important;
   }
+
   .category-heading {
     font-size: 18px;
+    text-shadow: 2px 2px black;
   }
+
   .category-para {
     display: none;
+  }
+
+  .category-container {
+    display: none;
+  }
+
+  .category-line{
+    display: none;
+  }
+  .cat-mobile-text {
+    color: #000;
+    padding-left: 3%;
+    font-size: 32px;
+    font-family: League Spartan;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    letter-spacing: -0.8px;
+    margin-top: 8vh;
+  }
+}
+
+@media (min-width: 767px) {
+  .cat-mob-view {
+    display: none;
+  }
+  .cat-mobile-text{
+    display: none;
+  }
+}
+
+@media (max-width: 993px) and (min-width:768px) {
+  .box1 {
+    font-size: medium;
+  }
+
+  .cat-card-body h1 {
+    font-size: x-large;
   }
 }

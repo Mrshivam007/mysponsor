@@ -1,7 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Jomhuria&display=swap');
+
+.page-section{
+    padding-bottom: 20px !important;
+}
+
 .choice-line {
     border-top: 2px solid rgba(0, 78, 169, 0.50);
     text-align: center;
     position: relative;
+}
+
+.choice-card {
+    border-radius: 25px !important;
+    background: linear-gradient(90deg, #7DBDFF 0%, rgba(136, 195, 255, 0.81) 0.01%, rgba(242, 248, 255, 0.51) 49.48%, #7BBCFF 100%);
+
+    box-shadow: 0px 4px 55px -5px rgba(0, 0, 0, 0.25);
+    color: #00448B !important;
+    padding: 3% 5% 4% 5% !important;
+}
+
+.choice-img {
+    display: flex;
+    align-items: center;
+    width: 35%;
+    height: auto;
+    padding: 2% 2% 2% 6%;
+}
+
+.choice-img img {
+    width: 100%;
+    height: auto;
 }
 
 .line {
@@ -60,26 +88,86 @@
     .page-section {
         padding-top: 0% !important;
     }
+
+    .choice-img {
+        display: flex;
+        align-items: end;
+        width: 90%;
+        height: auto;
+    }
+
+    .choice-img img {
+        width: 100%;
+        height: auto;
+    }
+
+    .choice-body {
+        display: flex;
+        align-items: end;
+    }
+
+    .choice-body h2 {
+        font-size: x-large;
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
 }
 
 @media (max-width:576px) {
     .choice-card {
-        background: url("../../assets/img/services/service-2.svg");
-        background-size: 80%;
-        background-repeat: no-repeat;
-        background-position-x: right;
-        background-position-y: center;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.93) 92.19%), #004EA9;
+        background-size: 50%;
+        color: white !important;
+        width: 100%;
+        height: 23vh;
     }
 
     .choice-img {
         display: none;
     }
 
+    .choice-1 {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 50%, rgba(0, 0, 0, 0.93) 100%), url("../../assets/img/choice/choice-card-1.png");
+        background-size: 80%;
+        background-position-x: center;
+        background-position-y: center;
+        background-repeat: no-repeat;
+    }
+
+    .choice-2 {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 50%, rgba(0, 0, 0, 0.93) 100%), url("../../assets/img/choice/choice-card-2.png");
+        background-size: 70%;
+        background-position-x: center;
+        background-position-y: center;
+        background-repeat: no-repeat;
+    }
+
     .choice-body h2 {
         font-size: x-large;
-        position: relative;
-        top: 70%;
-        width: 100%;
-        height: 12vh;
+        /* position: relative;
+        z-index: 1; */
+        width: 38vw;
+        height: auto;
+        padding: 0 0 2% 6%;
+    }
+}
+
+@media (max-width:991px) and (min-width:768px) {
+    .choice-body {
+        font-size: medium;
+    }
+
+    .choice-body h2 {
+        font-size: larger;
+    }
+
+    .choice-btn {
+        font-size: smaller !important;
+    }
+
+    .choice-img {
+        width: 50%;
+        padding: 0px;
     }
 }

@@ -1,0 +1,5 @@
+@media (min-width:576px) {
+    .chatbot-card {
+        display: none !important;
+    }
+}

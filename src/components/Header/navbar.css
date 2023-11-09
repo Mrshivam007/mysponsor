@@ -22,7 +22,7 @@ body {
   flex-direction: column;
 }
 
-.mobile-nav-item{
+.mobile-nav-item {
   color: white !important;
 }
 
@@ -84,15 +84,26 @@ body {
 
 .subhead-banner {
   color: white;
+  font-family: 'League Spartan', sans-serif;
+  font-size: 40px;
+  font-weight: 600;
 }
 
 .head-banner {
   color: white;
+  font-family: 'League Spartan', sans-serif;
+  font-size: 70px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 91.5%;
+  /* 64.05px */
+  letter-spacing: -1.75px;
 }
 
 .banner-text-area {
   padding-top: 3rem;
   padding-bottom: 3rem;
+  padding-left: 6% !important;
 }
 
 .navbar-brand {
@@ -107,10 +118,30 @@ body {
 }
 
 .link-banner {
-  background-color: white;
-  color: blue;
-  font-weight: bold;
-  border-radius: 16px;
+  background-color: white !important;
+  color: blue !important;
+  font-weight: bold !important;
+  border-radius: 16px !important;
+  font-family: League Spartan;
+
+}
+
+.para-banner {
+  color: #FFF;
+  font-family: League Spartan;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+  /* 20px */
+}
+
+.img-container {
+  margin-left: -4vh;
+}
+
+.header-card-logo {
+  width: -webkit-fill-available;
 }
 
 @media (max-width: 767px) {
@@ -121,7 +152,7 @@ body {
     background-color: white !important;
   }
 
-  .desktop-nav{
+  .desktop-nav {
     display: none !important;
   }
 
@@ -137,12 +168,21 @@ body {
 
   .head-banner {
     color: blue;
+    color: #004EA9;
+    font-family: League Spartan;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 91.5%;
+    /* 36.6px */
+    letter-spacing: -1px;
 
   }
 
   .subhead-banner {
     color: black;
     font-size: 24px;
+    padding-top: 2vh;
   }
 
   .para-banner {
@@ -160,8 +200,8 @@ body {
 }
 
 @media (min-width: 767px) {
-  .mobile-nav{
+  .mobile-nav {
     display: none !important;
   }
-  
+
 }

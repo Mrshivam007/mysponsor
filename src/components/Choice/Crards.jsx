@@ -1,5 +1,6 @@
 import "./cards.css";
-import img1 from "../../assets/img/services/service-2.svg";
+import img1 from "../../assets/img/choice/choice-card-1.png";
+import img2 from "../../assets/img/choice/choice-card-2.png";
 const Choice = () => {
   return (
     <>
@@ -8,7 +9,7 @@ const Choice = () => {
           <h1 className="choice-heading">Centered Heading</h1>
         </div>
         <div className="container" style={{ marginTop: "2%" }}>
-          <div className="row" style={{flexWrap:"nowrap"}}>
+          <div className="row" style={{ flexWrap: "nowrap" }}>
             <div className="col-lg-6">
               <div
                 className="card-service wow fadeInUp choice-card"
@@ -18,10 +19,8 @@ const Choice = () => {
                   justifyContent: "space-between",
                 }}
               >
-                <div className="body choice-body text-left">
-                  <h2 className="text-dark font-weight-bold">
-                    Events
-                  </h2>
+                <div className="body choice-body choice-1 text-left">
+                  <h2 className="font-weight-bolder mb-0">Events</h2>
                   <div className="card_line"></div>
                   <p className="choice-para mt-4 text-left">
                     We help you define your SEO objective & develop a realistic
@@ -29,13 +28,20 @@ const Choice = () => {
                   </p>
                   <a
                     href="service.html"
-                    className="choice-btn btn btn-primary"
-                    style={{ float: "left" }}
+                    className="choice-btn btn text-white py-1 font-weight-bold"
+                    style={{
+                      float: "left",
+                      backgroundColor: "#00448B",
+                      borderRadius: "15px",
+                    }}
                   >
-                    Read More
+                    Explore now
                   </a>
                 </div>
-                <div className="header choice-img" style={{ textAlign: "right" }}>
+                <div
+                  className="header choice-img"
+                  style={{ textAlign: "right" }}
+                >
                   <img src={img1} alt="" />
                 </div>
               </div>
@@ -50,10 +56,8 @@ const Choice = () => {
                   justifyContent: "space-between",
                 }}
               >
-                <div className="body choice-body text-left">
-                  <h2 className="text-dark font-weight-bold">
-                    Content Creators
-                  </h2>
+                <div className="body choice-body choice-2 text-left">
+                  <h2 className="font-weight-bolder mb-0">Content Creators</h2>
                   <div className="card_line"></div>
                   <p className="choice-para mt-4 text-left">
                     We help you define your SEO objective & develop a realistic
@@ -61,21 +65,30 @@ const Choice = () => {
                   </p>
                   <a
                     href="service.html"
-                    className="choice-btn btn btn-primary"
-                    style={{ float: "left" }}
+                    className="choice-btn btn text-white py-1 font-weight-bold"
+                    style={{
+                      float: "left",
+                      backgroundColor: "#00448B",
+                      borderRadius: "15px",
+                    }}
                   >
-                    Read More
+                    Explore now
                   </a>
                 </div>
-                <div className="header choice-img" style={{ textAlign: "right" }}>
-                  <img src={img1} alt="" />
+                <div
+                  className="header choice-img"
+                  style={{ textAlign: "right" }}
+                >
+                  <img src={img2} alt="" />
                 </div>
               </div>
             </div>
-            
           </div>
           <div>
-            <p className="choice-bottom-para" style={{ padding: "2% 8%", textAlign: "center" }}>
+            <p
+              className="choice-bottom-para"
+              style={{ padding: "2% 8%", textAlign: "center" }}
+            >
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non
               autem incidunt deleniti cum quidem dolore earum vitae doloribus
               ducimus quod eum dicta pariatur facilis mollitia, laborum,
@@ -87,8 +100,12 @@ const Choice = () => {
         <div className="line">
           <a
             href="service.html"
-            className="btn btn-primary"
-            style={{ marginTop: "-26px" }}
+            className="btn text-white py-1 px-4 font-weight-bold"
+            style={{
+              marginTop: "-26px",
+              backgroundColor: "#00448B",
+              borderRadius: "15px",
+            }}
           >
             Read More
           </a>

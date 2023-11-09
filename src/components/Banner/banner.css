@@ -1,0 +1,107 @@
+.banner-heading {
+    color: #FFF;
+    font-family: League Spartan;
+    font-size: 64px;
+    font-style: normal;
+    margin-bottom: 0vh;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.banner-para {
+    color: #FFF;
+    font-family: League Spartan;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-bottom: 2%;
+}
+
+.banner-line {
+    border-top: 2px solid rgba(0, 78, 169, 0.50);
+    text-align: center;
+    position: relative;
+    margin-top: 8vh;
+}
+
+.banner-text {
+    background-color: #fff;
+    padding: 0 20px;
+    position: absolute;
+    color: black;
+    font-weight: bold;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.banner-wrap {
+    padding: 160px 0px 40px 0px !important;
+}
+
+.banner-btn {
+    width: 28%;
+    font-weight: bold;
+    margin-top: -2%;
+}
+
+.banner-btn-text {
+    color: #FFF;
+    text-align: center;
+    font-family: League Spartan;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+@media (max-width: 767px) {
+    .mobile-banner-heading {
+        color: #FFF;
+        font-family: League Spartan;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: -0.6px;
+    }
+
+    .banner-heading {
+        display: none;
+    }
+
+    .banner-para {
+        display: none;
+    }
+
+    .banner-btn {
+        display: none !important;
+    }
+
+    .banner-wrap {
+        padding-bottom: 0px !important;
+    }
+
+    .banner-line {
+        display: none;
+    }
+
+    .banner-mobile-text {
+        color: #000;
+        padding-left: 3%;
+        font-size: 32px;
+        font-family: League Spartan;
+        font-style: normal;
+        font-weight: 800;
+        line-height: normal;
+        letter-spacing: -0.8px;
+        margin-bottom: 6%;
+    }
+}
+
+@media (min-width: 767px) {
+    .banner-mobile-text {
+        display: none;
+    }
+}

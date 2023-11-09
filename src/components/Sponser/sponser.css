@@ -8,9 +8,9 @@
     text-align: center;
     position: relative;
     margin-top: 12vh;
-  }
+}
 
-  .sponsor-text {
+.sponsor-text {
     background-color: #fff;
     padding: 0 20px;
     position: absolute;
@@ -19,18 +19,21 @@
     top: -24px;
     left: 50%;
     transform: translateX(-50%);
-  }
+}
+
 .sponsor-mobile-text {
     color: #000;
-
-font-family: League Spartan;
-font-size: 32px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-letter-spacing: -0.8px;
-margin-top: 8vh;
+    padding-left: 3%;
+    font-family: League Spartan;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    letter-spacing: -0.8px;
+    margin-top: 8vh;
+    margin-bottom: 5vh;
 }
+
 .card-blog {
     background-color: #f2f2f2;
     border-radius: 6%;
@@ -68,55 +71,79 @@ margin-top: 8vh;
 
 .slick-prev,
 .slick-next {
-  display: none !important;
+    display: none !important;
 }
 
 .sponsor-card-indicator {
-  transform: rotate(270deg);
-  color: #FFF;
-  font-family: League Spartan;
-  font-size: 32px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  letter-spacing: -0.8px;
+    transform: rotate(270deg);
+    color: #FFF;
+    font-family: League Spartan;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.8px;
 }
 
 
 
 @media (min-width: 769px) {
     .sponsor-desktop {
-      display: block; /* Display sponsor-desktop */
+        display: block;
+        /* Display sponsor-desktop */
     }
+
     .sponsor-mobile {
-      display: none;  /* Hide sponsor-mobile */
+        display: none;
+        /* Hide sponsor-mobile */
     }
-.sponsor-mobile-text {
-    display: none;
+
+    .sponsor-mobile-text {
+        display: none;
+    }
 }
 
-  }
-  
-  /* For screens 768px or smaller (mobile) */
-  @media (max-width: 768px) {
+/* For screens 768px or smaller (mobile) */
+@media (max-width: 768px) {
     .sponsor-desktop {
-      display: none;  /* Hide sponsor-desktop */
+        display: none;
+        /* Hide sponsor-desktop */
     }
+
     .sponsor-mobile {
-      display: block; /* Display sponsor-mobile */
+        display: block;
+        /* Display sponsor-mobile */
     }
+
     .sponsor-line {
         display: none;
     }
-    .sponsor-mobile-text{
+
+    .sponsor-mobile-text {
         display: block;
     }
-    .sponsor-container{
-      background-color: blue !important;
-      text-align: -webkit-right;
+
+    .sponsor-container {
+        background-color: blue !important;
+        text-align: -webkit-right;
     }
-  }
- 
+
+    .sponsor-second-container {
+        margin-top: 0px !important;
+    }
+
+    .text-overlay {
+        position: absolute;
+        top: 80%;
+        left: 30%;
+        width: 100%;
+        transform: translate(-50%, -50%);
+        color: white;
+        background-color: rgba(0, 0, 0, 0);
+        padding: 10px;
+    }
+}
+
 
 
 
@@ -190,6 +217,9 @@ margin-top: 8vh;
         font-size: medium;
     }
 
+    .bg-sponsor {
+        background: none !important;
+    }
 }
 
 @media (max-width:576px) {
@@ -207,4 +237,13 @@ margin-top: 8vh;
         display: none;
     }
 }
-  
+
+@media (max-width:991px) and (min-width:768px) {
+    .card-body {
+        font-size: x-large;
+    }
+
+    .card-body h5 {
+        font-size: xx-large;
+    }
+}
