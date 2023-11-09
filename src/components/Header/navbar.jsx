@@ -31,7 +31,7 @@ function navbar() {
                 </div>
             </Navbar>
             <Navbar className='desktop-nav' expand="lg" style={{ backgroundColor: "#083C79" }}>
-                <div class="container">
+                <div class="container" style={{placeContent: 'center'}}>
                     <Nav>
                         <Nav.Link className='desktop-nav-item' href="index.html">Sponsor Event</Nav.Link>
                         <Nav.Link className='desktop-nav-item' href="about.html">Sponsor Content Creators</Nav.Link>
