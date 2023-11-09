@@ -1,4 +1,4 @@
-import logo from "../../assets/img/lgoo.png";
+import logo from "../../assets/img/logo/logo.png";
 import "./footer.css";
 
 const Footer = () => {
@@ -17,8 +17,8 @@ const Footer = () => {
           <div className="row align-items-center justify-content-around">
             {/* <!--Grid column--> */}
             <div className="col-lg-6 col-md-12 mb-4 mb-md-0 text-left mb-md-4 text-md-center ">
-              <h5 className="mb-4 footer-logo">
-                <img src={logo} style={{ width: "50%" }} />
+              <h5 className="footer-logo">
+                <img src={logo} style={{ width: "80%", height:"100%", objectFit: 'cover' }} />
               </h5>
 
               <h5 className="text-capitalize footer-heading">

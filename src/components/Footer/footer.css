@@ -1,9 +1,13 @@
+.footer-logo {
+  height: 120px;
+}  
   /* For screens 768px or smaller (mobile) */
   @media (max-width: 768px) {
     .footer-logo {
       text-align: center;
       /* Hide sponsor-desktop */
     }
+
 
     .footer-heading {
       color: #FFF;

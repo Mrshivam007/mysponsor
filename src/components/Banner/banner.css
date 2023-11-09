@@ -8,6 +8,10 @@
     line-height: normal;
 }
 
+.banner-info {
+    background-color: #fff !important;
+}
+
 .banner-para {
     color: #FFF;
     font-family: League Spartan;
@@ -102,6 +106,9 @@
 
 @media (min-width: 767px) {
     .banner-mobile-text {
+        display: none;
+    }
+    .mobile-banner-heading {
         display: none;
     }
 }
