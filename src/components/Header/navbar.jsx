@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import "./navbar.css"
 import banner from "../../assets/img/card/header_banner.png"
 import logo from "../../assets/img/logo/logo.png";
 import card_bg from "../../assets/img/card/header-bg.png"
+import { AiOutlineClose } from 'react-icons/ai'; // Import the close icon from react-icons library
 
 
-function navbar() {
+
+function NavBar() {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleNavbar = () => {
+        setIsOpen(!isOpen);
+    };
 
     return (
         <div>
@@ -25,9 +32,9 @@ function navbar() {
                             </button>
                         </div>
                     </div>
-                    <a class="nav-link" href="contact.html" style={{ backgroundColor: 'white', margin: '1vh', height: '40px', width: '40px', borderRadius: '50px', }}><span class="mai-heart" style={{fontSize: '28px',marginLeft: '-10px'}}></span></a>
-                    <a class="nav-link" href="contact.html" style={{ backgroundColor: 'white', margin: '1vh', height: '40px', width: '40px', borderRadius: '50px', }}><span class="mai-people" style={{fontSize: '28px',marginLeft: '-10px'}}></span></a>
-                    <a class="nav-link" href="contact.html" style={{ backgroundColor: 'white', margin: '1vh', height: '40px', width: '40px', borderRadius: '50px', }}><span class="mai-calendar" style={{fontSize: '28px',marginLeft: '-10px'}}></span></a>
+                    <a class="nav-link" href="contact.html" style={{ backgroundColor: 'white', margin: '1vh', height: '40px', width: '40px', borderRadius: '50px', }}><span class="mai-heart" style={{ fontSize: '28px', marginLeft: '-10px' }}></span></a>
+                    <a class="nav-link" href="contact.html" style={{ backgroundColor: 'white', margin: '1vh', height: '40px', width: '40px', borderRadius: '50px', }}><span class="mai-people" style={{ fontSize: '28px', marginLeft: '-10px' }}></span></a>
+                    <a class="nav-link" href="contact.html" style={{ backgroundColor: 'white', margin: '1vh', height: '40px', width: '40px', borderRadius: '50px', }}><span class="mai-calendar" style={{ fontSize: '28px', marginLeft: '-10px' }}></span></a>
                 </div>
             </Navbar>
             <Navbar className='desktop-nav' expand="lg" style={{ backgroundColor: "#083C79" }}>
@@ -44,16 +51,15 @@ function navbar() {
             </Navbar>
 
             <Navbar className='mobile-nav' expand="lg" style={{ display: 'flex', flexDirection: 'column', backgroundColor: "#004EA9" }}>
-                <div class="container" >
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <a href="#" class="navbar-brand" style={{ height: '52px', marginTop: '3%' }}><img src={logo} /></a>
-
-                    <a class="nav-link" href="contact.html" style={{ backgroundColor: 'white', margin: '1vh', height: '40px', width: '40px', borderRadius: '50px', }}><span class="mai-calendar" style={{fontSize: '28px',marginLeft: '-10px'}}></span></a>
+                <div className="container">
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={toggleNavbar} />
+                    <a href="#" className="navbar-brand" style={{ height: '52px', marginTop: '3%' }}><img src={logo} alt="Logo" /></a>
                 </div>
-                <div className="nav-bg-color">
-                    <div class="container" style={{}}>
-                        <Navbar.Collapse id="basic-navbar-nav" style={{ justifyContent: 'center' }}>
-                            <Nav>
+
+                {isOpen && (
+                    <div className="mobile-nav-overlay">
+                        <div className="mobile-nav-content">
+                            <Nav className="mobile-nav-items">
                                 <Nav.Link className="mobile-nav-item" href="index.html">Sponsor Event</Nav.Link>
                                 <Nav.Link className="mobile-nav-item" href="about.html">Sponsor Content Creators</Nav.Link>
                                 <Nav.Link className="mobile-nav-item" href="service.html">Events Near You</Nav.Link>
@@ -61,9 +67,12 @@ function navbar() {
                                 <Nav.Link className="mobile-nav-item" href="contact.html">Top Content Creator</Nav.Link>
                                 <Nav.Link className="mobile-nav-item" href="contact.html">List your event</Nav.Link>
                             </Nav>
-                        </Navbar.Collapse>
+                            <div className="close-icon" onClick={toggleNavbar}>
+                                <AiOutlineClose />
+                            </div>
+                        </div>
                     </div>
-                </div>
+                )}
             </Navbar>
             <div class="container" style={{ maxWidth: '1400px' }}>
                 <div class="page-banner home-banner" style={{ height: 'auto', backgroundImage: `url(${card_bg})` }}>
@@ -86,4 +95,4 @@ function navbar() {
     );
 }
 
-export default navbar;
+export default NavBar;

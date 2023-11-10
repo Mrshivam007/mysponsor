@@ -8,6 +8,55 @@ body {
   margin: auto;
 }
 
+/* Add this CSS to your stylesheet */
+
+/* Add this CSS to your stylesheet */
+
+/* Add this CSS to your stylesheet */
+
+/* Style for the overlay background */
+.mobile-nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.95); /* Adjust the background color and opacity as needed */
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+/* Style for the content within the overlay */
+.mobile-nav-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Style for the navbar links in the overlay */
+.mobile-nav-items {
+  text-align: left;
+}
+
+/* Style for each individual navbar item in the overlay */
+.mobile-nav-item {
+  margin: 10px 0;
+  color: #004EA9; /* Adjust the color as needed */
+}
+
+/* Style for the close icon */
+.close-icon {
+  cursor: pointer;
+  align-self: flex-end;
+  font-size: 24px;
+  color: #004EA9; /* Adjust the color as needed */
+}
+
+
+
 .desktop-nav {
   display: 'flex';
   flex-direction: 'column';
