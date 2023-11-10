@@ -173,7 +173,7 @@ function NavBar() {
         {isOpen && (
           <div className="mobile-nav-overlay">
             <div className="mobile-nav-content">
-              <Container className="justify-content-end">
+              <Container className="justify-content-start">
                 <div className="close-icon" onClick={toggleNavbar}>
                   <AiOutlineClose />
                 </div>
