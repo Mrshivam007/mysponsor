@@ -7,7 +7,7 @@ import card_bg from "../../assets/img/card/header-bg.png"
 
 
 function navbar() {
-    
+
     return (
         <div>
             {/* <nav class="navbar navbar-expand-lg navbar-light sticky" style={{ backgroundColor: '#004EA9' }} data-offset="500"> */}
@@ -25,13 +25,13 @@ function navbar() {
                             </button>
                         </div>
                     </div>
-                    <a class="nav-link" href="contact.html" style={{ backgroundColor: 'white', margin: '1vh', borderRadius: '50px' }}><span class="mai-heart"></span></a>
-                    <a class="nav-link" href="contact.html" style={{ backgroundColor: 'white', margin: '1vh', borderRadius: '50px' }}><span class="mai-calendar"></span></a>
-                    <a class="nav-link" href="contact.html" style={{ backgroundColor: 'white', margin: '1vh', borderRadius: '50px' }}><span class="mai-person"></span></a>
+                    <a class="nav-link" href="contact.html" style={{ backgroundColor: 'white', margin: '1vh', height: '40px', width: '40px', borderRadius: '50px', }}><span class="mai-heart" style={{fontSize: '28px',marginLeft: '-10px'}}></span></a>
+                    <a class="nav-link" href="contact.html" style={{ backgroundColor: 'white', margin: '1vh', height: '40px', width: '40px', borderRadius: '50px', }}><span class="mai-people" style={{fontSize: '28px',marginLeft: '-10px'}}></span></a>
+                    <a class="nav-link" href="contact.html" style={{ backgroundColor: 'white', margin: '1vh', height: '40px', width: '40px', borderRadius: '50px', }}><span class="mai-calendar" style={{fontSize: '28px',marginLeft: '-10px'}}></span></a>
                 </div>
             </Navbar>
             <Navbar className='desktop-nav' expand="lg" style={{ backgroundColor: "#083C79" }}>
-                <div class="container" style={{placeContent: 'center'}}>
+                <div class="container" style={{ placeContent: 'center' }}>
                     <Nav>
                         <Nav.Link className='desktop-nav-item' href="index.html">Sponsor Event</Nav.Link>
                         <Nav.Link className='desktop-nav-item' href="about.html">Sponsor Content Creators</Nav.Link>
@@ -48,7 +48,7 @@ function navbar() {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <a href="#" class="navbar-brand" style={{ height: '52px', marginTop: '3%' }}><img src={logo} /></a>
 
-                    <a class="nav-link" href="contact.html" style={{ backgroundColor: 'white', margin: '1vh', borderRadius: '50px' }}><span class="mai-heart"></span></a>
+                    <a class="nav-link" href="contact.html" style={{ backgroundColor: 'white', margin: '1vh', height: '40px', width: '40px', borderRadius: '50px', }}><span class="mai-calendar" style={{fontSize: '28px',marginLeft: '-10px'}}></span></a>
                 </div>
                 <div className="nav-bg-color">
                     <div class="container" style={{}}>
@@ -76,7 +76,7 @@ function navbar() {
                         </div>
                         <div class="img-container col-md-4 wow zoomIn">
                             <div class="img-fluid text-center">
-                                <img className='header-card-logo' src={banner} alt=""  style={{}} />
+                                <img className='header-card-logo' src={banner} alt="" style={{}} />
                             </div>
                         </div>
                     </div>
