@@ -19,9 +19,10 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 80%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.95); /* Adjust the background color and opacity as needed */
+  background-color: rgb(255, 255, 255);
+  /* Adjust the background color and opacity as needed */
   z-index: 1000;
   display: flex;
   flex-direction: column;
@@ -44,7 +45,9 @@ body {
 /* Style for each individual navbar item in the overlay */
 .mobile-nav-item {
   margin: 10px 0;
-  color: #004EA9; /* Adjust the color as needed */
+  font-size: larger;
+  font-weight: 700;
+  color: black !important;
 }
 
 /* Style for the close icon */
@@ -52,7 +55,8 @@ body {
   cursor: pointer;
   align-self: flex-end;
   font-size: 24px;
-  color: #004EA9; /* Adjust the color as needed */
+  color: black;
+  /* Adjust the color as needed */
 }
 
 
@@ -71,9 +75,9 @@ body {
   flex-direction: column;
 }
 
-.mobile-nav-item {
+/* .mobile-nav-item {
   color: white !important;
-}
+} */
 
 /* CSS for the slide-in effect */
 .mobile-nav.slide-in {
