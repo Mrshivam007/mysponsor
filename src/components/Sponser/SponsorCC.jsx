@@ -3,7 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./sponser.css";
 
-const SponserCC = () => {
+const SponserCC = (cardData) => {
   const settings = {
     dots: false,
     infinite: true,
@@ -13,6 +13,7 @@ const SponserCC = () => {
     prevArrow: null, // Hide the previous arrow
     nextArrow: null, // Hide the next arrow
   };
+  console.log(cardData);
 
   return (
     <>
@@ -33,6 +34,7 @@ const SponserCC = () => {
         style={{ marginTop: "8rem" }}
       >
         <div className="row">
+        {cardData && cardData?.cardData.map((data) => (
           <div className="col-lg-6 col-sm-12 mb-3">
             <div
               class="card"
@@ -49,19 +51,19 @@ const SponserCC = () => {
                 <div class="col-6 col-md-5 col-sm-6 mt-0">
                   <div class="card-body mb">
                     <h5 class="card-title font-weight-bold d-inline">
-                      Mr. Beast
+                      {data.name}
                     </h5>
                     <br />
-                    <span class="card-text ">Platform:- Youtube</span>
+                    <span class="card-text ">{data.plateform}</span>
                     <br />
                     <span class="card-text">
                       <i className="bi bi-cash text-success"></i>
-                      &nbsp;&nbsp; 1 Million &lt;
+                      &nbsp;&nbsp; {data.price} &lt;
                     </span>
                     <br />
                     <p class="card-text">
                       <i className="bi bi-people-fill text-danger"></i>
-                      &nbsp;&nbsp; 50 Million
+                      &nbsp;&nbsp; {data.people}
                     </p>
                   </div>
                 </div>
@@ -79,144 +81,7 @@ const SponserCC = () => {
               </div>
             </div>
           </div>
-          <div className="col-lg-6 col-sm-12 mb-3">
-            <div
-              class="card"
-              style={{ maxWidth: "100%", height: "auto", borderRadius: "18px" }}
-            >
-              <div class="row g-0">
-                <div class="col-4 col-md-5 col-sm-4">
-                  <img
-                    src={ccimg_card}
-                    class="img-fluid rounded-start cc-img"
-                    alt=""
-                  />
-                </div>
-                <div class="col-6 col-md-5 col-sm-6 mt-0">
-                  <div class="card-body mb">
-                    <h5 class="card-title font-weight-bold d-inline">
-                      Mr. Beast
-                    </h5>
-                    <br />
-                    <span class="card-text ">Platform:- Youtube</span>
-                    <br />
-                    <span class="card-text">
-                      <i className="bi bi-cash text-success"></i>
-                      &nbsp;&nbsp; 1 Million &lt;
-                    </span>
-                    <br />
-                    <p class="card-text">
-                      <i className="bi bi-people-fill text-danger"></i>
-                      &nbsp;&nbsp; 50 Million
-                    </p>
-                  </div>
-                </div>
-                <div class=" col-2 col-md-2 col-sm-2">
-                  <button
-                    className="btn btn-primary btn-block"
-                    style={{
-                      height: "100%",
-                      borderRadius: "0px 18px 18px 0px",
-                    }}
-                  >
-                    <span className="text-xl">&gt;</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-6 col-sm-12 mb-3">
-            <div
-              class="card"
-              style={{ maxWidth: "100%", height: "auto", borderRadius: "18px" }}
-            >
-              <div class="row g-0">
-                <div class="col-4 col-md-5 col-sm-4">
-                  <img
-                    src={ccimg_card}
-                    class="img-fluid rounded-start cc-img"
-                    alt=""
-                  />
-                </div>
-                <div class="col-6 col-md-5 col-sm-6 mt-0">
-                  <div class="card-body mb">
-                    <h5 class="card-title font-weight-bold d-inline">
-                      Mr. Beast
-                    </h5>
-                    <br />
-                    <span class="card-text ">Platform:- Youtube</span>
-                    <br />
-                    <span class="card-text">
-                      <i className="bi bi-cash text-success"></i>
-                      &nbsp;&nbsp; 1 Million &lt;
-                    </span>
-                    <br />
-                    <p class="card-text">
-                      <i className="bi bi-people-fill text-danger"></i>
-                      &nbsp;&nbsp; 50 Million
-                    </p>
-                  </div>
-                </div>
-                <div class=" col-2 col-md-2 col-sm-2">
-                  <button
-                    className="btn btn-primary btn-block"
-                    style={{
-                      height: "100%",
-                      borderRadius: "0px 18px 18px 0px",
-                    }}
-                  >
-                    <span className="text-xl">&gt;</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-6 col-sm-12 mb-3">
-            <div
-              class="card"
-              style={{ maxWidth: "100%", height: "auto", borderRadius: "18px" }}
-            >
-              <div class="row g-0">
-                <div class="col-4 col-md-5 col-sm-4">
-                  <img
-                    src={ccimg_card}
-                    class="img-fluid rounded-start cc-img"
-                    alt=""
-                  />
-                </div>
-                <div class="col-6 col-md-5 col-sm-6 mt-0">
-                  <div class="card-body mb">
-                    <h5 class="card-title font-weight-bold d-inline">
-                      Mr. Beast
-                    </h5>
-                    <br />
-                    <span class="card-text ">Platform:- Youtube</span>
-                    <br />
-                    <span class="card-text">
-                      <i className="bi bi-cash text-success"></i>
-                      &nbsp;&nbsp; 1 Million &lt;
-                    </span>
-                    <br />
-                    <p class="card-text">
-                      <i className="bi bi-people-fill text-danger"></i>
-                      &nbsp;&nbsp; 50 Million
-                    </p>
-                  </div>
-                </div>
-                <div class=" col-2 col-md-2 col-sm-2">
-                  <button
-                    className="btn btn-primary btn-block"
-                    style={{
-                      height: "100%",
-                      borderRadius: "0px 18px 18px 0px",
-                    }}
-                  >
-                    <span className="text-xl">&gt;</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+        ))}
         </div>
         <div
           className="container d-flex justify-content-center"

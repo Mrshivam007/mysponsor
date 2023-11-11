@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./sponser.css";
 import arrow from "../../assets/img/right-arrow.png";
-const SponserE = ({ line }) => {
+const SponserE = ({ line, cardData }) => {
   const settings = {
     dots: false,
     infinite: true,
@@ -14,6 +14,7 @@ const SponserE = ({ line }) => {
     prevArrow: null, // Hide the previous arrow
     nextArrow: null, // Hide the next arrow
   };
+  console.log(cardData);
 
   return (
     <>
@@ -30,214 +31,61 @@ const SponserE = ({ line }) => {
         <div className="sponsor-desktop">
           <div className="row my-5">
             {/* <Slider {...settings}> */}
-            <div className="col-lg-3 col-md-6 py-3">
-              <div className="card-blog">
-                <div className="header">
-                  <div className="post-thumb">
-                    <img
-                      src={sponser_card}
-                      alt=""
-                      style={{ width: "100%" }}
-                      className="sponser_card_img"
-                    />
-                    <div class="text-overlay">
-                      <p className="text-lg font-weight-bold mb-0 ">
-                        Ganesh Chaturthi
-                      </p>
-                      <p>Durg, C.G.</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="body">
-                  <div className="row">
-                    <div
-                      className="col"
-                      style={{ borderRight: "1px solid #cfcfcf" }}
-                    >
-                      <h6 className="post-title">
-                        <a href="blog-details.html">Price Band</a>
-                      </h6>
-                      <div className="post-date">
-                        <i className="bi bi-cash text-success"></i>
-                        <b> $10,000 &gt;</b>
-                      </div>
-                    </div>
-                    <div className="col">
-                      <h6 className="post-title">
-                        <a href="blog-details.html">Audience</a>
-                      </h6>
-                      <div className="post-date">
-                        <i className="bi bi-people-fill text-danger"></i>
-                        <b> 1 Million+ </b>
+            {cardData && cardData.map((data) => (
+              <div key={data.id} className="col-lg-3 col-md-6 py-3">
+                <div className="card-blog">
+                  <div className="header">
+                    <div className="post-thumb">
+                      <img
+                        src={sponser_card}
+                        alt=""
+                        style={{ width: "100%" }}
+                        className="sponser_card_img"
+                      />
+                      <div className="text-overlay">
+                        <p className="text-lg font-weight-bold mb-0">
+                          {data.name}
+                        </p>
+                        <p>{data.location}</p>
                       </div>
                     </div>
                   </div>
-                </div>
+                  <div className="body">
+                    <div className="row">
+                      <div
+                        className="col"
+                        style={{ borderRight: "1px solid #cfcfcf" }}
+                      >
+                        <h6 className="post-title">
+                          <a href="blog-details.html">Price Band</a>
+                        </h6>
+                        <div className="post-date">
+                          <i className="bi bi-cash text-success"></i>
+                          <b> {data.price}</b>
+                        </div>
+                      </div>
+                      <div className="col">
+                        <h6 className="post-title">
+                          <a href="blog-details.html">Audience</a>
+                        </h6>
+                        <div className="post-date">
+                          <i className="bi bi-people-fill text-danger"></i>
+                          <b> {data.people}</b>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-                <button
-                  className="btn btn-primary mx-auto rounded-0"
-                  style={{ width: "100%" }}
-                >
-                  Sponser Now
-                </button>
+                  <button
+                    className="btn btn-primary mx-auto rounded-0"
+                    style={{ width: "100%" }}
+                  >
+                    Sponsor Now
+                  </button>
+                </div>
               </div>
-            </div>
-            <div className="col-lg-3 col-md-6 py-3">
-              <div className="card-blog">
-                <div className="header">
-                  <div className="post-thumb">
-                    <img
-                      src={sponser_card}
-                      alt=""
-                      style={{ width: "100%" }}
-                      className="sponser_card_img"
-                    />
-                    <div class="text-overlay">
-                      <p className="text-lg font-weight-bold mb-0 ">
-                        Ganesh Chaturthi
-                      </p>
-                      <p>Durg, C.G.</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="body">
-                  <div className="row">
-                    <div
-                      className="col"
-                      style={{ borderRight: "1px solid #cfcfcf" }}
-                    >
-                      <h6 className="post-title">
-                        <a href="blog-details.html">Price Band</a>
-                      </h6>
-                      <div className="post-date">
-                        <i className="bi bi-cash text-success"></i>
-                        <b> $10,000 &gt;</b>
-                      </div>
-                    </div>
-                    <div className="col">
-                      <h6 className="post-title">
-                        <a href="blog-details.html">Audience</a>
-                      </h6>
-                      <div className="post-date">
-                        <i className="bi bi-people-fill text-danger"></i>
-                        <b> 1 Million+ </b>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            ))}
 
-                <button
-                  className="btn btn-primary mx-auto rounded-0"
-                  style={{ width: "100%" }}
-                >
-                  Sponser Now
-                </button>
-              </div>
-            </div>
-            <div className="col-lg-3 col-md-6 py-3">
-              <div className="card-blog">
-                <div className="header">
-                  <div className="post-thumb">
-                    <img
-                      src={sponser_card}
-                      alt=""
-                      style={{ width: "100%" }}
-                      className="sponser_card_img"
-                    />
-                    <div class="text-overlay">
-                      <p className="text-lg font-weight-bold mb-0 ">
-                        Ganesh Chaturthi
-                      </p>
-                      <p>Durg, C.G.</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="body">
-                  <div className="row">
-                    <div
-                      className="col"
-                      style={{ borderRight: "1px solid #cfcfcf" }}
-                    >
-                      <h6 className="post-title">
-                        <a href="blog-details.html">Price Band</a>
-                      </h6>
-                      <div className="post-date">
-                        <i className="bi bi-cash text-success"></i>
-                        <b> $10,000 &gt;</b>
-                      </div>
-                    </div>
-                    <div className="col">
-                      <h6 className="post-title">
-                        <a href="blog-details.html">Audience</a>
-                      </h6>
-                      <div className="post-date">
-                        <i className="bi bi-people-fill text-danger"></i>
-                        <b> 1 Million+ </b>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <button
-                  className="btn btn-primary mx-auto rounded-0"
-                  style={{ width: "100%" }}
-                >
-                  Sponser Now
-                </button>
-              </div>
-            </div>
-            <div className="col-lg-3 col-md-6 py-3">
-              <div className="card-blog">
-                <div className="header">
-                  <div className="post-thumb">
-                    <img
-                      src={sponser_card}
-                      alt=""
-                      style={{ width: "100%" }}
-                      className="sponser_card_img"
-                    />
-                    <div class="text-overlay">
-                      <p className="text-lg font-weight-bold mb-0 ">
-                        Ganesh Chaturthi
-                      </p>
-                      <p>Durg, C.G.</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="body">
-                  <div className="row">
-                    <div
-                      className="col"
-                      style={{ borderRight: "1px solid #cfcfcf" }}
-                    >
-                      <h6 className="post-title">
-                        <a href="blog-details.html">Price Band</a>
-                      </h6>
-                      <div className="post-date">
-                        <i className="bi bi-cash text-success"></i>
-                        <b> $10,000 &gt;</b>
-                      </div>
-                    </div>
-                    <div className="col">
-                      <h6 className="post-title">
-                        <a href="blog-details.html">Audience</a>
-                      </h6>
-                      <div className="post-date">
-                        <i className="bi bi-people-fill text-danger"></i>
-                        <b> 1 Million+ </b>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <button
-                  className="btn btn-primary mx-auto rounded-0"
-                  style={{ width: "100%" }}
-                >
-                  Sponser Now
-                </button>
-              </div>
-            </div>
             {/* </Slider> */}
             <div className="container d-flex justify-content-center">
               <button
@@ -264,214 +112,60 @@ const SponserE = ({ line }) => {
             </div>
             <div className="col-lg-4" style={{ width: "76%" }}>
               <Slider {...settings}>
-                <div className="col-lg-3 col-md-6 py-3">
-                  <div className="card-blog">
-                    <div className="header">
-                      <div className="post-thumb">
-                        <img
-                          src={sponser_card}
-                          alt=""
-                          style={{ width: "100%" }}
-                          className="sponser_card_img"
-                        />
-                        <div class="text-overlay">
-                          <p className="text-lg font-weight-bold mb-0 ">
-                            Ganesh Chaturthi
-                          </p>
-                          <p>Durg, C.G.</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="body sponsor-card-detail">
-                      <div className="row">
-                        <div
-                          className="col"
-                          style={{ borderRight: "1px solid #cfcfcf" }}
-                        >
-                          <h6 className="post-title">
-                            <a href="blog-details.html">Price Band</a>
-                          </h6>
-                          <div className="post-date">
-                            <i className="bi bi-cash text-success"></i>
-                            <b> $10,000 &gt;</b>
-                          </div>
-                        </div>
-                        <div className="col">
-                          <h6 className="post-title">
-                            <a href="blog-details.html">Audience</a>
-                          </h6>
-                          <div className="post-date">
-                            <i className="bi bi-people-fill text-danger"></i>
-                            <b> 1 Million+ </b>
+                {cardData && cardData.map((data) => (
+                  <div key={data.id} className="col-lg-3 col-md-6 py-3">
+                    <div className="card-blog">
+                      <div className="header">
+                        <div className="post-thumb">
+                          <img
+                            src={sponser_card}
+                            alt=""
+                            style={{ width: "100%" }}
+                            className="sponser_card_img"
+                          />
+                          <div class="text-overlay">
+                            <p className="text-lg font-weight-bold mb-0 ">
+                              {data.name}
+                            </p>
+                            <p>{data.location}</p>
                           </div>
                         </div>
                       </div>
-                    </div>
+                      <div className="body sponsor-card-detail">
+                        <div className="row">
+                          <div
+                            className="col"
+                            style={{ borderRight: "1px solid #cfcfcf" }}
+                          >
+                            <h6 className="post-title">
+                              <a href="blog-details.html">Price Band</a>
+                            </h6>
+                            <div className="post-date">
+                              <i className="bi bi-cash text-success"></i>
+                              <b> {data.price};</b>
+                            </div>
+                          </div>
+                          <div className="col">
+                            <h6 className="post-title">
+                              <a href="blog-details.html">Audience</a>
+                            </h6>
+                            <div className="post-date">
+                              <i className="bi bi-people-fill text-danger"></i>
+                              <b> {data.people} </b>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
-                    <button
-                      className="btn btn-primary mx-auto rounded-0"
-                      style={{ width: "100%" }}
-                    >
-                      Sponser Now
-                    </button>
+                      <button
+                        className="btn btn-primary mx-auto rounded-0"
+                        style={{ width: "100%" }}
+                      >
+                        Sponser Now
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div className="col-lg-3 col-md-6 py-3">
-                  <div className="card-blog">
-                    <div className="header">
-                      <div className="post-thumb">
-                        <img
-                          src={sponser_card}
-                          alt=""
-                          style={{ width: "100%" }}
-                          className="sponser_card_img"
-                        />
-                        <div class="text-overlay">
-                          <p className="text-lg font-weight-bold mb-0 ">
-                            Ganesh Chaturthi
-                          </p>
-                          <p>Durg, C.G.</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="body">
-                      <div className="row">
-                        <div
-                          className="col"
-                          style={{ borderRight: "1px solid #cfcfcf" }}
-                        >
-                          <h6 className="post-title">
-                            <a href="blog-details.html">Price Band</a>
-                          </h6>
-                          <div className="post-date">
-                            <i className="bi bi-cash text-success"></i>
-                            <b> $10,000 &gt;</b>
-                          </div>
-                        </div>
-                        <div className="col">
-                          <h6 className="post-title">
-                            <a href="blog-details.html">Audience</a>
-                          </h6>
-                          <div className="post-date">
-                            <i className="bi bi-people-fill text-danger"></i>
-                            <b> 1 Million+ </b>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <button
-                      className="btn btn-primary mx-auto rounded-0"
-                      style={{ width: "100%" }}
-                    >
-                      Sponser Now
-                    </button>
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-6 py-3">
-                  <div className="card-blog">
-                    <div className="header">
-                      <div className="post-thumb">
-                        <img
-                          src={sponser_card}
-                          alt=""
-                          style={{ width: "100%" }}
-                          className="sponser_card_img"
-                        />
-                        <div class="text-overlay">
-                          <p className="text-lg font-weight-bold mb-0 ">
-                            Ganesh Chaturthi
-                          </p>
-                          <p>Durg, C.G.</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="body">
-                      <div className="row">
-                        <div
-                          className="col"
-                          style={{ borderRight: "1px solid #cfcfcf" }}
-                        >
-                          <h6 className="post-title">
-                            <a href="blog-details.html">Price Band</a>
-                          </h6>
-                          <div className="post-date">
-                            <i className="bi bi-cash text-success"></i>
-                            <b> $10,000 &gt;</b>
-                          </div>
-                        </div>
-                        <div className="col">
-                          <h6 className="post-title">
-                            <a href="blog-details.html">Audience</a>
-                          </h6>
-                          <div className="post-date">
-                            <i className="bi bi-people-fill text-danger"></i>
-                            <b> 1 Million+ </b>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <button
-                      className="btn btn-primary mx-auto rounded-0"
-                      style={{ width: "100%" }}
-                    >
-                      Sponser Now
-                    </button>
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-6 py-3">
-                  <div className="card-blog">
-                    <div className="header">
-                      <div className="post-thumb">
-                        <img
-                          src={sponser_card}
-                          alt=""
-                          style={{ width: "100%" }}
-                          className="sponser_card_img"
-                        />
-                        <div class="text-overlay">
-                          <p className="text-lg font-weight-bold mb-0 ">
-                            Ganesh Chaturthi
-                          </p>
-                          <p>Durg, C.G.</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="body">
-                      <div className="row">
-                        <div
-                          className="col"
-                          style={{ borderRight: "1px solid #cfcfcf" }}
-                        >
-                          <h6 className="post-title">
-                            <a href="blog-details.html">Price Band</a>
-                          </h6>
-                          <div className="post-date">
-                            <i className="bi bi-cash text-success"></i>
-                            <b> $10,000 &gt;</b>
-                          </div>
-                        </div>
-                        <div className="col">
-                          <h6 className="post-title">
-                            <a href="blog-details.html">Audience</a>
-                          </h6>
-                          <div className="post-date">
-                            <i className="bi bi-people-fill text-danger"></i>
-                            <b> 1 Million+ </b>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <button
-                      className="btn btn-primary mx-auto rounded-0"
-                      style={{ width: "100%" }}
-                    >
-                      Sponser Now
-                    </button>
-                  </div>
-                </div>
+                ))}
               </Slider>
             </div>
           </div>
