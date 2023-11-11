@@ -5,19 +5,19 @@ import Choice from "../../components/Choice/Crards";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/home-header";
 import NavBar from "../../components/Navbar/navbar";
-import Sponser from "../../components/Sponser/Sponser";
+import SponserHome from "../../components/Sponser/SponsorHome";
 
 const Home = () => {
     return ( 
         <>
-        {/* <NavBar /> */}
+        <NavBar />
         <Header />
         <Choice />
         <Chatbot />
         <Banner />
         <Categories />
-        <Sponser />
-        {/* <Footer /> */}
+        <SponserHome />
+        <Footer />
         </>
      );
 }

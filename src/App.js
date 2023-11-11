@@ -9,9 +9,9 @@ import Main from "./Routes/main.jsx";
 function App() {
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       <Main />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

@@ -59,8 +59,6 @@ body {
   /* Adjust the color as needed */
 }
 
-
-
 .desktop-nav {
   display: 'flex';
   flex-direction: 'column';
@@ -75,9 +73,6 @@ body {
   flex-direction: column;
 }
 
-/* .mobile-nav-item {
-  color: white !important;
-} */
 
 /* CSS for the slide-in effect */
 .mobile-nav.slide-in {
@@ -135,6 +130,20 @@ body {
   cursor: pointer;
 }
 
+
+.navbar-brand {
+  height: 48px;
+  width: 120px;
+}
+
+.navbar-brand img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* Header Styling */
+
 .subhead-banner {
   color: white;
   font-family: 'League Spartan', sans-serif;
@@ -157,17 +166,6 @@ body {
   padding-top: 3rem;
   padding-bottom: 3rem;
   padding-left: 6% !important;
-}
-
-.navbar-brand {
-  height: 48px;
-  width: 120px;
-}
-
-.navbar-brand img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
 }
 
 .link-banner {
