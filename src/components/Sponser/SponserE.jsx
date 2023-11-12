@@ -4,8 +4,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./sponser.css";
 import arrow from "../../assets/img/right-arrow.png";
-import { cardData2 } from "../../data/data";
-const SponserE = ({ line }) => {
+// import { cardData2 } from "../../data/data";
+const SponserE = ({ line, cardData }) => {
   const settings = {
     dots: false,
     infinite: true,
@@ -32,8 +32,8 @@ const SponserE = ({ line }) => {
         <div className="sponsor-desktop">
           <div className="row my-5">
             {/* <Slider {...settings}> */}
-            {cardData2 &&
-              cardData2.map((data) => (
+            {cardData &&
+              cardData.map((data) => (
                 <div key={data.id} className="col-lg-3 col-md-6 py-3">
                   <div className="card-blog">
                     <div className="header">
@@ -114,8 +114,8 @@ const SponserE = ({ line }) => {
             </div>
             <div className="col-lg-4" style={{ width: "76%" }}>
               <Slider {...settings}>
-                {cardData2 &&
-                  cardData2.map((data) => (
+                {cardData &&
+                  cardData.map((data) => (
                     <div key={data.id} className="col-lg-3 col-md-6 py-3">
                       <div className="card-blog">
                         <div className="header">

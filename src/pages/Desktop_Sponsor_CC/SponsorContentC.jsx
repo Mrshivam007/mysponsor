@@ -6,6 +6,8 @@ import Footer from "../../components/Footer/Footer";
 import NavBar from "../../components/Navbar/navbar";
 import SponsorCC from "../../components/Sponser/SponsorCC";
 import SocialmediaBox from "../../components/Categories/SocialmediaBox";
+import { cardData } from "../../data/data";
+import { cardData2 } from "../../data/data";
 const SponsorContentC = () => {
   return (
     <>
@@ -19,9 +21,9 @@ const SponsorContentC = () => {
       >
         <NavBar />
         <EventsHeader title={"Sponsor Content Creators"} logo={cclogo} />
-        <SponsorCC end={4} />
+        <SponsorCC cardData={cardData} />
         <SocialmediaBox />
-        <SponsorCC end={8} />
+        <SponsorCC cardData={cardData2} />
         <Footer />
       </div>
     </>

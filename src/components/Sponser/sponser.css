@@ -4,7 +4,8 @@
 }
 
 .sponsor-line {
-    border-top: 2px solid rgba(0, 78, 169, 0.50);
+    /* border-top: 2px solid rgba(0, 78, 169, 0.50); */
+    padding-bottom: 4%;
     text-align: center;
     position: relative;
     margin-top: 12vh;
@@ -105,6 +106,9 @@
 
 /* For screens 768px or smaller (mobile) */
 @media (max-width: 768px) {
+    .events-bg {
+        background-image: none !important;
+    }
     .sponsor-desktop {
         display: none;
         /* Hide sponsor-desktop */
@@ -196,6 +200,16 @@
 
 .card-body {
     margin: 15% 0% 0% 0%;
+}
+
+@media (max-width: 767px) {
+    .cc-img{
+        margin: none !important;
+        max-width: 125%;
+    }
+    .cc-img-container {
+        max-width: 30%;
+    }
 }
 
 

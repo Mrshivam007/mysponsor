@@ -2,8 +2,8 @@ import ccimg_card from "../../assets/img/mrbeast.svg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./sponser.css";
-import { cardData2 } from "../../data/data";
-const SponserCC = ({ end }) => {
+// import { cardData2 } from "../../data/data";
+const SponserCC = ({ cardData }) => {
   const settings = {
     dots: false,
     infinite: true,
@@ -34,8 +34,8 @@ const SponserCC = ({ end }) => {
         style={{ marginTop: "8rem" }}
       >
         <div className="row">
-          {cardData2 &&
-            cardData2.slice(0, end)?.map((data) => (
+          {cardData &&
+            cardData.map((data) => (
               <div className="col-lg-6 col-sm-12 mb-3">
                 <div
                   class="card"
@@ -46,7 +46,7 @@ const SponserCC = ({ end }) => {
                   }}
                 >
                   <div class="row g-0">
-                    <div class="col-4 col-md-5 col-sm-4">
+                    <div class="col-4 col-md-5 col-sm-4 cc-img-container">
                       <img
                         src={ccimg_card}
                         class="img-fluid rounded-start cc-img"

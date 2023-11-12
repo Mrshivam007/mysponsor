@@ -210,3 +210,15 @@
   width: 100%;
   height: auto;
 }
+
+@media (min-width: 767px) {
+  .socialmedia-mobile-container {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .socialmedia-desktop-container {
+    display: none !important;
+  }
+}

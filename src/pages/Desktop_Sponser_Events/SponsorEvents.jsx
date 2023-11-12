@@ -5,6 +5,7 @@ import bgimage from "../../assets/img/circle-bg.png";
 import NavBar from "../../components/Navbar/navbar";
 import Footer from "../../components/Footer/Footer";
 import spevents from "../../assets/img/sponsor_events-logo.png";
+import { cardData3 } from "../../data/data";
 const SponsorEvents = () => {
   return (
     <>
@@ -18,13 +19,13 @@ const SponsorEvents = () => {
       >
         <NavBar />
         <EventsHeader title={"Sponsor Events"} logo={spevents} />
-        <SponserE line={"Festival Events"} />
-        <SponserE line={"Concerts"} />
-        <SponserE line={"Promotional Events"} />
-        <SponserE line={"Sports Events"} />
-        <SponserE line={"Comedy Shows"} />
-        <SponserE line={"Motivational Events"} />
-        <SponserE line={"Reality Shows"} />
+        <SponserE cardData={cardData3} line={"Festival Events"} />
+        <SponserE cardData={cardData3} line={"Concerts"} />
+        <SponserE cardData={cardData3} line={"Promotional Events"} />
+        <SponserE cardData={cardData3} line={"Sports Events"} />
+        <SponserE cardData={cardData3} line={"Comedy Shows"} />
+        <SponserE cardData={cardData3} line={"Motivational Events"} />
+        <SponserE cardData={cardData3} line={"Reality Shows"} />
         <Footer />
       </div>
     </>
