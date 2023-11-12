@@ -1,11 +1,8 @@
 import React from "react";
-import SponserE from "../../components/Sponser/SponserE";
-import EventsHeader from "../../components/Header/events-header";
+import { NavBar, EventsHeader, SponserE, Footer } from "../../components";
 import bgimage from "../../assets/img/circle-bg.png";
-import NavBar from "../../components/Navbar/navbar";
-import Footer from "../../components/Footer/Footer";
 import spevents from "../../assets/img/sponsor_events-logo.png";
-import { cardData3 } from "../../data/data";
+import { EventsCards } from "../../data/data";
 const SponsorEvents = () => {
   return (
     <>
@@ -19,13 +16,13 @@ const SponsorEvents = () => {
       >
         <NavBar />
         <EventsHeader title={"Sponsor Events"} logo={spevents} />
-        <SponserE cardData={cardData3} line={"Festival Events"} />
-        <SponserE cardData={cardData3} line={"Concerts"} />
-        <SponserE cardData={cardData3} line={"Promotional Events"} />
-        <SponserE cardData={cardData3} line={"Sports Events"} />
-        <SponserE cardData={cardData3} line={"Comedy Shows"} />
-        <SponserE cardData={cardData3} line={"Motivational Events"} />
-        <SponserE cardData={cardData3} line={"Reality Shows"} />
+        <SponserE cardData={EventsCards} line={"Festival Events"} />
+        <SponserE cardData={EventsCards} line={"Concerts"} />
+        <SponserE cardData={EventsCards} line={"Promotional Events"} />
+        <SponserE cardData={EventsCards} line={"Sports Events"} />
+        <SponserE cardData={EventsCards} line={"Comedy Shows"} />
+        <SponserE cardData={EventsCards} line={"Motivational Events"} />
+        <SponserE cardData={EventsCards} line={"Reality Shows"} />
         <Footer />
       </div>
     </>

@@ -1,13 +1,15 @@
 import "./cards.css";
 import img1 from "../../assets/img/choice/choice-card-1.png";
 import img2 from "../../assets/img/choice/choice-card-2.png";
+import { Link } from "react-router-dom";
 const Choice = () => {
   return (
     <>
       <div className="page-section">
-        <div className="choice-line">
-          <h1 className="choice-heading">Centered Heading</h1>
-        </div>
+        <h1 className="choice-heading" style={{ background: "transparent" }}>
+          Centered Heading
+        </h1>
+
         <div className="container" style={{ marginTop: "2%" }}>
           <div className="row" style={{ flexWrap: "nowrap" }}>
             <div className="col-lg-6">
@@ -26,8 +28,8 @@ const Choice = () => {
                     We help you define your SEO objective & develop a realistic
                     strategy with you
                   </p>
-                  <a
-                    href="service.html"
+                  <Link
+                    to="/events"
                     className="choice-btn btn text-white py-1 font-weight-bold"
                     style={{
                       float: "left",
@@ -36,7 +38,7 @@ const Choice = () => {
                     }}
                   >
                     Explore now
-                  </a>
+                  </Link>
                 </div>
                 <div
                   className="header choice-img"
@@ -46,7 +48,6 @@ const Choice = () => {
                 </div>
               </div>
             </div>
-
             <div className="col-lg-6">
               <div
                 className="card-service wow fadeInUp choice-card"
@@ -63,8 +64,8 @@ const Choice = () => {
                     We help you define your SEO objective & develop a realistic
                     strategy with you
                   </p>
-                  <a
-                    href="service.html"
+                  <Link
+                    to="/cc"
                     className="choice-btn btn text-white py-1 font-weight-bold"
                     style={{
                       float: "left",
@@ -73,7 +74,7 @@ const Choice = () => {
                     }}
                   >
                     Explore now
-                  </a>
+                  </Link>
                 </div>
                 <div
                   className="header choice-img"

@@ -1,13 +1,14 @@
 import React from "react";
 import bgimage from "../../assets/img/circle-bg.png";
 import cclogo from "../../assets/img/content-creator.jpg";
-import EventsHeader from "../../components/Header/events-header";
-import Footer from "../../components/Footer/Footer";
-import NavBar from "../../components/Navbar/navbar";
-import SponsorCC from "../../components/Sponser/SponsorCC";
-import SocialmediaBox from "../../components/Categories/SocialmediaBox";
-import { cardData } from "../../data/data";
-import { cardData2 } from "../../data/data";
+import {
+  NavBar,
+  EventsHeader,
+  SocialmediaBox,
+  SponsorCC,
+  Footer,
+} from "../../components";
+import { ContentCreators4, ContentCreators8 } from "../../data/data";
 const SponsorContentC = () => {
   return (
     <>
@@ -21,9 +22,9 @@ const SponsorContentC = () => {
       >
         <NavBar />
         <EventsHeader title={"Sponsor Content Creators"} logo={cclogo} />
-        <SponsorCC cardData={cardData} />
+        <SponsorCC cardData={ContentCreators4} />
         <SocialmediaBox />
-        <SponsorCC cardData={cardData2} />
+        <SponsorCC cardData={ContentCreators8} />
         <Footer />
       </div>
     </>

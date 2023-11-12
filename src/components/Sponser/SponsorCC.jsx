@@ -2,6 +2,7 @@ import ccimg_card from "../../assets/img/mrbeast.svg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./sponser.css";
+import { Link } from "react-router-dom";
 // import { cardData2 } from "../../data/data";
 const SponserCC = ({ cardData }) => {
   const settings = {
@@ -94,12 +95,14 @@ const SponserCC = ({ cardData }) => {
           className="container d-flex justify-content-center"
           style={{ paddingBottom: "4vh" }}
         >
-          <button
-            className="btn btn-outline-primary mt-4"
-            style={{ borderRadius: "15px" }}
-          >
-            See More
-          </button>
+          <Link to="/cc">
+            <button
+              className="btn btn-outline-primary mt-4"
+              style={{ borderRadius: "15px" }}
+            >
+              See More
+            </button>
+          </Link>
         </div>
       </div>
     </>

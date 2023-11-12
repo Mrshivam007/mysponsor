@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./sponser.css";
 import arrow from "../../assets/img/right-arrow.png";
+import { Link } from "react-router-dom";
 // import { cardData2 } from "../../data/data";
 const SponserE = ({ line, cardData }) => {
   const settings = {
@@ -90,12 +91,14 @@ const SponserE = ({ line, cardData }) => {
 
             {/* </Slider> */}
             <div className="container d-flex justify-content-center">
-              <button
-                className="btn btn-outline-primary mt-4"
-                style={{ borderRadius: "15px" }}
-              >
-                See More
-              </button>
+              <Link to="/events">
+                <button
+                  className="btn btn-outline-primary mt-4"
+                  style={{ borderRadius: "15px" }}
+                >
+                  See More
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -173,18 +176,20 @@ const SponserE = ({ line, cardData }) => {
             </div>
           </div>
           <div className="container d-flex justify-content-center">
-            <button
-              className="sponsor-btn btn btn-outline-light mt-4"
-              style={{
-                borderRadius: "15px",
-                backgroundColor: "white",
-                marginBottom: "2vh",
-                width: "100%",
-                color: "blue",
-              }}
-            >
-              See More
-            </button>
+            <Link to="/events">
+              <button
+                className="sponsor-btn btn btn-outline-light mt-4"
+                style={{
+                  borderRadius: "15px",
+                  backgroundColor: "white",
+                  marginBottom: "2vh",
+                  width: "100%",
+                  color: "blue",
+                }}
+              >
+                See More
+              </button>
+            </Link>
           </div>
           {/* </div> */}
         </div>

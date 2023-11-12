@@ -17,7 +17,7 @@ function Header({ title, logo }) {
                   className="header-card-logo"
                   src={logo}
                   alt=""
-                  style={{ width: "70%", height: "auto", margin: "2% auto" }}
+                  style={{ width: "50%", height: "auto", margin: "4% auto" }}
                 />
               </div>
               <h1 className="text-white text-center" style={{ fontWeight: "900" }}>

@@ -5,6 +5,7 @@ import logo from "../../assets/img/logo/logo.png";
 import card_bg from "../../assets/img/card/header-bg.png";
 import { AiOutlineClose } from "react-icons/ai"; // Import the close icon from react-icons library
 import account from "../../assets/img/account.png";
+import { Link } from "react-router-dom";
 
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,9 +23,9 @@ function NavBar() {
         style={{ backgroundColor: "#004EA9" }}
       >
         <div class="container">
-          <a href="#" class="navbar-brand">
+          <Link to="/home" class="navbar-brand">
             <img src={logo} />
-          </a>
+          </Link>
           <div class="wrapper">
             <div class="searchBar">
               <input

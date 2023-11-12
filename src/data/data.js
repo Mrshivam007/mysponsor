@@ -1,4 +1,4 @@
-export const cardData = [
+export const ContentCreators4 = [
   {
     id: 1,
     name: "Mr. Beast",
@@ -29,7 +29,7 @@ export const cardData = [
   },
   // Add more data objects as needed
 ];
-export const cardData2 = [
+export const ContentCreators8 = [
   {
     id: 1,
     name: "Mr. Beast",
@@ -89,7 +89,7 @@ export const cardData2 = [
   // Add more data objects as needed
 ];
 
-export const cardData3 = [
+export const EventsCards = [
     {
       id: 1,
       name: 'Mr. Beast',

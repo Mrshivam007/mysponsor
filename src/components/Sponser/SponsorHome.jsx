@@ -2,7 +2,7 @@ import React from "react";
 import SponserE from "./SponserE";
 import SponserCC from "./SponsorCC";
 import backgroundimg from "../../assets/img/circle-bg.png";
-import { cardData } from "../../data/data";
+import { ContentCreators4, EventsCards } from "../../data/data";
 
 const SponsorHome = () => {
   return (
@@ -15,8 +15,8 @@ const SponsorHome = () => {
           backgroundImage: `url(${backgroundimg})`,
         }}
       >
-        <SponserE line={"Sponsor Events Near You"} />
-        <SponserCC cardData={cardData} />
+        <SponserE line={"Sponsor Events Near You"} cardData={EventsCards} />
+        <SponserCC cardData={ContentCreators4} />
       </div>
     </>
   );

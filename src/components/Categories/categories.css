@@ -19,7 +19,6 @@
   background-image: url("../../assets/img/bg_ctgrs_lft.svg"), url("../../assets/img/bg_ctgrs_rt.svg");
   background-repeat: no-repeat;
   background-position: left, right;
-  background-size: contain;
 }
 
 
@@ -47,7 +46,7 @@
   max-width: 100%;
   height: auto !important;
   display: flex;
-  margin: 0px 0px 10% 0px !important;
+  margin: 0px 0px 5% 0px !important;
   padding: 5% 5% 0% 5% !important;
   justify-content: space-between;
   align-items: end;
@@ -58,14 +57,25 @@
   max-width: 100%;
   height: auto !important;
   display: flex;
-  margin: 0px 0px 10% 0px !important;
+  margin: 0px 0px 5% 0px !important;
   padding: 5% 5% 0% 5% !important;
   justify-content: space-between;
   align-items: end;
 
 }
 
-.bg-image1 {
+.wow3 {
+  background: linear-gradient(265deg, #FF424F 0.37%, #288EFF 98.81%);
+  max-width: 100%;
+  height: auto !important;
+  display: flex;
+  margin: 0px 0px 5% 0px !important;
+  padding: 5% 5% 0% 5% !important;
+  justify-content: space-between;
+  align-items: end;
+}
+
+/* .bg-image1 {
   position: absolute;
   width: 50%;
   height: 100%;
@@ -84,7 +94,7 @@
   background-position: right;
   z-index: -1;
   margin-top: 2vh;
-}
+} */
 
 .category-btn {
   display: flex;
