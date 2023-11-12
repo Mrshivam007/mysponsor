@@ -22,22 +22,17 @@
   background-size: contain;
 }
 
-.category-line {
-  border-top: 2px solid rgba(0, 78, 169, 0.50);
-  text-align: center;
-  position: relative;
-  margin-top: 8vh;
-}
 
 .category-text {
-  background-color: #fff;
+  background: transparent;
   padding: 0 20px;
-  position: absolute;
   color: black;
   font-weight: bold;
-  top: -24px;
-  left: 50%;
-  transform: translateX(-50%);
+  text-align: center;
+  /* position: absolute; */
+  /* top: -24px;
+  left: 50%; */
+  /* transform: translateX(-50%); */
 }
 
 .cat-card-body {
@@ -160,14 +155,19 @@
     display: none;
   }
 
-  .category-line{
+  .category-line {
     display: none;
   }
+
+  .category-text {
+    display: none;
+  }
+
   .cat-mobile-text {
     color: #000;
     padding-left: 3%;
     font-size: 32px;
-    font-family: League Spartan;
+    font-family: 'League Spartan';
     font-style: normal;
     font-weight: 800;
     line-height: normal;
@@ -180,7 +180,8 @@
   .cat-mob-view {
     display: none;
   }
-  .cat-mobile-text{
+
+  .cat-mobile-text {
     display: none;
   }
 }
@@ -193,4 +194,19 @@
   .cat-card-body h1 {
     font-size: x-large;
   }
+}
+
+/* Social Media Platform Box */
+.platform-container {
+  max-width: 100%;
+  height: auto !important;
+  display: flex;
+  margin-bottom: 3% !important;
+  padding: 0px !important;
+
+}
+
+.platform-img {
+  width: 100%;
+  height: auto;
 }
