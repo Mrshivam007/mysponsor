@@ -1,0 +1,26 @@
+@media (max-width:576px) {
+    .card-blog {
+        background-color: #fff;
+        border-radius: 20px;
+    }
+
+    .post-thumb {
+        background-color: #fff;
+        padding: 5%;
+    }
+
+    .sponser_card_img {
+        border-radius: 10px 10px 0px 0px;
+    }
+
+    .text-overlay {
+        position: absolute;
+        top: 86%;
+        left: 51%;
+        width: 100%;
+        transform: translate(-50%, -50%);
+        color: white;
+        background-color: rgba(0, 0, 0, 0);
+        padding: 10px;
+    }
+}

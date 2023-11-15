@@ -1,0 +1,40 @@
+body {
+    background-color: #EFEFEF;
+}
+
+.triangle-bg-choice {
+    max-width: 100% !important;
+    background-image: url("../../assets/img/bg_ctgrs_lft.svg"), url("../../assets/img/bg_ctgrs_rt.svg");
+    background-repeat: no-repeat;
+    background-position: left, right;
+}
+
+.choice-box {
+    background-color: #004EA9 !important;
+    padding: 5%;
+    border-radius: 15px;
+}
+
+.choice-box img {
+    display: block;
+    margin: auto;
+    width: 30%;
+}
+
+@media (max-width:767px) {
+    .triangle-bg-choice {
+        background-image: none !important;
+    }
+}
+
+@media (min-width:576px) {
+    .choice-page-mobile {
+        display: none;
+    }
+}
+
+@media (max-width:576px) {
+    .choice-page-desktop {
+        display: none;
+    }
+}

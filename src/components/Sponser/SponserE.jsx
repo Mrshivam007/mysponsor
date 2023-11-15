@@ -119,56 +119,35 @@ const SponserE = ({ line, cardData }) => {
               <Slider {...settings}>
                 {cardData &&
                   cardData.map((data) => (
-                    <div key={data.id} className="col-lg-3 col-md-6 py-3">
+                    <div key={data.id} className="col-10 py-3">
                       <div className="card-blog">
                         <div className="header">
                           <div className="post-thumb">
                             <img
-                              src={sponser_card}
+                              src={data.img}
                               alt=""
                               style={{ width: "100%" }}
                               className="sponser_card_img"
                             />
-                            <div class="text-overlay">
-                              <p className="text-lg font-weight-bold mb-0 ">
+                            {/* <div className="text-overlay">
+                              <p className="text-lg font-weight-bold mb-0">
                                 {data.name}
                               </p>
-                              <p>{data.location}</p>
-                            </div>
+                              <p className="text-sm">{data.location}</p>
+                            </div> */}
                           </div>
+                          <button
+                            className="btn text-lg text-white font-weight-bold"
+                            style={{
+                              width: "90%",
+                              borderRadius: "0px 0px 10px 10px",
+                              margin: "0% 5% 5% 0%",
+                              backgroundColor: "#004EA9",
+                            }}
+                          >
+                            Sponsor
+                          </button>
                         </div>
-                        <div className="body sponsor-card-detail">
-                          <div className="row">
-                            <div
-                              className="col"
-                              style={{ borderRight: "1px solid #cfcfcf" }}
-                            >
-                              <h6 className="post-title">
-                                <a href="blog-details.html">Price Band</a>
-                              </h6>
-                              <div className="post-date">
-                                <i className="bi bi-cash text-success"></i>
-                                <b> {data.price};</b>
-                              </div>
-                            </div>
-                            <div className="col">
-                              <h6 className="post-title">
-                                <a href="blog-details.html">Audience</a>
-                              </h6>
-                              <div className="post-date">
-                                <i className="bi bi-people-fill text-danger"></i>
-                                <b> {data.people} </b>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <button
-                          className="btn btn-primary mx-auto rounded-0"
-                          style={{ width: "100%" }}
-                        >
-                          Sponser Now
-                        </button>
                       </div>
                     </div>
                   ))}
@@ -176,18 +155,19 @@ const SponserE = ({ line, cardData }) => {
             </div>
           </div>
           <div className="container d-flex justify-content-center">
-            <Link to="/events">
+            <Link to="/events" style={{ width: "100%" }}>
               <button
-                className="sponsor-btn btn btn-outline-light mt-4"
+                className="sponsor-btn btn btn-outline-light mt-2"
                 style={{
                   borderRadius: "15px",
                   backgroundColor: "white",
                   marginBottom: "2vh",
                   width: "100%",
-                  color: "blue",
+                  color: "#004EA9",
+                  fontWeight: "bolder",
                 }}
               >
-                See More
+                More Events
               </button>
             </Link>
           </div>

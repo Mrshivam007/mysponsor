@@ -9,6 +9,7 @@ import {
   SponserE,
 } from "../../components";
 import { EventsCards } from "../../data/data";
+import "./cat-page.css";
 
 const CategoryPage = () => {
   return (
@@ -25,8 +26,13 @@ const CategoryPage = () => {
         <EventsHeader title={"Categories"} logo={catlogo} />
         <CatpageBox />
       </div>
-      <Banner />
-      <div className="container category-container">
+      <div className="cat-page-banner">
+        <Banner />
+      </div>
+      <div className="container triangle-bg">
+        <SponserE cardData={EventsCards} />
+      </div>
+      <div className="mobile-view mb-4">
         <SponserE cardData={EventsCards} />
       </div>
       <Footer />

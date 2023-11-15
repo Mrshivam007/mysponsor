@@ -1,0 +1,17 @@
+@media (max-width:576px) {
+    .events-bg {
+        background-color: #EFEFEF;
+    }
+}
+
+@media (min-width:576px) {
+    .cc-cards-mobile {
+        display: none;
+    }
+}
+
+@media (max-width:576px) {
+    .cc-cards-desktop {
+        display: none;
+    }
+}

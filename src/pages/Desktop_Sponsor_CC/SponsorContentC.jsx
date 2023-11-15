@@ -9,6 +9,7 @@ import {
   Footer,
 } from "../../components";
 import { ContentCreators4, ContentCreators8 } from "../../data/data";
+import "./cc-page.css";
 const SponsorContentC = () => {
   return (
     <>
@@ -24,7 +25,12 @@ const SponsorContentC = () => {
         <EventsHeader title={"Sponsor Content Creators"} logo={cclogo} />
         <SponsorCC cardData={ContentCreators4} />
         <SocialmediaBox />
-        <SponsorCC cardData={ContentCreators8} />
+        <div className="cc-cards-desktop">
+          <SponsorCC cardData={ContentCreators8} />
+        </div>
+        <div className="cc-cards-mobile">
+          <SponsorCC cardData={ContentCreators4} />
+        </div>
         <Footer />
       </div>
     </>

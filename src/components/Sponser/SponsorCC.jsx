@@ -31,7 +31,7 @@ const SponserCC = ({ cardData }) => {
       <h2 className="sponsor-mobile-text">Sponsor Content Creator</h2>
 
       <div
-        className="sponsor-second-container container mb-4"
+        className="sponsor-second-container container"
         style={{ marginTop: "8rem" }}
       >
         <div className="row">
@@ -54,19 +54,19 @@ const SponserCC = ({ cardData }) => {
                         alt=""
                       />
                     </div>
-                    <div class="col-6 col-md-5 col-sm-6 mt-0">
-                      <div class="card-body mb">
+                    <div class="col-6 col-md-5 col-sm-6 px-lg-0">
+                      <div class="card-body cc-card-body">
                         <h5 class="card-title font-weight-bold d-inline">
                           {data.name}
                         </h5>
                         <br />
-                        <span class="card-text ">
+                        <span class="card-text">
                           Platform: {data.platform}
                         </span>
                         <br />
                         <span class="card-text">
                           <i className="bi bi-cash text-success"></i>
-                          &nbsp;&nbsp; {data.price} &lt;
+                          &nbsp;&nbsp; {data.price}
                         </span>
                         <br />
                         <p class="card-text">
@@ -75,7 +75,7 @@ const SponserCC = ({ cardData }) => {
                         </p>
                       </div>
                     </div>
-                    <div class=" col-2 col-md-2 col-sm-2">
+                    <div class=" col-2 col-md-2 col-sm-2 pl-lg-0">
                       <button
                         className="btn btn-primary btn-block"
                         style={{

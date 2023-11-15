@@ -8,13 +8,6 @@ body {
   margin: auto;
 }
 
-/* Add this CSS to your stylesheet */
-
-/* Add this CSS to your stylesheet */
-
-/* Add this CSS to your stylesheet */
-
-/* Style for the overlay background */
 .mobile-nav-overlay {
   position: fixed;
   top: 0;
@@ -200,7 +193,7 @@ body {
     background-image: none !important;
     /* Use !important to override inline styles */
     margin: 0px !important;
-    background-color: white !important;
+    background-color: #efefef !important;
   }
 
   .desktop-nav {

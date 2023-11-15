@@ -166,13 +166,10 @@ const Categories = () => {
                   style={{ backgroundImage: `url(${img5})`, textAlign: "left" }}
                 >
                   <h1
-                    className="category-heading text-light mt-5"
+                    className="category-heading text-light"
                     style={{ fontWeight: "bold" }}
                   >
-                    Expo,
-                    <span style={{ fontSize: "25px" }}>
-                      Conventions, Exibitions
-                    </span>
+                    Expo, Conventions, Exibitions
                   </h1>
                   <p
                     className="category-para text-light"
@@ -301,159 +298,6 @@ const Categories = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Category cards for mobile view*/}
-
-      <div className="box1 cat-mob-view">
-        <div className="row category-row">
-          <div className="col-sm-6 category-card1">
-            <div
-              className="card-service wow1 fadeInUp"
-              style={{
-                maxWidth: "100%",
-                display: "flex",
-              }}
-            >
-              <div
-                className="body cat-card-body"
-                style={{ backgroundImage: `url(${img1})`, textAlign: "left" }}
-              >
-                <h1
-                  className="category-heading text-light mt-5"
-                  style={{ fontWeight: "bold" }}
-                >
-                  Comedy Shows
-                </h1>
-
-                <p
-                  className="category-para text-light"
-                  style={{ textAlign: "left" }}
-                >
-                  Sponser Now
-                </p>
-              </div>
-              {/* <div className="cat-img">
-                  <img
-                    src={img1}
-                    alt=""
-                    style={{ width: "100%", height: "auto%" }}
-                  />
-                </div> */}
-            </div>
-          </div>
-          <div className="col-sm-6 category-card1">
-            <div
-              className="card-service wow2 fadeInUp"
-              style={{
-                maxWidth: "100%",
-                display: "flex",
-              }}
-            >
-              <div
-                className="body cat-card-body"
-                style={{ backgroundImage: `url(${img2})`, textAlign: "left" }}
-              >
-                <h1
-                  className="category-heading text-light mt-5"
-                  style={{ fontWeight: "bold" }}
-                >
-                  Sports Events
-                </h1>
-
-                <p
-                  className="category-para text-light"
-                  style={{ textAlign: "left" }}
-                >
-                  Sponser Now
-                </p>
-              </div>
-              {/* <div className="cat-img">
-                  <img
-                    src={img1}
-                    alt=""
-                    style={{ width: "100%", height: "auto%" }}
-                  />
-                </div> */}
-            </div>
-          </div>
-        </div>
-        <div className="row category-row">
-          <div className="col-sm-6 category-card1">
-            <div
-              className="card-service wow2 fadeInUp"
-              style={{
-                maxWidth: "100%",
-                display: "flex",
-              }}
-            >
-              <div
-                className="body cat-card-body"
-                style={{ backgroundImage: `url(${img3})`, textAlign: "left" }}
-              >
-                <h1
-                  className="category-heading text-light mt-5"
-                  style={{ fontWeight: "bold" }}
-                >
-                  Food Fest
-                </h1>
-
-                <p
-                  className="category-para text-light"
-                  style={{ textAlign: "left" }}
-                >
-                  Sponser Now
-                </p>
-              </div>
-              {/* <div className="cat-img">
-                  <img
-                    src={img1}
-                    alt=""
-                    style={{ width: "100%", height: "auto%" }}
-                  />
-                </div> */}
-            </div>
-          </div>
-          <div className="col-sm-6 category-card1">
-            <div
-              className="card-service wow1 fadeInUp"
-              style={{
-                maxWidth: "100%",
-                display: "flex",
-              }}
-            >
-              <div
-                className="body cat-card-body"
-                style={{ backgroundImage: `url(${img4})`, textAlign: "left" }}
-              >
-                <h1
-                  className="category-heading text-light mt-5"
-                  style={{ fontWeight: "bold" }}
-                >
-                  Concerts
-                </h1>
-
-                <p
-                  className="category-para text-light"
-                  style={{ textAlign: "left" }}
-                >
-                  Sponser Now
-                </p>
-              </div>
-              {/* <div className="cat-img">
-                  <img
-                    src={img1}
-                    alt=""
-                    style={{ width: "100%", height: "auto%" }}
-                  />
-                </div> */}
-            </div>
-          </div>
-        </div>
-
-        <button className="category-btn btn" style={{ width: "100%" }}>
-          <p className="category-btn-text">Browse Categories</p>
-        </button>
       </div>
     </>
   );

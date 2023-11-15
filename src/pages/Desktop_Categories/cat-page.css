@@ -1,0 +1,24 @@
+.triangle-bg {
+    max-width: 100% !important;
+    background-image: url("../../assets/img/bg_ctgrs_lft.svg"), url("../../assets/img/bg_ctgrs_rt.svg");
+    background-repeat: no-repeat;
+    background-position: left, right;
+}
+
+@media (max-width:767px) {
+    .triangle-bg {
+        display: none;
+    }
+}
+
+@media (min-width:767px) {
+    .mobile-view{
+        display: none;
+    }
+}
+
+@media (max-width:767px) {
+    .cat-page-banner{
+        display: none;
+    }
+}
