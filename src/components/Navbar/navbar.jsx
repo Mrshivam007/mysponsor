@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Navbar, Nav, NavLink, Container } from "react-bootstrap";
-import banner from "../../assets/img/card/header_banner.png";
+// import banner from "../../assets/img/card/header_banner.png";
 import logo from "../../assets/img/logo/logo.png";
-import card_bg from "../../assets/img/card/header-bg.png";
+// import card_bg from "../../assets/img/card/header-bg.png";
 import { AiOutlineClose } from "react-icons/ai"; // Import the close icon from react-icons library
-import account from "../../assets/img/account.png";
+// import account from "../../assets/img/account.png";
 import { Link } from "react-router-dom";
 
 function NavBar() {
@@ -24,7 +24,7 @@ function NavBar() {
       >
         <div class="container">
           <Link to="/home" class="navbar-brand">
-            <img src={logo} />
+            <img src={logo} alt="" />
           </Link>
           <div class="wrapper">
             <div class="searchBar">
@@ -146,7 +146,7 @@ function NavBar() {
             onClick={toggleNavbar}
           />
           <a
-            href="#"
+            href="home"
             className="navbar-brand"
             style={{ height: "52px", marginTop: "3%" }}
           >

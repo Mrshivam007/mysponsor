@@ -1,4 +1,4 @@
-import bg_img from "../../assets/img/bg_pattern.svg";
+// import bg_img from "../../assets/img/bg_pattern.svg";
 import img1 from "../../assets/img/Banner/img1.png";
 import img2 from "../../assets/img/Banner/img2.png";
 import img3 from "../../assets/img/Banner/img3.png";

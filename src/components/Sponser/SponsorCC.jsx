@@ -5,15 +5,15 @@ import "./sponser.css";
 import { Link } from "react-router-dom";
 // import { cardData2 } from "../../data/data";
 const SponserCC = ({ line, cardData }) => {
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1, // Display one card at a time on mobile
-    slidesToScroll: 1,
-    prevArrow: null, // Hide the previous arrow
-    nextArrow: null, // Hide the next arrow
-  };
+  // const settings = {
+  //   dots: false,
+  //   infinite: true,
+  //   speed: 500,
+  //   slidesToShow: 1, // Display one card at a time on mobile
+  //   slidesToScroll: 1,
+  //   prevArrow: null, // Hide the previous arrow
+  //   nextArrow: null, // Hide the next arrow
+  // };
   // console.log(cardData);
 
   return (

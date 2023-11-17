@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {
   NavBar,
   EventsHeader,
@@ -11,6 +11,10 @@ import spevents from "../../assets/img/sponsor_events-logo.png";
 import { EventsCards, EventsPageCards } from "../../data/data";
 import "./events-page.css";
 const SponsorEvents = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
+  }, []);
+
   return (
     <>
       <div

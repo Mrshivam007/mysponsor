@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import bgimage from "../../assets/img/circle-bg.png";
 import cclogo from "../../assets/img/content-creator.jpg";
 import {
@@ -11,6 +11,10 @@ import {
 import { ContentCreators4, ContentCreators8 } from "../../data/data";
 import "./cc-page.css";
 const SponsorContentC = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
+  }, []);
+
   return (
     <>
       <div

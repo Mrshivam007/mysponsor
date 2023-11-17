@@ -78,7 +78,7 @@
 
     .choice-img {
         display: flex;
-        align-items: end;
+        align-items: flex-end;
         width: 90%;
         height: auto;
     }
@@ -90,7 +90,7 @@
 
     .choice-body {
         display: flex;
-        align-items: end;
+        align-items: flex-end;
     }
 
     .choice-body h2 {

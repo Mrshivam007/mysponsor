@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import bgimage from "../../assets/img/circle-bg.png";
 import spevents from "../../assets/img/sponsor_events-logo.png";
 import calendar from "../../assets/img/calendar.svg";
@@ -20,6 +20,10 @@ import {
 } from "../../data/data";
 import "./choice-page.css";
 const SponsorChoice = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
+  }, []);
+
   return (
     <>
       <NavBar />

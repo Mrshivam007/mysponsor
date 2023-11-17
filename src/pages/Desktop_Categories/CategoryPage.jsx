@@ -1,3 +1,4 @@
+import React, {useEffect} from "react";
 import catlogo from "../../assets/img/category-bg-logo.png";
 import bgimage from "../../assets/img/circle-bg.png";
 import {
@@ -12,6 +13,10 @@ import { EventsCards } from "../../data/data";
 import "./cat-page.css";
 
 const CategoryPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
+  }, []);
+
   return (
     <>
       <div

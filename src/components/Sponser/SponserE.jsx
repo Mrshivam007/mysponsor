@@ -120,7 +120,7 @@ const SponserE = ({ line, cardData }) => {
               <div className="sponsor-card-indicator">
                 EVENTS
                 {/* hello */}
-                <img src={arrow} style={{ transform: "rotate(90deg)" }} />
+                <img src={arrow} style={{ transform: "rotate(90deg)" }} alt="" />
               </div>
             </div>
             <div className="col-lg-4" style={{ width: "76%" }}>

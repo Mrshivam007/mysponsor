@@ -49,7 +49,7 @@
   margin: 0px 0px 5% 0px !important;
   padding: 5% 5% 0% 5% !important;
   justify-content: space-between;
-  align-items: end;
+  align-items: flex-end;
 }
 
 .wow2 {
@@ -60,7 +60,7 @@
   margin: 0px 0px 5% 0px !important;
   padding: 5% 5% 0% 5% !important;
   justify-content: space-between;
-  align-items: end;
+  align-items: flex-end;
 
 }
 
@@ -72,7 +72,7 @@
   margin: 0px !important;
   padding: 2% 2% 0% 2% !important;
   justify-content: space-between;
-  align-items: end;
+  align-items: flex-end;
 }
 
 
