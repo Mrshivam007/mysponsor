@@ -13,10 +13,10 @@ const Home = () => {
     <>
       <NavBar />
       <Header />
-      <Choice />
+      <Choice line={"Sponsor Your Choice"} />
       <Chatbot />
       <Banner />
-      <Categories />
+      <Categories line={"Categories"} />
       <SponserHome />
       <Footer />
     </>

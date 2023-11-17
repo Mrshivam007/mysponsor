@@ -2,13 +2,11 @@ import "./cards.css";
 import img1 from "../../assets/img/choice/choice-card-1.png";
 import img2 from "../../assets/img/choice/choice-card-2.png";
 import { Link } from "react-router-dom";
-const Choice = () => {
+const Choice = ({ line }) => {
   return (
     <>
       <div className="page-section">
-        <h1 className="choice-heading" style={{ background: "transparent" }}>
-          Centered Heading
-        </h1>
+        <h1 className="choice-heading">{line}</h1>
 
         <div className="container" style={{ marginTop: "2%" }}>
           <div className="row" style={{ flexWrap: "nowrap" }}>
@@ -98,19 +96,20 @@ const Choice = () => {
             </p>
           </div>
         </div>
-        <div className="line">
-          <a
-            href="service.html"
-            className="btn text-white py-1 px-4 font-weight-bold"
-            style={{
-              marginTop: "-26px",
-              backgroundColor: "#00448B",
-              borderRadius: "15px",
-            }}
-          >
-            Read More
-          </a>
-        </div>
+
+        <a
+          href="service.html"
+          className="btn text-white py-1 px-4 font-weight-bold d-none d-md-block"
+          style={{
+            width: "15%",
+            // display: "block",
+            margin: "auto",
+            backgroundColor: "rgb(0, 68, 139)",
+            borderRadius: "10px",
+          }}
+        >
+          Read More
+        </a>
       </div>
     </>
   );

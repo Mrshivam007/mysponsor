@@ -1,13 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Jomhuria&display=swap');
-
 .page-section {
     padding-bottom: 20px !important;
-}
-
-.choice-line {
-    border-top: 2px solid rgba(0, 78, 169, 0.50);
-    text-align: center;
-    position: relative;
+    padding-top: 30px !important;
 }
 
 .choice-card {
@@ -32,12 +25,6 @@
     height: auto;
 }
 
-.line {
-    border-top: 2px solid rgba(0, 78, 169, 0.50);
-    text-align: center;
-    position: relative;
-}
-
 .card_line {
     border-top: 1px solid rgba(0, 78, 169, 0.50);
     text-align: center;
@@ -45,7 +32,6 @@
 }
 
 .choice-heading {
-    background-color: #fff;
     padding: 0 20px;
     color: black;
     font-weight: bold;
@@ -151,6 +137,24 @@
         width: 38vw;
         height: auto;
         padding: 0 0 2% 6%;
+    }
+
+    .choice-heading-mobile {
+        color: #000;
+        padding-left: 3%;
+        font-size: 32px;
+        font-family: 'League Spartan';
+        font-style: normal;
+        font-weight: 800;
+        line-height: normal;
+        letter-spacing: -0.8px;
+        margin-top: 8vh;
+    }
+}
+
+@media (min-width:576px) {
+    .choice-heading-mobile {
+        display: none;
     }
 }
 

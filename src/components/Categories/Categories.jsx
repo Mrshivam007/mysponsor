@@ -6,14 +6,12 @@ import img3 from "../../assets/img/categories/img3.png";
 import img4 from "../../assets/img/categories/img4.png";
 import { Link } from "react-router-dom";
 
-const Categories = () => {
+const Categories = ({ line }) => {
   return (
     <>
-      <div className="category-line">
-        <h1 className="category-text">Categories</h1>
-      </div>
+      <h1 className="category-text">{line}</h1>
 
-      <h2 className="cat-mobile-text">Categories</h2>
+      <h2 className="cat-mobile-text">{line}</h2>
 
       {/* Category cards */}
       <div className="container category-container">

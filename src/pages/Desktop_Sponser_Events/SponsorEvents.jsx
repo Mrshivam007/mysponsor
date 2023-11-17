@@ -33,7 +33,17 @@ const SponsorEvents = () => {
           <SponserE cardData={EventsCards} line={"Reality Shows"} />
         </div>
         <div className="events-page-mobile">
-          <MobileCards cardData={EventsPageCards} />
+          <MobileCards line={"Sponsor events"} cardData={EventsPageCards} />
+          <div
+            className="btn d-block text-white font-weight-bolder"
+            style={{
+              margin: "5%",
+              borderRadius: "10px",
+              backgroundColor: "rgb(0, 78, 169)",
+            }}
+          >
+            Load More
+          </div>
         </div>
         <Footer />
       </div>

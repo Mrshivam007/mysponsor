@@ -11,12 +11,11 @@ const SponsorHome = () => {
         className="bg-sponsor"
         style={{
           height: "auto",
-          marginBottom: "-4vh",
           backgroundImage: `url(${backgroundimg})`,
         }}
       >
         <SponserE line={"Sponsor Events Near You"} cardData={EventsCards} />
-        <SponserCC cardData={ContentCreators4} />
+        <SponserCC line={"Sponsor Content Creators"} cardData={ContentCreators4} />
       </div>
     </>
   );

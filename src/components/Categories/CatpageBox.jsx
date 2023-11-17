@@ -10,14 +10,12 @@ import img7 from "../../assets/img/categories/img7.png";
 import img8 from "../../assets/img/categories/img8.png";
 import img9 from "../../assets/img/categories/img9.png";
 
-const Categories = () => {
+const Categories = ({ line }) => {
   return (
     <>
-      <div className="category-line">
-        <h1 className="category-text">Categories</h1>
-      </div>
+      {/* <h1 className="category-text">{line}</h1> */}
 
-      <h2 className="cat-mobile-text">Categories</h2>
+      <h2 className="cat-mobile-text">{line}</h2>
 
       {/* Category cards */}
       <div className="container" style={{ maxWidth: "100%" }}>

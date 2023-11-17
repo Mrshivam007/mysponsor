@@ -2,36 +2,27 @@
     width: 70%;
 }
 
-.sponsor-line {
-    /* border-top: 2px solid rgba(0, 78, 169, 0.50); */
-    padding-bottom: 4%;
-    text-align: center;
-    position: relative;
-    margin-top: 12vh;
-}
-
 .sponsor-text {
-    background-color: #fff;
     padding: 0 20px;
-    position: absolute;
     color: black;
     font-weight: bold;
-    top: -24px;
+    text-align: center;
+    /* top: -24px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%); */
 }
 
 .sponsor-mobile-text {
     color: #000;
     padding-left: 3%;
-    font-family: League Spartan;
+    font-family: 'League Spartan';
     font-size: 32px;
     font-style: normal;
     font-weight: 800;
     line-height: normal;
     letter-spacing: -0.8px;
-    margin-top: 8vh;
-    margin-bottom: 5vh;
+    margin-top: 10%;
+    margin-bottom: 5%;
 }
 
 .card-blog {
@@ -238,7 +229,7 @@
 }
 
 @media (max-width:576px) {
-    .sponsor-line {
+    .sponsor-text {
         display: none;
     }
 

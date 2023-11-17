@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "./sponser.css";
 import { Link } from "react-router-dom";
 // import { cardData2 } from "../../data/data";
-const SponserCC = ({ cardData }) => {
+const SponserCC = ({ line, cardData }) => {
   const settings = {
     dots: false,
     infinite: true,
@@ -20,19 +20,13 @@ const SponserCC = ({ cardData }) => {
     <>
       {/* Content Creator Layer */}
 
-      <div
-        className="sponsor-line"
-        style={{ borderTop: "none", paddingBottom: "1px" }}
-      >
-        <h1 className="sponsor-text" style={{ backgroundColor: "transparent" }}>
-          Sponsor Content Creator
-        </h1>
-      </div>
-      <h2 className="sponsor-mobile-text">Sponsor Content Creator</h2>
+      <h1 className="sponsor-text">{line}</h1>
+
+      <h2 className="sponsor-mobile-text">{line}</h2>
 
       <div
         className="sponsor-second-container container"
-        style={{ marginTop: "8rem" }}
+        style={{ marginTop: "4rem" }}
       >
         <div className="row">
           {cardData &&
@@ -60,9 +54,7 @@ const SponserCC = ({ cardData }) => {
                           {data.name}
                         </h5>
                         <br />
-                        <span class="card-text">
-                          Platform: {data.platform}
-                        </span>
+                        <span class="card-text">Platform: {data.platform}</span>
                         <br />
                         <span class="card-text">
                           <i className="bi bi-cash text-success"></i>
@@ -81,6 +73,7 @@ const SponserCC = ({ cardData }) => {
                         style={{
                           height: "100%",
                           borderRadius: "0px 18px 18px 0px",
+                          backgroundColor: "#004EA9",
                         }}
                       >
                         <span className="text-xl">&gt;</span>
@@ -98,7 +91,14 @@ const SponserCC = ({ cardData }) => {
           <Link to="/cc">
             <button
               className="btn btn-outline-primary mt-4"
-              style={{ borderRadius: "15px" }}
+              style={{
+                borderRadius: "15px",
+                border: "2px solid #004EA9",
+                background: "#FFF",
+                boxShadow: "0px 3px 10px 0px rgba(0, 0, 0, 0.18)",
+                fontWeight: "bolder",
+                color: "#004EA9",
+              }}
             >
               See More
             </button>

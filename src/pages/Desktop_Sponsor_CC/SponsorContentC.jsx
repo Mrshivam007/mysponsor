@@ -23,10 +23,16 @@ const SponsorContentC = () => {
       >
         <NavBar />
         <EventsHeader title={"Sponsor Content Creators"} logo={cclogo} />
-        <SponsorCC cardData={ContentCreators4} />
+        <SponsorCC
+          line={"Sponsor content creators"}
+          cardData={ContentCreators4}
+        />
         <SocialmediaBox />
         <div className="cc-cards-desktop">
-          <SponsorCC cardData={ContentCreators8} />
+          <SponsorCC
+            line={"Sponsor Other Creators"}
+            cardData={ContentCreators8}
+          />
         </div>
         <div className="cc-cards-mobile">
           <SponsorCC cardData={ContentCreators4} />

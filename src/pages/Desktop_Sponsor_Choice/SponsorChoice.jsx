@@ -36,9 +36,9 @@ const SponsorChoice = () => {
           <Choice />
           <SponserE line={"Sponser Events Near You"} cardData={EventsCards} />
         </div>
-      </div>
-      <div className="choice-page-desktop">
-        <Banner />
+        <div className="choice-page-desktop">
+          <Banner />
+        </div>
       </div>
       <div className="choice-page-mobile">
         <h3 className="font-weight-bolder pl-4 mb-3">Sponsor your choice</h3>
@@ -62,9 +62,27 @@ const SponsorChoice = () => {
             </div>
           </div>
         </div>
+        <div
+          className="d-flex d-md-none justify-content-between px-4 mt-4"
+          style={{ marginBottom: "-13%" }}
+        >
+          <p className="font-weight-bolder text-lg">Top events near you</p>
+          <p className="font-weight-bold" style={{ color: "#004EA9" }}>
+            See more{" "}
+          </p>
+        </div>
         <MobileCards cardData={ChoicePageCards} />
       </div>
       <div className="triangle-bg-choice">
+        <div
+          className="d-flex d-md-none justify-content-between px-4 mt-4"
+          style={{ marginBottom: "-13%" }}
+        >
+          <p className="font-weight-bolder text-lg">Top events near you</p>
+          <p className="font-weight-bold" style={{ color: "#004EA9" }}>
+            See more{" "}
+          </p>
+        </div>
         <SponsorCC cardData={ContentCreators4} />
       </div>
       <Footer />

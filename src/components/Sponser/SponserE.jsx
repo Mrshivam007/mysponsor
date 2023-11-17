@@ -20,11 +20,8 @@ const SponserE = ({ line, cardData }) => {
 
   return (
     <>
-      <div className="sponsor-line">
-        <h1 className="sponsor-text" style={{ backgroundColor: "transparent" }}>
-          {line}
-        </h1>
-      </div>
+      <h1 className="sponsor-text">{line}</h1>
+
       <h2 className="sponsor-mobile-text">{line}</h2>
 
       {/* Events Layer  */}
@@ -81,7 +78,11 @@ const SponserE = ({ line, cardData }) => {
 
                     <button
                       className="btn btn-primary mx-auto rounded-0"
-                      style={{ width: "100%" }}
+                      style={{
+                        width: "100%",
+                        backgroundColor: "#004EA9",
+                        fontWeight: "bold",
+                      }}
                     >
                       Sponsor Now
                     </button>
@@ -94,7 +95,14 @@ const SponserE = ({ line, cardData }) => {
               <Link to="/events">
                 <button
                   className="btn btn-outline-primary mt-4"
-                  style={{ borderRadius: "15px" }}
+                  style={{
+                    borderRadius: "15px",
+                    border: "2px solid #004EA9",
+                    background: "#FFF",
+                    boxShadow: "0px 3px 10px 0px rgba(0, 0, 0, 0.18)",
+                    fontWeight: "bolder",
+                    color: "#004EA9",
+                  }}
                 >
                   See More
                 </button>

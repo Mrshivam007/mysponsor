@@ -3,6 +3,8 @@
     background-image: url("../../assets/img/bg_ctgrs_lft.svg"), url("../../assets/img/bg_ctgrs_rt.svg");
     background-repeat: no-repeat;
     background-position: left, right;
+    background-size: contain;
+    margin-bottom: 3%;
 }
 
 @media (max-width:767px) {

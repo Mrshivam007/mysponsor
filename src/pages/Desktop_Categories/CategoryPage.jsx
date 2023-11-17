@@ -24,7 +24,7 @@ const CategoryPage = () => {
       >
         <NavBar />
         <EventsHeader title={"Categories"} logo={catlogo} />
-        <CatpageBox />
+        <CatpageBox line={"Categories"} />
       </div>
       <div className="cat-page-banner">
         <Banner />
