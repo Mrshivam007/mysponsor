@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Navbar, Nav, NavLink, Container } from "react-bootstrap";
 // import banner from "../../assets/img/card/header_banner.png";
 import logo from "../../assets/img/logo/logo.png";
@@ -7,7 +7,21 @@ import { AiOutlineClose } from "react-icons/ai"; // Import the close icon from r
 // import account from "../../assets/img/account.png";
 import { Link } from "react-router-dom";
 
-function NavBar() {
+const NavBar = () => {
+  const [isSticky, setSticky] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setSticky(window.scrollY > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleNavbar = () => {
@@ -17,11 +31,7 @@ function NavBar() {
   return (
     <div>
       {/* <nav class="navbar navbar-expand-lg navbar-light sticky" style={{ backgroundColor: '#004EA9' }} data-offset="500"> */}
-      <Navbar
-        className="desktop-nav"
-        expand="lg"
-        style={{ backgroundColor: "#004EA9" }}
-      >
+      <Navbar className={`desktop-nav${isSticky ? ' sticky' : ''}`} style={{ backgroundColor: '#004EA9' }} expand="lg">
         <div class="container">
           <Link to="/home" class="navbar-brand">
             <img src={logo} alt="" />
@@ -132,8 +142,7 @@ function NavBar() {
       </Navbar>
 
       <Navbar
-        className="mobile-nav"
-        expand="lg"
+        className={`mobile-nav${isSticky ? ' sticky' : ''}`} expand="lg"
         style={{
           display: "flex",
           flexDirection: "column",

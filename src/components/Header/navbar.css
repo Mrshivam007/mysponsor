@@ -8,6 +8,15 @@ body {
   margin: auto;
 }
 
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  /* Add any other styles you need for the sticky navbar */
+}
+
+
 .mobile-nav-overlay {
   position: fixed;
   top: 0;
