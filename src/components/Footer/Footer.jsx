@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logo from "../../assets/img/logo/logo.png";
 import "./footer.css";
 
@@ -18,7 +19,10 @@ const Footer = () => {
             {/* <!--Grid column--> */}
             <div className="col-lg-6 col-md-12 mb-4 mb-md-0 text-left mb-md-4 text-md-center ">
               <h5 className="footer-logo">
-                <img src={logo} style={{ width: "80%", height:"100%", objectFit: 'cover' }} />
+                <img
+                  src={logo}
+                  style={{ width: "80%", height: "100%", objectFit: "cover" }}
+                />
               </h5>
 
               <h5 className="text-capitalize footer-heading">
@@ -99,23 +103,27 @@ const Footer = () => {
             </div>
 
             <div className="container">
+              <Link to="/choice">
+                <button
+                  className="mob-footer-btn btn btn-primary"
+                  style={{ width: "100%" }}
+                >
+                  Sponsor Events
+                </button>
+              </Link>
+              <Link to="/events">
+                <button
+                  className="mob-footer-btn btn btn-primary"
+                  style={{ width: "100%" }}
+                >
+                  List Events
+                </button>
+              </Link>
               <button
                 className="mob-footer-btn btn btn-primary"
                 style={{ width: "100%" }}
               >
-                Browse Categories
-              </button>
-              <button
-                className="mob-footer-btn btn btn-primary"
-                style={{ width: "100%" }}
-              >
-                Browse Categories
-              </button>
-              <button
-                className="mob-footer-btn btn btn-primary"
-                style={{ width: "100%" }}
-              >
-                Browse Categories
+                About Us
               </button>
             </div>
             {/* <!--Grid column--> */}

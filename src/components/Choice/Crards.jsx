@@ -11,105 +11,85 @@ const Choice = ({ line }) => {
         <div className="container" style={{ marginTop: "2%" }}>
           <div className="row" style={{ flexWrap: "nowrap" }}>
             <div className="col-lg-6">
-              <div
-                className="card-service wow fadeInUp choice-card"
-                style={{
-                  maxWidth: "100%",
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
-                <div className="body choice-body choice-1 text-left">
-                  <h2 className="font-weight-bolder mb-0">Events</h2>
-                  <div className="card_line"></div>
-                  <p className="choice-para mt-4 text-left">
-                    We help you define your SEO objective & develop a realistic
-                    strategy with you
-                  </p>
-                  <Link
-                    to="/events"
-                    className="choice-btn btn text-white py-1 font-weight-bold"
-                    style={{
-                      float: "left",
-                      backgroundColor: "#00448B",
-                      borderRadius: "15px",
-                    }}
-                  >
-                    Explore now
-                  </Link>
-                </div>
+              <Link to="/events">
                 <div
-                  className="header choice-img"
-                  style={{ textAlign: "right" }}
+                  className="card-service wow fadeInUp choice-card"
+                  style={{
+                    maxWidth: "100%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
                 >
-                  <img src={img1} alt="" />
+                  <div className="body choice-body choice-1 text-left">
+                    <h2 className="font-weight-bolder mb-0">Events</h2>
+                    <div className="card_line"></div>
+                    <p className="choice-para mt-4 text-left">
+                      We help you define your SEO objective & develop a
+                      realistic strategy with you
+                    </p>
+                    <button
+                      to="/events"
+                      className="choice-btn btn text-white py-1 font-weight-bold"
+                      style={{
+                        float: "left",
+                        backgroundColor: "#00448B",
+                        borderRadius: "15px",
+                      }}
+                    >
+                      Explore now
+                    </button>
+                  </div>
+                  <div
+                    className="header choice-img"
+                    style={{ textAlign: "right" }}
+                  >
+                    <img src={img1} alt="" />
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
             <div className="col-lg-6">
-              <div
-                className="card-service wow fadeInUp choice-card"
-                style={{
-                  maxWidth: "100%",
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
-                <div className="body choice-body choice-2 text-left">
-                  <h2 className="font-weight-bolder mb-0">Content Creators</h2>
-                  <div className="card_line"></div>
-                  <p className="choice-para mt-4 text-left">
-                    We help you define your SEO objective & develop a realistic
-                    strategy with you
-                  </p>
-                  <Link
-                    to="/cc"
-                    className="choice-btn btn text-white py-1 font-weight-bold"
-                    style={{
-                      float: "left",
-                      backgroundColor: "#00448B",
-                      borderRadius: "15px",
-                    }}
-                  >
-                    Explore now
-                  </Link>
-                </div>
+              <Link to="/cc">
                 <div
-                  className="header choice-img"
-                  style={{ textAlign: "right" }}
+                  className="card-service wow fadeInUp choice-card"
+                  style={{
+                    maxWidth: "100%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
                 >
-                  <img src={img2} alt="" />
+                  <div className="body choice-body choice-2 text-left">
+                    <h2 className="font-weight-bolder mb-0">
+                      Content Creators
+                    </h2>
+                    <div className="card_line"></div>
+                    <p className="choice-para mt-4 text-left">
+                      We help you define your SEO objective & develop a
+                      realistic strategy with you
+                    </p>
+                    <button
+                      to="/cc"
+                      className="choice-btn btn text-white py-1 font-weight-bold"
+                      style={{
+                        float: "left",
+                        backgroundColor: "#00448B",
+                        borderRadius: "15px",
+                      }}
+                    >
+                      Explore now
+                    </button>
+                  </div>
+                  <div
+                    className="header choice-img"
+                    style={{ textAlign: "right" }}
+                  >
+                    <img src={img2} alt="" />
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
-          <div>
-            <p
-              className="choice-bottom-para"
-              style={{ padding: "2% 8%", textAlign: "center" }}
-            >
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non
-              autem incidunt deleniti cum quidem dolore earum vitae doloribus
-              ducimus quod eum dicta pariatur facilis mollitia, laborum,
-              temporibus quaerat quas nesciunt excepturi ipsum nulla iste nisi.
-              Eaque.
-            </p>
-          </div>
         </div>
-
-        <a
-          href="service.html"
-          className="btn text-white py-1 px-4 font-weight-bold d-none d-md-block"
-          style={{
-            width: "15%",
-            // display: "block",
-            margin: "auto",
-            backgroundColor: "rgb(0, 68, 139)",
-            borderRadius: "10px",
-          }}
-        >
-          Read More
-        </a>
       </div>
     </>
   );

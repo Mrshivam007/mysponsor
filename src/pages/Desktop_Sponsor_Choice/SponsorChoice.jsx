@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import bgimage from "../../assets/img/circle-bg.png";
 import spevents from "../../assets/img/sponsor_events-logo.png";
 import calendar from "../../assets/img/calendar.svg";
@@ -19,6 +19,7 @@ import {
   EventsCards,
 } from "../../data/data";
 import "./choice-page.css";
+import { Link } from "react-router-dom";
 const SponsorChoice = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
@@ -49,20 +50,24 @@ const SponsorChoice = () => {
         <div className="container choice-boxes">
           <div className="row">
             <div className="col-6">
-              <div className="card-blog choice-box">
-                <img src={calendar} alt="" />
-                <p className="text-center text-white font-weight-bolder mb-0">
-                  Event
-                </p>
-              </div>
+              <Link to="/events">
+                <div className="card-blog choice-box">
+                  <img src={calendar} alt="" />
+                  <p className="text-center text-white font-weight-bolder mb-0">
+                    Event
+                  </p>
+                </div>
+              </Link>
             </div>
             <div className="col-6">
-              <div className="card-blog choice-box">
-                <img src={camera} alt="" />
-                <p className="text-center text-white font-weight-bolder mb-0">
-                  Content Creators
-                </p>
-              </div>
+              <Link to="/cc">
+                <div className="card-blog choice-box">
+                  <img src={camera} alt="" />
+                  <p className="text-center text-white font-weight-bolder mb-0">
+                    Content Creators
+                  </p>
+                </div>
+              </Link>
             </div>
           </div>
         </div>
@@ -71,9 +76,11 @@ const SponsorChoice = () => {
           style={{ marginBottom: "-13%" }}
         >
           <p className="font-weight-bolder text-lg">Top events near you</p>
-          <p className="font-weight-bold" style={{ color: "#004EA9" }}>
-            See more{" "}
-          </p>
+          <Link to="/events">
+            <p className="font-weight-bold" style={{ color: "#004EA9" }}>
+              See more
+            </p>
+          </Link>
         </div>
         <MobileCards cardData={ChoicePageCards} />
       </div>
@@ -83,9 +90,11 @@ const SponsorChoice = () => {
           style={{ marginBottom: "-13%" }}
         >
           <p className="font-weight-bolder text-lg">Top events near you</p>
-          <p className="font-weight-bold" style={{ color: "#004EA9" }}>
-            See more{" "}
-          </p>
+          <Link to="/cc">
+            <p className="font-weight-bold" style={{ color: "#004EA9" }}>
+              See more
+            </p>
+          </Link>
         </div>
         <SponsorCC cardData={ContentCreators4} />
       </div>

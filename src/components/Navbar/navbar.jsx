@@ -15,10 +15,10 @@ const NavBar = () => {
       setSticky(window.scrollY > 0);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -30,20 +30,23 @@ const NavBar = () => {
 
   return (
     <div>
-      {/* <nav class="navbar navbar-expand-lg navbar-light sticky" style={{ backgroundColor: '#004EA9' }} data-offset="500"> */}
-      <Navbar className={`desktop-nav${isSticky ? ' sticky' : ''}`} style={{ backgroundColor: '#004EA9' }} expand="lg">
-        <div class="container">
-          <Link to="/home" class="navbar-brand">
+      {/* <nav className="navbar navbar-expand-lg navbar-light sticky" style={{ backgroundColor: '#004EA9' }} data-offset="500"> */}
+      <Navbar
+        className={`desktop-nav${isSticky ? " sticky" : ""}`}
+        style={{ backgroundColor: "#004EA9" }}
+        expand="lg"
+      >
+        <div className="container">
+          <Link to="/home" className="navbar-brand">
             <img src={logo} alt="" />
           </Link>
-          <div class="wrapper">
-            <div class="searchBar">
+          <div className="wrapper">
+            <div className="searchBar">
               <input
                 id="searchQueryInput"
                 type="text"
                 name="searchQueryInput"
                 placeholder="Search"
-                value=""
               />
               <button
                 id="searchQuerySubmit"
@@ -63,8 +66,8 @@ const NavBar = () => {
             </div>
           </div>
           <a
-            class="nav-link"
-            href="contact.html"
+            className="nav-link"
+            href="#"
             style={{
               backgroundColor: "white",
               margin: "1vh",
@@ -74,13 +77,13 @@ const NavBar = () => {
             }}
           >
             <span
-              class="mai-heart"
+              className="mai-heart"
               style={{ fontSize: "28px", marginLeft: "-10px" }}
             ></span>
           </a>
           <a
-            class="nav-link"
-            href="contact.html"
+            className="nav-link"
+            href="#"
             style={{
               backgroundColor: "white",
               margin: "1vh",
@@ -90,13 +93,13 @@ const NavBar = () => {
             }}
           >
             <span
-              class="mai-people"
+              className="mai-people"
               style={{ fontSize: "28px", marginLeft: "-10px" }}
             ></span>
           </a>
           <a
-            class="nav-link"
-            href="contact.html"
+            className="nav-link"
+            href="#"
             style={{
               backgroundColor: "white",
               margin: "1vh",
@@ -106,7 +109,7 @@ const NavBar = () => {
             }}
           >
             <span
-              class="mai-calendar"
+              className="mai-calendar"
               style={{ fontSize: "28px", marginLeft: "-10px" }}
             ></span>
           </a>
@@ -117,24 +120,24 @@ const NavBar = () => {
         expand="lg"
         style={{ backgroundColor: "#083C79" }}
       >
-        <div class="container" style={{ placeContent: "center" }}>
+        <div className="container" style={{ placeContent: "center" }}>
           <Nav>
-            <Nav.Link className="desktop-nav-item" href="index.html">
+            <Nav.Link className="desktop-nav-item" href="#">
               Sponsor Event
             </Nav.Link>
-            <Nav.Link className="desktop-nav-item" href="about.html">
+            <Nav.Link className="desktop-nav-item" href="#">
               Sponsor Content Creators
             </Nav.Link>
-            <Nav.Link className="desktop-nav-item" href="service.html">
+            <Nav.Link className="desktop-nav-item" href="#">
               Events Near You
             </Nav.Link>
-            <Nav.Link className="desktop-nav-item" href="blog.html">
+            <Nav.Link className="desktop-nav-item" href="#">
               Top Events
             </Nav.Link>
-            <Nav.Link className="desktop-nav-item" href="contact.html">
+            <Nav.Link className="desktop-nav-item" href="#">
               Top Content Creator
             </Nav.Link>
-            <Nav.Link className="desktop-nav-item" href="contact.html">
+            <Nav.Link className="desktop-nav-item" href="#">
               List your event
             </Nav.Link>
           </Nav>
@@ -142,7 +145,8 @@ const NavBar = () => {
       </Navbar>
 
       <Navbar
-        className={`mobile-nav${isSticky ? ' sticky' : ''}`} expand="lg"
+        className={`mobile-nav${isSticky ? " sticky" : ""}`}
+        expand="lg"
         style={{
           display: "flex",
           flexDirection: "column",
@@ -162,8 +166,8 @@ const NavBar = () => {
             <img src={logo} alt="Logo" />
           </a>
           <a
-            class="nav-link"
-            href="contact.html"
+            className="nav-link"
+            href="#"
             style={{
               backgroundColor: "white",
               margin: "1vh",
@@ -173,7 +177,7 @@ const NavBar = () => {
             }}
           >
             <span
-              class="mai-calendar"
+              className="mai-calendar"
               style={{ fontSize: "28px", marginLeft: "-10px" }}
             ></span>
           </a>
@@ -200,10 +204,10 @@ const NavBar = () => {
                 <NavLink className="mobile-nav-item" href="blog.html">
                   Top Events
                 </NavLink>
-                <NavLink className="mobile-nav-item" href="contact.html">
+                <NavLink className="mobile-nav-item" href="#">
                   Top Content Creator
                 </NavLink>
-                <NavLink className="mobile-nav-item" href="contact.html">
+                <NavLink className="mobile-nav-item" href="#">
                   List your event
                 </NavLink>
               </Nav>
@@ -213,6 +217,6 @@ const NavBar = () => {
       </Navbar>
     </div>
   );
-}
+};
 
 export default NavBar;

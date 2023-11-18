@@ -31,43 +31,43 @@ const SponserCC = ({ line, cardData }) => {
         <div className="row">
           {cardData &&
             cardData.map((data) => (
-              <div className="col-lg-6 col-sm-12 mb-3">
+              <div className="col-lg-6 col-sm-12 mb-3" key={data.id}>
                 <div
-                  class="card"
+                  className="card"
                   style={{
                     maxWidth: "100%",
                     height: "auto",
                     borderRadius: "18px",
                   }}
                 >
-                  <div class="row g-0">
-                    <div class="col-4 col-md-5 col-sm-4 cc-img-container">
+                  <div className="row g-0">
+                    <div className="col-4 col-md-5 col-sm-4 cc-img-container">
                       <img
                         src={ccimg_card}
-                        class="img-fluid rounded-start cc-img"
+                        className="img-fluid rounded-start cc-img"
                         alt=""
                       />
                     </div>
-                    <div class="col-6 col-md-5 col-sm-6 px-lg-0">
-                      <div class="card-body cc-card-body">
-                        <h5 class="card-title font-weight-bold d-inline">
+                    <div className="col-6 col-md-5 col-sm-6 px-lg-0">
+                      <div className="card-body cc-card-body">
+                        <h5 className="card-title font-weight-bold d-inline">
                           {data.name}
                         </h5>
                         <br />
-                        <span class="card-text">Platform: {data.platform}</span>
+                        <span className="card-text">Platform: {data.platform}</span>
                         <br />
-                        <span class="card-text">
+                        <span className="card-text">
                           <i className="bi bi-cash text-success"></i>
                           &nbsp;&nbsp; {data.price}
                         </span>
                         <br />
-                        <p class="card-text">
+                        <p className="card-text">
                           <i className="bi bi-people-fill text-danger"></i>
                           &nbsp;&nbsp; {data.people}
                         </p>
                       </div>
                     </div>
-                    <div class=" col-2 col-md-2 col-sm-2 pl-lg-0">
+                    <div className=" col-2 col-md-2 col-sm-2 pl-lg-0">
                       <button
                         className="btn btn-primary btn-block"
                         style={{
