@@ -50,27 +50,34 @@ const SponserE = ({ line, cardData }) => {
                         </div>
                       </div>
                     </div>
-                    <div className="body">
+                    <div
+                      className="body text-center"
+                      style={{ padding: "1%" }}
+                    >
                       <div className="row">
                         <div
                           className="col"
                           style={{ borderRight: "1px solid #cfcfcf" }}
                         >
-                          <h6 className="post-title">
-                            <a href="blog-details.html">Price Band</a>
-                          </h6>
+                          <span className="text-sm post-title">
+                            <a href="#">Price Band</a>
+                          </span>
                           <div className="post-date">
-                            <i className="bi bi-cash text-success"></i>
-                            <b> {data.price}</b>
+                            <h6>
+                              <i className="bi bi-cash text-success"></i>
+                              <b> {data.price}</b>
+                            </h6>
                           </div>
                         </div>
                         <div className="col">
-                          <h6 className="post-title">
-                            <a href="blog-details.html">Audience</a>
-                          </h6>
+                          <span className="text-sm post-title">
+                            <a href="#">Audience</a>
+                          </span>
                           <div className="post-date">
-                            <i className="bi bi-people-fill text-danger"></i>
-                            <b> {data.people}</b>
+                            <h6>
+                              <i className="bi bi-people-fill text-danger"></i>
+                              <b> {data.people}</b>
+                            </h6>
                           </div>
                         </div>
                       </div>
@@ -120,7 +127,11 @@ const SponserE = ({ line, cardData }) => {
               <div className="sponsor-card-indicator">
                 EVENTS
                 {/* hello */}
-                <img src={arrow} style={{ transform: "rotate(90deg)" }} alt="" />
+                <img
+                  src={arrow}
+                  style={{ transform: "rotate(90deg)" }}
+                  alt=""
+                />
               </div>
             </div>
             <div className="col-lg-4" style={{ width: "76%" }}>

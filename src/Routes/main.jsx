@@ -4,6 +4,7 @@ import SponsorEvents from "../pages/Desktop_Sponser_Events/SponsorEvents";
 import SponsorContentC from "../pages/Desktop_Sponsor_CC/SponsorContentC";
 import SponsorChoice from "../pages/Desktop_Sponsor_Choice/SponsorChoice";
 import CategoryPage from "../pages/Desktop_Categories/CategoryPage";
+import PaymentGateway from "../pages/Desktop_Sponsor_Payment/PaymentGateway";
 const Main = () => {
   return (
     <>
@@ -15,6 +16,7 @@ const Main = () => {
           <Route path="/cc" element={<SponsorContentC />} />
           <Route path="/choice" element={<SponsorChoice />} />
           <Route path="/categories" element={<CategoryPage />} />
+          <Route path="/payment" element={<PaymentGateway />} />
         </Routes>
       </Router>
     </>
