@@ -13,3 +13,4 @@ export { default as SponsorCC } from "./Sponser/SponsorCC.jsx";
 export { default as CatpageBox } from "./Categories/CatpageBox.jsx";
 export { default as MobileCards } from "./MobileCards/mobile-cards.jsx";
 export { default as SponsorPay } from "./Sponsor-Pay-Box/SponsorPay.jsx";
+export { default as MyEventsBox } from "./My_Events_Details_Box/MyEventsBox.jsx";
