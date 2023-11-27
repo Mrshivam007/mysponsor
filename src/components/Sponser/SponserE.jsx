@@ -83,7 +83,8 @@ const SponserE = ({ line, cardData }) => {
                       </div>
                     </div>
 
-                    <button
+                    <Link
+                    to={"/myevent-details"}
                       className="btn btn-primary mx-auto rounded-0"
                       style={{
                         width: "100%",
@@ -92,7 +93,7 @@ const SponserE = ({ line, cardData }) => {
                       }}
                     >
                       Sponsor Now
-                    </button>
+                    </Link>
                   </div>
                 </div>
               ))}

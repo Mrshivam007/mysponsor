@@ -6,6 +6,7 @@ import logo from "../../assets/img/logo/logo.png";
 import card_bg from "../../assets/img/card/header-bg.png";
 import { AiOutlineClose } from "react-icons/ai"; // Import the close icon from react-icons library
 import account from "../../assets/img/account.png";
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
@@ -26,9 +27,9 @@ function Header() {
                 facere porro repellendus expedita et veniam jkvxdkvxkv
                 xnjnxkjbkxnb nkvdbkxbkxnbkk.
               </p>
-              <a href="#" className="link-banner btn btn-primary">
+              <Link to={"/choice"}  className="link-banner btn btn-primary">
                 Sponsor Now
-              </a>
+              </Link>
             </div>
             <div className="img-container col-md-4 wow zoomIn">
               <div className="img-fluid text-center">

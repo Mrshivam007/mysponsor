@@ -37,7 +37,7 @@ const NavBar = () => {
         expand="lg"
       >
         <div className="container">
-          <Link to="/home" className="navbar-brand">
+          <Link to="/" className="navbar-brand">
             <img src={logo} alt="" />
           </Link>
           <div className="wrapper">
@@ -122,11 +122,15 @@ const NavBar = () => {
       >
         <div className="container" style={{ placeContent: "center" }}>
           <Nav>
-            <Nav.Link className="desktop-nav-item" href="#">
-              Sponsor Event
+            <Nav.Link className="desktop-nav-item">
+              <Link to={"/events"} style={{color: 'white'}}>
+                Sponsor Event
+              </Link>
             </Nav.Link>
-            <Nav.Link className="desktop-nav-item" href="#">
-              Sponsor Content Creators
+            <Nav.Link className="desktop-nav-item">
+              <Link to={"/cc"} style={{color: 'white'}}>
+                Sponsor Content Creators
+              </Link>
             </Nav.Link>
             <Nav.Link className="desktop-nav-item" href="#">
               Events Near You
@@ -159,7 +163,6 @@ const NavBar = () => {
             onClick={toggleNavbar}
           />
           <a
-            href="home"
             className="navbar-brand"
             style={{ height: "52px", marginTop: "3%" }}
           >
