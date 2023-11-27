@@ -8,7 +8,7 @@ export const login = (email, password) => async (dispatch) => {
     try {
         dispatch({ type: AUTH_LOGIN_REQUEST });
 
-        const { data } = await axios.post(`${apiurl}/api/user/login`, {
+        const { data } = await axios.post(`${apiurl}/api/user/login/`, {
             email,
             password,
         });
@@ -86,12 +86,10 @@ export const logout = () => (dispatch) => {
 
 const getPayload = (data) => {
     const payload = {
-        isStaff: data.is_staff,
-        userProfile: data.user_profile,
         email: data.email,
         firstname: data.first_name,
         lastname: data.last_name,
-        user_id: data.user_id,
+        user_type: data.user_type,
     };
     localStorage.setItem("userDetails", JSON.stringify(payload));
     return payload;
