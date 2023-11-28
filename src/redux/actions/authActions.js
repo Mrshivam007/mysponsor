@@ -37,24 +37,25 @@ export const signup =
         password,
         firstname,
         lastname,
-        subject,
-        confirmPassword,
-        userProfile
+        password2,
+        user_type,
+        is_admin,
     ) =>
         async (dispatch) => {
             try {
                 dispatch({ type: AUTH_SIGNUP_REQUEST });
 
                 const { data } = await axios.post(
-                    `${apiurl}/api/user/register`,
+                    `${apiurl}/api/user/register/`,
                     {
                         email,
                         first_name: firstname,
                         last_name: lastname,
-                        subject: subject,
-                        password,
-                        confirm_password: confirmPassword,
-                        user_profile: userProfile,
+                        password: password,
+                        password2: password2,
+                        user_type: user_type,
+                        is_active: true,
+                        is_admin: is_admin,
                     }
                 );
 

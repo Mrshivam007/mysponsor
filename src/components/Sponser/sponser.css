@@ -14,7 +14,7 @@
 
 .sponsor-mobile-text {
     color: #000;
-    padding-left: 3%;
+    padding-left: 5%;
     font-family: 'League Spartan';
     font-size: 32px;
     font-style: normal;
@@ -28,6 +28,7 @@
 .card-blog {
     background-color: #fff !important;
     border-radius: 6%;
+    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.25)
 }
 
 .post-thumb {

@@ -1,10 +1,9 @@
 import backgroundimg from "../../assets/img/circle-bg.png";
 import React, { useState } from "react";
-import { Footer, NavBar, SponserE } from "../../components";
-import { EventsCards } from "../../data/data";
+import { Footer, NavBar } from "../../components";
 import { Link } from "react-router-dom";
 import { login } from "../../redux/actions/authActions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 
 const Login = () => {

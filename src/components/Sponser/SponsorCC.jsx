@@ -38,6 +38,7 @@ const SponserCC = ({ line, cardData }) => {
                     maxWidth: "100%",
                     height: "auto",
                     borderRadius: "18px",
+                    boxShadow: "0px 2px 10px -2px rgba(0, 0, 0, 0.25)",
                   }}
                 >
                   <div className="row g-0">
@@ -54,7 +55,9 @@ const SponserCC = ({ line, cardData }) => {
                           {data.name}
                         </h5>
                         <br />
-                        <span className="card-text">Platform: {data.platform}</span>
+                        <span className="card-text">
+                          Platform: {data.platform}
+                        </span>
                         <br />
                         <span className="card-text">
                           <i className="bi bi-cash text-success"></i>

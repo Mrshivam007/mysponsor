@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./listevents.css";
+import calendar from "../../assets/img/calendar.svg";
+import camera from "../../assets/img/camera.svg";
 import listevents from "../../assets/img/list_events.png";
 import bgimage from "../../assets/img/circle-bg.png";
 import cardImg1 from "../../assets/img/list_events_card1.jpg";
 import cardImg2 from "../../assets/img/list_events_card2.jpg";
 import cardImg3 from "../../assets/img/list_events_card3.jpg";
 import { Choice, EventsHeader, Footer, NavBar } from "../../components";
+import { Link } from "react-router-dom";
 const ListEvents = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
+  }, []);
   return (
     <>
       <div
@@ -18,9 +24,42 @@ const ListEvents = () => {
         }}
       >
         <NavBar />
+        {/* ---DESKTOP VIEW---  */}
+        <div className="desktop-view">
+          <EventsHeader title={"List Events"} logo={listevents} />
+          <Choice />
+        </div>
+        {/* ---DESKTOP VIEW END--- */}
+        {/* ---MOBILE VIEW--- */}
 
-        <EventsHeader title={"List Events"} logo={listevents} />
-        <Choice />
+        <div className="mobile-view">
+          <h2 className="sponsor-mobile-text">Get your event listed</h2>
+          <div className="container choice-boxes my-3">
+            <div className="row">
+              <div className="col-6">
+                <Link to="/events">
+                  <div className="card-blog choice-box">
+                    <img src={calendar} alt="" />
+                    <p className="text-center text-white font-weight-bolder mb-0">
+                      Event
+                    </p>
+                  </div>
+                </Link>
+              </div>
+              <div className="col-6">
+                <Link to="/cc">
+                  <div className="card-blog choice-box">
+                    <img src={camera} alt="" />
+                    <p className="text-center text-white font-weight-bolder mb-0">
+                      Upcoming Video
+                    </p>
+                  </div>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* ---MOBILE VIEW END--- */}
         <div className="container">
           <div className="list-events-box">
             <h1>
@@ -29,8 +68,8 @@ const ListEvents = () => {
           </div>
         </div>
         <div className="container mb-5">
-          <div className="row row-cols-3">
-            <div className="col">
+          <div className="row">
+            <div className="col-12 col-md-4">
               <div className="card list-events-card">
                 <img
                   src={cardImg1}
@@ -41,24 +80,19 @@ const ListEvents = () => {
                   }}
                 />
                 <div className="card-body" style={{ padding: "0 0 0 5%" }}>
-                  <p className="card-text font-weight-bold mb-1">
+                  <h5 className="card-text font-weight-bold">
                     Want your events sponsored?
-                  </p>
+                  </h5>
                   <button
                     to="/events"
-                    className="choice-btn btn text-white py-1 font-weight-bold mb-3"
-                    style={{
-                      float: "left",
-                      backgroundColor: "#00448B",
-                      borderRadius: "10px",
-                    }}
+                    className="btn text-white py-1 font-weight-bold mb-3"
                   >
                     List an Events
                   </button>
                 </div>
               </div>
             </div>
-            <div className="col">
+            <div className="col-12 col-md-4">
               <div className="card list-events-card">
                 <img
                   src={cardImg2}
@@ -69,24 +103,19 @@ const ListEvents = () => {
                   }}
                 />
                 <div className="card-body" style={{ padding: "0 0 0 5%" }}>
-                  <p className="card-text font-weight-bold mb-1">
+                  <h5 className="card-text font-weight-bold">
                     Want your content sponsored?
-                  </p>
+                  </h5>
                   <button
                     to="/events"
-                    className="choice-btn btn text-white py-1 font-weight-bold mb-3"
-                    style={{
-                      float: "left",
-                      backgroundColor: "#00448B",
-                      borderRadius: "10px",
-                    }}
+                    className="btn text-white py-1 font-weight-bold mb-3"
                   >
                     List as a content creator
                   </button>
                 </div>
               </div>
             </div>
-            <div className="col">
+            <div className="col-12 col-md-4">
               <div className="card list-events-card">
                 <img
                   src={cardImg3}
@@ -97,17 +126,12 @@ const ListEvents = () => {
                   }}
                 />
                 <div className="card-body" style={{ padding: "0 0 0 5%" }}>
-                  <p className="card-text font-weight-bold mb-1">
+                  <h5 className="card-text font-weight-bold">
                     Want your videos sponsored?
-                  </p>
+                  </h5>
                   <button
                     to="/events"
-                    className="choice-btn btn text-white py-1 font-weight-bold mb-3"
-                    style={{
-                      float: "left",
-                      backgroundColor: "#00448B",
-                      borderRadius: "10px",
-                    }}
+                    className="btn text-white py-1 font-weight-bold mb-3"
                   >
                     List an upcoming video
                   </button>

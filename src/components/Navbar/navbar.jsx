@@ -6,9 +6,12 @@ import logo from "../../assets/img/logo/logo.png";
 import { AiOutlineClose } from "react-icons/ai"; // Import the close icon from react-icons library
 // import account from "../../assets/img/account.png";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const NavBar = () => {
   const [isSticky, setSticky] = useState(false);
+  const auth = useSelector(state => state.auth);
+  const { userDetails } = auth;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,54 +68,62 @@ const NavBar = () => {
               </button>
             </div>
           </div>
-          <a
-            className="nav-link"
-            href="#"
-            style={{
-              backgroundColor: "white",
-              margin: "1vh",
-              height: "40px",
-              width: "40px",
-              borderRadius: "50px",
-            }}
-          >
-            <span
-              className="mai-heart"
-              style={{ fontSize: "28px", marginLeft: "-10px" }}
-            ></span>
-          </a>
-          <a
-            className="nav-link"
-            href="#"
-            style={{
-              backgroundColor: "white",
-              margin: "1vh",
-              height: "40px",
-              width: "40px",
-              borderRadius: "50px",
-            }}
-          >
-            <span
-              className="mai-people"
-              style={{ fontSize: "28px", marginLeft: "-10px" }}
-            ></span>
-          </a>
-          <a
-            className="nav-link"
-            href="#"
-            style={{
-              backgroundColor: "white",
-              margin: "1vh",
-              height: "40px",
-              width: "40px",
-              borderRadius: "50px",
-            }}
-          >
-            <span
-              className="mai-calendar"
-              style={{ fontSize: "28px", marginLeft: "-10px" }}
-            ></span>
-          </a>
+          {userDetails ? (
+            <>
+              <a
+                className="nav-link"
+                href="#"
+                style={{
+                  backgroundColor: "white",
+                  margin: "1vh",
+                  height: "40px",
+                  width: "40px",
+                  borderRadius: "50px",
+                }}
+              >
+                <span
+                  className="mai-heart"
+                  style={{ fontSize: "28px", marginLeft: "-10px" }}
+                ></span>
+              </a>
+              <a
+                className="nav-link"
+                href="#"
+                style={{
+                  backgroundColor: "white",
+                  margin: "1vh",
+                  height: "40px",
+                  width: "40px",
+                  borderRadius: "50px",
+                }}
+              >
+                <span
+                  className="mai-people"
+                  style={{ fontSize: "28px", marginLeft: "-10px" }}
+                ></span>
+              </a>
+              <a
+                className="nav-link"
+                href="#"
+                style={{
+                  backgroundColor: "white",
+                  margin: "1vh",
+                  height: "40px",
+                  width: "40px",
+                  borderRadius: "50px",
+                }}
+              >
+                <span
+                  className="mai-calendar"
+                  style={{ fontSize: "28px", marginLeft: "-10px" }}
+                ></span>
+              </a>
+            </>
+          ) : (
+            <Link to={"/login"} className="link-banner btn btn-primary">
+              Register
+            </Link>
+          )}
         </div>
       </Navbar>
       <Navbar
@@ -123,12 +134,12 @@ const NavBar = () => {
         <div className="container" style={{ placeContent: "center" }}>
           <Nav>
             <Nav.Link className="desktop-nav-item">
-              <Link to={"/events"} style={{color: 'white'}}>
+              <Link to={"/events"} style={{ color: 'white' }}>
                 Sponsor Event
               </Link>
             </Nav.Link>
             <Nav.Link className="desktop-nav-item">
-              <Link to={"/cc"} style={{color: 'white'}}>
+              <Link to={"/cc"} style={{ color: 'white' }}>
                 Sponsor Content Creators
               </Link>
             </Nav.Link>

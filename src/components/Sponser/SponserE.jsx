@@ -1,4 +1,4 @@
-import sponser_card from "../../assets/img/blog/blog-1.jpg";
+import cardImg from "../../assets/img/payment-img.jpg";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -37,7 +37,7 @@ const SponserE = ({ line, cardData }) => {
                     <div className="header">
                       <div className="post-thumb">
                         <img
-                          src={sponser_card}
+                          src={cardImg}
                           alt=""
                           style={{ width: "100%" }}
                           className="sponser_card_img"
@@ -50,10 +50,7 @@ const SponserE = ({ line, cardData }) => {
                         </div>
                       </div>
                     </div>
-                    <div
-                      className="body text-center"
-                      style={{ padding: "1%" }}
-                    >
+                    <div className="body text-center" style={{ padding: "1%" }}>
                       <div className="row">
                         <div
                           className="col"
@@ -84,7 +81,7 @@ const SponserE = ({ line, cardData }) => {
                     </div>
 
                     <Link
-                    to={"/myevent-details"}
+                      to={"/myevent-details"}
                       className="btn btn-primary mx-auto rounded-0"
                       style={{
                         width: "100%",

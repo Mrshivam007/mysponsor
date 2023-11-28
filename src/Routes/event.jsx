@@ -1,12 +1,14 @@
-import { Route, Router, Routes } from "react-router-dom";
-import { Home } from "../pages";
+import { Route, Router, Routes, Navigate } from "react-router-dom";
+import { Home, ListEvents } from "../pages";
 
 const EventRoutes = () => {
     console.log("Event Page");
     return (
         <>
             <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<ListEvents />} />
+                <Route path="/login" element={<Navigate to={"/"} />} />
+                <Route path="/signup" element={<Navigate to={"/"} />} />
             </Routes>
         </>
     );
