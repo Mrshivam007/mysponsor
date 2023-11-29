@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Footer, NavBar } from "../../components";
 import { Link } from "react-router-dom";
 import { login } from "../../redux/actions/authActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const Login = () => {
@@ -11,47 +11,59 @@ const Login = () => {
     const dispatch = useDispatch();
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+    const [isDisabled, setIsDisabled] = useState(true);
+    const auth = useSelector(state => state.auth)
+    const [showMessage, setShowMessage] = useState(false);
+
+    const {error, loading} = auth;
+    console.log(error);
 
     const submitHandler = (e) => {
         e.preventDefault()
         dispatch(login(email, password))
-        // if (error === 'Request failed with status code 401'){
-        //   const showMessage = "Your request requires admin approval before you can login as a teacher."
-        //    setShowMessage(showMessage);
-        // }
-        // else if (error === "Request failed with status code 400"){
-        //   const showMessage = "Unable to Determine"
-        //   setShowMessage(showMessage);
-        // }
-        // else {
-        //   setShowMessage(false);
-        // }
+        if (error === 'Request failed with status code 401'){
+          const showMessage = "Your request requires admin approval before you can login as a teacher."
+           setShowMessage(showMessage);
+        }
+        else if (error === "Request failed with status code 400"){
+          const showMessage = "Unable to Determine"
+          setShowMessage(showMessage);
+        }
+        else if (error === "Request failed with status code 404"){
+          const showMessage = "Email or Password is not Valid"
+          setShowMessage(showMessage);
+        }
+        else {
+          setShowMessage(false);
+        }
       };
 
       const handleEmailChange = (event) => {
         const newEmail = event.target.value;
         setEmail(newEmail);
-        // if (!newEmail) {
-        //   setEmailError("Please enter an email address");
-        //   setIsDisabled(true);
-        // } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)) {
-        //   setEmailError("Please enter a valid email address");
-        //   setIsDisabled(true);
-        // } else {
-        //   setEmailError("");
-        //   setIsDisabled(password.length < 8);
-        // }
+        if (!newEmail) {
+          setEmailError("Please enter an email address");
+          setIsDisabled(true);
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)) {
+          setEmailError("Please enter a valid email address");
+          setIsDisabled(true);
+        } else {
+          setEmailError("");
+          setIsDisabled(password.length < 8);
+        }
       };
       const handlePasswordChange = (event) => {
         const newPassword = event.target.value;
         setPassword(newPassword);
-        // if (newPassword.length < 8) {
-        //   setPasswordError("Password must be at least 8 characters long");
-        //   setIsDisabled(true);
-        // } else {
-        //   setPasswordError("");
-        //   setIsDisabled(email.length === 0 || !email.includes("@"));
-        // }
+        if (newPassword.length < 8) {
+          setPasswordError("Password must be at least 8 characters long");
+          setIsDisabled(true);
+        } else {
+          setPasswordError("");
+          setIsDisabled(email.length === 0 || !email.includes("@"));
+        }
       };
     return (
         <>
@@ -70,6 +82,7 @@ const Login = () => {
                     {/* <div class="col-lg-6 mb-5 mb-lg-0"> */}
                         <form action="#" class="contact-form" onSubmit={submitHandler}>
                             <h2 class="mb-4 font-weight-medium text-secondary">Login</h2>
+                            {showMessage && <div class="alert alert-danger" role="alert">{showMessage}</div>}
                             {/* <div class="row form-group">
                                 <div class="col-md-6 mb-3 mb-md-0">
                                     <label class="text-black" for="fname">First Name</label>
@@ -85,6 +98,7 @@ const Login = () => {
                                 <div class="col-md-12">
                                     <label class="text-black" for="email">Email</label>
                                     <input type="email" id="email" value={email} onChange={handleEmailChange} class="form-control" placeholder="Email" />
+                                    <p style={{color: 'red'}}>{emailError}</p>
                                 </div>
                             </div>
 
@@ -93,6 +107,7 @@ const Login = () => {
                                 <div class="col-md-12">
                                     <label class="text-black" for="subject">Password</label>
                                     <input type="text" id="subject" value={password} onChange={handlePasswordChange} class="form-control" placeholder="Password" />
+                                    <p style={{color: 'red'}}>{passwordError}</p>
                                 </div>
                             </div>
 {/* 

@@ -44,7 +44,7 @@ const SponserE = ({ line, cardData }) => {
                         />
                         <div className="text-overlay">
                           <p className="text-lg font-weight-bold mb-0">
-                            {data.name}
+                            {data.title}
                           </p>
                           <p>{data.location}</p>
                         </div>
@@ -73,7 +73,7 @@ const SponserE = ({ line, cardData }) => {
                           <div className="post-date">
                             <h6>
                               <i className="bi bi-people-fill text-danger"></i>
-                              <b> {data.people}</b>
+                              <b> {data.audience_expected}</b>
                             </h6>
                           </div>
                         </div>

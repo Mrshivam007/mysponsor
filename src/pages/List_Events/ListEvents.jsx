@@ -84,10 +84,11 @@ const ListEvents = () => {
                     Want your events sponsored?
                   </h5>
                   <button
-                    to="/events"
                     className="btn text-white py-1 font-weight-bold mb-3"
                   >
-                    List an Events
+                    <Link to={"create_event"} style={{color: 'white'}} >
+                      List an Events
+                    </Link>
                   </button>
                 </div>
               </div>
@@ -107,10 +108,11 @@ const ListEvents = () => {
                     Want your content sponsored?
                   </h5>
                   <button
-                    to="/events"
                     className="btn text-white py-1 font-weight-bold mb-3"
                   >
+                    <Link to={"create_content"} style={{color: 'white'}} >
                     List as a content creator
+                    </Link>
                   </button>
                 </div>
               </div>

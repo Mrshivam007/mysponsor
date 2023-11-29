@@ -9,11 +9,22 @@ import {
 import bgimage from "../../assets/img/circle-bg.png";
 import spevents from "../../assets/img/sponsor_events-logo.png";
 import { EventsCards, EventsPageCards } from "../../data/data";
+import { fetchEvent } from "../../redux/actions/eventAction";
+import { useDispatch, useSelector } from "react-redux"
 import "./events-page.css";
 const SponsorEvents = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
+
+  const dispatch = useDispatch();
+  const eventDetails = useSelector(state => state.event)
+  useEffect(() => {
+    dispatch(fetchEvent())
+  },[])
+
+  console.log("dynamic data",eventDetails.eventDetails);
+  console.log("static data",EventsCards);
 
   return (
     <>
@@ -28,7 +39,7 @@ const SponsorEvents = () => {
         <NavBar />
         <div className="events-page-desktop">
           <EventsHeader title={"Sponsor Events"} logo={spevents} />
-          <SponserE cardData={EventsCards} line={"Festival Events"} />
+          <SponserE cardData={eventDetails.eventDetails} line={"Festival Events"} />
           <SponserE cardData={EventsCards} line={"Concerts"} />
           <SponserE cardData={EventsCards} line={"Promotional Events"} />
           <SponserE cardData={EventsCards} line={"Sports Events"} />
