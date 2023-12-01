@@ -4,7 +4,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./sponser.css";
 import arrow from "../../assets/img/right-arrow.png";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useNavigate } from "react-router-dom";
+import apiurl from "../../constant/config";
 // import { cardData2 } from "../../data/data";
 const SponserE = ({ line, cardData }) => {
   const settings = {
@@ -17,6 +18,13 @@ const SponserE = ({ line, cardData }) => {
     nextArrow: null, // Hide the next arrow
   };
   // console.log(cardData);
+
+
+  const navigate = useNavigate();
+
+  const handleSponsorClick = (data) => {
+    navigate('/myevent-details', { state: { eventData: data } });
+  };
 
   return (
     <>
@@ -37,7 +45,7 @@ const SponserE = ({ line, cardData }) => {
                     <div className="header">
                       <div className="post-thumb">
                         <img
-                          src={cardImg}
+                          src={apiurl + data.thumbnail1}
                           alt=""
                           style={{ width: "100%" }}
                           className="sponser_card_img"
@@ -80,17 +88,17 @@ const SponserE = ({ line, cardData }) => {
                       </div>
                     </div>
 
-                    <Link
-                      to={"/myevent-details"}
+                    <button
                       className="btn btn-primary mx-auto rounded-0"
                       style={{
                         width: "100%",
                         backgroundColor: "#004EA9",
                         fontWeight: "bold",
                       }}
+                      onClick={() => handleSponsorClick(data)}
                     >
                       Sponsor Now
-                    </Link>
+                    </button>
                   </div>
                 </div>
               ))}

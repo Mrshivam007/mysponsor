@@ -23,26 +23,37 @@ const Signup = () => {
     const { error, loading } = auth;
     const [showMessage, setShowMessage] = useState(false);
     const [isDisabled, setIsDisabled] = useState(true);
+    const [errors, setErrors] = useState({});
+
+    const validateForm = () => {
+        const errorsObj = {};
+    
+        if (email.trim() === '') {
+          errorsObj.email = 'email is required';
+        }
+        if (password.trim() === '') {
+          errorsObj.password = 'password is required';
+        }
+        if (password2.trim() === '') {
+          errorsObj.password2 = 'password2 is required';
+        }
+        if (firstname.trim() === '') {
+          errorsObj.firstname = 'firstname is required';
+        }
+        if (lastname.trim() === '') {
+          errorsObj.lastname = 'lastname is required';
+        }
+        // ... validate other fields similarly
+        setErrors(errorsObj);
+        return Object.keys(errorsObj).length === 0;
+      };
+
     
     const submitHandler = (e) => {
         e.preventDefault();
         const isAdminValue = false; // Define is_admin as a separate variable
-        const errors = {};
-        if (!email) {
-            errors.title = "Email is Required";
-        }
-        if (!password) {
-            errors.password = "Password is Required!";
-        }
-        if (firstname) {
-            errors.firstname = "First Name is Required";
-        }
-        if (firstname) {
-            errors.firstname = "First Name is Required";
-        }
-        if (lastname) {
-            errors.lastname = "Last Name is Required";
-        }
+        const isFormValid = validateForm();
+        if (isFormValid) {
         dispatch(
             signup(
                 email,
@@ -54,6 +65,7 @@ const Signup = () => {
                 isAdminValue, // Pass isAdminValue as an argument instead of directly assigning within the function call
             )
         );
+        }
     };
 
 
@@ -157,10 +169,13 @@ const Signup = () => {
                                 <div class="col-md-6 mb-3 mb-md-0">
                                     <label class="text-black" for="fname">First Name</label>
                                     <input type="text" id="fname" class="form-control" value={firstname} onChange={handleFirstName} placeholder="First Name" />
+                                    {errors.firstname && <p className="error-msg">{errors.firstname}</p>}
+
                                 </div>
                                 <div class="col-md-6">
                                     <label class="text-black" for="lname">Last Name</label>
                                     <input type="text" id="lname" class="form-control" value={lastname} onChange={handleLastName} placeholder="Last Name" />
+                                    {errors.lastname && <p className="error-msg">{errors.lastname}</p>}
                                 </div>
                             </div>
 
@@ -168,7 +183,8 @@ const Signup = () => {
                                 <div class="col-md-12">
                                     <label class="text-black" for="email">Email</label>
                                     <input type="email" id="email" class="form-control" value={email} onChange={handleEmailChange} placeholder="Email" />
-                                    <p style={{ color: 'red', marginBottom: '0px' }}>{emailError}</p>
+                                    <p className="error-msg">{emailError}</p>
+                                    {errors.email && <p className="error-msg">{errors.email}</p>}
                                 </div>
                             </div>
 
@@ -180,7 +196,8 @@ const Signup = () => {
                                         setPassword(e.target.value);
                                         handlePassword(e);
                                     }} placeholder="Password" />
-                                    <p style={{ color: 'red', marginBottom: '0px' }}>{passwordError}</p>
+                                    <p className="error-msg">{passwordError}</p>
+                                    {errors.password && <p className="error-msg">{errors.password}</p>}
 
                                 </div>
                             </div>
@@ -193,7 +210,8 @@ const Signup = () => {
                                         handleConfirmPassword(e);
                                     }} placeholder="Confirm Password"
                                     />
-                                    <p style={{ color: 'red', marginBottom: '0px' }}>{ConfirmPasswordError}</p>
+                                    <p className="error-msg">{ConfirmPasswordError}</p>
+                                    {errors.password2 && <p className="error-msg">{errors.password2}</p>}
                                 </div>
                             </div>
 

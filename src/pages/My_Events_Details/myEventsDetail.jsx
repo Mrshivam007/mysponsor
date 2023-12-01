@@ -8,10 +8,14 @@ import {
   NavBar,
   SponserE,
 } from "../../components/index.js";
+import { useLocation } from "react-router-dom";
 const MyEventsDetail = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
+  const location = useLocation();
+  const eventData = location.state?.eventData || null;
+  console.log(eventData);
   return (
     <>
       <div
@@ -23,7 +27,7 @@ const MyEventsDetail = () => {
         }}
       >
         <NavBar />
-        <MyEventsBox />
+        <MyEventsBox eventData={eventData} />
         <SponserE cardData={EventsCards} />
         <Footer />
       </div>

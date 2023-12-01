@@ -1,6 +1,6 @@
 import axios from 'axios';
 import apiurl from '../../constant/config';
-import { AUTH_LOGIN_FAILED, AUTH_LOGIN_REQUEST, AUTH_LOGIN_SUCCESS, AUTH_LOGOUT, AUTH_SIGNUP_FAILED, AUTH_SIGNUP_REQUEST, AUTH_SIGNUP_SUCCESS } from '../constant';
+import { AUTH_LOGIN_FAILED, AUTH_LOGIN_REQUEST, AUTH_LOGIN_SUCCESS, AUTH_LOGOUT, AUTH_SIGNUP_FAILED, AUTH_SIGNUP_REQUEST, AUTH_SIGNUP_SUCCESS, GET_PROFILE_FAILED, GET_PROFILE_REQUEST, GET_PROFILE_SUCCESS } from '../constant';
 
 
 
@@ -40,6 +40,7 @@ export const signup =
         password2,
         user_type,
         is_admin,
+        user_id,
     ) =>
         async (dispatch) => {
             try {
@@ -56,6 +57,7 @@ export const signup =
                         user_type: user_type,
                         is_active: true,
                         is_admin: is_admin,
+                        user_id: user_id,
                     }
                 );
 
@@ -85,12 +87,38 @@ export const logout = () => (dispatch) => {
     dispatch({ type: AUTH_LOGOUT });
 };
 
+export const fetchUserProfile = () => async (dispatch) => {
+    try {
+      dispatch({ type: GET_PROFILE_REQUEST });
+  
+      const access = JSON.parse(localStorage.getItem("access"));
+  
+      const { data } = await axios.get(`${apiurl}/api/user/profile/`, {
+        headers: { Authorization: `Bearer ${access}` },
+      });
+  
+      dispatch({
+        type: GET_PROFILE_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_PROFILE_FAILED,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
 const getPayload = (data) => {
     const payload = {
         email: data.email,
         firstname: data.first_name,
         lastname: data.last_name,
         user_type: data.user_type,
+        user_id: data.user_id,
     };
     localStorage.setItem("userDetails", JSON.stringify(payload));
     return payload;

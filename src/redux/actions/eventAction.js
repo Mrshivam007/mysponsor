@@ -37,7 +37,7 @@ export const fetchEvent = () => async (dispatch) => {
     //   const access = JSON.parse(localStorage.getItem("access"));
   
       const { data } = await axios.post(
-        `${apiurl}/api/teacher/classup/create`,
+        `${apiurl}/api/user/event/`,
         formData,
         // { headers: { Authorization: `Bearer ${access}` } }
       );
