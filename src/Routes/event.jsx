@@ -1,5 +1,5 @@
 import { Route, Router, Routes, Navigate } from "react-router-dom";
-import { Home, ListEvents, MyEventDetails, SponsorContentC, SponsorEvents } from "../pages";
+import { Home, ListEvents, MyEventDetails, MyEvents, SponsorContentC, SponsorEvents } from "../pages";
 import ListeventsForm from "../pages/Create_Event/ListeventsForm";
 import CCForm from "../pages/Create_Content/CCForm";
 import EventHome from "../pages/Event/Home/EventHome";

@@ -11,6 +11,7 @@ import spevents from "../../../assets/img/sponsor_events-logo.png";
 import { EventsCards, EventsPageCards } from "../../../data/data";
 import { fetchEvent } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux"
+import MyEventCard from "../MyEventCrad/MyEventCard";
 const LiveEvent = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
@@ -38,7 +39,8 @@ const LiveEvent = () => {
         <NavBar />
         <div className="events-page-desktop">
           <EventsHeader title={"Live Events"} logo={spevents} />
-          <SponserE cardData={eventDetails.eventDetails} line={"Live Events"} />
+          {/* <SponserE cardData={eventDetails.eventDetails} line={"Live Events"} /> */}
+          <MyEventCard cardData={eventDetails.eventDetails} />
           {/* <SponserE cardData={EventsCards} line={"Concerts"} />
           <SponserE cardData={EventsCards} line={"Promotional Events"} />
           <SponserE cardData={EventsCards} line={"Sports Events"} />
