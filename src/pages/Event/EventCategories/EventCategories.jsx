@@ -113,7 +113,7 @@ const EventCategories = () => {
                     className="btn text-white py-1 font-weight-bold mb-3"
                   >
                     <Link to={"previous_event"} style={{ color: 'white' }} >
-                      Upcoming Event
+                      Previous Event
                     </Link>        
                   </button>
                 </div>

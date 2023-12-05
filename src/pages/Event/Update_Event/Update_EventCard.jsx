@@ -9,7 +9,7 @@ import { fetchEvent } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux"
 import apiurl from "../../../constant/config";
 import { useNavigate } from "react-router-dom";
-const MyEventCard = ({ cardData }) => {
+const Update_EventCard = ({ cardData }) => {
     useEffect(() => {
         window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
     }, []);
@@ -23,7 +23,7 @@ const MyEventCard = ({ cardData }) => {
     const navigate = useNavigate();
 
     const handleSponsorClick = (data) => {
-      navigate('/myevent-details', { state: { eventData: data } });
+      navigate('/update_event', { state: { eventData: data } });
     };
     return (
         <>
@@ -234,4 +234,4 @@ const MyEventCard = ({ cardData }) => {
     );
 };
 
-export default MyEventCard;
+export default Update_EventCard;

@@ -38,7 +38,7 @@ export const signup =
         firstname,
         lastname,
         password2,
-        user_type,
+        // user_type,
         is_admin,
         user_id,
     ) =>
@@ -54,7 +54,7 @@ export const signup =
                         last_name: lastname,
                         password: password,
                         password2: password2,
-                        user_type: user_type,
+                        // user_type: user_type,
                         is_active: true,
                         is_admin: is_admin,
                         user_id: user_id,

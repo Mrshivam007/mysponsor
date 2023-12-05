@@ -12,6 +12,7 @@ import { EventsCards, EventsPageCards } from "../../../data/data";
 import { fetchEvent } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux"
 import MyEventCard from "../MyEventCrad/MyEventCard";
+import EventMobileCard from "./EventMobileCards";
 const LiveEvent = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
@@ -49,7 +50,7 @@ const LiveEvent = () => {
           <SponserE cardData={EventsCards} line={"Reality Shows"} /> */}
         </div>
         <div className="events-page-mobile">
-          <MobileCards line={"Live Events"} cardData={eventDetails.eventDetails} />
+          <EventMobileCard line={"Live Events"} cardData={eventDetails.eventDetails} />
           <div
             className="btn d-block text-white font-weight-bolder"
             style={{

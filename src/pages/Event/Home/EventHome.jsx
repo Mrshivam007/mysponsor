@@ -44,17 +44,17 @@ const EventHome = () => {
                   <div className="card-blog choice-box">
                     <img src={calendar} alt="" />
                     <p className="text-center text-white font-weight-bolder mb-0">
-                      Event
+                      Your Event
                     </p>
                   </div>
                 </Link>
               </div>
               <div className="col-6">
-                <Link to="/cc">
+                <Link to="/sponsored_events">
                   <div className="card-blog choice-box">
                     <img src={camera} alt="" />
                     <p className="text-center text-white font-weight-bolder mb-0">
-                      Upcoming Video
+                      Sponsored Event
                     </p>
                   </div>
                 </Link>
@@ -108,13 +108,13 @@ const EventHome = () => {
                 />
                 <div className="card-body" style={{ padding: "0 0 0 5%" }}>
                   <h5 className="card-text font-weight-bold">
-                    Want your content sponsored?
+                    Update Your Event
                   </h5>
                   <button
                     className="btn text-white py-1 font-weight-bold mb-3"
                   >
-                    <Link to={"create_content"} style={{color: 'white'}} >
-                    List as a content creator
+                    <Link to={"update_UpcomingEvent"} style={{color: 'white'}} >
+                    Update an Event
                     </Link>
                   </button>
                 </div>
@@ -132,13 +132,14 @@ const EventHome = () => {
                 />
                 <div className="card-body" style={{ padding: "0 0 0 5%" }}>
                   <h5 className="card-text font-weight-bold">
-                    Want your videos sponsored?
+                    Delete Your Event
                   </h5>
                   <button
-                    to="/events"
                     className="btn text-white py-1 font-weight-bold mb-3"
                   >
-                    List an upcoming video
+                    <Link to={"delete_event"} style={{color: 'white'}}>
+                    Delete an Event
+                    </Link>
                   </button>
                 </div>
               </div>

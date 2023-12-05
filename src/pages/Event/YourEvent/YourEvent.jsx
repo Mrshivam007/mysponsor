@@ -48,7 +48,7 @@ const YourEvent = ({ line }) => {
               </Link>
             </div>
             <div className="col-lg-6">
-              <Link to="/cc">
+              <Link to="/sponsored_events">
                 <div
                   className="card-service wow fadeInUp choice-card"
                   style={{

@@ -12,9 +12,9 @@ import { EventsCards, EventsPageCards } from "../../../data/data";
 import { fetchEvent } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux"
 import MyEventCard from "../MyEventCrad/MyEventCard";
-import { useLocation } from "react-router-dom";
-import EventMobileCard from "./EventMobileCards";
-const UpcomingEvent = () => {
+import Update_EventCard from "./Update_EventCard";
+import Update_MobileCards from "./Update_MobileCard";
+const Update_UpcomingEvent = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
@@ -25,7 +25,6 @@ const UpcomingEvent = () => {
   useEffect(() => {
     dispatch(fetchEvent())
   }, [])
-
 
   useEffect(() => {
     // Retrieve success message from sessionStorage
@@ -64,7 +63,7 @@ const UpcomingEvent = () => {
               {successMessage}
             </div>
           )}
-          <MyEventCard cardData={eventDetails.eventDetails} />
+          <Update_EventCard cardData={eventDetails.eventDetails} />
           {/* <SponserE cardData={EventsCards} line={"Concerts"} />
           <SponserE cardData={EventsCards} line={"Promotional Events"} />
           <SponserE cardData={EventsCards} line={"Sports Events"} />
@@ -73,7 +72,7 @@ const UpcomingEvent = () => {
           <SponserE cardData={EventsCards} line={"Reality Shows"} /> */}
         </div>
         <div className="events-page-mobile">
-          <EventMobileCard line={"Upcoming Event"} cardData={eventDetails.eventDetails} />
+          <Update_MobileCards line={"Upcoming Event"} cardData={eventDetails.eventDetails} />
           <div
             className="btn d-block text-white font-weight-bolder"
             style={{
@@ -91,4 +90,4 @@ const UpcomingEvent = () => {
   );
 };
 
-export default UpcomingEvent;
+export default Update_UpcomingEvent;

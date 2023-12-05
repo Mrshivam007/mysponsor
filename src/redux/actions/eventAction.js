@@ -1,6 +1,6 @@
 import axios from 'axios';
 import apiurl from '../../constant/config';
-import { CREATE_EVENT_FAILED, CREATE_EVENT_REQUEST, CREATE_EVENT_SUCCESS, GET_EVENT_FAILED, GET_EVENT_REQUEST, GET_EVENT_SUCCESS } from '../constant';
+import { CREATE_EVENT_FAILED, CREATE_EVENT_REQUEST, CREATE_EVENT_SUCCESS, DELETE_EVENT_FAILED, DELETE_EVENT_REQUEST, DELETE_EVENT_SUCCESS, GET_EVENT_FAILED, GET_EVENT_REQUEST, GET_EVENT_SUCCESS, UPDATE_EVENT_FAILED, UPDATE_EVENT_REQUEST, UPDATE_EVENT_SUCCESS } from '../constant';
 
 export const fetchEvent = () => async (dispatch) => {
     try {
@@ -57,3 +57,61 @@ export const fetchEvent = () => async (dispatch) => {
       });
     }
   };
+
+
+  export const updateEvent = (eventId, formData) => async (dispatch) => {
+    try {
+      dispatch({ type: UPDATE_EVENT_REQUEST });
+  
+      // const access = JSON.parse(localStorage.getItem("access"));
+  
+      const { data } = await axios.put(
+        `${apiurl}/api/user/event/${eventId}`,
+        formData,
+        // { headers: { Authorization: `Bearer ${access}` } }
+      );
+      console.log(data.status);
+  
+      dispatch({
+        type: UPDATE_EVENT_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_EVENT_FAILED,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+
+  export const deleteEvent = (eventId) => async (dispatch) => {
+    try {
+      dispatch({ type: DELETE_EVENT_REQUEST });
+  
+      //   const access = JSON.parse(localStorage.getItem("access"));
+  
+      await axios.delete(
+        `${apiurl}/api/user/event/${eventId}`
+        // { headers: { Authorization: `Bearer ${access}` } }
+      );
+  
+      dispatch({
+        type: DELETE_EVENT_SUCCESS,
+        payload: eventId, // You might want to pass the eventId to update the state accordingly after deletion
+      });
+    } catch (error) {
+      dispatch({
+        type: DELETE_EVENT_FAILED,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+  
+  

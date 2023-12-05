@@ -1,4 +1,4 @@
-import { CREATE_EVENT_FAILED, CREATE_EVENT_REQUEST, CREATE_EVENT_SUCCESS, GET_EVENT_FAILED, GET_EVENT_REQUEST, GET_EVENT_SUCCESS } from "../constant"
+import { CREATE_EVENT_FAILED, CREATE_EVENT_REQUEST, CREATE_EVENT_SUCCESS, GET_EVENT_FAILED, GET_EVENT_REQUEST, GET_EVENT_SUCCESS, UPDATE_EVENT_FAILED, UPDATE_EVENT_REQUEST, UPDATE_EVENT_SUCCESS } from "../constant"
 
 
 export const eventReducer = (state = {},action) => {
@@ -15,6 +15,12 @@ export const eventReducer = (state = {},action) => {
         return { loading: false, createEvent: action.payload }
       case CREATE_EVENT_FAILED:
         return { loading: false, createEventError: action.payload }
+      case UPDATE_EVENT_REQUEST:
+        return { ...state, loading: true }
+      case UPDATE_EVENT_SUCCESS:
+        return { loading: false, updateEvent: action.payload }
+      case UPDATE_EVENT_FAILED:
+        return { loading: false, updateEventError: action.payload }
       default:
         return state
     }

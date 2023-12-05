@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Footer, NavBar } from "../../components";
-import "../Create_Content/form.css";
-import backgroundimg from "../../assets/img/circle-bg.png";
+import { Footer, NavBar } from "../../../components";
+import backgroundimg from "../../../assets/img/circle-bg.png";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createEvent } from "../../redux/actions/eventAction";
+import { createEvent } from "../../../redux/actions/eventAction";
+import { eventReducer } from "../../../redux/reducer/eventReducer";
+import { useNavigate } from "react-router-dom";
 
 const ListeventsForm = () => {
   useEffect(() => {
@@ -22,6 +23,9 @@ const ListeventsForm = () => {
   const [event_categories, setEventCategories] = useState("");
   const [event_time, setEventTime] = useState("");
   const [price, setPrice] = useState("");
+  const [prices, setPrices] = useState("");
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
   const [thumbnail1, setThumbnail1] = useState(null);
   const [thumbnail2, setThumbnail2] = useState(null);
   const [thumbnail3, setThumbnail3] = useState(null);
@@ -30,8 +34,9 @@ const ListeventsForm = () => {
   const auth = useSelector((state) => state.auth);
   const [errors, setErrors] = useState({});
   const { userDetails } = auth;
+  const navigate = useNavigate(); // Initialize useNavigate hook
   console.log(userDetails);
-
+  console.log("event error", errors);
 
   // For each thumbnail, you'll need a separate state and handler
   const handleThumbnail1Change = (e) => {
@@ -53,6 +58,41 @@ const ListeventsForm = () => {
     setVideo(file);
   };
 
+  const updatePrices = (selected) => {
+    const updatedPrices = { ...prices };
+
+    selected.forEach((item) => {
+      if (!updatedPrices[item]) {
+        updatedPrices[item] = '';
+      }
+    });
+
+    setPrices(updatedPrices);
+  };
+
+  const handleSponsoringItemChange = (e) => {
+    const { value } = e.target;
+    let updatedSelectedItems = [...selectedItems];
+
+    if (updatedSelectedItems.includes(value)) {
+      updatedSelectedItems = updatedSelectedItems.filter((item) => item !== value);
+    } else {
+      updatedSelectedItems.push(value);
+    }
+
+    setSelectedItems(updatedSelectedItems);
+  };
+
+  const handlePriceChange = (item, price) => {
+    const updatedPrices = { ...prices };
+    updatedPrices[item] = price;
+    setPrices(updatedPrices);
+  };
+
+  const handleToggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
   const validateForm = () => {
     const errorsObj = {};
 
@@ -68,8 +108,15 @@ const ListeventsForm = () => {
     if (endDate.trim() === '') {
       errorsObj.endDate = 'endDate is required';
     }
-    if (sponsoring_item.trim() === '') {
-      errorsObj.sponsoring_item = 'sponsoring_item is required';
+    // if (sponsoring_item.trim() === '') {
+    //   errorsObj.sponsoring_item = 'sponsoring_item is required';
+    // }
+
+    if (!selectedItems) {
+      errorsObj.selectedItems = 'selectedItems is required';
+    }
+    if (!prices) {
+      errorsObj.prices = 'prices is required';
     }
     if (audience.trim() === '') {
       errorsObj.audience = 'audience is required';
@@ -107,11 +154,17 @@ const ListeventsForm = () => {
       // if (Object.keys(errors).length === 0) {
       const formData = new FormData();
       formData.append("title", title);
+
+      // Prepare sponsoring items array
+      const sponsoringItemsData = selectedItems.map((item) => ({
+        sponsoring_items: item,
+        price: prices[item] || null, // handle cases where price might be undefined or null
+      }));
       // formData.append("event_date_time", event_date_time);
       formData.append("event_start_date", startDate);
       formData.append("event_end_date", endDate);
       formData.append("event_time", event_time);
-      formData.append("sponsoring_items", sponsoring_item);
+      formData.append("sponsoring_items", JSON.stringify(sponsoringItemsData));
       formData.append("user_id", userDetails.user_id);
       formData.append("description", description);
       formData.append("location", location);
@@ -126,8 +179,11 @@ const ListeventsForm = () => {
       try {
         // Make POST API call
         await dispatch(createEvent(formData));
+        sessionStorage.setItem('successMessage', 'Class created successfully!');
+        navigate('/events/upcoming_event'); // Replace '/' with the desired route for the home page
       } catch (error) {
         console.log("An error occurred during API calls:", error);
+
       }
     }
   };
@@ -187,7 +243,7 @@ const ListeventsForm = () => {
                           <option className="text-muted">Enter category</option>
                           <option>--select event category--</option>
                         </select> */}
-                        <input
+                        {/* <input
                           type="text"
                           id="sponoring_item"
                           value={sponsoring_item}
@@ -195,7 +251,42 @@ const ListeventsForm = () => {
                           className="form-control"
                           placeholder="Enter Sponsoring Item"
                         />
-                        {errors.sponsoring_item && <p className="error-msg">{errors.sponsoring_item}</p>}
+                        {errors.sponsoring_item && <p className="error-msg">{errors.sponsoring_item}</p>} */}
+
+                        <div>
+                          <button onClick={handleToggleDropdown}>Add Sponsoring Item</button>
+
+                          {showDropdown && (
+                            <div>
+                              <select
+                                multiple
+                                value={selectedItems}
+                                onChange={handleSponsoringItemChange}
+                                className="form-control"
+                                id="sponsoring_item"
+                                placeholder="Enter Sponsoring Item"
+                              >
+                                <option value="banner">Banner</option>
+                                <option value="led_screen">LED Screen</option>
+                                <option value="bill_board">Billboard</option>
+                              </select>
+
+                              {selectedItems.map((item) => (
+                                <div key={item}>
+                                  <input
+                                    type="text"
+                                    value={prices[item]}
+                                    onChange={(e) => handlePriceChange(item, e.target.value)}
+                                    className="form-control"
+                                    placeholder={`Enter ${item.replace('_', ' ')} Price`}
+                                  />
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                        {errors.selectedItems && <p className="error-msg">{errors.selectedItems}</p>}
+                        {errors.prices && <p className="error-msg">{errors.prices}</p>}
 
                       </div>
                       <div className="col-md-6">

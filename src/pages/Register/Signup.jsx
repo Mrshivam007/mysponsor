@@ -61,7 +61,7 @@ const Signup = () => {
                 firstname,
                 lastname,
                 password2,
-                user_type,
+                // user_type,
                 isAdminValue, // Pass isAdminValue as an argument instead of directly assigning within the function call
             )
         );

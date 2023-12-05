@@ -5,11 +5,11 @@ import cardImg from "../../../assets/img/my_events_img.png";
 import bgimage from "../../../assets/img/circle-bg.png";
 import card_bg from "../../../assets/img/card/header-bg.png";
 import { Footer, NavBar } from "../../../components";
-import { fetchEvent } from "../../../redux/actions/eventAction";
+import { deleteEvent, fetchEvent } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux"
 import apiurl from "../../../constant/config";
 import { useNavigate } from "react-router-dom";
-const MyEventCard = ({ cardData }) => {
+const Delete_EventCard = ({ cardData }) => {
     useEffect(() => {
         window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
     }, []);
@@ -20,10 +20,11 @@ const MyEventCard = ({ cardData }) => {
         dispatch(fetchEvent())
     }, [])
 
+
     const navigate = useNavigate();
 
     const handleSponsorClick = (data) => {
-      navigate('/myevent-details', { state: { eventData: data } });
+      navigate('/update_event', { state: { eventData: data } });
     };
     return (
         <>
@@ -47,7 +48,7 @@ const MyEventCard = ({ cardData }) => {
                       totalSponsoringPrice += parseFloat(item.price);
                     }
                   });
-
+                
                 return (
                         <div className="row">
                                 <div className="col-12 mb-4">
@@ -132,7 +133,7 @@ const MyEventCard = ({ cardData }) => {
                                                                     </h6>
                                                                     <h5>₹ 50,000</h5>
                                                                 </div>
-                                                                <div className="box myevents-box" onClick={() => handleSponsorClick(data)} >
+                                                                <div className="box myevents-box" onClick={() => dispatch(deleteEvent(data.event_id))} >
                                                                     <h5 className="pt-1">
                                                                         <img
                                                                             src={info}
@@ -140,7 +141,7 @@ const MyEventCard = ({ cardData }) => {
                                                                             style={{ width: "20%" }}
                                                                         />
                                                                     </h5>
-                                                                    <h5>View Details</h5>
+                                                                    <h5>Delete Event</h5>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -228,10 +229,10 @@ const MyEventCard = ({ cardData }) => {
 
                     </div>
                 </div>
-                <Footer />
+                {/* <Footer /> */}
             </div>
         </>
     );
 };
 
-export default MyEventCard;
+export default Delete_EventCard;

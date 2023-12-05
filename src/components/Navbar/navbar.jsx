@@ -179,9 +179,9 @@ const NavBar = () => {
           >
             <img src={logo} alt="Logo" />
           </a>
-          <a
+          <Link
             className="nav-link"
-            href="#"
+            to={"/login"}
             style={{
               backgroundColor: "white",
               margin: "1vh",
@@ -191,10 +191,10 @@ const NavBar = () => {
             }}
           >
             <span
-              className="mai-calendar"
+              className="mai-people"
               style={{ fontSize: "28px", marginLeft: "-10px" }}
             ></span>
-          </a>
+          </Link>
         </div>
 
         {isOpen && (

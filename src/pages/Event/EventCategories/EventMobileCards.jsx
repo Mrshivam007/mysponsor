@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import "./mobile-cards.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchEvent } from "../../redux/actions/eventAction";
-import apiurl from "../../constant/config";
+import { fetchEvent } from "../../../redux/actions/eventAction";
+import apiurl from "../../../constant/config";
 
-const MobileCards = ({ line, cardData }) => {
+const EventMobileCard = ({ line, cardData }) => {
   const dispatch = useDispatch();
   const eventDetails = useSelector((state) => state.event);
   useEffect(() => {
@@ -24,7 +23,7 @@ const MobileCards = ({ line, cardData }) => {
         <div className="row row-cols-2 g-0">
           {cardData &&
             cardData.map((data) => (
-              <div className="col py-3">
+              <div className="col py-3" style={{paddingLeft: "8px", paddingRight: '8px'}}>
                 <div className="card-blog">
                   <div className="header">
                     <div className="post-thumb">
@@ -49,8 +48,9 @@ const MobileCards = ({ line, cardData }) => {
                         margin: "0% 0% 5% 5%",
                         backgroundColor: "#004EA9",
                       }}
+                      onClick={() => handleSponsorClick(data)}
                     >
-                      Sponsor
+                      View
                     </button>
                   </div>
                 </div>
@@ -62,4 +62,4 @@ const MobileCards = ({ line, cardData }) => {
   );
 };
 
-export default MobileCards;
+export default EventMobileCard;
