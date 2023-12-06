@@ -38,8 +38,8 @@ export const signup =
         firstname,
         lastname,
         password2,
-        // user_type,
         is_admin,
+        user_type,
         user_id,
     ) =>
         async (dispatch) => {
@@ -47,7 +47,7 @@ export const signup =
                 dispatch({ type: AUTH_SIGNUP_REQUEST });
 
                 const { data } = await axios.post(
-                    `${apiurl}/api/user/register/`,
+                    `${apiurl}/api/user/register`,
                     {
                         email,
                         first_name: firstname,
@@ -57,6 +57,7 @@ export const signup =
                         // user_type: user_type,
                         is_active: true,
                         is_admin: is_admin,
+                        user_profile: user_type,
                         user_id: user_id,
                     }
                 );

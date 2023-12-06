@@ -14,6 +14,7 @@ import {
 } from "../pages";
 import { useSelector } from "react-redux";
 import EventRoutes from "./event";
+import ContentRoutes from "./content";
 
 const Main = () => {
   const auth = useSelector(state => state.auth);
@@ -25,9 +26,10 @@ const Main = () => {
         <>
           <Router>
               {userDetails.user_type === "Event" ? (
-                <EventRoutes />
+                // <EventRoutes />
+                <ContentRoutes />
               ) : userDetails.user_type === "Content" ? (
-                <EventRoutes />
+                <ContentRoutes />
               ) : userDetails.user_type === "Sponsor" ? (
                 <EventRoutes />
               ) : userDetails.user_type === "Admin" ? (
