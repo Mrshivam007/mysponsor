@@ -11,11 +11,6 @@ import EventDetails from "../pages/Event/EventDetails/EventDetails";
 import UpdateEvent from "../pages/Event/Update_Event/UpdateEventForm";
 import Update_UpcomingEvent from "../pages/Event/Update_Event/Update_UpcomingEvent";
 import DeleteEvent from "../pages/Event/DeleteEvent/DeleteEvent";
-// import CCHome from "../pages/ContentCreator/Home/CCHome";
-// import CCForm from "../pages/ContentCreator/ListContent/CCForm";
-// import YourContent from "../pages/ContentCreator/YourContent/YourContent";
-// import ListedContents from "../pages/ContentCreator/ListedContents/ListedContents";
-// import ContentDetails from "../pages/ContentCreator/ContentDetails/ContentDetails";
 const EventRoutes = () => {
   return (
     <>
@@ -37,11 +32,6 @@ const EventRoutes = () => {
         <Route path="/delete_event" element={<DeleteEvent />} />
         <Route path="/login" element={<Navigate to={"/"} />} />
         <Route path="/signup" element={<Navigate to={"/"} />} />
-        {/* <Route path="/" element={<CCHome />} />
-        <Route path="/create_content" element={<CCForm />} />
-        <Route path="/your_event" element={<YourContent />} />
-        <Route path="/listed_content" element={<ListedContents />} />
-        <Route path="/listed_content/content_details" element={<ContentDetails />} /> */}
       </Routes>
     </>
   );
