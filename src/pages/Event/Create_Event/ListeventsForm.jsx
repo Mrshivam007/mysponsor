@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../../ContentCreator/ListContent/form.css";
 import { Footer, NavBar } from "../../../components";
 import backgroundimg from "../../../assets/img/circle-bg.png";
 import { useEffect } from "react";
@@ -63,7 +64,7 @@ const ListeventsForm = () => {
 
     selected.forEach((item) => {
       if (!updatedPrices[item]) {
-        updatedPrices[item] = '';
+        updatedPrices[item] = "";
       }
     });
 
@@ -75,7 +76,9 @@ const ListeventsForm = () => {
     let updatedSelectedItems = [...selectedItems];
 
     if (updatedSelectedItems.includes(value)) {
-      updatedSelectedItems = updatedSelectedItems.filter((item) => item !== value);
+      updatedSelectedItems = updatedSelectedItems.filter(
+        (item) => item !== value
+      );
     } else {
       updatedSelectedItems.push(value);
     }
@@ -96,48 +99,48 @@ const ListeventsForm = () => {
   const validateForm = () => {
     const errorsObj = {};
 
-    if (title.trim() === '') {
-      errorsObj.title = 'Title is required';
+    if (title.trim() === "") {
+      errorsObj.title = "Title is required";
     }
-    if (location.trim() === '') {
-      errorsObj.location = 'Location is required';
+    if (location.trim() === "") {
+      errorsObj.location = "Location is required";
     }
-    if (startDate.trim() === '') {
-      errorsObj.startDate = 'startDate is required';
+    if (startDate.trim() === "") {
+      errorsObj.startDate = "startDate is required";
     }
-    if (endDate.trim() === '') {
-      errorsObj.endDate = 'endDate is required';
+    if (endDate.trim() === "") {
+      errorsObj.endDate = "endDate is required";
     }
     // if (sponsoring_item.trim() === '') {
     //   errorsObj.sponsoring_item = 'sponsoring_item is required';
     // }
 
     if (!selectedItems) {
-      errorsObj.selectedItems = 'selectedItems is required';
+      errorsObj.selectedItems = "selectedItems is required";
     }
     if (!prices) {
-      errorsObj.prices = 'prices is required';
+      errorsObj.prices = "prices is required";
     }
-    if (audience.trim() === '') {
-      errorsObj.audience = 'audience is required';
+    if (audience.trim() === "") {
+      errorsObj.audience = "audience is required";
     }
-    if (event_categories.trim() === '') {
-      errorsObj.event_categories = 'event_categories is required';
+    if (event_categories.trim() === "") {
+      errorsObj.event_categories = "event_categories is required";
     }
-    if (price.trim() === '') {
-      errorsObj.price = 'price is required';
+    if (price.trim() === "") {
+      errorsObj.price = "price is required";
     }
-    if (description.trim() === '') {
-      errorsObj.description = 'description is required';
+    if (description.trim() === "") {
+      errorsObj.description = "description is required";
     }
     if (!thumbnail1) {
-      errorsObj.thumbnail1 = 'thumbnail1 is required';
+      errorsObj.thumbnail1 = "thumbnail1 is required";
     }
     if (!thumbnail2) {
-      errorsObj.thumbnail2 = 'thumbnail2 is required';
+      errorsObj.thumbnail2 = "thumbnail2 is required";
     }
     if (!thumbnail3) {
-      errorsObj.thumbnail3 = 'thumbnail3 is required';
+      errorsObj.thumbnail3 = "thumbnail3 is required";
     }
     // if (event_time.trim() === '') {
     //   errorsObj.event_time = 'event_time is required';
@@ -179,12 +182,13 @@ const ListeventsForm = () => {
       try {
         // Make POST API call
         await dispatch(createEvent(formData));
-        sessionStorage.setItem('successMessage', 'Class created successfully!');
-        navigate('/events/upcoming_event'); // Replace '/' with the desired route for the home page
+        sessionStorage.setItem("successMessage", "Class created successfully!");
+        navigate("/events/upcoming_event"); // Replace '/' with the desired route for the home page
       } catch (error) {
         console.log("An error occurred during API calls:", error);
-
       }
+    } else {
+      window.scroll(0, 0);
     }
   };
   return (
@@ -218,7 +222,9 @@ const ListeventsForm = () => {
                           className="form-control"
                           placeholder="Enter Title"
                         />
-                        {errors.title && <p className="error-msg">{errors.title}</p>}
+                        {title == "" ? (
+                          <p className="error-msg">{errors.title}</p>
+                        ) : null}
                       </div>
                     </div>
 
@@ -232,8 +238,9 @@ const ListeventsForm = () => {
                           className="form-control"
                           placeholder="Enter Location"
                         />
-                        {errors.location && <p className="error-msg">{errors.location}</p>}
-
+                        {location == "" ? (
+                          <p className="error-msg">{errors.location}</p>
+                        ) : null}
                       </div>
                     </div>
 
@@ -254,7 +261,9 @@ const ListeventsForm = () => {
                         {errors.sponsoring_item && <p className="error-msg">{errors.sponsoring_item}</p>} */}
 
                         <div>
-                          <button onClick={handleToggleDropdown}>Add Sponsoring Item</button>
+                          <button onClick={handleToggleDropdown}>
+                            Add Sponsoring Item
+                          </button>
 
                           {showDropdown && (
                             <div>
@@ -276,18 +285,26 @@ const ListeventsForm = () => {
                                   <input
                                     type="text"
                                     value={prices[item]}
-                                    onChange={(e) => handlePriceChange(item, e.target.value)}
+                                    onChange={(e) =>
+                                      handlePriceChange(item, e.target.value)
+                                    }
                                     className="form-control"
-                                    placeholder={`Enter ${item.replace('_', ' ')} Price`}
+                                    placeholder={`Enter ${item.replace(
+                                      "_",
+                                      " "
+                                    )} Price`}
                                   />
                                 </div>
                               ))}
                             </div>
                           )}
                         </div>
-                        {errors.selectedItems && <p className="error-msg">{errors.selectedItems}</p>}
-                        {errors.prices && <p className="error-msg">{errors.prices}</p>}
-
+                        {errors.selectedItems && (
+                          <p className="error-msg">{errors.selectedItems}</p>
+                        )}
+                        {prices == "" ? (
+                          <p className="error-msg">{errors.prices}</p>
+                        ) : null}
                       </div>
                       <div className="col-md-6">
                         <input
@@ -298,8 +315,9 @@ const ListeventsForm = () => {
                           className="form-control"
                           placeholder="Estimated audience"
                         />
-                        {errors.audience && <p className="error-msg">{errors.audience}</p>}
-
+                        {audience == "" ? (
+                          <p className="error-msg">{errors.audience}</p>
+                        ) : null}
                       </div>
                     </div>
 
@@ -314,8 +332,9 @@ const ListeventsForm = () => {
                           className="form-control"
                           placeholder="DD/MM/YYYY"
                         />
-                        {errors.startDate && <p className="error-msg">{errors.startDate}</p>}
-
+                        {startDate ? (
+                          <p className="error-msg">{errors.startDate}</p>
+                        ) : null}
                       </div>
                       <div className="col-6">
                         <label className="font-weight-bold">End Date</label>
@@ -327,7 +346,9 @@ const ListeventsForm = () => {
                           className="form-control"
                           placeholder="DD/MM/YYYY"
                         />
-                        {errors.endDate && <p className="error-msg">{errors.endDate}</p>}
+                        {endDate == "" ? (
+                          <p className="error-msg">{errors.endDate}</p>
+                        ) : null}
                       </div>
                     </div>
                   </form>
@@ -360,7 +381,6 @@ const ListeventsForm = () => {
                           type="text"
                           id="subject"
                           value={`${userDetails.firstname} ${userDetails.lastname}`}
-                          onChange={""}
                           className="form-control"
                           placeholder="Organiser name"
                         />
@@ -373,7 +393,6 @@ const ListeventsForm = () => {
                           type="email"
                           id="email"
                           value={userDetails.email}
-                          onChange={""}
                           className="form-control"
                           placeholder="E-mail"
                         />
@@ -390,11 +409,11 @@ const ListeventsForm = () => {
                           className="form-control"
                           placeholder="Event Categories"
                         />
-                        {errors.event_categories && <p className="error-msg">{errors.event_categories}</p>}
-
+                        {event_categories == "" ? (
+                          <p className="error-msg">{errors.event_categories}</p>
+                        ) : null}
                       </div>
                     </div>
-
 
                     <div className="row form-group">
                       <div className="col-md-12">
@@ -406,8 +425,9 @@ const ListeventsForm = () => {
                           className="form-control"
                           placeholder="Price"
                         />
-                        {errors.price && <p className="error-msg">{errors.price}</p>}
-
+                        {price == "" ? (
+                          <p className="error-msg">{errors.price}</p>
+                        ) : null}
                       </div>
                     </div>
                   </form>
@@ -430,7 +450,9 @@ const ListeventsForm = () => {
                   col="30"
                   rows="5"
                 ></textarea>
-                {errors.description && <p className="error-msg">{errors.description}</p>}
+                {description == "" ? (
+                  <p className="error-msg">{errors.description}</p>
+                ) : null}
               </div>
             </div>
           </div>
@@ -441,7 +463,10 @@ const ListeventsForm = () => {
               </h1>
               <h2 className="sponsor-mobile-text">Add Photos & Videos</h2>
               <p>(atleast 3 photos & 1 video)</p>
-              <div className="box1 mt-2 d-flex justify-content-center" style={{ gap: '2%' }}>
+              <div
+                className="box1 mt-2 d-flex justify-content-center"
+                style={{ gap: "2%" }}
+              >
                 <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
                   <div className="box text-center">
                     <h5 className="font-weight-bold">Add media</h5>
@@ -454,11 +479,16 @@ const ListeventsForm = () => {
                     {thumbnail1 && (
                       <div>
                         <h2>Preview:</h2>
-                        <img src={URL.createObjectURL(thumbnail1)} alt="Preview" width="200" />
+                        <img
+                          src={URL.createObjectURL(thumbnail1)}
+                          alt="Preview"
+                          width="200"
+                        />
                       </div>
                     )}
-                    {errors.thumbnail1 && <p className="error-msg">{errors.thumbnail1}</p>}
-
+                    {!thumbnail1 ? (
+                      <p className="error-msg">{errors.thumbnail1}</p>
+                    ) : null}
                   </div>
                 </div>
                 <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
@@ -473,11 +503,16 @@ const ListeventsForm = () => {
                     {thumbnail2 && (
                       <div>
                         <h2>Preview:</h2>
-                        <img src={URL.createObjectURL(thumbnail2)} alt="Preview" width="200" />
+                        <img
+                          src={URL.createObjectURL(thumbnail2)}
+                          alt="Preview"
+                          width="200"
+                        />
                       </div>
                     )}
-                    {errors.thumbnail2 && <p className="error-msg">{errors.thumbnail2}</p>}
-
+                    {!thumbnail2 ? (
+                      <p className="error-msg">{errors.thumbnail2}</p>
+                    ) : null}
                   </div>
                 </div>
                 <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
@@ -492,10 +527,16 @@ const ListeventsForm = () => {
                     {thumbnail3 && (
                       <div>
                         <h2>Preview:</h2>
-                        <img src={URL.createObjectURL(thumbnail3)} alt="Preview" width="200" />
+                        <img
+                          src={URL.createObjectURL(thumbnail3)}
+                          alt="Preview"
+                          width="200"
+                        />
                       </div>
                     )}
-                    {errors.thumbnail3 && <p className="error-msg">{errors.thumbnail3}</p>}
+                    {!thumbnail3 ? (
+                      <p className="error-msg">{errors.thumbnail1}</p>
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -509,11 +550,20 @@ const ListeventsForm = () => {
                 {video && (
                   <div>
                     <h2>Preview:</h2>
-                    <img src={URL.createObjectURL(video)} alt="Preview" width="200" />
+                    <img
+                      src={URL.createObjectURL(video)}
+                      alt="Preview"
+                      width="200"
+                    />
                   </div>
                 )}
               </div>
-              <input type="submit" className="submit" value="List Event" onClick={handleSubmitClick} />
+              <input
+                type="submit"
+                className="submit"
+                value="List Event"
+                onClick={handleSubmitClick}
+              />
               <button className="btn btn-outline-primary mt-3">Discard</button>
             </div>
           </div>

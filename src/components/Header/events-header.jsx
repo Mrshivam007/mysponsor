@@ -11,7 +11,11 @@ function Header({ title, logo }) {
       >
         <div
           className="page-banner home-banner"
-          style={{ height: "auto", backgroundImage: `url(${card_bg})` }}
+          style={{
+            height: "auto",
+            backgroundImage: `url(${card_bg})`,
+            boxShadow: "0px 10px 40px 10px rgba(0, 0, 0, 0.25)",
+          }}
         >
           <div className="row align-items-center flex-wrap-reverse h-100">
             <div className="img-container col-md-12 wow zoomIn ">

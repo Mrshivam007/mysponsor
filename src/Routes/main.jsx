@@ -17,7 +17,7 @@ import EventRoutes from "./event";
 import ContentRoutes from "./content";
 
 const Main = () => {
-  const auth = useSelector(state => state.auth);
+  const auth = useSelector((state) => state.auth);
   const { userDetails } = auth;
   console.log(userDetails);
   return (
@@ -25,16 +25,15 @@ const Main = () => {
       {userDetails ? (
         <>
           <Router>
-              {userDetails.user_type === "Event" ? (
-                // <EventRoutes />
-                <ContentRoutes />
-              ) : userDetails.user_type === "Content" ? (
-                <ContentRoutes />
-              ) : userDetails.user_type === "Sponsor" ? (
-                <EventRoutes />
-              ) : userDetails.user_type === "Admin" ? (
-                <EventRoutes />
-              ) : null}
+            {userDetails.user_type === "Event" ? (
+              <EventRoutes />
+            ) : userDetails.user_type === "Content" ? (
+              <ContentRoutes />
+            ) : userDetails.user_type === "Sponsor" ? (
+              <EventRoutes />
+            ) : userDetails.user_type === "Admin" ? (
+              <EventRoutes />
+            ) : null}
           </Router>
         </>
       ) : (

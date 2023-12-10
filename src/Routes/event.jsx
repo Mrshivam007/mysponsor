@@ -1,14 +1,6 @@
 import { Route, Router, Routes, Navigate } from "react-router-dom";
-import {
-  Home,
-  ListEvents,
-  MyEventDetails,
-  MyEvents,
-  SponsorContentC,
-  SponsorEvents,
-} from "../pages";
+import { SponsorContentC } from "../pages";
 import ListeventsForm from "../pages/Event/Create_Event/ListeventsForm";
-import CCForm from "../pages/Create_Content/CCForm";
 import EventHome from "../pages/Event/Home/EventHome";
 import EventCategories from "../pages/Event/EventCategories/EventCategories";
 import LiveEvent from "../pages/Event/EventCategories/LiveEvent";
@@ -19,9 +11,12 @@ import EventDetails from "../pages/Event/EventDetails/EventDetails";
 import UpdateEvent from "../pages/Event/Update_Event/UpdateEventForm";
 import Update_UpcomingEvent from "../pages/Event/Update_Event/Update_UpcomingEvent";
 import DeleteEvent from "../pages/Event/DeleteEvent/DeleteEvent";
-
+// import CCHome from "../pages/ContentCreator/Home/CCHome";
+// import CCForm from "../pages/ContentCreator/ListContent/CCForm";
+// import YourContent from "../pages/ContentCreator/YourContent/YourContent";
+// import ListedContents from "../pages/ContentCreator/ListedContents/ListedContents";
+// import ContentDetails from "../pages/ContentCreator/ContentDetails/ContentDetails";
 const EventRoutes = () => {
-  console.log("Event Page");
   return (
     <>
       <Routes>
@@ -34,12 +29,19 @@ const EventRoutes = () => {
         <Route path="/myevent-details" element={<EventDetails />} />
         <Route path="/cc" element={<SponsorContentC />} />
         <Route path="/create_event" element={<ListeventsForm />} />
-        <Route path="/update_UpcomingEvent" element={<Update_UpcomingEvent />} />
+        <Route
+          path="/update_UpcomingEvent"
+          element={<Update_UpcomingEvent />}
+        />
         <Route path="/update_event" element={<UpdateEvent />} />
         <Route path="/delete_event" element={<DeleteEvent />} />
-        <Route path="/create_content" element={<CCForm />} />
         <Route path="/login" element={<Navigate to={"/"} />} />
         <Route path="/signup" element={<Navigate to={"/"} />} />
+        {/* <Route path="/" element={<CCHome />} />
+        <Route path="/create_content" element={<CCForm />} />
+        <Route path="/your_event" element={<YourContent />} />
+        <Route path="/listed_content" element={<ListedContents />} />
+        <Route path="/listed_content/content_details" element={<ContentDetails />} /> */}
       </Routes>
     </>
   );
