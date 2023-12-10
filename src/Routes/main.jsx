@@ -33,6 +33,7 @@ const Main = () => {
               <EventRoutes />
             ) : userDetails.user_type === "Admin" ? (
               <EventRoutes />
+              // <ContentRoutes />
             ) : null}
           </Router>
         </>

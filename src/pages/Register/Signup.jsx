@@ -61,8 +61,8 @@ const Signup = () => {
                 firstname,
                 lastname,
                 password2,
-                isAdminValue, // Pass isAdminValue as an argument instead of directly assigning within the function call
                 user_type,
+                // isAdminValue, // Pass isAdminValue as an argument instead of directly assigning within the function call
             )
         );
         }
@@ -159,7 +159,7 @@ const Signup = () => {
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" onChange={handleUserType} value="content" id="flexRadioDefault2" />
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" onChange={handleUserType} value="Content" id="flexRadioDefault2" />
                                 <label class="form-check-label" for="flexRadioDefault2">
                                     Content
                                 </label>

@@ -38,9 +38,9 @@ export const signup =
         firstname,
         lastname,
         password2,
-        is_admin,
         user_type,
-        user_id,
+        // is_admin,
+        // user_id,
     ) =>
         async (dispatch) => {
             try {
@@ -54,11 +54,11 @@ export const signup =
                         last_name: lastname,
                         password: password,
                         password2: password2,
-                        // user_type: user_type,
-                        is_active: true,
-                        is_admin: is_admin,
-                        user_profile: user_type,
-                        user_id: user_id,
+                        user_type: user_type,
+                        // is_active: true,
+                        // is_admin: is_admin,
+                        // user_profile: user_type,
+                        // user_id: user_id,
                     }
                 );
 

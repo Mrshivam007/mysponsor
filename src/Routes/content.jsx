@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Router, Routes, Navigate } from "react-router-dom";
 import CCHome from "../pages/ContentCreator/Home/CCHome";
 import CCForm from "../pages/ContentCreator/ListContent/CCForm";
 import YourContent from "../pages/ContentCreator/YourContent/YourContent";
@@ -17,6 +17,8 @@ const ContentRoutes = () => {
           path="/listed_content/content_details"
           element={<ContentDetails />}
         />
+        <Route path="/login" element={<Navigate to={"/"} />} />
+        <Route path="/signup" element={<Navigate to={"/"} />} />
       </Routes>
     </>
   );
