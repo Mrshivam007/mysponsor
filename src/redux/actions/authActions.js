@@ -47,7 +47,7 @@ export const signup =
                 dispatch({ type: AUTH_SIGNUP_REQUEST });
 
                 const { data } = await axios.post(
-                    `${apiurl}/api/user/register`,
+                    `${apiurl}/api/user/register/`,
                     {
                         email,
                         first_name: firstname,
