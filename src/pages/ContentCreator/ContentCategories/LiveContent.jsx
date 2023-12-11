@@ -6,7 +6,7 @@ import ContentCard from "../ContentCard/ContentCard";
 import { fetchContent } from "../../../redux/actions/contentAction";
 import { useDispatch, useSelector } from "react-redux";
 import MyContentCard from "../MyContentCard/MyContentCard";
-const ListedContents = () => {
+const LiveContent = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
@@ -58,4 +58,4 @@ const ListedContents = () => {
   );
 };
 
-export default ListedContents;
+export default LiveContent;

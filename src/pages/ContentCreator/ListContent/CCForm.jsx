@@ -1,26 +1,33 @@
-import React, { useEffect, useState } from "react";
-import "./form.css";
+import React, { useState } from "react";
+import "../../ContentCreator/ListContent/form.css";
 import { Footer, NavBar } from "../../../components";
 import backgroundimg from "../../../assets/img/circle-bg.png";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { eventReducer } from "../../../redux/reducer/eventReducer";
 import { useNavigate } from "react-router-dom";
-import { createEvent } from "../../../redux/actions/eventAction";
+import { createContent } from "../../../redux/actions/contentAction";
 
-const CCForm = () => {
+const ListContentForm = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
 
-  const [name, setName] = useState("");
-  const [platform, setPlatform] = useState("");
-  const [contact, setContact] = useState("");
-  const [email, setEmail] = useState("");
-  const [audienceExpected, setAudienceExpected] = useState("");
-  const [channelCategory, setChannelCategory] = useState("");
-  const [channelName, setChannelName] = useState("");
-  const [channelLink, setChannelLink] = useState("");
-  const [channelSubs, setChannelSubs] = useState("");
+  const [title, setTitle] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [event_date_time, setEventDateTime] = useState("");
+  const [sponsoring_item, setSponsoringItem] = useState("");
   const [description, setDescription] = useState("");
+  const [location, setLocation] = useState("");
+  const [audience, setAudienceExpected] = useState("");
+  const [event_categories, setEventCategories] = useState("");
+  const [content_platform, setContentplatform] = useState("");
+  const [event_time, setEventTime] = useState("");
+  const [price, setPrice] = useState("");
+  const [prices, setPrices] = useState("");
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
   const [thumbnail1, setThumbnail1] = useState(null);
   const [thumbnail2, setThumbnail2] = useState(null);
   const [thumbnail3, setThumbnail3] = useState(null);
@@ -29,8 +36,11 @@ const CCForm = () => {
   const auth = useSelector((state) => state.auth);
   const [errors, setErrors] = useState({});
   const { userDetails } = auth;
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Initialize useNavigate hook
+  console.log(userDetails);
+  console.log("event error", errors);
 
+  // For each thumbnail, you'll need a separate state and handler
   const handleThumbnail1Change = (e) => {
     const file = e.target.files[0];
     setThumbnail1(file);
@@ -49,41 +59,83 @@ const CCForm = () => {
     const file = e.target.files[0];
     setVideo(file);
   };
-  const handleDiscard = () => {
-    navigate("/");
+
+  const updatePrices = (selected) => {
+    const updatedPrices = { ...prices };
+
+    selected.forEach((item) => {
+      if (!updatedPrices[item]) {
+        updatedPrices[item] = "";
+      }
+    });
+
+    setPrices(updatedPrices);
   };
+
+  const handleSponsoringItemChange = (e) => {
+    const { value } = e.target;
+    let updatedSelectedItems = [...selectedItems];
+
+    if (updatedSelectedItems.includes(value)) {
+      updatedSelectedItems = updatedSelectedItems.filter(
+        (item) => item !== value
+      );
+    } else {
+      updatedSelectedItems.push(value);
+    }
+
+    setSelectedItems(updatedSelectedItems);
+  };
+
+  const handlePriceChange = (item, price) => {
+    const updatedPrices = { ...prices };
+    updatedPrices[item] = price;
+    setPrices(updatedPrices);
+  };
+
+  const handleToggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
   const validateForm = () => {
     const errorsObj = {};
 
-    if (name.trim() === "") {
-      errorsObj.name = "Name is required";
+    if (title.trim() === "") {
+      errorsObj.title = "Title is required";
     }
-    if (contact.trim() === "") {
-      errorsObj.contact = "Contact Detail is required";
+    if (location.trim() === "") {
+      errorsObj.location = "Location is required";
     }
-    if (email.trim() === "") {
-      errorsObj.email = "E-mail is required";
+    if (startDate.trim() === "") {
+      errorsObj.startDate = "startDate is required";
     }
-    if (platform.trim() === "") {
-      errorsObj.platform = "Platform is required";
+    if (endDate.trim() === "") {
+      errorsObj.endDate = "endDate is required";
     }
-    if (audienceExpected.trim() === "") {
-      errorsObj.audienceExpected = "Audience Expected is required";
+    // if (sponsoring_item.trim() === '') {
+    //   errorsObj.sponsoring_item = 'sponsoring_item is required';
+    // }
+
+    // if (!selectedItems) {
+    //   errorsObj.selectedItems = "selectedItems is required";
+    // }
+    // if (!prices) {
+    //   errorsObj.prices = "prices is required";
+    // }
+    if (audience.trim() === "") {
+      errorsObj.audience = "audience is required";
     }
-    if (channelCategory.trim() === "") {
-      errorsObj.channelCategory = "Channel Category is required";
+    if (event_categories.trim() === "") {
+      errorsObj.event_categories = "event_categories is required";
     }
-    if (channelName.trim() === "") {
-      errorsObj.channelName = "Channel Name is required";
+    if (content_platform.trim() === "") {
+      errorsObj.content_platform = "content_platform is required";
     }
-    if (channelLink.trim() === "") {
-      errorsObj.channelLink = "Channel Link is required";
-    }
-    if (channelSubs.trim() === "") {
-      errorsObj.channelSubs = "Subscribers count is required";
-    }
+    // if (price.trim() === "") {
+    //   errorsObj.price = "price is required";
+    // }
     if (description.trim() === "") {
-      errorsObj.description = "Description is required";
+      errorsObj.description = "description is required";
     }
     if (!thumbnail1) {
       errorsObj.thumbnail1 = "thumbnail1 is required";
@@ -94,7 +146,10 @@ const CCForm = () => {
     if (!thumbnail3) {
       errorsObj.thumbnail3 = "thumbnail3 is required";
     }
-
+    // if (event_time.trim() === '') {
+    //   errorsObj.event_time = 'event_time is required';
+    // }
+    // ... validate other fields similarly
     setErrors(errorsObj);
     return Object.keys(errorsObj).length === 0;
   };
@@ -104,18 +159,23 @@ const CCForm = () => {
     const isFormValid = validateForm();
     if (isFormValid) {
       // if (Object.keys(errors).length === 0) {
+        const sponsoringItemsData = selectedItems.map((item) => ({
+          sponsoring_items: item,
+          price: prices[item] || null, // handle cases where price might be undefined or null
+        }));
       const formData = new FormData();
-      formData.append("name", name);
-      formData.append("user_id", userDetails.user_id);
+      formData.append("title", title);
       formData.append("description", description);
-      formData.append("platform", platform);
-      formData.append("contact", contact);
-      formData.append("email", email);
-      formData.append("audience_expected", audienceExpected);
-      formData.append("channel_name", channelName);
-      formData.append("channel_link", channelLink);
-      formData.append("channel_subs", channelSubs);
-      formData.append("channel_category", channelCategory);
+      formData.append("location", location);
+      formData.append("audience_expected", audience);
+      formData.append("content_start_date", startDate);
+      formData.append("content_end_date", endDate);
+      formData.append("content_time", event_time);
+      formData.append("sponsoring_items", JSON.stringify(sponsoringItemsData));
+      formData.append("user_id", userDetails.user_id);
+      formData.append("price", price);
+      formData.append("content_category", event_categories);
+      formData.append("content_platform", content_platform);
       // Append thumbnails with different keys
       formData.append("thumbnail1", thumbnail1);
       formData.append("thumbnail2", thumbnail2);
@@ -123,9 +183,9 @@ const CCForm = () => {
       formData.append("attach_video", video);
       try {
         // Make POST API call
-        await dispatch(createEvent(formData));
+        await dispatch(createContent(formData));
         sessionStorage.setItem("successMessage", "Class created successfully!");
-        navigate("/content/your_event"); // Replace '/' with the desired route for the home page
+        navigate("/your_content/upcoming_content"); // Replace '/' with the desired route for the home page
       } catch (error) {
         console.log("An error occurred during API calls:", error);
       }
@@ -149,24 +209,23 @@ const CCForm = () => {
             <div className="col-12 col-md-6 px-0">
               <div className="container">
                 <h1 className="font-weight-bold d-none d-lg-block">
-                  Enter Content creator info
+                  Enter event info
                 </h1>
-                <h2 className="sponsor-mobile-text">
-                  Enter Content creator info
-                </h2>
+                <h2 className="sponsor-mobile-text">Enter event info</h2>
                 <div className="box1">
                   <form action="#" className="contact-form">
                     <div className="row form-group">
                       <div className="col-md-12">
                         <input
                           type="text"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
+                          id="title"
+                          value={title}
+                          onChange={(e) => setTitle(e.target.value)}
                           className="form-control"
-                          placeholder="Content creator name"
+                          placeholder="Enter Title"
                         />
-                        {name == "" ? (
-                          <p className="error-msg">{errors.name}</p>
+                        {title == "" ? (
+                          <p className="error-msg">{errors.title}</p>
                         ) : null}
                       </div>
                     </div>
@@ -175,74 +234,108 @@ const CCForm = () => {
                       <div className="col-md-12">
                         <input
                           type="text"
-                          id="subject"
-                          value={platform}
-                          onChange={(e) => setPlatform(e.target.value)}
+                          id="location"
+                          value={location}
+                          onChange={(e) => setLocation(e.target.value)}
                           className="form-control"
-                          placeholder="Platform (Youtube,Twitch,etc.)"
+                          placeholder="Enter Location"
                         />
-                        {platform == "" ? (
-                          <p className="error-msg">{errors.platform}</p>
+                        {location == "" ? (
+                          <p className="error-msg">{errors.location}</p>
                         ) : null}
                       </div>
                     </div>
 
-                    <div className="row form-group">
-                      <div className="col-12 col-md-6 mb-3 mb-md-0">
+                    <div className="row form-group gap-3">
+                      {/* <div className="col-md-6 mb-3 mb-md-0">
+                        <div>
+                          <button onClick={handleToggleDropdown}>
+                            Add Sponsoring Item
+                          </button>
+
+                          {showDropdown && (
+                            <div>
+                              <select
+                                multiple
+                                value={selectedItems}
+                                onChange={handleSponsoringItemChange}
+                                className="form-control"
+                                id="sponsoring_item"
+                                placeholder="Enter Sponsoring Item"
+                              >
+                                <option value="banner">Banner</option>
+                                <option value="led_screen">LED Screen</option>
+                                <option value="bill_board">Billboard</option>
+                              </select>
+
+                              {selectedItems.map((item) => (
+                                <div key={item}>
+                                  <input
+                                    type="text"
+                                    value={prices[item]}
+                                    onChange={(e) =>
+                                      handlePriceChange(item, e.target.value)
+                                    }
+                                    className="form-control"
+                                    placeholder={`Enter ${item.replace(
+                                      "_",
+                                      " "
+                                    )} Price`}
+                                  />
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                        {errors.selectedItems && (
+                          <p className="error-msg">{errors.selectedItems}</p>
+                        )}
+                        {prices == "" ? (
+                          <p className="error-msg">{errors.prices}</p>
+                        ) : null}
+                      </div> */}
+                      <div className="col-md-6">
                         <input
                           type="text"
                           id="subject"
-                          value={contact}
-                          onChange={(e) => setContact(e.target.value)}
-                          className="form-control"
-                          placeholder="Contact"
-                        />
-                        {contact == "" ? (
-                          <p className="error-msg">{errors.contact}</p>
-                        ) : null}
-                      </div>
-
-                      <div className="col-12 col-md-6">
-                        <input
-                          type="e-mail"
-                          id="subject"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          className="form-control"
-                          placeholder="E-mail"
-                        />
-                        {email == "" ? (
-                          <p className="error-msg">{errors.email}</p>
-                        ) : null}
-                      </div>
-                    </div>
-
-                    <div className="row form-group">
-                      <div className="col-12 col-md-6 mb-3 mb-md-0">
-                        <select className="form-control">
-                          <option value="Channel category" hidden>
-                            Channel category
-                          </option>
-                          <option value="--select event category--" disabled>
-                            --select event category--
-                          </option>
-                          <option value="Comedy">Comedy</option>
-                          <option value="Comedy">Comedy</option>
-                          <option value="Comedy">Comedy</option>
-                          <option value="Comedy">Comedy</option>
-                        </select>
-                      </div>
-                      <div className="col-12 col-md-6">
-                        <input
-                          type="number"
-                          id="subject"
-                          value={audienceExpected}
+                          value={audience}
                           onChange={(e) => setAudienceExpected(e.target.value)}
                           className="form-control"
                           placeholder="Estimated audience"
                         />
-                        {audienceExpected == "" ? (
-                          <p className="error-msg">{errors.audienceExpected}</p>
+                        {audience == "" ? (
+                          <p className="error-msg">{errors.audience}</p>
+                        ) : null}
+                      </div>
+                    </div>
+
+                    <div className="row form-group">
+                      <div className="col-6">
+                        <label className="font-weight-bold">Start Date</label>
+                        <input
+                          type="text"
+                          id="subject"
+                          value={startDate}
+                          onChange={(e) => setStartDate(e.target.value)}
+                          className="form-control"
+                          placeholder="DD/MM/YYYY"
+                        />
+                        {startDate ? (
+                          <p className="error-msg">{errors.startDate}</p>
+                        ) : null}
+                      </div>
+                      <div className="col-6">
+                        <label className="font-weight-bold">End Date</label>
+                        <input
+                          type="text"
+                          id="subject"
+                          value={endDate}
+                          onChange={(e) => setEndDate(e.target.value)}
+                          className="form-control"
+                          placeholder="DD/MM/YYYY"
+                        />
+                        {endDate == "" ? (
+                          <p className="error-msg">{errors.endDate}</p>
                         ) : null}
                       </div>
                     </div>
@@ -253,22 +346,59 @@ const CCForm = () => {
             <div className="col-12 col-md-6 px-0">
               <div className="container">
                 <h1 className="font-weight-bold d-none d-lg-block">
-                  Enter platform info
+                  Enter organizer info
                 </h1>
-                <h2 className="sponsor-mobile-text">Enter platform info</h2>
+                <h2 className="sponsor-mobile-text">Enter organizer info</h2>
                 <div className="box1">
+                  {/* <div className="col-lg-6 mb-5 mb-lg-0"> */}
                   <form action="#" className="contact-form">
+                    {/* <div className="row form-group">
+                                <div className="col-md-6 mb-3 mb-md-0">
+                                    <label className="text-black" for="fname">First Name</label>
+                                    <input type="text" id="fname" className="form-control" />
+                                </div>
+                                <div className="col-md-6">
+                                    <label className="text-black" for="lname">Last Name</label>
+                                    <input type="text" id="lname" className="form-control" />
+                                </div>
+                            </div> */}
+
                     <div className="row form-group">
                       <div className="col-md-12">
                         <input
                           type="text"
-                          value={channelName}
-                          onChange={(e) => setChannelName(e.target.value)}
+                          id="subject"
+                          value={`${userDetails.firstname} ${userDetails.lastname}`}
                           className="form-control"
-                          placeholder="Channel name"
+                          placeholder="Organiser name"
                         />
-                        {channelName == "" ? (
-                          <p className="error-msg">{errors.channelName}</p>
+                      </div>
+                    </div>
+
+                    <div className="row form-group">
+                      <div className="col-md-12">
+                        <input
+                          type="email"
+                          id="email"
+                          value={userDetails.email}
+                          className="form-control"
+                          placeholder="E-mail"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="row form-group">
+                      <div className="col-md-12">
+                        <input
+                          type="text"
+                          id="categorie"
+                          value={event_categories}
+                          onChange={(e) => setEventCategories(e.target.value)}
+                          className="form-control"
+                          placeholder="Content Categories"
+                        />
+                        {event_categories == "" ? (
+                          <p className="error-msg">{errors.event_categories}</p>
                         ) : null}
                       </div>
                     </div>
@@ -277,13 +407,14 @@ const CCForm = () => {
                       <div className="col-md-12">
                         <input
                           type="text"
-                          value={channelLink}
-                          onChange={(e) => setChannelLink(e.target.value)}
+                          id="categorie"
+                          value={content_platform}
+                          onChange={(e) => setContentplatform(e.target.value)}
                           className="form-control"
-                          placeholder="Channel link"
+                          placeholder="Content Platform"
                         />
-                        {channelLink == "" ? (
-                          <p className="error-msg">{errors.channelLink}</p>
+                        {content_platform == "" ? (
+                          <p className="error-msg">{errors.content_platform}</p>
                         ) : null}
                       </div>
                     </div>
@@ -292,28 +423,14 @@ const CCForm = () => {
                       <div className="col-md-12">
                         <input
                           type="number"
-                          value={channelSubs}
-                          onChange={(e) => setChannelSubs(e.target.value)}
+                          id="price"
+                          value={price}
+                          onChange={(e) => setPrice(e.target.value)}
                           className="form-control"
-                          placeholder="Current subscribers"
+                          placeholder="Price"
                         />
-                        {channelSubs == "" ? (
-                          <p className="error-msg">{errors.channelSubs}</p>
-                        ) : null}
-                      </div>
-                    </div>
-
-                    <div className="row form-group">
-                      <div className="col-md-12">
-                        <input
-                          type="text"
-                          value={audienceExpected}
-                          onChange={(e) => setAudienceExpected(e.target.value)}
-                          className="form-control"
-                          placeholder="Estimated audience"
-                        />
-                        {audienceExpected == "" ? (
-                          <p className="error-msg">{errors.audienceExpected}</p>
+                        {price == "" ? (
+                          <p className="error-msg">{errors.price}</p>
                         ) : null}
                       </div>
                     </div>
@@ -325,9 +442,9 @@ const CCForm = () => {
           <div className="row">
             <div className="container">
               <h1 className="font-weight-bold d-none d-lg-block">
-                Enter creator description
+                Enter event description
               </h1>
-              <h2 className="sponsor-mobile-text">Enter creator description</h2>
+              <h2 className="sponsor-mobile-text">Enter event description</h2>
               <div className="box1 mt-2">
                 <textarea
                   className="form-control"
@@ -356,7 +473,7 @@ const CCForm = () => {
               >
                 <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add Photo</h5>
+                    <h5 className="font-weight-bold">Add media</h5>
                     <input
                       type="file"
                       accept="image/*"
@@ -380,7 +497,7 @@ const CCForm = () => {
                 </div>
                 <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add Photo</h5>
+                    <h5 className="font-weight-bold">Add media</h5>
                     <input
                       type="file"
                       accept="image/*"
@@ -404,7 +521,7 @@ const CCForm = () => {
                 </div>
                 <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add Photo</h5>
+                    <h5 className="font-weight-bold">Add media</h5>
                     <input
                       type="file"
                       accept="image/*"
@@ -422,15 +539,12 @@ const CCForm = () => {
                       </div>
                     )}
                     {!thumbnail3 ? (
-                      <p className="error-msg">{errors.thumbnail3}</p>
+                      <p className="error-msg">{errors.thumbnail1}</p>
                     ) : null}
                   </div>
                 </div>
               </div>
               <div className="box1 mt-2">
-                <h2 className="d-inline font-weight-bold">
-                  Add Video &nbsp;&nbsp;&nbsp;&nbsp;
-                </h2>
                 <input
                   type="file"
                   accept="video/*"
@@ -454,12 +568,7 @@ const CCForm = () => {
                 value="List Event"
                 onClick={handleSubmitClick}
               />
-              <button
-                className="btn btn-outline-primary mt-3"
-                onClick={handleDiscard}
-              >
-                Discard
-              </button>
+              <button className="btn btn-outline-primary mt-3">Discard</button>
             </div>
           </div>
         </div>
@@ -469,4 +578,4 @@ const CCForm = () => {
   );
 };
 
-export default CCForm;
+export default ListContentForm;

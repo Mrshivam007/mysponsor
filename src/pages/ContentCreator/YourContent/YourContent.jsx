@@ -10,7 +10,7 @@ const YourContent = ({ line }) => {
         <div className="container" style={{ marginTop: "2%" }}>
           <div className="row" style={{ flexWrap: "nowrap" }}>
             <div className="col-lg-6">
-              <Link to="/listed_content">
+              <Link to="/your_content">
                 <div
                   className="card-service wow fadeInUp choice-card"
                   style={{
@@ -27,7 +27,7 @@ const YourContent = ({ line }) => {
                       realistic strategy with you
                     </p>
                     <button
-                      to="/listed_content"
+                      to="/your_content"
                       className="choice-btn btn text-white py-1 font-weight-bold"
                       style={{
                         float: "left",

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import calendar from "../../../assets/img/calendar.svg";
 import camera from "../../../assets/img/camera.svg";
 import listevents from "../../../assets/img/list_events.png";
@@ -6,10 +6,10 @@ import bgimage from "../../../assets/img/circle-bg.png";
 import cardImg1 from "../../../assets/img/list_events_card1.jpg";
 import cardImg2 from "../../../assets/img/list_events_card2.jpg";
 import cardImg3 from "../../../assets/img/list_events_card3.jpg";
-import { EventsHeader, Footer, NavBar } from "../../../components";
+import { Choice, EventsHeader, Footer, NavBar } from "../../../components";
 import { Link } from "react-router-dom";
-import YourContent from "../YourContent/YourContent";
-const ContentHome = () => {
+import { useDispatch, useSelector } from "react-redux";
+const ContentCategories = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
@@ -27,40 +27,17 @@ const ContentHome = () => {
         <NavBar />
         {/* ---DESKTOP VIEW---  */}
         <div className="desktop-view">
-          <EventsHeader title={"List Content"} logo={listevents} />
-          <YourContent />
+          <EventsHeader title={"Your Events"} logo={listevents} />
+          {/* <Choice /> */}
         </div>
         {/* ---DESKTOP VIEW END--- */}
         {/* ---MOBILE VIEW--- */}
 
         <div className="mobile-view">
           <h2 className="sponsor-mobile-text">Get your event listed</h2>
-          <div className="container choice-boxes my-3">
-            <div className="row">
-              <div className="col-6">
-                <Link to="/events">
-                  <div className="card-blog choice-box">
-                    <img src={calendar} alt="" />
-                    <p className="text-center text-white font-weight-bolder mb-0">
-                      Your Content
-                    </p>
-                  </div>
-                </Link>
-              </div>
-              <div className="col-6">
-                <Link to="/sponsored_events">
-                  <div className="card-blog choice-box">
-                    <img src={camera} alt="" />
-                    <p className="text-center text-white font-weight-bolder mb-0">
-                      Sponsored Video
-                    </p>
-                  </div>
-                </Link>
-              </div>
-            </div>
-          </div>
         </div>
         {/* ---MOBILE VIEW END--- */}
+
         <div className="container">
           <div className="list-events-box">
             <h1>
@@ -82,11 +59,13 @@ const ContentHome = () => {
                 />
                 <div className="card-body" style={{ padding: "0 0 0 5%" }}>
                   <h5 className="card-text font-weight-bold">
-                    Want your content sponsored?
+                    Your Live Content
                   </h5>
-                  <button className="btn text-white py-1 font-weight-bold mb-3">
-                    <Link to={"create_content"} style={{ color: "white" }}>
-                      List any Content
+                  <button
+                    className="btn text-white py-1 font-weight-bold mb-3"
+                  >
+                    <Link to={"live_content"} style={{ color: 'white' }} >
+                      Live Content
                     </Link>
                   </button>
                 </div>
@@ -104,14 +83,13 @@ const ContentHome = () => {
                 />
                 <div className="card-body" style={{ padding: "0 0 0 5%" }}>
                   <h5 className="card-text font-weight-bold">
-                    Update your listed content
+                    Your Upcoming Content
                   </h5>
-                  <button className="btn text-white py-1 font-weight-bold mb-3">
-                    <Link
-                      to={"update_UpcomingContent"}
-                      style={{ color: "white" }}
-                    >
-                      Update Content
+                  <button
+                    className="btn text-white py-1 font-weight-bold mb-3"
+                  >
+                    <Link to={"upcoming_content"} style={{ color: 'white' }} >
+                      Upcoming Content
                     </Link>
                   </button>
                 </div>
@@ -129,12 +107,14 @@ const ContentHome = () => {
                 />
                 <div className="card-body" style={{ padding: "0 0 0 5%" }}>
                   <h5 className="card-text font-weight-bold">
-                    Delete Your content
+                    Your Previous Content
                   </h5>
-                  <button className="btn text-white py-1 font-weight-bold mb-3">
-                    <Link to={"delete_content"} style={{ color: "white" }}>
-                      Delete Content
-                    </Link>
+                  <button
+                    className="btn text-white py-1 font-weight-bold mb-3"
+                  >
+                    <Link to={"previous_content"} style={{ color: 'white' }} >
+                      Previous Content
+                    </Link>        
                   </button>
                 </div>
               </div>
@@ -147,4 +127,4 @@ const ContentHome = () => {
   );
 };
 
-export default ContentHome;
+export default ContentCategories;

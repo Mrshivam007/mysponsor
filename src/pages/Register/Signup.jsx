@@ -153,7 +153,7 @@ const Signup = () => {
                         {/* <div class="col-lg-6 mb-5 mb-lg-0"> */}
                         <form action="#" class="contact-form" onSubmit={submitHandler}>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" onChange={handleUserType} value="event" id="flexRadioDefault1" />
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" onChange={handleUserType} value="Event" id="flexRadioDefault1" />
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     Event
                                 </label>
