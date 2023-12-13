@@ -84,7 +84,6 @@ const Update_UpcomingContent = () => {
             Load More
           </div>
         </div>
-        <Footer />
       </div>
     </>
   );

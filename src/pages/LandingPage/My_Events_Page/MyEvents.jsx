@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import "./myevents.css";
-import info from "../../assets/img/info.svg";
-import heart from "../../assets/img/heart2.svg";
-import cardImg from "../../assets/img/my_events_img.png";
-import bgimage from "../../assets/img/circle-bg.png";
-import card_bg from "../../assets/img/card/header-bg.png";
-import { Footer, NavBar } from "../../components";
+import info from "../../../assets/img/info.svg";
+import heart from "../../../assets/img/heart2.svg";
+import cardImg from "../../../assets/img/my_events_img.png";
+import bgimage from "../../../assets/img/circle-bg.png";
+import card_bg from "../../../assets/img/card/header-bg.png";
+import { Footer, NavBar } from "../../../components";
 const MyEvents = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount

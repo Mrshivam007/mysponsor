@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import "./myeventdetails.css";
-import bgimage from "../../assets/img/circle-bg.png";
-import { EventsCards } from "../../data/data.js";
+import bgimage from "../../../assets/img/circle-bg.png";
+import { EventsCards } from "../../../data/data.js";
 import {
   Footer,
   MyEventsBox,
   NavBar,
   SponserE,
-} from "../../components/index.js";
+} from "../../../components/index.js";
 import { useLocation } from "react-router-dom";
 const MyEventsDetail = () => {
   useEffect(() => {

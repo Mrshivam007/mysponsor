@@ -15,6 +15,7 @@ import {
 import { useSelector } from "react-redux";
 import EventRoutes from "./event";
 import ContentRoutes from "./content";
+import ContentDetails from "../pages/LandingPage/Desktop_Sponsor_CC/ContentDetails";
 
 const Main = () => {
   const auth = useSelector((state) => state.auth);
@@ -44,6 +45,7 @@ const Main = () => {
             <Route path="/home" element={<Home />} />
             <Route path="/events" element={<SponsorEvents />} />
             <Route path="/cc" element={<SponsorContentC />} />
+            <Route path="/mycontent-details" element={<ContentDetails />} />
             <Route path="/choice" element={<SponsorChoice />} />
             <Route path="/categories" element={<CategoryPage />} />
             <Route path="/payment" element={<PaymentGateway />} />

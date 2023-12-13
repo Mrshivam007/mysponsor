@@ -4,7 +4,7 @@ body {
 
 .triangle-bg-choice {
     max-width: 100% !important;
-    background-image: url("../../assets/img/bg_ctgrs_lft.svg"), url("../../assets/img/bg_ctgrs_rt.svg");
+    background-image: url("../../../assets/img/bg_ctgrs_lft.svg"), url("../../../assets/img/bg_ctgrs_rt.svg");
     background-repeat: no-repeat;
     background-position: left, right;
     background-size: contain;

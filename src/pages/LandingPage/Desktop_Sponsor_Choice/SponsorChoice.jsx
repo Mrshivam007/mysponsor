@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import bgimage from "../../assets/img/circle-bg.png";
-import spevents from "../../assets/img/sponsor_events-logo.png";
-import calendar from "../../assets/img/calendar.svg";
-import camera from "../../assets/img/camera.svg";
+import bgimage from "../../../assets/img/circle-bg.png";
+import spevents from "../../../assets/img/sponsor_events-logo.png";
+import calendar from "../../../assets/img/calendar.svg";
+import camera from "../../../assets/img/camera.svg";
 import {
   NavBar,
   EventsHeader,
@@ -12,12 +12,12 @@ import {
   Banner,
   SponsorCC,
   MobileCards,
-} from "../../components";
+} from "../../../components";
 import {
   ChoicePageCards,
   ContentCreators4,
   EventsCards,
-} from "../../data/data";
+} from "../../../data/data";
 import "./choice-page.css";
 import { Link } from "react-router-dom";
 const SponsorChoice = () => {

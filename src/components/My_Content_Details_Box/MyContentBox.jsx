@@ -76,9 +76,9 @@ const MyContentBox = (contentData) => {
                       borderRight: "1px solid rgba(255, 255, 255, 0.50)",
                     }}
                   >
-                    {cardData.event_start_date}
+                    {cardData.content_start_date}
                   </td>
-                  <td>{cardData.event_end_date}</td>
+                  <td>{cardData.content_end_date}</td>
                 </tr>
               </table>
 

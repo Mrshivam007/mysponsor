@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
-import catlogo from "../../assets/img/category-bg-logo.png";
-import bgimage from "../../assets/img/circle-bg.png";
+import catlogo from "../../../assets/img/category-bg-logo.png";
+import bgimage from "../../../assets/img/circle-bg.png";
 import {
   NavBar,
   Footer,
@@ -8,8 +8,8 @@ import {
   CatpageBox,
   Banner,
   SponserE,
-} from "../../components";
-import { EventsCards } from "../../data/data";
+} from "../../../components";
+import { EventsCards } from "../../../data/data";
 import "./cat-page.css";
 
 const CategoryPage = () => {

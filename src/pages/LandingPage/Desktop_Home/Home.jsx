@@ -7,7 +7,7 @@ import {
   Categories,
   SponserHome,
   Footer,
-} from "../../components";
+} from "../../../components";
 const Home = () => {
   return (
     <>

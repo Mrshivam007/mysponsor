@@ -5,11 +5,11 @@ import {
   SponserE,
   Footer,
   MobileCards,
-} from "../../components";
-import bgimage from "../../assets/img/circle-bg.png";
-import spevents from "../../assets/img/sponsor_events-logo.png";
-import { EventsCards, EventsPageCards } from "../../data/data";
-import { fetchEvent } from "../../redux/actions/eventAction";
+} from "../../../components";
+import bgimage from "../../../assets/img/circle-bg.png";
+import spevents from "../../../assets/img/sponsor_events-logo.png";
+import { EventsCards, EventsPageCards } from "../../../data/data";
+import { fetchEvent } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux"
 import "./events-page.css";
 const SponsorEvents = () => {

@@ -1,7 +1,7 @@
 import React from "react";
-import bgimage from "../../assets/img/circle-bg.png";
-import { Footer, NavBar, SponserE, SponsorPay } from "../../components";
-import { EventsCards } from "../../data/data.js";
+import bgimage from "../../../assets/img/circle-bg.png";
+import { Footer, NavBar, SponserE, SponsorPay } from "../../../components/index.js";
+import { EventsCards } from "../../../data/data.js";
 const PaymentGateway = () => {
   return (
     <>
