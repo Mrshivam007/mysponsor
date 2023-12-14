@@ -1,12 +1,7 @@
 import React, { useEffect } from "react";
 import bgimage from "../../../assets/img/circle-bg.png";
 import { EventsCards } from "../../../data/data.js";
-import {
-  Footer,
-  MyEventsBox,
-  NavBar,
-  SponserE,
-} from "../../../components/index.js";
+import { Footer, NavBar, SponserE } from "../../../components/index.js";
 import { useLocation } from "react-router-dom";
 import MyContentBox from "../../../components/My_Content_Details_Box/MyContentBox.jsx";
 const ContentDetails = () => {
@@ -15,7 +10,7 @@ const ContentDetails = () => {
   }, []);
   const location = useLocation();
   const contentData = location.state?.contentData || null;
-  console.log(contentData);
+  console.log("This is content data", contentData);
   return (
     <>
       <div

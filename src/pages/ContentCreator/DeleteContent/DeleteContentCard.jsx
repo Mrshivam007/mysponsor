@@ -1,24 +1,44 @@
-import React, { useEffect } from "react";
-import { fetchEvent } from "../../../redux/actions/eventAction";
+import React, { useEffect, useState } from "react";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import {
+  deleteContent,
+  fetchContent,
+} from "../../../redux/actions/contentAction";
 import { useDispatch, useSelector } from "react-redux";
 import apiurl from "../../../constant/config";
-import { Link, useNavigate } from "react-router-dom";
-const Update_ContentCard = ({ cardData }) => {
+import { useNavigate } from "react-router-dom";
+const DeleteContentCard = ({ cardData }) => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const dispatch = useDispatch();
   const ContentDetails = useSelector((state) => state.event);
   useEffect(() => {
-    dispatch(fetchEvent());
+    dispatch(fetchContent());
   }, []);
 
   const navigate = useNavigate();
 
-  const handleUpdateClick = (data) => {
-    navigate("/update_content", { state: { contentData: data } });
+  const handleDetailsClick = (data) => {
+    navigate("/myevents-details", { state: { eventData: data } });
   };
+
+  const handleDeletion = (data) => {
+    dispatch(deleteContent(data.content_id));
+    sessionStorage.setItem(
+      "deletionMessage",
+      "Your Content has been Deleted!!!"
+    );
+    navigate("/your_content/upcoming_content");
+  };
+
   return (
     <>
       <div className="desktop-view">
@@ -69,14 +89,16 @@ const Update_ContentCard = ({ cardData }) => {
                               elit. Eligendi laudantium iusto eum totam! Porro
                               saepe culpa dignissimos veritatis mollitia
                               voluptate.
-                              <Link to={"/mycontent-details"}>
-                                <b
-                                  className="text-sm font-weight-bold"
-                                  style={{ color: "#055bb5" }}
-                                >
-                                  Read More
-                                </b>
-                              </Link>
+                              <b
+                                className="text-sm font-weight-bold"
+                                style={{
+                                  color: "#055bb5",
+                                  cursor: "pointer",
+                                }}
+                                onClick={() => handleDetailsClick(data)}
+                              >
+                                Read More
+                              </b>
                             </p>
                           </div>
                         </div>
@@ -95,6 +117,12 @@ const Update_ContentCard = ({ cardData }) => {
                                 {data.location}
                               </span>
                             </h5>
+                            {/* <h5 className="font-weight-bold">
+                                Price:&nbsp;
+                                <span className="font-weight-light">
+                                  {data.price}
+                                </span>
+                              </h5> */}
                             <h5 className="font-weight-bold">
                               Video Preview:&nbsp;
                               <span className="font-weight-light">
@@ -102,19 +130,44 @@ const Update_ContentCard = ({ cardData }) => {
                               </span>
                             </h5>
                             <button
-                              onClick={() => handleUpdateClick(data)}
-                              className="btn py-1 px-3 font-weight-bold d-none d-md-block"
+                              className="btn py-1 px-3 font-weight-bold d-none d-md-block bg-danger text-light"
+                              onClick={handleShow}
                               style={{
                                 width: "100%",
                                 marginTop: "4%",
-                                color: "#004EA9",
-                                backgroundColor: "white",
-                                border: "2px solid #004EA9",
                                 borderRadius: "10px",
                               }}
                             >
-                              Update Your Content Details &nbsp;&nbsp; &gt;&gt;
+                              Delete this Content &nbsp;&nbsp;{" "}
+                              <i className="bi bi-trash"></i>
                             </button>
+                            <Modal
+                              show={show}
+                              onHide={handleClose}
+                              scrollable={true}
+                              style={{ zIndex: "2000" }}
+                            >
+                              <Modal.Header>
+                                <Modal.Title>Delete {data.title} ?</Modal.Title>
+                              </Modal.Header>
+                              <Modal.Body>
+                                Are you sure you want to delete this content ?
+                              </Modal.Body>
+                              <Modal.Footer>
+                                <Button
+                                  variant="primary"
+                                  onClick={() => handleDeletion(data)}
+                                >
+                                  Yes
+                                </Button>
+                                <Button
+                                  variant="secondary"
+                                  onClick={handleClose}
+                                >
+                                  No
+                                </Button>
+                              </Modal.Footer>
+                            </Modal>
                           </div>
                         </div>
                       </div>
@@ -180,4 +233,4 @@ const Update_ContentCard = ({ cardData }) => {
   );
 };
 
-export default Update_ContentCard;
+export default DeleteContentCard;

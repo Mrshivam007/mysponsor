@@ -56,7 +56,7 @@ const Update_UpcomingContent = () => {
       >
         <NavBar />
         <div className="events-page-desktop">
-          <EventsHeader title={"Upcoming Event"} logo={spevents} />
+          <EventsHeader title={"Update Listed Content"} logo={spevents} />
           {/* <SponserE cardData={eventDetails.eventDetails} line={"Upcoming Event"} /> */}
           {successMessage && (
             <div class="alert alert-success" role="alert">
@@ -84,6 +84,7 @@ const Update_UpcomingContent = () => {
             Load More
           </div>
         </div>
+        <Footer />
       </div>
     </>
   );

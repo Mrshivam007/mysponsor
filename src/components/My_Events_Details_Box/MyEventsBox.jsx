@@ -1,21 +1,27 @@
 import React from "react";
-import paymentImg from "../../assets/img/payment-img.jpg";
 import heart from "../../assets/img/heart2.svg";
 import "./myeventsbox.css";
 import apiurl from "../../constant/config";
+import Slider from "react-slick";
 const MyEventsBox = (eventData) => {
   const cardData = eventData.eventData;
-  console.log("eevnt data", cardData);
+  console.log("event data", cardData);
   let totalSponsoringPrice = 0;
   const sponsoring_items = cardData?.sponsoring_items || [];
 
-  sponsoring_items.forEach(item => {
+  sponsoring_items.forEach((item) => {
     if (item && item.price) {
       totalSponsoringPrice += parseFloat(item.price);
     }
   });
-
-
+  const settings = {
+    infinite: true, // Loop the slider
+    speed: 500, // Transition speed in milliseconds
+    slidesToShow: 1, // Number of slides to show at a time
+    slidesToScroll: 1, // Number of slides to scroll at a time
+    autoplay: true, // Auto-play the slider
+    autoplaySpeed: 3000, // Auto-play speed in milliseconds
+  };
   return (
     <>
       {/* DESKTOP VIEW  */}
@@ -31,11 +37,19 @@ const MyEventsBox = (eventData) => {
                   padding: "3%",
                 }}
               >
-                <img
-                  src={apiurl + cardData.thumbnail1}
-                  alt=""
-                  style={{ width: "100%", borderRadius: "15px" }}
-                />
+                <Slider {...settings}>
+                  {[
+                    cardData.thumbnail1,
+                    cardData.thumbnail2,
+                    cardData.thumbnail3,
+                  ].map((data) => (
+                    <img
+                      src={apiurl + data}
+                      alt=""
+                      style={{ width: "100%", borderRadius: "15px" }}
+                    />
+                  ))}
+                </Slider>
               </div>
             </div>
             <div className="col-6">
@@ -144,8 +158,11 @@ const MyEventsBox = (eventData) => {
             boxShadow: "0px 2px 10px -2px rgba(0, 0, 0, 0.25)",
           }}
         >
-          <img src={apiurl + cardData.thumbnail1}
-            alt="" style={{ width: "100%" }} />
+          <img
+            src={apiurl + cardData.thumbnail1}
+            alt=""
+            style={{ width: "100%" }}
+          />
         </div>
         <div className="container text-white text-center d-flex align-items-end justify-content-around px-0 mt-3">
           <div className="box">

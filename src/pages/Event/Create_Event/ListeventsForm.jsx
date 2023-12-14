@@ -92,7 +92,8 @@ const ListeventsForm = () => {
     setPrices(updatedPrices);
   };
 
-  const handleToggleDropdown = () => {
+  const handleToggleDropdown = (e) => {
+    e.preventDefault();
     setShowDropdown(!showDropdown);
   };
 
@@ -261,7 +262,7 @@ const ListeventsForm = () => {
                         {errors.sponsoring_item && <p className="error-msg">{errors.sponsoring_item}</p>} */}
 
                         <div>
-                          <button onClick={handleToggleDropdown}>
+                          <button type="button" onClick={handleToggleDropdown}>
                             Add Sponsoring Item
                           </button>
 
@@ -325,26 +326,22 @@ const ListeventsForm = () => {
                       <div className="col-6">
                         <label className="font-weight-bold">Start Date</label>
                         <input
-                          type="text"
-                          id="subject"
-                          value={startDate}
+                          type="date"
+                          id="start-date"
                           onChange={(e) => setStartDate(e.target.value)}
                           className="form-control"
-                          placeholder="DD/MM/YYYY"
                         />
-                        {startDate ? (
+                        {startDate == "" ? (
                           <p className="error-msg">{errors.startDate}</p>
                         ) : null}
                       </div>
                       <div className="col-6">
                         <label className="font-weight-bold">End Date</label>
                         <input
-                          type="text"
+                          type="date"
                           id="subject"
-                          value={endDate}
                           onChange={(e) => setEndDate(e.target.value)}
                           className="form-control"
-                          placeholder="DD/MM/YYYY"
                         />
                         {endDate == "" ? (
                           <p className="error-msg">{errors.endDate}</p>
@@ -541,11 +538,14 @@ const ListeventsForm = () => {
                 </div>
               </div>
               <div className="box1 mt-2">
+                <h3 className="d-inline font-weight-bold">
+                  Add Video Preview:&nbsp;&nbsp;&nbsp;
+                </h3>
                 <input
                   type="file"
                   accept="video/*"
                   onChange={handleVideoChange}
-                  style={{ width: "74%", borderRadius: "0" }}
+                  style={{ width: "50%", borderRadius: "0" }}
                 />
                 {video && (
                   <div>

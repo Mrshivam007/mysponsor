@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import listevents from "../../../assets/img/list_events.png";
 import bgimage from "../../../assets/img/circle-bg.png";
 import { EventsHeader, Footer, NavBar } from "../../../components";
-import ContentCard from "../ContentCard/ContentCard";
 import { fetchContent } from "../../../redux/actions/contentAction";
 import { useDispatch, useSelector } from "react-redux";
 import MyContentCard from "../MyContentCard/MyContentCard";
@@ -11,21 +10,24 @@ const LiveContent = () => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
   const dispatch = useDispatch();
-  const ContentDetails = useSelector(state => state.content)
-  const [successMessage, setSuccessMessage] = useState('');
+  const ContentDetails = useSelector((state) => state.content);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [deletionMessage, setDeletionMessage] = useState("");
   useEffect(() => {
-    dispatch(fetchContent())
-  },[])
+    dispatch(fetchContent());
+  }, []);
   useEffect(() => {
     // Retrieve success message from sessionStorage
-    const message = sessionStorage.getItem('successMessage');
-
+    const message1 = sessionStorage.getItem("successMessage");
+    const message2 = sessionStorage.getItem("deletionMessage");
     // Clear success message from sessionStorage
-    sessionStorage.removeItem('successMessage');
+    sessionStorage.removeItem("successMessage");
+    sessionStorage.removeItem("deletionMessage");
 
-    if (message) {
-      setSuccessMessage(message);
-      console.log(message);
+    if (message1) {
+      setSuccessMessage(message1);
+    } else if (message2) {
+      setDeletionMessage(message2);
     }
   }, []);
 
@@ -48,11 +50,29 @@ const LiveContent = () => {
         />
         {/* <ContentCard /> */}
         {successMessage && (
-            <div class="alert alert-success" role="alert">
+          <div className="container">
+            <div
+              class="alert alert-success"
+              role="alert"
+              style={{ borderRadius: "10px" }}
+            >
               {successMessage}
             </div>
-          )}
+          </div>
+        )}
+        {deletionMessage && (
+          <div className="container">
+            <div
+              class="alert alert-danger"
+              role="alert"
+              style={{ borderRadius: "10px" }}
+            >
+              {deletionMessage}
+            </div>
+          </div>
+        )}
         <MyContentCard cardData={ContentDetails.contentDetails} />
+        <Footer />
       </div>
     </>
   );

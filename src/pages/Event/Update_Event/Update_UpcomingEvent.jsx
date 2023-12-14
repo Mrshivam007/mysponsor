@@ -84,7 +84,6 @@ const Update_UpcomingEvent = () => {
             Load More
           </div>
         </div>
-        <Footer />
       </div>
     </>
   );

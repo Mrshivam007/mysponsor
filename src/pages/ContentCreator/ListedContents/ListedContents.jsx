@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import listevents from "../../../assets/img/list_events.png";
 import bgimage from "../../../assets/img/circle-bg.png";
 import { EventsHeader, Footer, NavBar } from "../../../components";
-import ContentCard from "../ContentCard/ContentCard";
 import { fetchContent } from "../../../redux/actions/contentAction";
 import { useDispatch, useSelector } from "react-redux";
 import MyContentCard from "../MyContentCard/MyContentCard";
@@ -11,17 +10,17 @@ const ListedContents = () => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
   const dispatch = useDispatch();
-  const ContentDetails = useSelector(state => state.content)
-  const [successMessage, setSuccessMessage] = useState('');
+  const ContentDetails = useSelector((state) => state.content);
+  const [successMessage, setSuccessMessage] = useState("");
   useEffect(() => {
-    dispatch(fetchContent())
-  },[])
+    dispatch(fetchContent());
+  }, []);
   useEffect(() => {
     // Retrieve success message from sessionStorage
-    const message = sessionStorage.getItem('successMessage');
+    const message = sessionStorage.getItem("successMessage");
 
     // Clear success message from sessionStorage
-    sessionStorage.removeItem('successMessage');
+    sessionStorage.removeItem("successMessage");
 
     if (message) {
       setSuccessMessage(message);
@@ -48,11 +47,12 @@ const ListedContents = () => {
         />
         {/* <ContentCard /> */}
         {successMessage && (
-            <div class="alert alert-success" role="alert">
-              {successMessage}
-            </div>
-          )}
+          <div class="alert alert-success" role="alert">
+            {successMessage}
+          </div>
+        )}
         <MyContentCard cardData={ContentDetails.contentDetails} />
+        <Footer />
       </div>
     </>
   );

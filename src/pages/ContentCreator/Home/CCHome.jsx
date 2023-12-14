@@ -64,7 +64,7 @@ const ContentHome = () => {
         <div className="container">
           <div className="list-events-box">
             <h1>
-              List your event and get sponsored worldwide by different sponsors
+              List your Content and get sponsored worldwide by different sponsors
             </h1>
           </div>
         </div>

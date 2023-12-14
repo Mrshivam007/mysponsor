@@ -22,6 +22,8 @@ const ListContentForm = () => {
   const [location, setLocation] = useState("");
   const [audience, setAudienceExpected] = useState("");
   const [event_categories, setEventCategories] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedPlatform, setSelectedPlatform] = useState("");
   const [content_platform, setContentplatform] = useState("");
   const [event_time, setEventTime] = useState("");
   const [price, setPrice] = useState("");
@@ -37,9 +39,8 @@ const ListContentForm = () => {
   const [errors, setErrors] = useState({});
   const { userDetails } = auth;
   const navigate = useNavigate(); // Initialize useNavigate hook
-  console.log(userDetails);
-  console.log("event error", errors);
-
+  // console.log("This is content details", userDetails);
+  // console.log("event error", errors);
   // For each thumbnail, you'll need a separate state and handler
   const handleThumbnail1Change = (e) => {
     const file = e.target.files[0];
@@ -97,6 +98,10 @@ const ListContentForm = () => {
     setShowDropdown(!showDropdown);
   };
 
+  const handleDiscard = () => {
+    navigate("/");
+  };
+
   const validateForm = () => {
     const errorsObj = {};
 
@@ -112,24 +117,14 @@ const ListContentForm = () => {
     if (endDate.trim() === "") {
       errorsObj.endDate = "endDate is required";
     }
-    // if (sponsoring_item.trim() === '') {
-    //   errorsObj.sponsoring_item = 'sponsoring_item is required';
-    // }
-
-    // if (!selectedItems) {
-    //   errorsObj.selectedItems = "selectedItems is required";
-    // }
-    // if (!prices) {
-    //   errorsObj.prices = "prices is required";
-    // }
     if (audience.trim() === "") {
       errorsObj.audience = "audience is required";
     }
-    if (event_categories.trim() === "") {
-      errorsObj.event_categories = "event_categories is required";
+    if (selectedCategory === "") {
+      errorsObj.event_categories = "Content Category is required";
     }
-    if (content_platform.trim() === "") {
-      errorsObj.content_platform = "content_platform is required";
+    if (selectedPlatform === "") {
+      errorsObj.content_platform = "Content Platform is required";
     }
     // if (price.trim() === "") {
     //   errorsObj.price = "price is required";
@@ -159,10 +154,10 @@ const ListContentForm = () => {
     const isFormValid = validateForm();
     if (isFormValid) {
       // if (Object.keys(errors).length === 0) {
-        const sponsoringItemsData = selectedItems.map((item) => ({
-          sponsoring_items: item,
-          price: prices[item] || null, // handle cases where price might be undefined or null
-        }));
+      const sponsoringItemsData = selectedItems.map((item) => ({
+        sponsoring_items: item,
+        price: prices[item] || null, // handle cases where price might be undefined or null
+      }));
       const formData = new FormData();
       formData.append("title", title);
       formData.append("description", description);
@@ -174,8 +169,8 @@ const ListContentForm = () => {
       formData.append("sponsoring_items", JSON.stringify(sponsoringItemsData));
       formData.append("user_id", userDetails.user_id);
       formData.append("price", price);
-      formData.append("content_category", event_categories);
-      formData.append("content_platform", content_platform);
+      formData.append("content_category", selectedCategory);
+      formData.append("content_platform", selectedPlatform);
       // Append thumbnails with different keys
       formData.append("thumbnail1", thumbnail1);
       formData.append("thumbnail2", thumbnail2);
@@ -209,9 +204,9 @@ const ListContentForm = () => {
             <div className="col-12 col-md-6 px-0">
               <div className="container">
                 <h1 className="font-weight-bold d-none d-lg-block">
-                  Enter event info
+                  Enter Content info
                 </h1>
-                <h2 className="sponsor-mobile-text">Enter event info</h2>
+                <h2 className="sponsor-mobile-text">Enter Content info</h2>
                 <div className="box1">
                   <form action="#" className="contact-form">
                     <div className="row form-group">
@@ -222,7 +217,7 @@ const ListContentForm = () => {
                           value={title}
                           onChange={(e) => setTitle(e.target.value)}
                           className="form-control"
-                          placeholder="Enter Title"
+                          placeholder="Enter content title"
                         />
                         {title == "" ? (
                           <p className="error-msg">{errors.title}</p>
@@ -232,16 +227,44 @@ const ListContentForm = () => {
 
                     <div className="row form-group">
                       <div className="col-md-12">
-                        <input
-                          type="text"
-                          id="location"
-                          value={location}
-                          onChange={(e) => setLocation(e.target.value)}
+                        <select
                           className="form-control"
-                          placeholder="Enter Location"
-                        />
-                        {location == "" ? (
-                          <p className="error-msg">{errors.location}</p>
+                          onChange={(e) => {
+                            setSelectedCategory(e.target.value);
+                            console.log(
+                              "This is content category",
+                              e.target.value
+                            );
+                          }}
+                        >
+                          <option hidden>Enter Content Category</option>
+                          <option value="Video">Video</option>
+                          <option value="Post">Post</option>
+                        </select>
+                        {selectedCategory == "" ? (
+                          <p className="error-msg">{errors.event_categories}</p>
+                        ) : null}
+                      </div>
+                    </div>
+
+                    <div className="row form-group">
+                      <div className="col-md-12">
+                        <select
+                          className="form-control"
+                          onChange={(e) => {
+                            setSelectedPlatform(e.target.value);
+                            console.log(
+                              "This is platform used",
+                              e.target.value
+                            );
+                          }}
+                        >
+                          <option hidden>Enter Platform</option>
+                          <option value="Youtube">Youtube</option>
+                          <option value="Facebook">Facebook</option>
+                        </select>
+                        {selectedPlatform == "" ? (
+                          <p className="error-msg">{errors.content_platform}</p>
                         ) : null}
                       </div>
                     </div>
@@ -294,14 +317,14 @@ const ListContentForm = () => {
                           <p className="error-msg">{errors.prices}</p>
                         ) : null}
                       </div> */}
-                      <div className="col-md-6">
+                      <div className="col-md-12">
                         <input
                           type="text"
                           id="subject"
                           value={audience}
                           onChange={(e) => setAudienceExpected(e.target.value)}
                           className="form-control"
-                          placeholder="Estimated audience"
+                          placeholder="Enter expected audience (Channel Subs)"
                         />
                         {audience == "" ? (
                           <p className="error-msg">{errors.audience}</p>
@@ -313,26 +336,22 @@ const ListContentForm = () => {
                       <div className="col-6">
                         <label className="font-weight-bold">Start Date</label>
                         <input
-                          type="text"
-                          id="subject"
-                          value={startDate}
+                          type="date"
+                          id="start-date"
                           onChange={(e) => setStartDate(e.target.value)}
                           className="form-control"
-                          placeholder="DD/MM/YYYY"
                         />
-                        {startDate ? (
+                        {startDate == "" ? (
                           <p className="error-msg">{errors.startDate}</p>
                         ) : null}
                       </div>
                       <div className="col-6">
                         <label className="font-weight-bold">End Date</label>
                         <input
-                          type="text"
+                          type="date"
                           id="subject"
-                          value={endDate}
                           onChange={(e) => setEndDate(e.target.value)}
                           className="form-control"
-                          placeholder="DD/MM/YYYY"
                         />
                         {endDate == "" ? (
                           <p className="error-msg">{errors.endDate}</p>
@@ -346,9 +365,9 @@ const ListContentForm = () => {
             <div className="col-12 col-md-6 px-0">
               <div className="container">
                 <h1 className="font-weight-bold d-none d-lg-block">
-                  Enter organizer info
+                  Enter Creator info
                 </h1>
-                <h2 className="sponsor-mobile-text">Enter organizer info</h2>
+                <h2 className="sponsor-mobile-text">Enter Creator info</h2>
                 <div className="box1">
                   {/* <div className="col-lg-6 mb-5 mb-lg-0"> */}
                   <form action="#" className="contact-form">
@@ -391,30 +410,14 @@ const ListContentForm = () => {
                       <div className="col-md-12">
                         <input
                           type="text"
-                          id="categorie"
-                          value={event_categories}
-                          onChange={(e) => setEventCategories(e.target.value)}
+                          id="location"
+                          value={location}
+                          onChange={(e) => setLocation(e.target.value)}
                           className="form-control"
-                          placeholder="Content Categories"
+                          placeholder="Enter your location"
                         />
-                        {event_categories == "" ? (
-                          <p className="error-msg">{errors.event_categories}</p>
-                        ) : null}
-                      </div>
-                    </div>
-
-                    <div className="row form-group">
-                      <div className="col-md-12">
-                        <input
-                          type="text"
-                          id="categorie"
-                          value={content_platform}
-                          onChange={(e) => setContentplatform(e.target.value)}
-                          className="form-control"
-                          placeholder="Content Platform"
-                        />
-                        {content_platform == "" ? (
-                          <p className="error-msg">{errors.content_platform}</p>
+                        {location == "" ? (
+                          <p className="error-msg">{errors.location}</p>
                         ) : null}
                       </div>
                     </div>
@@ -442,9 +445,9 @@ const ListContentForm = () => {
           <div className="row">
             <div className="container">
               <h1 className="font-weight-bold d-none d-lg-block">
-                Enter event description
+                Enter Content description
               </h1>
-              <h2 className="sponsor-mobile-text">Enter event description</h2>
+              <h2 className="sponsor-mobile-text">Enter Content description</h2>
               <div className="box1 mt-2">
                 <textarea
                   className="form-control"
@@ -462,10 +465,8 @@ const ListContentForm = () => {
           </div>
           <div className="row">
             <div className="container">
-              <h1 className="font-weight-bold d-none d-lg-block">
-                Add Photos & Videos
-              </h1>
-              <h2 className="sponsor-mobile-text">Add Photos & Videos</h2>
+              <h1 className="font-weight-bold d-none d-lg-block">Add Photos</h1>
+              <h2 className="sponsor-mobile-text">Add Photos</h2>
               <p>(atleast 3 photos & 1 video)</p>
               <div
                 className="box1 mt-2 d-flex justify-content-center"
@@ -545,11 +546,14 @@ const ListContentForm = () => {
                 </div>
               </div>
               <div className="box1 mt-2">
+                <h3 className="d-inline font-weight-bold">
+                  Add Video Preview:&nbsp;&nbsp;&nbsp;
+                </h3>
                 <input
                   type="file"
                   accept="video/*"
                   onChange={handleVideoChange}
-                  style={{ width: "74%", borderRadius: "0" }}
+                  style={{ width: "50%", borderRadius: "0" }}
                 />
                 {video && (
                   <div>
@@ -568,7 +572,12 @@ const ListContentForm = () => {
                 value="List Event"
                 onClick={handleSubmitClick}
               />
-              <button className="btn btn-outline-primary mt-3">Discard</button>
+              <button
+                className="btn btn-outline-primary mt-3"
+                onClick={handleDiscard}
+              >
+                Discard
+              </button>
             </div>
           </div>
         </div>

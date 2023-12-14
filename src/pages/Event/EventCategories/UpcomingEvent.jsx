@@ -10,7 +10,7 @@ import bgimage from "../../../assets/img/circle-bg.png";
 import spevents from "../../../assets/img/sponsor_events-logo.png";
 import { EventsCards, EventsPageCards } from "../../../data/data";
 import { fetchEvent } from "../../../redux/actions/eventAction";
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
 import MyEventCard from "../MyEventCrad/MyEventCard";
 import { useLocation } from "react-router-dom";
 import EventMobileCard from "./EventMobileCards";
@@ -20,27 +20,27 @@ const UpcomingEvent = () => {
   }, []);
 
   const dispatch = useDispatch();
-  const eventDetails = useSelector(state => state.event)
-  const [successMessage, setSuccessMessage] = useState('');
+  const eventDetails = useSelector((state) => state.event);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [deletionMessage, setDeletionMessage] = useState("");
   useEffect(() => {
-    dispatch(fetchEvent())
-  }, [])
-
+    dispatch(fetchEvent());
+  }, []);
 
   useEffect(() => {
     // Retrieve success message from sessionStorage
-    const message = sessionStorage.getItem('successMessage');
-
+    const message1 = sessionStorage.getItem("successMessage");
+    const message2 = sessionStorage.getItem("deletionMessage");
     // Clear success message from sessionStorage
-    sessionStorage.removeItem('successMessage');
+    sessionStorage.removeItem("successMessage");
+    sessionStorage.removeItem("deletionMessage");
 
-    if (message) {
-      setSuccessMessage(message);
-      console.log(message);
+    if (message1) {
+      setSuccessMessage(message1);
+    } else if (message2) {
+      setDeletionMessage(message2);
     }
   }, []);
-
-
 
   console.log("dynamic data", eventDetails.eventDetails);
   console.log("static data", EventsCards);
@@ -60,8 +60,25 @@ const UpcomingEvent = () => {
           <EventsHeader title={"Upcoming Event"} logo={spevents} />
           {/* <SponserE cardData={eventDetails.eventDetails} line={"Upcoming Event"} /> */}
           {successMessage && (
-            <div class="alert alert-success" role="alert">
-              {successMessage}
+            <div className="container">
+              <div
+                class="alert alert-success"
+                role="alert"
+                style={{ borderRadius: "10px" }}
+              >
+                {successMessage}
+              </div>
+            </div>
+          )}
+          {deletionMessage && (
+            <div className="container">
+              <div
+                class="alert alert-danger"
+                role="alert"
+                style={{ borderRadius: "10px" }}
+              >
+                {deletionMessage}
+              </div>
             </div>
           )}
           <MyEventCard cardData={eventDetails.eventDetails} />
@@ -73,7 +90,10 @@ const UpcomingEvent = () => {
           <SponserE cardData={EventsCards} line={"Reality Shows"} /> */}
         </div>
         <div className="events-page-mobile">
-          <EventMobileCard line={"Upcoming Event"} cardData={eventDetails.eventDetails} />
+          <EventMobileCard
+            line={"Upcoming Event"}
+            cardData={eventDetails.eventDetails}
+          />
           <div
             className="btn d-block text-white font-weight-bolder"
             style={{
