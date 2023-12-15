@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateEvent } from "../../../redux/actions/eventAction";
 import { eventReducer } from "../../../redux/reducer/eventReducer";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import apiurl from "../../../constant/config";
 
 const UpdateEvent = () => {
@@ -281,27 +281,10 @@ const UpdateEvent = () => {
                       </div>
                     </div>
 
-                    <div className="row form-group gap-3">
-                      <div className="col-md-6 mb-3 mb-md-0">
-                        {/* <select className="form-control" value={""}>
-                          <option className="text-muted">Enter category</option>
-                          <option>--select event category--</option>
-                        </select> */}
-                        {/* <input
-                          type="text"
-                          id="sponoring_item"
-                          value={sponsoring_item}
-                          onChange={(e) => setSponsoringItem(e.target.value)}
-                          className="form-control"
-                          placeholder="Enter Sponsoring Item"
-                        />
-                        {errors.sponsoring_item && <p className="error-msg">{errors.sponsoring_item}</p>} */}
-
+                    <div className="row form-group">
+                      <div className="col-md-12 mb-3 mb-md-0">
                         <div>
-                          <button
-                            className="btn bg-white"
-                            onClick={handleToggleDropdown}
-                          >
+                          <button type="button" onClick={handleToggleDropdown}>
                             Add Sponsoring Item
                           </button>
 
@@ -328,7 +311,7 @@ const UpdateEvent = () => {
                                     onChange={(e) =>
                                       handlePriceChange(item, e.target.value)
                                     }
-                                    className="form-control"
+                                    className="form-control my-1"
                                     placeholder={`Enter ${item.replace(
                                       "_",
                                       " "
@@ -344,24 +327,6 @@ const UpdateEvent = () => {
                         )}
                         {errors.prices && (
                           <p className="error-msg">{errors.prices}</p>
-                        )}
-                      </div>
-                      <div className="col-md-6">
-                        <input
-                          type="text"
-                          id="subject"
-                          value={eventData ? eventData.audience_expected : ""} // Populate the input with eventData's audience if it exists
-                          onChange={(e) =>
-                            setEventData({
-                              ...eventData,
-                              audience_expected: e.target.value,
-                            })
-                          }
-                          className="form-control"
-                          placeholder="Estimated audience"
-                        />
-                        {errors.audience && (
-                          <p className="error-msg">{errors.audience}</p>
                         )}
                       </div>
                     </div>
@@ -417,19 +382,7 @@ const UpdateEvent = () => {
                 </h1>
                 <h2 className="sponsor-mobile-text">Enter organizer info</h2>
                 <div className="box1">
-                  {/* <div className="col-lg-6 mb-5 mb-lg-0"> */}
                   <form action="#" className="contact-form">
-                    {/* <div className="row form-group">
-                                <div className="col-md-6 mb-3 mb-md-0">
-                                    <label className="text-black" for="fname">First Name</label>
-                                    <input type="text" id="fname" className="form-control" />
-                                </div>
-                                <div className="col-md-6">
-                                    <label className="text-black" for="lname">Last Name</label>
-                                    <input type="text" id="lname" className="form-control" />
-                                </div>
-                            </div> */}
-
                     <div className="row form-group">
                       <div className="col-md-12">
                         <input
@@ -476,21 +429,26 @@ const UpdateEvent = () => {
                         )}
                       </div>
                     </div>
-
-                    {/* <div className="row form-group">
-                                            <div className="col-md-12">
-                                                <input
-                                                    type="number"
-                                                    id="price"
-                                                    value={price}
-                                                    onChange={(e) => setPrice(e.target.value)}
-                                                    className="form-control"
-                                                    placeholder="Price"
-                                                />
-                                                {errors.price && <p className="error-msg">{errors.price}</p>}
-
-                                            </div>
-                                        </div> */}
+                    <div className="row form-group">
+                      <div className="col-md-12">
+                        <input
+                          type="text"
+                          id="subject"
+                          value={eventData ? eventData.audience_expected : ""} // Populate the input with eventData's audience if it exists
+                          onChange={(e) =>
+                            setEventData({
+                              ...eventData,
+                              audience_expected: e.target.value,
+                            })
+                          }
+                          className="form-control"
+                          placeholder="Estimated audience"
+                        />
+                        {errors.audience && (
+                          <p className="error-msg">{errors.audience}</p>
+                        )}
+                      </div>
+                    </div>
                   </form>
                 </div>
               </div>
@@ -532,11 +490,10 @@ const UpdateEvent = () => {
               >
                 <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add media</h5>
-                    // Input field and preview for the thumbnail
+                    <h5 className="font-weight-bold">Add primary thumbnail</h5>
                     {currentThumbnail1 && (
                       <div>
-                        <h2>Current Thumbnail:</h2>
+                        <h4>Current Thumbnail:</h4>
                         <img
                           src={currentThumbnail1}
                           alt="Current Thumbnail"
@@ -553,7 +510,7 @@ const UpdateEvent = () => {
                     {/* Display the new thumbnail if selected */}
                     {newThumbnail1 && (
                       <div>
-                        <h2>New Thumbnail:</h2>
+                        <h4>New Thumbnail:</h4>
                         <img
                           src={URL.createObjectURL(newThumbnail1)}
                           alt="New Thumbnail"
@@ -568,10 +525,12 @@ const UpdateEvent = () => {
                 </div>
                 <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add media</h5>
+                    <h5 className="font-weight-bold">
+                      Add secondary thumbnail
+                    </h5>
                     {currentThumbnail2 && (
                       <div>
-                        <h2>Current Thumbnail:</h2>
+                        <h4>Current Thumbnail:</h4>
                         <img
                           src={currentThumbnail2}
                           alt="Current Thumbnail"
@@ -589,7 +548,7 @@ const UpdateEvent = () => {
                     {/* Display the new thumbnail if selected */}
                     {newThumbnail2 && (
                       <div>
-                        <h2>New Thumbnail:</h2>
+                        <h4>New Thumbnail:</h4>
                         <img
                           src={URL.createObjectURL(newThumbnail2)}
                           alt="New Thumbnail"
@@ -604,10 +563,12 @@ const UpdateEvent = () => {
                 </div>
                 <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add media</h5>
+                    <h5 className="font-weight-bold">
+                      Add secondary thumbnail
+                    </h5>
                     {currentThumbnail3 && (
                       <div>
-                        <h2>Current Thumbnail:</h2>
+                        <h4>Current Thumbnail:</h4>
                         <img
                           src={currentThumbnail3}
                           alt="Current Thumbnail"
@@ -625,7 +586,7 @@ const UpdateEvent = () => {
                     {/* Display the new thumbnail if selected */}
                     {newThumbnail3 && (
                       <div>
-                        <h2>New Thumbnail:</h2>
+                        <h4>New Thumbnail:</h4>
                         <img
                           src={URL.createObjectURL(newThumbnail3)}
                           alt="New Thumbnail"
@@ -640,11 +601,14 @@ const UpdateEvent = () => {
                 </div>
               </div>
               <div className="box1 mt-2">
+                <h3 className="d-inline font-weight-bold">
+                  Add Video Preview:&nbsp;&nbsp;&nbsp;
+                </h3>
                 <input
                   type="file"
                   accept="video/*"
                   onChange={handleVideoChange}
-                  style={{ width: "74%", borderRadius: "0" }}
+                  style={{ width: "50%", borderRadius: "0" }}
                 />
                 {video && (
                   <div>
@@ -663,7 +627,12 @@ const UpdateEvent = () => {
                 value="List Event"
                 onClick={handleSubmitClick}
               />
-              <button className="btn btn-outline-primary mt-3">Discard</button>
+              <button
+                className="btn btn-outline-primary mt-3"
+                onClick={() => navigate("/")}
+              >
+                Discard
+              </button>
             </div>
           </div>
         </div>

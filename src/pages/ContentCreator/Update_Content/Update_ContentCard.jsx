@@ -19,6 +19,10 @@ const Update_ContentCard = ({ cardData }) => {
   const handleUpdateClick = (data) => {
     navigate("/update_content", { state: { contentData: data } });
   };
+  const handleDetailsClick = (data) => {
+    navigate("/mycontent-details", { state: { contentData: data } });
+  };
+
   return (
     <>
       <div className="desktop-view">
@@ -65,18 +69,14 @@ const Update_ContentCard = ({ cardData }) => {
                               {data.content_category} description:
                             </h6>
                             <p>
-                              Lorem ipsum dolor sit amet consectetur adipisicing
-                              elit. Eligendi laudantium iusto eum totam! Porro
-                              saepe culpa dignissimos veritatis mollitia
-                              voluptate.
-                              <Link to={"/mycontent-details"}>
-                                <b
-                                  className="text-sm font-weight-bold"
-                                  style={{ color: "#055bb5" }}
-                                >
-                                  Read More
-                                </b>
-                              </Link>
+                              {data.description}
+                              <b
+                                className="text-sm font-weight-bold"
+                                style={{ color: "#055bb5", cursor: "pointer" }}
+                                onClick={() => handleDetailsClick(data)}
+                              >
+                                ...Read More
+                              </b>
                             </p>
                           </div>
                         </div>
@@ -101,20 +101,30 @@ const Update_ContentCard = ({ cardData }) => {
                                 **Video Link Here**
                               </span>
                             </h5>
-                            <button
-                              onClick={() => handleUpdateClick(data)}
-                              className="btn py-1 px-3 font-weight-bold d-none d-md-block"
-                              style={{
-                                width: "100%",
-                                marginTop: "4%",
-                                color: "#004EA9",
-                                backgroundColor: "white",
-                                border: "2px solid #004EA9",
-                                borderRadius: "10px",
-                              }}
-                            >
-                              Update Your Content Details &nbsp;&nbsp; &gt;&gt;
-                            </button>
+                            <div className="container text-white text-center d-flex justify-content-between px-0 mt-3">
+                              <div className="box myevents-box text-white">
+                                <h6
+                                  style={{
+                                    borderBottom:
+                                      "1px solid rgba(255, 255, 255, 0.30)",
+                                    padding: "2%",
+                                  }}
+                                >
+                                  Your Bid
+                                </h6>
+                                <h5>₹ 50,000</h5>
+                              </div>
+                              <div
+                                className="box myevents-box"
+                                style={{ cursor: "pointer" }}
+                                onClick={() => handleUpdateClick(data)}
+                              >
+                                <h4 className="mt-2 mb-0">
+                                  <i className="bi bi-arrow-clockwise"></i>
+                                </h4>
+                                <p>Update Content</p>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>

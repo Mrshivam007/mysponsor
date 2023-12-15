@@ -22,6 +22,7 @@ const ListeventsForm = () => {
   const [location, setLocation] = useState("");
   const [audience, setAudienceExpected] = useState("");
   const [event_categories, setEventCategories] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [event_time, setEventTime] = useState("");
   const [price, setPrice] = useState("");
   const [prices, setPrices] = useState("");
@@ -174,7 +175,7 @@ const ListeventsForm = () => {
       formData.append("location", location);
       formData.append("audience_expected", audience);
       formData.append("price", price);
-      formData.append("event_category", event_categories);
+      formData.append("event_category", selectedCategory);
       // Append thumbnails with different keys
       formData.append("thumbnail1", thumbnail1);
       formData.append("thumbnail2", thumbnail2);
@@ -245,8 +246,8 @@ const ListeventsForm = () => {
                       </div>
                     </div>
 
-                    <div className="row form-group gap-3">
-                      <div className="col-md-6 mb-3 mb-md-0">
+                    <div className="row form-group">
+                      <div className="col-md-12 mb-3 mb-md-0">
                         {/* <select className="form-control" value={""}>
                           <option className="text-muted">Enter category</option>
                           <option>--select event category--</option>
@@ -289,7 +290,7 @@ const ListeventsForm = () => {
                                     onChange={(e) =>
                                       handlePriceChange(item, e.target.value)
                                     }
-                                    className="form-control"
+                                    className="form-control my-1"
                                     placeholder={`Enter ${item.replace(
                                       "_",
                                       " "
@@ -305,19 +306,6 @@ const ListeventsForm = () => {
                         )}
                         {prices == "" ? (
                           <p className="error-msg">{errors.prices}</p>
-                        ) : null}
-                      </div>
-                      <div className="col-md-6">
-                        <input
-                          type="text"
-                          id="subject"
-                          value={audience}
-                          onChange={(e) => setAudienceExpected(e.target.value)}
-                          className="form-control"
-                          placeholder="Estimated audience"
-                        />
-                        {audience == "" ? (
-                          <p className="error-msg">{errors.audience}</p>
                         ) : null}
                       </div>
                     </div>
@@ -359,19 +347,7 @@ const ListeventsForm = () => {
                 </h1>
                 <h2 className="sponsor-mobile-text">Enter organizer info</h2>
                 <div className="box1">
-                  {/* <div className="col-lg-6 mb-5 mb-lg-0"> */}
                   <form action="#" className="contact-form">
-                    {/* <div className="row form-group">
-                                <div className="col-md-6 mb-3 mb-md-0">
-                                    <label className="text-black" for="fname">First Name</label>
-                                    <input type="text" id="fname" className="form-control" />
-                                </div>
-                                <div className="col-md-6">
-                                    <label className="text-black" for="lname">Last Name</label>
-                                    <input type="text" id="lname" className="form-control" />
-                                </div>
-                            </div> */}
-
                     <div className="row form-group">
                       <div className="col-md-12">
                         <input
@@ -398,32 +374,33 @@ const ListeventsForm = () => {
 
                     <div className="row form-group">
                       <div className="col-md-12">
-                        <input
-                          type="text"
-                          id="categorie"
-                          value={event_categories}
-                          onChange={(e) => setEventCategories(e.target.value)}
+                        <select
                           className="form-control"
-                          placeholder="Event Categories"
-                        />
+                          onChange={(e) => {
+                            setSelectedCategory(e.target.value);
+                          }}
+                        >
+                          <option hidden>Enter Event Category</option>
+                          <option value="music">Music</option>
+                          <option value="dance">Dance</option>
+                        </select>
                         {event_categories == "" ? (
                           <p className="error-msg">{errors.event_categories}</p>
                         ) : null}
                       </div>
                     </div>
-
                     <div className="row form-group">
                       <div className="col-md-12">
                         <input
-                          type="number"
-                          id="price"
-                          value={price}
-                          onChange={(e) => setPrice(e.target.value)}
+                          type="text"
+                          id="subject"
+                          value={audience}
+                          onChange={(e) => setAudienceExpected(e.target.value)}
                           className="form-control"
-                          placeholder="Price"
+                          placeholder="Estimated audience"
                         />
-                        {price == "" ? (
-                          <p className="error-msg">{errors.price}</p>
+                        {audience == "" ? (
+                          <p className="error-msg">{errors.audience}</p>
                         ) : null}
                       </div>
                     </div>
@@ -458,7 +435,7 @@ const ListeventsForm = () => {
               <h1 className="font-weight-bold d-none d-lg-block">
                 Add Photos & Videos
               </h1>
-              <h2 className="sponsor-mobile-text">Add Photos & Videos</h2>
+              <h2 className="sponsor-mobile-text">Add Photos</h2>
               <p>(atleast 3 photos & 1 video)</p>
               <div
                 className="box1 mt-2 d-flex justify-content-center"
@@ -466,7 +443,7 @@ const ListeventsForm = () => {
               >
                 <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add media</h5>
+                    <h5 className="font-weight-bold">Add primary thumbnail</h5>
                     <input
                       type="file"
                       accept="image/*"
@@ -490,7 +467,9 @@ const ListeventsForm = () => {
                 </div>
                 <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add media</h5>
+                    <h5 className="font-weight-bold">
+                      Add secondary thumbnail
+                    </h5>
                     <input
                       type="file"
                       accept="image/*"
@@ -514,7 +493,9 @@ const ListeventsForm = () => {
                 </div>
                 <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add media</h5>
+                    <h5 className="font-weight-bold">
+                      Add secondary thumbnail
+                    </h5>
                     <input
                       type="file"
                       accept="image/*"
@@ -564,7 +545,12 @@ const ListeventsForm = () => {
                 value="List Event"
                 onClick={handleSubmitClick}
               />
-              <button className="btn btn-outline-primary mt-3">Discard</button>
+              <button
+                className="btn btn-outline-primary mt-3"
+                onClick={() => navigate("/")}
+              >
+                Discard
+              </button>
             </div>
           </div>
         </div>

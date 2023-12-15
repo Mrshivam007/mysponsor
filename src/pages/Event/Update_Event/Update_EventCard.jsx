@@ -148,9 +148,9 @@ const Update_EventCard = ({ cardData }) => {
                                   style={{ cursor: "pointer" }}
                                   onClick={() => handleUpdation(data)}
                                 >
-                                  <p>
-                                    <i className="bi bi-trash"></i>
-                                  </p>
+                                  <h4 className="mt-2 mb-0">
+                                    <i className="bi bi-arrow-clockwise"></i>
+                                  </h4>
                                   <p>Update Event</p>
                                 </div>
                               </div>

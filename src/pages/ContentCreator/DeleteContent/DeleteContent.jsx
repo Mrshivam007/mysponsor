@@ -47,7 +47,7 @@ const DeleteContent = () => {
       >
         <NavBar />
         <div className="events-page-desktop">
-          <EventsHeader title={"Delete Event"} logo={spevents} />
+          <EventsHeader title={"Delete Your Listed Content"} logo={spevents} />
           {/* <SponserE cardData={contentDetails.contentDetails} line={"Upcoming Event"} /> */}
           {successMessage && (
             <div class="alert alert-success" role="alert">

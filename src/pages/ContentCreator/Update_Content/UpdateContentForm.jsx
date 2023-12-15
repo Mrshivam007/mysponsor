@@ -301,79 +301,6 @@ const UpdateContent = () => {
                       </div>
                     </div>
 
-                    <div className="row form-group gap-3">
-                      <div className="col-md-6 mb-3 mb-md-0">
-                        {/* <select className="form-control" value={""}>
-                          <option className="text-muted">Enter category</option>
-                          <option>--select event category--</option>
-                        </select> */}
-                        {/* <input
-                          type="text"
-                          id="sponoring_item"
-                          value={sponsoring_item}
-                          onChange={(e) => setSponsoringItem(e.target.value)}
-                          className="form-control"
-                          placeholder="Enter Sponsoring Item"
-                        />
-                        {errors.sponsoring_item && <p className="error-msg">{errors.sponsoring_item}</p>} */}
-
-                        {/* <div>
-                                                    <button onClick={handleToggleDropdown}>Add Sponsoring Item</button>
-
-                                                    {showDropdown && (
-                                                        <div>
-                                                            <select
-                                                                multiple
-                                                                value={selectedItems}
-                                                                onChange={handleSponsoringItemChange}
-                                                                className="form-control"
-                                                                id="sponsoring_item"
-                                                                placeholder="Enter Sponsoring Item"
-                                                            >
-                                                                <option value="banner">Banner</option>
-                                                                <option value="led_screen">LED Screen</option>
-                                                                <option value="bill_board">Billboard</option>
-                                                            </select>
-
-                                                            {selectedItems.map((item) => (
-                                                                <div key={item}>
-                                                                    <input
-                                                                        type="text"
-                                                                        value={prices[item]}
-                                                                        onChange={(e) => handlePriceChange(item, e.target.value)}
-                                                                        className="form-control"
-                                                                        placeholder={`Enter ${item.replace('_', ' ')} Price`}
-                                                                    />
-                                                                </div>
-                                                            ))}
-                                                        </div>
-                                                    )}
-                                                </div>
-                                                {errors.selectedItems && <p className="error-msg">{errors.selectedItems}</p>}
-                                                {errors.prices && <p className="error-msg">{errors.prices}</p>} */}
-                      </div>
-                      <div className="col-md-12">
-                        <input
-                          type="text"
-                          id="subject"
-                          value={
-                            contentData ? contentData.audience_expected : ""
-                          } // Populate the input with contentData's audience if it exists
-                          onChange={(e) =>
-                            setcontentData({
-                              ...contentData,
-                              audience_expected: e.target.value,
-                            })
-                          }
-                          className="form-control"
-                          placeholder="Estimated audience"
-                        />
-                        {errors.audience && (
-                          <p className="error-msg">{errors.audience}</p>
-                        )}
-                      </div>
-                    </div>
-
                     <div className="row form-group">
                       <div className="col-6">
                         <label className="font-weight-bold">Start Date</label>
@@ -429,19 +356,7 @@ const UpdateContent = () => {
                 </h1>
                 <h2 className="sponsor-mobile-text">Enter Creator info</h2>
                 <div className="box1">
-                  {/* <div className="col-lg-6 mb-5 mb-lg-0"> */}
                   <form action="#" className="contact-form">
-                    {/* <div className="row form-group">
-                                <div className="col-md-6 mb-3 mb-md-0">
-                                    <label className="text-black" for="fname">First Name</label>
-                                    <input type="text" id="fname" className="form-control" />
-                                </div>
-                                <div className="col-md-6">
-                                    <label className="text-black" for="lname">Last Name</label>
-                                    <input type="text" id="lname" className="form-control" />
-                                </div>
-                            </div> */}
-
                     <div className="row form-group">
                       <div className="col-md-12">
                         <input
@@ -489,18 +404,26 @@ const UpdateContent = () => {
                       </div>
                     </div>
 
-                    <div className="row form-group">
+                    <div className="row form-group gap-3">
+                      <div className="col-md-6 mb-3 mb-md-0"></div>
                       <div className="col-md-12">
                         <input
-                          type="number"
-                          id="price"
-                          value={contentData ? contentData.content_price : ""}
-                          onChange={(e) => setPrice(e.target.value)}
+                          type="text"
+                          id="subject"
+                          value={
+                            contentData ? contentData.audience_expected : ""
+                          } // Populate the input with contentData's audience if it exists
+                          onChange={(e) =>
+                            setcontentData({
+                              ...contentData,
+                              audience_expected: e.target.value,
+                            })
+                          }
                           className="form-control"
-                          placeholder="Price"
+                          placeholder="Estimated audience"
                         />
-                        {errors.price && (
-                          <p className="error-msg">{errors.price}</p>
+                        {errors.audience && (
+                          <p className="error-msg">{errors.audience}</p>
                         )}
                       </div>
                     </div>
@@ -540,20 +463,20 @@ const UpdateContent = () => {
               <h1 className="font-weight-bold d-none d-lg-block">
                 Add Photos & Videos
               </h1>
-              <h2 className="sponsor-mobile-text">Add Photos & Videos</h2>
+              <h2 className="sponsor-mobile-text">Add Photos</h2>
               <p>(atleast 3 photos & 1 video)</p>
               <div
                 className="box1 mt-2 d-flex justify-content-center"
                 style={{ gap: "2%" }}
               >
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add media</h5>
-                    // Input field and preview for the thumbnail
+                    <h5 className="font-weight-bold">Add primary thumbnail</h5>
                     {currentThumbnail1 && (
                       <div>
-                        <h2>Current Thumbnail:</h2>
+                        <h4>Current Thumbnail:</h4>
                         <img
+                          className="my-3"
                           src={currentThumbnail1}
                           alt="Current Thumbnail"
                           width="200"
@@ -569,7 +492,7 @@ const UpdateContent = () => {
                     {/* Display the new thumbnail if selected */}
                     {newThumbnail1 && (
                       <div>
-                        <h2>New Thumbnail:</h2>
+                        <h4>New Thumbnail:</h4>
                         <img
                           src={URL.createObjectURL(newThumbnail1)}
                           alt="New Thumbnail"
@@ -582,13 +505,16 @@ const UpdateContent = () => {
                     )}
                   </div>
                 </div>
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add media</h5>
+                    <h5 className="font-weight-bold">
+                      Add secondary thumbnail
+                    </h5>
                     {currentThumbnail2 && (
                       <div>
-                        <h2>Current Thumbnail:</h2>
+                        <h4>Current Thumbnail:</h4>
                         <img
+                          className="my-3"
                           src={currentThumbnail2}
                           alt="Current Thumbnail"
                           width="200"
@@ -605,7 +531,7 @@ const UpdateContent = () => {
                     {/* Display the new thumbnail if selected */}
                     {newThumbnail2 && (
                       <div>
-                        <h2>New Thumbnail:</h2>
+                        <h4>New Thumbnail:</h4>
                         <img
                           src={URL.createObjectURL(newThumbnail2)}
                           alt="New Thumbnail"
@@ -618,13 +544,16 @@ const UpdateContent = () => {
                     )}
                   </div>
                 </div>
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add media</h5>
+                    <h5 className="font-weight-bold">
+                      Add secondary thumbnail
+                    </h5>
                     {currentThumbnail3 && (
                       <div>
-                        <h2>Current Thumbnail:</h2>
+                        <h4>Current Thumbnail:</h4>
                         <img
+                          className="my-3"
                           src={currentThumbnail3}
                           alt="Current Thumbnail"
                           width="200"
@@ -641,7 +570,7 @@ const UpdateContent = () => {
                     {/* Display the new thumbnail if selected */}
                     {newThumbnail3 && (
                       <div>
-                        <h2>New Thumbnail:</h2>
+                        <h4>New Thumbnail:</h4>
                         <img
                           src={URL.createObjectURL(newThumbnail3)}
                           alt="New Thumbnail"

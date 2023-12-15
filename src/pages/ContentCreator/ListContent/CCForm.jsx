@@ -121,7 +121,7 @@ const ListContentForm = () => {
       errorsObj.audience = "audience is required";
     }
     if (selectedCategory === "") {
-      errorsObj.event_categories = "Content Category is required";
+      errorsObj.content_categories = "Content Category is required";
     }
     if (selectedPlatform === "") {
       errorsObj.content_platform = "Content Platform is required";
@@ -231,10 +231,6 @@ const ListContentForm = () => {
                           className="form-control"
                           onChange={(e) => {
                             setSelectedCategory(e.target.value);
-                            console.log(
-                              "This is content category",
-                              e.target.value
-                            );
                           }}
                         >
                           <option hidden>Enter Content Category</option>
@@ -242,7 +238,9 @@ const ListContentForm = () => {
                           <option value="Post">Post</option>
                         </select>
                         {selectedCategory == "" ? (
-                          <p className="error-msg">{errors.event_categories}</p>
+                          <p className="error-msg">
+                            {errors.content_categories}
+                          </p>
                         ) : null}
                       </div>
                     </div>
@@ -253,10 +251,6 @@ const ListContentForm = () => {
                           className="form-control"
                           onChange={(e) => {
                             setSelectedPlatform(e.target.value);
-                            console.log(
-                              "This is platform used",
-                              e.target.value
-                            );
                           }}
                         >
                           <option hidden>Enter Platform</option>
@@ -265,69 +259,6 @@ const ListContentForm = () => {
                         </select>
                         {selectedPlatform == "" ? (
                           <p className="error-msg">{errors.content_platform}</p>
-                        ) : null}
-                      </div>
-                    </div>
-
-                    <div className="row form-group gap-3">
-                      {/* <div className="col-md-6 mb-3 mb-md-0">
-                        <div>
-                          <button onClick={handleToggleDropdown}>
-                            Add Sponsoring Item
-                          </button>
-
-                          {showDropdown && (
-                            <div>
-                              <select
-                                multiple
-                                value={selectedItems}
-                                onChange={handleSponsoringItemChange}
-                                className="form-control"
-                                id="sponsoring_item"
-                                placeholder="Enter Sponsoring Item"
-                              >
-                                <option value="banner">Banner</option>
-                                <option value="led_screen">LED Screen</option>
-                                <option value="bill_board">Billboard</option>
-                              </select>
-
-                              {selectedItems.map((item) => (
-                                <div key={item}>
-                                  <input
-                                    type="text"
-                                    value={prices[item]}
-                                    onChange={(e) =>
-                                      handlePriceChange(item, e.target.value)
-                                    }
-                                    className="form-control"
-                                    placeholder={`Enter ${item.replace(
-                                      "_",
-                                      " "
-                                    )} Price`}
-                                  />
-                                </div>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                        {errors.selectedItems && (
-                          <p className="error-msg">{errors.selectedItems}</p>
-                        )}
-                        {prices == "" ? (
-                          <p className="error-msg">{errors.prices}</p>
-                        ) : null}
-                      </div> */}
-                      <div className="col-md-12">
-                        <input
-                          type="text"
-                          id="subject"
-                          value={audience}
-                          onChange={(e) => setAudienceExpected(e.target.value)}
-                          className="form-control"
-                          placeholder="Enter expected audience (Channel Subs)"
-                        />
-                        {audience == "" ? (
-                          <p className="error-msg">{errors.audience}</p>
                         ) : null}
                       </div>
                     </div>
@@ -422,18 +353,18 @@ const ListContentForm = () => {
                       </div>
                     </div>
 
-                    <div className="row form-group">
+                    <div className="row form-group gap-3">
                       <div className="col-md-12">
                         <input
-                          type="number"
-                          id="price"
-                          value={price}
-                          onChange={(e) => setPrice(e.target.value)}
+                          type="text"
+                          id="subject"
+                          value={audience}
+                          onChange={(e) => setAudienceExpected(e.target.value)}
                           className="form-control"
-                          placeholder="Price"
+                          placeholder="Enter expected audience (Channel Subs)"
                         />
-                        {price == "" ? (
-                          <p className="error-msg">{errors.price}</p>
+                        {audience == "" ? (
+                          <p className="error-msg">{errors.audience}</p>
                         ) : null}
                       </div>
                     </div>
@@ -472,9 +403,9 @@ const ListContentForm = () => {
                 className="box1 mt-2 d-flex justify-content-center"
                 style={{ gap: "2%" }}
               >
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add media</h5>
+                    <h5 className="font-weight-bold">Add primary thumbnail</h5>
                     <input
                       type="file"
                       accept="image/*"
@@ -483,7 +414,7 @@ const ListContentForm = () => {
                     />
                     {thumbnail1 && (
                       <div>
-                        <h2>Preview:</h2>
+                        <h2 className="my-3">Preview:</h2>
                         <img
                           src={URL.createObjectURL(thumbnail1)}
                           alt="Preview"
@@ -496,9 +427,11 @@ const ListContentForm = () => {
                     ) : null}
                   </div>
                 </div>
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add media</h5>
+                    <h5 className="font-weight-bold">
+                      Add secondary thumbnail
+                    </h5>
                     <input
                       type="file"
                       accept="image/*"
@@ -507,7 +440,7 @@ const ListContentForm = () => {
                     />
                     {thumbnail2 && (
                       <div>
-                        <h2>Preview:</h2>
+                        <h2 className="my-3">Preview:</h2>
                         <img
                           src={URL.createObjectURL(thumbnail2)}
                           alt="Preview"
@@ -522,7 +455,9 @@ const ListContentForm = () => {
                 </div>
                 <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add media</h5>
+                    <h5 className="font-weight-bold">
+                      Add secondary thumbnail
+                    </h5>
                     <input
                       type="file"
                       accept="image/*"
@@ -531,7 +466,7 @@ const ListContentForm = () => {
                     />
                     {thumbnail3 && (
                       <div>
-                        <h2>Preview:</h2>
+                        <h2 className="my-3">Preview:</h2>
                         <img
                           src={URL.createObjectURL(thumbnail3)}
                           alt="Preview"

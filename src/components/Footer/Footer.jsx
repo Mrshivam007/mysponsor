@@ -11,11 +11,11 @@ const Footer = () => {
       >
         {/* <!-- Grid container --> */}
         <div
-          className="container p-4"
+          className="container p-2"
           style={{ borderBottom: "1px solid rgba(255, 255, 255, 0.30)" }}
         >
           {/* <!--Grid row--> */}
-          <div className="row align-items-center justify-content-around">
+          <div className="row align-items-center">
             {/* <!--Grid column--> */}
             <div className="col-lg-6 col-md-12 mb-4 mb-md-0 text-left mb-md-4 text-md-center ">
               <h5 className="footer-logo">
@@ -35,9 +35,8 @@ const Footer = () => {
                 cumque eum delectus sint!
               </p>
             </div>
-            {/* <!--Grid column-->
-
-      <!--Grid column--> */}
+            {/* Grid column end */}
+            {/* <!--Grid column--> */}
             <div className="col-lg-2 col-md-4 mb-4 mb-md-0 text-lg-left text-md-center footer-desktop-links">
               <h5 className="text-capitalize">Events</h5>
 
@@ -59,9 +58,27 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            {/* <!--Grid column-->
+            {/* Grid column end */}
+            {/* <!--Grid column--> */}
+            <div className="col-lg-2 col-md-4 mt-0 mb-4 mb-md-0 text-lg-left text-md-center footer-desktop-links">
+              <h5 className="text-capitalize">Listing</h5>
 
-      <!--Grid column--> */}
+              <ul className="list-unstyled">
+                <li>
+                  <a href="#!" className="text-white text-sm">
+                    List your event
+                  </a>
+                </li>
+                <li style={{ margin: "4% 0 4% 0" }}>
+                  <a href="#!" className="text-white text-sm">
+                    List content creator
+                  </a>
+                </li>
+              </ul>
+              <br />
+            </div>
+            {/* Grid column end */}
+            {/* <!--Grid column--> */}
             <div className="col-lg-2 col-md-4 mb-4 mb-md-0 text-lg-left text-md-center footer-desktop-links">
               <h5 className="text-capitalize">Content creators</h5>
 
@@ -83,25 +100,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            {/* <!--Grid column--> */}
-            <div className="col-lg-2 col-md-4 mt-0 mb-4 mb-md-0 text-lg-left text-md-center footer-desktop-links">
-              <h5 className="text-capitalize">Listing</h5>
-
-              <ul className="list-unstyled">
-                <li>
-                  <a href="#!" className="text-white text-sm">
-                    List your event
-                  </a>
-                </li>
-                <li style={{ margin: "4% 0 4% 0" }}>
-                  <a href="#!" className="text-white text-sm">
-                    List content creator
-                  </a>
-                </li>
-              </ul>
-              <br />
-            </div>
-
+            {/* Grid column end */}
             <div className="container">
               <Link to="/choice">
                 <button

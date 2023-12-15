@@ -116,20 +116,30 @@ const MyContentCard = ({ cardData }) => {
                                   **Video Link Here**
                                 </span>
                               </h5>
-                              <button
-                                onClick={() => handleDetailsClick(data)}
-                                className="btn py-1 px-3 font-weight-bold d-none d-md-block"
-                                style={{
-                                  width: "100%",
-                                  marginTop: "4%",
-                                  color: "#004EA9",
-                                  backgroundColor: "white",
-                                  border: "2px solid #004EA9",
-                                  borderRadius: "10px",
-                                }}
-                              >
-                                Check Out Content Details &nbsp;&nbsp; &gt;&gt;
-                              </button>
+                              <div className="container text-white text-center d-flex justify-content-between px-0 mt-3">
+                                <div className="box myevents-box text-white">
+                                  <h6
+                                    style={{
+                                      borderBottom:
+                                        "1px solid rgba(255, 255, 255, 0.30)",
+                                      padding: "2%",
+                                    }}
+                                  >
+                                    Your Bid
+                                  </h6>
+                                  <h5>₹ 50,000</h5>
+                                </div>
+                                <div
+                                  className="box myevents-box"
+                                  style={{ cursor: "pointer" }}
+                                  onClick={() => handleDetailsClick(data)}
+                                >
+                                  <h4 className="mb-0 mt-2">
+                                    <i className="bi bi-info-circle"></i>
+                                  </h4>
+                                  <h5>View Details</h5>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>

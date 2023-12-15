@@ -17,7 +17,7 @@ const MyContentBox = (contentData) => {
     speed: 500, // Transition speed in milliseconds
     slidesToShow: 1, // Number of slides to show at a time
     slidesToScroll: 1, // Number of slides to scroll at a time
-    autoplay: true, // Auto-play the slider
+    autoplay: false, // Auto-play the slider
     autoplaySpeed: 3000, // Auto-play speed in milliseconds
   };
 
@@ -45,8 +45,11 @@ const MyContentBox = (contentData) => {
                     <img
                       src={apiurl + data}
                       alt=""
+                      width="600"
+                      height="300"
                       style={{
                         width: "100%",
+                        height: "auto",
                         borderRadius: "15px",
                       }}
                     />

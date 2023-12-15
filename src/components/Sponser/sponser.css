@@ -185,11 +185,12 @@
 
 .cc-img {
     max-width: -webkit-fill-available;
-    margin: 8%;
+    margin: 5%;
+    border-radius: 10px;
 }
 
 .cc-card-body {
-    margin: 15% 0 0 0;
+    margin: 8% 0 8% 0;
     padding: 0%;
 }
 

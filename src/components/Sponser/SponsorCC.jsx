@@ -3,19 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./sponser.css";
 import { Link } from "react-router-dom";
-// import { cardData2 } from "../../data/data";
 const SponserCC = ({ line, cardData }) => {
-  // const settings = {
-  //   dots: false,
-  //   infinite: true,
-  //   speed: 500,
-  //   slidesToShow: 1, // Display one card at a time on mobile
-  //   slidesToScroll: 1,
-  //   prevArrow: null, // Hide the previous arrow
-  //   nextArrow: null, // Hide the next arrow
-  // };
-  // console.log(cardData);
-
   return (
     <>
       {/* Content Creator Layer */}
@@ -41,11 +29,11 @@ const SponserCC = ({ line, cardData }) => {
                     boxShadow: "0px 2px 10px -2px rgba(0, 0, 0, 0.25)",
                   }}
                 >
-                  <div className="row g-0">
+                  <div className="row g-0 align-items-center">
                     <div className="col-4 col-md-5 col-sm-4 cc-img-container">
                       <img
-                        src={ccimg_card}
                         className="img-fluid rounded-start cc-img"
+                        src={ccimg_card}
                         alt=""
                       />
                     </div>

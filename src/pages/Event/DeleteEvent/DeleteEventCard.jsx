@@ -154,13 +154,13 @@ const Delete_EventCard = ({ cardData }) => {
                                   <h5>₹ 50,000</h5>
                                 </div>
                                 <div
-                                  className="box myevents-box"
+                                  className="box myevents-box bg-danger"
                                   style={{ cursor: "pointer" }}
                                   onClick={handleShow}
                                 >
-                                  <h5 className="pt-1">
+                                  <h4 className="mb-0 mt-2">
                                     <i className="bi bi-trash"></i>
-                                  </h5>
+                                  </h4>
                                   <h5>Delete Event</h5>
                                 </div>
                                 <Modal
@@ -175,8 +175,7 @@ const Delete_EventCard = ({ cardData }) => {
                                     </Modal.Title>
                                   </Modal.Header>
                                   <Modal.Body>
-                                    Are you sure you want to delete this event
-                                    ?
+                                    Are you sure you want to delete this event ?
                                   </Modal.Body>
                                   <Modal.Footer>
                                     <Button

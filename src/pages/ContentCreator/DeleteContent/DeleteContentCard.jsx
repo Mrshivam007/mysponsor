@@ -129,18 +129,59 @@ const DeleteContentCard = ({ cardData }) => {
                                 **Video Link Here**
                               </span>
                             </h5>
-                            <button
-                              className="btn py-1 px-3 font-weight-bold d-none d-md-block bg-danger text-light"
-                              onClick={handleShow}
-                              style={{
-                                width: "100%",
-                                marginTop: "4%",
-                                borderRadius: "10px",
-                              }}
-                            >
-                              Delete this Content &nbsp;&nbsp;{" "}
-                              <i className="bi bi-trash"></i>
-                            </button>
+                            <div className="container text-white text-center d-flex justify-content-between px-0 mt-3">
+                              <div className="box myevents-box text-white">
+                                <h6
+                                  style={{
+                                    borderBottom:
+                                      "1px solid rgba(255, 255, 255, 0.30)",
+                                    padding: "2%",
+                                  }}
+                                >
+                                  Your Bid
+                                </h6>
+                                <h5>₹ 50,000</h5>
+                              </div>
+                              <div
+                                className="box myevents-box bg-danger"
+                                style={{ cursor: "pointer" }}
+                                onClick={handleShow}
+                              >
+                                <h4 className="mb-0 mt-2">
+                                  <i className="bi bi-trash"></i>
+                                </h4>
+                                <h5>Delete Content</h5>
+                              </div>
+                              <Modal
+                                show={show}
+                                onHide={handleClose}
+                                scrollable={true}
+                                style={{ zIndex: "2000" }}
+                              >
+                                <Modal.Header>
+                                  <Modal.Title>
+                                    Delete {data.title} ?
+                                  </Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                  Are you sure you want to delete this event ?
+                                </Modal.Body>
+                                <Modal.Footer>
+                                  <Button
+                                    variant="primary"
+                                    onClick={() => handleDeletion(data)}
+                                  >
+                                    Yes
+                                  </Button>
+                                  <Button
+                                    variant="secondary"
+                                    onClick={handleClose}
+                                  >
+                                    No
+                                  </Button>
+                                </Modal.Footer>
+                              </Modal>
+                            </div>
                             <Modal
                               show={show}
                               onHide={handleClose}

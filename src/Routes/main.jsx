@@ -11,7 +11,7 @@ import {
   SponsorChoice,
   SponsorContentC,
   SponsorEvents,
-} from "../pages";
+} from "../pages/LandingPage";
 import { useSelector } from "react-redux";
 import EventRoutes from "./event";
 import ContentRoutes from "./content";
