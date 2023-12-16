@@ -40,7 +40,7 @@ const ContentCard = ({ line, cardData }) => {
                   className="card"
                   style={{
                     maxWidth: "100%",
-                    height: "55vh",
+                    height: "30vh",
                     borderRadius: "18px",
                     boxShadow: "0px 2px 10px -2px rgba(0, 0, 0, 0.25)",
                   }}
