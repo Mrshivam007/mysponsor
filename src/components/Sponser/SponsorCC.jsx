@@ -24,20 +24,23 @@ const SponserCC = ({ line, cardData }) => {
                   className="card"
                   style={{
                     maxWidth: "100%",
-                    height: "auto",
+                    height: "55vh",
                     borderRadius: "18px",
                     boxShadow: "0px 2px 10px -2px rgba(0, 0, 0, 0.25)",
                   }}
                 >
-                  <div className="row g-0 align-items-center">
-                    <div className="col-4 col-md-5 col-sm-4 cc-img-container">
+                  <div
+                    className="row g-0 align-items-center"
+                    style={{ width: "auto", height: "100%" }}
+                  >
+                    <div className="col-4 col-md-5 col-sm-4 cc-img-container d-flex">
                       <img
                         className="img-fluid rounded-start cc-img"
                         src={ccimg_card}
                         alt=""
                       />
                     </div>
-                    <div className="col-6 col-md-5 col-sm-6 px-lg-0">
+                    <div className="col-6 col-md-5 col-sm-6 px-lg-0 d-flex align-items-center">
                       <div className="card-body cc-card-body">
                         <h5 className="card-title font-weight-bold d-inline">
                           {data.name}
