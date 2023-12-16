@@ -1,28 +1,22 @@
 import React, { useState } from "react";
 import heart from "../../assets/img/heart2.svg";
-import "./myeventsbox.css";
 import apiurl from "../../constant/config";
 import Slider from "react-slick";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SponsorButton = ({ item, isSelected, onButtonClick }) => {
   return (
-    <tr style={{ background: "rgba(0, 187, 255, 0.75)" }}>
-      <td
-        style={{
-          borderRight: "1px solid rgba(255, 255, 255, 0.50)",
-        }}
+    <div className="col-4 px-1 px-md-2 my-3 text-center">
+      <div
+        className="post-thumb text-dark py-1"
+        style={{ backgroundColor: "#f2f2f2", borderRadius: "10px" }}
       >
-        {item.sponsoring_items}
-      </td>
-      <td
-        style={{
-          borderRight: "1px solid rgba(255, 255, 255, 0.50)",
-        }}
-      >
-        {item.price}
-      </td>
-    </tr>
+        <h6 className="font-weight-bolder">
+          {item.sponsoring_items} <br />
+          <i className="bi bi-cash text-success"></i> ₹{item.price}
+        </h6>
+      </div>
+    </div>
   );
 };
 
@@ -43,9 +37,6 @@ const MyEventsBox = (eventData) => {
     // Navigate to the /sponsor_login route with cardData as state
     navigate("/sponsor_login", { state: { cardData } });
   };
-
-
-
 
   sponsoring_items.forEach((item) => {
     if (item && item.price) {
@@ -70,15 +61,17 @@ const MyEventsBox = (eventData) => {
       setSelectedItems((prevSelectedItems) =>
         prevSelectedItems.filter((selectedItem) => selectedItem !== item)
       );
-      setTotalSponsoringPrice((prevTotal) => prevTotal - parseFloat(item.price));
+      setTotalSponsoringPrice(
+        (prevTotal) => prevTotal - parseFloat(item.price)
+      );
     } else {
       // If item is not selected, add it
       setSelectedItems((prevSelectedItems) => [...prevSelectedItems, item]);
-      setTotalSponsoringPrice((prevTotal) => prevTotal + parseFloat(item.price));
+      setTotalSponsoringPrice(
+        (prevTotal) => prevTotal + parseFloat(item.price)
+      );
     }
   };
-
-
 
   return (
     <>
@@ -109,35 +102,29 @@ const MyEventsBox = (eventData) => {
                   ))}
                 </Slider>
               </div>
-              <div>
-                <table
-                  className="table table-borderless text-center text-white overflow-hidden"
-                  style={{
-                    marginBottom: "4%",
-                    borderRadius: "10px",
-                    boxShadow: "0px 2px 20px -3px rgba(0, 0, 0, 0.16)",
-                  }}
-                >
-                  <thead>
-                    <tr className="table-sm" style={{ background: "#004EA9" }}>
-                      <th>Sponsoring Item Name</th>
-                      <th>Sponsoring Item Price</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {cardData?.sponsoring_items.map((item, index) => (
-                      <SponsorButton
-                        key={index}
-                        item={item}
-                        isSelected={selectedItems.includes(item)}
-                        onButtonClick={handleButtonClick}
-                      />
-                    ))}
-                  </tbody>
-                </table>
-                <p>Total Sponsoring Price: ${totalSponsoringPrice.toFixed(2)}</p>
-              </div>
-
+              <table
+                className="table table-borderless text-center text-white overflow-hidden"
+                style={{
+                  marginBottom: "4%",
+                  borderRadius: "10px",
+                  boxShadow: "0px 2px 20px -3px rgba(0, 0, 0, 0.16)",
+                }}
+              >
+                <tr className="table-sm" style={{ background: "#004EA9" }}>
+                  <td>Start date</td>
+                  <td>End date</td>
+                </tr>
+                <tr style={{ background: "rgba(0, 187, 255, 0.75)" }}>
+                  <td
+                    style={{
+                      borderRight: "1px solid rgba(255, 255, 255, 0.50)",
+                    }}
+                  >
+                    {cardData.event_start_date}
+                  </td>
+                  <td>{cardData.event_end_date}</td>
+                </tr>
+              </table>
             </div>
             <div className="col-6">
               <h4 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between">
@@ -162,47 +149,28 @@ const MyEventsBox = (eventData) => {
                 <i className="bi bi-people-fill text-danger"></i>&nbsp;&nbsp;
                 <span className="text-md">{cardData.audience_expected}</span>
               </h5>
-              <table
-                className="table table-borderless text-center text-white overflow-hidden"
-                style={{
-                  marginBottom: "4%",
-                  borderRadius: "10px",
-                  boxShadow: "0px 2px 20px -3px rgba(0, 0, 0, 0.16)",
-                }}
-              >
-                <tr className="table-sm" style={{ background: "#004EA9" }}>
-                  <td>Start date</td>
-                  <td>End date</td>
-                </tr>
-                <tr style={{ background: "rgba(0, 187, 255, 0.75)" }}>
-                  <td
-                    style={{
-                      borderRight: "1px solid rgba(255, 255, 255, 0.50)",
-                    }}
-                  >
-                    {cardData.event_start_date}
-                  </td>
-                  <td>{cardData.event_end_date}</td>
-                </tr>
-              </table>
 
-              {/* <div>
-                <table
-                  className="table table-borderless text-center text-white overflow-hidden"
+              <div className="row g-0">
+                <div
+                  className="box text-white"
                   style={{
-                    marginBottom: "4%",
+                    backgroundColor: "#004EA9",
+                    width: "100%",
                     borderRadius: "10px",
-                    boxShadow: "0px 2px 20px -3px rgba(0, 0, 0, 0.16)",
+                    marginTop: "3%",
                   }}
                 >
-                  <thead>
-                    <tr className="table-sm" style={{ background: "#004EA9" }}>
-                      <th>Sponsoring Item Name</th>
-                      <th>Sponsoring Item Price</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+                  <div
+                    className="col-12 font-weight-bolder text-center"
+                    style={{
+                      padding: "3% 0 2% 0",
+                      borderBottom: "1px solid rgba(255, 255, 255, 0.20)",
+                    }}
+                  >
+                    Sponsoring items
+                  </div>
+
+                  <div className="row mx-auto" style={{ width: "100%" }}>
                     {cardData?.sponsoring_items.map((item, index) => (
                       <SponsorButton
                         key={index}
@@ -211,67 +179,23 @@ const MyEventsBox = (eventData) => {
                         onButtonClick={handleButtonClick}
                       />
                     ))}
-                  </tbody>
-                </table>
-                <p>Total Sponsoring Price: ${totalSponsoringPrice.toFixed(2)}</p>
-              </div> */}
-
-              <div className="container text-white text-center d-flex justify-content-between px-0 mt-4">
-                <div
-                  className="box bid-box text-white"
-                  style={{ backgroundColor: "#004EA9" }}
-                >
-                  <h6
-                    style={{
-                      borderBottom: "1px solid rgba(255, 255, 255, 0.30)",
-                      padding: "2%",
-                      // marginBottom: "4%",
-                    }}
-                  >
-                    Your Bid
-                  </h6>
-                  <h5>₹ {totalSponsoringPrice.toFixed(2)}</h5>
-                </div>
-                {/* <div
-                  className="box bid-box"
-                  style={{ backgroundColor: "#FF2B66" }}
-                >
-                  <h2 className="mb-0">
-                    <i className="bi bi-plus"></i>
-                  </h2>
-                  <h5>Add More</h5>
-                </div> */}
-                <div
-                  className="box bid-box"
-                  style={{
-                    backgroundColor: "#004EA9",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    textAlign: "center",
-                  }}
-                  onClick={handleSponsorLogin}
-                >
-                  <h3 style={{color: 'white'}}>Sponsor</h3>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="row p-3">
+          <div className="container mt-2">
+            <h5 className="font-weight-bold">Event Description: </h5>
             <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non quis
-              repellat consequuntur quasi, facere officia praesentium voluptatum
-              libero eveniet vel quisquam voluptates temporibus facilis quas
-              quam. Voluptatibus repellat itaque adipisci labore voluptates sint
-              ipsa sapiente, a consequuntur odio, excepturi iusto! Non,
-              reiciendis quidem officia quae delectus eos fugit tempore velit
-              voluptate error dignissimos. <br />
-              Dolore facilis repellat ipsum! Atque iusto accusamus, cupiditate
-              excepturi dolores accusantium dignissimos, voluptatem distinctio
-              doloremque quaerat in enim sunt iure magni officiis deserunt
-              facilis vel voluptates incidunt quisquam nisi corporis tenetur
-              exercitationem. Iure, corporis repellat. Amet accusamus asperiores
-              nisi maxime fugit facere, est voluptatibus sit molestiae deleniti.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Consequatur voluptates est perspiciatis voluptas dolorem quo quasi
+              sapiente magnam corporis fugiat? Culpa, dolores ullam? Alias nulla
+              libero rem praesentium consequuntur excepturi porro cupiditate
+              velit, vero harum id sequi, repellendus beatae voluptatibus
+              facilis minima in fugiat sunt animi qui? Voluptatem magni eos
+              mollitia. Obcaecati tempora vero fugiat dolorem aliquid officiis
+              necessitatibus consequuntur sit in, distinctio ipsam aperiam
+              cupiditate facilis, sint nesciunt quam!
             </p>
           </div>
         </div>
@@ -294,40 +218,27 @@ const MyEventsBox = (eventData) => {
             style={{ width: "100%" }}
           />
         </div>
-        <div className="container text-white text-center d-flex align-items-end justify-content-around px-0 mt-3">
-          <div className="box">
-            <h4 className="text-md text-dark font-weight-bold">
-              <i className="bi bi-cash text-success"></i>
-              &nbsp; {totalAmount}&lt;
-            </h4>
-            <h4 className="text-md text-dark font-weight-bold">
-              <i className="bi bi-people-fill text-danger"></i>
-              &nbsp; {cardData.audience_expected}+
-            </h4>
+        <div className="container">
+          <div className="star d-flex pt-3">
+            <h5>
+              <i className="bi bi-cash text-success"></i>&nbsp;
+              {totalAmount}&nbsp;&nbsp;
+              <i className="bi bi-people-fill text-danger"></i>&nbsp;
+              {cardData.audience_expected}&nbsp;&nbsp;
+            </h5>
           </div>
-          <div
-            className="box bid-box text-white"
-            style={{ backgroundColor: "#004EA9" }}
-          >
-            <p
-              style={{
-                borderBottom: "1px solid rgba(255, 255, 255, 0.30)",
-                padding: "4%",
-                // marginBottom: "4%",
-              }}
-            >
-              Your Bid
-            </p>
-            <p>₹ 50,000</p>
-          </div>
-          <div className="box bid-box" style={{ backgroundColor: "#FF2B66" }}>
-            <h2 className="mb-0">
-              <i className="bi bi-plus"></i>
-            </h2>
-            <p>Add More</p>
+          <div className="star d-flex">
+            <h5>
+              <i class="bi bi-star-fill text-warning"></i>&nbsp;
+              <i class="bi bi-star-fill text-warning"></i>&nbsp;
+              <i class="bi bi-star-fill text-warning"></i>&nbsp;
+              <i class="bi bi-star-fill text-warning"></i>&nbsp;
+              <i class="bi bi-star-fill text-white"></i>&nbsp;
+              <span className="text-sm text-muted">3482 reviews</span>
+            </h5>
           </div>
         </div>
-        <div className="container">
+        <div className="container px-0">
           <table
             className="table table-borderless text-center text-dark overflow-hidden"
             style={{
@@ -367,13 +278,42 @@ const MyEventsBox = (eventData) => {
             </tr>
           </table>
         </div>
-        <p>
-          Ganesh Chaturthi, also called Vinayaka Chaturthi, in Hinduism, 10-day
-          festival marking the birth of the elephant-headed deity Ganesha, the
-          god of prosperity and wisdom. It begins on the fourth day (chaturthi)
-          of the month of Bhadrapada (August-September), the sixth month of the
-          Hindu calendar.
-        </p>
+        <div className="container px-1">
+          <div className="row g-0">
+            <div
+              className="box text-white"
+              style={{
+                backgroundColor: "#004EA9",
+                width: "100%",
+                borderRadius: "10px",
+                marginTop: "3%",
+              }}
+            >
+              <div
+                className="col-12 font-weight-bolder text-center"
+                style={{
+                  padding: "3% 0 2% 0",
+                  borderBottom: "1px solid rgba(255, 255, 255, 0.20)",
+                }}
+              >
+                Sponsoring items
+              </div>
+
+              <div className="row mx-auto" style={{ width: "100%" }}>
+                {cardData?.sponsoring_items.map((item, index) => (
+                  <SponsorButton
+                    key={index}
+                    item={item}
+                    isSelected={selectedItems.includes(item)}
+                    onButtonClick={handleButtonClick}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+        <h5 className="mt-2 font-weight-bold">Event Description: </h5>
+        <p>{cardData.description}</p>
       </div>
       {/* MOBILE VIEW END */}
     </>

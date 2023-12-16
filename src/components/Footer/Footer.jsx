@@ -15,7 +15,7 @@ const Footer = () => {
           style={{ borderBottom: "1px solid rgba(255, 255, 255, 0.30)" }}
         >
           {/* <!--Grid row--> */}
-          <div className="row align-items-center">
+          <div className="row align-items-center w-100 mx-auto">
             {/* <!--Grid column--> */}
             <div className="col-lg-6 col-md-12 mb-4 mb-md-0 text-left mb-md-4 text-md-center ">
               <h5 className="footer-logo">
