@@ -36,15 +36,7 @@ const ContentCard = ({ line, cardData }) => {
           {cardData &&
             cardData.map((data) => (
               <div className="col-lg-6 col-sm-12 mb-3" key={data.id}>
-                <div
-                  className="card"
-                  style={{
-                    maxWidth: "100%",
-                    height: "30vh",
-                    borderRadius: "18px",
-                    boxShadow: "0px 2px 10px -2px rgba(0, 0, 0, 0.25)",
-                  }}
-                >
+                <div className="card">
                   <div
                     className="row g-0"
                     style={{ width: "auto", height: "100%" }}
