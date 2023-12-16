@@ -1,17 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import heart from "../../assets/img/heart2.svg";
 import "./myeventsbox.css";
 import apiurl from "../../constant/config";
 import Slider from "react-slick";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
+const SponsorButton = ({ item, isSelected, onButtonClick }) => {
+  return (
+    <tr style={{ background: "rgba(0, 187, 255, 0.75)" }}>
+      <td
+        style={{
+          borderRight: "1px solid rgba(255, 255, 255, 0.50)",
+        }}
+      >
+        {item.sponsoring_items}
+      </td>
+      <td
+        style={{
+          borderRight: "1px solid rgba(255, 255, 255, 0.50)",
+        }}
+      >
+        {item.price}
+      </td>
+    </tr>
+  );
+};
+
 const MyEventsBox = (eventData) => {
-  const cardData = eventData.eventData;
-  console.log("event data", cardData);
-  let totalSponsoringPrice = 0;
+  const cardData01 = eventData.eventData;
+  console.log("event data01", cardData01);
+  const location = useLocation();
+  const cardData02 = location.state && location.state.cardData;
+  console.log("event data02", cardData02);
+  const cardData = cardData01 || cardData02;
+  let totalAmount = 0;
   const sponsoring_items = cardData?.sponsoring_items || [];
+
+  const navigate = useNavigate();
+
+  const handleSponsorLogin = () => {
+    // Assuming cardData is defined in your component state
+    // Navigate to the /sponsor_login route with cardData as state
+    navigate("/sponsor_login", { state: { cardData } });
+  };
+
+
+
 
   sponsoring_items.forEach((item) => {
     if (item && item.price) {
-      totalSponsoringPrice += parseFloat(item.price);
+      totalAmount += parseFloat(item.price);
     }
   });
   const settings = {
@@ -22,6 +60,26 @@ const MyEventsBox = (eventData) => {
     autoplay: true, // Auto-play the slider
     autoplaySpeed: 3000, // Auto-play speed in milliseconds
   };
+
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [totalSponsoringPrice, setTotalSponsoringPrice] = useState(0);
+
+  const handleButtonClick = (item) => {
+    if (selectedItems.includes(item)) {
+      // If item is already selected, remove it
+      setSelectedItems((prevSelectedItems) =>
+        prevSelectedItems.filter((selectedItem) => selectedItem !== item)
+      );
+      setTotalSponsoringPrice((prevTotal) => prevTotal - parseFloat(item.price));
+    } else {
+      // If item is not selected, add it
+      setSelectedItems((prevSelectedItems) => [...prevSelectedItems, item]);
+      setTotalSponsoringPrice((prevTotal) => prevTotal + parseFloat(item.price));
+    }
+  };
+
+
+
   return (
     <>
       {/* DESKTOP VIEW  */}
@@ -51,6 +109,35 @@ const MyEventsBox = (eventData) => {
                   ))}
                 </Slider>
               </div>
+              <div>
+                <table
+                  className="table table-borderless text-center text-white overflow-hidden"
+                  style={{
+                    marginBottom: "4%",
+                    borderRadius: "10px",
+                    boxShadow: "0px 2px 20px -3px rgba(0, 0, 0, 0.16)",
+                  }}
+                >
+                  <thead>
+                    <tr className="table-sm" style={{ background: "#004EA9" }}>
+                      <th>Sponsoring Item Name</th>
+                      <th>Sponsoring Item Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {cardData?.sponsoring_items.map((item, index) => (
+                      <SponsorButton
+                        key={index}
+                        item={item}
+                        isSelected={selectedItems.includes(item)}
+                        onButtonClick={handleButtonClick}
+                      />
+                    ))}
+                  </tbody>
+                </table>
+                <p>Total Sponsoring Price: ${totalSponsoringPrice.toFixed(2)}</p>
+              </div>
+
             </div>
             <div className="col-6">
               <h4 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between">
@@ -70,7 +157,7 @@ const MyEventsBox = (eventData) => {
               </div>
               <h5>
                 <i className="bi bi-cash text-success"></i>&nbsp;&nbsp;
-                <span className="text-md">{totalSponsoringPrice}&lt;</span>
+                <span className="text-md">{totalAmount}&lt;</span>
                 <br />
                 <i className="bi bi-people-fill text-danger"></i>&nbsp;&nbsp;
                 <span className="text-md">{cardData.audience_expected}</span>
@@ -99,6 +186,36 @@ const MyEventsBox = (eventData) => {
                 </tr>
               </table>
 
+              {/* <div>
+                <table
+                  className="table table-borderless text-center text-white overflow-hidden"
+                  style={{
+                    marginBottom: "4%",
+                    borderRadius: "10px",
+                    boxShadow: "0px 2px 20px -3px rgba(0, 0, 0, 0.16)",
+                  }}
+                >
+                  <thead>
+                    <tr className="table-sm" style={{ background: "#004EA9" }}>
+                      <th>Sponsoring Item Name</th>
+                      <th>Sponsoring Item Price</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {cardData?.sponsoring_items.map((item, index) => (
+                      <SponsorButton
+                        key={index}
+                        item={item}
+                        isSelected={selectedItems.includes(item)}
+                        onButtonClick={handleButtonClick}
+                      />
+                    ))}
+                  </tbody>
+                </table>
+                <p>Total Sponsoring Price: ${totalSponsoringPrice.toFixed(2)}</p>
+              </div> */}
+
               <div className="container text-white text-center d-flex justify-content-between px-0 mt-4">
                 <div
                   className="box bid-box text-white"
@@ -113,9 +230,9 @@ const MyEventsBox = (eventData) => {
                   >
                     Your Bid
                   </h6>
-                  <h5>₹ 50,000</h5>
+                  <h5>₹ {totalSponsoringPrice.toFixed(2)}</h5>
                 </div>
-                <div
+                {/* <div
                   className="box bid-box"
                   style={{ backgroundColor: "#FF2B66" }}
                 >
@@ -123,6 +240,19 @@ const MyEventsBox = (eventData) => {
                     <i className="bi bi-plus"></i>
                   </h2>
                   <h5>Add More</h5>
+                </div> */}
+                <div
+                  className="box bid-box"
+                  style={{
+                    backgroundColor: "#004EA9",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    textAlign: "center",
+                  }}
+                  onClick={handleSponsorLogin}
+                >
+                  <h3 style={{color: 'white'}}>Sponsor</h3>
                 </div>
               </div>
             </div>
@@ -168,7 +298,7 @@ const MyEventsBox = (eventData) => {
           <div className="box">
             <h4 className="text-md text-dark font-weight-bold">
               <i className="bi bi-cash text-success"></i>
-              &nbsp; {totalSponsoringPrice}&lt;
+              &nbsp; {totalAmount}&lt;
             </h4>
             <h4 className="text-md text-dark font-weight-bold">
               <i className="bi bi-people-fill text-danger"></i>
