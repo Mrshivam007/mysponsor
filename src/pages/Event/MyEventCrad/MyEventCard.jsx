@@ -19,6 +19,7 @@ const MyEventCard = ({ cardData }) => {
   useEffect(() => {
     dispatch(fetchEvent());
   }, []);
+  console.log(cardData);
 
   const navigate = useNavigate();
 
@@ -61,7 +62,6 @@ const MyEventCard = ({ cardData }) => {
                         <div className="row mx-0">
                           <div className="col-3 p-3">
                             <img
-                              s
                               src={apiurl + data.thumbnail1}
                               alt=""
                               style={{ width: "100%" }}

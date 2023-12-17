@@ -152,6 +152,7 @@ const SponsorLogin = () => {
             )
           );
           sessionStorage.setItem("successMessage", "Sign Up Successsfull!!!");
+          toggleForm()
         //   navigate("/sponsor_login", { state: { cardData } });
         }
       };
@@ -376,7 +377,7 @@ const SponsorLogin = () => {
 
                                     <div class="row form-group mt-4">
                                         <div class="col-md-12">
-                                            <input type="submit" onClick={toggleForm} value="Submit" class="btn btn-primary" />
+                                            <input type="submit" value="Submit" class="btn btn-primary" />
                                         </div>
                                         <div class="col-md-12 mt-4">
                                             <p style={{ textAlign: "center" }}>

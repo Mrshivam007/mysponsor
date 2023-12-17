@@ -18,6 +18,7 @@ import ContentRoutes from "./content";
 import ContentDetails from "../pages/LandingPage/Desktop_Sponsor_CC/ContentDetails";
 import SponsorLogin from "../pages/SponsorRegister/SponsorLogin";
 import SponsorRegister from "../pages/SponsorRegister/SponsorRegister";
+import SponsorRoutes from "./sponsor";
 
 const Main = () => {
   const auth = useSelector((state) => state.auth);
@@ -33,9 +34,9 @@ const Main = () => {
             ) : userDetails.user_type === "Content" ? (
               <ContentRoutes />
             ) : userDetails.user_type === "Sponsor" ? (
-              <EventRoutes />
+              <SponsorRoutes />
             ) : userDetails.user_type === "Admin" ? (
-              <EventRoutes />
+              <SponsorRoutes />
               // <ContentRoutes />
             ) : null}
           </Router>

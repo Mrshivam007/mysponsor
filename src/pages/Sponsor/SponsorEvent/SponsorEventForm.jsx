@@ -5,15 +5,20 @@ import backgroundimg from "../../../assets/img/circle-bg.png";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createEvent } from "../../../redux/actions/eventAction";
+import { createSponsor } from "../../../redux/actions/sponsorAction";
 import { eventReducer } from "../../../redux/reducer/eventReducer";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import SponsorNavbar from "../SponsorNavbar/SponsorNavbar";
 
-const ListeventsForm = () => {
+const SponsorEventForm = (props) => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
 
   const [title, setTitle] = useState("");
+  const [businessName, setBusinessName] = useState("");
+  const [businessType, setBusinessType] = useState("");
+  const [businessContact, setBusinessContact] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [event_date_time, setEventDateTime] = useState("");
@@ -37,8 +42,16 @@ const ListeventsForm = () => {
   const [errors, setErrors] = useState({});
   const { userDetails } = auth;
   const navigate = useNavigate(); // Initialize useNavigate hook
-  console.log(userDetails);
+  console.log(userDetails.user_id);
   console.log("event error", errors);
+  const locationState = useLocation();
+  const { cardData, sponsoring_items, sponsoring_price } = locationState.state;
+  console.log(cardData);
+  console.log(sponsoring_items);
+  console.log(sponsoring_price);
+// Use the values as needed in your component
+
+
 
   // For each thumbnail, you'll need a separate state and handler
   const handleThumbnail1Change = (e) => {
@@ -101,39 +114,14 @@ const ListeventsForm = () => {
   const validateForm = () => {
     const errorsObj = {};
 
-    if (title.trim() === "") {
-      errorsObj.title = "Title is required";
+    if (businessName.trim() === "") {
+      errorsObj.businessName = "businessName is required";
     }
-    if (location.trim() === "") {
-      errorsObj.location = "Location is required";
+    if (businessType.trim() === "") {
+      errorsObj.businessType = "businessType is required";
     }
-    if (startDate.trim() === "") {
-      errorsObj.startDate = "startDate is required";
-    }
-    if (endDate.trim() === "") {
-      errorsObj.endDate = "endDate is required";
-    }
-    // if (sponsoring_item.trim() === '') {
-    //   errorsObj.sponsoring_item = 'sponsoring_item is required';
-    // }
-
-    if (!selectedItems) {
-      errorsObj.selectedItems = "selectedItems is required";
-    }
-    if (!prices) {
-      errorsObj.prices = "prices is required";
-    }
-    if (audience.trim() === "") {
-      errorsObj.audience = "audience is required";
-    }
-    // if (selectedCategory.trim() === "") {
-    //   errorsObj.selectedCategory = "event_categories is required";
-    // }
-    // if (price.trim() === "") {
-    //   errorsObj.price = "price is required";
-    // }
-    if (description.trim() === "") {
-      errorsObj.description = "description is required";
+    if (businessContact.trim() === "") {
+      errorsObj.businessContact = "businessContact is required";
     }
     if (!thumbnail1) {
       errorsObj.thumbnail1 = "thumbnail1 is required";
@@ -144,10 +132,6 @@ const ListeventsForm = () => {
     if (!thumbnail3) {
       errorsObj.thumbnail3 = "thumbnail3 is required";
     }
-    // if (event_time.trim() === '') {
-    //   errorsObj.event_time = 'event_time is required';
-    // }
-    // ... validate other fields similarly
     setErrors(errorsObj);
     return Object.keys(errorsObj).length === 0;
   };
@@ -156,34 +140,35 @@ const ListeventsForm = () => {
     e.preventDefault();
     const isFormValid = validateForm();
     if (isFormValid) {
-      // if (Object.keys(errors).length === 0) {
       const formData = new FormData();
-      formData.append("title", title);
-
-      // Prepare sponsoring items array
-      const sponsoringItemsData = selectedItems.map((item) => ({
-        sponsoring_items: item,
-        price: prices[item] || null, // handle cases where price might be undefined or null
-      }));
-      // formData.append("event_date_time", event_date_time);
-      formData.append("event_start_date", startDate);
-      formData.append("event_end_date", endDate);
-      formData.append("event_time", event_time);
-      formData.append("sponsoring_items", JSON.stringify(sponsoringItemsData));
-      formData.append("user_id", userDetails.user_id);
-      formData.append("description", description);
-      formData.append("location", location);
-      formData.append("audience_expected", audience);
-      // formData.append("price", price);
-      formData.append("event_category", selectedCategory);
-      // Append thumbnails with different keys
+      formData.append("sponsor_user_id", userDetails.user_id);
+      formData.append("event_user_id", cardData.user_id);
+      formData.append("event_id", cardData.event_id);
+      formData.append("title", cardData.title);
+      formData.append("description", cardData.description);
+      formData.append("sponsoring_items", JSON.stringify(sponsoring_items) );
+      formData.append("business_name", businessName );
+      formData.append("business_type", businessType );
+      formData.append("contact_no", businessContact );
       formData.append("thumbnail1", thumbnail1);
       formData.append("thumbnail2", thumbnail2);
       formData.append("thumbnail3", thumbnail3);
       formData.append("attach_video", video);
+      // formData.append("event_date_time", event_date_time);
+    //   formData.append("event_start_date", startDate);
+    //   formData.append("event_end_date", endDate);
+    //   formData.append("event_time", event_time);
+    // //   formData.append("sponsoring_items", JSON.stringify(sponsoringItemsData));
+    //   formData.append("user_id", userDetails.user_id);
+    //   formData.append("description", description);
+    //   formData.append("location", location);
+    //   formData.append("audience_expected", audience);
+    //   // formData.append("price", price);
+    //   formData.append("event_category", selectedCategory);
+    //   // Append thumbnails with different keys
       try {
         // Make POST API call
-        await dispatch(createEvent(formData));
+        await dispatch(createSponsor(formData));
         sessionStorage.setItem("successMessage", "Class created successfully!");
         navigate("/events/upcoming_event"); // Replace '/' with the desired route for the home page
       } catch (error) {
@@ -195,7 +180,7 @@ const ListeventsForm = () => {
   };
   return (
     <>
-      <NavBar />
+      <SponsorNavbar />
       <div
         className="bg-form"
         style={{
@@ -209,106 +194,53 @@ const ListeventsForm = () => {
             <div className="col-12 col-md-6 px-0">
               <div className="container">
                 <h1 className="font-weight-bold d-none d-lg-block">
-                  Enter event info
+                  Event Information
                 </h1>
                 <h2 className="sponsor-mobile-text">Enter event info</h2>
                 <div className="box1">
                   <form action="#" className="contact-form">
                     <div className="row form-group">
                       <div className="col-md-12">
+                      <label className="font-weight-bold">Event Title</label>
                         <input
                           type="text"
                           id="title"
-                          value={title}
-                          onChange={(e) => setTitle(e.target.value)}
+                          value={cardData.title}
+                        //   onChange={(e) => setTitle(e.target.value)}
                           className="form-control"
-                          placeholder="Enter Title"
+                        //   placeholder="Enter Title"
+                        readOnly
                         />
-                        {title == "" ? (
-                          <p className="error-msg">{errors.title}</p>
-                        ) : null}
                       </div>
                     </div>
 
                     <div className="row form-group">
                       <div className="col-md-12">
+                      <label className="font-weight-bold">Event Location</label>
                         <input
                           type="text"
                           id="location"
-                          value={location}
-                          onChange={(e) => setLocation(e.target.value)}
+                          value={cardData.location}
                           className="form-control"
-                          placeholder="Enter Location"
+                          readOnly
                         />
-                        {location == "" ? (
-                          <p className="error-msg">{errors.location}</p>
-                        ) : null}
                       </div>
                     </div>
 
-                    <div className="row form-group">
-                      <div className="col-md-12 mb-3 mb-md-0">
-                        {/* <select className="form-control" value={""}>
-                          <option className="text-muted">Enter category</option>
-                          <option>--select event category--</option>
-                        </select> */}
-                        {/* <input
+
+                      <div className="row form-group">
+                      <div className="col-md-12">
+                      <label className="font-weight-bold">Event Sponsoring Item</label>
+                        <input
                           type="text"
-                          id="sponoring_item"
-                          value={sponsoring_item}
-                          onChange={(e) => setSponsoringItem(e.target.value)}
+                          id="location"
+                          value={sponsoring_items}
                           className="form-control"
-                          placeholder="Enter Sponsoring Item"
+                          readOnly
                         />
-                        {errors.sponsoring_item && <p className="error-msg">{errors.sponsoring_item}</p>} */}
-
-                        <div>
-                          <button type="button" onClick={handleToggleDropdown}>
-                            Add Sponsoring Item
-                          </button>
-
-                          {showDropdown && (
-                            <div>
-                              <select
-                                multiple
-                                value={selectedItems}
-                                onChange={handleSponsoringItemChange}
-                                className="form-control"
-                                id="sponsoring_item"
-                                placeholder="Enter Sponsoring Item"
-                              >
-                                <option value="banner">Banner</option>
-                                <option value="led_screen">LED Screen</option>
-                                <option value="bill_board">Billboard</option>
-                              </select>
-
-                              {selectedItems.map((item) => (
-                                <div key={item}>
-                                  <input
-                                    type="text"
-                                    value={prices[item]}
-                                    onChange={(e) =>
-                                      handlePriceChange(item, e.target.value)
-                                    }
-                                    className="form-control my-1"
-                                    placeholder={`Enter ${item.replace(
-                                      "_",
-                                      " "
-                                    )} Price`}
-                                  />
-                                </div>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                        {errors.selectedItems && (
-                          <p className="error-msg">{errors.selectedItems}</p>
-                        )}
-                        {prices == "" ? (
-                          <p className="error-msg">{errors.prices}</p>
-                        ) : null}
                       </div>
                     </div>
+          
 
                     <div className="row form-group">
                       <div className="col-6">
@@ -316,20 +248,19 @@ const ListeventsForm = () => {
                         <input
                           type="date"
                           id="start-date"
-                          onChange={(e) => setStartDate(e.target.value)}
+                          value={cardData.event_start_date}
                           className="form-control"
+                          readOnly
                         />
-                        {startDate == "" ? (
-                          <p className="error-msg">{errors.startDate}</p>
-                        ) : null}
                       </div>
                       <div className="col-6">
                         <label className="font-weight-bold">End Date</label>
                         <input
                           type="date"
-                          id="subject"
-                          onChange={(e) => setEndDate(e.target.value)}
+                          id="start-date"
+                          value={cardData.event_end_date}
                           className="form-control"
+                          readOnly
                         />
                         {endDate == "" ? (
                           <p className="error-msg">{errors.endDate}</p>
@@ -343,13 +274,14 @@ const ListeventsForm = () => {
             <div className="col-12 col-md-6 px-0">
               <div className="container">
                 <h1 className="font-weight-bold d-none d-lg-block">
-                  Enter organizer info
+                  Enter Sponsor Info
                 </h1>
                 <h2 className="sponsor-mobile-text">Enter organizer info</h2>
                 <div className="box1">
                   <form action="#" className="contact-form">
                     <div className="row form-group">
                       <div className="col-md-12">
+                      <label className="font-weight-bold">Your Name</label>
                         <input
                           type="text"
                           id="subject"
@@ -362,6 +294,7 @@ const ListeventsForm = () => {
 
                     <div className="row form-group">
                       <div className="col-md-12">
+                      <label className="font-weight-bold">Your Mail</label>
                         <input
                           type="email"
                           id="email"
@@ -374,59 +307,51 @@ const ListeventsForm = () => {
 
                     <div className="row form-group">
                       <div className="col-md-12">
-                        <select
+                        <input
+                          type="text"
+                          id="name"
+                          value={businessName}
+                          onChange={(e) => setBusinessName(e.target.value)}
                           className="form-control"
-                          onChange={(e) => {
-                            setSelectedCategory(e.target.value);
-                          }}
-                        >
-                          <option hidden>Enter Event Category</option>
-                          <option value="music">Music</option>
-                          <option value="dance">Dance</option>
-                        </select>
-                        {selectedCategory == "" ? (
-                          <p className="error-msg">{errors.selectedCategory}</p>
-                        ) : null}
+                          placeholder="Enter Business Name"
+                        />
                       </div>
                     </div>
+                    {!businessName ? (
+                      <p className="error-msg">{errors.businessName}</p>
+                    ) : null}
                     <div className="row form-group">
                       <div className="col-md-12">
                         <input
                           type="text"
-                          id="subject"
-                          value={audience}
-                          onChange={(e) => setAudienceExpected(e.target.value)}
+                          id="type"
+                          value={businessType}
+                          onChange={(e) => setBusinessType(e.target.value)}
                           className="form-control"
-                          placeholder="Estimated audience"
+                          placeholder="Enter Business Type"
                         />
-                        {audience == "" ? (
-                          <p className="error-msg">{errors.audience}</p>
-                        ) : null}
                       </div>
                     </div>
+                    {!businessType ? (
+                      <p className="error-msg">{errors.businessType}</p>
+                    ) : null}
+                    <div className="row form-group">
+                      <div className="col-md-12">
+                        <input
+                          type="number"
+                          id="number"
+                          value={businessContact}
+                          onChange={(e) => setBusinessContact(e.target.value)}
+                          className="form-control"
+                          placeholder="Enter Contact Number"
+                        />
+                      </div>
+                    </div>
+                    {!businessContact ? (
+                      <p className="error-msg">{errors.businessContact}</p>
+                    ) : null}
                   </form>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="container">
-              <h1 className="font-weight-bold d-none d-lg-block">
-                Enter event description
-              </h1>
-              <h2 className="sponsor-mobile-text">Enter event description</h2>
-              <div className="box1 mt-2">
-                <textarea
-                  className="form-control"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  placeholder="Enter description (100 words)"
-                  col="30"
-                  rows="5"
-                ></textarea>
-                {description == "" ? (
-                  <p className="error-msg">{errors.description}</p>
-                ) : null}
               </div>
             </div>
           </div>
@@ -560,4 +485,4 @@ const ListeventsForm = () => {
   );
 };
 
-export default ListeventsForm;
+export default SponsorEventForm;
