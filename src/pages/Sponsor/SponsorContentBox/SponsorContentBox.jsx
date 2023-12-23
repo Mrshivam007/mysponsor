@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import heart from "../../assets/img/heart2.svg";
-import apiurl from "../../constant/config";
+import heart from "../../../assets/img/heart2.svg";
+import apiurl from "../../../constant/config";
 import Slider from "react-slick";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const SponsorButton = ({ item, isSelected, onButtonClick }) => {
+  console.log(item);
   return (
     <div className="col-4 px-1 px-md-2 my-3 text-center">
       <div
@@ -12,21 +13,22 @@ const SponsorButton = ({ item, isSelected, onButtonClick }) => {
         style={{ backgroundColor: "#f2f2f2", borderRadius: "10px" }}
       >
         <h6 className="font-weight-bolder">
-          {item.sponsoring_items} <br />
-          <i className="bi bi-cash text-success"></i> ₹{item.price}
+          {item} <br />
         </h6>
       </div>
     </div>
   );
 };
 
-const MyEventsBox = (eventData) => {
-  const cardData01 = eventData.eventData;
+
+const SponsorContentBox = (contentData) => {
+  const cardData01 = contentData.contentData;
   console.log("event data01", cardData01);
   const location = useLocation();
   const cardData02 = location.state && location.state.cardData;
   console.log("event data02", cardData02);
   const cardData = cardData01 || cardData02;
+  console.log("Content data", cardData);
   let totalAmount = 0;
   const sponsoring_items = cardData?.sponsoring_items || [];
 
@@ -90,9 +92,9 @@ const MyEventsBox = (eventData) => {
               >
                 <Slider {...settings}>
                   {[
-                    cardData.thumbnail1,
-                    cardData.thumbnail2,
-                    cardData.thumbnail3,
+                    cardData.image1,
+                    cardData.image2,
+                    cardData.image3,
                   ].map((data) => (
                     <img
                       src={apiurl + data}
@@ -120,18 +122,18 @@ const MyEventsBox = (eventData) => {
                       borderRight: "1px solid rgba(255, 255, 255, 0.50)",
                     }}
                   >
-                    {cardData.event_start_date}
+                    {cardData.content_id.content_start_date}
                   </td>
-                  <td>{cardData.event_end_date}</td>
+                  <td>{cardData.content_id.content_end_date}</td>
                 </tr>
               </table>
             </div>
             <div className="col-6">
               <h4 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between">
-                {cardData.title}{" "}
+                {cardData.content_id.title}{" "}
                 <img src={heart} alt="" style={{ width: "7%" }} />
               </h4>
-              <h4>{cardData.location}</h4>
+              <h4>{cardData.content_id.location}</h4>
               <div className="star d-flex">
                 <h5>
                   <i class="bi bi-star-fill text-warning"></i>&nbsp;
@@ -147,7 +149,7 @@ const MyEventsBox = (eventData) => {
                 <span className="text-md">{totalAmount}&lt;</span>
                 <br />
                 <i className="bi bi-people-fill text-danger"></i>&nbsp;&nbsp;
-                <span className="text-md">{cardData.audience_expected}</span>
+                <span className="text-md">{cardData.content_id.audience_expected}</span>
               </h5>
 
               <div className="row g-0">
@@ -167,11 +169,11 @@ const MyEventsBox = (eventData) => {
                       borderBottom: "1px solid rgba(255, 255, 255, 0.20)",
                     }}
                   >
-                   Your Sponsoring items
+                    Your Sponsoring Items
                   </div>
 
                   <div className="row mx-auto" style={{ width: "100%" }}>
-                    {cardData?.sponsoring_items.map((item, index) => (
+                    {cardData?.sponsoring_content.map((item, index) => (
                       <SponsorButton
                         key={index}
                         item={item}
@@ -187,7 +189,15 @@ const MyEventsBox = (eventData) => {
           <div className="container mt-2">
             <h5 className="font-weight-bold">Event Description: </h5>
             <p>
-              {cardData.description}
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Consequatur voluptates est perspiciatis voluptas dolorem quo quasi
+              sapiente magnam corporis fugiat? Culpa, dolores ullam? Alias nulla
+              libero rem praesentium consequuntur excepturi porro cupiditate
+              velit, vero harum id sequi, repellendus beatae voluptatibus
+              facilis minima in fugiat sunt animi qui? Voluptatem magni eos
+              mollitia. Obcaecati tempora vero fugiat dolorem aliquid officiis
+              necessitatibus consequuntur sit in, distinctio ipsam aperiam
+              cupiditate facilis, sint nesciunt quam!
             </p>
           </div>
         </div>
@@ -196,7 +206,7 @@ const MyEventsBox = (eventData) => {
 
       {/* MOBILE VIEW */}
       <div className="container mobile-view">
-        <h2 className="sponsor-mobile-text">{cardData.title}</h2>
+        <h2 className="sponsor-mobile-text">{cardData.content_id.title}</h2>
         <div
           className="post-thumb mt-4"
           style={{
@@ -205,7 +215,7 @@ const MyEventsBox = (eventData) => {
           }}
         >
           <img
-            src={apiurl + cardData.thumbnail1}
+            src={apiurl + cardData.content_id.thumbnail1}
             alt=""
             style={{ width: "100%" }}
           />
@@ -216,7 +226,7 @@ const MyEventsBox = (eventData) => {
               <i className="bi bi-cash text-success"></i>&nbsp;
               {totalAmount}&nbsp;&nbsp;
               <i className="bi bi-people-fill text-danger"></i>&nbsp;
-              {cardData.audience_expected}&nbsp;&nbsp;
+              {cardData.content_id.audience_expected}&nbsp;&nbsp;
             </h5>
           </div>
           <div className="star d-flex">
@@ -253,7 +263,7 @@ const MyEventsBox = (eventData) => {
                     borderRadius: "5px",
                   }}
                 >
-                  {cardData.event_start_date}
+                  {cardData.content_id.event_start_date}
                 </span>
               </td>
               <td>
@@ -264,7 +274,7 @@ const MyEventsBox = (eventData) => {
                     borderRadius: "5px",
                   }}
                 >
-                  {cardData.event_end_date}
+                  {cardData.content_id.event_end_date}
                 </span>
               </td>
             </tr>
@@ -291,8 +301,8 @@ const MyEventsBox = (eventData) => {
                 Sponsoring items
               </div>
 
-              <div className="row mx-auto" style={{ width: "100%" }}>
-                {cardData?.sponsoring_items.map((item, index) => (
+              {/* <div className="row mx-auto" style={{ width: "100%" }}>
+                {cardData.sponsoring_items.map((item, index) => (
                   <SponsorButton
                     key={index}
                     item={item}
@@ -300,16 +310,16 @@ const MyEventsBox = (eventData) => {
                     onButtonClick={handleButtonClick}
                   />
                 ))}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
         <h5 className="mt-2 font-weight-bold">Event Description: </h5>
-        <p>{cardData.description}</p>
+        <p>{cardData.content_id.description}</p>
       </div>
       {/* MOBILE VIEW END */}
     </>
   );
 };
 
-export default MyEventsBox;
+export default SponsorContentBox;

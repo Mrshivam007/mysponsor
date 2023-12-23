@@ -23,7 +23,7 @@ const SponsorContentC = () => {
   useEffect(() => {
     dispatch(fetchContent())
   },[])
-  console.log(ContentDetails);
+  console.log("Content Details past ",ContentDetails.contentDetails?.past_content);
 
   return (
     <>
@@ -39,7 +39,7 @@ const SponsorContentC = () => {
         <EventsHeader title={"Sponsor Content Creators"} logo={cclogo} />
         <ContentCard
           line={"Sponsor content creators"}
-          cardData={ContentDetails.contentDetails}
+          cardData={ContentDetails.contentDetails?.live_content}
         />
         <SocialmediaBox />
         <div className="cc-cards-desktop">

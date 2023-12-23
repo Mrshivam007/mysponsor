@@ -23,7 +23,7 @@ const SponsorEvents = () => {
     dispatch(fetchEvent())
   },[])
 
-  console.log("dynamic data",eventDetails.eventDetails);
+  console.log("dynamic data",eventDetails.eventDetails?.live_event);
   console.log("static data",EventsCards);
 
   return (
@@ -39,7 +39,7 @@ const SponsorEvents = () => {
         <NavBar />
         <div className="events-page-desktop">
           <EventsHeader title={"Sponsor Events"} logo={spevents} />
-          <SponserE cardData={eventDetails.eventDetails} line={"Festival Events"} />
+          <SponserE cardData={eventDetails.eventDetails?.live_event} line={"Festival Events"} />
           <SponserE cardData={EventsCards} line={"Concerts"} />
           <SponserE cardData={EventsCards} line={"Promotional Events"} />
           <SponserE cardData={EventsCards} line={"Sports Events"} />

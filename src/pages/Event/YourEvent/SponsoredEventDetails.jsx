@@ -8,17 +8,14 @@ import {
   SponserE,
 } from "../../../components/index.js";
 import { useLocation } from "react-router-dom";
-import MyContentBox from "../../../components/My_Content_Details_Box/MyContentBox.jsx";
-import SponsorNavbar from "../SponsorNavbar/SponsorNavbar.jsx";
-import SponsorContentBox from "./SponsorContentBox.jsx";
-import MyContentSponsor from "./MyContentSponsor.jsx";
-const ContentDetails = () => {
+import SponsorEventBox from "../SponsorEventBox/SponsorEventBox.jsx";
+const SponsoredEventDetails = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
   const location = useLocation();
-  const contentData = location.state?.contentData || null;
-  console.log(contentData);
+  const eventData = location.state?.eventData || null;
+  console.log(eventData);
   return (
     <>
       <div
@@ -29,9 +26,8 @@ const ContentDetails = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <SponsorNavbar />
-        {/* <SponsorContentBox contentData={contentData} /> */}
-        <MyContentSponsor contentData={contentData} />
+        <NavBar />
+        <SponsorEventBox eventData={eventData} />
         <SponserE cardData={EventsCards} />
         <Footer />
       </div>
@@ -39,4 +35,4 @@ const ContentDetails = () => {
   );
 };
 
-export default ContentDetails;
+export default SponsoredEventDetails;

@@ -1,80 +1,100 @@
 import React, { useState } from "react";
-import heart from "../../assets/img/heart2.svg";
-import apiurl from "../../constant/config";
+import heart from "../../../assets/img/heart2.svg";
+import apiurl from "../../../constant/config";
 import Slider from "react-slick";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const SponsorButton = ({ item, isSelected, onButtonClick }) => {
   return (
     <div className="col-4 px-1 px-md-2 my-3 text-center">
       <div
-        className="post-thumb text-dark py-1"
+        className="post-thumb text-dark py-2"
         style={{ backgroundColor: "#f2f2f2", borderRadius: "10px" }}
       >
         <h6 className="font-weight-bolder">
-          {item.sponsoring_items} <br />
+          {item.sponsoring_content_items} <br />
           <i className="bi bi-cash text-success"></i> ₹{item.price}
         </h6>
+        <button
+          className="badge-pill font-weight-bold w-100"
+          onClick={() => onButtonClick(item)}
+          style={
+            isSelected
+              ? { backgroundColor: "red", color: "white" }
+              : {
+                  color: "rgb(0, 78, 169)",
+                  backgroundColor: "white",
+                  border: "2px solid rgb(0, 78, 169)",
+                }
+          }
+        >
+          {isSelected ? "Remove" : "Buy Now"}
+        </button>
       </div>
     </div>
   );
 };
 
-const MyEventsBox = (eventData) => {
-  const cardData01 = eventData.eventData;
+const MyContentSponsor = (contentData) => {
+  const cardData01 = contentData.contentData;
   console.log("event data01", cardData01);
   const location = useLocation();
   const cardData02 = location.state && location.state.cardData;
   console.log("event data02", cardData02);
   const cardData = cardData01 || cardData02;
   let totalAmount = 0;
-  const sponsoring_items = cardData?.sponsoring_items || [];
+  const sponsoring_items = cardData?.sponsoring_content_items || [];
 
   const navigate = useNavigate();
 
-  const handleSponsorLogin = () => {
-    // Assuming cardData is defined in your component state
-    // Navigate to the /sponsor_login route with cardData as state
-    navigate("/sponsor_login", { state: { cardData } });
-  };
-
+  
+  
   sponsoring_items.forEach((item) => {
-    if (item && item.price) {
-      totalAmount += parseFloat(item.price);
-    }
-  });
-  const settings = {
-    infinite: true, // Loop the slider
-    speed: 500, // Transition speed in milliseconds
-    slidesToShow: 1, // Number of slides to show at a time
-    slidesToScroll: 1, // Number of slides to scroll at a time
-    autoplay: true, // Auto-play the slider
-    autoplaySpeed: 3000, // Auto-play speed in milliseconds
-  };
+      if (item && item.price) {
+          totalAmount += parseFloat(item.price);
+        }
+    });
+    const settings = {
+        infinite: true, // Loop the slider
+        speed: 500, // Transition speed in milliseconds
+        slidesToShow: 1, // Number of slides to show at a time
+        slidesToScroll: 1, // Number of slides to scroll at a time
+        autoplay: true, // Auto-play the slider
+        autoplaySpeed: 3000, // Auto-play speed in milliseconds
+    };
 
-  const [selectedItems, setSelectedItems] = useState([]);
-  const [totalSponsoringPrice, setTotalSponsoringPrice] = useState(0);
-
-  const handleButtonClick = (item) => {
-    if (selectedItems.includes(item)) {
-      // If item is already selected, remove it
+    const [selectedItems, setSelectedItems] = useState([]);
+    const [totalSponsoringPrice, setTotalSponsoringPrice] = useState(0);
+    
+    const handleButtonClick = (item) => {
+        if (selectedItems.includes(item)) {
+            // If item is already selected, remove it
       setSelectedItems((prevSelectedItems) =>
-        prevSelectedItems.filter((selectedItem) => selectedItem !== item)
+      prevSelectedItems.filter((selectedItem) => selectedItem !== item)
       );
       setTotalSponsoringPrice(
-        (prevTotal) => prevTotal - parseFloat(item.price)
-      );
-    } else {
-      // If item is not selected, add it
-      setSelectedItems((prevSelectedItems) => [...prevSelectedItems, item]);
-      setTotalSponsoringPrice(
-        (prevTotal) => prevTotal + parseFloat(item.price)
-      );
-    }
-  };
-
-  return (
-    <>
+          (prevTotal) => prevTotal - parseFloat(item.price)
+          );
+        } else {
+            // If item is not selected, add it
+            setSelectedItems((prevSelectedItems) => [...prevSelectedItems, item]);
+            setTotalSponsoringPrice(
+                (prevTotal) => prevTotal + parseFloat(item.price)
+                );
+            }
+        };
+        
+        const handleSponsorClick = () => {
+          const selectedItemsData = {
+            cardData,
+            sponsoring_items: selectedItems.map(item => item.sponsoring_content_items),
+            sponsoring_price: totalSponsoringPrice.toFixed(2),
+          };
+        
+          navigate("/sponsor_contentForm", { state: selectedItemsData });
+        };
+        return (
+            <>
       {/* DESKTOP VIEW  */}
       <div className="container payments-desktop desktop-view">
         <div className="pay-box">
@@ -120,9 +140,9 @@ const MyEventsBox = (eventData) => {
                       borderRight: "1px solid rgba(255, 255, 255, 0.50)",
                     }}
                   >
-                    {cardData.event_start_date}
+                    {cardData.content_start_date}
                   </td>
-                  <td>{cardData.event_end_date}</td>
+                  <td>{cardData.content_end_date}</td>
                 </tr>
               </table>
             </div>
@@ -167,11 +187,11 @@ const MyEventsBox = (eventData) => {
                       borderBottom: "1px solid rgba(255, 255, 255, 0.20)",
                     }}
                   >
-                   Your Sponsoring items
+                    Sponsoring items
                   </div>
 
                   <div className="row mx-auto" style={{ width: "100%" }}>
-                    {cardData?.sponsoring_items.map((item, index) => (
+                    {cardData?.sponsoring_content_items.map((item, index) => (
                       <SponsorButton
                         key={index}
                         item={item}
@@ -180,14 +200,44 @@ const MyEventsBox = (eventData) => {
                       />
                     ))}
                   </div>
+                  <div className="col-12">
+                    <div className="container py-3 px-0 text-start text-dark">
+                      <label className="text-white font-weight-bold">
+                        Total Amount Sponsored
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control w-100"
+                        value={`₹ ${totalSponsoringPrice.toFixed(2)}`}
+                      />
+                    </div>
+                  </div>
                 </div>
+                <button
+                  className="btn w-100 text-center text-white font-weight-bold my-2"
+                  style={{
+                    backgroundColor: "rgb(0, 78, 169)",
+                    borderRadius: "10px",
+                  }}
+                  onClick={handleSponsorClick}
+                >
+                  Sponsor
+                </button>
               </div>
             </div>
           </div>
           <div className="container mt-2">
             <h5 className="font-weight-bold">Event Description: </h5>
             <p>
-              {cardData.description}
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Consequatur voluptates est perspiciatis voluptas dolorem quo quasi
+              sapiente magnam corporis fugiat? Culpa, dolores ullam? Alias nulla
+              libero rem praesentium consequuntur excepturi porro cupiditate
+              velit, vero harum id sequi, repellendus beatae voluptatibus
+              facilis minima in fugiat sunt animi qui? Voluptatem magni eos
+              mollitia. Obcaecati tempora vero fugiat dolorem aliquid officiis
+              necessitatibus consequuntur sit in, distinctio ipsam aperiam
+              cupiditate facilis, sint nesciunt quam!
             </p>
           </div>
         </div>
@@ -292,7 +342,7 @@ const MyEventsBox = (eventData) => {
               </div>
 
               <div className="row mx-auto" style={{ width: "100%" }}>
-                {cardData?.sponsoring_items.map((item, index) => (
+                {cardData?.sponsoring_content_items.map((item, index) => (
                   <SponsorButton
                     key={index}
                     item={item}
@@ -301,10 +351,32 @@ const MyEventsBox = (eventData) => {
                   />
                 ))}
               </div>
+              <div className="col-12">
+                <div className="container py-3 px-0 text-start text-dark">
+                  <label className="text-white font-weight-bold">
+                    Total Amount Sponsored
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control w-100"
+                    value={`₹ ${totalSponsoringPrice.toFixed(2)}`}
+                  />
+                </div>
+              </div>
             </div>
+            <button
+              className="btn w-100 text-center text-white font-weight-bold my-2"
+              style={{
+                backgroundColor: "rgb(0, 78, 169)",
+                borderRadius: "10px",
+              }}
+              onClick={handleSponsorClick}
+            >
+              Sponsor
+            </button>
           </div>
         </div>
-        <h5 className="mt-2 font-weight-bold">Event Description: </h5>
+        <h5 className="font-weight-bold">Event Description: </h5>
         <p>{cardData.description}</p>
       </div>
       {/* MOBILE VIEW END */}
@@ -312,4 +384,4 @@ const MyEventsBox = (eventData) => {
   );
 };
 
-export default MyEventsBox;
+export default MyContentSponsor;

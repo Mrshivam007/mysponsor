@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchEvent } from "../../../redux/actions/eventAction";
+import { fetchEvent, fetchEventbyId } from "../../../redux/actions/eventAction";
 import apiurl from "../../../constant/config";
 
 const EventMobileCard = ({ line, cardData }) => {
+  const auth = useSelector((state) => state.auth);
+  const { userDetails } = auth;
+  console.log(userDetails);
   const dispatch = useDispatch();
   const eventDetails = useSelector((state) => state.event);
   useEffect(() => {
-    dispatch(fetchEvent());
+    dispatch(fetchEventbyId(userDetails.user_id))
   }, []);
 
   const navigate = useNavigate();

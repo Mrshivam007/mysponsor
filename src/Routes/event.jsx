@@ -11,6 +11,7 @@ import EventDetails from "../pages/Event/EventDetails/EventDetails";
 import UpdateEvent from "../pages/Event/Update_Event/UpdateEventForm";
 import Update_UpcomingEvent from "../pages/Event/Update_Event/Update_UpcomingEvent";
 import DeleteEvent from "../pages/Event/DeleteEvent/DeleteEvent";
+import SponsoredEventDetails from "../pages/Event/YourEvent/SponsoredEventDetails";
 const EventRoutes = () => {
   return (
     <>
@@ -18,6 +19,7 @@ const EventRoutes = () => {
         <Route path="/" element={<EventHome />} />
         <Route path="/events" element={<EventCategories />} />
         <Route path="/sponsored_events" element={<SponsoredEvent />} />
+        <Route path="/sponsored_event_details" element={<SponsoredEventDetails />} />
         <Route path="/events/live_event" element={<LiveEvent />} />
         <Route path="/events/upcoming_event" element={<UpcomingEvent />} />
         <Route path="/events/previous_event" element={<PreviousEvent />} />

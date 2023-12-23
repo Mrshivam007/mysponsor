@@ -173,6 +173,20 @@ const Signup = () => {
                   Content
                 </label>
               </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="flexRadioDefault"
+                  onChange={handleUserType}
+                  value="Sponsor"
+                  id="flexRadioDefault2"
+                  required
+                />
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Sponsor
+                </label>
+              </div>
               <h2 class="mb-4 font-weight-medium text-secondary">SignUp</h2>
               <div class="row form-group">
                 <div class="col-md-6 mb-3 mb-md-0">

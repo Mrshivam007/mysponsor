@@ -20,14 +20,14 @@ export const login = (email, password) => async (dispatch) => {
             type: AUTH_LOGIN_SUCCESS,
             payload: payload,
         });
+        console.log("Action data",data);
     } catch (error) {
         dispatch({
             type: AUTH_LOGIN_FAILED,
             payload:
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message,
+                error.response.data.errors,
         });
+        console.log("Aciton error",error );
     }
 };
 

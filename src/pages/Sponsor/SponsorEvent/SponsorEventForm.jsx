@@ -170,7 +170,7 @@ const SponsorEventForm = (props) => {
         // Make POST API call
         await dispatch(createSponsor(formData));
         sessionStorage.setItem("successMessage", "Class created successfully!");
-        navigate("/events/upcoming_event"); // Replace '/' with the desired route for the home page
+        navigate("/sponsored_event"); // Replace '/' with the desired route for the home page
       } catch (error) {
         console.log("An error occurred during API calls:", error);
       }

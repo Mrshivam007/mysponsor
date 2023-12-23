@@ -9,7 +9,7 @@ import {
 import bgimage from "../../../assets/img/circle-bg.png";
 import spevents from "../../../assets/img/sponsor_events-logo.png";
 import { EventsCards, EventsPageCards } from "../../../data/data";
-import { fetchEvent } from "../../../redux/actions/eventAction";
+import { fetchEvent, fetchEventbyId } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux"
 import MyEventCard from "../MyEventCrad/MyEventCard";
 import EventMobileCard from "./EventMobileCards";
@@ -17,11 +17,14 @@ const PreviousEvent = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
+  const auth = useSelector((state) => state.auth);
+  const { userDetails } = auth;
+  console.log(userDetails);
 
   const dispatch = useDispatch();
   const eventDetails = useSelector(state => state.event)
   useEffect(() => {
-    dispatch(fetchEvent())
+    dispatch(fetchEventbyId(userDetails.user_id))
   },[])
 
   console.log("dynamic data",eventDetails.eventDetails);
@@ -41,7 +44,7 @@ const PreviousEvent = () => {
         <div className="events-page-desktop">
           <EventsHeader title={"Previous Events"} logo={spevents} />
           {/* <SponserE cardData={eventDetails.eventDetails} line={"Previous Events"} /> */}
-          <MyEventCard cardData={eventDetails.eventDetails} />
+          <MyEventCard cardData={eventDetails.eventDetails?.past_event} />
           {/* <SponserE cardData={EventsCards} line={"Concerts"} />
           <SponserE cardData={EventsCards} line={"Promotional Events"} />
           <SponserE cardData={EventsCards} line={"Sports Events"} />
@@ -50,7 +53,7 @@ const PreviousEvent = () => {
           <SponserE cardData={EventsCards} line={"Reality Shows"} /> */}
         </div>
         <div className="events-page-mobile">
-          <EventMobileCard line={"Previous Events"} cardData={eventDetails.eventDetails} />
+          <EventMobileCard line={"Previous Events"} cardData={eventDetails.eventDetails?.past_event} />
           <div
             className="btn d-block text-white font-weight-bolder"
             style={{
@@ -62,7 +65,6 @@ const PreviousEvent = () => {
             Load More
           </div>
         </div>
-        <Footer />
       </div>
     </>
   );

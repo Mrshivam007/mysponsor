@@ -5,7 +5,7 @@ import { EventsHeader, Footer, NavBar } from "../../../components";
 import { fetchContent } from "../../../redux/actions/contentAction";
 import { useDispatch, useSelector } from "react-redux";
 import MyContentCard from "../MyContentCard/MyContentCard";
-const LiveContent = () => {
+const UpcomingContent = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
@@ -71,11 +71,11 @@ const LiveContent = () => {
             </div>
           </div>
         )}
-        <MyContentCard cardData={ContentDetails.contentDetails?.live_content} />
+        <MyContentCard cardData={ContentDetails.contentDetails?.upcoming_content} />
         <Footer />
       </div>
     </>
   );
 };
 
-export default LiveContent;
+export default UpcomingContent;

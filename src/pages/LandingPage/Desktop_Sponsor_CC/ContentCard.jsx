@@ -13,7 +13,7 @@ const ContentCard = ({ line, cardData }) => {
   //   prevArrow: null, // Hide the previous arrow
   //   nextArrow: null, // Hide the next arrow
   // };
-  // console.log(cardData);
+  console.log(cardData);
   const navigate = useNavigate();
 
   const handleSponsorClick = (data) => {

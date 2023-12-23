@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import info from "../../../assets/img/info.svg";
 import heart from "../../../assets/img/heart2.svg";
 import bgimage from "../../../assets/img/circle-bg.png";
-import { deleteEvent, fetchEvent } from "../../../redux/actions/eventAction";
+import { deleteEvent, fetchEvent, fetchEventbyId } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux";
 import apiurl from "../../../constant/config";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,9 @@ const Delete_EventCard = ({ cardData }) => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
+  const auth = useSelector((state) => state.auth);
+  const { userDetails } = auth;
+  console.log(userDetails);
 
   const [show, setShow] = useState(false);
 
@@ -21,7 +24,7 @@ const Delete_EventCard = ({ cardData }) => {
   const dispatch = useDispatch();
   const eventDetails = useSelector((state) => state.event);
   useEffect(() => {
-    dispatch(fetchEvent());
+    dispatch(fetchEventbyId(userDetails.user_id))
   }, []);
 
   const navigate = useNavigate();

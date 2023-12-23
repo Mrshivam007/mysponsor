@@ -35,6 +35,14 @@ const MyContentCard = ({ cardData }) => {
           <div className="container">
             {cardData &&
               cardData.map((data) => {
+                let totalSponsoringPrice = 0;
+                const sponsoring_items = data?.sponsoring_content_items || [];
+
+                sponsoring_items.forEach((item) => {
+                  if (item && item.price) {
+                    totalSponsoringPrice += parseFloat(item.price);
+                  }
+                });
                 return (
                   <div className="row">
                     <div className="col-12 mb-4">
@@ -127,7 +135,7 @@ const MyContentCard = ({ cardData }) => {
                                   >
                                     Your Bid
                                   </h6>
-                                  <h5>₹ 50,000</h5>
+                                  <h5>₹ {totalSponsoringPrice}</h5>
                                 </div>
                                 <div
                                   className="box myevents-box"

@@ -39,7 +39,7 @@ const SponserE = ({ line, cardData }) => {
           <div className="row my-5">
             {/* <Slider {...settings}> */}
             {cardData &&
-              cardData.map((data) => (
+              cardData?.map((data) => (
                 <div key={data.id} className="col-lg-3 col-md-6 py-3">
                   <div className="card-blog">
                     <div className="header">
@@ -142,7 +142,7 @@ const SponserE = ({ line, cardData }) => {
             </div>
             <div className="col-lg-4" style={{ width: "76%" }}>
               <Slider {...settings}>
-                {cardData &&
+                {/* {cardData &&
                   cardData.map((data) => (
                     <div key={data.id} className="col-10 py-3">
                       <div className="card-blog">
@@ -154,12 +154,6 @@ const SponserE = ({ line, cardData }) => {
                               style={{ width: "100%" }}
                               className="sponser_card_img"
                             />
-                            {/* <div className="text-overlay">
-                              <p className="text-lg font-weight-bold mb-0">
-                                {data.name}
-                              </p>
-                              <p className="text-sm">{data.location}</p>
-                            </div> */}
                           </div>
                           <button
                             className="btn text-lg text-white font-weight-bold"
@@ -175,7 +169,7 @@ const SponserE = ({ line, cardData }) => {
                         </div>
                       </div>
                     </div>
-                  ))}
+                  ))} */}
               </Slider>
             </div>
           </div>

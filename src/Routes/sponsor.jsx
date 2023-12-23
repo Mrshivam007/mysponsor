@@ -19,6 +19,9 @@ import ContentDetails from "../pages/Sponsor/SponsorContent/ContentDetails";
 import SponsorCategoryPage from "../pages/Sponsor/SponsorCategorie/SponsorCategories";
 import SponsorEventForm from "../pages/Sponsor/SponsorEvent/SponsorEventForm";
 import SponsoredEventDetails from "../pages/Sponsor/SponsorEvent/SponsoredEventDetails";
+import SponsorContentForm from "../pages/Sponsor/SponsorContent/SponsorContentForm";
+import SponsoredContent from "../pages/Sponsor/SponsorContent/SponsoredContent";
+import SponsoredContentDetails from "../pages/Sponsor/SponsorContent/SponsoredContentDetails";
 const SponsorRoutes = () => {
   return (
     <>
@@ -27,9 +30,12 @@ const SponsorRoutes = () => {
         <Route path="/choice" element={<SponsorChoice />} />
         <Route path="/events" element={<SponsorEvents />} />
         <Route path="/sponsored_event" element={<SponsoredEvent />} />
+        <Route path="/sponsored_content" element={<SponsoredContent />} />
         <Route path="/sponsored_event_details" element={<SponsoredEventDetails />} />
+        <Route path="/sponsored_content_details" element={<SponsoredContentDetails />} />
         <Route path="/cc" element={<SponsorContent />} />
         <Route path="/sponsor_eventForm" element={<SponsorEventForm />} />
+        <Route path="/sponsor_contentForm" element={<SponsorContentForm />} />
         <Route path="/mycontent-details" element={<ContentDetails />} />
         <Route path="/myevent-details" element={<EventDetails />} />
         <Route path="/categories" element={<SponsorCategoryPage />} />

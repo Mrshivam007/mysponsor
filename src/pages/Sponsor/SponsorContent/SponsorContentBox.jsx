@@ -1,32 +1,15 @@
-import React, { useState } from "react";
-import apiurl from "../../constant/config";
+import React from "react";
+import apiurl from "../../../constant/config";
 import Slider from "react-slick";
-
-const SponsorButton = ({ item, isSelected, onButtonClick }) => {
-  return (
-    <div className="col-4 px-1 px-md-2 my-3 text-center">
-      <div
-        className="post-thumb text-dark py-1"
-        style={{ backgroundColor: "#f2f2f2", borderRadius: "10px" }}
-      >
-        <h6 className="font-weight-bolder">
-          {item.sponsoring_content_items} <br />
-          <i className="bi bi-cash text-success"></i> ₹{item.price}
-        </h6>
-      </div>
-    </div>
-  );
-};
-
-const MyContentBox = (contentData) => {
+const SponsorContentBox = (contentData) => {
   const cardData = contentData.contentData;
   console.log("content data", cardData);
-  let totalAmount = 0;
-  const sponsoring_items = cardData?.sponsoring_content_items || [];
+  let totalSponsoringPrice = 0;
+  const sponsoring_items = cardData?.sponsoring_items || [];
 
   sponsoring_items.forEach((item) => {
     if (item && item.price) {
-      totalAmount += parseFloat(item.price);
+      totalSponsoringPrice += parseFloat(item.price);
     }
   });
   const settings = {
@@ -38,26 +21,6 @@ const MyContentBox = (contentData) => {
     autoplaySpeed: 3000, // Auto-play speed in milliseconds
   };
 
-  const [selectedItems, setSelectedItems] = useState([]);
-  const [totalSponsoringPrice, setTotalSponsoringPrice] = useState(0);
-
-  const handleButtonClick = (item) => {
-    if (selectedItems.includes(item)) {
-      // If item is already selected, remove it
-      setSelectedItems((prevSelectedItems) =>
-        prevSelectedItems.filter((selectedItem) => selectedItem !== item)
-      );
-      setTotalSponsoringPrice(
-        (prevTotal) => prevTotal - parseFloat(item.price)
-      );
-    } else {
-      // If item is not selected, add it
-      setSelectedItems((prevSelectedItems) => [...prevSelectedItems, item]);
-      setTotalSponsoringPrice(
-        (prevTotal) => prevTotal + parseFloat(item.price)
-      );
-    }
-  };
   return (
     <>
       {/* DESKTOP VIEW  */}
@@ -116,41 +79,6 @@ const MyContentBox = (contentData) => {
                 Video Preview:&nbsp;
                 <span className="font-weight-light">**Video Link Here**</span>
               </h5>
-              <div className="row g-0">
-              <div
-                className="box text-white"
-                style={{
-                  backgroundColor: "#004EA9",
-                  width: "100%",
-                  borderRadius: "10px",
-                  marginTop: "3%",
-                }}
-              >
-                <div
-                  className="col-12 font-weight-bolder text-center"
-                  style={{
-                    padding: "3% 0 2% 0",
-                    borderBottom: "1px solid rgba(255, 255, 255, 0.20)",
-                  }}
-                >
-                  Your Sponsoring items
-                </div>
-
-                <div className="row mx-auto" style={{ width: "100%" }}>
-                  {cardData?.sponsoring_content_items.map((item, index) => (
-                    <SponsorButton
-                      key={index}
-                      item={item}
-                      isSelected={selectedItems.includes(item)}
-                      onButtonClick={handleButtonClick}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-            </div>
-         
-          </div>
               <h6 className="font-weight-bold mt-5">
                 Content publishing dates:{" "}
               </h6>
@@ -177,6 +105,19 @@ const MyContentBox = (contentData) => {
                   <td>{cardData.content_end_date}</td>
                 </tr>
               </table>
+            <button
+              className="btn w-100 text-center text-white font-weight-bold my-2"
+              style={{
+                backgroundColor: "rgb(0, 78, 169)",
+                borderRadius: "10px",
+              }}
+              // onClick={handleSponsorClick}
+            >
+              Sponsor
+            </button>
+            </div>
+
+          </div>
           <div className="row p-3">
             <h6 className="font-weight-bold">Video Description: </h6>
             <p>{cardData.description}</p>
@@ -287,4 +228,4 @@ const MyContentBox = (contentData) => {
   );
 };
 
-export default MyContentBox;
+export default SponsorContentBox;

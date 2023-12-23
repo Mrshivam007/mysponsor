@@ -4,12 +4,15 @@ import CCForm from "../pages/ContentCreator/ListContent/CCForm";
 import YourContent from "../pages/ContentCreator/YourContent/YourContent";
 import ListedContents from "../pages/ContentCreator/ListedContents/ListedContents";
 import ContentDetails from "../pages/ContentCreator/ContentDetails/ContentDetails";
-import SponsoredContent from "../pages/ContentCreator/YourContent/SponsoredContent";
+import SponsoredContent from "../pages/ContentCreator/SponsoredContent/SponsoredContent";
 import ContentCategories from "../pages/ContentCreator/ContentCategories/ContentCategories";
 import LiveContent from "../pages/ContentCreator/ContentCategories/LiveContent";
 import Update_UpcomingContent from "../pages/ContentCreator/Update_Content/Update_UpcomingContent";
 import UpdateContent from "../pages/ContentCreator/Update_Content/UpdateContentForm";
 import DeleteContent from "../pages/ContentCreator/DeleteContent/DeleteContent";
+import SponsoredContentDetails from "../pages/ContentCreator/SponsoredContent/SponsoredContentDetails";
+import UpcomingContent from "../pages/ContentCreator/ContentCategories/UpcomingContent";
+import PreviousContent from "../pages/ContentCreator/ContentCategories/PreviousContent";
 
 const ContentRoutes = () => {
   return (
@@ -21,10 +24,11 @@ const ContentRoutes = () => {
         <Route path="/listed_content" element={<ListedContents />} />
         <Route path="/your_content" element={<ContentCategories />} />
         <Route path="/your_content/live_content" element={<LiveContent />} />
-        <Route path="/your_content/upcoming_content" element={<LiveContent />} />
-        <Route path="/your_content/previous_content" element={<LiveContent />} />
+        <Route path="/your_content/upcoming_content" element={<UpcomingContent />} />
+        <Route path="/your_content/previous_content" element={<PreviousContent />} />
         <Route path="/mycontent-details" element={<ContentDetails />} />
         <Route path="/sponsored_contents" element={<SponsoredContent />} />
+        <Route path="/sponsored_content_details" element={<SponsoredContentDetails />} />
         <Route
           path="/listed_content/content_details"
           element={<ContentDetails />}

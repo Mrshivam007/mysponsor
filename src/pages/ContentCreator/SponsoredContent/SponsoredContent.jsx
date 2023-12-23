@@ -3,27 +3,27 @@ import bgimage from "../../../assets/img/circle-bg.png";
 import cardImg from "../../../assets/img/my_events_img.png";
 import listevents from "../../../assets/img/list_events.png";
 import { EventsHeader, Footer, NavBar } from "../../../components";
-import { fetchSponsoredEvent } from "../../../redux/actions/sponsorAction";
+import { fetchSponsoredContent } from "../../../redux/actions/sponsorAction";
 import { useDispatch, useSelector } from "react-redux";
 import apiurl from "../../../constant/config";
 import { Link, useNavigate } from "react-router-dom";
 
-const SponsoredEvent = () => {
+const SponsoredContent = () => {
     const auth = useSelector((state) => state.auth);
     const { userDetails } = auth;
     const sponsor_id = userDetails.user_id;
     const dispatch = useDispatch();
-    const eventDetails = useSelector(state => state.sponsor)
+    const contentDetails = useSelector(state => state.sponsor)
     useEffect(() => {
-        dispatch(fetchSponsoredEvent(sponsor_id))
+        dispatch(fetchSponsoredContent(sponsor_id))
     }, [])
     console.log("user details", auth);
-    console.log("Event details", eventDetails);
-    const cardData = eventDetails.SponsoredEvent;
+    const cardData = contentDetails.SponsoredContent;
+    console.log("Content details", cardData);
     const navigate = useNavigate();
 
     const handleSponsorClick = (data) => {
-        navigate("/sponsored_event_details", { state: { eventData: data } });
+        navigate("/sponsored_content_details", { state: { eventData: data } });
     };
     return (
         <>
@@ -55,7 +55,7 @@ const SponsoredEvent = () => {
                                                 <div className="row mx-0">
                                                     <div className="col-3 p-3">
                                                         <img
-                                                            src={apiurl + data.thumbnail1}
+                                                            src={apiurl + data.content_id.thumbnail1}
                                                             alt=""
                                                             style={{
                                                                 width: "100%",
@@ -72,9 +72,9 @@ const SponsoredEvent = () => {
                                                             }}
                                                         >
                                                             <h3 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between">
-                                                                {data.event_id.title}
+                                                                {data.content_id.title}
                                                             </h3>
-                                                            <h4>{data.event_id.location}</h4>
+                                                            <h4>{data.content_id.location}</h4>
                                                             <div className="star d-flex">
                                                                 <h5>
                                                                     <i className="bi bi-star-fill text-warning"></i>
@@ -92,7 +92,7 @@ const SponsoredEvent = () => {
                                                                 </h5>
                                                             </div>
                                                             <p>
-                                                                {data.event_id.description}
+                                                                {data.content_id.description}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -102,8 +102,8 @@ const SponsoredEvent = () => {
                                                             <h4 className="font-weight-bold">
                                                                 Event Sponsored for:
                                                             </h4>
-                                                            <div className="d-flex justify-content-around text-lg mt-3">
-                                                                {data.event_id.sponsoring_items.map((item, index) => (
+                                                            {/* <div className="d-flex justify-content-around text-lg mt-3">
+                                                                {data.content_id.sponsoring_items.map((item, index) => (
                                                                     <>
                                                                         <span
                                                                             key={index}
@@ -115,7 +115,7 @@ const SponsoredEvent = () => {
                                                                     </>
                                                                 ))}
 
-                                                            </div>
+                                                            </div> */}
                                                         </div>
                                                         <button
                                                             className="btn py-1 px-3 font-weight-bold d-none d-md-block"
@@ -145,7 +145,7 @@ const SponsoredEvent = () => {
                                                                 >
                                                                     Total amount sponsored
                                                                 </h6>
-                                                                <h5>₹ 50,000</h5>
+                                                                <h5>{data.price}</h5>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -258,4 +258,4 @@ const SponsoredEvent = () => {
     );
 };
 
-export default SponsoredEvent;
+export default SponsoredContent;

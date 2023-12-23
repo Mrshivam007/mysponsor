@@ -336,6 +336,7 @@ const ListeventsForm = () => {
                         ) : null}
                       </div>
                     </div>
+                    <p class="error-msg">Kindly note that if the duration of the event is one day, please ensure that both the start date and end date are selected as the same day.</p>
                   </form>
                 </div>
               </div>

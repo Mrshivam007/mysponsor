@@ -411,19 +411,25 @@ const UpdateEvent = () => {
 
                     <div className="row form-group">
                       <div className="col-md-12">
-                        <input
-                          type="text"
-                          id="categorie"
-                          value={eventData ? eventData.event_categories : ""} // Populate the input with eventData's event_categories if it exists
+                        <select
+                          className="form-control"
                           onChange={(e) =>
                             setEventData({
                               ...eventData,
-                              event_categories: e.target.value,
+                              event_category: e.target.value,
                             })
                           }
-                          className="form-control"
-                          placeholder="Event Categories"
-                        />
+                          value={eventData ? eventData.event_category : ""}
+                        >
+                          <option hidden>Select Event Category</option>
+                          <option value="music">Music</option>
+                          <option value="dance">Dance</option>
+                        </select>
+
+                        {/* Display error message for Event Category */}
+                        {errors.event_category && (
+                          <p className="error-msg">{errors.event_category}</p>
+                        )}
                         {errors.event_categories && (
                           <p className="error-msg">{errors.event_categories}</p>
                         )}

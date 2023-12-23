@@ -30,23 +30,36 @@ const Login = () => {
     }
   }, []);
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    dispatch(login(email, password));
-    if (error === "Request failed with status code 401") {
-      const showMessage =
-        "Your request requires admin approval before you can login as a teacher.";
-      setShowMessage(showMessage);
-    } else if (error === "Request failed with status code 400") {
-      const showMessage = "Unable to Determine";
-      setShowMessage(showMessage);
-    } else if (error === "Request failed with status code 404") {
-      const showMessage = "Email or Password is not Valid";
-      setShowMessage(showMessage);
-    } else {
-      setShowMessage(false);
+    try {
+      const response = await dispatch(login(email, password));
+      // Destructure the error from the response payload
+      console.log(response);
+      console.log("Api Error",error);
+      console.log("Api response",response);
+      if (error.non_field_errors[0] === "Email or Password is not Valid") {
+        const showMessage =
+          "Your entered Email or Password is not valid";
+        setShowMessage(showMessage);
+      } else if (error === "Request failed with status code 400") {
+        const showMessage = "Unable to Determine";
+        setShowMessage(showMessage);
+      } else if (error === "Request failed with status code 404") {
+        const showMessage = "Email or Password is not Valid";
+        setShowMessage(showMessage);
+      } else {
+        setShowMessage(false);
+      }
+    } catch (error) {
+      // Handle any errors that occur during the dispatch
+      console.log("error message", error);
+      console.error("An error occurred during login:", error);
+      // Optionally, you can set an error message for the user
+      setShowMessage("An error occurred during login. Please try again.");
     }
   };
+  
 
   const handleEmailChange = (event) => {
     const newEmail = event.target.value;

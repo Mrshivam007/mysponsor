@@ -29,6 +29,33 @@ export const fetchEvent = () => async (dispatch) => {
     }
   };
 
+export const fetchEventbyId = (id) => async (dispatch) => {
+    try {
+      dispatch({ type: GET_EVENT_REQUEST });
+  
+    //   const access = JSON.parse(localStorage.getItem("access"));
+  
+      const { data } = await axios.get(
+        `${apiurl}/api/user/event/${id}`,
+        // {
+        //   headers: { Authorization: `Bearer ${access}` },
+        // }
+      );  
+      dispatch({
+        type: GET_EVENT_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_EVENT_FAILED,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
 
   export const createEvent = (formData) => async (dispatch) => {
     try {

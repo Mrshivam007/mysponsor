@@ -5,7 +5,7 @@ import cardImg from "../../../assets/img/my_events_img.png";
 import bgimage from "../../../assets/img/circle-bg.png";
 import card_bg from "../../../assets/img/card/header-bg.png";
 import { Footer, NavBar } from "../../../components";
-import { fetchEvent } from "../../../redux/actions/eventAction";
+import { fetchEvent, fetchEventbyId } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux";
 import apiurl from "../../../constant/config";
 import { useNavigate } from "react-router-dom";
@@ -13,11 +13,14 @@ const Update_EventCard = ({ cardData }) => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
+  const auth = useSelector((state) => state.auth);
+  const { userDetails } = auth;
+  console.log(userDetails);
 
   const dispatch = useDispatch();
   const eventDetails = useSelector((state) => state.event);
   useEffect(() => {
-    dispatch(fetchEvent());
+    dispatch(fetchEventbyId(userDetails.user_id))
   }, []);
 
   const navigate = useNavigate();
@@ -97,10 +100,7 @@ const Update_EventCard = ({ cardData }) => {
                                 </h5>
                               </div>
                               <p>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Eligendi laudantium iusto eum
-                                totam! Porro saepe culpa dignissimos veritatis
-                                mollitia voluptate.
+                                {data.description}
                               </p>
                             </div>
                           </div>
@@ -141,7 +141,7 @@ const Update_EventCard = ({ cardData }) => {
                                   >
                                     Your Bid
                                   </h6>
-                                  <h5>₹ 50,000</h5>
+                                  <h5>₹ {totalSponsoringPrice}</h5>
                                 </div>
                                 <div
                                   className="box myevents-box"

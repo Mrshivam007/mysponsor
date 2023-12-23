@@ -4,16 +4,21 @@ import { Footer, NavBar } from "../../../components";
 import backgroundimg from "../../../assets/img/circle-bg.png";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { createEvent } from "../../../redux/actions/eventAction";
+import { createContent } from "../../../redux/actions/sponsorAction";
 import { eventReducer } from "../../../redux/reducer/eventReducer";
-import { useNavigate } from "react-router-dom";
-import { createContent } from "../../../redux/actions/contentAction";
+import { useLocation, useNavigate } from "react-router-dom";
+import SponsorNavbar from "../SponsorNavbar/SponsorNavbar";
 
-const ListContentForm = () => {
+const SponsorContentForm = (props) => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
 
   const [title, setTitle] = useState("");
+  const [businessName, setBusinessName] = useState("");
+  const [businessType, setBusinessType] = useState("");
+  const [businessContact, setBusinessContact] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [event_date_time, setEventDateTime] = useState("");
@@ -23,10 +28,8 @@ const ListContentForm = () => {
   const [audience, setAudienceExpected] = useState("");
   const [event_categories, setEventCategories] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedPlatform, setSelectedPlatform] = useState("");
-  const [content_platform, setContentplatform] = useState("");
   const [event_time, setEventTime] = useState("");
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
   const [prices, setPrices] = useState("");
   const [selectedItems, setSelectedItems] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -39,8 +42,17 @@ const ListContentForm = () => {
   const [errors, setErrors] = useState({});
   const { userDetails } = auth;
   const navigate = useNavigate(); // Initialize useNavigate hook
-  // console.log("This is content details", userDetails);
-  // console.log("event error", errors);
+  console.log(userDetails.user_id);
+  console.log("event error", errors);
+  const locationState = useLocation();
+  const { cardData, sponsoring_items, sponsoring_price } = locationState.state;
+  console.log(cardData);
+  console.log(sponsoring_items);
+  console.log(sponsoring_price);
+// Use the values as needed in your component
+
+
+
   // For each thumbnail, you'll need a separate state and handler
   const handleThumbnail1Change = (e) => {
     const file = e.target.files[0];
@@ -94,43 +106,22 @@ const ListContentForm = () => {
     setPrices(updatedPrices);
   };
 
-  const handleToggleDropdown = () => {
+  const handleToggleDropdown = (e) => {
+    e.preventDefault();
     setShowDropdown(!showDropdown);
-  };
-
-  const handleDiscard = () => {
-    navigate("/");
   };
 
   const validateForm = () => {
     const errorsObj = {};
 
-    if (title.trim() === "") {
-      errorsObj.title = "Title is required";
+    if (businessName.trim() === "") {
+      errorsObj.businessName = "businessName is required";
     }
-    if (location.trim() === "") {
-      errorsObj.location = "Location is required";
+    if (businessType.trim() === "") {
+      errorsObj.businessType = "businessType is required";
     }
-    if (startDate.trim() === "") {
-      errorsObj.startDate = "startDate is required";
-    }
-    if (endDate.trim() === "") {
-      errorsObj.endDate = "endDate is required";
-    }
-    if (audience.trim() === "") {
-      errorsObj.audience = "audience is required";
-    }
-    if (selectedCategory === "") {
-      errorsObj.content_categories = "Content Category is required";
-    }
-    if (selectedPlatform === "") {
-      errorsObj.content_platform = "Content Platform is required";
-    }
-    // if (price.trim() === "") {
-    //   errorsObj.price = "price is required";
-    // }
-    if (description.trim() === "") {
-      errorsObj.description = "description is required";
+    if (businessContact.trim() === "") {
+      errorsObj.businessContact = "businessContact is required";
     }
     if (!thumbnail1) {
       errorsObj.thumbnail1 = "thumbnail1 is required";
@@ -141,10 +132,6 @@ const ListContentForm = () => {
     if (!thumbnail3) {
       errorsObj.thumbnail3 = "thumbnail3 is required";
     }
-    // if (event_time.trim() === '') {
-    //   errorsObj.event_time = 'event_time is required';
-    // }
-    // ... validate other fields similarly
     setErrors(errorsObj);
     return Object.keys(errorsObj).length === 0;
   };
@@ -153,34 +140,40 @@ const ListContentForm = () => {
     e.preventDefault();
     const isFormValid = validateForm();
     if (isFormValid) {
-      // if (Object.keys(errors).length === 0) {
-      const sponsoringItemsData = selectedItems.map((item) => ({
-        sponsoring_content_items: item,
-        price: prices[item] || null, // handle cases where price might be undefined or null
-      }));
       const formData = new FormData();
-      formData.append("title", title);
-      formData.append("description", description);
-      formData.append("location", location);
-      formData.append("audience_expected", audience);
-      formData.append("content_start_date", startDate);
-      formData.append("content_end_date", endDate);
-      formData.append("content_time", event_time);
-      formData.append("sponsoring_content_items", JSON.stringify(sponsoringItemsData));
-      formData.append("user_id", userDetails.user_id);
-      formData.append("price", price);
-      formData.append("content_category", selectedCategory);
-      formData.append("content_platform", selectedPlatform);
-      // Append thumbnails with different keys
-      formData.append("thumbnail1", thumbnail1);
-      formData.append("thumbnail2", thumbnail2);
-      formData.append("thumbnail3", thumbnail3);
+      formData.append("sponsor_user_id", userDetails.user_id);
+      formData.append("content_user_id", cardData.user_id);
+      formData.append("content_id", cardData.content_id);
+      formData.append("title", cardData.title);
+      formData.append("price", sponsoring_price);
+      formData.append("description", cardData.description);
+      formData.append("content_category", JSON.stringify(cardData.content_category));
+      formData.append("sponsoring_content", JSON.stringify(sponsoring_items) );
+    //   formData.append("sponsoring_items", JSON.stringify(sponsoring_items) );
+      formData.append("business_name", businessName );
+      formData.append("business_type", businessType );
+      formData.append("contact_no", businessContact );
+      formData.append("image1", thumbnail1);
+      formData.append("image2", thumbnail2);
+      formData.append("image3", thumbnail3);
       formData.append("attach_video", video);
+      // formData.append("event_date_time", event_date_time);
+    //   formData.append("event_start_date", startDate);
+    //   formData.append("event_end_date", endDate);
+    //   formData.append("event_time", event_time);
+    // //   formData.append("sponsoring_items", JSON.stringify(sponsoringItemsData));
+    //   formData.append("user_id", userDetails.user_id);
+    //   formData.append("description", description);
+    //   formData.append("location", location);
+    //   formData.append("audience_expected", audience);
+    //   // formData.append("price", price);
+    //   formData.append("event_category", selectedCategory);
+    //   // Append thumbnails with different keys
       try {
         // Make POST API call
         await dispatch(createContent(formData));
         sessionStorage.setItem("successMessage", "Class created successfully!");
-        navigate("/your_content/upcoming_content"); // Replace '/' with the desired route for the home page
+        navigate("/sponsored_content"); // Replace '/' with the desired route for the home page
       } catch (error) {
         console.log("An error occurred during API calls:", error);
       }
@@ -190,7 +183,7 @@ const ListContentForm = () => {
   };
   return (
     <>
-      <NavBar />
+      <SponsorNavbar />
       <div
         className="bg-form"
         style={{
@@ -204,128 +197,53 @@ const ListContentForm = () => {
             <div className="col-12 col-md-6 px-0">
               <div className="container">
                 <h1 className="font-weight-bold d-none d-lg-block">
-                  Enter Content info
+                  Event Information
                 </h1>
-                <h2 className="sponsor-mobile-text">Enter Content info</h2>
+                <h2 className="sponsor-mobile-text">Enter event info</h2>
                 <div className="box1">
                   <form action="#" className="contact-form">
                     <div className="row form-group">
                       <div className="col-md-12">
+                      <label className="font-weight-bold">Event Title</label>
                         <input
                           type="text"
                           id="title"
-                          value={title}
-                          onChange={(e) => setTitle(e.target.value)}
+                          value={cardData.title}
+                        //   onChange={(e) => setTitle(e.target.value)}
                           className="form-control"
-                          placeholder="Enter content title"
+                        //   placeholder="Enter Title"
+                        readOnly
                         />
-                        {title == "" ? (
-                          <p className="error-msg">{errors.title}</p>
-                        ) : null}
                       </div>
                     </div>
 
                     <div className="row form-group">
                       <div className="col-md-12">
-                        <select
-                          className="form-control"
-                          onChange={(e) => {
-                            setSelectedCategory(e.target.value);
-                          }}
-                        >
-                          <option hidden>Enter Content Category</option>
-                          <option value="Video">Video</option>
-                          <option value="Post">Post</option>
-                        </select>
-                        {selectedCategory == "" ? (
-                          <p className="error-msg">
-                            {errors.content_categories}
-                          </p>
-                        ) : null}
-                      </div>
-                    </div>
-
-                    <div className="row form-group">
-                      <div className="col-md-12">
-                        <select
-                          className="form-control"
-                          onChange={(e) => {
-                            setSelectedPlatform(e.target.value);
-                          }}
-                        >
-                          <option hidden>Enter Platform</option>
-                          <option value="Youtube">Youtube</option>
-                          <option value="Facebook">Facebook</option>
-                        </select>
-                        {selectedPlatform == "" ? (
-                          <p className="error-msg">{errors.content_platform}</p>
-                        ) : null}
-                      </div>
-                    </div>
-
-                    <div className="row form-group">
-                      <div className="col-md-12 mb-3 mb-md-0">
-                        {/* <select className="form-control" value={""}>
-                          <option className="text-muted">Enter category</option>
-                          <option>--select event category--</option>
-                        </select> */}
-                        {/* <input
+                      <label className="font-weight-bold">Event Location</label>
+                        <input
                           type="text"
-                          id="sponoring_item"
-                          value={sponsoring_item}
-                          onChange={(e) => setSponsoringItem(e.target.value)}
+                          id="location"
+                          value={cardData.location}
                           className="form-control"
-                          placeholder="Enter Sponsoring Item"
+                          readOnly
                         />
-                        {errors.sponsoring_item && <p className="error-msg">{errors.sponsoring_item}</p>} */}
-
-                        <div>
-                          <button type="button" onClick={handleToggleDropdown}>
-                            Add Sponsoring Item
-                          </button>
-
-                          {showDropdown && (
-                            <div>
-                              <select
-                                multiple
-                                value={selectedItems}
-                                onChange={handleSponsoringItemChange}
-                                className="form-control"
-                                id="sponsoring_item"
-                                placeholder="Enter Sponsoring Item"
-                              >
-                                <option value="banner">Banner</option>
-                                <option value="led_screen">LED Screen</option>
-                                <option value="bill_board">Billboard</option>
-                              </select>
-
-                              {selectedItems.map((item) => (
-                                <div key={item}>
-                                  <input
-                                    type="text"
-                                    value={prices[item]}
-                                    onChange={(e) =>
-                                      handlePriceChange(item, e.target.value)
-                                    }
-                                    className="form-control my-1"
-                                    placeholder={`Enter ${item.replace(
-                                      "_",
-                                      " "
-                                    )} Price`}
-                                  />
-                                </div>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                        {errors.selectedItems && (
-                          <p className="error-msg">{errors.selectedItems}</p>
-                        )}
-                        {prices == "" ? (
-                          <p className="error-msg">{errors.prices}</p>
-                        ) : null}
                       </div>
                     </div>
+
+
+                      <div className="row form-group">
+                      <div className="col-md-12">
+                      <label className="font-weight-bold">Event Sponsoring Item</label>
+                        <input
+                          type="text"
+                          id="location"
+                          value={sponsoring_items}
+                          className="form-control"
+                          readOnly
+                        />
+                      </div>
+                    </div>
+          
 
                     <div className="row form-group">
                       <div className="col-6">
@@ -333,20 +251,19 @@ const ListContentForm = () => {
                         <input
                           type="date"
                           id="start-date"
-                          onChange={(e) => setStartDate(e.target.value)}
+                          value={cardData.content_start_date}
                           className="form-control"
+                          readOnly
                         />
-                        {startDate == "" ? (
-                          <p className="error-msg">{errors.startDate}</p>
-                        ) : null}
                       </div>
                       <div className="col-6">
                         <label className="font-weight-bold">End Date</label>
                         <input
                           type="date"
-                          id="subject"
-                          onChange={(e) => setEndDate(e.target.value)}
+                          id="start-date"
+                          value={cardData.content_end_date}
                           className="form-control"
+                          readOnly
                         />
                         {endDate == "" ? (
                           <p className="error-msg">{errors.endDate}</p>
@@ -360,25 +277,14 @@ const ListContentForm = () => {
             <div className="col-12 col-md-6 px-0">
               <div className="container">
                 <h1 className="font-weight-bold d-none d-lg-block">
-                  Enter Creator info
+                  Enter Sponsor Info
                 </h1>
-                <h2 className="sponsor-mobile-text">Enter Creator info</h2>
+                <h2 className="sponsor-mobile-text">Enter organizer info</h2>
                 <div className="box1">
-                  {/* <div className="col-lg-6 mb-5 mb-lg-0"> */}
                   <form action="#" className="contact-form">
-                    {/* <div className="row form-group">
-                                <div className="col-md-6 mb-3 mb-md-0">
-                                    <label className="text-black" for="fname">First Name</label>
-                                    <input type="text" id="fname" className="form-control" />
-                                </div>
-                                <div className="col-md-6">
-                                    <label className="text-black" for="lname">Last Name</label>
-                                    <input type="text" id="lname" className="form-control" />
-                                </div>
-                            </div> */}
-
                     <div className="row form-group">
                       <div className="col-md-12">
+                      <label className="font-weight-bold">Your Name</label>
                         <input
                           type="text"
                           id="subject"
@@ -391,6 +297,7 @@ const ListContentForm = () => {
 
                     <div className="row form-group">
                       <div className="col-md-12">
+                      <label className="font-weight-bold">Your Mail</label>
                         <input
                           type="email"
                           id="email"
@@ -405,33 +312,47 @@ const ListContentForm = () => {
                       <div className="col-md-12">
                         <input
                           type="text"
-                          id="location"
-                          value={location}
-                          onChange={(e) => setLocation(e.target.value)}
+                          id="name"
+                          value={businessName}
+                          onChange={(e) => setBusinessName(e.target.value)}
                           className="form-control"
-                          placeholder="Enter your location"
+                          placeholder="Enter Business Name"
                         />
-                        {location == "" ? (
-                          <p className="error-msg">{errors.location}</p>
-                        ) : null}
                       </div>
                     </div>
-
-                    <div className="row form-group gap-3">
+                    {!businessName ? (
+                      <p className="error-msg">{errors.businessName}</p>
+                    ) : null}
+                    <div className="row form-group">
                       <div className="col-md-12">
                         <input
                           type="text"
-                          id="subject"
-                          value={audience}
-                          onChange={(e) => setAudienceExpected(e.target.value)}
+                          id="type"
+                          value={businessType}
+                          onChange={(e) => setBusinessType(e.target.value)}
                           className="form-control"
-                          placeholder="Enter expected audience (Channel Subs)"
+                          placeholder="Enter Business Type"
                         />
-                        {audience == "" ? (
-                          <p className="error-msg">{errors.audience}</p>
-                        ) : null}
                       </div>
                     </div>
+                    {!businessType ? (
+                      <p className="error-msg">{errors.businessType}</p>
+                    ) : null}
+                    <div className="row form-group">
+                      <div className="col-md-12">
+                        <input
+                          type="number"
+                          id="number"
+                          value={businessContact}
+                          onChange={(e) => setBusinessContact(e.target.value)}
+                          className="form-control"
+                          placeholder="Enter Contact Number"
+                        />
+                      </div>
+                    </div>
+                    {!businessContact ? (
+                      <p className="error-msg">{errors.businessContact}</p>
+                    ) : null}
                   </form>
                 </div>
               </div>
@@ -440,34 +361,15 @@ const ListContentForm = () => {
           <div className="row">
             <div className="container">
               <h1 className="font-weight-bold d-none d-lg-block">
-                Enter Content description
+                Add Photos & Videos
               </h1>
-              <h2 className="sponsor-mobile-text">Enter Content description</h2>
-              <div className="box1 mt-2">
-                <textarea
-                  className="form-control"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  placeholder="Enter description (100 words)"
-                  col="30"
-                  rows="5"
-                ></textarea>
-                {description == "" ? (
-                  <p className="error-msg">{errors.description}</p>
-                ) : null}
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="container">
-              <h1 className="font-weight-bold d-none d-lg-block">Add Photos</h1>
               <h2 className="sponsor-mobile-text">Add Photos</h2>
               <p>(atleast 3 photos & 1 video)</p>
               <div
                 className="box1 mt-2 d-flex justify-content-center"
                 style={{ gap: "2%" }}
               >
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
                   <div className="box text-center">
                     <h5 className="font-weight-bold">Add primary thumbnail</h5>
                     <input
@@ -478,7 +380,7 @@ const ListContentForm = () => {
                     />
                     {thumbnail1 && (
                       <div>
-                        <h2 className="my-3">Preview:</h2>
+                        <h2>Preview:</h2>
                         <img
                           src={URL.createObjectURL(thumbnail1)}
                           alt="Preview"
@@ -491,7 +393,7 @@ const ListContentForm = () => {
                     ) : null}
                   </div>
                 </div>
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
                   <div className="box text-center">
                     <h5 className="font-weight-bold">
                       Add secondary thumbnail
@@ -504,7 +406,7 @@ const ListContentForm = () => {
                     />
                     {thumbnail2 && (
                       <div>
-                        <h2 className="my-3">Preview:</h2>
+                        <h2>Preview:</h2>
                         <img
                           src={URL.createObjectURL(thumbnail2)}
                           alt="Preview"
@@ -530,7 +432,7 @@ const ListContentForm = () => {
                     />
                     {thumbnail3 && (
                       <div>
-                        <h2 className="my-3">Preview:</h2>
+                        <h2>Preview:</h2>
                         <img
                           src={URL.createObjectURL(thumbnail3)}
                           alt="Preview"
@@ -573,7 +475,7 @@ const ListContentForm = () => {
               />
               <button
                 className="btn btn-outline-primary mt-3"
-                onClick={handleDiscard}
+                onClick={() => navigate("/")}
               >
                 Discard
               </button>
@@ -586,4 +488,4 @@ const ListContentForm = () => {
   );
 };
 
-export default ListContentForm;
+export default SponsorContentForm;
