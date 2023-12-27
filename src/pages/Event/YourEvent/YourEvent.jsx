@@ -1,13 +1,11 @@
 import img1 from "../../../assets/img/choice/choice-card-1.png";
 import img2 from "../../../assets/img/choice/choice-card-2.png";
 import { Link } from "react-router-dom";
-const YourEvent = ({ line }) => {
+const YourEvent = () => {
   return (
     <>
       <div className="page-section">
-        <h1 className="choice-heading">{line}</h1>
-
-        <div className="container" style={{ marginTop: "2%" }}>
+        <div className="container">
           <div className="row" style={{ flexWrap: "nowrap" }}>
             <div className="col-lg-6">
               <Link to="/events">

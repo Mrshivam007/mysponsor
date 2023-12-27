@@ -248,20 +248,6 @@ const ListeventsForm = () => {
 
                     <div className="row form-group">
                       <div className="col-md-12 mb-3 mb-md-0">
-                        {/* <select className="form-control" value={""}>
-                          <option className="text-muted">Enter category</option>
-                          <option>--select event category--</option>
-                        </select> */}
-                        {/* <input
-                          type="text"
-                          id="sponoring_item"
-                          value={sponsoring_item}
-                          onChange={(e) => setSponsoringItem(e.target.value)}
-                          className="form-control"
-                          placeholder="Enter Sponsoring Item"
-                        />
-                        {errors.sponsoring_item && <p className="error-msg">{errors.sponsoring_item}</p>} */}
-
                         <div>
                           <button type="button" onClick={handleToggleDropdown}>
                             Add Sponsoring Item
@@ -336,7 +322,11 @@ const ListeventsForm = () => {
                         ) : null}
                       </div>
                     </div>
-                    <p class="error-msg">Kindly note that if the duration of the event is one day, please ensure that both the start date and end date are selected as the same day.</p>
+                    <p class="error-msg">
+                      Kindly note that if the duration of the event is one day,
+                      please ensure that both the start date and end date are
+                      selected as the same day.
+                    </p>
                   </form>
                 </div>
               </div>
@@ -382,6 +372,8 @@ const ListeventsForm = () => {
                           }}
                         >
                           <option hidden>Enter Event Category</option>
+                          <option value="music">Music</option>
+                          <option value="dance">Dance</option>
                           <option value="comedy">comedy</option>
                           <option value="music">music</option>
                           <option value="dance">dance</option>
@@ -449,7 +441,7 @@ const ListeventsForm = () => {
                 className="box1 mt-2 d-flex justify-content-center"
                 style={{ gap: "2%" }}
               >
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
                   <div className="box text-center">
                     <h5 className="font-weight-bold">Add primary thumbnail</h5>
                     <input
@@ -473,7 +465,7 @@ const ListeventsForm = () => {
                     ) : null}
                   </div>
                 </div>
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
                   <div className="box text-center">
                     <h5 className="font-weight-bold">
                       Add secondary thumbnail
@@ -499,7 +491,7 @@ const ListeventsForm = () => {
                     ) : null}
                   </div>
                 </div>
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
                   <div className="box text-center">
                     <h5 className="font-weight-bold">
                       Add secondary thumbnail

@@ -5,14 +5,16 @@ import logo from "../../assets/img/logo/logo.png";
 // import card_bg from "../../assets/img/card/header-bg.png";
 import { AiOutlineClose } from "react-icons/ai"; // Import the close icon from react-icons library
 // import account from "../../assets/img/account.png";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/actions/authActions";
 
 const NavBar = () => {
   const [isSticky, setSticky] = useState(false);
-  const auth = useSelector(state => state.auth);
+  const auth = useSelector((state) => state.auth);
   const { userDetails } = auth;
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     const handleScroll = () => {
       setSticky(window.scrollY > 0);
@@ -26,9 +28,15 @@ const NavBar = () => {
   }, []);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [openDropDown, setOpenDropDown] = useState(false);
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
   };
 
   return (
@@ -70,9 +78,9 @@ const NavBar = () => {
           </div>
           {userDetails ? (
             <>
-              <a
-                className="nav-link"
-                href="#"
+              <Link
+                className="nav-link text-accent"
+                to={"favourites"}
                 style={{
                   backgroundColor: "white",
                   margin: "1vh",
@@ -82,10 +90,10 @@ const NavBar = () => {
                 }}
               >
                 <span
-                  className="mai-heart"
+                  className="mai-heart "
                   style={{ fontSize: "28px", marginLeft: "-10px" }}
                 ></span>
-              </a>
+              </Link>
               <a
                 className="nav-link"
                 href="#"
@@ -94,22 +102,7 @@ const NavBar = () => {
                   margin: "1vh",
                   height: "40px",
                   width: "40px",
-                  borderRadius: "50px",
-                }}
-              >
-                <span
-                  className="mai-people"
-                  style={{ fontSize: "28px", marginLeft: "-10px" }}
-                ></span>
-              </a>
-              <a
-                className="nav-link"
-                href="#"
-                style={{
-                  backgroundColor: "white",
-                  margin: "1vh",
-                  height: "40px",
-                  width: "40px",
+                  color: "blue",
                   borderRadius: "50px",
                 }}
               >
@@ -118,6 +111,45 @@ const NavBar = () => {
                   style={{ fontSize: "28px", marginLeft: "-10px" }}
                 ></span>
               </a>
+              <div
+                className="nav-link"
+                style={{
+                  backgroundColor: "white",
+                  margin: "1vh",
+                  height: "40px",
+                  width: "40px",
+                  color: "black",
+                  borderRadius: "50px",
+                  cursor: "pointer",
+                }}
+                onClick={() => setOpenDropDown(!openDropDown)}
+              >
+                <span
+                  className="mai-people"
+                  style={{ fontSize: "28px", marginLeft: "-10px" }}
+                ></span>
+              </div>
+              <div className="dropdown">
+                {openDropDown ? (
+                  <ul
+                    className="dropdown-menu"
+                    style={{
+                      display: "block",
+                      width: "100%",
+                      left: "-75px",
+                      top: "20px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <li onClick={handleLogout}>
+                      <div className="dropdown-item">Logout</div>
+                    </li>
+                    <li>
+                      <div className="dropdown-item">Your Account</div>
+                    </li>
+                  </ul>
+                ) : null}
+              </div>
             </>
           ) : (
             <Link to={"/login"} className="link-banner btn btn-primary">
@@ -134,12 +166,12 @@ const NavBar = () => {
         <div className="container" style={{ placeContent: "center" }}>
           <Nav>
             <Nav.Link className="desktop-nav-item">
-              <Link to={"/events"} style={{ color: 'white' }}>
+              <Link to={"/events"} style={{ color: "white" }}>
                 Sponsor Event
               </Link>
             </Nav.Link>
             <Nav.Link className="desktop-nav-item">
-              <Link to={"/cc"} style={{ color: 'white' }}>
+              <Link to={"/cc"} style={{ color: "white" }}>
                 Sponsor Content Creators
               </Link>
             </Nav.Link>

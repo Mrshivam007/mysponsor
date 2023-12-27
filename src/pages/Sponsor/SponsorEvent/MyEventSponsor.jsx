@@ -47,54 +47,52 @@ const MyEventSponsor = (eventData) => {
 
   const navigate = useNavigate();
 
-  
-  
   sponsoring_items.forEach((item) => {
-      if (item && item.price) {
-          totalAmount += parseFloat(item.price);
-        }
-    });
-    const settings = {
-        infinite: true, // Loop the slider
-        speed: 500, // Transition speed in milliseconds
-        slidesToShow: 1, // Number of slides to show at a time
-        slidesToScroll: 1, // Number of slides to scroll at a time
-        autoplay: true, // Auto-play the slider
-        autoplaySpeed: 3000, // Auto-play speed in milliseconds
-    };
+    if (item && item.price) {
+      totalAmount += parseFloat(item.price);
+    }
+  });
+  const settings = {
+    infinite: true, // Loop the slider
+    speed: 500, // Transition speed in milliseconds
+    slidesToShow: 1, // Number of slides to show at a time
+    slidesToScroll: 1, // Number of slides to scroll at a time
+    autoplay: true, // Auto-play the slider
+    autoplaySpeed: 3000, // Auto-play speed in milliseconds
+  };
 
-    const [selectedItems, setSelectedItems] = useState([]);
-    const [totalSponsoringPrice, setTotalSponsoringPrice] = useState(0);
-    
-    const handleButtonClick = (item) => {
-        if (selectedItems.includes(item)) {
-            // If item is already selected, remove it
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [totalSponsoringPrice, setTotalSponsoringPrice] = useState(0);
+  const [favorite, setFavorite] = useState(false);
+  const handleButtonClick = (item) => {
+    if (selectedItems.includes(item)) {
+      // If item is already selected, remove it
       setSelectedItems((prevSelectedItems) =>
-      prevSelectedItems.filter((selectedItem) => selectedItem !== item)
+        prevSelectedItems.filter((selectedItem) => selectedItem !== item)
       );
       setTotalSponsoringPrice(
-          (prevTotal) => prevTotal - parseFloat(item.price)
-          );
-        } else {
-            // If item is not selected, add it
-            setSelectedItems((prevSelectedItems) => [...prevSelectedItems, item]);
-            setTotalSponsoringPrice(
-                (prevTotal) => prevTotal + parseFloat(item.price)
-                );
-            }
-        };
-        
-        const handleSponsorClick = () => {
-          const selectedItemsData = {
-            cardData,
-            sponsoring_items: selectedItems.map(item => item.sponsoring_items),
-            sponsoring_price: totalSponsoringPrice.toFixed(2),
-          };
-        
-          navigate("/sponsor_eventForm", { state: selectedItemsData });
-        };
-        return (
-            <>
+        (prevTotal) => prevTotal - parseFloat(item.price)
+      );
+    } else {
+      // If item is not selected, add it
+      setSelectedItems((prevSelectedItems) => [...prevSelectedItems, item]);
+      setTotalSponsoringPrice(
+        (prevTotal) => prevTotal + parseFloat(item.price)
+      );
+    }
+  };
+
+  const handleSponsorClick = () => {
+    const selectedItemsData = {
+      cardData,
+      sponsoring_items: selectedItems.map((item) => item.sponsoring_items),
+      sponsoring_price: totalSponsoringPrice.toFixed(2),
+    };
+
+    navigate("/sponsor_eventForm", { state: selectedItemsData });
+  };
+  return (
+    <>
       {/* DESKTOP VIEW  */}
       <div className="container payments-desktop desktop-view">
         <div className="pay-box">
@@ -117,6 +115,8 @@ const MyEventSponsor = (eventData) => {
                     <img
                       src={apiurl + data}
                       alt=""
+                      width="600"
+                      height="400"
                       style={{ width: "100%", borderRadius: "15px" }}
                     />
                   ))}
@@ -147,9 +147,34 @@ const MyEventSponsor = (eventData) => {
               </table>
             </div>
             <div className="col-6">
-              <h4 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between">
+              <h4 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between align-items-center">
                 {cardData.title}{" "}
-                <img src={heart} alt="" style={{ width: "7%" }} />
+                <span
+                  className="bg-white"
+                  style={{
+                    borderRadius: "20px",
+                    padding: "8px 7px 2px 8px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <i
+                    className="bi bi-suit-heart-fill"
+                    onClick={() => setFavorite(!favorite)}
+                    style={
+                      !favorite
+                        ? {
+                            color: "gray",
+                            filter:
+                              "drop-shadow(rgba(0, 0, 0, 0.5) 1px 3px 3px)",
+                          }
+                        : {
+                            color: "#ff0068",
+                            filter:
+                              "drop-shadow(rgba(0, 0, 0, 0.5) 1px 3px 3px)",
+                          }
+                    }
+                  ></i>
+                </span>
               </h4>
               <h4>{cardData.location}</h4>
               <div className="star d-flex">

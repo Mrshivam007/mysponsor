@@ -27,21 +27,21 @@ const ContentCategories = () => {
         <NavBar />
         {/* ---DESKTOP VIEW---  */}
         <div className="desktop-view">
-          <EventsHeader title={"Your Events"} logo={listevents} />
+          <EventsHeader title={"Your Content"} logo={listevents} />
           {/* <Choice /> */}
         </div>
         {/* ---DESKTOP VIEW END--- */}
         {/* ---MOBILE VIEW--- */}
 
         <div className="mobile-view">
-          <h2 className="sponsor-mobile-text">Get your event listed</h2>
+          <h2 className="sponsor-mobile-text">Get your Contents listed</h2>
         </div>
         {/* ---MOBILE VIEW END--- */}
 
         <div className="container">
           <div className="list-events-box">
             <h1>
-              List your event and get sponsored worldwide by different sponsors
+              Check out your listed content here
             </h1>
           </div>
         </div>
@@ -61,10 +61,8 @@ const ContentCategories = () => {
                   <h5 className="card-text font-weight-bold">
                     Your Live Content
                   </h5>
-                  <button
-                    className="btn text-white py-1 font-weight-bold mb-3"
-                  >
-                    <Link to={"live_content"} style={{ color: 'white' }} >
+                  <button className="btn text-white py-1 font-weight-bold mb-3">
+                    <Link to={"live_content"} style={{ color: "white" }}>
                       Live Content
                     </Link>
                   </button>
@@ -85,10 +83,8 @@ const ContentCategories = () => {
                   <h5 className="card-text font-weight-bold">
                     Your Upcoming Content
                   </h5>
-                  <button
-                    className="btn text-white py-1 font-weight-bold mb-3"
-                  >
-                    <Link to={"upcoming_content"} style={{ color: 'white' }} >
+                  <button className="btn text-white py-1 font-weight-bold mb-3">
+                    <Link to={"upcoming_content"} style={{ color: "white" }}>
                       Upcoming Content
                     </Link>
                   </button>
@@ -109,12 +105,10 @@ const ContentCategories = () => {
                   <h5 className="card-text font-weight-bold">
                     Your Previous Content
                   </h5>
-                  <button
-                    className="btn text-white py-1 font-weight-bold mb-3"
-                  >
-                    <Link to={"previous_content"} style={{ color: 'white' }} >
+                  <button className="btn text-white py-1 font-weight-bold mb-3">
+                    <Link to={"previous_content"} style={{ color: "white" }}>
                       Previous Content
-                    </Link>        
+                    </Link>
                   </button>
                 </div>
               </div>

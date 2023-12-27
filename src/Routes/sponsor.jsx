@@ -22,6 +22,8 @@ import SponsoredEventDetails from "../pages/Sponsor/SponsorEvent/SponsoredEventD
 import SponsorContentForm from "../pages/Sponsor/SponsorContent/SponsorContentForm";
 import SponsoredContent from "../pages/Sponsor/SponsorContent/SponsoredContent";
 import SponsoredContentDetails from "../pages/Sponsor/SponsorContent/SponsoredContentDetails";
+import Favourite from "../pages/Sponsor/FavouritePage/Favourite";
+import SponsorProfile from "../pages/Sponsor/SponsorProfile/SponsorProfile";
 const SponsorRoutes = () => {
   return (
     <>
@@ -31,8 +33,14 @@ const SponsorRoutes = () => {
         <Route path="/events" element={<SponsorEvents />} />
         <Route path="/sponsored_event" element={<SponsoredEvent />} />
         <Route path="/sponsored_content" element={<SponsoredContent />} />
-        <Route path="/sponsored_event_details" element={<SponsoredEventDetails />} />
-        <Route path="/sponsored_content_details" element={<SponsoredContentDetails />} />
+        <Route
+          path="/sponsored_event_details"
+          element={<SponsoredEventDetails />}
+        />
+        <Route
+          path="/sponsored_content_details"
+          element={<SponsoredContentDetails />}
+        />
         <Route path="/cc" element={<SponsorContent />} />
         <Route path="/sponsor_eventForm" element={<SponsorEventForm />} />
         <Route path="/sponsor_contentForm" element={<SponsorContentForm />} />
@@ -49,6 +57,8 @@ const SponsorRoutes = () => {
         />
         <Route path="/update_event" element={<UpdateEvent />} />
         <Route path="/delete_event" element={<DeleteEvent />} />
+        <Route path="/favourites" element={<Favourite />} />
+        <Route path="/profile" element={<SponsorProfile />} />
         <Route path="/login" element={<Navigate to={"/"} />} />
         <Route path="/signup" element={<Navigate to={"/"} />} />
       </Routes>
