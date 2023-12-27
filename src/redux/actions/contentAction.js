@@ -1,6 +1,6 @@
 import axios from 'axios';
 import apiurl from '../../constant/config';
-import { CREATE_CONTENT_FAILED, CREATE_CONTENT_REQUEST, CREATE_CONTENT_SUCCESS, CREATE_EVENT_FAILED, CREATE_EVENT_REQUEST, CREATE_EVENT_SUCCESS, DELETE_CONTENT_FAILED, DELETE_CONTENT_REQUEST, DELETE_CONTENT_SUCCESS, DELETE_EVENT_FAILED, DELETE_EVENT_REQUEST, DELETE_EVENT_SUCCESS, GET_CONTENT_FAILED, GET_CONTENT_REQUEST, GET_CONTENT_SUCCESS, GET_EVENT_FAILED, GET_EVENT_REQUEST, GET_EVENT_SUCCESS, UPDATE_CONTENT_FAILED, UPDATE_CONTENT_REQUEST, UPDATE_CONTENT_SUCCESS, UPDATE_EVENT_FAILED, UPDATE_EVENT_REQUEST, UPDATE_EVENT_SUCCESS } from '../constant';
+import { CREATE_CONTENT_FAILED, CREATE_CONTENT_REQUEST, CREATE_CONTENT_SUCCESS, CREATE_EVENT_FAILED, CREATE_EVENT_REQUEST, CREATE_EVENT_SUCCESS, DELETE_CONTENT_FAILED, DELETE_CONTENT_REQUEST, DELETE_CONTENT_SUCCESS, DELETE_EVENT_FAILED, DELETE_EVENT_REQUEST, DELETE_EVENT_SUCCESS, GET_CONTENT_CATEGORY_FAILED, GET_CONTENT_CATEGORY_REQUEST, GET_CONTENT_CATEGORY_SUCCESS, GET_CONTENT_FAILED, GET_CONTENT_REQUEST, GET_CONTENT_SUCCESS, GET_EVENT_FAILED, GET_EVENT_REQUEST, GET_EVENT_SUCCESS, UPDATE_CONTENT_FAILED, UPDATE_CONTENT_REQUEST, UPDATE_CONTENT_SUCCESS, UPDATE_EVENT_FAILED, UPDATE_EVENT_REQUEST, UPDATE_EVENT_SUCCESS } from '../constant';
 
 export const fetchContent = () => async (dispatch) => {
     try {
@@ -21,6 +21,33 @@ export const fetchContent = () => async (dispatch) => {
     } catch (error) {
       dispatch({
         type: GET_CONTENT_FAILED,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+export const fetchContentPlatform = () => async (dispatch) => {
+    try {
+      dispatch({ type: GET_CONTENT_CATEGORY_REQUEST });
+  
+    //   const access = JSON.parse(localStorage.getItem("access"));
+  
+      const { data } = await axios.get(
+        `${apiurl}/api/user/populer-content/`,
+        // {
+        //   headers: { Authorization: `Bearer ${access}` },
+        // }
+      );  
+      dispatch({
+        type: GET_CONTENT_CATEGORY_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_CONTENT_CATEGORY_FAILED,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message

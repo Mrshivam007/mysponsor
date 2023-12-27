@@ -5,6 +5,7 @@ import facebook from "../../assets/img/Facebook.png";
 import instagram from "../../assets/img/instagram.jpg";
 import snapchat from "../../assets/img/snapchat.jpg";
 import tiktok from "../../assets/img/tiktok.jpg";
+import { Link } from "react-router-dom";
 
 const SocialmediaBox = () => {
   return (
@@ -26,13 +27,15 @@ const SocialmediaBox = () => {
                   backgroundColor: "#FF6762",
                 }}
               >
-                <div className="platform-img">
-                  <img
-                    src={youtube}
-                    alt=""
-                    style={{ width: "60%", height: "auto", margin: "8%" }}
-                  />
-                </div>
+                  <div className="platform-img">
+                <Link to={"/youtube"}>
+                    <img
+                      src={youtube}
+                      alt=""
+                      style={{ width: "60%", height: "auto", margin: "8%" }}
+                    />
+                </Link>
+                  </div>
               </div>
               <h3 className=" text-center font-weight-bolder ">Youtube</h3>
             </div>
@@ -65,11 +68,13 @@ const SocialmediaBox = () => {
                 }}
               >
                 <div className="platform-img">
+                  <Link to={"/instagram"}>
                   <img
                     src={instagram}
                     alt=""
                     style={{ width: "50%", height: "auto", margin: "8%" }}
                   />
+                  </Link>
                 </div>
               </div>
               <h3 className=" text-center font-weight-bolder ">Instagram</h3>
@@ -105,11 +110,13 @@ const SocialmediaBox = () => {
                 }}
               >
                 <div className="platform-img">
+                  <Link to={"/facebook"}>
                   <img
                     src={facebook}
                     alt=""
                     style={{ width: "48%", height: "auto", margin: "8%" }}
                   />
+                  </Link>
                 </div>
               </div>
               <h3 className=" text-center font-weight-bolder ">Facebook</h3>

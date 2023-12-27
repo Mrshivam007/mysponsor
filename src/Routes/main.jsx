@@ -19,6 +19,9 @@ import ContentDetails from "../pages/LandingPage/Desktop_Sponsor_CC/ContentDetai
 import SponsorLogin from "../pages/SponsorRegister/SponsorLogin";
 import SponsorRegister from "../pages/SponsorRegister/SponsorRegister";
 import SponsorRoutes from "./sponsor";
+import YoutubeContent from "../pages/LandingPage/Content_Category/YoutubeContent";
+import InstagramContent from "../pages/LandingPage/Content_Category/InstagramContent";
+import FacebookContent from "../pages/LandingPage/Content_Category/FacebookContent";
 
 const Main = () => {
   const auth = useSelector((state) => state.auth);
@@ -48,6 +51,9 @@ const Main = () => {
             <Route path="/home" element={<Home />} />
             <Route path="/events" element={<SponsorEvents />} />
             <Route path="/cc" element={<SponsorContentC />} />
+            <Route path="/youtube" element={<YoutubeContent />} />
+            <Route path="/instagram" element={<InstagramContent />} />
+            <Route path="/facebook" element={<FacebookContent />} />
             <Route path="/mycontent-details" element={<ContentDetails />} />
             <Route path="/choice" element={<SponsorChoice />} />
             <Route path="/categories" element={<CategoryPage />} />

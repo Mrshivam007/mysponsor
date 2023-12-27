@@ -382,8 +382,15 @@ const ListeventsForm = () => {
                           }}
                         >
                           <option hidden>Enter Event Category</option>
-                          <option value="music">Music</option>
-                          <option value="dance">Dance</option>
+                          <option value="comedy">comedy</option>
+                          <option value="music">music</option>
+                          <option value="dance">dance</option>
+                          <option value="festival">festival</option>
+                          <option value="party">party</option>
+                          <option value="concerts">concerts</option>
+                          <option value="promotional">promotional</option>
+                          <option value="sports">sports</option>
+                          <option value="motivational">Motivational</option>
                         </select>
                         {selectedCategory == "" ? (
                           <p className="error-msg">{errors.selectedCategory}</p>
