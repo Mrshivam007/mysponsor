@@ -24,6 +24,9 @@ import SponsoredContent from "../pages/Sponsor/SponsorContent/SponsoredContent";
 import SponsoredContentDetails from "../pages/Sponsor/SponsorContent/SponsoredContentDetails";
 import Favourite from "../pages/Sponsor/FavouritePage/Favourite";
 import SponsorProfile from "../pages/Sponsor/SponsorProfile/SponsorProfile";
+import YoutubeContentSponsor from "../pages/Sponsor/Content_Category/YoutubeContent";
+import InstagramContentSponsor from "../pages/Sponsor/Content_Category/InstagramContent";
+import FacebookContentSponsor from "../pages/Sponsor/Content_Category/FacebookContent";
 const SponsorRoutes = () => {
   return (
     <>
@@ -42,6 +45,9 @@ const SponsorRoutes = () => {
           element={<SponsoredContentDetails />}
         />
         <Route path="/cc" element={<SponsorContent />} />
+        <Route path="/youtube" element={<YoutubeContentSponsor />} />
+        <Route path="/instagram" element={<InstagramContentSponsor />} />
+        <Route path="/facebook" element={<FacebookContentSponsor />} />
         <Route path="/sponsor_eventForm" element={<SponsorEventForm />} />
         <Route path="/sponsor_contentForm" element={<SponsorContentForm />} />
         <Route path="/mycontent-details" element={<ContentDetails />} />

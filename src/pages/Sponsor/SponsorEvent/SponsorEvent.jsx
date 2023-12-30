@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import {
   NavBar,
   EventsHeader,
@@ -9,7 +9,7 @@ import {
 import bgimage from "../../../assets/img/circle-bg.png";
 import spevents from "../../../assets/img/sponsor_events-logo.png";
 import { EventsCards, EventsPageCards } from "../../../data/data";
-import { fetchEvent } from "../../../redux/actions/eventAction";
+import { fetchEvent, fetchEventCategory } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux"
 import SponsorNavbar from "../SponsorNavbar/SponsorNavbar";
 const SponsorEvents = () => {
@@ -20,11 +20,16 @@ const SponsorEvents = () => {
   const dispatch = useDispatch();
   const eventDetails = useSelector(state => state.event)
   useEffect(() => {
-    dispatch(fetchEvent())
-  },[])
+    dispatch(fetchEventCategory())
+  }, [])
 
-  console.log("dynamic data",eventDetails.eventDetails);
-  console.log("static data",EventsCards);
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+
+  console.log("dynamic data", eventDetails.eventCategory);
+  console.log("static data", EventsCards);
 
   return (
     <>
@@ -36,17 +41,19 @@ const SponsorEvents = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
+        {/* <NavBar /> */}
         <SponsorNavbar />
         <div className="events-page-desktop">
           <EventsHeader title={"Sponsor Events"} logo={spevents} />
-          <SponserE cardData={eventDetails.eventDetails} line={"Festival Events"} />
-          <SponserE cardData={EventsCards} line={"Concerts"} />
-          <SponserE cardData={EventsCards} line={"Promotional Events"} />
-          <SponserE cardData={EventsCards} line={"Sports Events"} />
-          <SponserE cardData={EventsCards} line={"Comedy Shows"} />
-          <SponserE cardData={EventsCards} line={"Motivational Events"} />
-          <SponserE cardData={EventsCards} line={"Reality Shows"} />
+
+          {[...Object.entries(eventDetails.eventCategory || {})]
+            .filter(([key, value]) => value && value.length > 0)
+            .sort((a, b) => b[1].length - a[1].length)
+            .map(([category, cardData]) => (
+              <SponserE key={category} cardData={cardData} line={`${capitalizeFirstLetter(category)} Event`} />
+            ))}
         </div>
+
         <div className="events-page-mobile">
           <MobileCards line={"Sponsor events"} cardData={EventsPageCards} />
           <div

@@ -3,6 +3,8 @@ import heart from "../../../assets/img/heart2.svg";
 import apiurl from "../../../constant/config";
 import Slider from "react-slick";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { createFavoriteSponsor } from "../../../redux/actions/sponsorAction";
+import { useDispatch, useSelector } from "react-redux";
 
 const SponsorButton = ({ item, isSelected, onButtonClick }) => {
   return (
@@ -42,8 +44,28 @@ const MyEventSponsor = (eventData) => {
   const cardData02 = location.state && location.state.cardData;
   console.log("event data02", cardData02);
   const cardData = cardData01 || cardData02;
+  console.log(cardData.event_id);
   let totalAmount = 0;
+  const dispatch = useDispatch();
   const sponsoring_items = cardData?.sponsoring_items || [];
+  const auth = useSelector((state) => state.auth);
+  const { userDetails } = auth;
+  console.log(userDetails.user_id);
+  const sponsor_user_id = userDetails.user_id
+  const event_id = cardData.event_id
+
+  const handleFavoriteClick = async () => {
+    try {
+      // Call the API here by dispatching the action
+      await dispatch(createFavoriteSponsor({sponsor_user_id, event_id  }));
+      console.log("api calling");
+      // If successful, update the local state or perform any other actions
+      setFavorite(!favorite);
+    } catch (error) {
+      // Handle errors, e.g., show an error message
+      console.error('Error marking sponsor as favorite:', error);
+    }
+  };
 
   const navigate = useNavigate();
 
@@ -159,7 +181,8 @@ const MyEventSponsor = (eventData) => {
                 >
                   <i
                     className="bi bi-suit-heart-fill"
-                    onClick={() => setFavorite(!favorite)}
+                    // onClick={() => setFavorite(!favorite)}
+                    onClick={handleFavoriteClick}
                     style={
                       !favorite
                         ? {

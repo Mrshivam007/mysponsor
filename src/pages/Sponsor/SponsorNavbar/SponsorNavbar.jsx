@@ -8,6 +8,7 @@ import { AiOutlineClose } from "react-icons/ai"; // Import the close icon from r
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/actions/authActions";
+import SponsorClaendar from "../SponsorCalendar/SponsorCalendar";
 
 const SponsorNavbar = () => {
   const [isSticky, setSticky] = useState(false);
@@ -79,7 +80,7 @@ const SponsorNavbar = () => {
             <>
               <Link
                 className="nav-link text-accent"
-                to="/favourites"
+                to="/favourites"  // Use an absolute path
                 style={{
                   backgroundColor: "white",
                   margin: "1vh",
@@ -95,6 +96,7 @@ const SponsorNavbar = () => {
               </Link>
               <div
                 className="nav-link"
+                data-bs-toggle="modal" data-bs-target="#calendarModal" data-bs-whatever="@mdo"
                 style={{
                   backgroundColor: "white",
                   margin: "1vh",
@@ -108,6 +110,34 @@ const SponsorNavbar = () => {
                   className="mai-calendar"
                   style={{ fontSize: "28px", marginLeft: "-10px" }}
                 ></span>
+              </div>
+              {/* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#calendarModal" data-bs-whatever="@mdo">Open modal for @mdo</button> */}
+              <div class="modal fade" id="calendarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                {/* <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5">New message</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form>
+                        <div class="mb-3">
+                          <label for="recipient-name" class="col-form-label">Recipient:</label>
+                          <input type="text" class="form-control" id="recipient-name" />
+                        </div>
+                        <div class="mb-3">
+                          <label for="message-text" class="col-form-label">Message:</label>
+                          <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Send message</button>
+                    </div>
+                  </div>
+                </div> */}
+                <SponsorClaendar />
               </div>
               <div
                 className="nav-link"

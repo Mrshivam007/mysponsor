@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import fav_logo from "../../../assets/img/favorite.png";
 import bgimage from "../../../assets/img/circle-bg.png";
 import { EventsHeader, Footer} from "../../../components";
 import { Tab, Tabs } from "react-bootstrap";
+import { fetchFavoriteEvent } from "../../../redux/actions/sponsorAction";
 import SponsorNavbar from "../SponsorNavbar/SponsorNavbar";
+import { useDispatch, useSelector } from "react-redux";
+import FavouriteEventCard from "./FavouriteEventCard";
 const Favourite = () => {
   const [favorite, setFavorite] = useState(false);
+  const dispatch = useDispatch();
+  const eventDetails = useSelector(state => state.sponsor)
+  useEffect(() => {
+      dispatch(fetchFavoriteEvent())
+  }, [])
+  console.log("Favorite Event Details", eventDetails);
   return (
     <>
       <div
@@ -18,7 +27,8 @@ const Favourite = () => {
       >
         <SponsorNavbar />
         <EventsHeader title={"Your Favourites are Here !!!"} logo={fav_logo} />
-        <div className="container mx-2">
+        <FavouriteEventCard cardData={eventDetails?.favoriteEvent} />
+        {/* <div className="container mx-2">
           <Tabs
             defaultActiveKey="all"
             id="uncontrolled-tab-example"
@@ -137,7 +147,6 @@ const Favourite = () => {
                               <div
                                 className="box myevents-box"
                                 style={{ cursor: "pointer" }}
-                                // onClick={() => handleSponsorClick(data)}
                               >
                                 <h5 className="pt-1">
                                   <img
@@ -201,7 +210,6 @@ const Favourite = () => {
                                   color: "#055bb5",
                                   cursor: "pointer",
                                 }}
-                                // onClick={() => handleDetailsClick(data)}
                               >
                                 ...Read More
                               </b>
@@ -247,12 +255,6 @@ const Favourite = () => {
                               Location:&nbsp;
                               <span className="font-weight-light">Raipur</span>
                             </h5>
-                            {/* <h5 className="font-weight-bold">
-                                Price:&nbsp;
-                                <span className="font-weight-light">
-                                  {data.price}
-                                </span>
-                              </h5> */}
                             <h5 className="font-weight-bold">
                               Video Preview:&nbsp;
                               <span className="font-weight-light">
@@ -275,7 +277,6 @@ const Favourite = () => {
                               <div
                                 className="box myevents-box"
                                 style={{ cursor: "pointer" }}
-                                // onClick={() => handleDetailsClick(data)}
                               >
                                 <h4 className="mb-0 mt-2">
                                   <i className="bi bi-info-circle"></i>
@@ -470,7 +471,6 @@ const Favourite = () => {
                                   color: "#055bb5",
                                   cursor: "pointer",
                                 }}
-                                // onClick={() => handleDetailsClick(data)}
                               >
                                 ...Read More
                               </b>
@@ -516,12 +516,6 @@ const Favourite = () => {
                               Location:&nbsp;
                               <span className="font-weight-light">Raipur</span>
                             </h5>
-                            {/* <h5 className="font-weight-bold">
-                                Price:&nbsp;
-                                <span className="font-weight-light">
-                                  {data.price}
-                                </span>
-                              </h5> */}
                             <h5 className="font-weight-bold">
                               Video Preview:&nbsp;
                               <span className="font-weight-light">
@@ -544,7 +538,6 @@ const Favourite = () => {
                               <div
                                 className="box myevents-box"
                                 style={{ cursor: "pointer" }}
-                                // onClick={() => handleDetailsClick(data)}
                               >
                                 <h4 className="mb-0 mt-2">
                                   <i className="bi bi-info-circle"></i>
@@ -561,7 +554,7 @@ const Favourite = () => {
               </div>
             </Tab>
           </Tabs>
-        </div>
+        </div> */}
         {/* <MyEventCard />
         <ContentCard /> */}
         <Footer />
