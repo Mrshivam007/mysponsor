@@ -23,17 +23,15 @@ body {
   left: 0;
   width: 80%;
   height: 100%;
-  background-color: rgb(255, 255, 255);
-  /* Adjust the background color and opacity as needed */
+  background-color: #efefef;
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 20px;
 }
 
 /* Style for the content within the overlay */
 .mobile-nav-content {
+  padding-left: 10%;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -46,7 +44,7 @@ body {
 
 /* Style for each individual navbar item in the overlay */
 .mobile-nav-item {
-  margin: 10px 0;
+  margin: 2% 0;
   font-size: larger;
   font-weight: 700;
   color: black !important;
@@ -54,11 +52,14 @@ body {
 
 /* Style for the close icon */
 .close-icon {
+  background: white;
+  color: black;
+  padding: 0 1% 0 1%;
+  border: 1px solid grey;
+  border-radius: 4px;
   cursor: pointer;
   align-self: flex-end;
-  font-size: 24px;
-  color: black;
-  /* Adjust the color as needed */
+  font-size: 18px;
 }
 
 .desktop-nav {
