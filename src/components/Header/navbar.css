@@ -50,6 +50,16 @@ body {
   color: black !important;
 }
 
+.nav-profile-box {
+  height: 25%;
+}
+
+.nav-profile {
+  width: 95%;
+  position: absolute;
+  top: 12%;
+}
+
 /* Style for the close icon */
 .close-icon {
   background: white;
@@ -135,33 +145,39 @@ body {
 
 
 .navbar-brand {
-  height: 48px;
-  width: 120px;
+  width: 160px;
+  height: 55px;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar-brand img {
-  height: 100%;
   width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
 /* Header Styling */
 
+.page-banner {
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .subhead-banner {
   color: white;
   font-family: 'League Spartan', sans-serif;
-  font-size: 40px;
+  font-size: 2rem;
   font-weight: 600;
 }
 
 .head-banner {
   color: white;
   font-family: 'League Spartan', sans-serif;
-  font-size: 70px;
+  font-size: 4rem;
   font-style: normal;
   font-weight: 600;
   line-height: 91.5%;
-  /* 64.05px */
   letter-spacing: -1.75px;
 }
 
@@ -182,12 +198,11 @@ body {
 
 .para-banner {
   color: #FFF;
-  font-family: League Spartan;
-  font-size: 20px;
+  font-family: 'League Spartan';
+  font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 100%;
-  /* 20px */
 }
 
 .img-container {
@@ -201,13 +216,8 @@ body {
 @media (max-width: 767px) {
   .page-banner {
     background-image: none !important;
-    /* Use !important to override inline styles */
     margin: 0px !important;
     background-color: #efefef !important;
-  }
-
-  .desktop-nav {
-    display: none !important;
   }
 
   h3,
@@ -223,12 +233,11 @@ body {
   .head-banner {
     color: blue;
     color: #004EA9;
-    font-family: League Spartan;
+    font-family: 'League Spartan';
     font-size: 40px;
     font-style: normal;
     font-weight: 600;
     line-height: 91.5%;
-    /* 36.6px */
     letter-spacing: -1px;
 
   }
@@ -253,9 +262,57 @@ body {
 
 }
 
-@media (min-width: 767px) {
+@media (min-width:767px) and (max-width:991px) {
+  .head-banner {
+    font-size: 3rem
+  }
+
+  .mobile-nav-overlay {
+    width: 45%;
+  }
+
+  .nav-profile-box {
+    height: 20%;
+  }
+
+  .nav-profile {
+    width: 85%;
+    top: 12%;
+  }
+
+  .navbar-brand {
+    width: 200px;
+    height: 72px;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@media (min-width: 991px) {
   .mobile-nav {
     display: none !important;
   }
 
+}
+
+@media (max-width: 991px) {
+  .desktop-nav {
+    display: none !important;
+  }
+
+}
+
+@media (max-width: 576px) {
+  .navbar-brand {
+    width: 120px;
+  }
+
+  .nav-profile-box {
+    height: 170px;
+  }
+
+  .nav-profile {
+    width: 285px;
+    top: 85px;
+  }
 }

@@ -6,9 +6,8 @@ import bgimage from "../../../assets/img/circle-bg.png";
 import cardImg1 from "../../../assets/img/list_events_card1.jpg";
 import cardImg2 from "../../../assets/img/list_events_card2.jpg";
 import cardImg3 from "../../../assets/img/list_events_card3.jpg";
-import { Choice, EventsHeader, Footer, NavBar } from "../../../components";
+import { EventsHeader, Footer, NavBar } from "../../../components";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import YourEvent from "../YourEvent/YourEvent";
 const EventHome = () => {
   useEffect(() => {
@@ -70,7 +69,7 @@ const EventHome = () => {
             </h1>
           </div>
         </div>
-        <div className="container mb-5">
+        <div className="container events-home-cards mb-5">
           <div className="row">
             <div className="col-12 col-md-4">
               <div className="card list-events-card">
@@ -87,7 +86,7 @@ const EventHome = () => {
                     Want your events sponsored?
                   </h5>
                   <button
-                    className="btn text-white py-1 font-weight-bold mb-3"
+                    className="btn text-white p-1 font-weight-bold mb-3"
                   >
                     <Link to={"create_event"} style={{color: 'white'}} >
                       List an Events
@@ -111,7 +110,7 @@ const EventHome = () => {
                     Update Your Event
                   </h5>
                   <button
-                    className="btn text-white py-1 font-weight-bold mb-3"
+                    className="btn text-white p-1 font-weight-bold mb-3"
                   >
                     <Link to={"update_UpcomingEvent"} style={{color: 'white'}} >
                     Update an Event
@@ -135,7 +134,7 @@ const EventHome = () => {
                     Delete Your Event
                   </h5>
                   <button
-                    className="btn text-white py-1 font-weight-bold mb-3"
+                    className="btn text-white p-1 font-weight-bold mb-3"
                   >
                     <Link to={"delete_event"} style={{color: 'white'}}>
                     Delete an Event

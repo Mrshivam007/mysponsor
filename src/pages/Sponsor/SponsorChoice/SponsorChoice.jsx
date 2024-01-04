@@ -4,7 +4,6 @@ import spevents from "../../../assets/img/sponsor_events-logo.png";
 import calendar from "../../../assets/img/calendar.svg";
 import camera from "../../../assets/img/camera.svg";
 import {
-  NavBar,
   EventsHeader,
   Choice,
   Footer,

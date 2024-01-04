@@ -1,0 +1,15 @@
+.tablet-viewport {
+    display: none;
+}
+
+@media (max-width:991px) and (min-width:576px) {
+    .tablet-viewport {
+        display: block;
+    }
+}
+
+@media (max-width:991px) {
+    .sponsored-events {
+        display: none;
+    }
+}

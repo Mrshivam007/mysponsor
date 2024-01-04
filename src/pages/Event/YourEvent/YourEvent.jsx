@@ -20,7 +20,7 @@ const YourEvent = () => {
                   <div className="body choice-body choice-1 text-left">
                     <h2 className="font-weight-bolder mb-0">Your Event</h2>
                     <div className="card_line"></div>
-                    <p className="choice-para mt-4 text-left">
+                    <p className="choice-para mt-2 text-left">
                       We help you define your SEO objective & develop a
                       realistic strategy with you
                     </p>
@@ -57,10 +57,10 @@ const YourEvent = () => {
                 >
                   <div className="body choice-body choice-2 text-left">
                     <h2 className="font-weight-bolder mb-0">
-                      Your Event Sponsors
+                      Sponsorsed Events
                     </h2>
                     <div className="card_line"></div>
-                    <p className="choice-para mt-4 text-left">
+                    <p className="choice-para mt-2 text-left">
                       We help you define your SEO objective & develop a
                       realistic strategy with you
                     </p>

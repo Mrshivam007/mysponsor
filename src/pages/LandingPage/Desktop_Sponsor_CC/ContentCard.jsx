@@ -2,17 +2,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link, useNavigate } from "react-router-dom";
 import apiurl from "../../../constant/config";
-// import { cardData2 } from "../../data/data";
 const ContentCard = ({ line, cardData }) => {
-  // const settings = {
-  //   dots: false,
-  //   infinite: true,
-  //   speed: 500,
-  //   slidesToShow: 1, // Display one card at a time on mobile
-  //   slidesToScroll: 1,
-  //   prevArrow: null, // Hide the previous arrow
-  //   nextArrow: null, // Hide the next arrow
-  // };
   console.log(cardData);
   const navigate = useNavigate();
 
@@ -69,7 +59,7 @@ const ContentCard = ({ line, cardData }) => {
                         </p>
                       </div>
                     </div>
-                    <div className=" col-2 col-md-2 col-sm-2 pl-lg-0">
+                    <div className=" col-2 col-md-2 col-sm-2 pl-lg-0 pr-0">
                       <button
                         className="btn btn-primary btn-block"
                         style={{

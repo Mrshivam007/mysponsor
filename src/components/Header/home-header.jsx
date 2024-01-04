@@ -1,11 +1,7 @@
-import React, { useState } from "react";
-import { Navbar, Nav, NavLink, Container } from "react-bootstrap";
+import React from "react";
 import "./navbar.css";
 import banner from "../../assets/img/card/header_banner.png";
-import logo from "../../assets/img/logo/logo.png";
 import card_bg from "../../assets/img/card/header-bg.png";
-import { AiOutlineClose } from "react-icons/ai"; // Import the close icon from react-icons library
-import account from "../../assets/img/account.png";
 import { Link } from "react-router-dom";
 
 function Header() {
@@ -19,7 +15,7 @@ function Header() {
           <div className="row align-items-center flex-wrap-reverse h-100">
             <div className=" banner-text-area col-md-8 wow fadeInLeft">
               <h3 className="subhead-banner">Welcome to India's first</h3>
-              <h1 className=" head-banner mb-4">Online Sponsoring Platform</h1>
+              <h1 className="head-banner mb-4">Online Sponsoring Platform</h1>
               <p className="para-banner">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis
                 accusantium reprehenderit quos iusto. Earum in modi, dolorem

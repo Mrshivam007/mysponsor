@@ -43,13 +43,6 @@ const Categories = ({ line }) => {
                     Sponser Now
                   </p>
                 </div>
-                {/* <div className="cat-img">
-                  <img
-                    src={img1}
-                    alt=""
-                    style={{ width: "100%", height: "auto%" }}
-                  />
-                </div> */}
               </div>
             </div>
             <div className="col-sm-6 category-card1">
@@ -78,13 +71,6 @@ const Categories = ({ line }) => {
                     Sponser Now
                   </p>
                 </div>
-                {/* <div className="cat-img">
-                  <img
-                    src={img1}
-                    alt=""
-                    style={{ width: "100%", height: "auto%" }}
-                  />
-                </div> */}
               </div>
             </div>
           </div>
@@ -115,13 +101,6 @@ const Categories = ({ line }) => {
                     Sponser Now
                   </p>
                 </div>
-                {/* <div className="cat-img">
-                  <img
-                    src={img1}
-                    alt=""
-                    style={{ width: "100%", height: "auto%" }}
-                  />
-                </div> */}
               </div>
             </div>
             <div className="col-sm-6 category-card1">
@@ -150,13 +129,6 @@ const Categories = ({ line }) => {
                     Sponser Now
                   </p>
                 </div>
-                {/* <div className="cat-img">
-                  <img
-                    src={img1}
-                    alt=""
-                    style={{ width: "100%", height: "auto%" }}
-                  />
-                </div> */}
               </div>
             </div>
           </div>

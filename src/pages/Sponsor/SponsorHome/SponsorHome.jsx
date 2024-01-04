@@ -30,7 +30,7 @@ import SponsorNavbar from "../SponsorNavbar/SponsorNavbar";
           href="#!"
           className="btn text-white py-1 px-4 font-weight-bold d-none d-md-block"
           style={{
-            width: "15%",
+            width: "25%",
             margin: "auto",
             backgroundColor: "rgb(0, 68, 139)",
             borderRadius: "10px",

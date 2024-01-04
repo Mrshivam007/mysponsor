@@ -45,7 +45,7 @@
 }
 
 .banner-btn {
-    width: 28%;
+    width: 35%;
     font-weight: bold;
     margin-top: -2%;
 }
@@ -111,5 +111,11 @@
 
     .mobile-banner-heading {
         display: none;
+    }
+}
+
+@media (min-width: 767px) and (max-width:991px) {
+    .banner-btn{
+        width: 35%;
     }
 }

@@ -79,93 +79,95 @@ const SponsorNavbar = () => {
           </div>
           {userDetails ? (
             <>
-              <Link
-                className="nav-link text-accent"
-                to="/favourites" // Use an absolute path
-                style={{
-                  backgroundColor: "white",
-                  margin: "1vh",
-                  height: "40px",
-                  width: "40px",
-                  borderRadius: "50px",
-                }}
-              >
-                <span
-                  className="mai-heart "
-                  style={{ fontSize: "28px", marginLeft: "-10px" }}
-                ></span>
-              </Link>
-              <div
-                className="nav-link"
-                data-bs-toggle="modal"
-                data-bs-target="#calendarModal"
-                data-bs-whatever="@mdo"
-                style={{
-                  backgroundColor: "white",
-                  margin: "1vh",
-                  height: "40px",
-                  width: "40px",
-                  color: "blue",
-                  borderRadius: "50px",
-                  cursor: "pointer",
-                }}
-              >
-                <span
-                  className="mai-calendar"
-                  style={{ fontSize: "28px", marginLeft: "-10px" }}
-                ></span>
-              </div>
-              <div
-                className="modal fade"
-                id="calendarModal"
-                tabindex="-1"
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-              >
-                <SponsorClaendar />
-              </div>
-              <div
-                className="nav-link"
-                style={{
-                  backgroundColor: "white",
-                  margin: "1vh",
-                  height: "40px",
-                  width: "40px",
-                  borderRadius: "50px",
-                  color: "black",
-                  cursor: "pointer",
-                }}
-                onClick={() => setOpenDropDown(!openDropDown)}
-              >
-                <span
-                  className="mai-people"
-                  style={{ fontSize: "28px", marginLeft: "-10px" }}
-                ></span>
-              </div>
-              <div className="dropdown">
-                {openDropDown ? (
-                  <ul
-                    className="dropdown-menu"
-                    style={{
-                      display: "block",
-                      width: "100%",
-                      left: "-75px",
-                      top: "20px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <li>
-                      <div className="dropdown-item" onClick={handleLogout}>
-                        Logout
-                      </div>
-                    </li>
-                    <li>
-                      <Link to={"/profile"}>
-                        <div className="dropdown-item">My Account</div>
-                      </Link>
-                    </li>
-                  </ul>
-                ) : null}
+              <div className="box d-flex align-items-center justify-content-between">
+                <Link
+                  className="nav-link text-accent"
+                  to="/favourites" // Use an absolute path
+                  style={{
+                    backgroundColor: "white",
+                    margin: "1vh",
+                    height: "40px",
+                    width: "40px",
+                    borderRadius: "50px",
+                  }}
+                >
+                  <span
+                    className="mai-heart "
+                    style={{ fontSize: "28px", marginLeft: "-10px" }}
+                  ></span>
+                </Link>
+                <div
+                  className="nav-link"
+                  data-bs-toggle="modal"
+                  data-bs-target="#calendarModal"
+                  data-bs-whatever="@mdo"
+                  style={{
+                    backgroundColor: "white",
+                    margin: "1vh",
+                    height: "40px",
+                    width: "40px",
+                    color: "blue",
+                    borderRadius: "50px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <span
+                    className="mai-calendar"
+                    style={{ fontSize: "28px", marginLeft: "-10px" }}
+                  ></span>
+                </div>
+                <div
+                  className="modal fade"
+                  id="calendarModal"
+                  tabindex="-1"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                >
+                  <SponsorClaendar />
+                </div>
+                <div
+                  className="nav-link"
+                  style={{
+                    backgroundColor: "white",
+                    margin: "1vh",
+                    height: "40px",
+                    width: "40px",
+                    borderRadius: "50px",
+                    color: "black",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setOpenDropDown(!openDropDown)}
+                >
+                  <span
+                    className="mai-people"
+                    style={{ fontSize: "28px", marginLeft: "-10px" }}
+                  ></span>
+                </div>
+                <div className="dropdown">
+                  {openDropDown ? (
+                    <ul
+                      className="dropdown-menu"
+                      style={{
+                        display: "block",
+                        width: "100%",
+                        left: "-75px",
+                        top: "20px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <li>
+                        <div className="dropdown-item" onClick={handleLogout}>
+                          Logout
+                        </div>
+                      </li>
+                      <li>
+                        <Link to={"/profile"}>
+                          <div className="dropdown-item">My Account</div>
+                        </Link>
+                      </li>
+                    </ul>
+                  ) : null}
+                </div>
               </div>
             </>
           ) : (
@@ -224,64 +226,63 @@ const SponsorNavbar = () => {
             aria-controls="basic-navbar-nav"
             onClick={toggleNavbar}
           />
-          <a
-            className="navbar-brand"
-            style={{ height: "52px", marginTop: "3%" }}
-          >
+          <a className="navbar-brand">
             <img src={logo} alt="Logo" />
           </a>
-          <div
-            className="nav-link"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-            style={{
-              backgroundColor: "white",
-              margin: "1vh",
-              height: "40px",
-              width: "40px",
-              color: "blue",
-              borderRadius: "50px",
-              cursor: "pointer",
-            }}
-          >
-            <span
-              className="mai-calendar"
-              style={{ fontSize: "28px", marginLeft: "-10px" }}
-            ></span>
+          <div className="box d-flex">
+            <div
+              className="nav-link"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              style={{
+                backgroundColor: "white",
+                margin: "1vh",
+                height: "40px",
+                width: "40px",
+                color: "blue",
+                borderRadius: "50px",
+                cursor: "pointer",
+              }}
+            >
+              <span
+                className="mai-calendar"
+                style={{ fontSize: "28px", marginLeft: "-10px" }}
+              ></span>
+            </div>
+            {/* MODAL */}
+            <div
+              class="modal fade"
+              id="exampleModal"
+              tabindex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <SponsorClaendar />
+            </div>
+            {/* MODAL-END */}
+            <Link
+              className="nav-link text-dark"
+              to="/profile"
+              style={{
+                backgroundColor: "white",
+                margin: "1vh",
+                height: "40px",
+                width: "40px",
+                borderRadius: "50px",
+              }}
+            >
+              <span
+                className="mai-people"
+                style={{ fontSize: "28px", marginLeft: "-10px" }}
+              ></span>
+            </Link>
           </div>
-          {/* MODAL */}
-          <div
-            class="modal fade"
-            id="exampleModal"
-            tabindex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-          >
-            <SponsorClaendar />
-          </div>
-          {/* MODAL-END */}
-          <Link
-            className="nav-link text-dark"
-            to="/profile"
-            style={{
-              backgroundColor: "white",
-              margin: "1vh",
-              height: "40px",
-              width: "40px",
-              borderRadius: "50px",
-            }}
-          >
-            <span
-              className="mai-people"
-              style={{ fontSize: "28px", marginLeft: "-10px" }}
-            ></span>
-          </Link>
         </div>
 
         {isOpen && (
           <div className="mobile-nav-overlay">
             <div
-              className="box h-25 w-100"
+              className="box nav-profile-box w-100"
               style={{
                 backgroundColor: "#004EA9",
               }}
@@ -291,10 +292,7 @@ const SponsorNavbar = () => {
                   <AiOutlineClose />
                 </div>
               </Container>
-              <div
-                className="container"
-                style={{ width: "90%", position: "absolute", top: "85px" }}
-              >
+              <div className="container nav-profile">
                 <div
                   className="box"
                   style={{
@@ -317,7 +315,7 @@ const SponsorNavbar = () => {
                 </div>
               </div>
             </div>
-            <div className="mobile-nav-content mt-5">
+            <div className="mobile-nav-content mt-4">
               <Nav className="mobile-nav-items border-0">
                 <NavLink className="mobile-nav-item" href="about.html">
                   Sponsor Event

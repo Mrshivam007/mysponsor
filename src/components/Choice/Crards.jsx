@@ -8,7 +8,7 @@ const Choice = ({ line }) => {
       <div className="page-section">
         <h1 className="choice-heading">{line}</h1>
 
-        <div className="container" style={{ marginTop: "2%" }}>
+        <div className="container choice-container">
           <div className="row" style={{ flexWrap: "nowrap" }}>
             <div className="col-lg-6">
               <Link to="/events">
@@ -23,7 +23,7 @@ const Choice = ({ line }) => {
                   <div className="body choice-body choice-1 text-left">
                     <h2 className="font-weight-bolder mb-0">Events</h2>
                     <div className="card_line"></div>
-                    <p className="choice-para mt-4 text-left">
+                    <p className="choice-para mt-2 text-left">
                       We help you define your SEO objective & develop a
                       realistic strategy with you
                     </p>
@@ -40,8 +40,7 @@ const Choice = ({ line }) => {
                     </button>
                   </div>
                   <div
-                    className="header choice-img"
-                    style={{ textAlign: "right" }}
+                    className="header choice-img mb-0"
                   >
                     <img src={img1} alt="" />
                   </div>
@@ -63,26 +62,18 @@ const Choice = ({ line }) => {
                       Content Creators
                     </h2>
                     <div className="card_line"></div>
-                    <p className="choice-para mt-4 text-left">
+                    <p className="choice-para mt-2 text-left">
                       We help you define your SEO objective & develop a
                       realistic strategy with you
                     </p>
                     <button
                       to="/cc"
                       className="choice-btn btn text-white py-1 font-weight-bold"
-                      style={{
-                        float: "left",
-                        backgroundColor: "#00448B",
-                        borderRadius: "15px",
-                      }}
                     >
                       Explore now
                     </button>
                   </div>
-                  <div
-                    className="header choice-img"
-                    style={{ textAlign: "right" }}
-                  >
+                  <div className="header choice-img mb-0">
                     <img src={img2} alt="" />
                   </div>
                 </div>

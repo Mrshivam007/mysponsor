@@ -8,6 +8,7 @@
 }
 
 .list-events-card {
+    height: 100%;
     border-radius: 10px;
     border: 1px solid #FFF;
     background: rgba(0, 101, 220, 0.10);
@@ -15,13 +16,38 @@
     backdrop-filter: blur(50px);
 }
 
+.list-events-card .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
 .list-events-card button {
+    width: 70%;
     float: left;
     background-color: #00448B;
     border-radius: 10px;
 }
 
+@media (max-width:991px) and (min-width:767px) {
+    .list-events-card .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .list-events-card button {
+        width: 90%;
+        background-color: #00448B;
+        border-radius: 10px;
+    }
+}
+
+
 @media (max-width:576px) {
+    .events-home-cards .col-12{
+        margin-bottom: 5%;
+    }
     .list-events-card button {
         width: 95%;
     }

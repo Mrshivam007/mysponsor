@@ -16,6 +16,7 @@
 
 .category-container {
   max-width: 100% !important;
+  background-size: contain;
   background-image: url("../../assets/img/bg_ctgrs_lft.svg"), url("../../assets/img/bg_ctgrs_rt.svg");
   background-repeat: no-repeat;
   background-position: left, right;
@@ -28,10 +29,6 @@
   color: black;
   font-weight: bold;
   text-align: center;
-  /* position: absolute; */
-  /* top: -24px;
-  left: 50%; */
-  /* transform: translateX(-50%); */
 }
 
 .cat-card-body {
