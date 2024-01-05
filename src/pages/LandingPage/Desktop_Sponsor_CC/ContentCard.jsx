@@ -25,7 +25,7 @@ const ContentCard = ({ line, cardData }) => {
         <div className="row">
           {cardData &&
             cardData.map((data) => (
-              <div className="col-lg-6 col-sm-12 mb-3" key={data.id}>
+              <div className="col-lg-6 col-sm-12 mb-3" key={data.id} style={{height: '28vh'}}>
                 <div className="card">
                   <div
                     className="row g-0"
