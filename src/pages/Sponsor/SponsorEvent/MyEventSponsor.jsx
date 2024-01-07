@@ -3,7 +3,7 @@ import heart from "../../../assets/img/heart2.svg";
 import apiurl from "../../../constant/config";
 import Slider from "react-slick";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { createFavoriteSponsor } from "../../../redux/actions/sponsorAction";
+import { createFavoriteSponsor, updateFavoriteSponsor } from "../../../redux/actions/sponsorAction";
 import { useDispatch, useSelector } from "react-redux";
 
 const SponsorButton = ({ item, isSelected, onButtonClick }) => {
@@ -39,10 +39,8 @@ const SponsorButton = ({ item, isSelected, onButtonClick }) => {
 
 const MyEventSponsor = (eventData) => {
   const cardData01 = eventData.eventData;
-  console.log("event data01", cardData01);
   const location = useLocation();
   const cardData02 = location.state && location.state.cardData;
-  console.log("event data02", cardData02);
   const cardData = cardData01 || cardData02;
   console.log(cardData.event_id);
   let totalAmount = 0;
@@ -53,14 +51,32 @@ const MyEventSponsor = (eventData) => {
   console.log(userDetails.user_id);
   const sponsor_user_id = userDetails.user_id
   const event_id = cardData.event_id
+  console.log("Sponsor Details", userDetails);
+  console.log("Event Details", cardData);
+  const isUserFavorite = cardData.favorite_list.includes(String(userDetails.user_id));
+  console.log(isUserFavorite);
+
 
   const handleFavoriteClick = async () => {
     try {
-      // Call the API here by dispatching the action
-      await dispatch(createFavoriteSponsor({sponsor_user_id, event_id  }));
+      if (isUserFavorite) {
+        // If user is already a favorite, update the favorite record
+        await dispatch(updateFavoriteSponsor({
+          sponsor_user_id,
+          event_id,
+        }));
+      } else {
+        // If user is not a favorite, create a new favorite record
+        await dispatch(createFavoriteSponsor({
+          sponsor_user_id,
+          event_id,
+        }));
+      }
+  
       console.log("api calling");
+  
       // If successful, update the local state or perform any other actions
-      setFavorite(!favorite);
+      setFavorite(!isUserFavorite);
     } catch (error) {
       // Handle errors, e.g., show an error message
       console.error('Error marking sponsor as favorite:', error);
@@ -183,20 +199,10 @@ const MyEventSponsor = (eventData) => {
                     className="bi bi-suit-heart-fill"
                     // onClick={() => setFavorite(!favorite)}
                     onClick={handleFavoriteClick}
-                    style={
-                      !favorite
-                        ? {
-                            color: "gray",
-                            filter:
-                              "drop-shadow(rgba(0, 0, 0, 0.5) 1px 3px 3px)",
-                          }
-                        : {
-                            color: "#ff0068",
-                            filter:
-                              "drop-shadow(rgba(0, 0, 0, 0.5) 1px 3px 3px)",
-                          }
-                    }
-                  ></i>
+                    style={{
+                      color: isUserFavorite ? "#ff0068" : "gray",
+                      filter: "drop-shadow(rgba(0, 0, 0, 0.5) 1px 3px 3px)",
+                    }}></i>
                 </span>
               </h4>
               <h4>{cardData.location}</h4>

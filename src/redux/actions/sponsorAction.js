@@ -59,6 +59,34 @@ import { CREATE_FAVORITE_SPONSOR_FAILED, CREATE_FAVORITE_SPONSOR_REQUEST, CREATE
     }
   };
 
+  export const updateFavoriteSponsor = (formData) => async (dispatch) => {
+    try {
+      dispatch({ type: CREATE_FAVORITE_SPONSOR_REQUEST });
+  
+      const access = JSON.parse(localStorage.getItem("access"));
+  
+      const { data } = await axios.put(
+        `${apiurl}/api/user/favorite-event/${formData.event_id}`,
+        formData,
+        { headers: { Authorization: `Bearer ${access}` } }
+      );
+      console.log(data.status);      
+      dispatch({
+        type: CREATE_FAVORITE_SPONSOR_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: CREATE_FAVORITE_SPONSOR_FAILED,
+        payload:
+        error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message,
+      });
+    
+    }
+  };
+
   export const fetchFavoriteEvent = () => async (dispatch) => {
     try {
       dispatch({ type: GET_FAVORITE_EVENT_REQUEST });
