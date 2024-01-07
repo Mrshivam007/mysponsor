@@ -1,32 +1,32 @@
 import { Route, Router, Routes, Navigate } from "react-router-dom";
-import { SponsorContentC } from "../pages/LandingPage";
 import ListeventsForm from "../pages/Event/Create_Event/ListeventsForm";
-import EventHome from "../pages/Event/Home/EventHome";
-import EventCategories from "../pages/Event/EventCategories/EventCategories";
 import LiveEvent from "../pages/Event/EventCategories/LiveEvent";
 import UpcomingEvent from "../pages/Event/EventCategories/UpcomingEvent";
 import PreviousEvent from "../pages/Event/EventCategories/PreviousEvent";
-import SponsoredEvent from "../pages/Sponsor/SponsorEvent/SponsoredEvent";
-import EventDetails from "../pages/Sponsor/SponsorEvent/EventDetails";
 import UpdateEvent from "../pages/Event/Update_Event/UpdateEventForm";
 import Update_UpcomingEvent from "../pages/Event/Update_Event/Update_UpcomingEvent";
 import DeleteEvent from "../pages/Event/DeleteEvent/DeleteEvent";
-import SponsorHome from "../pages/Sponsor/SponsorHome/SponsorHome";
-import SponsorChoice from "../pages/Sponsor/SponsorChoice/SponsorChoice";
-import SponsorEvents from "../pages/Sponsor/SponsorEvent/SponsorEvent";
-import SponsorContent from "../pages/Sponsor/SponsorContent/SponsorContent";
-import ContentDetails from "../pages/Sponsor/SponsorContent/ContentDetails";
-import SponsorCategoryPage from "../pages/Sponsor/SponsorCategorie/SponsorCategories";
-import SponsorEventForm from "../pages/Sponsor/SponsorEvent/SponsorEventForm";
-import SponsoredEventDetails from "../pages/Sponsor/SponsorEvent/SponsoredEventDetails";
-import SponsorContentForm from "../pages/Sponsor/SponsorContent/SponsorContentForm";
-import SponsoredContent from "../pages/Sponsor/SponsorContent/SponsoredContent";
-import SponsoredContentDetails from "../pages/Sponsor/SponsorContent/SponsoredContentDetails";
-import Favourite from "../pages/Sponsor/FavouritePage/Favourite";
-import SponsorProfile from "../pages/Sponsor/SponsorProfile/SponsorProfile";
-import YoutubeContentSponsor from "../pages/Sponsor/Content_Category/YoutubeContent";
-import InstagramContentSponsor from "../pages/Sponsor/Content_Category/InstagramContent";
-import FacebookContentSponsor from "../pages/Sponsor/Content_Category/FacebookContent";
+import {
+  ContentDetails,
+  EventDetails,
+  FacebookContentSponsor,
+  Favourite,
+  InstagramContentSponsor,
+  SponsorCategoryPage,
+  SponsorChoice,
+  SponsorContent,
+  SponsorContentForm,
+  SponsorEventForm,
+  SponsorEvents,
+  SponsorHome,
+  SponsorPayment,
+  SponsorProfile,
+  SponsoredContent,
+  SponsoredContentDetails,
+  SponsoredEvent,
+  SponsoredEventDetails,
+  YoutubeContentSponsor,
+} from "../pages/Sponsor";
 const SponsorRoutes = () => {
   return (
     <>
@@ -65,6 +65,7 @@ const SponsorRoutes = () => {
         <Route path="/delete_event" element={<DeleteEvent />} />
         <Route path="/favourites" element={<Favourite />} />
         <Route path="/profile" element={<SponsorProfile />} />
+        <Route path="/sponsor_payment" element={<SponsorPayment />} />
         <Route path="/login" element={<Navigate to={"/"} />} />
         <Route path="/signup" element={<Navigate to={"/"} />} />
       </Routes>

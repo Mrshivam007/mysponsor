@@ -43,7 +43,7 @@ const NavBar = () => {
     <div>
       {/* <nav className="navbar navbar-expand-lg navbar-light sticky" style={{ backgroundColor: '#004EA9' }} data-offset="500"> */}
       <Navbar
-        className={`desktop-nav${isSticky ? " sticky" : ""}`}
+        className={`desktop-nav ${isSticky ? " sticky" : ""}`}
         style={{ backgroundColor: "#004EA9" }}
         expand="lg"
       >
@@ -192,7 +192,7 @@ const NavBar = () => {
       </Navbar>
 
       <Navbar
-        className={`mobile-nav${isSticky ? " sticky" : ""}`}
+        className={`mobile-nav ${isSticky ? " sticky" : ""}`}
         expand="lg"
         style={{
           display: "flex",

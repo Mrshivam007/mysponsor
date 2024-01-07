@@ -1,7 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
   CategoryPage,
+  FacebookContent,
   Home,
+  InstagramContent,
   ListEvents,
   Login,
   MyEventDetails,
@@ -11,6 +13,7 @@ import {
   SponsorChoice,
   SponsorContentC,
   SponsorEvents,
+  YoutubeContent,
 } from "../pages/LandingPage";
 import { useSelector } from "react-redux";
 import EventRoutes from "./event";
@@ -19,9 +22,6 @@ import ContentDetails from "../pages/LandingPage/Desktop_Sponsor_CC/ContentDetai
 import SponsorLogin from "../pages/SponsorRegister/SponsorLogin";
 import SponsorRegister from "../pages/SponsorRegister/SponsorRegister";
 import SponsorRoutes from "./sponsor";
-import YoutubeContent from "../pages/LandingPage/Content_Category/YoutubeContent";
-import InstagramContent from "../pages/LandingPage/Content_Category/InstagramContent";
-import FacebookContent from "../pages/LandingPage/Content_Category/FacebookContent";
 
 const Main = () => {
   const auth = useSelector((state) => state.auth);
