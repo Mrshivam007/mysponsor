@@ -28,9 +28,9 @@ const ContentProfileInfo = () => {
   const [instaLink, setInstaLink] = useState('');
   const [faceFollowers, setFaceFollowers] = useState('');
   const [facePostType, setFacePostType] = useState('');
-  const [perFacePostLink, setFerPostLink] = useState('');
+  const [perFacePostLink, setPerFacePostLink] = useState('');
   const [faceLink, setfaceLink] = useState('');
-  
+
   console.log(profileDetails?.ContentDetails?.business_name);
   const [profilePic, setProfilePic] = useState(null);
 
@@ -48,28 +48,28 @@ const ContentProfileInfo = () => {
 
   const youtubeData = [
     {
-      "video_type": ytVideoType || "",
-      "subscribers": subscriber || "",
-      "youtube__link": youtubeLink || "",
-      "per_video_reach": perVideoReach || "",
+      "video_type": ytVideoType || profileDetails?.contentDetails?.youtube && profileDetails.contentDetails.youtube[0]?.video_type || null,
+      "subscribers": subscriber || profileDetails?.contentDetails?.youtube && profileDetails.contentDetails.youtube[0]?.subscribers || null,
+      "youtube__link": youtubeLink || profileDetails?.contentDetails?.youtube && profileDetails.contentDetails.youtube[0]?.youtube__link || null,
+      "per_video_reach": perVideoReach || profileDetails?.contentDetails?.youtube && profileDetails.contentDetails.youtube[0]?.per_video_reach || null,
     },
   ];
 
   const instagramData = [
     {
-      "followers": instaFollowers || "",
-      "post_type": instaPostType || "",
-      "per_post_link": instaPerPostLink || "",
-      "instagram_link": instaLink || "",
+      "followers": instaFollowers || profileDetails?.contentDetails?.instagram && profileDetails.contentDetails.instagram[0]?.followers || null,
+      "post_type": instaPostType || profileDetails?.contentDetails?.instagram && profileDetails.contentDetails.instagram[0]?.post_type || null,
+      "per_post_link": instaPerPostLink || profileDetails?.contentDetails?.instagram && profileDetails.contentDetails.instagram[0]?.per_post_link || null,
+      "instagram_link": instaLink || profileDetails?.contentDetails?.instagram && profileDetails.contentDetails.instagram[0]?.instagram_link || null,
     },
   ];
 
   const facebookData = [
     {
-      "followers": faceFollowers || "",
-      "post_type": facePostType || "",
-      "per_post_link": perFacePostLink || "",
-      "facebook_link": faceLink || "",
+      "followers": faceFollowers || profileDetails?.contentDetails?.facebook && profileDetails.contentDetails.facebook[0]?.followers || null,
+      "post_type": facePostType || profileDetails?.contentDetails?.facebook && profileDetails.contentDetails.facebook[0]?.post_type || null,
+      "per_post_link": perFacePostLink || profileDetails?.contentDetails?.facebook && profileDetails.contentDetails.facebook[0]?.facebook_link || null,
+      "facebook_link": faceLink || profileDetails?.contentDetails?.facebook && profileDetails.contentDetails.facebook[0]?.per_post_link || null,
     },
   ];
 
@@ -89,13 +89,15 @@ const ContentProfileInfo = () => {
     formData.append("user_id", userDetails?.user_id);
     formData.append("channel_name", profileDetails?.contentDetails?.channel_name || businessName);
     formData.append("contact_no", profileDetails?.contentDetails?.contact_no || contact);
-    formData.append("youtube",JSON.stringify(profileDetails?.contentDetails?.youtube) || youtubeDataString )
-    formData.append("instagram", JSON.stringify(profileDetails?.contentDetails?.instagram) || instagramDataString)
-    formData.append("facebook", JSON.stringify(profileDetails?.contentDetails?.facebook) || facebookDataString)
+    formData.append("youtube", youtubeDataString)
+    formData.append("instagram", instagramDataString)
+    formData.append("facebook", facebookDataString)
     try {
       // Make POST API call
       await dispatch(createContentProfile(formData));
+      console.log("Form Data ", formData);
       sessionStorage.setItem("successMessage", "Class created successfully!");
+      await dispatch(getContentProfile())
     } catch (error) {
       console.log("An error occurred during API calls:", error);
     }
@@ -218,7 +220,7 @@ const ContentProfileInfo = () => {
                                 id="inputFirstName"
                                 type="text"
                                 placeholder="Enter your first name"
-                                value={ profileDetails?.contentDetails?.youtube[0]?.video_type || ytVideoType}
+                                value={(profileDetails?.contentDetails?.youtube && profileDetails.contentDetails.youtube[0]?.video_type) || ytVideoType}
                                 onChange={(e) => setYtVideoType(e.target.value)} />
                             </div>
                             <div className="col-md-6">
@@ -230,7 +232,7 @@ const ContentProfileInfo = () => {
                                 id="inputLastName"
                                 type="text"
                                 placeholder="Enter your last name"
-                                value={profileDetails?.contentDetails?.youtube[0]?.subscribers || subscriber}
+                                value={(profileDetails?.contentDetails?.youtube && profileDetails.contentDetails.youtube[0]?.subscriber) || subscriber}
                                 onChange={(e) => setSubscriber(e.target.value)} />
                             </div>
                           </div>
@@ -244,7 +246,7 @@ const ContentProfileInfo = () => {
                                 id="inputFirstName"
                                 type="text"
                                 placeholder="Enter your first name"
-                                value={profileDetails?.contentDetails?.youtube[0]?.per_video_reach || perVideoReach}
+                                value={(profileDetails?.contentDetails?.youtube && profileDetails.contentDetails.youtube[0]?.per_video_reach) || perVideoReach}
                                 onChange={(e) => setPerVideoReach(e.target.value)} />
                             </div>
                             <div className="col-md-6">
@@ -256,13 +258,13 @@ const ContentProfileInfo = () => {
                                 id="inputLastName"
                                 type="text"
                                 placeholder="Enter your last name"
-                                value={profileDetails?.contentDetails?.youtube[0]?.youtube__link || youtubeLink}
+                                value={(profileDetails?.contentDetails?.youtube && profileDetails.contentDetails.youtube[0]?.youtube__link) || youtubeLink}
                                 onChange={(e) => setYoutubeLink(e.target.value)} />
                             </div>
                           </div>
                         </Tab>
                         <Tab eventKey="security" title="Instagram">
-                        <div className="row gx-3 mb-3">
+                          <div className="row gx-3 mb-3">
                             <div className="col-md-6">
                               <label className="small mb-1" for="inputFirstName">
                                 Followers
@@ -272,7 +274,7 @@ const ContentProfileInfo = () => {
                                 id="inputFirstName"
                                 type="text"
                                 placeholder="Enter your first name"
-                                value={profileDetails?.contentDetails?.instagram[0]?.followers || instaFollowers}
+                                value={(profileDetails?.contentDetails?.instagram && profileDetails.contentDetails.instagram[0]?.followers) || instaFollowers}
                                 onChange={(e) => setInstaFollowers(e.target.value)} />
                             </div>
                             <div className="col-md-6">
@@ -284,7 +286,7 @@ const ContentProfileInfo = () => {
                                 id="inputLastName"
                                 type="text"
                                 placeholder="Enter your last name"
-                                value={profileDetails?.contentDetails?.instagram[0]?.post_type || instaPostType}
+                                value={(profileDetails?.contentDetails?.instagram && profileDetails.contentDetails.instagram[0]?.post_type) || instaPostType}
                                 onChange={(e) => setInstaPostType(e.target.value)} />
                             </div>
                           </div>
@@ -298,7 +300,7 @@ const ContentProfileInfo = () => {
                                 id="inputFirstName"
                                 type="text"
                                 placeholder="Enter your first name"
-                                value={profileDetails?.contentDetails?.instagram[0]?.per_post_link || instaPerPostLink}
+                                value={(profileDetails?.contentDetails?.instagram && profileDetails.contentDetails.instagram[0]?.per_post_link) || instaPerPostLink}
                                 onChange={(e) => setInstaPerPostLink(e.target.value)} />
                             </div>
                             <div className="col-md-6">
@@ -310,13 +312,64 @@ const ContentProfileInfo = () => {
                                 id="inputLastName"
                                 type="text"
                                 placeholder="Enter your last name"
-                                value={profileDetails?.contentDetails?.instagram[0]?.instagram_link || instaLink}
+                                value={(profileDetails?.contentDetails?.instagram && profileDetails.contentDetails.instagram[0]?.instagram_link) || instaLink}
                                 onChange={(e) => setInstaLink(e.target.value)} />
                             </div>
                           </div>
                         </Tab>
                         <Tab eventKey="notification" title="Facebook">
-                          Facebook
+                          <div className="row gx-3 mb-3">
+                            <div className="col-md-6">
+                              <label className="small mb-1" for="inputFirstName">
+                                Followers
+                              </label>
+                              <input
+                                className="form-control"
+                                id="inputFirstName"
+                                type="text"
+                                placeholder="Enter your first name"
+                                value={(profileDetails?.contentDetails?.facebook && profileDetails.contentDetails.facebook[0]?.followers) || faceFollowers}
+                                onChange={(e) => setFaceFollowers(e.target.value)} />
+                            </div>
+                            <div className="col-md-6">
+                              <label className="small mb-1" for="inputLastName">
+                                Facebook Post Type
+                              </label>
+                              <input
+                                className="form-control"
+                                id="inputLastName"
+                                type="text"
+                                placeholder="Enter your last name"
+                                value={(profileDetails?.contentDetails?.facebook && profileDetails.contentDetails.facebook[0]?.post_type) || facePostType}
+                                onChange={(e) => setFacePostType(e.target.value)} />
+                            </div>
+                          </div>
+                          <div className="row gx-3 mb-3">
+                            <div className="col-md-6">
+                              <label className="small mb-1" for="inputFirstName">
+                                Per Post Reach
+                              </label>
+                              <input
+                                className="form-control"
+                                id="inputFirstName"
+                                type="text"
+                                placeholder="Enter your first name"
+                                value={(profileDetails?.contentDetails?.facebook && profileDetails.contentDetails.facebook[0]?.facebook_link) || faceLink}
+                                onChange={(e) => setfaceLink(e.target.value)} />
+                            </div>
+                            <div className="col-md-6">
+                              <label className="small mb-1" for="inputLastName">
+                                Instagram Link
+                              </label>
+                              <input
+                                className="form-control"
+                                id="inputLastName"
+                                type="text"
+                                placeholder="Enter your last name"
+                                value={(profileDetails?.contentDetails?.facebook && profileDetails.contentDetails.facebook[0]?.per_post_link) || perFacePostLink}
+                                onChange={(e) => setPerFacePostLink(e.target.value)} />
+                            </div>
+                          </div>
                         </Tab>
                       </Tabs>
                     </div>
