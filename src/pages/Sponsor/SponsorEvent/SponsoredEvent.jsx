@@ -55,7 +55,7 @@ const SponsoredEvent = () => {
                                                 <div className="row mx-0">
                                                     <div className="col-3 p-3">
                                                         <img
-                                                            src={apiurl + data.thumbnail1}
+                                                            src={apiurl + data.event_id.thumbnail1}
                                                             alt=""
                                                             style={{
                                                                 width: "100%",
@@ -103,17 +103,17 @@ const SponsoredEvent = () => {
                                                                 Event Sponsored for:
                                                             </h4>
                                                             <div className="d-flex justify-content-around text-lg mt-3">
-                                                                {data.event_id.sponsoring_items.map((item, index) => (
-                                                                    <>
+                                                                {data.event_id.sponsoring_items
+                                                                    .filter(item => item.is_sponsored) // Filter only items where is_sponsored is true
+                                                                    .map((item, index) => (
                                                                         <span
                                                                             key={index}
-                                                                            className={`badge rounded-pill px-2 py-1 ${data.sponsoring_items.includes(item.sponsoring_items) ? "bg-success" : "bg-danger"
-                                                                                }`}
+                                                                            className={"badge rounded-pill px-2 py-1 bg-success"}
                                                                         >
-                                                                            {item.sponsoring_items} {data.sponsoring_items.includes(item.sponsoring_items) ? <i className="bi bi-check2-circle"></i> : <i className="bi bi-x-lg"></i>}
+                                                                            {item.sponsoring_items}<i className="bi bi-check2-circle"></i>
                                                                         </span>
-                                                                    </>
-                                                                ))}
+                                                                    ))}
+
 
                                                             </div>
                                                         </div>
@@ -128,7 +128,7 @@ const SponsoredEvent = () => {
                                                                 borderRadius: "10px",
                                                             }}
                                                             onClick={() => handleSponsorClick(data)}
-                                                            >
+                                                        >
                                                             Check Out Sponsors Details &nbsp;&nbsp; &gt;&gt;
                                                         </button>
                                                         <div className="container d-flex text-white text-center px-0 mt-2">

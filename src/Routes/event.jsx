@@ -14,6 +14,7 @@ import {
   UpdateEvent,
   Update_UpcomingEvent,
 } from "../pages/Event";
+import EventProfile from "../pages/Event/EventProfile/EventProfile";
 const EventRoutes = () => {
   return (
     <>
@@ -37,6 +38,7 @@ const EventRoutes = () => {
         />
         <Route path="/update_event" element={<UpdateEvent />} />
         <Route path="/delete_event" element={<DeleteEvent />} />
+        <Route path="/profile" element={<EventProfile />} />
         <Route path="/login" element={<Navigate to={"/"} />} />
         <Route path="/signup" element={<Navigate to={"/"} />} />
       </Routes>

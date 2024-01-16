@@ -2,24 +2,24 @@ import React, { useEffect, useState } from "react";
 import noProfilepic from "../../../assets/img/emptyprofile2.jpg";
 import "./profile.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createSponsorProfile, getSponsorProfile } from "../../../redux/actions/profileAction";
-const SponsorProfileInfo = () => {
+import { createEventProfile, createSponsorProfile, getEventProfile, getSponsorProfile } from "../../../redux/actions/profileAction";
+const EventProfileInfo = () => {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
   const dispatch = useDispatch();
   const profileDetails = useSelector(state => state.sponsorProfile)
   useEffect(() => {
-    dispatch(getSponsorProfile())
+    dispatch(getEventProfile())
   }, [])
 
   console.log("Sponsor Profile ", profileDetails);
   // const [businessName, setBusinessName] = useState('');
   const [businessType, setBusinessType] = useState('');
   const [contact, setContact] = useState('');
-  console.log(profileDetails?.sponsorDetails?.business_name);
+  console.log(profileDetails?.eventDetails?.business_name);
 
-  const [businessName, setBusinessName] = useState(profileDetails?.sponsorDetails?.business_name || '');
+  const [businessName, setBusinessName] = useState(profileDetails?.eventDetails?.business_name || '');
 
   const handleBusinessNameChange = (e) => {
     setBusinessName(e.target.value);
@@ -48,13 +48,13 @@ const SponsorProfileInfo = () => {
   const handleSubmitClick = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("business_name", profileDetails?.sponsorDetails?.business_name || businessName );
-    formData.append("contact_no", profileDetails?.sponsorDetails?.contact_no || contact);
-    formData.append("business_type", profileDetails?.sponsorDetails?.business_type || businessType);
+    formData.append("organisation_name", profileDetails?.eventDetails?.organisation_name || businessName );
+    formData.append("contact_no", profileDetails?.eventDetails?.contact_no || contact);
+    formData.append("event_type", profileDetails?.eventDetails?.event_type || businessType);
     formData.append("user_id", userDetails?.user_id);
     try {
       // Make POST API call
-      await dispatch(createSponsorProfile(formData));
+      await dispatch(createEventProfile(formData));
       sessionStorage.setItem("successMessage", "Class created successfully!");
     } catch (error) {
       console.log("An error occurred during API calls:", error);
@@ -155,7 +155,7 @@ const SponsorProfileInfo = () => {
                         id="inputOrgName"
                         type="text"
                         placeholder="Enter your organization name"
-                        value={profileDetails?.sponsorDetails?.business_name || businessName}
+                        value={profileDetails?.eventDetails?.organisation_name || businessName}
                         onChange={(e) => setBusinessName(e.target.value)} />
                     </div>
                     <div className="col-md-6">
@@ -167,7 +167,7 @@ const SponsorProfileInfo = () => {
                         id="inputLocation"
                         type="text"
                         placeholder="Enter your location"
-                        value={profileDetails?.sponsorDetails?.business_type || businessType}
+                        value={profileDetails?.eventDetails?.event_type || businessType}
                         onChange={(e) => setBusinessType(e.target.value)}
                       />
                     </div>
@@ -181,7 +181,7 @@ const SponsorProfileInfo = () => {
                       id="inputEmailAddress"
                       type="email"
                       placeholder="Enter your email address"
-                      value={profileDetails?.sponsorDetails?.contact_no || contact}
+                      value={profileDetails?.eventDetails?.contact_no || contact}
                       onChange={(e) => setContact(e.target.value)} />
                   </div>
                   {/* <div className="row gx-3 mb-3">
@@ -222,4 +222,4 @@ const SponsorProfileInfo = () => {
   );
 };
 
-export default SponsorProfileInfo;
+export default EventProfileInfo;

@@ -127,7 +127,7 @@ const MyEventSponsor = (eventData) => {
       sponsoring_price: totalSponsoringPrice.toFixed(2),
     };
 
-    navigate("/sponsor_eventForm", { state: selectedItemsData });
+    navigate("/sponsor_payment", { state: selectedItemsData });
   };
   return (
     <>

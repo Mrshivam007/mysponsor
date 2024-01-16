@@ -15,6 +15,7 @@ import {
   Update_UpcomingContent,
   YourContent,
 } from "../pages/ContentCreator";
+import ContentProfile from "../pages/ContentCreator/ContentProfile/ContentProfile";
 
 const ContentRoutes = () => {
   return (
@@ -50,7 +51,7 @@ const ContentRoutes = () => {
         />
         <Route path="/update_content" element={<UpdateContent />} />
         <Route path="/delete_content" element={<DeleteContent />} />
-
+        <Route path="/profile" element={<ContentProfile />} />
         <Route path="/login" element={<Navigate to={"/"} />} />
         <Route path="/signup" element={<Navigate to={"/"} />} />
       </Routes>

@@ -163,7 +163,8 @@ const ListeventsForm = () => {
       // Prepare sponsoring items array
       const sponsoringItemsData = selectedItems.map((item) => ({
         sponsoring_items: item,
-        price: prices[item] || null, // handle cases where price might be undefined or null
+        price: prices[item] || null,
+        is_sponsored: false, // handle cases where price might be undefined or null
       }));
       // formData.append("event_date_time", event_date_time);
       formData.append("event_start_date", startDate);

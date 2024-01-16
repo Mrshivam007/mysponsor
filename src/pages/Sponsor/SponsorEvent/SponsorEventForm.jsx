@@ -49,7 +49,7 @@ const SponsorEventForm = (props) => {
   console.log(cardData);
   console.log(sponsoring_items);
   console.log(sponsoring_price);
-// Use the values as needed in your component
+  // Use the values as needed in your component
 
 
 
@@ -136,6 +136,8 @@ const SponsorEventForm = (props) => {
     return Object.keys(errorsObj).length === 0;
   };
 
+ console.log("thumbnail ", thumbnail1);
+
   const handleSubmitClick = async (e) => {
     e.preventDefault();
     const isFormValid = validateForm();
@@ -146,38 +148,50 @@ const SponsorEventForm = (props) => {
       formData.append("event_id", cardData.event_id);
       formData.append("title", cardData.title);
       formData.append("description", cardData.description);
-      formData.append("sponsoring_items", JSON.stringify(sponsoring_items) );
-      formData.append("business_name", businessName );
-      formData.append("business_type", businessType );
-      formData.append("contact_no", businessContact );
-      formData.append("thumbnail1", thumbnail1);
-      formData.append("thumbnail2", thumbnail2);
-      formData.append("thumbnail3", thumbnail3);
-      formData.append("attach_video", video);
+      formData.append("sponsoring_items", JSON.stringify(sponsoring_items));
+      formData.append("business_name", businessName);
+      formData.append("business_type", businessType);
+      formData.append("contact_no", businessContact);
+      // formData.append("thumbnail1", thumbnail1);
+      // formData.append("thumbnail2", thumbnail2);
+      // formData.append("thumbnail3", thumbnail3);
+      // formData.append("attach_video", video);
       // formData.append("event_date_time", event_date_time);
-    //   formData.append("event_start_date", startDate);
-    //   formData.append("event_end_date", endDate);
-    //   formData.append("event_time", event_time);
-    // //   formData.append("sponsoring_items", JSON.stringify(sponsoringItemsData));
-    //   formData.append("user_id", userDetails.user_id);
-    //   formData.append("description", description);
-    //   formData.append("location", location);
-    //   formData.append("audience_expected", audience);
-    //   // formData.append("price", price);
-    //   formData.append("event_category", selectedCategory);
-    //   // Append thumbnails with different keys
-      try {
-        // Make POST API call
-        await dispatch(createSponsor(formData));
-        sessionStorage.setItem("successMessage", "Class created successfully!");
-        navigate("/sponsored_event"); // Replace '/' with the desired route for the home page
-      } catch (error) {
-        console.log("An error occurred during API calls:", error);
-      }
+      //   formData.append("event_start_date", startDate);
+      //   formData.append("event_end_date", endDate);
+      //   formData.append("event_time", event_time);
+      // //   formData.append("sponsoring_items", JSON.stringify(sponsoringItemsData));
+      //   formData.append("user_id", userDetails.user_id);
+      //   formData.append("description", description);
+      //   formData.append("location", location);
+      //   formData.append("audience_expected", audience);
+      //   // formData.append("price", price);
+      //   formData.append("event_category", selectedCategory);
+      //   // Append thumbnails with different keys
+      // Make POST API call
+      // await dispatch(createSponsor(formData));
+      // sessionStorage.setItem("successMessage", "Class created successfully!");
+      const formDataObject = {};
+      formData.forEach((value, key) => {
+        formDataObject[key] = value;
+      });
+      console.log("Form Data", formData );
+      // Handle successful form validation
+      const selectedItemsData = {
+        formData: formDataObject,
+        cardData,
+        sponsoring_item,
+        sponsoring_price,
+        // sponsoring_items: selectedItems.map((item) => item.sponsoring_items),
+        // sponsoring_price: totalSponsoringPrice.toFixed(2),
+      };
+      navigate("/sponsor_payment", { state: selectedItemsData });
+
     } else {
       window.scroll(0, 0);
     }
   };
+
   return (
     <>
       <SponsorNavbar />
@@ -201,22 +215,22 @@ const SponsorEventForm = (props) => {
                   <form action="#" className="contact-form">
                     <div className="row form-group">
                       <div className="col-md-12">
-                      <label className="font-weight-bold">Event Title</label>
+                        <label className="font-weight-bold">Event Title</label>
                         <input
                           type="text"
                           id="title"
                           value={cardData.title}
-                        //   onChange={(e) => setTitle(e.target.value)}
+                          //   onChange={(e) => setTitle(e.target.value)}
                           className="form-control"
-                        //   placeholder="Enter Title"
-                        readOnly
+                          //   placeholder="Enter Title"
+                          readOnly
                         />
                       </div>
                     </div>
 
                     <div className="row form-group">
                       <div className="col-md-12">
-                      <label className="font-weight-bold">Event Location</label>
+                        <label className="font-weight-bold">Event Location</label>
                         <input
                           type="text"
                           id="location"
@@ -228,9 +242,9 @@ const SponsorEventForm = (props) => {
                     </div>
 
 
-                      <div className="row form-group">
+                    <div className="row form-group">
                       <div className="col-md-12">
-                      <label className="font-weight-bold">Event Sponsoring Item</label>
+                        <label className="font-weight-bold">Event Sponsoring Item</label>
                         <input
                           type="text"
                           id="location"
@@ -240,7 +254,7 @@ const SponsorEventForm = (props) => {
                         />
                       </div>
                     </div>
-          
+
 
                     <div className="row form-group">
                       <div className="col-6">
@@ -281,7 +295,7 @@ const SponsorEventForm = (props) => {
                   <form action="#" className="contact-form">
                     <div className="row form-group">
                       <div className="col-md-12">
-                      <label className="font-weight-bold">Your Name</label>
+                        <label className="font-weight-bold">Your Name</label>
                         <input
                           type="text"
                           id="subject"
@@ -294,7 +308,7 @@ const SponsorEventForm = (props) => {
 
                     <div className="row form-group">
                       <div className="col-md-12">
-                      <label className="font-weight-bold">Your Mail</label>
+                        <label className="font-weight-bold">Your Mail</label>
                         <input
                           type="email"
                           id="email"

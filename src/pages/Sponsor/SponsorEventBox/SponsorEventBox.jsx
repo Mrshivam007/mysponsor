@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const SponsorButton = ({ item, isSelected, onButtonClick }) => {
+  console.log(item);
   return (
     <div className="col-4 px-1 px-md-2 my-3 text-center">
       <div
@@ -12,7 +13,7 @@ const SponsorButton = ({ item, isSelected, onButtonClick }) => {
         style={{ backgroundColor: "#f2f2f2", borderRadius: "10px" }}
       >
         <h6 className="font-weight-bolder">
-          {item} <br />
+          {item.sponsoring_items} <br />
         </h6>
       </div>
     </div>
@@ -39,7 +40,7 @@ const SponsorEventBox = (eventData) => {
   };
 
   sponsoring_items.forEach((item) => {
-    if (item && item.price) {
+    if (item) {
       totalAmount += parseFloat(item.price);
     }
   });

@@ -1,6 +1,8 @@
 import React from "react";
 import cardimg from "../../../assets/img/payment-img.jpg";
-const SponsorpayCard = () => {
+import apiurl from "../../../constant/config";
+const SponsorpayCard = (data) => {
+  console.log("Sponsor Pay", data);
   return (
     <>
       <div className="desktop-view mt-4">
@@ -17,7 +19,7 @@ const SponsorpayCard = () => {
                 <div className="row mx-0">
                   <div className="col-6 col-md-4 col-lg-3 p-3">
                     <img
-                      src={cardimg}
+                      src={apiurl + data?.data?.thumbnail1}
                       alt=""
                       style={{
                         width: "100%",
@@ -28,9 +30,9 @@ const SponsorpayCard = () => {
                   <div className="col-6 col-md-8 col-lg-9 mt-2">
                     <div className="box">
                       <h3 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between">
-                        Event First
+                        {data?.data?.title}
                       </h3>
-                      <h4>Raipur</h4>
+                      <h4>{data?.data?.location}</h4>
                       <div className="star d-flex">
                         <h5>
                           <i className="bi bi-star-fill text-warning"></i>
@@ -49,11 +51,7 @@ const SponsorpayCard = () => {
                         </h5>
                       </div>
                       <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Quas dolorum repudiandae odit labore excepturi
-                        nihil ipsum nulla assumenda corrupti repellat est iste
-                        delectus, obcaecati molestiae iure error dolor fuga
-                        vero.
+                      {data?.data?.description}
                       </p>
                     </div>
                   </div>
