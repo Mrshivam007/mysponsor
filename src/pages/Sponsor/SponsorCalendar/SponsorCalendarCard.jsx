@@ -25,7 +25,7 @@ const SponsorCalendarCard = () => {
         <div className="col-12 mb-2">
           {cardData &&
             cardData.map((data) => {
-              const eventDate = new Date(data.created_at);
+              const eventDate = new Date(data.event_id.event_start_date);
 
               // Options for formatting the date
               const options = {
@@ -45,7 +45,7 @@ const SponsorCalendarCard = () => {
                       class="bi bi-calendar-event-fill"
                       style={{ color: "rgb(0, 78, 169)" }}
                     ></i>
-                    &nbsp; "{data.title}"
+                    &nbsp; "{data.event_id.title}"
                   </h5>
                   <p className="p-2 mb-0">
                     <i className="bi bi-alarm-fill text-danger"></i>&nbsp; Event

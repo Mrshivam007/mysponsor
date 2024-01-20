@@ -5,7 +5,6 @@ import cardImg from "../../../assets/img/my_events_img.png";
 import bgimage from "../../../assets/img/circle-bg.png";
 import card_bg from "../../../assets/img/card/header-bg.png";
 import { Footer, NavBar } from "../../../components";
-import { fetchEvent, fetchEventbyId } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux";
 import apiurl from "../../../constant/config";
 import { useNavigate } from "react-router-dom";
@@ -18,15 +17,11 @@ const FavouriteEventCard = ({ cardData }) => {
     const { userDetails } = auth;
     console.log(userDetails);
     const sponsor_user_id = userDetails.user_id
-    // const event_id = cardData.event_id?.event_id
     const [favorite, setFavorite] = useState(false);
 
 
     const dispatch = useDispatch();
     const eventDetails = useSelector((state) => state.event);
-    useEffect(() => {
-        dispatch(fetchEventbyId(userDetails.user_id))
-    }, []);
     console.log("Card Details", cardData);
 
     const navigate = useNavigate();
@@ -35,10 +30,10 @@ const FavouriteEventCard = ({ cardData }) => {
         navigate("/myevent-details", { state: { eventData: data } });
     };
 
-    const handleFavoriteClick =  async (event_id) => {
+    const handleFavoriteClick = async (event_id) => {
         try {
             // Call the API here by dispatching the action
-            await dispatch(createFavoriteSponsor({ sponsor_user_id, event_id  }));
+            await dispatch(createFavoriteSponsor({ sponsor_user_id, event_id }));
             console.log("api calling");
             // If successful, update the local state or perform any other actions
             setFavorite(!favorite);
@@ -61,136 +56,140 @@ const FavouriteEventCard = ({ cardData }) => {
                 <div className="desktop-view">
                     <div className="container">
                         {cardData &&
-                            cardData.map((data) => {
-                                let totalSponsoringPrice = 0;
-                                const sponsoring_items = data.event_id?.sponsoring_items || [];
+                            cardData
+                                .filter((data) => data.favorite_list.includes(String(sponsor_user_id)))
+                                .map((data) => {
 
-                                sponsoring_items.forEach((item) => {
-                                    if (item && item.price) {
-                                        totalSponsoringPrice += parseFloat(item.price);
-                                    }
-                                });
+                                    let totalSponsoringPrice = 0;
+                                    const sponsoring_items = data?.sponsoring_items || [];
 
-                                return (
-                                    <div className="row">
-                                        <div className="col-12 mb-4">
-                                            <div
-                                                className="card"
-                                                style={{
-                                                    borderRadius: "20px",
-                                                    backgroundColor: "#efefef",
-                                                }}
-                                            >
-                                                <div className="row mx-0">
-                                                    <div className="col-3 p-3">
-                                                        <img
-                                                            src={apiurl + data.event_id.thumbnail1}
-                                                            alt=""
-                                                            style={{ width: "100%" }}
-                                                        />
-                                                    </div>
-                                                    <div className="col-5 mt-2">
-                                                        <div
-                                                            className="box"
-                                                            style={{
-                                                                borderRight: "1px solid #acacac",
-                                                                height: "84%",
-                                                            }}
-                                                        >
-                                                            <h3 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between">
-                                                                {data.event_id.title}{" "}
-                                                            </h3>
-                                                            <h4>{data.event_id.location}</h4>
-                                                            <div className="star d-flex">
-                                                                <h5>
-                                                                    <i class="bi bi-star-fill text-warning"></i>
-                                                                    &nbsp;
-                                                                    <i class="bi bi-star-fill text-warning"></i>
-                                                                    &nbsp;
-                                                                    <i class="bi bi-star-fill text-warning"></i>
-                                                                    &nbsp;
-                                                                    <i class="bi bi-star-fill text-warning"></i>
-                                                                    &nbsp;
-                                                                    <i class="bi bi-star-fill text-white"></i>
-                                                                    &nbsp;
-                                                                    <span className="text-sm text-muted">
-                                                                        3482 reviews
-                                                                    </span>
-                                                                </h5>
-                                                            </div>
-                                                            <p>
-                                                                {data.event_id.description}
-                                                            </p>
+                                    sponsoring_items.forEach((item) => {
+                                        if (item && item.price) {
+                                            totalSponsoringPrice += parseFloat(item.price);
+                                        }
+                                    });
+
+                                    return (
+                                        <div className="row">
+                                            <div className="col-12 mb-4">
+                                                <div
+                                                    className="card"
+                                                    style={{
+                                                        borderRadius: "20px",
+                                                        backgroundColor: "#efefef",
+                                                    }}
+                                                >
+                                                    <div className="row mx-0">
+                                                        <div className="col-3 p-3">
+                                                            <img
+                                                                src={apiurl + data.thumbnail1}
+                                                                alt=""
+                                                                style={{ width: "100%" }}
+                                                            />
                                                         </div>
-                                                    </div>
-
-                                                    <div className="col-4 p-4">
-                                                        <div className="box">
-                                                            <div className="heart d-flex justify-content-between mb-2">
-                                                                <span>
-                                                                    <h4 className="d-inline">
-                                                                        <i className="bi bi-cash text-success"></i>
-                                                                        &nbsp;&nbsp; {totalSponsoringPrice}
-                                                                    </h4>
-                                                                </span>
-                                                                <span
-                                                                    className="bg-white"
-                                                                    style={{
-                                                                        borderRadius: "20px",
-                                                                        padding: "8px 7px 2px 8px",
-                                                                        cursor: "pointer",
-                                                                    }}
-                                                                >
-                                                                    <i
-                                                                        className="bi bi-suit-heart-fill"
-                                                                        // onClick={() => setFavorite(!favorite)}
-                                                                        onClick={() => handleFavoriteClick(data.event_id.event_id)}                                                                        style={
-                                                                            !favorite
-                                                                                ? {
-                                                                                    color: "gray",
-                                                                                    filter:
-                                                                                        "drop-shadow(rgba(0, 0, 0, 0.5) 1px 3px 3px)",
-                                                                                }
-                                                                                : {
-                                                                                    color: "#ff0068",
-                                                                                    filter:
-                                                                                        "drop-shadow(rgba(0, 0, 0, 0.5) 1px 3px 3px)",
-                                                                                }
-                                                                        }
-                                                                    ></i>
-                                                                </span>
+                                                        <div className="col-5 mt-2">
+                                                            <div
+                                                                className="box"
+                                                                style={{
+                                                                    borderRight: "1px solid #acacac",
+                                                                    height: "84%",
+                                                                }}
+                                                            >
+                                                                <h3 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between">
+                                                                    {data.title}{" "}
+                                                                </h3>
+                                                                <h4>{data.location}</h4>
+                                                                <div className="star d-flex">
+                                                                    <h5>
+                                                                        <i class="bi bi-star-fill text-warning"></i>
+                                                                        &nbsp;
+                                                                        <i class="bi bi-star-fill text-warning"></i>
+                                                                        &nbsp;
+                                                                        <i class="bi bi-star-fill text-warning"></i>
+                                                                        &nbsp;
+                                                                        <i class="bi bi-star-fill text-warning"></i>
+                                                                        &nbsp;
+                                                                        <i class="bi bi-star-fill text-white"></i>
+                                                                        &nbsp;
+                                                                        <span className="text-sm text-muted">
+                                                                            3482 reviews
+                                                                        </span>
+                                                                    </h5>
+                                                                </div>
+                                                                <p>
+                                                                    {data.description}
+                                                                </p>
                                                             </div>
-                                                            <h4>
-                                                                <i className="bi bi-people-fill text-danger"></i>
-                                                                &nbsp;&nbsp; {data.event_id.audience_expected}
-                                                            </h4>
+                                                        </div>
 
-                                                            <div className="container text-white text-center d-flex justify-content-between px-0 mt-5">
-                                                                <div className="box myevents-box text-white">
-                                                                    <h6
+                                                        <div className="col-4 p-4">
+                                                            <div className="box">
+                                                                <div className="heart d-flex justify-content-between mb-2">
+                                                                    <span>
+                                                                        <h4 className="d-inline">
+                                                                            <i className="bi bi-cash text-success"></i>
+                                                                            &nbsp;&nbsp; {totalSponsoringPrice}
+                                                                        </h4>
+                                                                    </span>
+                                                                    <span
+                                                                        className="bg-white"
                                                                         style={{
-                                                                            borderBottom:
-                                                                                "1px solid rgba(255, 255, 255, 0.30)",
-                                                                            padding: "2%",
+                                                                            borderRadius: "20px",
+                                                                            padding: "8px 7px 2px 8px",
+                                                                            cursor: "pointer",
                                                                         }}
                                                                     >
-                                                                        Your Bid
-                                                                    </h6>
-                                                                    <h5>₹ {totalSponsoringPrice}</h5>
+                                                                        <i
+                                                                            className="bi bi-suit-heart-fill"
+                                                                            // onClick={() => setFavorite(!favorite)}
+                                                                            onClick={() => handleFavoriteClick(data.event_id)} style={
+                                                                                !favorite
+                                                                                    ? {
+                                                                                        color: "gray",
+                                                                                        filter:
+                                                                                            "drop-shadow(rgba(0, 0, 0, 0.5) 1px 3px 3px)",
+                                                                                    }
+                                                                                    : {
+                                                                                        color: "#ff0068",
+                                                                                        filter:
+                                                                                            "drop-shadow(rgba(0, 0, 0, 0.5) 1px 3px 3px)",
+                                                                                    }
+                                                                            }
+                                                                        ></i>
+                                                                    </span>
                                                                 </div>
-                                                                <div
-                                                                    className="box myevents-box"
-                                                                    style={{ cursor: "pointer" }}
-                                                                    onClick={() => handleSponsorClick(data.event_id)}
-                                                                >
-                                                                    <h5 className="pt-1">
-                                                                        <img
-                                                                            src={info}
-                                                                            alt=""
-                                                                            style={{ width: "20%" }}
-                                                                        />
-                                                                    </h5>
-                                                                    <h5>View Details</h5>
+                                                                <h4>
+                                                                    <i className="bi bi-people-fill text-danger"></i>
+                                                                    &nbsp;&nbsp; {data.audience_expected}
+                                                                </h4>
+
+                                                                <div className="container text-white text-center d-flex justify-content-between px-0 mt-5">
+                                                                    <div className="box myevents-box text-white">
+                                                                        <h6
+                                                                            style={{
+                                                                                borderBottom:
+                                                                                    "1px solid rgba(255, 255, 255, 0.30)",
+                                                                                padding: "2%",
+                                                                            }}
+                                                                        >
+                                                                            Your Bid
+                                                                        </h6>
+                                                                        <h5>₹ {totalSponsoringPrice}</h5>
+                                                                    </div>
+                                                                    <div
+                                                                        className="box myevents-box"
+                                                                        style={{ cursor: "pointer" }}
+                                                                        onClick={() => handleSponsorClick(data.event_id)}
+                                                                    >
+                                                                        <h5 className="pt-1">
+                                                                            <img
+                                                                                src={info}
+                                                                                alt=""
+                                                                                style={{ width: "20%" }}
+                                                                            />
+                                                                        </h5>
+                                                                        <h5>View Details</h5>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -198,9 +197,8 @@ const FavouriteEventCard = ({ cardData }) => {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                );
-                            })}
+                                    );
+                                })}
                     </div>
                     <button
                         className="btn text-white py-1 px-4 font-weight-bold d-none d-md-block"

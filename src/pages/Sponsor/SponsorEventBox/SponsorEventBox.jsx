@@ -3,6 +3,8 @@ import heart from "../../../assets/img/heart2.svg";
 import apiurl from "../../../constant/config";
 import Slider from "react-slick";
 import { useLocation, useNavigate } from "react-router-dom";
+import { updateSponsoringItem } from "../../../redux/actions/sponsorAction";
+import { useDispatch, useSelector } from "react-redux";
 
 const SponsorButton = ({ item, isSelected, onButtonClick }) => {
   console.log(item);
@@ -24,12 +26,63 @@ const SponsorButton = ({ item, isSelected, onButtonClick }) => {
 const SponsorEventBox = (eventData) => {
   const cardData01 = eventData.eventData;
   console.log("event data01", cardData01);
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  const sponsor = useSelector((state) => state.sponsor);
+  const { userDetails } = auth;
   const location = useLocation();
   const cardData02 = location.state && location.state.cardData;
   console.log("event data02", cardData02);
   const cardData = cardData01 || cardData02;
   let totalAmount = 0;
   const sponsoring_items = cardData?.sponsoring_items || [];
+  const [bannerImage, setBannerImage] = useState(null);
+  const [ledImage, setLedImage] = useState(null);
+  const [ledVideo, setLedVideo] = useState(null);
+  const [billText, setBillText] = useState(null);
+  const { SponsoringItem, loading } = sponsor;
+
+  console.log('Sponsorign item errors ',SponsoringItem);
+
+
+  console.log("Sponsor Id ",userDetails?.user_id);
+
+  const handleBannerImgChange = (e) => {
+    const file = e.target.files[0];
+    setBannerImage(file);
+  };
+  const handleLedImgChange = (e) => {
+    const file = e.target.files[0];
+    setLedImage(file);
+  };
+  const handleLedVidChange = (e) => {
+    const file = e.target.files[0];
+    setLedVideo(file);
+  };
+
+  const handleSubmitClick = async (e) => {
+    e.preventDefault();
+    // if (Object.keys(errors).length === 0) {
+    const formData = new FormData();
+    formData.append("sponsor_id", cardData.sponsor_id);
+    formData.append("banner_image", bannerImage);
+    formData.append("led_image", ledImage);
+    formData.append("led_video", ledVideo);
+    formData.append("bill_text", "");
+    try {
+      // Make POST API call
+      await dispatch(updateSponsoringItem(formData));
+      
+      console.log();
+      sessionStorage.setItem("successMessage", "Class created successfully!");
+      // navigate("/events/upcoming_event"); // Replace '/' with the desired route for the home page
+    } catch (error) {
+      console.log("An error occurred during API calls:", error);
+    }
+  };
+
+
+
 
   const navigate = useNavigate();
 
@@ -183,8 +236,96 @@ const SponsorEventBox = (eventData) => {
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
+          <h1 className="font-weight-bold d-none d-lg-block">
+            Add Photos & Videos
+          </h1>
+          <h2 className="sponsor-mobile-text">Add Photos</h2>
+          <p>(atleast 3 photos & 1 video)</p>
+
+          {cardData?.sponsoring_items.map((item, index) => (
+            <div key={index} className="box1 mt-2 d-flex justify-content-center" style={{ gap: "2%" }}>
+              {item.sponsoring_items === 'banner' && (
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
+                  <div className="box text-center">
+                    <h5 className="font-weight-bold">Add Banner Image</h5>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleBannerImgChange}
+                      style={{ width: "74%", borderRadius: "0" }}
+                    />
+                    {bannerImage && (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          src={URL.createObjectURL(bannerImage)}
+                          alt="Preview"
+                          width="200"
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {item.sponsoring_items === 'led_screen' && (
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
+                  <div className="box text-center">
+                    <h5 className="font-weight-bold">Add Led Image</h5>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleLedImgChange}
+                      style={{ width: "74%", borderRadius: "0" }}
+                    />
+                    {ledImage && (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          src={URL.createObjectURL(ledImage)}
+                          alt="Preview"
+                          width="200"
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {item.sponsoring_items === 'led_screen' && (
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
+                  <div className="box text-center">
+                    <h5 className="font-weight-bold">Add Led Video</h5>
+                    <input
+                      type="file"
+                      accept="video/*"
+                      onChange={handleLedVidChange}
+                      style={{ width: "74%", borderRadius: "0" }}
+                    />
+                    {ledVideo && (
+                      <div>
+                        <h2>Preview:</h2>
+                        <video width="200" controls>
+                          <source src={URL.createObjectURL(ledVideo)} type="video/mp4" />
+                          Your browser does not support the video tag.
+                        </video>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+          <input
+            type="submit"
+            className="submit"
+            value="List Event"
+            onClick={handleSubmitClick}
+          />
+
           <div className="container mt-2">
             <h5 className="font-weight-bold">Event Description: </h5>
             <p>

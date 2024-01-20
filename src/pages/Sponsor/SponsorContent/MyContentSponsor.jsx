@@ -91,7 +91,7 @@ const MyContentSponsor = (contentData) => {
             sponsoring_price: totalSponsoringPrice.toFixed(2),
           };
         
-          navigate("/sponsor_contentForm", { state: selectedItemsData });
+          navigate("/sponsor_content_payment", { state: selectedItemsData });
         };
         return (
             <>

@@ -27,6 +27,8 @@ import {
   SponsoredEventDetails,
   YoutubeContentSponsor,
 } from "../pages/Sponsor";
+import SponsorContentPayment from "../pages/Sponsor/SponsorPayment/SponsorContentPayment";
+import SponsorNavbar from "../pages/Sponsor/SponsorNavbar/SponsorNavbar";
 const SponsorRoutes = () => {
   return (
     <>
@@ -66,6 +68,7 @@ const SponsorRoutes = () => {
         <Route path="/favourites" element={<Favourite />} />
         <Route path="/profile" element={<SponsorProfile />} />
         <Route path="/sponsor_payment" element={<SponsorPayment />} />
+        <Route path="/sponsor_content_payment" element={<SponsorContentPayment />} />
         <Route path="/login" element={<Navigate to={"/"} />} />
         <Route path="/signup" element={<Navigate to={"/"} />} />
       </Routes>

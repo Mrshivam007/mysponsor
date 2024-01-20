@@ -16,7 +16,7 @@ const EventDetails = () => {
   }, []);
   const location = useLocation();
   const eventData = location.state?.eventData || null;
-  console.log(eventData);
+  console.log("Event data from id ",eventData);
   return (
     <>
       <div
