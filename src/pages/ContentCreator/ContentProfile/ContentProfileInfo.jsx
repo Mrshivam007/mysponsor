@@ -232,7 +232,7 @@ const ContentProfileInfo = () => {
                                 id="inputLastName"
                                 type="text"
                                 placeholder="Enter your last name"
-                                value={(profileDetails?.contentDetails?.youtube && profileDetails.contentDetails.youtube[0]?.subscriber) || subscriber}
+                                value={(profileDetails?.contentDetails?.youtube && profileDetails.contentDetails.youtube[0]?.subscribers) || subscriber}
                                 onChange={(e) => setSubscriber(e.target.value)} />
                             </div>
                           </div>

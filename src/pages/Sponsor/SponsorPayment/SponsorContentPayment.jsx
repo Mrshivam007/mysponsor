@@ -22,62 +22,65 @@ const SponsorContentPayment = () => {
   console.log("Card Data", cardData);
   console.log("Price", sponsoring_price);
   console.log("Item", sponsoring_items);
-  const tax_amount = (sponsoring_price * 19) / 100
+  const tax_amount = (sponsoring_price * 19) / 100;
   const auth = useSelector((state) => state.auth);
   const { userDetails } = auth;
   console.log("Sponsor_user_id ", userDetails.user_id);
-  const total_amount = (Number(sponsoring_price) + Number(tax_amount)).toFixed(2);
+  const total_amount = (Number(sponsoring_price) + Number(tax_amount)).toFixed(
+    2
+  );
+
   const navigate = useNavigate(); // Initialize useNavigate hook
-  const formattedSponsoringItems = sponsoring_items.map(item => ({
+  const formattedSponsoringItems = sponsoring_items.map((item) => ({
     sponsoring_content_items: item,
   }));
-
 
   // complete order
   const complete_order = async (paymentID, orderID, signature) => {
     axios({
-      method: 'post',
-      url: 'http://127.0.0.1:8000/api/razorpay/content/order/complete/',
+      method: "post",
+      url: "http://127.0.0.1:8000/api/razorpay/content/order/complete/",
       data: {
-        "payment_id": paymentID,
-        "order_id": orderID,
-        "signature": signature,
-        "amount": total_amount,
-        "content_user_id": cardData.user_id,
-        "content_id": cardData.content_id,
-        "sponsor_user_id": userDetails.user_id,
-        "sponsoring_content_items": formattedSponsoringItems
-      }
+        payment_id: paymentID,
+        order_id: orderID,
+        signature: signature,
+        amount: total_amount,
+        content_user_id: cardData.user_id,
+        content_id: cardData.content_id,
+        sponsor_user_id: userDetails.user_id,
+        sponsoring_content_items: formattedSponsoringItems,
+      },
     })
       .then((response) => {
         console.log(response.data.message);
         if (response.data.message === "transaction created") {
           // dispatch(createSponsor());
-          sessionStorage.setItem("successMessage", "Class created successfully!");
-          navigate("/sponsored_event"); // Replace '/' with the desired route for the home page  
+          sessionStorage.setItem(
+            "successMessage",
+            "Class created successfully!"
+          );
+          navigate("/sponsored_event"); // Replace '/' with the desired route for the home page
         }
       })
       .catch((error) => {
         console.log(error.response.data);
       });
-  }
-
+  };
 
   const razorPay = () => {
     //create order
     axios({
-      method: 'post',
-      url: 'http://127.0.0.1:8000/api/razorpay/order/create/',
+      method: "post",
+      url: "http://127.0.0.1:8000/api/razorpay/order/create/",
       data: {
         amount: total_amount,
-        currency: "INR"
-      }
+        currency: "INR",
+      },
     })
       .then((response) => {
-
         // get order id
         console.log("response", response);
-        const order_id = response?.data?.data.id
+        const order_id = response?.data?.data.id;
 
         // handle payment
         const options = {
@@ -93,7 +96,7 @@ const SponsorContentPayment = () => {
               response.razorpay_payment_id,
               response.razorpay_order_id,
               response.razorpay_signature
-            )
+            );
           },
           // prefill: {
           // name: "Piyush Garg",
@@ -122,12 +125,8 @@ const SponsorContentPayment = () => {
       })
       .catch((error) => {
         console.log(error);
-      })
-  }
-
-
-
-
+      });
+  };
 
   return (
     <>
@@ -164,11 +163,15 @@ const SponsorContentPayment = () => {
           <div className="box grand-total">
             <h5 className="text-center">Grand Total</h5>
             <div className="d-flex justify-content-center">
-              <span className="bagde-pill text-white text-xl">₹{total_amount}</span>
+              <span className="bagde-pill text-white text-xl">
+                ₹{total_amount}
+              </span>
             </div>
           </div>
           <button className="category-btn btn mb-3" style={{ width: "100%" }}>
-            <p className="category-btn-text" onClick={razorPay}>Sponsor</p>
+            <p className="category-btn-text" onClick={razorPay}>
+              Sponsor
+            </p>
           </button>
           <div className="payment-description">
             <p>

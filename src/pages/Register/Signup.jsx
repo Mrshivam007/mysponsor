@@ -179,12 +179,12 @@ const Signup = () => {
                   type="radio"
                   name="flexRadioDefault"
                   onChange={handleUserType}
-                  value="Sponsor"
+                  value="Admin"
                   id="flexRadioDefault2"
                   required
                 />
                 <label class="form-check-label" for="flexRadioDefault2">
-                  Sponsor
+                  Admin
                 </label>
               </div>
               <h2 class="mb-4 font-weight-medium text-secondary">SignUp</h2>

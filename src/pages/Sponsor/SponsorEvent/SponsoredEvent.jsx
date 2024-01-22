@@ -145,9 +145,15 @@ const SponsoredEvent = () => {
                                                                 >
                                                                     Total amount sponsored
                                                                 </h6>
-                                                                <h5>₹ 50,000</h5>
+                                                                <h5>
+                                                                    {data.event_id.sponsoring_items
+                                                                        .filter(item => item.is_sponsored)
+                                                                        .reduce((total, item) => total + parseInt(item.price, 10), 0)
+                                                                        .toLocaleString()} {/* Display the sum of prices */}
+                                                                </h5>
                                                             </div>
                                                         </div>
+
                                                     </div>
                                                 </div>
                                             </div>

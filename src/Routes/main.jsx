@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useRoutes } from "react-router-dom";
 import {
   CategoryPage,
   FacebookContent,
@@ -22,6 +22,7 @@ import ContentDetails from "../pages/LandingPage/Desktop_Sponsor_CC/ContentDetai
 import SponsorLogin from "../pages/SponsorRegister/SponsorLogin";
 import SponsorRegister from "../pages/SponsorRegister/SponsorRegister";
 import SponsorRoutes from "./sponsor";
+import AdminLayout from "../pages/Admin/layouts/admin/index"
 
 const Main = () => {
   const auth = useSelector((state) => state.auth);
@@ -39,7 +40,9 @@ const Main = () => {
             ) : userDetails.user_type === "Sponsor" ? (
               <SponsorRoutes />
             ) : userDetails.user_type === "Admin" ? (
-              <SponsorRoutes />
+              // <App />
+              // <AdminRoutes />
+              <AdminLayout />
               // <ContentRoutes />
             ) : null}
           </Router>

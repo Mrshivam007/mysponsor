@@ -1,27 +1,89 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import heart from "../../../assets/img/heart2.svg";
 import apiurl from "../../../constant/config";
+import banner_preview from "../../../assets/img/Banner/banner-preview-img.png";
+import modalBackground from "../../../assets/img/Banner/modal-background.webp";
 import Slider from "react-slick";
 import { useLocation, useNavigate } from "react-router-dom";
 import { updateSponsoringItem } from "../../../redux/actions/sponsorAction";
 import { useDispatch, useSelector } from "react-redux";
+import { Button, Container, Modal } from "react-bootstrap";
 
-const SponsorButton = ({ item, isSelected, onButtonClick }) => {
+const SponsorButton = ({ item, preview, isSelected, onButtonClick }) => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   console.log(item);
+  console.log("This is the banner preview", preview);
+  console.log("This is the type of banner preview", typeof preview);
   return (
-    <div className="col-4 px-1 px-md-2 my-3 text-center">
-      <div
-        className="post-thumb text-dark py-1"
-        style={{ backgroundColor: "#f2f2f2", borderRadius: "10px" }}
-      >
-        <h6 className="font-weight-bolder">
-          {item.sponsoring_items} <br />
-        </h6>
+    <>
+      <div className="col-4 px-1 px-md-2 my-3 text-center">
+        <div
+          className="post-thumb text-dark py-1"
+          style={{ backgroundColor: "#f2f2f2", borderRadius: "10px" }}
+        >
+          <h6 className="font-weight-bolder">
+            {item.sponsoring_items} <br />
+          </h6>
+          <Button
+            className="px-2 py-1 rounded-pill"
+            variant="primary"
+            onClick={handleShow}
+          >
+            Preview
+          </Button>
+          {/* <!-- Modal --> */}
+
+          <Modal
+            show={show}
+            onHide={handleClose}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+          >
+            <Modal.Header
+              className="p-2 border-black border-bottom-1"
+              closeButton
+            >
+              <Modal.Title id="contained-modal-title-vcenter">
+                {item.sponsoring_items} Preview
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body
+              className="p-0"
+              style={{
+                backgroundImage: `url(${modalBackground})`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+              }}
+            >
+              <Container className="d-flex justify-content-center">
+                <img src={banner_preview} alt="banner-preview" />
+                <div style={{ position: "absolute", top: "70px" }}>
+                  <img
+                    src={preview}
+                    alt="banner-img-preview"
+                    style={{ width: "449px", height: "220px" }}
+                  />
+                </div>
+              </Container>
+            </Modal.Body>
+            <Modal.Footer className="p-0 justify-content-between">
+              <span className="font-weight-bold">
+                *This image may not resemble the accurate depiction of the
+                content when put up on {item.sponsoring_items}.{" "}
+              </span>
+              <Button className="p-2" variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
-
 
 const SponsorEventBox = (eventData) => {
   const cardData01 = eventData.eventData;
@@ -42,10 +104,9 @@ const SponsorEventBox = (eventData) => {
   const [billText, setBillText] = useState(null);
   const { SponsoringItem, loading } = sponsor;
 
-  console.log('Sponsorign item errors ',SponsoringItem);
+  console.log("Sponsoring Items", sponsoring_items);
 
-
-  console.log("Sponsor Id ",userDetails?.user_id);
+  console.log("Sponsor Id ", userDetails?.user_id);
 
   const handleBannerImgChange = (e) => {
     const file = e.target.files[0];
@@ -65,24 +126,34 @@ const SponsorEventBox = (eventData) => {
     // if (Object.keys(errors).length === 0) {
     const formData = new FormData();
     formData.append("sponsor_id", cardData.sponsor_id);
-    formData.append("banner_image", bannerImage);
-    formData.append("led_image", ledImage);
-    formData.append("led_video", ledVideo);
+    formData.append("banner_image", bannerImage || "");
+    formData.append("led_image", ledImage || "");
+    formData.append("led_video", ledVideo || "");
     formData.append("bill_text", "");
     try {
       // Make POST API call
       await dispatch(updateSponsoringItem(formData));
-      
-      console.log();
-      sessionStorage.setItem("successMessage", "Class created successfully!");
+      // sessionStorage.setItem(
+      //   "successMessage",
+      //   "Promotion listed successfully!"
+      // );
       // navigate("/events/upcoming_event"); // Replace '/' with the desired route for the home page
     } catch (error) {
       console.log("An error occurred during API calls:", error);
     }
   };
 
+  // useEffect(() => {
+  //   // Retrieve success message from sessionStorage
+  //   const message = sessionStorage.getItem("successMessage");
 
+  //   // Clear success message from sessionStorage
+  //   sessionStorage.removeItem("successMessage");
 
+  //   if (message) {
+  //     setSuccessMessage(message);
+  //   }
+  // }, []);
 
   const navigate = useNavigate();
 
@@ -188,11 +259,11 @@ const SponsorEventBox = (eventData) => {
               <h4>{cardData.event_id.location}</h4>
               <div className="star d-flex">
                 <h5>
-                  <i class="bi bi-star-fill text-warning"></i>&nbsp;
-                  <i class="bi bi-star-fill text-warning"></i>&nbsp;
-                  <i class="bi bi-star-fill text-warning"></i>&nbsp;
-                  <i class="bi bi-star-fill text-warning"></i>&nbsp;
-                  <i class="bi bi-star-fill text-white"></i>&nbsp;
+                  <i className="bi bi-star-fill text-warning"></i>&nbsp;
+                  <i className="bi bi-star-fill text-warning"></i>&nbsp;
+                  <i className="bi bi-star-fill text-warning"></i>&nbsp;
+                  <i className="bi bi-star-fill text-warning"></i>&nbsp;
+                  <i className="bi bi-star-fill text-white"></i>&nbsp;
                   <span className="text-sm text-muted">3482 reviews</span>
                 </h5>
               </div>
@@ -201,7 +272,9 @@ const SponsorEventBox = (eventData) => {
                 <span className="text-md">{totalAmount}&lt;</span>
                 <br />
                 <i className="bi bi-people-fill text-danger"></i>&nbsp;&nbsp;
-                <span className="text-md">{cardData.event_id.audience_expected}</span>
+                <span className="text-md">
+                  {cardData.event_id.audience_expected}
+                </span>
               </h5>
 
               <div className="row g-0">
@@ -231,12 +304,14 @@ const SponsorEventBox = (eventData) => {
                         item={item}
                         isSelected={selectedItems.includes(item)}
                         onButtonClick={handleButtonClick}
+                        preview={
+                          bannerImage && URL.createObjectURL(bannerImage)
+                        }
                       />
                     ))}
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
           <h1 className="font-weight-bold d-none d-lg-block">
@@ -246,9 +321,16 @@ const SponsorEventBox = (eventData) => {
           <p>(atleast 3 photos & 1 video)</p>
 
           {cardData?.sponsoring_items.map((item, index) => (
-            <div key={index} className="box1 mt-2 d-flex justify-content-center" style={{ gap: "2%" }}>
-              {item.sponsoring_items === 'banner' && (
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
+            <div
+              key={index}
+              className="box1 mt-2 d-flex justify-content-center"
+              style={{ gap: "2%" }}
+            >
+              {item.sponsoring_items === "banner" && (
+                <div
+                  className="box photo-box bg-white d-flex justify-content-center align-items-start p-3"
+                  style={{ width: "40%" }}
+                >
                   <div className="box text-center">
                     <h5 className="font-weight-bold">Add Banner Image</h5>
                     <input
@@ -257,6 +339,20 @@ const SponsorEventBox = (eventData) => {
                       onChange={handleBannerImgChange}
                       style={{ width: "74%", borderRadius: "0" }}
                     />
+                    {apiurl + cardData?.banner_image &&
+                      bannerImage === null && (
+                        <div>
+                          <h2>Preview:</h2>
+                          <img
+                            src={
+                              apiurl + cardData?.banner_image ||
+                              URL.createObjectURL(bannerImage)
+                            }
+                            alt="Preview"
+                            width="200"
+                          />
+                        </div>
+                      )}
                     {bannerImage && (
                       <div>
                         <h2>Preview:</h2>
@@ -271,7 +367,7 @@ const SponsorEventBox = (eventData) => {
                 </div>
               )}
 
-              {item.sponsoring_items === 'led_screen' && (
+              {item.sponsoring_items === "led_screen" && (
                 <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
                   <div className="box text-center">
                     <h5 className="font-weight-bold">Add Led Image</h5>
@@ -281,6 +377,16 @@ const SponsorEventBox = (eventData) => {
                       onChange={handleLedImgChange}
                       style={{ width: "74%", borderRadius: "0" }}
                     />
+                    {apiurl + cardData?.led_image && ledImage === null && (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          src={apiurl + cardData?.led_image}
+                          alt="Preview"
+                          width="200"
+                        />
+                      </div>
+                    )}
                     {ledImage && (
                       <div>
                         <h2>Preview:</h2>
@@ -295,7 +401,7 @@ const SponsorEventBox = (eventData) => {
                 </div>
               )}
 
-              {item.sponsoring_items === 'led_screen' && (
+              {item.sponsoring_items === "led_screen" && (
                 <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
                   <div className="box text-center">
                     <h5 className="font-weight-bold">Add Led Video</h5>
@@ -305,13 +411,26 @@ const SponsorEventBox = (eventData) => {
                       onChange={handleLedVidChange}
                       style={{ width: "74%", borderRadius: "0" }}
                     />
-                    {ledVideo && (
+                    {apiurl + cardData?.banner_image && ledVideo == null && (
                       <div>
                         <h2>Preview:</h2>
                         <video width="200" controls>
-                          <source src={URL.createObjectURL(ledVideo)} type="video/mp4" />
+                          <source
+                            src={apiurl + cardData?.led_video}
+                            type="video/mp4"
+                          />
                           Your browser does not support the video tag.
                         </video>
+                      </div>
+                    )}
+                    {ledVideo && (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          src={URL.createObjectURL(ledVideo)}
+                          alt="Preview"
+                          width="200"
+                        />
                       </div>
                     )}
                   </div>
@@ -319,10 +438,32 @@ const SponsorEventBox = (eventData) => {
               )}
             </div>
           ))}
+          {cardData?.sponsoring_items.map((item) => (
+            <>
+              {item.sponsoring_items === "banner" &&
+              !(bannerImage || apiurl + cardData?.banner_image) ? (
+                <div className="alert alert-danger">
+                  Upload an image to be displayed on the Banner
+                </div>
+              ) : null}
+              {item.sponsoring_items === "led_screen" &&
+              !(ledImage || apiurl + cardData?.led_image) ? (
+                <div className="alert alert-danger">
+                  Upload an image to be displayed on the LED
+                </div>
+              ) : null}
+              {item.sponsoring_items === "led_screen" &&
+              !(ledVideo || apiurl + cardData?.led_video) ? (
+                <div className="alert alert-danger">
+                  Upload a video to be displayed on the LED
+                </div>
+              ) : null}
+            </>
+          ))}
           <input
             type="submit"
             className="submit"
-            value="List Event"
+            value="List Promotion"
             onClick={handleSubmitClick}
           />
 
@@ -371,11 +512,11 @@ const SponsorEventBox = (eventData) => {
           </div>
           <div className="star d-flex">
             <h5>
-              <i class="bi bi-star-fill text-warning"></i>&nbsp;
-              <i class="bi bi-star-fill text-warning"></i>&nbsp;
-              <i class="bi bi-star-fill text-warning"></i>&nbsp;
-              <i class="bi bi-star-fill text-warning"></i>&nbsp;
-              <i class="bi bi-star-fill text-white"></i>&nbsp;
+              <i className="bi bi-star-fill text-warning"></i>&nbsp;
+              <i className="bi bi-star-fill text-warning"></i>&nbsp;
+              <i className="bi bi-star-fill text-warning"></i>&nbsp;
+              <i className="bi bi-star-fill text-warning"></i>&nbsp;
+              <i className="bi bi-star-fill text-white"></i>&nbsp;
               <span className="text-sm text-muted">3482 reviews</span>
             </h5>
           </div>

@@ -15,7 +15,7 @@ const SponsoredEventDetails = () => {
   }, []);
   const location = useLocation();
   const eventData = location.state?.eventData || null;
-  console.log(eventData);
+  console.log("This is the api in events side",eventData);
   return (
     <>
       <div

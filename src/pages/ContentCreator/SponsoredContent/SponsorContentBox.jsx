@@ -1,10 +1,25 @@
 import React, { useState } from "react";
 import heart from "../../../assets/img/heart2.svg";
 import apiurl from "../../../constant/config";
+import banner_preview from "../../../assets/img/Banner/banner-preview-img.png";
+import modalBackground from "../../../assets/img/Banner/modal-background.webp";
 import Slider from "react-slick";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Button, Carousel, Container, Modal } from "react-bootstrap";
 
-const SponsorButton = ({ item, isSelected, onButtonClick }) => {
+const SponsorButton = ({ item, cardData, isSelected, onButtonClick }) => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1, // Number of slides to show at a time
+    slidesToScroll: 1, // Number of slides to scroll at a time
+    autoplay: true, // Auto-play the slider
+  };
+  console.log("This is the events side data", cardData);
   return (
     <div className="col-4 px-1 px-md-2 my-3 text-center">
       <div
@@ -12,13 +27,122 @@ const SponsorButton = ({ item, isSelected, onButtonClick }) => {
         style={{ backgroundColor: "#f2f2f2", borderRadius: "10px" }}
       >
         <h6 className="font-weight-bolder">
-          {item} <br />
+          {item.sponsoring_content_items} <br />
         </h6>
+        <Button
+          className="px-2 py-1 rounded-pill"
+          variant="primary"
+          onClick={handleShow}
+        >
+          Preview
+        </Button>
+        {/* <!-- Modal --> */}
+
+        <Modal
+          show={show}
+          onHide={handleClose}
+          size="lg"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Header className="p-2 border-black border-bottom-1">
+            <Modal.Title id="contained-modal-title-vcenter">
+              {item.sponsoring_content_items} Preview
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body
+            className="p-0"
+            style={{
+              backgroundImage: `url(${modalBackground})`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+            }}
+          >
+            <Container className="d-flex justify-content-center">
+              {item.sponsoring_content_items === "banner" && (
+                <>
+                  <img src={banner_preview} alt="banner-preview" />
+                  <div style={{ position: "absolute", top: "70px" }}>
+                    <img
+                      src={apiurl + cardData?.banner_image}
+                      alt="banner-img-preview"
+                      style={{ width: "449px", height: "220px" }}
+                    />
+                  </div>
+                </>
+              )}
+              {item.sponsoring_content_items === "led_screen" && (
+                <>
+                  <img src={banner_preview} alt="banner-preview" />
+
+                  <div
+                    style={{
+                      width: "449px",
+                      height: "220px",
+                      position: "absolute",
+                      top: "70px",
+                    }}
+                    data-bs-theme="dark"
+                  >
+                    <Carousel data-bs-theme="dark">
+                      <Carousel.Item interval={1000}>
+                        <img
+                          style={{ width: "100%", height: "220px" }}
+                          src={apiurl + cardData?.banner_image}
+                          alt=""
+                        />
+                      </Carousel.Item>
+                      <Carousel.Item interval={41000}>
+                        <video
+                          style={{ width: "100%", height: "220px" }}
+                          src={apiurl + cardData?.led_video}
+                          controls
+                          controlsList="nofullscreen"
+                          autoplay
+                        ></video>
+                      </Carousel.Item>
+                    </Carousel>
+                  </div>
+                </>
+              )}
+            </Container>
+          </Modal.Body>
+          <Modal.Footer className="p-0">
+            {/* <span className="font-weight-bold">
+              *This image may not resemble the accurate depiction of the content
+              when put up on {item.sponsoring_content_items}.{" "}
+            </span> */}
+
+            {item.sponsoring_content_items === "banner" && (
+              <a href={cardData?.banner_image} download>
+                <Button className="p-2" variant="success">
+                  Download Banner Image
+                </Button>
+              </a>
+            )}
+            {item.sponsoring_content_items === "led_screen" && (
+              <>
+                <a href={cardData?.led_image} download>
+                  <Button className="p-2" variant="success">
+                    Download LED Image
+                  </Button>
+                </a>
+                <a href={cardData?.led_video} download>
+                  <Button className="p-2" variant="success">
+                    Download LED Video
+                  </Button>
+                </a>
+              </>
+            )}
+            <Button className="p-2" variant="danger" onClick={handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </div>
   );
 };
-
 
 const SponsorContentBox = (contentData) => {
   const cardData01 = contentData.contentData;
@@ -27,9 +151,8 @@ const SponsorContentBox = (contentData) => {
   const cardData02 = location.state && location.state.cardData;
   console.log("event data02", cardData02);
   const cardData = cardData01 || cardData02;
-  console.log("Content data", cardData);
   let totalAmount = 0;
-  const sponsoring_items = cardData?.sponsoring_items || [];
+  const sponsoring_content_items = cardData?.sponsoring_content_items || [];
 
   const navigate = useNavigate();
 
@@ -39,7 +162,7 @@ const SponsorContentBox = (contentData) => {
     navigate("/sponsor_login", { state: { cardData } });
   };
 
-  sponsoring_items.forEach((item) => {
+  sponsoring_content_items.forEach((item) => {
     if (item && item.price) {
       totalAmount += parseFloat(item.price);
     }
@@ -91,9 +214,9 @@ const SponsorContentBox = (contentData) => {
               >
                 <Slider {...settings}>
                   {[
-                    cardData.image1,
-                    cardData.image2,
-                    cardData.image3,
+                    cardData.content_id.thumbnail1,
+                    cardData.content_id.thumbnail2,
+                    cardData.content_id.thumbnail3,
                   ].map((data) => (
                     <img
                       src={apiurl + data}
@@ -121,9 +244,9 @@ const SponsorContentBox = (contentData) => {
                       borderRight: "1px solid rgba(255, 255, 255, 0.50)",
                     }}
                   >
-                    {cardData.content_id.event_start_date}
+                    {cardData.content_id.content_start_date}
                   </td>
-                  <td>{cardData.content_id.event_end_date}</td>
+                  <td>{cardData.content_id.content_end_date}</td>
                 </tr>
               </table>
             </div>
@@ -148,7 +271,9 @@ const SponsorContentBox = (contentData) => {
                 <span className="text-md">{totalAmount}&lt;</span>
                 <br />
                 <i className="bi bi-people-fill text-danger"></i>&nbsp;&nbsp;
-                <span className="text-md">{cardData.content_id.audience_expected}</span>
+                <span className="text-md">
+                  {cardData.content_id.audience_expected}
+                </span>
               </h5>
 
               <div className="row g-0">
@@ -171,16 +296,17 @@ const SponsorContentBox = (contentData) => {
                     Your Sponsoring Items
                   </div>
 
-                  {/* <div className="row mx-auto" style={{ width: "100%" }}>
-                    {cardData?.sponsoring_items.map((item, index) => (
+                  <div className="row mx-auto" style={{ width: "100%" }}>
+                    {cardData?.content_id.sponsoring_content_items.map((item, index) => (
                       <SponsorButton
                         key={index}
                         item={item}
                         isSelected={selectedItems.includes(item)}
                         onButtonClick={handleButtonClick}
+                        cardData={cardData}
                       />
                     ))}
-                  </div> */}
+                  </div>
                 </div>
               </div>
             </div>
@@ -300,8 +426,8 @@ const SponsorContentBox = (contentData) => {
                 Sponsoring items
               </div>
 
-              {/* <div className="row mx-auto" style={{ width: "100%" }}>
-                {cardData.sponsoring_items.map((item, index) => (
+              <div className="row mx-auto" style={{ width: "100%" }}>
+                {cardData.content_id.sponsoring_content_items.map((item, index) => (
                   <SponsorButton
                     key={index}
                     item={item}
@@ -309,7 +435,7 @@ const SponsorContentBox = (contentData) => {
                     onButtonClick={handleButtonClick}
                   />
                 ))}
-              </div> */}
+              </div>
             </div>
           </div>
         </div>

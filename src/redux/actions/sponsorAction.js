@@ -62,6 +62,37 @@ export const updateSponsoringItem = (formData) => async (dispatch) => {
   }
 };
 
+export const updateContentSponsoringItem = (formData) => async (dispatch) => {
+  try {
+    dispatch({ type: CREATE_SPONSORING_ITEM_REQUEST });
+
+    const access = JSON.parse(localStorage.getItem("access"));
+
+    const sponsorId = formData.get("sponsor_id"); // Use the get method to retrieve values from FormData
+
+    const { data } = await axios.put(
+      `${apiurl}/api/user/content-sponsor/${sponsorId}`, // Use the retrieved sponsorId
+      formData,
+      { headers: { Authorization: `Bearer ${access}` } }
+    );
+
+    console.log(data.status);
+    dispatch({
+      type: CREATE_SPONSORING_ITEM_SUCCESS,
+      payload: data,
+    });
+    console.log(data);
+  } catch (error) {
+    dispatch({
+      type: CREATE_SPONSORING_ITEM_FAILED,
+      payload:
+        error.response && error.response.data
+          ? error.response.data
+          : error.message,
+    });
+  }
+};
+
 
 export const createFavoriteSponsor = (formData) => async (dispatch) => {
   try {
