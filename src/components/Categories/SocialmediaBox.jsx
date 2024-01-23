@@ -23,19 +23,18 @@ const SocialmediaBox = () => {
                 className="card-service platform-container fadeInUp"
                 style={{
                   maxWidth: "100%",
-                  display: "flex",
                   backgroundColor: "#FF6762",
                 }}
               >
-                  <div className="platform-img">
                 <Link to={"/youtube"}>
+                  <div className="platform-img d-flex justify-content-center">
                     <img
                       src={youtube}
                       alt=""
                       style={{ width: "60%", height: "auto", margin: "8%" }}
                     />
-                </Link>
                   </div>
+                </Link>
               </div>
               <h3 className=" text-center font-weight-bolder ">Youtube</h3>
             </div>
@@ -44,11 +43,10 @@ const SocialmediaBox = () => {
                 className="card-service platform-container fadeInUp"
                 style={{
                   maxWidth: "100%",
-                  display: "flex",
                   backgroundColor: "#5A3E85",
                 }}
               >
-                <div className="platform-img">
+                <div className="platform-img d-flex justify-content-center">
                   <img
                     src={twitch}
                     alt=""
@@ -63,19 +61,18 @@ const SocialmediaBox = () => {
                 className="card-service platform-container fadeInUp"
                 style={{
                   maxWidth: "100%",
-                  display: "flex",
                   background: "linear-gradient(112deg ,#3871C9 , #FF6942 )",
                 }}
               >
-                <div className="platform-img">
-                  <Link to={"/instagram"}>
-                  <img
-                    src={instagram}
-                    alt=""
-                    style={{ width: "50%", height: "auto", margin: "8%" }}
-                  />
-                  </Link>
-                </div>
+                <Link to={"/instagram"}>
+                  <div className="platform-img d-flex justify-content-center">
+                    <img
+                      src={instagram}
+                      alt=""
+                      style={{ width: "50%", height: "auto", margin: "8%" }}
+                    />
+                  </div>
+                </Link>
               </div>
               <h3 className=" text-center font-weight-bolder ">Instagram</h3>
             </div>
@@ -86,11 +83,10 @@ const SocialmediaBox = () => {
                 className="card-service platform-container fadeInUp"
                 style={{
                   maxWidth: "100%",
-                  display: "flex",
                   backgroundColor: "#69C9D0",
                 }}
               >
-                <div className="platform-img">
+                <div className="platform-img d-flex justify-content-center">
                   <img
                     src={tiktok}
                     alt=""
@@ -105,19 +101,18 @@ const SocialmediaBox = () => {
                 className="card-service platform-container fadeInUp"
                 style={{
                   maxWidth: "100%",
-                  display: "flex",
                   backgroundColor: "#3C5A99",
                 }}
               >
-                <div className="platform-img">
-                  <Link to={"/facebook"}>
-                  <img
-                    src={facebook}
-                    alt=""
-                    style={{ width: "48%", height: "auto", margin: "8%" }}
-                  />
-                  </Link>
-                </div>
+                <Link to={"/facebook"}>
+                  <div className="platform-img d-flex justify-content-center">
+                    <img
+                      src={facebook}
+                      alt=""
+                      style={{ width: "48%", height: "auto", margin: "8%" }}
+                    />
+                  </div>
+                </Link>
               </div>
               <h3 className=" text-center font-weight-bolder ">Facebook</h3>
             </div>
@@ -126,11 +121,10 @@ const SocialmediaBox = () => {
                 className="card-service platform-container fadeInUp"
                 style={{
                   maxWidth: "100%",
-                  display: "flex",
                   background: "#FFFC1E",
                 }}
               >
-                <div className="platform-img">
+                <div className="platform-img d-flex justify-content-center">
                   <img
                     src={snapchat}
                     alt=""
@@ -156,7 +150,7 @@ const SocialmediaBox = () => {
                 borderRadius: "20px",
               }}
             >
-              <div className="platform-img">
+              <div className="platform-img d-flex justify-content-center">
                 <img
                   src={youtube}
                   alt=""
@@ -170,12 +164,11 @@ const SocialmediaBox = () => {
               className="card-service platform-container fadeInUp"
               style={{
                 maxWidth: "100%",
-                display: "flex",
                 backgroundColor: "#5A3E85",
                 borderRadius: "20px",
               }}
             >
-              <div className="platform-img">
+              <div className="platform-img d-flex justify-content-center">
                 <img
                   src={twitch}
                   alt=""
@@ -191,12 +184,11 @@ const SocialmediaBox = () => {
               className="card-service platform-container fadeInUp"
               style={{
                 maxWidth: "100%",
-                display: "flex",
                 background: "linear-gradient(112deg ,#3871C9 , #FF6942 )",
                 borderRadius: "20px",
               }}
             >
-              <div className="platform-img">
+              <div className="platform-img d-flex justify-content-center">
                 <img
                   src={instagram}
                   alt=""
@@ -211,12 +203,11 @@ const SocialmediaBox = () => {
               className="card-service platform-container fadeInUp"
               style={{
                 maxWidth: "100%",
-                display: "flex",
                 backgroundColor: "#69C9D0",
                 borderRadius: "20px",
               }}
             >
-              <div className="platform-img">
+              <div className="platform-img d-flex justify-content-center">
                 <img
                   src={tiktok}
                   alt=""
@@ -232,12 +223,11 @@ const SocialmediaBox = () => {
               className="card-service platform-container fadeInUp"
               style={{
                 maxWidth: "100%",
-                display: "flex",
                 backgroundColor: "#3C5A99",
                 borderRadius: "20px",
               }}
             >
-              <div className="platform-img">
+              <div className="platform-img d-flex justify-content-center">
                 <img
                   src={facebook}
                   alt=""
@@ -251,12 +241,11 @@ const SocialmediaBox = () => {
               className="card-service platform-container fadeInUp"
               style={{
                 maxWidth: "100%",
-                display: "flex",
                 background: "#FFFC1E",
                 borderRadius: "20px",
               }}
             >
-              <div className="platform-img">
+              <div className="platform-img d-flex justify-content-center">
                 <img
                   src={snapchat}
                   alt=""

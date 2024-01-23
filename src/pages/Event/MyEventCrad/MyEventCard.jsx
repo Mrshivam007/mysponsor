@@ -20,7 +20,7 @@ const MyEventCard = ({ cardData }) => {
   const dispatch = useDispatch();
   const eventDetails = useSelector((state) => state.event);
   useEffect(() => {
-    dispatch(fetchEventbyId(userDetails.user_id))
+    dispatch(fetchEventbyId(userDetails.user_id));
   }, []);
   console.log(cardData);
 
@@ -67,15 +67,15 @@ const MyEventCard = ({ cardData }) => {
                             <img
                               src={apiurl + data.thumbnail1}
                               alt=""
-                              style={{ width: "100%" }}
+                              style={{ width: "100%", height: "100%" }}
                             />
                           </div>
-                          <div className="col-5 mt-2">
+                          <div className="col-5">
                             <div
-                              className="box"
+                              className="mt-3 box d-flex flex-column"
                               style={{
                                 borderRight: "1px solid #acacac",
-                                height: "84%",
+                                height: "88%",
                               }}
                             >
                               <h3 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between">
@@ -99,14 +99,12 @@ const MyEventCard = ({ cardData }) => {
                                   </span>
                                 </h5>
                               </div>
-                              <p>
-                                {data.description}
-                              </p>
+                              <p>{data.description}</p>
                             </div>
                           </div>
 
-                          <div className="col-4 p-4">
-                            <div className="box">
+                          <div className="col-4 p-3">
+                            <div className="box h-100 d-flex flex-column justify-content-around">
                               <div className="heart d-flex justify-content-between mb-2">
                                 <span>
                                   <h4 className="d-inline">
@@ -130,7 +128,7 @@ const MyEventCard = ({ cardData }) => {
                                 &nbsp;&nbsp; {data.audience_expected}
                               </h4>
 
-                              <div className="container text-white text-center d-flex justify-content-between px-0 mt-5">
+                              <div className="container text-white text-center d-flex justify-content-between px-0">
                                 <div className="box myevents-box text-white">
                                   <h6
                                     style={{
@@ -152,7 +150,7 @@ const MyEventCard = ({ cardData }) => {
                                     <img
                                       src={info}
                                       alt=""
-                                      style={{ width: "20%" }}
+                                      style={{ width: "20%", margin: "auto" }}
                                     />
                                   </h5>
                                   <h5>View Details</h5>

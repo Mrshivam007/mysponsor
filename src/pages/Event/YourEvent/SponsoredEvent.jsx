@@ -60,16 +60,16 @@ const SponsoredEvent = () => {
                               alt=""
                               style={{
                                 width: "100%",
-                                height: "-webkit-fill-available",
+                                height: "100%",
                               }}
                             />
                           </div>
                           <div className="col-5 mt-2">
                             <div
-                              className="box"
+                              className="mt-3 box d-flex flex-column"
                               style={{
                                 borderRight: "1px solid #acacac",
-                                height: "84%",
+                                height: "88%",
                               }}
                             >
                               <h3 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between">
@@ -97,15 +97,12 @@ const SponsoredEvent = () => {
                             </div>
                           </div>
 
-                          <div
-                            className="col-4"
-                            style={{ padding: "2% 1% 2% 0" }}
-                          >
-                            <div className="box">
+                          <div className="col-4 py-3 px-2">
+                            <div className="box h-100 d-flex flex-column justify-content-center">
                               <h4 className="font-weight-bold">
                                 Event Sponsored for:
                               </h4>
-                              <div className="d-flex justify-content-around text-lg mt-3">
+                              <div className="d-flex justify-content-around text-lg">
                                 {data.event_id.sponsoring_items.map(
                                   (item, index) => (
                                     <>
@@ -115,53 +112,54 @@ const SponsoredEvent = () => {
                                           data.sponsoring_items.includes(
                                             item.sponsoring_items
                                           )
-                                            ? "bg-success"
-                                            : "bg-danger"
+                                            ? "bg-danger"
+                                            : "bg-success"
                                         }`}
                                       >
                                         {item.sponsoring_items}{" "}
                                         {data.sponsoring_items.includes(
                                           item.sponsoring_items
                                         ) ? (
-                                          <i className="bi bi-check2-circle"></i>
-                                        ) : (
                                           <i className="bi bi-x-lg"></i>
+                                        ) : (
+                                          <i className="bi bi-check2-circle"></i>
                                         )}
                                       </span>
                                     </>
                                   )
                                 )}
                               </div>
-                            </div>
-                            <button
-                              className="btn py-1 px-3 font-weight-bold d-none d-md-block"
-                              style={{
-                                width: "100%",
-                                marginTop: "4%",
-                                color: "#004EA9",
-                                backgroundColor: "white",
-                                border: "2px solid #004EA9",
-                                borderRadius: "10px",
-                              }}
-                              onClick={() => handleSponsorClick(data)}
-                            >
-                              Check Out Sponsors Details &nbsp;&nbsp; &gt;&gt;
-                            </button>
-                            <div className="container d-flex text-white text-center px-0 mt-2">
-                              <div
-                                className="box myevents-box text-white"
-                                style={{ width: "100%" }}
+
+                              <button
+                                className="btn py-1 px-3 font-weight-bold d-none d-md-block"
+                                style={{
+                                  width: "100%",
+                                  marginTop: "4%",
+                                  color: "#004EA9",
+                                  backgroundColor: "white",
+                                  border: "2px solid #004EA9",
+                                  borderRadius: "10px",
+                                }}
+                                onClick={() => handleSponsorClick(data)}
                               >
-                                <h6
-                                  style={{
-                                    borderBottom:
-                                      "1px solid rgba(255, 255, 255, 0.30)",
-                                    padding: "2%",
-                                  }}
+                                Check Out Sponsors Details &nbsp;&nbsp; &gt;&gt;
+                              </button>
+                              <div className="container d-flex text-white text-center px-0 mt-2">
+                                <div
+                                  className="box myevents-box text-white"
+                                  style={{ width: "100%" }}
                                 >
-                                  Total amount sponsored
-                                </h6>
-                                <h5>₹ 50,000</h5>
+                                  <h6
+                                    style={{
+                                      borderBottom:
+                                        "1px solid rgba(255, 255, 255, 0.30)",
+                                      padding: "2%",
+                                    }}
+                                  >
+                                    Total amount sponsored
+                                  </h6>
+                                  <h5>₹ 50,000</h5>
+                                </div>
                               </div>
                             </div>
                           </div>

@@ -145,6 +145,7 @@ const Signup = () => {
         <div className="container">
           <div className="box1">
             <form action="#" class="contact-form" onSubmit={submitHandler}>
+              <h4 class="font-weight-medium text-secondary">Register as?</h4>
               <div class="form-check">
                 <input
                   class="form-check-input"
@@ -179,12 +180,12 @@ const Signup = () => {
                   type="radio"
                   name="flexRadioDefault"
                   onChange={handleUserType}
-                  value="Admin"
+                  value="Sponsor"
                   id="flexRadioDefault2"
                   required
                 />
                 <label class="form-check-label" for="flexRadioDefault2">
-                  Admin
+                  Sponsor
                 </label>
               </div>
               <h2 class="mb-4 font-weight-medium text-secondary">SignUp</h2>
@@ -293,7 +294,7 @@ const Signup = () => {
                 <div class="col-md-12">
                   <input type="submit" value="Submit" class="btn btn-primary" />
                 </div>
-                <div class="col-md-12 mt-4">
+                <div class="col-md-12 mt-4 text-lg">
                   <p style={{ textAlign: "center" }}>
                     Already have an account? <Link to="/login">Login</Link>
                   </p>

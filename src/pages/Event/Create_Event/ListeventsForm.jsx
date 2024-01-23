@@ -250,7 +250,14 @@ const ListeventsForm = () => {
                     <div className="row form-group">
                       <div className="col-md-12 mb-3 mb-md-0">
                         <div>
-                          <button type="button" onClick={handleToggleDropdown}>
+                          <button
+                            type="button"
+                            style={{
+                              background: "#fff",
+                              border: "2px solid black",
+                            }}
+                            onClick={handleToggleDropdown}
+                          >
                             Add Sponsoring Item
                           </button>
 
@@ -324,9 +331,8 @@ const ListeventsForm = () => {
                       </div>
                     </div>
                     <p class="error-msg">
-                      Kindly note that if the duration of the event is one day,
-                      please ensure that both the start date and end date are
-                      selected as the same day.
+                      **Note: If your Event is of a single day then select the
+                      same start date and end date.**
                     </p>
                   </form>
                 </div>
@@ -416,7 +422,7 @@ const ListeventsForm = () => {
                 Enter event description
               </h1>
               <h2 className="sponsor-mobile-text">Enter event description</h2>
-              <div className="box1 mt-2">
+              <div className="box1 mt-2 p-3">
                 <textarea
                   className="form-control"
                   value={description}
@@ -439,10 +445,10 @@ const ListeventsForm = () => {
               <h2 className="sponsor-mobile-text">Add Photos</h2>
               <p>(atleast 3 photos & 1 video)</p>
               <div
-                className="box1 mt-2 d-flex justify-content-center"
+                className="box1 mt-2 d-flex justify-content-center p-3"
                 style={{ gap: "2%" }}
               >
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-2">
                   <div className="box text-center">
                     <h5 className="font-weight-bold">Add primary thumbnail</h5>
                     <input
@@ -454,11 +460,13 @@ const ListeventsForm = () => {
                     {thumbnail1 && (
                       <div>
                         <h2>Preview:</h2>
-                        <img
-                          src={URL.createObjectURL(thumbnail1)}
-                          alt="Preview"
-                          width="200"
-                        />
+                        <div className="d-flex align-items-center justify-content-center">
+                          <img
+                            src={URL.createObjectURL(thumbnail1)}
+                            alt="Preview"
+                            width="200"
+                          />
+                        </div>
                       </div>
                     )}
                     {!thumbnail1 ? (
@@ -466,7 +474,7 @@ const ListeventsForm = () => {
                     ) : null}
                   </div>
                 </div>
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-2">
                   <div className="box text-center">
                     <h5 className="font-weight-bold">
                       Add secondary thumbnail
@@ -480,11 +488,13 @@ const ListeventsForm = () => {
                     {thumbnail2 && (
                       <div>
                         <h2>Preview:</h2>
-                        <img
-                          src={URL.createObjectURL(thumbnail2)}
-                          alt="Preview"
-                          width="200"
-                        />
+                        <div className="d-flex align-items-center justify-content-center">
+                          <img
+                            src={URL.createObjectURL(thumbnail2)}
+                            alt="Preview"
+                            width="200"
+                          />
+                        </div>
                       </div>
                     )}
                     {!thumbnail2 ? (
@@ -492,7 +502,7 @@ const ListeventsForm = () => {
                     ) : null}
                   </div>
                 </div>
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-2">
                   <div className="box text-center">
                     <h5 className="font-weight-bold">
                       Add secondary thumbnail
@@ -506,11 +516,13 @@ const ListeventsForm = () => {
                     {thumbnail3 && (
                       <div>
                         <h2>Preview:</h2>
-                        <img
-                          src={URL.createObjectURL(thumbnail3)}
-                          alt="Preview"
-                          width="200"
-                        />
+                        <div className="d-flex align-items-center justify-content-center">
+                          <img
+                            src={URL.createObjectURL(thumbnail3)}
+                            alt="Preview"
+                            width="200"
+                          />
+                        </div>
                       </div>
                     )}
                     {!thumbnail3 ? (
@@ -521,7 +533,7 @@ const ListeventsForm = () => {
               </div>
               <div className="box1 mt-2">
                 <h3 className="d-inline font-weight-bold">
-                  Add Video Preview:&nbsp;&nbsp;&nbsp;
+                  Add Video:&nbsp;&nbsp;&nbsp;
                 </h3>
                 <input
                   type="file"
@@ -530,13 +542,24 @@ const ListeventsForm = () => {
                   style={{ width: "50%", borderRadius: "0" }}
                 />
                 {video && (
-                  <div>
+                  <div className="d-flex align-items-center justify-content-center flex-column mt-3">
                     <h2>Preview:</h2>
-                    <img
-                      src={URL.createObjectURL(video)}
-                      alt="Preview"
-                      width="200"
-                    />
+                    <div
+                      className="post-thumb p-3"
+                      style={{
+                        width: "50vw",
+                        height: "auto",
+                        borderRadius: "10px",
+                      }}
+                    >
+                      <video
+                        src={URL.createObjectURL(video)}
+                        alt="Preview"
+                        autoPlay
+                        loop
+                        style={{ width: "100%", height: "auto" }}
+                      ></video>
+                    </div>
                   </div>
                 )}
               </div>

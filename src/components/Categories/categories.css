@@ -189,7 +189,6 @@
 .platform-container {
   max-width: 100%;
   height: auto !important;
-  display: flex;
   margin-bottom: 3% !important;
   padding: 0px !important;
 
