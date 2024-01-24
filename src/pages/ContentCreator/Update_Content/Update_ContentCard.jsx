@@ -42,21 +42,24 @@ const Update_ContentCard = ({ cardData }) => {
                       <div className="row mx-0">
                         <div className="col-3 p-3">
                           <img
-                            s
                             src={apiurl + data.thumbnail1}
                             alt=""
-                            style={{ width: "100%", borderRadius: "15px" }}
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              borderRadius: "15px",
+                            }}
                           />
                         </div>
-                        <div className="col-5 mt-2">
+                        <div className="col-5">
                           <div
-                            className="box"
+                            className="mt-3 box d-flex flex-column justify-content-center"
                             style={{
                               borderRight: "1px solid #acacac",
-                              height: "84%",
+                              height: "88%",
                             }}
                           >
-                            <h3 className="mt-3 font-weight-bolder d-flex justify-content-between">
+                            <h3 className="font-weight-bolder">
                               {data.title}{" "}
                             </h3>
                             <h4 className="font-weight-bold">
@@ -82,7 +85,7 @@ const Update_ContentCard = ({ cardData }) => {
                         </div>
 
                         <div className="col-4 py-3 px-2">
-                          <div className="box">
+                          <div className="box h-100 d-flex flex-column justify-content-around">
                             <h5 className=" font-weight-bold">
                               Channel Subs:&nbsp;
                               <span className="font-weight-light">
@@ -101,7 +104,7 @@ const Update_ContentCard = ({ cardData }) => {
                                 **Video Link Here**
                               </span>
                             </h5>
-                            <div className="container text-white text-center d-flex justify-content-between px-0 mt-3">
+                            <div className="container text-white text-center d-flex justify-content-between px-0">
                               <div className="box myevents-box text-white">
                                 <h6
                                   style={{

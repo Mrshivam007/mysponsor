@@ -96,9 +96,9 @@ const SponsorButton = ({ item, cardData, isSelected, onButtonClick }) => {
                         <video
                           style={{ width: "100%", height: "220px" }}
                           src={apiurl + cardData?.led_video}
+                          autoplay
                           controls
                           controlsList="nofullscreen"
-                          autoplay
                         ></video>
                       </Carousel.Item>
                     </Carousel>
@@ -205,11 +205,13 @@ const SponsorEventBox = (eventData) => {
           <div className="row row-cols-2">
             <div className="col-6">
               <div
-                className="post-thumb mb-3"
+                className="post-thumb w-100 mb-3"
                 style={{
                   borderRadius: "20px",
                   boxShadow: "0px 2px 10px 0px rgba(0, 0, 0, 0.25)",
                   padding: "3%",
+                  height: "55svh",
+                  overflow: "auto",
                 }}
               >
                 <Slider {...settings}>
@@ -221,7 +223,11 @@ const SponsorEventBox = (eventData) => {
                     <img
                       src={apiurl + data}
                       alt=""
-                      style={{ width: "100%", borderRadius: "15px" }}
+                      width="400"
+                      height="300"
+                      style={{
+                        borderRadius: "15px",
+                      }}
                     />
                   ))}
                 </Slider>

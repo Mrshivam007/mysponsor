@@ -15,7 +15,9 @@ import NFTMarketplace from "./views/admin/marketplace";
 import Profile from "./views/admin/profile";
 import DataTables from "./views/admin/dataTables";
 import EventManagement from "./views/admin/eventManagement"
+import EventApproval from "./views/admin/eventApprove"
 import ContentManagement from "./views/admin/contentManagement"
+import ContentApproval from "./views/admin/contentApprove"
 import RTL from "./views/admin/rtl";
 
 // Auth Imports
@@ -37,11 +39,25 @@ const routes = [
     component: EventManagement,
   },
   {
+    name: "Event Approval",
+    layout: "/admin",
+    path: "/approve_event",
+    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
+    component: EventApproval,
+  },
+  {
     name: "Content Management",
     layout: "/admin",
     path: "/content",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: ContentManagement,
+  },
+  {
+    name: "Content Approval",
+    layout: "/admin",
+    path: "/approve_content",
+    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
+    component: ContentApproval,
   },
   {
     name: "NFT Marketplace",

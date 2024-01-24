@@ -63,7 +63,7 @@ const Update_UpcomingContent = () => {
               {successMessage}
             </div>
           )}
-          <Update_ContentCard cardData={contentDetails.contentDetails?.upcoming_content} />
+          <Update_ContentCard cardData={contentDetails.contentDetails?.live_content} />
           {/* <SponserE cardData={EventsCards} line={"Concerts"} />
           <SponserE cardData={EventsCards} line={"Promotional Events"} />
           <SponserE cardData={EventsCards} line={"Sports Events"} />

@@ -9,6 +9,11 @@
     /* Hide sponsor-desktop */
   }
 
+  .footer-logo img {
+    margin: auto;
+    /* Hide sponsor-desktop */
+  }
+
 
   .footer-heading {
     color: #FFF;

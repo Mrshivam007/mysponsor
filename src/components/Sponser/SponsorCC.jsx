@@ -1,4 +1,3 @@
-import ccimg_card from "../../assets/img/mrbeast.svg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./sponser.css";
@@ -33,7 +32,7 @@ const SponserCC = ({ line, cardData }) => {
                     <div className="col-4 col-md-5 col-sm-4 cc-img-container">
                       <img
                         className="img-fluid rounded-start cc-img"
-                        src={ccimg_card}
+                        src={""}
                         alt=""
                       />
                     </div>

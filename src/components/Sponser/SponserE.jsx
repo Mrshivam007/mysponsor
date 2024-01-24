@@ -19,11 +19,10 @@ const SponserE = ({ line, cardData }) => {
   };
   console.log(cardData);
 
-
   const navigate = useNavigate();
 
   const handleSponsorClick = (data) => {
-    navigate('/myevent-details', { state: { eventData: data } });
+    navigate("/myevent-details", { state: { eventData: data } });
   };
 
   return (
@@ -130,9 +129,8 @@ const SponserE = ({ line, cardData }) => {
               className="col-lg-1"
               style={{ alignSelf: "center", width: "24%" }}
             >
-              <div className="sponsor-card-indicator">
-                EVENTS
-                {/* hello */}
+              <div className="sponsor-card-indicator d-flex flex-column align-items-center">
+                Events
                 <img
                   src={arrow}
                   style={{ transform: "rotate(90deg)" }}
@@ -142,14 +140,14 @@ const SponserE = ({ line, cardData }) => {
             </div>
             <div className="col-lg-4" style={{ width: "76%" }}>
               <Slider {...settings}>
-                {/* {cardData &&
+                {cardData &&
                   cardData.map((data) => (
                     <div key={data.id} className="col-10 py-3">
                       <div className="card-blog">
                         <div className="header">
                           <div className="post-thumb">
                             <img
-                              src={data.img}
+                              src={apiurl + data.thumbnail1}
                               alt=""
                               style={{ width: "100%" }}
                               className="sponser_card_img"
@@ -169,7 +167,7 @@ const SponserE = ({ line, cardData }) => {
                         </div>
                       </div>
                     </div>
-                  ))} */}
+                  ))}
               </Slider>
             </div>
           </div>

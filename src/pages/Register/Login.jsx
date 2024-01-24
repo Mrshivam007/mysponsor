@@ -153,7 +153,7 @@ const Login = () => {
                   <input type="submit" value="Submit" class="btn btn-primary" />
                   <Link style={{ float: "right" }}>Forgot password?</Link>
                 </div>
-                <div class="col-md-12 mt-4">
+                <div class="col-md-12 mt-4 text-lg">
                   <p style={{ textAlign: "center" }}>
                     Don't have an account? <Link to="/signup">Sign Up</Link>
                   </p>

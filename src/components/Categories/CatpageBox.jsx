@@ -35,7 +35,7 @@ const Categories = ({ line }) => {
                 >
                   <h1
                     className="category-heading text-light mt-5"
-                    style={{ fontWeight: "bold" }}
+                    style={{ fontWeight: "bold"}}
                   >
                     Comedy Shows
                   </h1>

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import bgimage from "../../../assets/img/circle-bg.png";
 import cclogo from "../../../assets/img/content-creator.jpg";
 import {
@@ -18,12 +18,15 @@ const SponsorContentC = () => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
   const dispatch = useDispatch();
-  const ContentDetails = useSelector(state => state.content)
-  const [successMessage, setSuccessMessage] = useState('');
+  const ContentDetails = useSelector((state) => state.content);
+  const [successMessage, setSuccessMessage] = useState("");
   useEffect(() => {
-    dispatch(fetchContent())
-  },[])
-  console.log("Content Details past ",ContentDetails.contentDetails?.past_content);
+    dispatch(fetchContent());
+  }, []);
+  console.log(
+    "Content Details past ",
+    ContentDetails.contentDetails?.past_content
+  );
 
   return (
     <>
@@ -49,7 +52,8 @@ const SponsorContentC = () => {
           />
         </div>
         <div className="cc-cards-mobile">
-          <SponsorCC cardData={ContentCreators4} />
+          {/* <SponsorCC cardData={ContentCreators4} /> */}
+          <ContentCard cardData={ContentDetails.contentDetails?.live_content} />
         </div>
         <Footer />
       </div>

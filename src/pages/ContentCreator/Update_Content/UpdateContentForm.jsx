@@ -58,6 +58,11 @@ const UpdateContent = () => {
   );
   const [newThumbnail3, setNewThumbnail3] = useState(null);
 
+  const [currentVideo, setCurrentVideo] = useState(
+    contentData.attach_video ? apiurl + contentData.attach_video : null
+  );
+  const [newVideo, setNewVideo] = useState(null);
+
   useEffect(() => {
     setcontentData(data_location.state?.contentData || null);
   }, [data_location.state?.contentData]);
@@ -80,7 +85,7 @@ const UpdateContent = () => {
   };
   const handleVideoChange = (e) => {
     const file = e.target.files[0];
-    setVideo(file);
+    setNewVideo(file);
   };
 
   const updatePrices = (selected) => {
@@ -201,8 +206,9 @@ const UpdateContent = () => {
       if (newThumbnail3 && newThumbnail3 !== currentThumbnail3) {
         formData.append("thumbnail3", newThumbnail3);
       }
-
-      formData.append("attach_video", video);
+      if (newVideo && newVideo !== currentVideo) {
+        formData.append("attach_video", newVideo);
+      }
 
       try {
         // Make an API call to update the event using the existing event's ID
@@ -305,7 +311,7 @@ const UpdateContent = () => {
                       <div className="col-6">
                         <label className="font-weight-bold">Start Date</label>
                         <input
-                          type="text"
+                          type="date"
                           id="subject"
                           value={
                             contentData ? contentData.content_start_date : ""
@@ -326,7 +332,7 @@ const UpdateContent = () => {
                       <div className="col-6">
                         <label className="font-weight-bold">End Date</label>
                         <input
-                          type="text"
+                          type="date"
                           id="subject"
                           value={
                             contentData ? contentData.content_end_date : ""
@@ -438,7 +444,7 @@ const UpdateContent = () => {
                 Enter event description
               </h1>
               <h2 className="sponsor-mobile-text">Enter event description</h2>
-              <div className="box1 mt-2">
+              <div className="box1 mt-2 p-3">
                 <textarea
                   className="form-control"
                   value={contentData ? contentData.description : ""} // Populate the input with contentData's description if it exists
@@ -466,21 +472,22 @@ const UpdateContent = () => {
               <h2 className="sponsor-mobile-text">Add Photos</h2>
               <p>(atleast 3 photos & 1 video)</p>
               <div
-                className="box1 mt-2 d-flex justify-content-center"
+                className="box1 mt-2 d-flex justify-content-center p-3"
                 style={{ gap: "2%" }}
               >
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-2">
                   <div className="box text-center">
                     <h5 className="font-weight-bold">Add primary thumbnail</h5>
-                    {currentThumbnail1 && (
+                    {currentThumbnail1 && newThumbnail1 === null && (
                       <div>
                         <h4>Current Thumbnail:</h4>
-                        <img
-                          className="my-3"
-                          src={currentThumbnail1}
-                          alt="Current Thumbnail"
-                          width="200"
-                        />
+                        <div className="d-flex align-items-center justify-content-center">
+                          <img
+                            src={currentThumbnail1}
+                            alt="Current Thumbnail"
+                            width="200"
+                          />
+                        </div>
                         <input
                           type="file"
                           accept="image/*"
@@ -493,10 +500,18 @@ const UpdateContent = () => {
                     {newThumbnail1 && (
                       <div>
                         <h4>New Thumbnail:</h4>
-                        <img
-                          src={URL.createObjectURL(newThumbnail1)}
-                          alt="New Thumbnail"
-                          width="200"
+                        <div className="d-flex align-items-center justify-content-center">
+                          <img
+                            src={URL.createObjectURL(newThumbnail1)}
+                            alt="New Thumbnail"
+                            width="200"
+                          />
+                        </div>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleThumbnail3Change}
+                          style={{ width: "74%", borderRadius: "0" }}
                         />
                       </div>
                     )}
@@ -505,20 +520,21 @@ const UpdateContent = () => {
                     )}
                   </div>
                 </div>
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-2">
                   <div className="box text-center">
                     <h5 className="font-weight-bold">
                       Add secondary thumbnail
                     </h5>
-                    {currentThumbnail2 && (
+                    {currentThumbnail2 && newThumbnail2 === null && (
                       <div>
                         <h4>Current Thumbnail:</h4>
-                        <img
-                          className="my-3"
-                          src={currentThumbnail2}
-                          alt="Current Thumbnail"
-                          width="200"
-                        />
+                        <div className="d-flex align-items-center justify-content-center">
+                          <img
+                            src={currentThumbnail2}
+                            alt="Current Thumbnail"
+                            width="200"
+                          />
+                        </div>
                         <input
                           type="file"
                           accept="image/*"
@@ -532,10 +548,18 @@ const UpdateContent = () => {
                     {newThumbnail2 && (
                       <div>
                         <h4>New Thumbnail:</h4>
-                        <img
-                          src={URL.createObjectURL(newThumbnail2)}
-                          alt="New Thumbnail"
-                          width="200"
+                        <div className="d-flex align-items-center justify-content-center">
+                          <img
+                            src={URL.createObjectURL(newThumbnail2)}
+                            alt="New Thumbnail"
+                            width="200"
+                          />
+                        </div>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleThumbnail3Change}
+                          style={{ width: "74%", borderRadius: "0" }}
                         />
                       </div>
                     )}
@@ -544,20 +568,21 @@ const UpdateContent = () => {
                     )}
                   </div>
                 </div>
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-2">
                   <div className="box text-center">
                     <h5 className="font-weight-bold">
                       Add secondary thumbnail
                     </h5>
-                    {currentThumbnail3 && (
+                    {currentThumbnail3 && newThumbnail3 === null && (
                       <div>
                         <h4>Current Thumbnail:</h4>
-                        <img
-                          className="my-3"
-                          src={currentThumbnail3}
-                          alt="Current Thumbnail"
-                          width="200"
-                        />
+                        <div className="d-flex align-items-center justify-content-center">
+                          <img
+                            src={currentThumbnail3}
+                            alt="Current Thumbnail"
+                            width="200"
+                          />
+                        </div>
                         <input
                           type="file"
                           accept="image/*"
@@ -571,10 +596,18 @@ const UpdateContent = () => {
                     {newThumbnail3 && (
                       <div>
                         <h4>New Thumbnail:</h4>
-                        <img
-                          src={URL.createObjectURL(newThumbnail3)}
-                          alt="New Thumbnail"
-                          width="200"
+                        <div className="d-flex align-items-center justify-content-center">
+                          <img
+                            src={URL.createObjectURL(newThumbnail3)}
+                            alt="New Thumbnail"
+                            width="200"
+                          />
+                        </div>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleThumbnail3Change}
+                          style={{ width: "74%", borderRadius: "0" }}
                         />
                       </div>
                     )}
@@ -594,16 +627,50 @@ const UpdateContent = () => {
                   onChange={handleVideoChange}
                   style={{ width: "50%", borderRadius: "0" }}
                 />
-                {video && (
-                  <div>
+                {currentVideo && newVideo === null ? (
+                  <div className="d-flex flex-column align-items-center">
                     <h2>Preview:</h2>
-                    <img
-                      src={URL.createObjectURL(video)}
-                      alt="Preview"
-                      width="200"
-                    />
+                    <div
+                      className="post-thumb p-3"
+                      style={{
+                        width: "50vw",
+                        height: "auto",
+                        borderRadius: "10px",
+                      }}
+                    >
+                      <video
+                        src={currentVideo}
+                        alt="Preview"
+                        autoPlay
+                        controls
+                        loop
+                        style={{ width: "100%", height: "auto" }}
+                      ></video>
+                    </div>
                   </div>
-                )}
+                ) : null}
+                {newVideo ? (
+                  <div className="d-flex flex-column align-items-center">
+                    <h2>Preview:</h2>
+                    <div
+                      className="post-thumb p-3"
+                      style={{
+                        width: "50vw",
+                        height: "auto",
+                        borderRadius: "10px",
+                      }}
+                    >
+                      <video
+                        src={URL.createObjectURL(newVideo)}
+                        alt="Preview"
+                        autoPlay
+                        controls
+                        loop
+                        style={{ width: "100%", height: "auto" }}
+                      ></video>
+                    </div>
+                  </div>
+                ) : null}
               </div>
               <input
                 type="submit"

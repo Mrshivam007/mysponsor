@@ -23,7 +23,7 @@ import {
   useTable,
 } from "react-table";
 
-export default function ManageTable(props) {
+export default function DevelopmentTable(props) {
   const { columnsData, tableData } = props;
 
   const columns = useMemo(() => columnsData, [columnsData]);
@@ -64,96 +64,33 @@ export default function ManageTable(props) {
           fontSize='22px'
           fontWeight='700'
           lineHeight='100%'>
-          Event Manage Table
+          Development Table
         </Text>
         <Menu />
       </Flex>
       <Table {...getTableProps()} variant='simple' color='gray.500' mb='24px'>
         <Thead>
-          <Tr>
-            <Th
-            pe='10px'
-            borderColor={borderColor}>
-              <Flex
+          {headerGroups.map((headerGroup, index) => (
+            <Tr {...headerGroup.getHeaderGroupProps()} key={index}>
+              {headerGroup.headers.map((column, index) => (
+                <Th
+                  {...column.getHeaderProps(column.getSortByToggleProps())}
+                  pe='10px'
+                  key={index}
+                  borderColor={borderColor}>
+                  <Flex
                     justify='space-between'
                     align='center'
                     fontSize={{ sm: "10px", lg: "12px" }}
                     color='gray.400'>
-                      Event Name
+                    {column.render("Header")}
                   </Flex>
-              </Th>
-            <Th
-            pe='10px'
-            borderColor={borderColor}>
-              <Flex
-                    justify='space-between'
-                    align='center'
-                    fontSize={{ sm: "10px", lg: "12px" }}
-                    color='gray.400'>
-                      Event Name
-                  </Flex>
-              </Th>
-            <Th
-            pe='10px'
-            borderColor={borderColor}>
-              <Flex
-                    justify='space-between'
-                    align='center'
-                    fontSize={{ sm: "10px", lg: "12px" }}
-                    color='gray.400'>
-                      Event Date
-                  </Flex>
-              </Th>
-            <Th
-            pe='10px'
-            borderColor={borderColor}>
-              <Flex
-                    justify='space-between'
-                    align='center'
-                    fontSize={{ sm: "10px", lg: "12px" }}
-                    color='gray.400'>
-                      Event Action
-                  </Flex>
-              </Th>
-          </Tr>
+                </Th>
+              ))}
+            </Tr>
+          ))}
         </Thead>
-        <Tbody>
-              <Tr>
-                <Td
-                fontSize={{ sm: "14px" }}
-                        minW={{ sm: "150px", md: "200px", lg: "auto" }}
-                        borderColor='transparent'>
-                <Text color={textColor} fontSize='sm' fontWeight='700'>
-              Hello 01
-              </Text>
-              </Td>
-                <Td
-                fontSize={{ sm: "14px" }}
-                        minW={{ sm: "150px", md: "200px", lg: "auto" }}
-                        borderColor='transparent'>
-                <Text color={textColor} fontSize='sm' fontWeight='700'>
-              Hello 01
-              </Text>
-              </Td>
-                <Td
-                fontSize={{ sm: "14px" }}
-                        minW={{ sm: "150px", md: "200px", lg: "auto" }}
-                        borderColor='transparent'>
-                <Text color={textColor} fontSize='sm' fontWeight='700'>
-              Hello 01
-              </Text>
-              </Td>
-                <Td
-                fontSize={{ sm: "14px" }}
-                        minW={{ sm: "150px", md: "200px", lg: "auto" }}
-                        borderColor='transparent'>
-                <Text color={textColor} fontSize='sm' fontWeight='700'>
-              Hello 01
-              </Text>
-              </Td>
-              </Tr>
-        </Tbody>
-        {/* <Tbody {...getTableBodyProps()}>
+        <Tbody {...getTableBodyProps()}>
           {page.map((row, index) => {
             prepareRow(row);
             return (
@@ -243,7 +180,7 @@ export default function ManageTable(props) {
               </Tr>
             );
           })}
-        </Tbody> */}
+        </Tbody>
       </Table>
     </Card>
   );

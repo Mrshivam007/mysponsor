@@ -4,6 +4,7 @@ import { eventReducer } from "./reducer/eventReducer";
 import { contentReducer } from "./reducer/contentReducer";
 import { sponsorReducer } from "./reducer/sponsorReducer";
 import { profileReducer } from "./reducer/profileReducer";
+import { adminReducer } from "./reducer/adminReducer";
 
 
 const reducer = combineReducers({
@@ -11,7 +12,8 @@ const reducer = combineReducers({
     event: eventReducer,
     content: contentReducer,
     sponsor: sponsorReducer,
-    sponsorProfile: profileReducer
+    sponsorProfile: profileReducer,
+    admin: adminReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userDetails') ? JSON.parse(localStorage.getItem('userDetails')) : null;

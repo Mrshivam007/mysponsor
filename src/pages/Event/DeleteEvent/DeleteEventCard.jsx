@@ -4,7 +4,11 @@ import Modal from "react-bootstrap/Modal";
 import info from "../../../assets/img/info.svg";
 import heart from "../../../assets/img/heart2.svg";
 import bgimage from "../../../assets/img/circle-bg.png";
-import { deleteEvent, fetchEvent, fetchEventbyId } from "../../../redux/actions/eventAction";
+import {
+  deleteEvent,
+  fetchEvent,
+  fetchEventbyId,
+} from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux";
 import apiurl from "../../../constant/config";
 import { useNavigate } from "react-router-dom";
@@ -24,7 +28,7 @@ const Delete_EventCard = ({ cardData }) => {
   const dispatch = useDispatch();
   const eventDetails = useSelector((state) => state.event);
   useEffect(() => {
-    dispatch(fetchEventbyId(userDetails.user_id))
+    dispatch(fetchEventbyId(userDetails.user_id));
   }, []);
 
   const navigate = useNavigate();
@@ -74,21 +78,24 @@ const Delete_EventCard = ({ cardData }) => {
                         <div className="row mx-0">
                           <div className="col-3 p-3">
                             <img
-                              s
                               src={apiurl + data.thumbnail1}
                               alt=""
-                              style={{ width: "100%" }}
+                              style={{
+                                width: "100%",
+                                height: "100%",
+                                borderRadius: "15px",
+                              }}
                             />
                           </div>
-                          <div className="col-5 mt-2">
+                          <div className="col-5 mt-3">
                             <div
-                              className="box"
+                              className="box d-flex flex-column"
                               style={{
                                 borderRight: "1px solid #acacac",
-                                height: "84%",
+                                height: "88%",
                               }}
                             >
-                              <h3 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between">
+                              <h3 className="font-weight-bolder">
                                 {data.title}{" "}
                               </h3>
                               <h4>{data.location}</h4>
@@ -118,8 +125,8 @@ const Delete_EventCard = ({ cardData }) => {
                             </div>
                           </div>
 
-                          <div className="col-4 p-4">
-                            <div className="box">
+                          <div className="col-4 p-3">
+                            <div className="box h-100 d-flex flex-column justify-content-around">
                               <div className="heart d-flex justify-content-between mb-2">
                                 <span>
                                   <h4 className="d-inline">
@@ -143,7 +150,7 @@ const Delete_EventCard = ({ cardData }) => {
                                 &nbsp;&nbsp; {data.audience_expected}
                               </h4>
 
-                              <div className="container text-white text-center d-flex justify-content-between px-0 mt-5">
+                              <div className="container text-white text-center d-flex justify-content-between px-0">
                                 <div className="box myevents-box text-white">
                                   <h6
                                     style={{

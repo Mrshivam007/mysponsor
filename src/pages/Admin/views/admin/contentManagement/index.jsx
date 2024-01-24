@@ -22,31 +22,43 @@
 
 // Chakra imports
 import { Box, SimpleGrid } from "@chakra-ui/react";
-import DevelopmentTable from "../dataTables/components/ManageTable";
-import CheckTable from "../../../views/admin/dataTables/components/CheckTable";
-import ColumnsTable from "../../../views/admin/dataTables/components/ColumnsTable";
-import ComplexTable from "../../../views/admin/dataTables/components/ComplexTable";
+// import DevelopmentTable from "../eventManagement/components/DevelopmentTable";
+import DevelopmentTable from "./components/DevelopmentTable";
+import CheckTable from "../../../views/admin/eventManagement/components/CheckTable";
+import ColumnsTable from "../../../views/admin/eventManagement/components/ColumnsTable";
+import ComplexTable from "../../../views/admin/eventManagement/components/ComplexTable";
 import {
   columnsDataDevelopment,
   columnsDataCheck,
   columnsDataColumns,
   columnsDataComplex,
-} from "../../../views/admin/dataTables/variables/columnsData";
-import tableDataDevelopment from "../../../views/admin/dataTables/variables/tableDataDevelopment.json";
-import tableDataCheck from "../../../views/admin/dataTables/variables/tableDataCheck.json";
-import tableDataColumns from "../../../views/admin/dataTables/variables/tableDataColumns.json";
-import tableDataComplex from "../../../views/admin/dataTables/variables/tableDataComplex.json";
-import React from "react";
+} from "../../../views/admin/eventManagement/variables/columnsData";
+import tableDataDevelopment from "../../../views/admin/eventManagement/variables/tableDataDevelopment.json";
+import { fetchEvent } from "../../../../../redux/actions/eventAction";
+import { fetchContent } from "../../../../../redux/actions/contentAction";
+import tableDataCheck from "../../../views/admin/eventManagement/variables/tableDataCheck.json";
+import tableDataColumns from "../../../views/admin/eventManagement/variables/tableDataColumns.json";
+import tableDataComplex from "../../../views/admin/eventManagement/variables/tableDataComplex.json";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Settings() {
+  const dispatch = useDispatch();
+  const contentDetails = useSelector(state => state.content)
+  useEffect(() => {
+    dispatch(fetchContent())
+  }, [])
+  console.log(contentDetails.contentDetails?.live_content);
   // Chakra Color Mode
   return (
     <Box pt={{ base: "30px", md: "80px", xl: "80px" }}>
       <DevelopmentTable
         columnsData={columnsDataDevelopment}
         tableData={tableDataDevelopment}
+        liveContentData={contentDetails.contentDetails?.live_content}
+        upcomingContentData={contentDetails.contentDetails?.upcoming_content}
       />
-      <SimpleGrid
+      {/* <SimpleGrid
         mb='20px'
         columns={{ sm: 1, md: 2 }}
         spacing={{ base: "20px", xl: "20px" }}>
@@ -59,7 +71,7 @@ export default function Settings() {
           columnsData={columnsDataComplex}
           tableData={tableDataComplex}
         />
-      </SimpleGrid>
+      </SimpleGrid> */}
     </Box>
   );
 }

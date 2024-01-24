@@ -65,6 +65,7 @@ const NavBar = () => {
                 name="searchQuerySubmit"
               >
                 <svg
+                  className="mx-auto"
                   style={{ width: "24px", height: "24px" }}
                   viewBox="0 0 24 24"
                 >
@@ -146,7 +147,7 @@ const NavBar = () => {
                     </li>
                     <li>
                       <Link to={"/profile"}>
-                      <div className="dropdown-item">Your Account</div>
+                        <div className="dropdown-item">Your Account</div>
                       </Link>
                     </li>
                   </ul>

@@ -5,7 +5,11 @@ import Profile from "../../views/admin/profile";
 import DataTables from "../../views/admin/dataTables";
 import RTL from "../../views/admin/rtl";
 import Eventmanagement from "../../views/admin/eventManagement"
+import EventApproval from "../../views/admin/eventApprove"
 import ContentManagement from "../../views/admin/contentManagement"
+import ContentApproval from "../../views/admin/contentApprove"
+import UpdateEvent from "../../views/admin/eventManagement/components/UpdateEvent";
+import UpdateContent from "../../views/admin/contentManagement/components/UpdateContent";
 const AdminRoutes = () => {
   return (
     <>
@@ -16,7 +20,11 @@ const AdminRoutes = () => {
         <Route path="/admin/default" element={<MainDashboard />} />
         <Route path="/admin/nft-marketplace" element={<NFTMarketplace />} />
         <Route path="/admin/event" element={<Eventmanagement />} />
+        <Route path="/admin/approve_event" element={<EventApproval />} />
+        <Route path="/update_event" element={<UpdateEvent />} />
         <Route path="/admin/content" element={<ContentManagement />} />
+        <Route path="/admin/approve_content" element={<ContentApproval />} />
+        <Route path="/update_content" element={<UpdateContent />} />
         <Route path="/admin/data-tables" element={<DataTables />} />
         <Route path="/admin/profile" element={<Profile />} />
         <Route path="/admin/data-tables" element={<DataTables />} />

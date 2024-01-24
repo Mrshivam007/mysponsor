@@ -31,7 +31,7 @@ const Categories = ({ line }) => {
                 >
                   <h1
                     className="category-heading text-light mt-5"
-                    style={{ fontWeight: "bold" }}
+                    style={{ fontWeight: "bold", fontSize: "39px" }}
                   >
                     Comedy Shows
                   </h1>
@@ -171,13 +171,6 @@ const Categories = ({ line }) => {
                   Sponser Now
                 </p>
               </div>
-              {/* <div className="cat-img">
-                  <img
-                    src={img1}
-                    alt=""
-                    style={{ width: "100%", height: "auto%" }}
-                  />
-                </div> */}
             </div>
           </div>
           <div className="col-sm-6 category-card1">
@@ -206,13 +199,6 @@ const Categories = ({ line }) => {
                   Sponser Now
                 </p>
               </div>
-              {/* <div className="cat-img">
-                  <img
-                    src={img1}
-                    alt=""
-                    style={{ width: "100%", height: "auto%" }}
-                  />
-                </div> */}
             </div>
           </div>
         </div>
@@ -243,13 +229,6 @@ const Categories = ({ line }) => {
                   Sponser Now
                 </p>
               </div>
-              {/* <div className="cat-img">
-                  <img
-                    src={img1}
-                    alt=""
-                    style={{ width: "100%", height: "auto%" }}
-                  />
-                </div> */}
             </div>
           </div>
           <div className="col-sm-6 category-card1">
@@ -278,19 +257,14 @@ const Categories = ({ line }) => {
                   Sponser Now
                 </p>
               </div>
-              {/* <div className="cat-img">
-                  <img
-                    src={img1}
-                    alt=""
-                    style={{ width: "100%", height: "auto%" }}
-                  />
-                </div> */}
             </div>
           </div>
         </div>
 
         <button className="category-btn btn" style={{ width: "100%" }}>
-          <p className="category-btn-text">Browse Categories</p>
+          <Link to={"/categories"}>
+            <p className="category-btn-text">Browse Categories</p>
+          </Link>
         </button>
       </div>
     </>

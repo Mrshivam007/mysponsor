@@ -56,6 +56,11 @@ const UpdateEvent = () => {
   );
   const [newThumbnail3, setNewThumbnail3] = useState(null);
 
+  const [currentVideo, setCurrentVideo] = useState(
+    eventData.attach_video ? apiurl + eventData.attach_video : null
+  );
+  const [newVideo, setNewVideo] = useState(null);
+
   useEffect(() => {
     setEventData(data_location.state?.eventData || null);
   }, [data_location.state?.eventData]);
@@ -77,7 +82,7 @@ const UpdateEvent = () => {
   };
   const handleVideoChange = (e) => {
     const file = e.target.files[0];
-    setVideo(file);
+    setNewVideo(file);
   };
 
   const updatePrices = (selected) => {
@@ -284,7 +289,14 @@ const UpdateEvent = () => {
                     <div className="row form-group">
                       <div className="col-md-12 mb-3 mb-md-0">
                         <div>
-                          <button type="button" onClick={handleToggleDropdown}>
+                          <button
+                            type="button"
+                            onClick={handleToggleDropdown}
+                            style={{
+                              background: "#fff",
+                              border: "2px solid black",
+                            }}
+                          >
                             Add Sponsoring Item
                           </button>
 
@@ -335,7 +347,7 @@ const UpdateEvent = () => {
                       <div className="col-6">
                         <label className="font-weight-bold">Start Date</label>
                         <input
-                          type="text"
+                          type="date"
                           id="subject"
                           value={eventData ? eventData.event_start_date : ""} // Populate the input with eventData's startDate if it exists
                           onChange={(e) =>
@@ -354,7 +366,7 @@ const UpdateEvent = () => {
                       <div className="col-6">
                         <label className="font-weight-bold">End Date</label>
                         <input
-                          type="text"
+                          type="date"
                           id="subject"
                           value={eventData ? eventData.event_end_date : ""} // Populate the input with eventData's endDate if it exists
                           onChange={(e) =>
@@ -371,6 +383,10 @@ const UpdateEvent = () => {
                         )}
                       </div>
                     </div>
+                    <p class="error-msg">
+                      **Note: If your Event is of a single day then select the
+                      same start date and end date.**
+                    </p>
                   </form>
                 </div>
               </div>
@@ -466,7 +482,7 @@ const UpdateEvent = () => {
                 Enter event description
               </h1>
               <h2 className="sponsor-mobile-text">Enter event description</h2>
-              <div className="box1 mt-2">
+              <div className="box1 mt-2 p-3">
                 <textarea
                   className="form-control"
                   value={eventData ? eventData.description : ""} // Populate the input with eventData's description if it exists
@@ -491,20 +507,22 @@ const UpdateEvent = () => {
               <h2 className="sponsor-mobile-text">Add Photos & Videos</h2>
               <p>(atleast 3 photos & 1 video)</p>
               <div
-                className="box1 mt-2 d-flex justify-content-center"
+                className="box1 mt-2 d-flex justify-content-center p-3"
                 style={{ gap: "2%" }}
               >
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
+                <div className="box photo-box bg-white d-flex justify-content-center p-2">
                   <div className="box text-center">
                     <h5 className="font-weight-bold">Add primary thumbnail</h5>
-                    {currentThumbnail1 && (
+                    {currentThumbnail1 && newThumbnail1 === null && (
                       <div>
                         <h4>Current Thumbnail:</h4>
-                        <img
-                          src={currentThumbnail1}
-                          alt="Current Thumbnail"
-                          width="200"
-                        />
+                        <div className="d-flex align-items-center justify-content-center">
+                          <img
+                            src={currentThumbnail1}
+                            alt="Current Thumbnail"
+                            width="200"
+                          />
+                        </div>
                         <input
                           type="file"
                           accept="image/*"
@@ -517,10 +535,18 @@ const UpdateEvent = () => {
                     {newThumbnail1 && (
                       <div>
                         <h4>New Thumbnail:</h4>
-                        <img
-                          src={URL.createObjectURL(newThumbnail1)}
-                          alt="New Thumbnail"
-                          width="200"
+                        <div className="d-flex align-items-center justify-content-center">
+                          <img
+                            src={URL.createObjectURL(newThumbnail1)}
+                            alt="New Thumbnail"
+                            width="200"
+                          />
+                        </div>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleThumbnail3Change}
+                          style={{ width: "74%", borderRadius: "0" }}
                         />
                       </div>
                     )}
@@ -529,19 +555,21 @@ const UpdateEvent = () => {
                     )}
                   </div>
                 </div>
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
+                <div className="box photo-box bg-white d-flex justify-content-center p-2">
                   <div className="box text-center">
                     <h5 className="font-weight-bold">
                       Add secondary thumbnail
                     </h5>
-                    {currentThumbnail2 && (
+                    {currentThumbnail2 && newThumbnail2 === null && (
                       <div>
                         <h4>Current Thumbnail:</h4>
-                        <img
-                          src={currentThumbnail2}
-                          alt="Current Thumbnail"
-                          width="200"
-                        />
+                        <div className="d-flex align-items-center justify-content-center">
+                          <img
+                            src={currentThumbnail2}
+                            alt="Current Thumbnail"
+                            width="200"
+                          />
+                        </div>
                         <input
                           type="file"
                           accept="image/*"
@@ -550,15 +578,22 @@ const UpdateEvent = () => {
                         />
                       </div>
                     )}
-
                     {/* Display the new thumbnail if selected */}
                     {newThumbnail2 && (
                       <div>
                         <h4>New Thumbnail:</h4>
-                        <img
-                          src={URL.createObjectURL(newThumbnail2)}
-                          alt="New Thumbnail"
-                          width="200"
+                        <div className="d-flex align-items-center justify-content-center">
+                          <img
+                            src={URL.createObjectURL(newThumbnail2)}
+                            alt="New Thumbnail"
+                            width="200"
+                          />
+                        </div>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleThumbnail3Change}
+                          style={{ width: "74%", borderRadius: "0" }}
                         />
                       </div>
                     )}
@@ -567,19 +602,21 @@ const UpdateEvent = () => {
                     )}
                   </div>
                 </div>
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
+                <div className="box photo-box bg-white d-flex justify-content-center p-2">
                   <div className="box text-center">
                     <h5 className="font-weight-bold">
                       Add secondary thumbnail
                     </h5>
-                    {currentThumbnail3 && (
+                    {currentThumbnail3 && newThumbnail3 === null && (
                       <div>
                         <h4>Current Thumbnail:</h4>
-                        <img
-                          src={currentThumbnail3}
-                          alt="Current Thumbnail"
-                          width="200"
-                        />
+                        <div className="d-flex align-items-center justify-content-center">
+                          <img
+                            src={currentThumbnail3}
+                            alt="Current Thumbnail"
+                            width="200"
+                          />
+                        </div>
                         <input
                           type="file"
                           accept="image/*"
@@ -593,10 +630,18 @@ const UpdateEvent = () => {
                     {newThumbnail3 && (
                       <div>
                         <h4>New Thumbnail:</h4>
-                        <img
-                          src={URL.createObjectURL(newThumbnail3)}
-                          alt="New Thumbnail"
-                          width="200"
+                        <div className="d-flex align-items-center justify-content-center">
+                          <img
+                            src={URL.createObjectURL(newThumbnail3)}
+                            alt="New Thumbnail"
+                            width="200"
+                          />
+                        </div>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleThumbnail3Change}
+                          style={{ width: "74%", borderRadius: "0" }}
                         />
                       </div>
                     )}
@@ -616,16 +661,50 @@ const UpdateEvent = () => {
                   onChange={handleVideoChange}
                   style={{ width: "50%", borderRadius: "0" }}
                 />
-                {video && (
-                  <div>
+                {currentVideo && newVideo === null ? (
+                  <div className="d-flex flex-column align-items-center">
                     <h2>Preview:</h2>
-                    <img
-                      src={URL.createObjectURL(video)}
-                      alt="Preview"
-                      width="200"
-                    />
+                    <div
+                      className="post-thumb p-3"
+                      style={{
+                        width: "50vw",
+                        height: "auto",
+                        borderRadius: "10px",
+                      }}
+                    >
+                      <video
+                        src={currentVideo}
+                        alt="Preview"
+                        autoPlay
+                        controls
+                        loop
+                        style={{ width: "100%", height: "auto" }}
+                      ></video>
+                    </div>
                   </div>
-                )}
+                ) : null}
+                {newVideo ? (
+                  <div className="d-flex flex-column align-items-center">
+                    <h2>Preview:</h2>
+                    <div
+                      className="post-thumb p-3"
+                      style={{
+                        width: "50vw",
+                        height: "50vh",
+                        borderRadius: "10px",
+                      }}
+                    >
+                      <video
+                        src={URL.createObjectURL(newVideo)}
+                        alt="Preview"
+                        autoPlay
+                        controls
+                        loop
+                        style={{ width: "100%", height: "100%" }}
+                      ></video>
+                    </div>
+                  </div>
+                ) : null}
               </div>
               <input
                 type="submit"
