@@ -70,7 +70,7 @@ const SponsorProfileInfo = () => {
               <div className="card-header">Profile Picture</div>
               <div className="card-body text-center">
                 <img
-                  className="img-account-profile rounded-circle mb-2"
+                  className="img-account-profile rounded-circle mb-2 mx-auto"
                   src={profilePic ? profilePic : noProfilepic}
                   alt="Profile Pic"
                 />

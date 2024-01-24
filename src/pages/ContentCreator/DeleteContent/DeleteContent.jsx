@@ -54,7 +54,7 @@ const DeleteContent = () => {
               {successMessage}
             </div>
           )}
-          <DeleteContentCard cardData={contentDetails.contentDetails?.upcoming_content} />
+          <DeleteContentCard cardData={contentDetails.contentDetails?.live_content} />
         </div>
         <div className="events-page-mobile">
           <Delete_MobileCards

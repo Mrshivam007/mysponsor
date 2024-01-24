@@ -166,7 +166,10 @@ const ListContentForm = () => {
       formData.append("content_start_date", startDate);
       formData.append("content_end_date", endDate);
       formData.append("content_time", event_time);
-      formData.append("sponsoring_content_items", JSON.stringify(sponsoringItemsData));
+      formData.append(
+        "sponsoring_content_items",
+        JSON.stringify(sponsoringItemsData)
+      );
       formData.append("user_id", userDetails.user_id);
       formData.append("price", price);
       formData.append("content_category", selectedCategory);
@@ -280,7 +283,14 @@ const ListContentForm = () => {
                         {errors.sponsoring_item && <p className="error-msg">{errors.sponsoring_item}</p>} */}
 
                         <div>
-                          <button type="button" onClick={handleToggleDropdown}>
+                          <button
+                            type="button"
+                            onClick={handleToggleDropdown}
+                            style={{
+                              background: "#fff",
+                              border: "2px solid black",
+                            }}
+                          >
                             Add Sponsoring Item
                           </button>
 
@@ -443,7 +453,7 @@ const ListContentForm = () => {
                 Enter Content description
               </h1>
               <h2 className="sponsor-mobile-text">Enter Content description</h2>
-              <div className="box1 mt-2">
+              <div className="box1 mt-2 p-3">
                 <textarea
                   className="form-control"
                   value={description}
@@ -464,10 +474,10 @@ const ListContentForm = () => {
               <h2 className="sponsor-mobile-text">Add Photos</h2>
               <p>(atleast 3 photos & 1 video)</p>
               <div
-                className="box1 mt-2 d-flex justify-content-center"
+                className="box1 mt-2 d-flex justify-content-center p-3"
                 style={{ gap: "2%" }}
               >
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-2">
                   <div className="box text-center">
                     <h5 className="font-weight-bold">Add primary thumbnail</h5>
                     <input
@@ -479,11 +489,13 @@ const ListContentForm = () => {
                     {thumbnail1 && (
                       <div>
                         <h2 className="my-3">Preview:</h2>
-                        <img
-                          src={URL.createObjectURL(thumbnail1)}
-                          alt="Preview"
-                          width="200"
-                        />
+                        <div className="d-flex align-items-center justify-content-center">
+                          <img
+                            src={URL.createObjectURL(thumbnail1)}
+                            alt="Preview"
+                            width="200"
+                          />
+                        </div>
                       </div>
                     )}
                     {!thumbnail1 ? (
@@ -491,7 +503,7 @@ const ListContentForm = () => {
                     ) : null}
                   </div>
                 </div>
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-2">
                   <div className="box text-center">
                     <h5 className="font-weight-bold">
                       Add secondary thumbnail
@@ -505,11 +517,13 @@ const ListContentForm = () => {
                     {thumbnail2 && (
                       <div>
                         <h2 className="my-3">Preview:</h2>
-                        <img
-                          src={URL.createObjectURL(thumbnail2)}
-                          alt="Preview"
-                          width="200"
-                        />
+                        <div className="d-flex align-items-center justify-content-center">
+                          <img
+                            src={URL.createObjectURL(thumbnail2)}
+                            alt="Preview"
+                            width="200"
+                          />
+                        </div>
                       </div>
                     )}
                     {!thumbnail2 ? (
@@ -517,7 +531,7 @@ const ListContentForm = () => {
                     ) : null}
                   </div>
                 </div>
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-center p-3">
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-2">
                   <div className="box text-center">
                     <h5 className="font-weight-bold">
                       Add secondary thumbnail
@@ -531,11 +545,13 @@ const ListContentForm = () => {
                     {thumbnail3 && (
                       <div>
                         <h2 className="my-3">Preview:</h2>
-                        <img
-                          src={URL.createObjectURL(thumbnail3)}
-                          alt="Preview"
-                          width="200"
-                        />
+                        <div className="d-flex align-items-center justify-content-center">
+                          <img
+                            src={URL.createObjectURL(thumbnail3)}
+                            alt="Preview"
+                            width="200"
+                          />
+                        </div>
                       </div>
                     )}
                     {!thumbnail3 ? (
@@ -555,13 +571,24 @@ const ListContentForm = () => {
                   style={{ width: "50%", borderRadius: "0" }}
                 />
                 {video && (
-                  <div>
+                  <div className="d-flex align-items-center justify-content-center flex-column mt-3">
                     <h2>Preview:</h2>
-                    <img
-                      src={URL.createObjectURL(video)}
-                      alt="Preview"
-                      width="200"
-                    />
+                    <div
+                      className="post-thumb p-3"
+                      style={{
+                        width: "50vw",
+                        height: "auto",
+                        borderRadius: "10px",
+                      }}
+                    >
+                      <video
+                        src={URL.createObjectURL(video)}
+                        alt="Preview"
+                        autoPlay
+                        loop
+                        style={{ width: "100%", height: "auto" }}
+                      ></video>
+                    </div>
                   </div>
                 )}
               </div>

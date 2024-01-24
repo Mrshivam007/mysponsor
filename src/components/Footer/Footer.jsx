@@ -12,7 +12,10 @@ const Footer = () => {
         {/* <!-- Grid container --> */}
         <div
           className="container p-2"
-          style={{ borderBottom: "1px solid rgba(255, 255, 255, 0.30)" }}
+          style={{
+            maxWidth: "95%",
+            borderBottom: "1px solid rgba(255, 255, 255, 0.30)",
+          }}
         >
           {/* <!--Grid row--> */}
           <div className="row align-items-center w-100 mx-auto">
@@ -132,20 +135,20 @@ const Footer = () => {
         {/* <!-- Grid container --> */}
 
         {/* <!-- New Row --> */}
-        <div className="container mt-4 mb-4 footer-desktop-links">
+        <div className="container mx-auto my-3 footer-desktop-links">
           <div className="row">
             <div
               className="col-lg-6 col-md-6"
               style={{ borderRight: "1px solid rgba(255, 255, 255, 0.30)" }}
             >
-              <p className="text-center text-xl">
+              <p className="text-center text-xl mb-0">
                 <a href="#!" className="text-white">
                   About
                 </a>
               </p>
             </div>
             <div className="col-lg-6 col-md-6">
-              <p className="text-center text-xl">
+              <p className="text-center text-xl mb-0">
                 <a href="#!" className="text-white">
                   Contact Us
                 </a>

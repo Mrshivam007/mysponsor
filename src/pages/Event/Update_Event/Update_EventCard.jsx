@@ -66,7 +66,11 @@ const Update_EventCard = ({ cardData }) => {
                             <img
                               src={apiurl + data.thumbnail1}
                               alt=""
-                              style={{ width: "100%", height: "100%" }}
+                              style={{
+                                width: "100%",
+                                height: "100%",
+                                borderRadius: "15px",
+                              }}
                             />
                           </div>
                           <div className="col-5">

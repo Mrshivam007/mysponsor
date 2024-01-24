@@ -66,7 +66,7 @@ const SponsorNavbar = () => {
                 name="searchQuerySubmit"
               >
                 <svg
-                  style={{ width: "24px", height: "24px" }}
+                  style={{ width: "24px", height: "24px", margin: "auto" }}
                   viewBox="0 0 24 24"
                 >
                   <path

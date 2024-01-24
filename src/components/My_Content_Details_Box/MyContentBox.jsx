@@ -36,6 +36,7 @@ const MyContentBox = (contentData) => {
     slidesToScroll: 1, // Number of slides to scroll at a time
     autoplay: false, // Auto-play the slider
     autoplaySpeed: 3000, // Auto-play speed in milliseconds
+    adaptiveHeight: true,
   };
 
   const [selectedItems, setSelectedItems] = useState([]);
@@ -71,6 +72,9 @@ const MyContentBox = (contentData) => {
                   borderRadius: "20px",
                   boxShadow: "0px 2px 10px 0px rgba(0, 0, 0, 0.25)",
                   padding: "3%",
+                  width: "100%",
+                  height: "55svh",
+                  // overflow:"hidden"
                 }}
               >
                 <Slider {...settings}>
@@ -78,15 +82,17 @@ const MyContentBox = (contentData) => {
                     cardData.thumbnail1,
                     cardData.thumbnail2,
                     cardData.thumbnail3,
-                  ].map((data) => (
+                  ].map((data, index) => (
                     <img
+                      key={index}
                       src={apiurl + data}
                       alt=""
-                      width="600"
-                      height="300"
                       style={{
-                        width: "100%",
+                        width: "auto",
                         height: "auto",
+                        maxWidth:"100%", // Make sure the image takes up the full height of the container
+                        maxHeight:"100%", // Make sure the image takes up the full height of the container
+                        objectFit: "contain",
                         borderRadius: "15px",
                       }}
                     />
@@ -117,66 +123,63 @@ const MyContentBox = (contentData) => {
                 <span className="font-weight-light">**Video Link Here**</span>
               </h5>
               <div className="row g-0">
-              <div
-                className="box text-white"
-                style={{
-                  backgroundColor: "#004EA9",
-                  width: "100%",
-                  borderRadius: "10px",
-                  marginTop: "3%",
-                }}
-              >
                 <div
-                  className="col-12 font-weight-bolder text-center"
+                  className="box text-white"
                   style={{
-                    padding: "3% 0 2% 0",
-                    borderBottom: "1px solid rgba(255, 255, 255, 0.20)",
+                    backgroundColor: "#004EA9",
+                    width: "100%",
+                    borderRadius: "10px",
+                    marginTop: "3%",
                   }}
                 >
-                  Your Sponsoring items
-                </div>
+                  <div
+                    className="col-12 font-weight-bolder text-center"
+                    style={{
+                      padding: "3% 0 2% 0",
+                      borderBottom: "1px solid rgba(255, 255, 255, 0.20)",
+                    }}
+                  >
+                    Your Sponsoring items
+                  </div>
 
-                <div className="row mx-auto" style={{ width: "100%" }}>
-                  {cardData?.sponsoring_content_items.map((item, index) => (
-                    <SponsorButton
-                      key={index}
-                      item={item}
-                      isSelected={selectedItems.includes(item)}
-                      onButtonClick={handleButtonClick}
-                    />
-                  ))}
+                  <div className="row mx-auto" style={{ width: "100%" }}>
+                    {cardData?.sponsoring_content_items.map((item, index) => (
+                      <SponsorButton
+                        key={index}
+                        item={item}
+                        isSelected={selectedItems.includes(item)}
+                        onButtonClick={handleButtonClick}
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-            </div>
-         
           </div>
-              <h6 className="font-weight-bold mt-5">
-                Content publishing dates:{" "}
-              </h6>
-              <table
-                className="table table-borderless text-center text-white overflow-hidden"
+          <h6 className="font-weight-bold mt-2">Content publishing dates: </h6>
+          <table
+            className="table table-borderless text-center text-white overflow-hidden"
+            style={{
+              marginBottom: "4%",
+              borderRadius: "10px",
+              boxShadow: "0px 2px 20px -3px rgba(0, 0, 0, 0.16)",
+            }}
+          >
+            <tr className="table-sm" style={{ background: "#004EA9" }}>
+              <td>Start date</td>
+              <td>End date</td>
+            </tr>
+            <tr style={{ background: "rgba(0, 187, 255, 0.75)" }}>
+              <td
                 style={{
-                  marginBottom: "4%",
-                  borderRadius: "10px",
-                  boxShadow: "0px 2px 20px -3px rgba(0, 0, 0, 0.16)",
+                  borderRight: "1px solid rgba(255, 255, 255, 0.50)",
                 }}
               >
-                <tr className="table-sm" style={{ background: "#004EA9" }}>
-                  <td>Start date</td>
-                  <td>End date</td>
-                </tr>
-                <tr style={{ background: "rgba(0, 187, 255, 0.75)" }}>
-                  <td
-                    style={{
-                      borderRight: "1px solid rgba(255, 255, 255, 0.50)",
-                    }}
-                  >
-                    {cardData.content_start_date}
-                  </td>
-                  <td>{cardData.content_end_date}</td>
-                </tr>
-              </table>
+                {cardData.content_start_date}
+              </td>
+              <td>{cardData.content_end_date}</td>
+            </tr>
+          </table>
           <div className="row p-3">
             <h6 className="font-weight-bold">Video Description: </h6>
             <p>{cardData.description}</p>
