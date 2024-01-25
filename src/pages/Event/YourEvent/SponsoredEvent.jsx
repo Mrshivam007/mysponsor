@@ -192,10 +192,16 @@ const SponsoredEvent = () => {
                     <div className="col-12 col-md-6 mb-2">
                       <div className="card myevents-card">
                         <div className="post-thumb">
-                          <img src={apiurl + data.event_id.thumbnail1} alt="" style={{ width: "100%" }} />
+                          <img
+                            src={apiurl + data.event_id.thumbnail1}
+                            alt=""
+                            style={{ width: "100%" }}
+                          />
                           <div className="text-overlay">
-                            <h4 className="font-weight-bold mb-0"></h4>
-                            <h5></h5>
+                            <h4 className="font-weight-bold mb-0">
+                              {data.event_id.title}
+                            </h4>
+                            <h5>{data.event_id.location}</h5>
                           </div>
                         </div>
                         <div className="container">

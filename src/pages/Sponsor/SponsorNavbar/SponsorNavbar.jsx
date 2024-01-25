@@ -316,25 +316,28 @@ const SponsorNavbar = () => {
               </div>
             </div>
             <div className="mobile-nav-content mt-4">
-              <Nav className="mobile-nav-items border-0">
-                <NavLink className="mobile-nav-item" href="about.html">
-                  Sponsor Event
-                </NavLink>
-                <NavLink className="mobile-nav-item" href="index.html">
+              <Nav
+                className="mobile-nav-items border-0"
+                style={{ gap: "20px" }}
+              >
+                <Link to={"/sponsored_event"}>
+                  <div className="mobile-nav-item">My Sponsored Event</div>
+                </Link>
+                <div className="mobile-nav-item" href="index.html">
                   Sponsor Content
-                </NavLink>
-                <NavLink className="mobile-nav-item" href="service.html">
+                </div>
+                <div className="mobile-nav-item" href="service.html">
                   Top Events
-                </NavLink>
-                <NavLink className="mobile-nav-item" href="#">
+                </div>
+                <div className="mobile-nav-item" href="#">
                   My Account
-                </NavLink>
-                <NavLink className="mobile-nav-item" href="#">
+                </div>
+                <div className="mobile-nav-item" href="#">
                   Payment Info
-                </NavLink>
-                <NavLink className="mobile-nav-item" href="#">
+                </div>
+                <div className="mobile-nav-item" href="#">
                   ChatBot
-                </NavLink>
+                </div>
               </Nav>
             </div>
             <div className="text-success">

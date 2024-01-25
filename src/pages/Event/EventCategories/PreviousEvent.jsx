@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import {
   NavBar,
   EventsHeader,
@@ -10,7 +10,7 @@ import bgimage from "../../../assets/img/circle-bg.png";
 import spevents from "../../../assets/img/sponsor_events-logo.png";
 import { EventsCards, EventsPageCards } from "../../../data/data";
 import { fetchEvent, fetchEventbyId } from "../../../redux/actions/eventAction";
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
 import MyEventCard from "../MyEventCrad/MyEventCard";
 import EventMobileCard from "./EventMobileCards";
 const PreviousEvent = () => {
@@ -22,13 +22,13 @@ const PreviousEvent = () => {
   console.log(userDetails);
 
   const dispatch = useDispatch();
-  const eventDetails = useSelector(state => state.event)
+  const eventDetails = useSelector((state) => state.event);
   useEffect(() => {
-    dispatch(fetchEventbyId(userDetails.user_id))
-  },[])
+    dispatch(fetchEventbyId(userDetails.user_id));
+  }, []);
 
-  console.log("dynamic data",eventDetails.eventDetails);
-  console.log("static data",EventsCards);
+  console.log("dynamic data", eventDetails.eventDetails);
+  console.log("static data", EventsCards);
 
   return (
     <>
@@ -53,7 +53,10 @@ const PreviousEvent = () => {
           <SponserE cardData={EventsCards} line={"Reality Shows"} /> */}
         </div>
         <div className="events-page-mobile">
-          <EventMobileCard line={"Previous Events"} cardData={eventDetails.eventDetails?.past_event} />
+          <EventMobileCard
+            line={"Previous Events"}
+            cardData={eventDetails.eventDetails?.past_event}
+          />
           <div
             className="btn d-block text-white font-weight-bolder"
             style={{
@@ -65,6 +68,7 @@ const PreviousEvent = () => {
             Load More
           </div>
         </div>
+        <Footer />
       </div>
     </>
   );

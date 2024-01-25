@@ -74,7 +74,7 @@ const DeleteEvent = () => {
         </div>
         <div className="events-page-mobile">
           <Delete_MobileCards
-            line={"Upcoming Event"}
+            line={"Delete Event"}
             cardData={eventDetails.eventDetails?.upcoming_event}
           />
           <div

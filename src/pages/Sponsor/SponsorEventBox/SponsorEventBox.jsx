@@ -3,11 +3,10 @@ import heart from "../../../assets/img/heart2.svg";
 import apiurl from "../../../constant/config";
 import banner_preview from "../../../assets/img/Banner/banner-preview-img.png";
 import modalBackground from "../../../assets/img/Banner/modal-background.webp";
-import Slider from "react-slick";
 import { useLocation, useNavigate } from "react-router-dom";
 import { updateSponsoringItem } from "../../../redux/actions/sponsorAction";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Container, Modal } from "react-bootstrap";
+import { Button, Carousel, Container, Modal } from "react-bootstrap";
 
 const SponsorButton = ({ item, preview, isSelected, onButtonClick }) => {
   const [show, setShow] = useState(false);
@@ -70,10 +69,6 @@ const SponsorButton = ({ item, preview, isSelected, onButtonClick }) => {
               </Container>
             </Modal.Body>
             <Modal.Footer className="p-0 justify-content-between">
-              <span className="font-weight-bold">
-                *This image may not resemble the accurate depiction of the
-                content when put up on {item.sponsoring_items}.{" "}
-              </span>
               <Button className="p-2" variant="secondary" onClick={handleClose}>
                 Close
               </Button>
@@ -168,14 +163,7 @@ const SponsorEventBox = (eventData) => {
       totalAmount += parseFloat(item.price);
     }
   });
-  const settings = {
-    infinite: true, // Loop the slider
-    speed: 500, // Transition speed in milliseconds
-    slidesToShow: 1, // Number of slides to show at a time
-    slidesToScroll: 1, // Number of slides to scroll at a time
-    autoplay: true, // Auto-play the slider
-    autoplaySpeed: 3000, // Auto-play speed in milliseconds
-  };
+
 
   const [selectedItems, setSelectedItems] = useState([]);
   const [totalSponsoringPrice, setTotalSponsoringPrice] = useState(0);
@@ -213,19 +201,26 @@ const SponsorEventBox = (eventData) => {
                   padding: "3%",
                 }}
               >
-                <Slider {...settings}>
+                <Carousel controls={false}>
                   {[
-                    cardData.event_id.thumbnail1,
-                    cardData.event_id.thumbnail2,
-                    cardData.event_id.thumbnail3,
-                  ].map((data) => (
-                    <img
-                      src={apiurl + data}
-                      alt=""
-                      style={{ width: "100%", borderRadius: "15px" }}
-                    />
+                    apiurl + cardData.event_id.thumbnail1,
+                    apiurl + cardData.event_id.thumbnail2,
+                    apiurl + cardData.event_id.thumbnail3,
+                  ].map((item, index) => (
+                    <Carousel.Item>
+                      <img
+                        key={index}
+                        src={item}
+                        alt=""
+                        style={{
+                          width: "100%",
+                          height: "300px",
+                          borderRadius: "10px",
+                        }}
+                      />
+                    </Carousel.Item>
                   ))}
-                </Slider>
+                </Carousel>
               </div>
               <table
                 className="table table-borderless text-center text-white overflow-hidden"
@@ -344,6 +339,7 @@ const SponsorEventBox = (eventData) => {
                         <div>
                           <h2>Preview:</h2>
                           <img
+                            className="mx-auto"
                             src={
                               apiurl + cardData?.banner_image ||
                               URL.createObjectURL(bannerImage)
@@ -357,6 +353,7 @@ const SponsorEventBox = (eventData) => {
                       <div>
                         <h2>Preview:</h2>
                         <img
+                          className="mx-auto"
                           src={URL.createObjectURL(bannerImage)}
                           alt="Preview"
                           width="200"
@@ -381,6 +378,7 @@ const SponsorEventBox = (eventData) => {
                       <div>
                         <h2>Preview:</h2>
                         <img
+                          className="mx-auto"
                           src={apiurl + cardData?.led_image}
                           alt="Preview"
                           width="200"
@@ -391,6 +389,7 @@ const SponsorEventBox = (eventData) => {
                       <div>
                         <h2>Preview:</h2>
                         <img
+                          className="mx-auto"
                           src={URL.createObjectURL(ledImage)}
                           alt="Preview"
                           width="200"
@@ -414,7 +413,7 @@ const SponsorEventBox = (eventData) => {
                     {apiurl + cardData?.banner_image && ledVideo == null && (
                       <div>
                         <h2>Preview:</h2>
-                        <video width="200" controls>
+                        <video width="200" controls className="mx-auto">
                           <source
                             src={apiurl + cardData?.led_video}
                             type="video/mp4"
@@ -460,12 +459,14 @@ const SponsorEventBox = (eventData) => {
               ) : null}
             </>
           ))}
-          <input
-            type="submit"
-            className="submit"
-            value="List Promotion"
-            onClick={handleSubmitClick}
-          />
+          <div className="container">
+            <input
+              type="submit"
+              className="btn btn-success submit py-1 px-3"
+              value="List Promotion"
+              onClick={handleSubmitClick}
+            />
+          </div>
 
           <div className="container mt-2">
             <h5 className="font-weight-bold">Event Description: </h5>
@@ -486,7 +487,7 @@ const SponsorEventBox = (eventData) => {
       {/* DESKTOP VIEW END  */}
 
       {/* MOBILE VIEW */}
-      <div className="container mobile-view">
+      <div className="container mobile-view sponsored-events-mobile">
         <h2 className="sponsor-mobile-text">{cardData.event_id.title}</h2>
         <div
           className="post-thumb mt-4"
@@ -495,11 +496,26 @@ const SponsorEventBox = (eventData) => {
             boxShadow: "0px 2px 10px -2px rgba(0, 0, 0, 0.25)",
           }}
         >
-          <img
-            src={apiurl + cardData.event_id.thumbnail1}
-            alt=""
-            style={{ width: "100%" }}
-          />
+          <Carousel controls={false}>
+            {[
+              apiurl + cardData.event_id.thumbnail1,
+              apiurl + cardData.event_id.thumbnail2,
+              apiurl + cardData.event_id.thumbnail3,
+            ].map((item, index) => (
+              <Carousel.Item>
+                <img
+                  key={index}
+                  src={item}
+                  alt=""
+                  style={{
+                    width: "100%",
+                    height: "300px",
+                    borderRadius: "10px",
+                  }}
+                />
+              </Carousel.Item>
+            ))}
+          </Carousel>
         </div>
         <div className="container">
           <div className="star d-flex pt-3">
@@ -561,6 +577,160 @@ const SponsorEventBox = (eventData) => {
             </tr>
           </table>
         </div>
+        <div className="container">
+          <h2 className="sponsor-mobile-text pl-0">Add Photos</h2>
+          <p>(atleast 3 photos & 1 video)</p>
+
+          {cardData?.sponsoring_items.map((item, index) => (
+            <div
+              key={index}
+              className="box1 mt-2 d-flex justify-content-center"
+            >
+              {item.sponsoring_items === "banner" && (
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
+                  <div className="box text-center">
+                    <h5 className="font-weight-bold">Add Banner Image</h5>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleBannerImgChange}
+                      style={{ width: "74%", borderRadius: "0" }}
+                    />
+                    {apiurl + cardData?.banner_image &&
+                      bannerImage === null && (
+                        <div>
+                          <h2>Preview:</h2>
+                          <img
+                            className="mx-auto"
+                            src={
+                              apiurl + cardData?.banner_image ||
+                              URL.createObjectURL(bannerImage)
+                            }
+                            alt="Preview"
+                            width="200"
+                          />
+                        </div>
+                      )}
+                    {bannerImage && (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          className="mx-auto"
+                          src={URL.createObjectURL(bannerImage)}
+                          alt="Preview"
+                          width="200"
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {item.sponsoring_items === "led_screen" && (
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
+                  <div className="box text-center">
+                    <h5 className="font-weight-bold">Add Led Image</h5>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleLedImgChange}
+                      style={{ width: "74%", borderRadius: "0" }}
+                    />
+                    {apiurl + cardData?.led_image && ledImage === null && (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          className="mx-auto"
+                          src={apiurl + cardData?.led_image}
+                          alt="Preview"
+                          width="200"
+                        />
+                      </div>
+                    )}
+                    {ledImage && (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          className="mx-auto"
+                          S
+                          src={URL.createObjectURL(ledImage)}
+                          alt="Preview"
+                          width="200"
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {item.sponsoring_items === "led_screen" && (
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
+                  <div className="box text-center">
+                    <h5 className="font-weight-bold">Add Led Video</h5>
+                    <input
+                      type="file"
+                      accept="video/*"
+                      onChange={handleLedVidChange}
+                      style={{ width: "74%", borderRadius: "0" }}
+                    />
+                    {apiurl + cardData?.banner_image && ledVideo == null && (
+                      <div>
+                        <h2>Preview:</h2>
+                        <video width="200" controls className="mx-auto">
+                          <source
+                            src={apiurl + cardData?.led_video}
+                            type="video/mp4"
+                          />
+                          Your browser does not support the video tag.
+                        </video>
+                      </div>
+                    )}
+                    {ledVideo && (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          src={URL.createObjectURL(ledVideo)}
+                          alt="Preview"
+                          width="200"
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+          {cardData?.sponsoring_items.map((item) => (
+            <>
+              {item.sponsoring_items === "banner" &&
+              !(bannerImage || apiurl + cardData?.banner_image) ? (
+                <div className="alert alert-danger">
+                  Upload an image to be displayed on the Banner
+                </div>
+              ) : null}
+              {item.sponsoring_items === "led_screen" &&
+              !(ledImage || apiurl + cardData?.led_image) ? (
+                <div className="alert alert-danger">
+                  Upload an image to be displayed on the LED
+                </div>
+              ) : null}
+              {item.sponsoring_items === "led_screen" &&
+              !(ledVideo || apiurl + cardData?.led_video) ? (
+                <div className="alert alert-danger">
+                  Upload a video to be displayed on the LED
+                </div>
+              ) : null}
+            </>
+          ))}
+        </div>
+        <div className="container-md">
+          <input
+            type="submit"
+            className="btn btn-success submit py-1 px-3"
+            value="List Promotion"
+            onClick={handleSubmitClick}
+          />
+        </div>
         <div className="container px-1">
           <div className="row g-0">
             <div
@@ -581,7 +751,6 @@ const SponsorEventBox = (eventData) => {
               >
                 Sponsoring items
               </div>
-
               <div className="row mx-auto" style={{ width: "100%" }}>
                 {cardData.sponsoring_items.map((item, index) => (
                   <SponsorButton

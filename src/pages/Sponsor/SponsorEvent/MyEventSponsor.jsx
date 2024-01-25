@@ -3,8 +3,12 @@ import heart from "../../../assets/img/heart2.svg";
 import apiurl from "../../../constant/config";
 import Slider from "react-slick";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { createFavoriteSponsor, updateFavoriteSponsor } from "../../../redux/actions/sponsorAction";
+import {
+  createFavoriteSponsor,
+  updateFavoriteSponsor,
+} from "../../../redux/actions/sponsorAction";
 import { useDispatch, useSelector } from "react-redux";
+import { Carousel } from "react-bootstrap";
 
 const SponsorButton = ({ item, isSelected, onButtonClick }) => {
   return (
@@ -49,37 +53,42 @@ const MyEventSponsor = (eventData) => {
   const auth = useSelector((state) => state.auth);
   const { userDetails } = auth;
   console.log(userDetails.user_id);
-  const sponsor_user_id = userDetails.user_id
-  const event_id = cardData.event_id
+  const sponsor_user_id = userDetails.user_id;
+  const event_id = cardData.event_id;
   console.log("Sponsor Details", userDetails);
   console.log("Event Details", cardData);
-  const isUserFavorite = cardData.favorite_list.includes(String(userDetails.user_id));
+  const isUserFavorite = cardData.favorite_list.includes(
+    String(userDetails.user_id)
+  );
   console.log(isUserFavorite);
-
 
   const handleFavoriteClick = async () => {
     try {
       if (isUserFavorite) {
         // If user is already a favorite, update the favorite record
-        await dispatch(updateFavoriteSponsor({
-          sponsor_user_id,
-          event_id,
-        }));
+        await dispatch(
+          updateFavoriteSponsor({
+            sponsor_user_id,
+            event_id,
+          })
+        );
       } else {
         // If user is not a favorite, create a new favorite record
-        await dispatch(createFavoriteSponsor({
-          sponsor_user_id,
-          event_id,
-        }));
+        await dispatch(
+          createFavoriteSponsor({
+            sponsor_user_id,
+            event_id,
+          })
+        );
       }
-  
+
       console.log("api calling");
-  
+
       // If successful, update the local state or perform any other actions
       setFavorite(!isUserFavorite);
     } catch (error) {
       // Handle errors, e.g., show an error message
-      console.error('Error marking sponsor as favorite:', error);
+      console.error("Error marking sponsor as favorite:", error);
     }
   };
 
@@ -144,21 +153,26 @@ const MyEventSponsor = (eventData) => {
                   padding: "3%",
                 }}
               >
-                <Slider {...settings}>
+                <Carousel controls={false}>
                   {[
-                    cardData.thumbnail1,
-                    cardData.thumbnail2,
-                    cardData.thumbnail3,
-                  ].map((data) => (
-                    <img
-                      src={apiurl + data}
-                      alt=""
-                      width="600"
-                      height="400"
-                      style={{ width: "100%", borderRadius: "15px" }}
-                    />
+                    apiurl + cardData.thumbnail1,
+                    apiurl + cardData.thumbnail2,
+                    apiurl + cardData.thumbnail3,
+                  ].map((item, index) => (
+                    <Carousel.Item>
+                      <img
+                        key={index}
+                        src={item}
+                        alt=""
+                        style={{
+                          width: "100%",
+                          height: "300px",
+                          borderRadius: "10px",
+                        }}
+                      />
+                    </Carousel.Item>
                   ))}
-                </Slider>
+                </Carousel>
               </div>
               <table
                 className="table table-borderless text-center text-white overflow-hidden"
@@ -202,7 +216,8 @@ const MyEventSponsor = (eventData) => {
                     style={{
                       color: isUserFavorite ? "#ff0068" : "gray",
                       filter: "drop-shadow(rgba(0, 0, 0, 0.5) 1px 3px 3px)",
-                    }}></i>
+                    }}
+                  ></i>
                 </span>
               </h4>
               <h4>{cardData.location}</h4>
@@ -308,11 +323,26 @@ const MyEventSponsor = (eventData) => {
             boxShadow: "0px 2px 10px -2px rgba(0, 0, 0, 0.25)",
           }}
         >
-          <img
-            src={apiurl + cardData.thumbnail1}
-            alt=""
-            style={{ width: "100%" }}
-          />
+          <Carousel controls={false}>
+            {[
+              apiurl + cardData.thumbnail1,
+              apiurl + cardData.thumbnail2,
+              apiurl + cardData.thumbnail3,
+            ].map((item, index) => (
+              <Carousel.Item>
+                <img
+                  key={index}
+                  src={item}
+                  alt=""
+                  style={{
+                    width: "100%",
+                    height: "300px",
+                    borderRadius: "10px",
+                  }}
+                />
+              </Carousel.Item>
+            ))}
+          </Carousel>
         </div>
         <div className="container">
           <div className="star d-flex pt-3">

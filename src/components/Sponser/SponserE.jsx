@@ -161,6 +161,7 @@ const SponserE = ({ line, cardData }) => {
                               margin: "0% 5% 5% 0%",
                               backgroundColor: "#004EA9",
                             }}
+                            onClick={() => handleSponsorClick(data)}
                           >
                             Sponsor
                           </button>

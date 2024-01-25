@@ -59,4 +59,13 @@
         align-items: center;
         gap: 2rem;
     }
+
+    .sponsored-events-mobile .photo-box {
+        width: 100%;
+    }
+
+    .sponsored-events-mobile .box1 {
+        gap: 30px;
+        flex-direction: column;
+    }
 }

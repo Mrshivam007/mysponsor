@@ -33,9 +33,9 @@ const Delete_EventCard = ({ cardData }) => {
 
   const navigate = useNavigate();
 
-  const handleSponsorClick = (data) => {
-    navigate("/update_event", { state: { eventData: data } });
-  };
+  // const handleSponsorClick = (data) => {
+  //   navigate("/update_event", { state: { eventData: data } });
+  // };
 
   const handleDeletion = (data) => {
     dispatch(deleteEvent(data.event_id));
@@ -224,7 +224,7 @@ const Delete_EventCard = ({ cardData }) => {
           </button>
         </div>
         {/* MOBILE VIEW FOR CARDS */}
-        <div className="mobile-view text-md">
+        {/* <div className="mobile-view text-md">
           <h2 className="sponsor-mobile-text">My Events</h2>
           <div className="container mb-4">
             {cardData &&
@@ -293,7 +293,7 @@ const Delete_EventCard = ({ cardData }) => {
                 </div>
               ))}
           </div>
-        </div>
+        </div> */}
         {/* <Footer /> */}
       </div>
     </>
