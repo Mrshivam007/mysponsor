@@ -108,11 +108,6 @@ const SponsorButton = ({ item, cardData, isSelected, onButtonClick }) => {
             </Container>
           </Modal.Body>
           <Modal.Footer className="p-0">
-            {/* <span className="font-weight-bold">
-              *This image may not resemble the accurate depiction of the content
-              when put up on {item.sponsoring_content_items}.{" "}
-            </span> */}
-
             {item.sponsoring_content_items === "banner" && (
               <a href={cardData?.banner_image} download>
                 <Button className="p-2" variant="success">

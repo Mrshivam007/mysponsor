@@ -71,7 +71,7 @@ const PreviousContent = () => {
             </div>
           </div>
         )}
-        <MyContentCard cardData={ContentDetails.contentDetails?.past_content} />
+        <MyContentCard heading={"My Previous Content"} cardData={ContentDetails.contentDetails?.past_content} />
         <Footer />
       </div>
     </>

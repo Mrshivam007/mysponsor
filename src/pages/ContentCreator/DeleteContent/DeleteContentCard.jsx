@@ -120,12 +120,6 @@ const DeleteContentCard = ({ cardData }) => {
                                 {data.location}
                               </span>
                             </h5>
-                            {/* <h5 className="font-weight-bold">
-                                Price:&nbsp;
-                                <span className="font-weight-light">
-                                  {data.price}
-                                </span>
-                              </h5> */}
                             <h5 className="font-weight-bold">
                               Video Preview:&nbsp;
                               <span className="font-weight-light">
@@ -185,7 +179,7 @@ const DeleteContentCard = ({ cardData }) => {
                                 </Modal.Footer>
                               </Modal>
                             </div>
-                            <Modal
+                            {/* <Modal
                               show={show}
                               onHide={handleClose}
                               scrollable={true}
@@ -211,7 +205,7 @@ const DeleteContentCard = ({ cardData }) => {
                                   No
                                 </Button>
                               </Modal.Footer>
-                            </Modal>
+                            </Modal> */}
                           </div>
                         </div>
                       </div>
@@ -233,7 +227,7 @@ const DeleteContentCard = ({ cardData }) => {
         </button>
       </div>
       {/* MOBILE VIEW FOR CARDS */}
-      <div className="mobile-view text-md">
+      {/* <div className="mobile-view text-md">
         <h2 className="sponsor-mobile-text">My Events</h2>
         <div className="container mb-4">
           {cardData &&
@@ -272,7 +266,7 @@ const DeleteContentCard = ({ cardData }) => {
               </div>
             ))}
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

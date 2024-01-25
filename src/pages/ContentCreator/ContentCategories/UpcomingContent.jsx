@@ -71,7 +71,10 @@ const UpcomingContent = () => {
             </div>
           </div>
         )}
-        <MyContentCard cardData={ContentDetails.contentDetails?.upcoming_content} />
+        <MyContentCard
+          heading={"My Upcoming Content"}
+          cardData={ContentDetails.contentDetails?.upcoming_content}
+        />
         <Footer />
       </div>
     </>

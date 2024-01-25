@@ -191,7 +191,7 @@ body {
   background-color: white !important;
   color: blue !important;
   font-weight: bold !important;
-  border-radius: 16px !important;
+  border-radius: 15px !important;
   font-family: League Spartan;
 
 }
@@ -217,7 +217,7 @@ body {
   .page-banner {
     background-image: none !important;
     margin: 0px !important;
-    background-color: #efefef !important;
+    /* background-color: #efefef !important; */
   }
 
   h3,
@@ -254,6 +254,10 @@ body {
 
   .link-banner {
     display: none !important;
+  }
+
+  .mobile-nav .link-banner {
+    display: block !important;
   }
 
   .img-container {

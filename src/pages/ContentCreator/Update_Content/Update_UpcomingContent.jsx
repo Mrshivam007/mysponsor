@@ -10,7 +10,7 @@ import bgimage from "../../../assets/img/circle-bg.png";
 import spevents from "../../../assets/img/sponsor_events-logo.png";
 import { EventsCards, EventsPageCards } from "../../../data/data";
 import { fetchContent } from "../../../redux/actions/contentAction";
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
 import Update_MobileCards from "./Update_MobileCard";
 import Update_ContentCard from "./Update_ContentCard";
 const Update_UpcomingContent = () => {
@@ -19,18 +19,18 @@ const Update_UpcomingContent = () => {
   }, []);
 
   const dispatch = useDispatch();
-  const contentDetails = useSelector(state => state.content)
-  const [successMessage, setSuccessMessage] = useState('');
+  const contentDetails = useSelector((state) => state.content);
+  const [successMessage, setSuccessMessage] = useState("");
   useEffect(() => {
-    dispatch(fetchContent())
-  }, [])
+    dispatch(fetchContent());
+  }, []);
 
   useEffect(() => {
     // Retrieve success message from sessionStorage
-    const message = sessionStorage.getItem('successMessage');
+    const message = sessionStorage.getItem("successMessage");
 
     // Clear success message from sessionStorage
-    sessionStorage.removeItem('successMessage');
+    sessionStorage.removeItem("successMessage");
 
     if (message) {
       setSuccessMessage(message);
@@ -39,7 +39,6 @@ const Update_UpcomingContent = () => {
   }, []);
 
   console.log(contentDetails);
-
 
   // console.log("dynamic data", eventDetails.eventDetails);
   // console.log("static data", EventsCards);
@@ -63,7 +62,9 @@ const Update_UpcomingContent = () => {
               {successMessage}
             </div>
           )}
-          <Update_ContentCard cardData={contentDetails.contentDetails?.live_content} />
+          <Update_ContentCard
+            cardData={contentDetails.contentDetails?.live_content}
+          />
           {/* <SponserE cardData={EventsCards} line={"Concerts"} />
           <SponserE cardData={EventsCards} line={"Promotional Events"} />
           <SponserE cardData={EventsCards} line={"Sports Events"} />
@@ -72,7 +73,10 @@ const Update_UpcomingContent = () => {
           <SponserE cardData={EventsCards} line={"Reality Shows"} /> */}
         </div>
         <div className="events-page-mobile">
-          {/* <Update_MobileCards line={"Upcoming Event"} cardData={eventDetails.eventDetails} /> */}
+          <Update_MobileCards
+            line={"Update Your Content"}
+            cardData={contentDetails.contentDetails?.live_content}
+          />
           <div
             className="btn d-block text-white font-weight-bolder"
             style={{

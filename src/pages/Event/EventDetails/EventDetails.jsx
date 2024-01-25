@@ -27,7 +27,7 @@ const EventDetails = () => {
       >
         <NavBar />
         <MyEventsBox eventData={eventData} />
-        <SponserE cardData={EventsCards} />
+        {/* <SponserE cardData={EventsCards} /> */}
         <Footer />
       </div>
     </>

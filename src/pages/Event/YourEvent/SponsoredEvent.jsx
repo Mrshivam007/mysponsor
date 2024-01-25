@@ -7,7 +7,7 @@ import { EventsHeader, Footer, NavBar } from "../../../components";
 import { fetchSponsoredEvent } from "../../../redux/actions/sponsorAction";
 import { useDispatch, useSelector } from "react-redux";
 import apiurl from "../../../constant/config";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SponsoredEvent = () => {
   const auth = useSelector((state) => state.auth);
@@ -26,6 +26,7 @@ const SponsoredEvent = () => {
   const handleSponsorClick = (data) => {
     navigate("/sponsored_event_details", { state: { eventData: data } });
   };
+  console.log("Card Data", cardData);
   return (
     <>
       <div
@@ -38,7 +39,6 @@ const SponsoredEvent = () => {
       >
         <NavBar />
         <EventsHeader title={"Your Sponsored Event!"} logo={listevents} />
-        <h1></h1>
         <div className="desktop-view sponsored-events mt-4">
           <div className="container">
             {cardData &&
@@ -56,11 +56,12 @@ const SponsoredEvent = () => {
                         <div className="row mx-0">
                           <div className="col-3 p-3">
                             <img
-                              src={apiurl + data.thumbnail1}
+                              src={apiurl + data.event_id.thumbnail1}
                               alt=""
                               style={{
                                 width: "100%",
                                 height: "100%",
+                                borderRadius: "10px",
                               }}
                             />
                           </div>
@@ -184,241 +185,274 @@ const SponsoredEvent = () => {
 
         <div className="tablet-viewport">
           <div className="container mb-4">
-            <div className="row">
-              <div className="col-12 col-md-6 mb-2">
-                <div className="card myevents-card">
-                  <div className="post-thumb">
-                    <img src={cardImg} alt="" style={{ width: "100%" }} />
-                    <div className="text-overlay">
-                      <h4 className="font-weight-bold mb-0"></h4>
-                      <h5></h5>
-                    </div>
-                  </div>
-                  <div className="container">
-                    <div className="row d-flex">
-                      <div className="col-12">
-                        <div className="box">
-                          <h4 className="font-weight-bold">
-                            Event Sponsored for:
-                          </h4>
-                          <div className="d-flex justify-content-between text-lg">
-                            <span
-                              className="badge rounded-pill px-2 py-1"
-                              style={{ backgroundColor: "#72dfa8 " }}
-                            >
-                              Banner <i className="bi bi-check2-circle"></i>
-                            </span>
-                            <span
-                              className="badge rounded-pill px-2 py-1"
-                              style={{
-                                backgroundColor: "rgb(255 97 97)",
-                              }}
-                            >
-                              LED Screen <i class="bi bi-x-lg"></i>
-                            </span>
-                            <span
-                              className="badge rounded-pill px-2 py-1"
-                              style={{ backgroundColor: "rgb(255 97 97)" }}
-                            >
-                              Bill Board <i class="bi bi-x-lg"></i>
-                            </span>
+            {cardData &&
+              cardData.map((data) => {
+                return (
+                  <div className="row">
+                    <div className="col-12 col-md-6 mb-2">
+                      <div className="card myevents-card">
+                        <div className="post-thumb">
+                          <img src={apiurl + data.event_id.thumbnail1} alt="" style={{ width: "100%" }} />
+                          <div className="text-overlay">
+                            <h4 className="font-weight-bold mb-0"></h4>
+                            <h5></h5>
                           </div>
                         </div>
+                        <div className="container">
+                          <div className="row d-flex">
+                            <div className="col-12">
+                              <div className="box">
+                                <h4 className="font-weight-bold">
+                                  Event Sponsored for:
+                                </h4>
+                                <div className="d-flex justify-content-between text-lg">
+                                  <span
+                                    className="badge rounded-pill px-2 py-1"
+                                    style={{ backgroundColor: "#72dfa8 " }}
+                                  >
+                                    Banner{" "}
+                                    <i className="bi bi-check2-circle"></i>
+                                  </span>
+                                  <span
+                                    className="badge rounded-pill px-2 py-1"
+                                    style={{
+                                      backgroundColor: "rgb(255 97 97)",
+                                    }}
+                                  >
+                                    LED Screen <i class="bi bi-x-lg"></i>
+                                  </span>
+                                  <span
+                                    className="badge rounded-pill px-2 py-1"
+                                    style={{
+                                      backgroundColor: "rgb(255 97 97)",
+                                    }}
+                                  >
+                                    Bill Board <i class="bi bi-x-lg"></i>
+                                  </span>
+                                </div>
+                              </div>
 
-                        <div className="container text-lg text-white text-center d-flex my-2">
-                          <div
-                            className="box myevents-box"
-                            style={{ width: "100%" }}
-                          >
-                            <p
-                              className="mb-1"
-                              style={{
-                                borderBottom:
-                                  "1px solid rgba(255, 255, 255, 0.30)",
-                              }}
-                            >
-                              Total amount sponsored
-                            </p>
-                            <p className="mb-1">₹50,000</p>
+                              <div className="container text-lg text-white text-center d-flex my-2">
+                                <div
+                                  className="box myevents-box"
+                                  style={{ width: "100%" }}
+                                >
+                                  <p
+                                    className="mb-1"
+                                    style={{
+                                      borderBottom:
+                                        "1px solid rgba(255, 255, 255, 0.30)",
+                                    }}
+                                  >
+                                    Total amount sponsored
+                                  </p>
+                                  <p className="mb-1">₹50,000</p>
+                                </div>
+                              </div>
+                              <button
+                                className="btn py-1 px-3 font-weight-bold"
+                                style={{
+                                  width: "100%",
+                                  marginBottom: "2%",
+                                  color: "#004EA9",
+                                  backgroundColor: "white",
+                                  border: "2px solid #004EA9",
+                                  borderRadius: "10px",
+                                }}
+                                onClick={() => handleSponsorClick(data)}
+                              >
+                                Check Out Sponsors Details &nbsp;&nbsp; &gt;&gt;
+                              </button>
+                            </div>
                           </div>
                         </div>
-                        <button
-                          className="btn py-1 px-3 font-weight-bold"
-                          style={{
-                            width: "100%",
-                            marginBottom: "2%",
-                            color: "#004EA9",
-                            backgroundColor: "white",
-                            border: "2px solid #004EA9",
-                            borderRadius: "10px",
-                          }}
-                        >
-                          Check Out Sponsors Details &nbsp;&nbsp; &gt;&gt;
-                        </button>
+                      </div>
+                    </div>
+                    <div className="col-12 col-md-6">
+                      <div className="card myevents-card">
+                        <div className="post-thumb">
+                          <img src={cardImg} alt="" style={{ width: "100%" }} />
+                          <div className="text-overlay">
+                            <h4 className="font-weight-bold mb-0"></h4>
+                            <h5></h5>
+                          </div>
+                        </div>
+                        <div className="container">
+                          <div className="row d-flex">
+                            <div className="col-12">
+                              <div className="box">
+                                <h4 className="font-weight-bold">
+                                  Event Sponsored for:
+                                </h4>
+                                <div className="d-flex justify-content-between text-lg">
+                                  <span
+                                    className="badge rounded-pill px-2 py-1"
+                                    style={{ backgroundColor: "#72dfa8 " }}
+                                  >
+                                    Banner{" "}
+                                    <i className="bi bi-check2-circle"></i>
+                                  </span>
+                                  <span
+                                    className="badge rounded-pill px-2 py-1"
+                                    style={{
+                                      backgroundColor: "rgb(255 97 97)",
+                                    }}
+                                  >
+                                    LED Screen <i class="bi bi-x-lg"></i>
+                                  </span>
+                                  <span
+                                    className="badge rounded-pill px-2 py-1"
+                                    style={{
+                                      backgroundColor: "rgb(255 97 97)",
+                                    }}
+                                  >
+                                    Bill Board <i class="bi bi-x-lg"></i>
+                                  </span>
+                                </div>
+                              </div>
+
+                              <div className="container text-lg text-white text-center d-flex my-2">
+                                <div
+                                  className="box myevents-box"
+                                  style={{ width: "100%" }}
+                                >
+                                  <p
+                                    className="mb-1"
+                                    style={{
+                                      borderBottom:
+                                        "1px solid rgba(255, 255, 255, 0.30)",
+                                    }}
+                                  >
+                                    Total amount sponsored
+                                  </p>
+                                  <p className="mb-1">₹50,000</p>
+                                </div>
+                              </div>
+                              <button
+                                className="btn py-1 px-3 font-weight-bold"
+                                style={{
+                                  width: "100%",
+                                  marginBottom: "2%",
+                                  color: "#004EA9",
+                                  backgroundColor: "white",
+                                  border: "2px solid #004EA9",
+                                  borderRadius: "10px",
+                                }}
+                              >
+                                Check Out Sponsors Details &nbsp;&nbsp; &gt;&gt;
+                              </button>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div className="col-12 col-md-6">
-                <div className="card myevents-card">
-                  <div className="post-thumb">
-                    <img src={cardImg} alt="" style={{ width: "100%" }} />
-                    <div className="text-overlay">
-                      <h4 className="font-weight-bold mb-0"></h4>
-                      <h5></h5>
-                    </div>
-                  </div>
-                  <div className="container">
-                    <div className="row d-flex">
-                      <div className="col-12">
-                        <div className="box">
-                          <h4 className="font-weight-bold">
-                            Event Sponsored for:
-                          </h4>
-                          <div className="d-flex justify-content-between text-lg">
-                            <span
-                              className="badge rounded-pill px-2 py-1"
-                              style={{ backgroundColor: "#72dfa8 " }}
-                            >
-                              Banner <i className="bi bi-check2-circle"></i>
-                            </span>
-                            <span
-                              className="badge rounded-pill px-2 py-1"
-                              style={{
-                                backgroundColor: "rgb(255 97 97)",
-                              }}
-                            >
-                              LED Screen <i class="bi bi-x-lg"></i>
-                            </span>
-                            <span
-                              className="badge rounded-pill px-2 py-1"
-                              style={{ backgroundColor: "rgb(255 97 97)" }}
-                            >
-                              Bill Board <i class="bi bi-x-lg"></i>
-                            </span>
-                          </div>
-                        </div>
-
-                        <div className="container text-lg text-white text-center d-flex my-2">
-                          <div
-                            className="box myevents-box"
-                            style={{ width: "100%" }}
-                          >
-                            <p
-                              className="mb-1"
-                              style={{
-                                borderBottom:
-                                  "1px solid rgba(255, 255, 255, 0.30)",
-                              }}
-                            >
-                              Total amount sponsored
-                            </p>
-                            <p className="mb-1">₹50,000</p>
-                          </div>
-                        </div>
-                        <button
-                          className="btn py-1 px-3 font-weight-bold"
-                          style={{
-                            width: "100%",
-                            marginBottom: "2%",
-                            color: "#004EA9",
-                            backgroundColor: "white",
-                            border: "2px solid #004EA9",
-                            borderRadius: "10px",
-                          }}
-                        >
-                          Check Out Sponsors Details &nbsp;&nbsp; &gt;&gt;
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                );
+              })}
           </div>
         </div>
 
         <div className="mobile-view text-md">
           <h2 className="sponsor-mobile-text">My Events</h2>
           <div className="container mb-4">
-            <div className="row">
-              <div className="col-12">
-                <div className="card myevents-card">
-                  <div className="post-thumb">
-                    <img src={cardImg} alt="" style={{ width: "100%" }} />
-                    <div className="text-overlay">
-                      <h4 className="font-weight-bold mb-0"></h4>
-                      <h5></h5>
-                    </div>
-                  </div>
-                  <div className="container">
-                    <div className="row d-flex">
-                      <div className="col-12">
-                        <div className="box">
-                          <h4 className="font-weight-bold">
-                            Event Sponsored for:
-                          </h4>
-                          <div className="d-flex justify-content-between text-lg">
-                            <span
-                              className="badge rounded-pill px-2 py-1"
-                              style={{ backgroundColor: "#72dfa8 " }}
-                            >
-                              Banner <i className="bi bi-check2-circle"></i>
-                            </span>
-                            <span
-                              className="badge rounded-pill px-2 py-1"
-                              style={{
-                                backgroundColor: "rgb(255 97 97)",
-                              }}
-                            >
-                              LED Screen <i class="bi bi-x-lg"></i>
-                            </span>
-                            <span
-                              className="badge rounded-pill px-2 py-1"
-                              style={{ backgroundColor: "rgb(255 97 97)" }}
-                            >
-                              Bill Board <i class="bi bi-x-lg"></i>
-                            </span>
+            {cardData &&
+              cardData.map((data) => {
+                return (
+                  <div className="row">
+                    <div className="col-12">
+                      <div className="card myevents-card">
+                        <div className="post-thumb">
+                          <img
+                            src={apiurl + data.event_id.thumbnail1}
+                            alt=""
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              borderRadius: "10px",
+                            }}
+                          />
+                          <div className="text-overlay">
+                            <h4 className="font-weight-bold mb-0">
+                              {data.event_id.title}
+                            </h4>
+                            <h5>{data.event_id.location}</h5>
                           </div>
                         </div>
+                        <div className="container">
+                          <div className="row d-flex">
+                            <div className="col-12">
+                              <div className="box">
+                                <h4 className="font-weight-bold">
+                                  Event Sponsored for:
+                                </h4>
+                                <div className="d-flex justify-content-around text-lg">
+                                  {data.event_id.sponsoring_items.map(
+                                    (item, index) => (
+                                      <>
+                                        <span
+                                          key={index}
+                                          className={`badge rounded-pill px-2 py-1 ${
+                                            data.sponsoring_items.includes(
+                                              item.sponsoring_items
+                                            )
+                                              ? "bg-danger"
+                                              : "bg-success"
+                                          }`}
+                                        >
+                                          {item.sponsoring_items}{" "}
+                                          {data.sponsoring_items.includes(
+                                            item.sponsoring_items
+                                          ) ? (
+                                            <i className="bi bi-x-lg"></i>
+                                          ) : (
+                                            <i className="bi bi-check2-circle"></i>
+                                          )}
+                                        </span>
+                                      </>
+                                    )
+                                  )}
+                                </div>
+                              </div>
 
-                        <div className="container text-lg text-white text-center d-flex my-2">
-                          <div
-                            className="box myevents-box"
-                            style={{ width: "100%" }}
-                          >
-                            <p
-                              className="mb-1"
-                              style={{
-                                borderBottom:
-                                  "1px solid rgba(255, 255, 255, 0.30)",
-                              }}
-                            >
-                              Total amount sponsored
-                            </p>
-                            <p className="mb-1">₹50,000</p>
+                              <div className="container text-lg text-white text-center d-flex my-2">
+                                <div
+                                  className="box myevents-box"
+                                  style={{ width: "100%" }}
+                                >
+                                  <p
+                                    className="mb-1"
+                                    style={{
+                                      borderBottom:
+                                        "1px solid rgba(255, 255, 255, 0.30)",
+                                    }}
+                                  >
+                                    Total amount sponsored
+                                  </p>
+                                  <p className="mb-1">₹50,000</p>
+                                </div>
+                              </div>
+                              <button
+                                className="btn py-1 px-3 font-weight-bold"
+                                style={{
+                                  width: "100%",
+                                  marginBottom: "2%",
+                                  color: "#004EA9",
+                                  backgroundColor: "white",
+                                  border: "2px solid #004EA9",
+                                  borderRadius: "10px",
+                                }}
+                                onClick={() => handleSponsorClick(data)}
+                              >
+                                Check Out Sponsors Details &nbsp;&nbsp; &gt;&gt;
+                              </button>
+                            </div>
                           </div>
                         </div>
-                        <button
-                          className="btn py-1 px-3 font-weight-bold"
-                          style={{
-                            width: "100%",
-                            marginBottom: "2%",
-                            color: "#004EA9",
-                            backgroundColor: "white",
-                            border: "2px solid #004EA9",
-                            borderRadius: "10px",
-                          }}
-                        >
-                          Check Out Sponsors Details &nbsp;&nbsp; &gt;&gt;
-                        </button>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
+                );
+              })}
           </div>
         </div>
         <Footer />

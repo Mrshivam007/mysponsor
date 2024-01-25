@@ -14,7 +14,7 @@ const Update_MobileCards = ({ line, cardData }) => {
   const navigate = useNavigate();
 
   const handleSponsorClick = (data) => {
-    navigate("/update_event", { state: { eventData: data } });
+    navigate("/update_content", { state: { contentData: data } });
   };
   return (
     <>

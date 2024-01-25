@@ -49,7 +49,7 @@ const Delete_MobileCards = ({ line, cardData }) => {
                         width: "90%",
                         borderRadius: "0px 0px 10px 10px",
                         margin: "0% 0% 5% 5%",
-                        backgroundColor: "#004EA9",
+                        backgroundColor: "red",
                       }}
                       onClick={() => handleSponsorClick(data)}
                     >

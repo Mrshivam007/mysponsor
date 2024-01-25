@@ -64,9 +64,9 @@ const EventHome = () => {
         {/* ---MOBILE VIEW END--- */}
         <div className="container">
           <div className="list-events-box">
-            <h1>
+            <h2>
               List your event and get sponsored worldwide by different sponsors
-            </h1>
+            </h2>
           </div>
         </div>
         <div className="container events-home-cards mb-5">

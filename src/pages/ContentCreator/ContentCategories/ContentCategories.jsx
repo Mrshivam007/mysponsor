@@ -34,15 +34,15 @@ const ContentCategories = () => {
         {/* ---MOBILE VIEW--- */}
 
         <div className="mobile-view">
-          <h2 className="sponsor-mobile-text">Get your Contents listed</h2>
+          <h2 className="sponsor-mobile-text">Listed content</h2>
         </div>
         {/* ---MOBILE VIEW END--- */}
 
         <div className="container">
           <div className="list-events-box">
-            <h1>
-              Check out your listed content here
-            </h1>
+            <h2>
+              Track all your listed content activities here
+            </h2>
           </div>
         </div>
         <div className="container mb-5">
@@ -69,7 +69,7 @@ const ContentCategories = () => {
                 </div>
               </div>
             </div>
-            <div className="col-12 col-md-4">
+            <div className="col-12 col-md-4 my-md-0 my-3">
               <div className="card list-events-card">
                 <img
                   src={cardImg2}

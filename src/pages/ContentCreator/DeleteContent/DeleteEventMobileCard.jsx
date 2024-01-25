@@ -1,20 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchEvent } from "../../../redux/actions/eventAction";
 import apiurl from "../../../constant/config";
+import { Button, Modal } from "react-bootstrap";
+import { deleteContent } from "../../../redux/actions/contentAction";
 
 const Delete_MobileCards = ({ line, cardData }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchEvent());
   }, [dispatch]);
-  
 
   const navigate = useNavigate();
 
-  const handleSponsorClick = (data) => {
-    navigate("/update_event", { state: { eventData: data } });
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  // const handleSponsorClick = (data) => {
+  //   navigate("/update_event", { state: { eventData: data } });
+  // };
+
+  const handleDeletion = (data) => {
+    dispatch(deleteContent(data.content_id));
+    sessionStorage.setItem(
+      "deletionMessage",
+      "Your Content has been Deleted!!!"
+    );
+    navigate("/your_content/upcoming_content");
   };
   return (
     <>
@@ -46,12 +61,36 @@ const Delete_MobileCards = ({ line, cardData }) => {
                         width: "90%",
                         borderRadius: "0px 0px 10px 10px",
                         margin: "0% 0% 5% 5%",
-                        backgroundColor: "#004EA9",
+                        backgroundColor: "red",
                       }}
-                      onClick={() => handleSponsorClick(data)}
+                      onClick={handleShow}
                     >
                       Delete
                     </button>
+                    <Modal
+                      show={show}
+                      onHide={handleClose}
+                      scrollable={true}
+                      style={{ zIndex: "2000" }}
+                    >
+                      <Modal.Header>
+                        <Modal.Title>Delete {data.title} ?</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        Are you sure you want to delete this content ?
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button
+                          variant="danger"
+                          onClick={() => handleDeletion(data)}
+                        >
+                          Yes
+                        </Button>
+                        <Button variant="success" onClick={handleClose}>
+                          No
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
                   </div>
                 </div>
               </div>

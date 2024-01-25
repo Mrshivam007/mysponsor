@@ -40,14 +40,14 @@ const EventCategories = () => {
 
         <div className="container">
           <div className="list-events-box">
-            <h1>
-              List your event and get sponsored worldwide by different sponsors
-            </h1>
+            <h2>
+              Track all your event activities here
+            </h2>
           </div>
         </div>
         <div className="container mb-5">
           <div className="row">
-            <div className="col-12 col-md-4">
+            <div className="col-12 col-md-4 mb-3">
               <div className="card list-events-card">
                 <img
                   src={cardImg1}
@@ -71,7 +71,7 @@ const EventCategories = () => {
                 </div>
               </div>
             </div>
-            <div className="col-12 col-md-4">
+            <div className="col-12 col-md-4 mb-3">
               <div className="card list-events-card">
                 <img
                   src={cardImg2}
@@ -95,7 +95,7 @@ const EventCategories = () => {
                 </div>
               </div>
             </div>
-            <div className="col-12 col-md-4">
+            <div className="col-12 col-md-4 mb-3">
               <div className="card list-events-card">
                 <img
                   src={cardImg3}

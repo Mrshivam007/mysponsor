@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import apiurl from "../../constant/config";
-import Slider from "react-slick";
+import { Carousel } from "react-bootstrap";
 
 const SponsorButton = ({ item, isSelected, onButtonClick }) => {
   return (
@@ -29,15 +29,6 @@ const MyContentBox = (contentData) => {
       totalAmount += parseFloat(item.price);
     }
   });
-  const settings = {
-    infinite: true, // Loop the slider
-    speed: 500, // Transition speed in milliseconds
-    slidesToShow: 1, // Number of slides to show at a time
-    slidesToScroll: 1, // Number of slides to scroll at a time
-    autoplay: false, // Auto-play the slider
-    autoplaySpeed: 3000, // Auto-play speed in milliseconds
-    adaptiveHeight: true,
-  };
 
   const [selectedItems, setSelectedItems] = useState([]);
   const [totalSponsoringPrice, setTotalSponsoringPrice] = useState(0);
@@ -72,32 +63,28 @@ const MyContentBox = (contentData) => {
                   borderRadius: "20px",
                   boxShadow: "0px 2px 10px 0px rgba(0, 0, 0, 0.25)",
                   padding: "3%",
-                  width: "100%",
-                  height: "55svh",
-                  // overflow:"hidden"
                 }}
               >
-                <Slider {...settings}>
+                <Carousel controls={false}>
                   {[
-                    cardData.thumbnail1,
-                    cardData.thumbnail2,
-                    cardData.thumbnail3,
-                  ].map((data, index) => (
-                    <img
-                      key={index}
-                      src={apiurl + data}
-                      alt=""
-                      style={{
-                        width: "auto",
-                        height: "auto",
-                        maxWidth:"100%", // Make sure the image takes up the full height of the container
-                        maxHeight:"100%", // Make sure the image takes up the full height of the container
-                        objectFit: "contain",
-                        borderRadius: "15px",
-                      }}
-                    />
+                    apiurl + cardData.thumbnail1,
+                    apiurl + cardData.thumbnail2,
+                    apiurl + cardData.thumbnail3,
+                  ].map((item, index) => (
+                    <Carousel.Item>
+                      <img
+                        key={index}
+                        src={item}
+                        alt=""
+                        style={{
+                          width: "100%",
+                          height: "300px",
+                          borderRadius: "10px",
+                        }}
+                      />
+                    </Carousel.Item>
                   ))}
-                </Slider>
+                </Carousel>
               </div>
             </div>
             <div className="col-6">
@@ -198,50 +185,61 @@ const MyContentBox = (contentData) => {
             boxShadow: "0px 2px 10px -2px rgba(0, 0, 0, 0.25)",
           }}
         >
-          <img
-            src={apiurl + cardData.thumbnail1}
-            alt=""
-            style={{ width: "100%" }}
-          />
+          <Carousel controls={false}>
+            {[
+              apiurl + cardData.thumbnail1,
+              apiurl + cardData.thumbnail2,
+              apiurl + cardData.thumbnail3,
+            ].map((item, index) => (
+              <Carousel.Item>
+                <img
+                  key={index}
+                  src={item}
+                  alt=""
+                  style={{
+                    width: "100%",
+                    height: "300px",
+                    borderRadius: "10px",
+                  }}
+                />
+              </Carousel.Item>
+            ))}
+          </Carousel>
         </div>
-        <div className="container text-white text-center d-flex align-items-end justify-content-around px-0 mt-3">
-          <div className="box">
-            <h4 className="text-md text-dark font-weight-bold">
-              <i className="bi bi-cash text-success"></i>
-              &nbsp; {totalSponsoringPrice}&lt;
-            </h4>
-            <h4 className="text-md text-dark font-weight-bold">
-              <i className="bi bi-people-fill text-danger"></i>
-              &nbsp; {cardData.audience_expected}+
-            </h4>
-          </div>
-          <div
-            className="box bid-box text-white"
-            style={{ backgroundColor: "#004EA9" }}
-          >
-            <p
-              style={{
-                borderBottom: "1px solid rgba(255, 255, 255, 0.30)",
-                padding: "4%",
-                // marginBottom: "4%",
-              }}
-            >
-              Your Bid
-            </p>
-            <p>₹ 50,000</p>
-          </div>
-          <div className="box bid-box" style={{ backgroundColor: "#FF2B66" }}>
-            <h2 className="mb-0">
-              <i className="bi bi-plus"></i>
-            </h2>
-            <p>Add More</p>
+
+        <div className="container">
+          <div className="box py-3">
+            <h5 className="font-weight-bold">
+              Title:&nbsp;&nbsp;
+              <span className="font-weight-normal">{cardData.title}</span>
+            </h5>
+            <h5 className="font-weight-bold">
+              Platform:&nbsp;&nbsp;
+              <span className="font-weight-normal">
+                {cardData.content_platform}
+              </span>
+            </h5>
+            <h5 className="font-weight-bold">
+              Channel Subs:&nbsp;&nbsp;
+              <span className="font-weight-normal">
+                {cardData.audience_expected}
+              </span>
+            </h5>
+            <h5 className="font-weight-bold">
+              Location:&nbsp;&nbsp;
+              <span className="font-weight-normal">{cardData.location}</span>
+            </h5>
+            <h5 className="font-weight-bold">
+              Video Preview:&nbsp;&nbsp;
+              <span className="font-weight-normal">**Video Preview**</span>
+            </h5>
           </div>
         </div>
+
         <div className="container">
           <table
             className="table table-borderless text-center text-dark overflow-hidden"
             style={{
-              marginTop: "4%",
               borderRadius: "10px",
               backgroundColor: "white",
               boxShadow: "0px 2px 20px -3px rgba(0, 0, 0, 0.16)",
@@ -260,7 +258,7 @@ const MyContentBox = (contentData) => {
                     borderRadius: "5px",
                   }}
                 >
-                  {cardData.event_start_date}
+                  {cardData.content_start_date}
                 </span>
               </td>
               <td>
@@ -271,19 +269,47 @@ const MyContentBox = (contentData) => {
                     borderRadius: "5px",
                   }}
                 >
-                  {cardData.event_end_date}
+                  {cardData.content_end_date}
                 </span>
               </td>
             </tr>
           </table>
         </div>
-        <p>
-          Ganesh Chaturthi, also called Vinayaka Chaturthi, in Hinduism, 10-day
-          festival marking the birth of the elephant-headed deity Ganesha, the
-          god of prosperity and wisdom. It begins on the fourth day (chaturthi)
-          of the month of Bhadrapada (August-September), the sixth month of the
-          Hindu calendar.
-        </p>
+        <div className="container px-2 mb-3">
+          <div className="row g-0">
+            <div
+              className="box text-white"
+              style={{
+                backgroundColor: "#004EA9",
+                width: "100%",
+                borderRadius: "10px",
+                marginTop: "3%",
+              }}
+            >
+              <div
+                className="col-12 font-weight-bolder text-center"
+                style={{
+                  padding: "3% 0 2% 0",
+                  borderBottom: "1px solid rgba(255, 255, 255, 0.20)",
+                }}
+              >
+                Your Sponsoring items
+              </div>
+
+              <div className="row mx-auto" style={{ width: "100%" }}>
+                {cardData?.sponsoring_content_items.map((item, index) => (
+                  <SponsorButton
+                    key={index}
+                    item={item}
+                    isSelected={selectedItems.includes(item)}
+                    onButtonClick={handleButtonClick}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+        <p>{cardData.description}</p>
       </div>
       {/* MOBILE VIEW END */}
     </>

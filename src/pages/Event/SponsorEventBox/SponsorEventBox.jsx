@@ -11,14 +11,8 @@ const SponsorButton = ({ item, cardData, isSelected, onButtonClick }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1, // Number of slides to show at a time
-    slidesToScroll: 1, // Number of slides to scroll at a time
-    autoplay: true, // Auto-play the slider
-  };
+
+  console.log("This is the events side data", item);
   console.log("This is the events side data", cardData);
   return (
     <div className="col-4 px-1 px-md-2 my-3 text-center">
@@ -62,11 +56,17 @@ const SponsorButton = ({ item, cardData, isSelected, onButtonClick }) => {
               {item.sponsoring_items === "banner" && (
                 <>
                   <img src={banner_preview} alt="banner-preview" />
-                  <div style={{ position: "absolute", top: "70px" }}>
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: "21.9%",
+                      top: "13.4%",
+                    }}
+                  >
                     <img
                       src={apiurl + cardData?.banner_image}
                       alt="banner-img-preview"
-                      style={{ width: "449px", height: "220px" }}
+                      style={{ width: "44.5vw", height: "21.9vw" }}
                     />
                   </div>
                 </>
@@ -77,24 +77,24 @@ const SponsorButton = ({ item, cardData, isSelected, onButtonClick }) => {
 
                   <div
                     style={{
-                      width: "449px",
-                      height: "220px",
+                      width: "44.5vw",
+                      height: "21.9vw",
                       position: "absolute",
-                      top: "70px",
+                      left: "21.9%",
+                      top: "13.4%",
                     }}
-                    data-bs-theme="dark"
                   >
-                    <Carousel data-bs-theme="dark">
+                    <Carousel controls={false}>
                       <Carousel.Item interval={1000}>
                         <img
-                          style={{ width: "100%", height: "220px" }}
-                          src={apiurl + cardData?.banner_image}
+                          style={{ width: "100%", height: "21.9vw" }}
+                          src={apiurl + cardData?.led_image}
                           alt=""
                         />
                       </Carousel.Item>
                       <Carousel.Item interval={41000}>
                         <video
-                          style={{ width: "100%", height: "220px" }}
+                          style={{ width: "100%", height: "21.9vw" }}
                           src={apiurl + cardData?.led_video}
                           autoplay
                           controls
@@ -108,11 +108,6 @@ const SponsorButton = ({ item, cardData, isSelected, onButtonClick }) => {
             </Container>
           </Modal.Body>
           <Modal.Footer className="p-0">
-            {/* <span className="font-weight-bold">
-              *This image may not resemble the accurate depiction of the content
-              when put up on {item.sponsoring_items}.{" "}
-            </span> */}
-
             {item.sponsoring_items === "banner" && (
               <a href={cardData?.banner_image} download>
                 <Button className="p-2" variant="success">
@@ -167,14 +162,6 @@ const SponsorEventBox = (eventData) => {
       totalAmount += parseFloat(item.price);
     }
   });
-  const settings = {
-    infinite: true, // Loop the slider
-    speed: 500, // Transition speed in milliseconds
-    slidesToShow: 1, // Number of slides to show at a time
-    slidesToScroll: 1, // Number of slides to scroll at a time
-    autoplay: true, // Auto-play the slider
-    autoplaySpeed: 3000, // Auto-play speed in milliseconds
-  };
 
   const [selectedItems, setSelectedItems] = useState([]);
   const [totalSponsoringPrice, setTotalSponsoringPrice] = useState(0);
@@ -210,27 +197,28 @@ const SponsorEventBox = (eventData) => {
                   borderRadius: "20px",
                   boxShadow: "0px 2px 10px 0px rgba(0, 0, 0, 0.25)",
                   padding: "3%",
-                  height: "55svh",
-                  overflow: "auto",
                 }}
               >
-                <Slider {...settings}>
+                <Carousel controls={false} autoplay>
                   {[
-                    cardData.event_id.thumbnail1,
-                    cardData.event_id.thumbnail2,
-                    cardData.event_id.thumbnail3,
-                  ].map((data) => (
-                    <img
-                      src={apiurl + data}
-                      alt=""
-                      width="400"
-                      height="300"
-                      style={{
-                        borderRadius: "15px",
-                      }}
-                    />
+                    apiurl + cardData.event_id.thumbnail1,
+                    apiurl + cardData.event_id.thumbnail2,
+                    apiurl + cardData.event_id.thumbnail3,
+                  ].map((item, index) => (
+                    <Carousel.Item>
+                      <img
+                        key={index}
+                        src={item}
+                        alt=""
+                        style={{
+                          width: "100%",
+                          height: "300px",
+                          borderRadius: "10px",
+                        }}
+                      />
+                    </Carousel.Item>
                   ))}
-                </Slider>
+                </Carousel>
               </div>
               <table
                 className="table table-borderless text-center text-white overflow-hidden"
@@ -345,11 +333,26 @@ const SponsorEventBox = (eventData) => {
             boxShadow: "0px 2px 10px -2px rgba(0, 0, 0, 0.25)",
           }}
         >
-          <img
-            src={apiurl + cardData.event_id.thumbnail1}
-            alt=""
-            style={{ width: "100%" }}
-          />
+          <Carousel controls={false}>
+            {[
+              apiurl + cardData.event_id.thumbnail1,
+              apiurl + cardData.event_id.thumbnail2,
+              apiurl + cardData.event_id.thumbnail3,
+            ].map((item, index) => (
+              <Carousel.Item>
+                <img
+                  key={index}
+                  src={item}
+                  alt=""
+                  style={{
+                    width: "100%",
+                    height: "300px",
+                    borderRadius: "10px",
+                  }}
+                />
+              </Carousel.Item>
+            ))}
+          </Carousel>
         </div>
         <div className="container">
           <div className="star d-flex pt-3">

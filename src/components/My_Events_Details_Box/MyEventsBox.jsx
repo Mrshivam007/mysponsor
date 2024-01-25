@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import heart from "../../assets/img/heart2.svg";
 import apiurl from "../../constant/config";
-import Slider from "react-slick";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Carousel } from "react-bootstrap";
 
 const SponsorButton = ({ item, isSelected, onButtonClick }) => {
   return (
@@ -43,14 +43,6 @@ const MyEventsBox = (eventData) => {
       totalAmount += parseFloat(item.price);
     }
   });
-  const settings = {
-    infinite: true, // Loop the slider
-    speed: 500, // Transition speed in milliseconds
-    slidesToShow: 1, // Number of slides to show at a time
-    slidesToScroll: 1, // Number of slides to scroll at a time
-    autoplay: true, // Auto-play the slider
-    autoplaySpeed: 3000, // Auto-play speed in milliseconds
-  };
 
   const [selectedItems, setSelectedItems] = useState([]);
   const [totalSponsoringPrice, setTotalSponsoringPrice] = useState(0);
@@ -88,19 +80,26 @@ const MyEventsBox = (eventData) => {
                   padding: "3%",
                 }}
               >
-                <Slider {...settings}>
+                <Carousel controls={false}>
                   {[
-                    cardData.thumbnail1,
-                    cardData.thumbnail2,
-                    cardData.thumbnail3,
-                  ].map((data) => (
-                    <img
-                      src={apiurl + data}
-                      alt=""
-                      style={{ width: "100%", borderRadius: "15px" }}
-                    />
+                    apiurl + cardData.thumbnail1,
+                    apiurl + cardData.thumbnail2,
+                    apiurl + cardData.thumbnail3,
+                  ].map((item, index) => (
+                    <Carousel.Item>
+                      <img
+                        key={index}
+                        src={item}
+                        alt=""
+                        style={{
+                          width: "100%",
+                          height: "300px",
+                          borderRadius: "10px",
+                        }}
+                      />
+                    </Carousel.Item>
                   ))}
-                </Slider>
+                </Carousel>
               </div>
               <table
                 className="table table-borderless text-center text-white overflow-hidden"
@@ -167,7 +166,7 @@ const MyEventsBox = (eventData) => {
                       borderBottom: "1px solid rgba(255, 255, 255, 0.20)",
                     }}
                   >
-                   Your Sponsoring items
+                    Your Sponsoring items
                   </div>
 
                   <div className="row mx-auto" style={{ width: "100%" }}>
@@ -186,9 +185,7 @@ const MyEventsBox = (eventData) => {
           </div>
           <div className="container mt-2">
             <h5 className="font-weight-bold">Event Description: </h5>
-            <p>
-              {cardData.description}
-            </p>
+            <p>{cardData.description}</p>
           </div>
         </div>
       </div>
@@ -204,17 +201,32 @@ const MyEventsBox = (eventData) => {
             boxShadow: "0px 2px 10px -2px rgba(0, 0, 0, 0.25)",
           }}
         >
-          <img
-            src={apiurl + cardData.thumbnail1}
-            alt=""
-            style={{ width: "100%" }}
-          />
+          <Carousel controls={false}>
+            {[
+              apiurl + cardData.thumbnail1,
+              apiurl + cardData.thumbnail2,
+              apiurl + cardData.thumbnail3,
+            ].map((item, index) => (
+              <Carousel.Item>
+                <img
+                  key={index}
+                  src={item}
+                  alt=""
+                  style={{
+                    width: "100%",
+                    height: "300px",
+                    borderRadius: "10px",
+                  }}
+                />
+              </Carousel.Item>
+            ))}
+          </Carousel>
         </div>
         <div className="container">
           <div className="star d-flex pt-3">
             <h5>
               <i className="bi bi-cash text-success"></i>&nbsp;
-              {totalAmount}&nbsp;&nbsp;
+              {totalAmount}&nbsp;&nbsp;&nbsp;&nbsp;
               <i className="bi bi-people-fill text-danger"></i>&nbsp;
               {cardData.audience_expected}&nbsp;&nbsp;
             </h5>

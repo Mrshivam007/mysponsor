@@ -59,7 +59,7 @@ const UpdateContent = () => {
   const [newThumbnail3, setNewThumbnail3] = useState(null);
 
   const [currentVideo, setCurrentVideo] = useState(
-    contentData.attach_video ? apiurl + contentData.attach_video : null
+    contentData?.attach_video ? apiurl + contentData?.attach_video : null
   );
   const [newVideo, setNewVideo] = useState(null);
 
@@ -471,10 +471,7 @@ const UpdateContent = () => {
               </h1>
               <h2 className="sponsor-mobile-text">Add Photos</h2>
               <p>(atleast 3 photos & 1 video)</p>
-              <div
-                className="box1 mt-2 d-flex justify-content-center p-3"
-                style={{ gap: "2%" }}
-              >
+              <div className="box1 form-photos-box mt-2 d-flex justify-content-center p-3">
                 <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-2">
                   <div className="box text-center">
                     <h5 className="font-weight-bold">Add primary thumbnail</h5>
@@ -618,9 +615,9 @@ const UpdateContent = () => {
                 </div>
               </div>
               <div className="box1 mt-2">
-                <h3 className="d-inline font-weight-bold">
-                  Add Video Preview:&nbsp;&nbsp;&nbsp;
-                </h3>
+                <h4 className="d-inline font-weight-bold">
+                  Add Video:&nbsp;&nbsp;&nbsp;
+                </h4>
                 <input
                   type="file"
                   accept="video/*"

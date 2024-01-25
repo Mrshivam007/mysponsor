@@ -38,7 +38,7 @@ const ContentHome = () => {
           <div className="container choice-boxes my-3">
             <div className="row">
               <div className="col-6">
-                <Link to="/events">
+                <Link to="/your_content">
                   <div className="card-blog choice-box">
                     <img src={calendar} alt="" />
                     <p className="text-center text-white font-weight-bolder mb-0">
@@ -48,7 +48,7 @@ const ContentHome = () => {
                 </Link>
               </div>
               <div className="col-6">
-                <Link to="/sponsored_events">
+                <Link to="/sponsored_contents">
                   <div className="card-blog choice-box">
                     <img src={camera} alt="" />
                     <p className="text-center text-white font-weight-bolder mb-0">
@@ -63,9 +63,9 @@ const ContentHome = () => {
         {/* ---MOBILE VIEW END--- */}
         <div className="container">
           <div className="list-events-box">
-            <h1>
+            <h2>
               List your Content and get sponsored worldwide by different sponsors
-            </h1>
+            </h2>
           </div>
         </div>
         <div className="container mb-5">
@@ -92,7 +92,7 @@ const ContentHome = () => {
                 </div>
               </div>
             </div>
-            <div className="col-12 col-md-4">
+            <div className="col-12 col-md-4 my-md-0 my-3">
               <div className="card list-events-card">
                 <img
                   src={cardImg2}

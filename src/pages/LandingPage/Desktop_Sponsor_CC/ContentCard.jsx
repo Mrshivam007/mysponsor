@@ -2,6 +2,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link, useNavigate } from "react-router-dom";
 import apiurl from "../../../constant/config";
+import "./cc-page.css";
 const ContentCard = ({ line, cardData }) => {
   console.log(cardData);
   const navigate = useNavigate();
@@ -25,7 +26,10 @@ const ContentCard = ({ line, cardData }) => {
         <div className="row">
           {cardData &&
             cardData.map((data) => (
-              <div className="col-lg-6 col-sm-12 mb-3" key={data.id} style={{height: '28vh'}}>
+              <div
+                className="col-lg-6 col-sm-12 mb-3 cc-card-col"
+                key={data.id}
+              >
                 <div className="card">
                   <div
                     className="row g-0"
@@ -59,7 +63,7 @@ const ContentCard = ({ line, cardData }) => {
                         </p>
                       </div>
                     </div>
-                    <div className=" col-2 col-md-2 col-sm-2 pl-lg-0 pr-0">
+                    <div className="col-2 col-md-2 col-sm-2 pl-lg-0 pr-0">
                       <button
                         className="btn btn-primary btn-block"
                         style={{

@@ -71,7 +71,7 @@ const LiveContent = () => {
             </div>
           </div>
         )}
-        <MyContentCard cardData={ContentDetails.contentDetails?.live_content} />
+        <MyContentCard heading={"My Live Content"} cardData={ContentDetails.contentDetails?.live_content} />
         <Footer />
       </div>
     </>
