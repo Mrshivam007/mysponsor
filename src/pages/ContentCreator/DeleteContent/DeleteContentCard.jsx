@@ -13,10 +13,20 @@ const DeleteContentCard = ({ cardData }) => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
 
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
+
+  const [modalStates, setModalStates] = useState({});
+
+  const handleClose = (content_id) => {
+    setModalStates({ ...modalStates, [content_id]: false });
+  };
+
+  const handleShow = (content_id) => {
+    setModalStates({ ...modalStates, [content_id]: true });
+  };
 
   const dispatch = useDispatch();
   const ContentDetails = useSelector((state) => state.event);
@@ -142,7 +152,8 @@ const DeleteContentCard = ({ cardData }) => {
                               <div
                                 className="box myevents-box bg-danger"
                                 style={{ cursor: "pointer" }}
-                                onClick={handleShow}
+                                // onClick={handleShow}
+                                onClick={() => handleShow(data.content_id)}
                               >
                                 <h5 className="mb-0 mt-2">
                                   <i className="bi bi-trash"></i>
@@ -150,8 +161,10 @@ const DeleteContentCard = ({ cardData }) => {
                                 <h6>Delete Content</h6>
                               </div>
                               <Modal
-                                show={show}
-                                onHide={handleClose}
+                                // show={show}
+                                // onHide={handleClose}
+                                show={modalStates[data.content_id] || false}
+                                onHide={() => handleClose(data.content_id)}
                                 scrollable={true}
                                 style={{ zIndex: "2000" }}
                               >
@@ -165,14 +178,14 @@ const DeleteContentCard = ({ cardData }) => {
                                 </Modal.Body>
                                 <Modal.Footer>
                                   <Button
-                                    variant="primary"
+                                    variant="danger"
                                     onClick={() => handleDeletion(data)}
                                   >
                                     Yes
                                   </Button>
                                   <Button
-                                    variant="secondary"
-                                    onClick={handleClose}
+                                    variant="success"
+                                    onClick={() => handleClose(data.content_id)}
                                   >
                                     No
                                   </Button>

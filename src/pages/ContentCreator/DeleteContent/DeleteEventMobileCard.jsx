@@ -14,10 +14,20 @@ const Delete_MobileCards = ({ line, cardData }) => {
 
   const navigate = useNavigate();
 
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
+
+  const [modalStates, setModalStates] = useState({});
+
+  const handleClose = (content_id) => {
+    setModalStates({ ...modalStates, [content_id]: false });
+  };
+
+  const handleShow = (content_id) => {
+    setModalStates({ ...modalStates, [content_id]: true });
+  };
 
   // const handleSponsorClick = (data) => {
   //   navigate("/update_event", { state: { eventData: data } });
@@ -65,13 +75,16 @@ const Delete_MobileCards = ({ line, cardData }) => {
                         borderRadius: "0px 0px 10px 10px",
                         margin: "0% 0% 5% 5%",
                       }}
-                      onClick={handleShow}
+                      // onClick={handleShow}
+                      onClick={() => handleShow(data.content_id)}
                     >
                       Delete
                     </button>
                     <Modal
-                      show={show}
-                      onHide={handleClose}
+                      // show={show}
+                      // onHide={handleClose}
+                      show={modalStates[data.content_id] || false}
+                      onHide={() => handleClose(data.content_id)}
                       scrollable={true}
                       style={{ zIndex: "2000" }}
                     >
@@ -88,7 +101,10 @@ const Delete_MobileCards = ({ line, cardData }) => {
                         >
                           Yes
                         </Button>
-                        <Button variant="success" onClick={handleClose}>
+                        <Button
+                          variant="success"
+                          onClick={() => handleClose(data.content_id)}
+                        >
                           No
                         </Button>
                       </Modal.Footer>
