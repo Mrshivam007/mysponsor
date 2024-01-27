@@ -1,12 +1,4 @@
 import React, { useEffect } from "react";
-import info from "../../../assets/img/info.svg";
-import heart from "../../../assets/img/heart2.svg";
-import cardImg from "../../../assets/img/my_events_img.png";
-import bgimage from "../../../assets/img/circle-bg.png";
-import card_bg from "../../../assets/img/card/header-bg.png";
-import { Footer, NavBar } from "../../../components";
-import { fetchEvent } from "../../../redux/actions/eventAction";
-import { useDispatch, useSelector } from "react-redux";
 import apiurl from "../../../constant/config";
 import { Link, useNavigate } from "react-router-dom";
 const MyContentCard = ({ cardData, heading }) => {
@@ -46,16 +38,25 @@ const MyContentCard = ({ cardData, heading }) => {
                       }}
                     >
                       <div className="row mx-0">
-                        <div className="col-3 p-3">
-                          <img
-                            src={apiurl + data.thumbnail1}
-                            alt=""
+                        <div className="col-3 p-0">
+                          <div
+                            className="img-container mx-auto"
                             style={{
-                              width: "100%",
-                              height: "100%",
-                              borderRadius: "15px",
+                              width: "fit-content",
+                              height: "200px",
+                              padding: "4%",
                             }}
-                          />
+                          >
+                            <img
+                              src={apiurl + data.thumbnail1}
+                              alt=""
+                              style={{
+                                width: "100%",
+                                height: "100%",
+                                borderRadius: "10px",
+                              }}
+                            />
+                          </div>
                         </div>
                         <div className="col-5">
                           <div
@@ -175,13 +176,17 @@ const MyContentCard = ({ cardData, heading }) => {
                 <div className="row">
                   <div className="col-12">
                     <div className="card myevents-card">
-                      <div className="post-thumb">
+                      <div className="post-thumb" style={{ height: "40svh" }}>
                         <img
                           src={apiurl + data.thumbnail1}
                           alt=""
-                          style={{ width: "100%", borderRadius: "10px" }}
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            borderRadius: "10px",
+                          }}
                         />
-                        <div className="text-overlay">
+                        <div className="content-text-overlay">
                           <h4 className="font-weight-bold mb-0">
                             {data.title}
                           </h4>

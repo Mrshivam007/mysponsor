@@ -27,7 +27,7 @@ const UpcomingEvent = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [deletionMessage, setDeletionMessage] = useState("");
   useEffect(() => {
-    dispatch(fetchEventbyId(userDetails.user_id))
+    dispatch(fetchEventbyId(userDetails.user_id));
   }, []);
 
   useEffect(() => {
@@ -108,6 +108,7 @@ const UpcomingEvent = () => {
             Load More
           </div>
         </div>
+        <Footer />
       </div>
     </>
   );

@@ -2,29 +2,35 @@ import React, { useEffect, useState } from "react";
 import noProfilepic from "../../../assets/img/emptyprofile2.jpg";
 import "./profile.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createEventProfile, createSponsorProfile, getEventProfile, getSponsorProfile } from "../../../redux/actions/profileAction";
+import {
+  createEventProfile,
+  createSponsorProfile,
+  getEventProfile,
+  getSponsorProfile,
+} from "../../../redux/actions/profileAction";
 const EventProfileInfo = () => {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
   const dispatch = useDispatch();
-  const profileDetails = useSelector(state => state.sponsorProfile)
+  const profileDetails = useSelector((state) => state.sponsorProfile);
   useEffect(() => {
-    dispatch(getEventProfile())
-  }, [])
+    dispatch(getEventProfile());
+  }, []);
 
   console.log("Sponsor Profile ", profileDetails);
   // const [businessName, setBusinessName] = useState('');
-  const [businessType, setBusinessType] = useState('');
-  const [contact, setContact] = useState('');
+  const [businessType, setBusinessType] = useState("");
+  const [contact, setContact] = useState("");
   console.log(profileDetails?.eventDetails?.business_name);
 
-  const [businessName, setBusinessName] = useState(profileDetails?.eventDetails?.business_name || '');
+  const [businessName, setBusinessName] = useState(
+    profileDetails?.eventDetails?.business_name || ""
+  );
 
   const handleBusinessNameChange = (e) => {
     setBusinessName(e.target.value);
   };
-
 
   const [profilePic, setProfilePic] = useState(null);
 
@@ -40,7 +46,6 @@ const EventProfileInfo = () => {
     }
   };
 
-
   const auth = useSelector((state) => state.auth);
   const { userDetails } = auth;
   // console.log("Sponsor Profile ",userDetails);
@@ -48,9 +53,18 @@ const EventProfileInfo = () => {
   const handleSubmitClick = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("organisation_name", profileDetails?.eventDetails?.organisation_name || businessName );
-    formData.append("contact_no", profileDetails?.eventDetails?.contact_no || contact);
-    formData.append("event_type", profileDetails?.eventDetails?.event_type || businessType);
+    formData.append(
+      "organisation_name",
+      profileDetails?.eventDetails?.organisation_name || businessName
+    );
+    formData.append(
+      "contact_no",
+      profileDetails?.eventDetails?.contact_no || contact
+    );
+    formData.append(
+      "event_type",
+      profileDetails?.eventDetails?.event_type || businessType
+    );
     formData.append("user_id", userDetails?.user_id);
     try {
       // Make POST API call
@@ -155,8 +169,12 @@ const EventProfileInfo = () => {
                         id="inputOrgName"
                         type="text"
                         placeholder="Enter your organization name"
-                        value={profileDetails?.eventDetails?.organisation_name || businessName}
-                        onChange={(e) => setBusinessName(e.target.value)} />
+                        value={
+                          profileDetails?.eventDetails?.organisation_name ||
+                          businessName
+                        }
+                        onChange={(e) => setBusinessName(e.target.value)}
+                      />
                     </div>
                     <div className="col-md-6">
                       <label className="small mb-1" for="inputLocation">
@@ -167,7 +185,10 @@ const EventProfileInfo = () => {
                         id="inputLocation"
                         type="text"
                         placeholder="Enter your location"
-                        value={profileDetails?.eventDetails?.event_type || businessType}
+                        value={
+                          profileDetails?.eventDetails?.event_type ||
+                          businessType
+                        }
                         onChange={(e) => setBusinessType(e.target.value)}
                       />
                     </div>
@@ -181,8 +202,11 @@ const EventProfileInfo = () => {
                       id="inputEmailAddress"
                       type="email"
                       placeholder="Enter your email address"
-                      value={profileDetails?.eventDetails?.contact_no || contact}
-                      onChange={(e) => setContact(e.target.value)} />
+                      value={
+                        profileDetails?.eventDetails?.contact_no || contact
+                      }
+                      onChange={(e) => setContact(e.target.value)}
+                    />
                   </div>
                   {/* <div className="row gx-3 mb-3">
                     <div className="col-md-6">
@@ -209,7 +233,11 @@ const EventProfileInfo = () => {
                       />
                     </div>
                   </div> */}
-                  <button className="btn btn-primary" type="button" onClick={handleSubmitClick}>
+                  <button
+                    className="btn btn-primary"
+                    type="button"
+                    onClick={handleSubmitClick}
+                  >
                     Save changes
                   </button>
                 </form>

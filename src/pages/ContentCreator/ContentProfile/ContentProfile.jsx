@@ -6,7 +6,16 @@ import { NavBar } from "../../../components";
 import ContentProfileInfo from "./ContentProfileInfo";
 import ContentSecurity from "./ContentSecurity";
 import ContentNotification from "./ContentNotification";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../../../redux/actions/authActions";
 const ContentProfile = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
+  };
   return (
     <>
       <div
@@ -34,6 +43,11 @@ const ContentProfile = () => {
               <ContentNotification />
             </Tab>
           </Tabs>
+        </div>
+        <div className="container px-3 pt-0 pb-3 d-sm-none">
+          <button className="btn btn-danger w-100" onClick={handleLogout}>
+            Logout
+          </button>
         </div>
         <Footer />
       </div>

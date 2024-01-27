@@ -29,11 +29,11 @@ const EventMobileCard = ({ line, cardData }) => {
               <div className="col py-3" style={{paddingLeft: "8px", paddingRight: '8px'}}>
                 <div className="card-blog">
                   <div className="header">
-                    <div className="post-thumb">
+                    <div className="post-thumb" style={{height:"200px"}}>
                       <img
                         src={apiurl + data.thumbnail1}
                         alt=""
-                        style={{ width: "100%" }}
+                        style={{ width: "100%",height:"100%" }}
                         className="sponser_card_img"
                       />
                       <div className="text-overlay">

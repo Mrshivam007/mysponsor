@@ -10,9 +10,8 @@ const Update_MobileCards = ({ line, cardData }) => {
   console.log(userDetails);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchEventbyId(userDetails.user_id))
+    dispatch(fetchEventbyId(userDetails.user_id));
   }, [dispatch]);
-  
 
   const navigate = useNavigate();
 
@@ -29,11 +28,14 @@ const Update_MobileCards = ({ line, cardData }) => {
               <div className="col py-3">
                 <div className="card-blog">
                   <div className="header">
-                    <div className="post-thumb">
+                    <div
+                      className="post-thumb"
+                      style={{ width: "100%", height: "200px" }}
+                    >
                       <img
                         src={apiurl + data.thumbnail1}
                         alt=""
-                        style={{ width: "100%" }}
+                        style={{ width: "100%", height: "100%" }}
                         className="sponser_card_img"
                       />
                       <div className="text-overlay">

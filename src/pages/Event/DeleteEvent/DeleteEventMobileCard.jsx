@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { deleteEvent, fetchEvent, fetchEventbyId } from "../../../redux/actions/eventAction";
+import {
+  deleteEvent,
+  fetchEvent,
+  fetchEventbyId,
+} from "../../../redux/actions/eventAction";
 import apiurl from "../../../constant/config";
 
 const Delete_MobileCards = ({ line, cardData }) => {
@@ -17,15 +21,25 @@ const Delete_MobileCards = ({ line, cardData }) => {
 
   const navigate = useNavigate();
 
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
+
+  const [modalStates, setModalStates] = useState({});
+
+  const handleClose = (event_id) => {
+    setModalStates({ ...modalStates, [event_id]: false });
+  };
+
+  const handleShow = (event_id) => {
+    setModalStates({ ...modalStates, [event_id]: true });
+  };
 
   // const handleSponsorClick = (data) => {
   //   navigate("/update_event", { state: { eventData: data } });
   // };
-
+  console.log("Deletion Data", cardData);
   const handleDeletion = (data) => {
     dispatch(deleteEvent(data.event_id));
     sessionStorage.setItem("deletionMessage", "Your Event has been Deleted!!!");
@@ -41,11 +55,14 @@ const Delete_MobileCards = ({ line, cardData }) => {
               <div className="col py-3">
                 <div className="card-blog">
                   <div className="header">
-                    <div className="post-thumb">
+                    <div
+                      className="post-thumb"
+                      style={{ width: "100%", height: "200px" }}
+                    >
                       <img
                         src={apiurl + data.thumbnail1}
                         alt=""
-                        style={{ width: "100%" }}
+                        style={{ width: "100%", height: "100%" }}
                         className="sponser_card_img"
                       />
                       <div className="text-overlay">
@@ -56,20 +73,22 @@ const Delete_MobileCards = ({ line, cardData }) => {
                       </div>
                     </div>
                     <button
-                      className="btn text-lg text-white font-weight-bold"
+                      className="btn btn-danger text-lg font-weight-bold"
                       style={{
                         width: "90%",
                         borderRadius: "0px 0px 10px 10px",
                         margin: "0% 0% 5% 5%",
-                        backgroundColor: "red",
                       }}
-                      onClick={handleShow}
+                      // onClick={handleShow}
+                      onClick={() => handleShow(data.event_id)}
                     >
                       Delete
                     </button>
                     <Modal
-                      show={show}
-                      onHide={handleClose}
+                      show={modalStates[data.event_id] || false}
+                      onHide={() => handleClose(data.event_id)}
+                      // show={show}
+                      // onHide={handleClose}
                       scrollable={true}
                       style={{ zIndex: "2000" }}
                     >
@@ -86,7 +105,11 @@ const Delete_MobileCards = ({ line, cardData }) => {
                         >
                           Yes
                         </Button>
-                        <Button variant="success" onClick={handleClose}>
+                        <Button
+                          variant="success"
+                          // onClick={handleClose}
+                          onClick={() => handleClose(data.event_id)}
+                        >
                           No
                         </Button>
                       </Modal.Footer>

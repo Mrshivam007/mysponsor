@@ -4,7 +4,7 @@
         border-radius: 20px;
     }
 
-    .post-thumb {
+    .sponsor-cards-mobile .post-thumb {
         background-color: #fff;
         padding: 5%;
     }
@@ -13,15 +13,20 @@
         border-radius: 10px 10px 0px 0px;
     }
 
-    .text-overlay {
+    .sponsor-cards-mobile .text-overlay {
+        text-align: start;
         position: absolute;
-        top: 80%;
-        left: 51%;
-        width: 89%;
-        transform: translate(-50%, -50%);
+        top: 0;
+        left: 9px;
         color: white;
-        background-color: rgba(0, 0, 0, 0.3);
-        padding: 10px;
+        text-shadow: black 2px 2px;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        width: 89%;
+        height: 95%;
+        background-color: rgba(0, 0, 0, 0);
+        padding-left: 4%;
         padding-bottom: 0;
     }
 }

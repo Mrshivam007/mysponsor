@@ -74,7 +74,7 @@ const Update_UpcomingContent = () => {
         </div>
         <div className="events-page-mobile">
           <Update_MobileCards
-            line={"Update Your Content"}
+            line={"Update My Content"}
             cardData={contentDetails.contentDetails?.live_content}
           />
           <div

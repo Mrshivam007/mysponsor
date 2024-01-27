@@ -1,5 +1,10 @@
 .footer-logo {
-  height: 120px;
+  height: 130px;
+}
+
+.footer-logo img {
+  margin: auto;
+  /* Hide sponsor-desktop */
 }
 
 /* For screens 768px or smaller (mobile) */
@@ -8,12 +13,6 @@
     text-align: center;
     /* Hide sponsor-desktop */
   }
-
-  .footer-logo img {
-    margin: auto;
-    /* Hide sponsor-desktop */
-  }
-
 
   .footer-heading {
     color: #FFF;

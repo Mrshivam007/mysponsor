@@ -6,7 +6,8 @@
 .event-form .box1 {
     width: 100%;
     height: auto;
-    padding: 3%
+    padding: 3%;
+    gap: 30px;
 }
 
 .error-msg {

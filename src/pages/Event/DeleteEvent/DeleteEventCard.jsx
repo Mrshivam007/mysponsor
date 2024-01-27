@@ -20,10 +20,20 @@ const Delete_EventCard = ({ cardData }) => {
   const { userDetails } = auth;
   console.log(userDetails);
 
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
+
+  const [modalStates, setModalStates] = useState({});
+
+  const handleClose = (event_id) => {
+    setModalStates({ ...modalStates, [event_id]: false });
+  };
+
+  const handleShow = (event_id) => {
+    setModalStates({ ...modalStates, [event_id]: true });
+  };
 
   const dispatch = useDispatch();
   const eventDetails = useSelector((state) => state.event);
@@ -76,16 +86,25 @@ const Delete_EventCard = ({ cardData }) => {
                         }}
                       >
                         <div className="row mx-0">
-                          <div className="col-3 p-3">
-                            <img
-                              src={apiurl + data.thumbnail1}
-                              alt=""
+                          <div className="col-3 p-0">
+                            <div
+                              className="img-container mx-auto"
                               style={{
-                                width: "100%",
-                                height: "100%",
-                                borderRadius: "15px",
+                                width: "fit-content",
+                                height: "200px",
+                                padding: "4%",
                               }}
-                            />
+                            >
+                              <img
+                                src={apiurl + data.thumbnail1}
+                                alt=""
+                                style={{
+                                  width: "100%",
+                                  height: "100%",
+                                  borderRadius: "10px",
+                                }}
+                              />
+                            </div>
                           </div>
                           <div className="col-5 mt-3">
                             <div
@@ -166,7 +185,8 @@ const Delete_EventCard = ({ cardData }) => {
                                 <div
                                   className="box myevents-box bg-danger"
                                   style={{ cursor: "pointer" }}
-                                  onClick={handleShow}
+                                  // onClick={handleShow}
+                                  onClick={() => handleShow(data.event_id)}
                                 >
                                   <h4 className="mb-0 mt-2">
                                     <i className="bi bi-trash"></i>
@@ -174,8 +194,10 @@ const Delete_EventCard = ({ cardData }) => {
                                   <h5>Delete Event</h5>
                                 </div>
                                 <Modal
-                                  show={show}
-                                  onHide={handleClose}
+                                  // show={show}
+                                  // onHide={handleClose}
+                                  show={modalStates[data.event_id] || false}
+                                  onHide={() => handleClose(data.event_id)}
                                   scrollable={true}
                                   style={{ zIndex: "2000" }}
                                 >
@@ -189,14 +211,15 @@ const Delete_EventCard = ({ cardData }) => {
                                   </Modal.Body>
                                   <Modal.Footer>
                                     <Button
-                                      variant="primary"
+                                      variant="danger"
                                       onClick={() => handleDeletion(data)}
                                     >
                                       Yes
                                     </Button>
                                     <Button
-                                      variant="secondary"
-                                      onClick={handleClose}
+                                      variant="success"
+                                      // onClick={handleClose}
+                                      onClick={() => handleClose(data.event_id)}
                                     >
                                       No
                                     </Button>

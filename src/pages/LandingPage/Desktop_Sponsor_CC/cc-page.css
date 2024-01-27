@@ -1,10 +1,18 @@
 .cc-card-col {
-    height: 24vh
+    height: 100%;
 }
 
 @media (max-width:576px) {
     .events-bg {
         background-color: #EFEFEF;
+    }
+
+    .cc-cards-desktop {
+        display: none;
+    }
+
+    .cc-card-col {
+        padding: 0 4% 0 0;
     }
 }
 
@@ -12,13 +20,12 @@
     .cc-cards-mobile {
         display: none;
     }
-}
 
-@media (max-width:576px) {
-    .cc-cards-desktop {
-        display: none;
+    .cc-card-col {
+        height: 24vh
     }
 }
+
 
 @media (min-width:768px) and (max-width:991px) {
     .cc-card-col {

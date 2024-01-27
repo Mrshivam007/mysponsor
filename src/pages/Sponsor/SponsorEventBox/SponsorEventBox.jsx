@@ -22,58 +22,11 @@ const SponsorButton = ({ item, preview, isSelected, onButtonClick }) => {
           className="post-thumb text-dark py-1"
           style={{ backgroundColor: "#f2f2f2", borderRadius: "10px" }}
         >
-          <h6 className="font-weight-bolder">
-            {item.sponsoring_items} <br />
-          </h6>
-          <Button
-            className="px-2 py-1 rounded-pill"
-            variant="primary"
-            onClick={handleShow}
-          >
-            Preview
-          </Button>
-          {/* <!-- Modal --> */}
-
-          <Modal
-            show={show}
-            onHide={handleClose}
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-          >
-            <Modal.Header
-              className="p-2 border-black border-bottom-1"
-              closeButton
-            >
-              <Modal.Title id="contained-modal-title-vcenter">
-                {item.sponsoring_items} Preview
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body
-              className="p-0"
-              style={{
-                backgroundImage: `url(${modalBackground})`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-              }}
-            >
-              <Container className="d-flex justify-content-center">
-                <img src={banner_preview} alt="banner-preview" />
-                <div style={{ position: "absolute", top: "70px" }}>
-                  <img
-                    src={preview}
-                    alt="banner-img-preview"
-                    style={{ width: "449px", height: "220px" }}
-                  />
-                </div>
-              </Container>
-            </Modal.Body>
-            <Modal.Footer className="p-0 justify-content-between">
-              <Button className="p-2" variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
-            </Modal.Footer>
-          </Modal>
+          <h6 className="font-weight-bolder">{item.sponsoring_items}</h6>
+          <p>
+            <i className="bi bi-cash text-success"></i>
+            <span>₹{item.price}</span>
+          </p>
         </div>
       </div>
     </>
@@ -100,7 +53,7 @@ const SponsorEventBox = (eventData) => {
   const { SponsoringItem, loading } = sponsor;
 
   console.log("Sponsoring Items", sponsoring_items);
-
+  console.log("CardData", cardData);
   console.log("Sponsor Id ", userDetails?.user_id);
 
   const handleBannerImgChange = (e) => {
@@ -163,7 +116,6 @@ const SponsorEventBox = (eventData) => {
       totalAmount += parseFloat(item.price);
     }
   });
-
 
   const [selectedItems, setSelectedItems] = useState([]);
   const [totalSponsoringPrice, setTotalSponsoringPrice] = useState(0);
@@ -313,7 +265,7 @@ const SponsorEventBox = (eventData) => {
             Add Photos & Videos
           </h1>
           <h2 className="sponsor-mobile-text">Add Photos</h2>
-          <p>(atleast 3 photos & 1 video)</p>
+          <p>(atleast 1 photo & 1 video)</p>
 
           {cardData?.sponsoring_items.map((item, index) => (
             <div
@@ -324,7 +276,7 @@ const SponsorEventBox = (eventData) => {
               {item.sponsoring_items === "banner" && (
                 <div
                   className="box photo-box bg-white d-flex justify-content-center align-items-start p-3"
-                  style={{ width: "40%" }}
+                  style={{ width: "50%" }}
                 >
                   <div className="box text-center">
                     <h5 className="font-weight-bold">Add Banner Image</h5>
@@ -334,38 +286,40 @@ const SponsorEventBox = (eventData) => {
                       onChange={handleBannerImgChange}
                       style={{ width: "74%", borderRadius: "0" }}
                     />
-                    {apiurl + cardData?.banner_image &&
-                      bannerImage === null && (
-                        <div>
-                          <h2>Preview:</h2>
-                          <img
-                            className="mx-auto"
-                            src={
-                              apiurl + cardData?.banner_image ||
-                              URL.createObjectURL(bannerImage)
-                            }
-                            alt="Preview"
-                            width="200"
-                          />
-                        </div>
-                      )}
-                    {bannerImage && (
+                    {cardData?.banner_image && bannerImage === null ? (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          className="mx-auto"
+                          src={
+                            apiurl + cardData?.banner_image ||
+                            URL.createObjectURL(bannerImage)
+                          }
+                          alt="Preview"
+                          width="200"
+                        />
+                      </div>
+                    ) : null}
+                    {bannerImage ? (
                       <div>
                         <h2>Preview:</h2>
                         <img
                           className="mx-auto"
                           src={URL.createObjectURL(bannerImage)}
-                          alt="Preview"
+                          alt=""
                           width="200"
                         />
                       </div>
-                    )}
+                    ) : null}
                   </div>
                 </div>
               )}
 
               {item.sponsoring_items === "led_screen" && (
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
+                <div
+                  className="box photo-box bg-white d-flex justify-content-center align-items-start p-3 w-md-50"
+                  style={{ width: "50%" }}
+                >
                   <div className="box text-center">
                     <h5 className="font-weight-bold">Add Led Image</h5>
                     <input
@@ -374,18 +328,21 @@ const SponsorEventBox = (eventData) => {
                       onChange={handleLedImgChange}
                       style={{ width: "74%", borderRadius: "0" }}
                     />
-                    {apiurl + cardData?.led_image && ledImage === null && (
+                    {cardData?.led_image && ledImage === null ? (
                       <div>
                         <h2>Preview:</h2>
                         <img
                           className="mx-auto"
-                          src={apiurl + cardData?.led_image}
-                          alt="Preview"
+                          src={
+                            apiurl + cardData?.led_image ||
+                            URL.createObjectURL(ledImage)
+                          }
+                          alt=""
                           width="200"
                         />
                       </div>
-                    )}
-                    {ledImage && (
+                    ) : null}
+                    {ledImage ? (
                       <div>
                         <h2>Preview:</h2>
                         <img
@@ -395,13 +352,16 @@ const SponsorEventBox = (eventData) => {
                           width="200"
                         />
                       </div>
-                    )}
+                    ) : null}
                   </div>
                 </div>
               )}
 
               {item.sponsoring_items === "led_screen" && (
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
+                <div
+                  className="box photo-box bg-white d-flex justify-content-center align-items-start p-3 w-md-50"
+                  style={{ width: "50%" }}
+                >
                   <div className="box text-center">
                     <h5 className="font-weight-bold">Add Led Video</h5>
                     <input
@@ -410,28 +370,33 @@ const SponsorEventBox = (eventData) => {
                       onChange={handleLedVidChange}
                       style={{ width: "74%", borderRadius: "0" }}
                     />
-                    {apiurl + cardData?.banner_image && ledVideo == null && (
+                    {cardData?.led_video && ledVideo == null ? (
                       <div>
                         <h2>Preview:</h2>
                         <video width="200" controls className="mx-auto">
                           <source
-                            src={apiurl + cardData?.led_video}
+                            src={
+                              apiurl + cardData?.led_video ||
+                              URL.createObjectURL(ledVideo)
+                            }
                             type="video/mp4"
                           />
                           Your browser does not support the video tag.
                         </video>
                       </div>
-                    )}
-                    {ledVideo && (
+                    ) : null}
+                    {ledVideo ? (
                       <div>
                         <h2>Preview:</h2>
-                        <img
-                          src={URL.createObjectURL(ledVideo)}
-                          alt="Preview"
-                          width="200"
-                        />
+                        <video width="200" controls className="mx-auto">
+                          <source
+                            src={URL.createObjectURL(ledVideo)}
+                            type="video/mp4"
+                          />
+                          Your browser does not support the video tag.
+                        </video>
                       </div>
-                    )}
+                    ) : null}
                   </div>
                 </div>
               )}
@@ -576,6 +541,39 @@ const SponsorEventBox = (eventData) => {
               </td>
             </tr>
           </table>
+        </div>
+        <div className="container px-1">
+          <div className="row g-0">
+            <div
+              className="box text-white"
+              style={{
+                backgroundColor: "#004EA9",
+                width: "100%",
+                borderRadius: "10px",
+                marginTop: "3%",
+              }}
+            >
+              <div
+                className="col-12 font-weight-bolder text-center"
+                style={{
+                  padding: "3% 0 2% 0",
+                  borderBottom: "1px solid rgba(255, 255, 255, 0.20)",
+                }}
+              >
+                Sponsoring items
+              </div>
+              <div className="row mx-auto" style={{ width: "100%" }}>
+                {cardData.sponsoring_items.map((item, index) => (
+                  <SponsorButton
+                    key={index}
+                    item={item}
+                    isSelected={selectedItems.includes(item)}
+                    onButtonClick={handleButtonClick}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
         <div className="container">
           <h2 className="sponsor-mobile-text pl-0">Add Photos</h2>
@@ -730,39 +728,6 @@ const SponsorEventBox = (eventData) => {
             value="List Promotion"
             onClick={handleSubmitClick}
           />
-        </div>
-        <div className="container px-1">
-          <div className="row g-0">
-            <div
-              className="box text-white"
-              style={{
-                backgroundColor: "#004EA9",
-                width: "100%",
-                borderRadius: "10px",
-                marginTop: "3%",
-              }}
-            >
-              <div
-                className="col-12 font-weight-bolder text-center"
-                style={{
-                  padding: "3% 0 2% 0",
-                  borderBottom: "1px solid rgba(255, 255, 255, 0.20)",
-                }}
-              >
-                Sponsoring items
-              </div>
-              <div className="row mx-auto" style={{ width: "100%" }}>
-                {cardData.sponsoring_items.map((item, index) => (
-                  <SponsorButton
-                    key={index}
-                    item={item}
-                    isSelected={selectedItems.includes(item)}
-                    onButtonClick={handleButtonClick}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
         <h5 className="mt-2 font-weight-bold">Event Description: </h5>
         <p>{cardData.event_id.description}</p>

@@ -53,16 +53,25 @@ const SponsoredEvent = () => {
                         }}
                       >
                         <div className="row mx-0">
-                          <div className="col-3 p-3">
-                            <img
-                              src={apiurl + data.event_id.thumbnail1}
-                              alt=""
+                        <div className="col-3 p-0">
+                            <div
+                              className="img-container mx-auto"
                               style={{
-                                width: "100%",
-                                height: "100%",
-                                borderRadius: "15px",
+                                width: "fit-content",
+                                height: "223px",
+                                padding: "4%",
                               }}
-                            />
+                            >
+                              <img
+                                src={apiurl + data.event_id.thumbnail1}
+                                alt=""
+                                style={{
+                                  width: "100%",
+                                  height: "100%",
+                                  borderRadius: "10px",
+                                }}
+                              />
+                            </div>
                           </div>
                           <div className="col-5">
                             <div
@@ -190,11 +199,15 @@ const SponsoredEvent = () => {
                   <div className="row">
                     <div className="col-12">
                       <div className="card myevents-card">
-                        <div className="post-thumb">
+                        <div className="post-thumb" style={{ height: "40svh" }}>
                           <img
                             src={apiurl + data.event_id.thumbnail1}
                             alt=""
-                            style={{ width: "100%", borderRadius: "10px" }}
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              borderRadius: "10px",
+                            }}
                           />
                           <div
                             className="text-overlay"

@@ -79,10 +79,6 @@
         display: none;
     }
 
-    .banner-btn {
-        display: none !important;
-    }
-
     .banner-wrap {
         padding-bottom: 0px !important;
     }
@@ -102,6 +98,21 @@
         letter-spacing: -0.8px;
         margin-bottom: 6%;
     }
+
+    .banner-btn {
+        width: auto;
+        padding: 1% 4% 1% 4%;
+        margin-top: 2%;
+    }
+
+    .banner-btn-text {
+        color: #FFF;
+        text-align: center;
+        font-family: 'League Spartan';
+        font-size: medium;
+        font-style: normal;
+        line-height: normal;
+    }
 }
 
 @media (min-width: 767px) {
@@ -115,7 +126,7 @@
 }
 
 @media (min-width: 767px) and (max-width:991px) {
-    .banner-btn{
+    .banner-btn {
         width: 35%;
     }
 }

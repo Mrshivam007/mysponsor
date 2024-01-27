@@ -50,10 +50,15 @@ const SponserE = ({ line, cardData }) => {
                           className="sponser_card_img"
                         />
                         <div className="text-overlay">
-                          <p className="text-lg font-weight-bold mb-0">
+                          <p
+                            className="text-lg font-weight-bold mb-0"
+                            style={{ textShadow: "2px 2px black" }}
+                          >
                             {data.title}
                           </p>
-                          <p>{data.location}</p>
+                          <p style={{ textShadow: "2px 2px black" }}>
+                            {data.location}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -122,7 +127,7 @@ const SponserE = ({ line, cardData }) => {
             </div>
           </div>
         </div>
-        <div className="sponsor-mobile">
+        <div className="landing-page sponsor-mobile">
           {/* <div className="row my-5"> */}
           <div className="row" style={{ flexWrap: "nowrap" }}>
             <div
@@ -152,6 +157,17 @@ const SponserE = ({ line, cardData }) => {
                               style={{ width: "100%" }}
                               className="sponser_card_img"
                             />
+                            <div className="text-overlay">
+                              <p
+                                className="text-lg font-weight-bold mb-0"
+                                style={{ textShadow: "2px 2px black" }}
+                              >
+                                {data.title}
+                              </p>
+                              <p style={{ textShadow: "2px 2px black" }}>
+                                {data.location}
+                              </p>
+                            </div>
                           </div>
                           <button
                             className="btn text-lg text-white font-weight-bold"

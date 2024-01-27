@@ -30,7 +30,7 @@ const ContentCard = ({ line, cardData }) => {
                 className="col-lg-6 col-sm-12 mb-3 cc-card-col"
                 key={data.id}
               >
-                <div className="card">
+                <div className="card h-auto">
                   <div
                     className="row g-0"
                     style={{ width: "auto", height: "100%" }}
@@ -47,16 +47,13 @@ const ContentCard = ({ line, cardData }) => {
                         <h5 className="card-title font-weight-bold d-inline">
                           {data.title}
                         </h5>
-                        <br />
                         <span className="card-text">
                           Platform: {data.content_platform}
                         </span>
-                        <br />
                         <span className="card-text">
                           <i className="bi bi-cash text-success"></i>
                           &nbsp;&nbsp; {data.content_category}
                         </span>
-                        <br />
                         <p className="card-text">
                           <i className="bi bi-people-fill text-danger"></i>
                           &nbsp;&nbsp; {data.audience_expected}
@@ -83,7 +80,7 @@ const ContentCard = ({ line, cardData }) => {
         </div>
         <div
           className="container d-flex justify-content-center"
-          style={{ paddingBottom: "4vh" }}
+          style={{ paddingBottom: "4vh",marginTop:"5%" }}
         >
           <Link to="/cc">
             <button

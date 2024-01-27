@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import heart from "../../../assets/img/heart2.svg";
 import apiurl from "../../../constant/config";
+import "../YourEvent/sponsoredevent.css";
 import banner_preview from "../../../assets/img/Banner/banner-preview-img.png";
 import modalBackground from "../../../assets/img/Banner/modal-background.webp";
-import Slider from "react-slick";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button, Carousel, Container, Modal } from "react-bootstrap";
 
@@ -33,6 +33,7 @@ const SponsorButton = ({ item, cardData, isSelected, onButtonClick }) => {
         {/* <!-- Modal --> */}
 
         <Modal
+          className="preview-modal"
           show={show}
           onHide={handleClose}
           size="lg"
@@ -55,48 +56,37 @@ const SponsorButton = ({ item, cardData, isSelected, onButtonClick }) => {
             <Container className="d-flex justify-content-center">
               {item.sponsoring_items === "banner" && (
                 <>
-                  <img src={banner_preview} alt="banner-preview" />
-                  <div
-                    style={{
-                      position: "absolute",
-                      left: "21.9%",
-                      top: "13.4%",
-                    }}
-                  >
+                  <img
+                    className="w-100"
+                    src={banner_preview}
+                    alt="banner-preview"
+                  />
+                  <div className="banner-preview-container">
                     <img
                       src={apiurl + cardData?.banner_image}
                       alt="banner-img-preview"
-                      style={{ width: "44.5vw", height: "21.9vw" }}
+                      style={{ width: "100%", height: "100%" }}
                     />
                   </div>
                 </>
               )}
               {item.sponsoring_items === "led_screen" && (
                 <>
-                  <img src={banner_preview} alt="banner-preview" />
+                  <img
+                    className="w-100"
+                    src={banner_preview}
+                    alt="banner-preview"
+                  />
 
-                  <div
-                    style={{
-                      width: "44.5vw",
-                      height: "21.9vw",
-                      position: "absolute",
-                      left: "21.9%",
-                      top: "13.4%",
-                    }}
-                  >
+                  <div className="led-preview-container">
                     <Carousel controls={false}>
                       <Carousel.Item interval={1000}>
-                        <img
-                          style={{ width: "100%", height: "21.9vw" }}
-                          src={apiurl + cardData?.led_image}
-                          alt=""
-                        />
+                        <img src={apiurl + cardData?.led_image} alt="" />
                       </Carousel.Item>
                       <Carousel.Item interval={41000}>
                         <video
-                          style={{ width: "100%", height: "21.9vw" }}
+                          // style={{ width: "100%", height: "100%" }}
                           src={apiurl + cardData?.led_video}
-                          autoplay
                           controls
                           controlsList="nofullscreen"
                         ></video>
@@ -442,6 +432,7 @@ const SponsorEventBox = (eventData) => {
                     item={item}
                     isSelected={selectedItems.includes(item)}
                     onButtonClick={handleButtonClick}
+                    cardData={cardData}
                   />
                 ))}
               </div>

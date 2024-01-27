@@ -17,15 +17,25 @@ const SponsorpayCard = (data) => {
                 }}
               >
                 <div className="row mx-0">
-                  <div className="col-6 col-md-4 col-lg-3 p-3">
-                    <img
-                      src={apiurl + data?.data?.thumbnail1}
-                      alt=""
+                  <div className="col-6 col-md-4 col-lg-3 p-0">
+                    <div
+                      className="img-container mx-auto"
                       style={{
-                        width: "100%",
-                        height: "-webkit-fill-available",
+                        width: "fit-content",
+                        height: "200px",
+                        padding: "4%",
                       }}
-                    />
+                    >
+                      <img
+                        src={apiurl + data?.data?.thumbnail1}
+                        alt=""
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          borderRadius: "10px",
+                        }}
+                      />
+                    </div>
                   </div>
                   <div className="col-6 col-md-8 col-lg-9 mt-2">
                     <div className="box">
@@ -50,9 +60,7 @@ const SponsorpayCard = (data) => {
                           </span>
                         </h5>
                       </div>
-                      <p>
-                      {data?.data?.description}
-                      </p>
+                      <p>{data?.data?.description}</p>
                     </div>
                   </div>
                 </div>
@@ -70,36 +78,36 @@ const SponsorpayCard = (data) => {
                   className="row g-0"
                   style={{ width: "auto", height: "100%" }}
                 >
-                  <div
-                    className="col-5 cc-img-container d-flex"
-                    style={{ maxWidth: "40%" }}
-                  >
+                  <div className="col-5 cc-img-container d-flex">
                     <img
-                      src={cardimg}
+                      src={apiurl + data?.data?.thumbnail1}
                       className="img-fluid rounded-start cc-img m-0"
                       alt=""
                     />
                   </div>
                   <div className="col-7 d-flex align-items-center">
-                    <div
-                      className="card-body cc-card-body text-md"
-                      style={{ paddingLeft: "10%" }}
-                    >
-                      <h5 className="card-title font-weight-bold d-inline text-xl">
-                        Mr. Beast
+                    <div className="card-body cc-card-body text-md">
+                      <h5 className="card-title font-weight-bold d-inline text-xl mb-0">
+                        {data?.data?.title}
                       </h5>
-                      <br />
-                      <span className="card-text">Platform: Youtube</span>
-                      <br />
-                      <span className="card-text">
-                        <i className="bi bi-cash text-success"></i>
-                        &nbsp;&nbsp; Video
-                      </span>
-                      <br />
-                      <p className="card-text">
-                        <i className="bi bi-people-fill text-danger"></i>
-                        &nbsp;&nbsp; 100k
-                      </p>
+                      <span className="card-text">{data?.data?.location}</span>
+                      <div className="star d-flex">
+                        <h6>
+                          <i className="bi bi-star-fill text-warning"></i>
+                          &nbsp;
+                          <i className="bi bi-star-fill text-warning"></i>
+                          &nbsp;
+                          <i className="bi bi-star-fill text-warning"></i>
+                          &nbsp;
+                          <i className="bi bi-star-fill text-warning"></i>
+                          &nbsp;
+                          <i className="bi bi-star-fill text-grey"></i>
+                          &nbsp;
+                          <span className="text-xs text-muted">
+                            3482 reviews
+                          </span>
+                        </h6>
+                      </div>
                     </div>
                   </div>
                 </div>

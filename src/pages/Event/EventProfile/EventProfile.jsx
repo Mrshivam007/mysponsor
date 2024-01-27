@@ -6,7 +6,16 @@ import EventProfileInfo from "./EventProfileInfo";
 import EventSecurity from "./EventSecurity";
 import EventNotification from "./EventNotification";
 import { NavBar } from "../../../components";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../../../redux/actions/authActions";
 const EventProfile = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
+  };
   return (
     <>
       <div
@@ -34,6 +43,11 @@ const EventProfile = () => {
               <EventNotification />
             </Tab>
           </Tabs>
+        </div>
+        <div className="container px-3 pt-0 pb-3 d-sm-none">
+          <button className="btn btn-danger w-100" onClick={handleLogout}>
+            Logout
+          </button>
         </div>
         <Footer />
       </div>

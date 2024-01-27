@@ -54,12 +54,12 @@ const DeleteContent = () => {
               {successMessage}
             </div>
           )}
-          <DeleteContentCard cardData={contentDetails.contentDetails?.live_content} />
+          <DeleteContentCard cardData={contentDetails.contentDetails?.past_content} />
         </div>
         <div className="events-page-mobile">
           <Delete_MobileCards
-            line={"Upcoming Event"}
-            cardData={contentDetails.contentDetails?.live_content}
+            line={"Delete Your Content"}
+            cardData={contentDetails.contentDetails?.past_content}
           />
           <div
             className="btn d-block text-white font-weight-bolder"
