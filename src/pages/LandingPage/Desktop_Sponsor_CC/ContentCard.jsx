@@ -84,7 +84,7 @@ const ContentCard = ({ line, cardData }) => {
         >
           <Link to="/cc">
             <button
-              className="btn btn-outline-primary mt-4"
+              className="btn btn-outline-primary"
               style={{
                 borderRadius: "15px",
                 border: "2px solid #004EA9",
