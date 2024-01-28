@@ -18,15 +18,17 @@
         position: absolute;
         top: 0;
         left: 9px;
+        right: 0;
+        bottom: 8px;
         color: white;
-        text-shadow: black 2px 2px;
         display: flex;
         flex-direction: column;
         justify-content: end;
         width: 89%;
-        height: 95%;
-        background-color: rgba(0, 0, 0, 0);
+        height: auto;
+        background: linear-gradient(180deg, rgb(0, 0, 0, 0)40%, rgb(0, 0, 0, 0.7)100%);
         padding-left: 4%;
+        border-radius: 10px 10px 0px 0px;
         padding-bottom: 0;
     }
 }

@@ -50,15 +50,10 @@ const SponserE = ({ line, cardData }) => {
                           className="sponser_card_img"
                         />
                         <div className="text-overlay">
-                          <p
-                            className="text-lg font-weight-bold mb-0"
-                            style={{ textShadow: "2px 2px black" }}
-                          >
+                          <p className="text-lg font-weight-bold mb-0">
                             {data.title}
                           </p>
-                          <p style={{ textShadow: "2px 2px black" }}>
-                            {data.location}
-                          </p>
+                          <p>{data.location}</p>
                         </div>
                       </div>
                     </div>
@@ -158,15 +153,10 @@ const SponserE = ({ line, cardData }) => {
                               className="sponser_card_img"
                             />
                             <div className="text-overlay">
-                              <p
-                                className="text-lg font-weight-bold mb-0"
-                                style={{ textShadow: "2px 2px black" }}
-                              >
+                              <p className="text-lg font-weight-bold mb-0">
                                 {data.title}
                               </p>
-                              <p style={{ textShadow: "2px 2px black" }}>
-                                {data.location}
-                              </p>
+                              <p>{data.location}</p>
                             </div>
                           </div>
                           <button

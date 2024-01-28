@@ -21,14 +21,14 @@
         display: none;
     }
 
-    .cc-card-col {
+    /* .cc-card-col {
         height: 24vh
-    }
+    } */
 }
 
 
 @media (min-width:768px) and (max-width:991px) {
-    .cc-card-col {
+    /* .cc-card-col {
         height: 53vh
-    }
+    } */
 }
