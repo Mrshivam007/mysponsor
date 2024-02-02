@@ -13,6 +13,7 @@ import { fetchEvent, fetchEventbyId } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux";
 import MyEventCard from "../MyEventCrad/MyEventCard";
 import EventMobileCard from "./EventMobileCards";
+import EventNavBar from "../EventNavbar/EventNavbar";
 const LiveEvent = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
@@ -40,7 +41,7 @@ const LiveEvent = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <NavBar />
+        <EventNavBar />
         <div className="events-page-desktop">
           <EventsHeader title={"Live Events"} logo={spevents} />
           {/* <SponserE cardData={eventDetails.eventDetails} line={"Live Events"} /> */}

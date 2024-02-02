@@ -54,7 +54,13 @@ const SponsorEvents = () => {
         </div>
 
         <div className="events-page-mobile">
-          <MobileCards line={"Sponsor events"} cardData={EventsPageCards} />
+          {/* <MobileCards line={"Sponsor events"} cardData={EventsPageCards} /> */}
+          {[...Object.entries(eventDetails.eventCategory || {})]
+            .filter(([key, value]) => value && value.length > 0)
+            .sort((a, b) => b[1].length - a[1].length)
+            .map(([category, cardData]) => (
+              <SponserE key={category} cardData={cardData} line={`${capitalizeFirstLetter(category)} Event`} />
+            ))}
           <div
             className="btn d-block text-white font-weight-bolder"
             style={{

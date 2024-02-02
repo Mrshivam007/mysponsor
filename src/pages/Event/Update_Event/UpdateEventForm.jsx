@@ -7,6 +7,7 @@ import { updateEvent } from "../../../redux/actions/eventAction";
 import { eventReducer } from "../../../redux/reducer/eventReducer";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import apiurl from "../../../constant/config";
+import EventNavBar from "../EventNavbar/EventNavbar";
 
 const UpdateEvent = () => {
   useEffect(() => {
@@ -223,7 +224,7 @@ const UpdateEvent = () => {
 
   return (
     <>
-      <NavBar />
+      <EventNavBar />
       <div
         className="bg-form"
         style={{

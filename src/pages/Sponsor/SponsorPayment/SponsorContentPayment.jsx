@@ -10,6 +10,7 @@ import useRazorpay from "react-razorpay";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { createSponsor } from "../../../redux/actions/sponsorAction";
+import apiurl from "../../../constant/config";
 
 const SponsorContentPayment = () => {
   useEffect(() => {
@@ -39,7 +40,8 @@ const SponsorContentPayment = () => {
   const complete_order = async (paymentID, orderID, signature) => {
     axios({
       method: "post",
-      url: "http://127.0.0.1:8000/api/razorpay/content/order/complete/",
+      // url: "http://127.0.0.1:8000/api/razorpay/content/order/complete/",
+      url: `${apiurl}/api/razorpay/content/order/complete/`,
       data: {
         payment_id: paymentID,
         order_id: orderID,
@@ -59,7 +61,7 @@ const SponsorContentPayment = () => {
             "successMessage",
             "Class created successfully!"
           );
-          navigate("/sponsored_event"); // Replace '/' with the desired route for the home page
+          navigate("/sponsored_content"); // Replace '/' with the desired route for the home page
         }
       })
       .catch((error) => {
@@ -71,7 +73,8 @@ const SponsorContentPayment = () => {
     //create order
     axios({
       method: "post",
-      url: "http://127.0.0.1:8000/api/razorpay/order/create/",
+      // url: "http://127.0.0.1:8000/api/razorpay/order/create/",
+      url: `${apiurl}/api/razorpay/order/create/`,
       data: {
         amount: total_amount,
         currency: "INR",

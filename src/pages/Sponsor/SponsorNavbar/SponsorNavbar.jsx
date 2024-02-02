@@ -52,7 +52,7 @@ const SponsorNavbar = () => {
           <Link to="/" className="navbar-brand">
             <img src={logo} alt="" />
           </Link>
-          <div className="wrapper">
+          {/* <div className="wrapper">
             <div className="searchBar">
               <input
                 id="searchQueryInput"
@@ -76,7 +76,7 @@ const SponsorNavbar = () => {
                 </svg>
               </button>
             </div>
-          </div>
+          </div> */}
           {userDetails ? (
             <>
               <div className="box d-flex align-items-center justify-content-between">
@@ -194,18 +194,23 @@ const SponsorNavbar = () => {
                 Sponsor Content Creators
               </Link>
             </Nav.Link>
-            <Nav.Link className="desktop-nav-item" href="#">
+            {/* <Nav.Link className="desktop-nav-item" href="#">
               Events Near You
-            </Nav.Link>
+            </Nav.Link> */}
             <Nav.Link className="desktop-nav-item" href="#">
               Top Events
             </Nav.Link>
             <Nav.Link className="desktop-nav-item" href="#">
-              Top Content Creator
+              Top Content
             </Nav.Link>
             <Nav.Link className="desktop-nav-item" href="#">
               <Link to={"/sponsored_event"} style={{ color: "white" }}>
                 Your Sponsored Event
+              </Link>
+            </Nav.Link>
+            <Nav.Link className="desktop-nav-item" href="#">
+              <Link to={"/sponsored_content"} style={{ color: "white" }}>
+                Your Sponsored Content
               </Link>
             </Nav.Link>
           </Nav>

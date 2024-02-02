@@ -6,13 +6,13 @@ export const fetchEvent = () => async (dispatch) => {
     try {
       dispatch({ type: GET_EVENT_REQUEST });
   
-    //   const access = JSON.parse(localStorage.getItem("access"));
+      const access = JSON.parse(localStorage.getItem("access"));
   
       const { data } = await axios.get(
         `${apiurl}/api/user/event/`,
-        // {
-        //   headers: { Authorization: `Bearer ${access}` },
-        // }
+        {
+          headers: { Authorization: `Bearer ${access}` },
+        }
       );  
       dispatch({
         type: GET_EVENT_SUCCESS,
@@ -33,13 +33,13 @@ export const fetchEventbyId = (id) => async (dispatch) => {
     try {
       dispatch({ type: GET_EVENT_REQUEST });
   
-    //   const access = JSON.parse(localStorage.getItem("access"));
+      const access = JSON.parse(localStorage.getItem("access"));
   
       const { data } = await axios.get(
         `${apiurl}/api/user/event/${id}`,
-        // {
-        //   headers: { Authorization: `Bearer ${access}` },
-        // }
+        {
+          headers: { Authorization: `Bearer ${access}` },
+        }
       );  
       dispatch({
         type: GET_EVENT_SUCCESS,

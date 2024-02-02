@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createEvent } from "../../../redux/actions/eventAction";
 import { eventReducer } from "../../../redux/reducer/eventReducer";
 import { useNavigate } from "react-router-dom";
+import EventNavBar from "../EventNavbar/EventNavbar";
 
 const ListeventsForm = () => {
   useEffect(() => {
@@ -196,7 +197,7 @@ const ListeventsForm = () => {
   };
   return (
     <>
-      <NavBar />
+      <EventNavBar />
       <div
         className="bg-form"
         style={{

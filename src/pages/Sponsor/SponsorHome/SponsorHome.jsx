@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
     NavBar,
     Header,
@@ -26,8 +27,8 @@ import SponsorNavbar from "../SponsorNavbar/SponsorNavbar";
             nesciunt excepturi ipsum nulla iste nisi. Eaque.
           </p>
         </div>
-        <a
-          href="#!"
+        <Link
+          to={"/choice"}
           className="btn text-white py-1 px-4 font-weight-bold d-none d-md-block"
           style={{
             width: "25%",
@@ -37,7 +38,7 @@ import SponsorNavbar from "../SponsorNavbar/SponsorNavbar";
           }}
         >
           Read More
-        </a>
+        </Link>
         <Chatbot />
         <Banner />
         <Categories line={"Categories"} />

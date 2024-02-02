@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import MyEventCard from "../MyEventCrad/MyEventCard";
 import { useLocation } from "react-router-dom";
 import EventMobileCard from "./EventMobileCards";
+import EventNavBar from "../EventNavbar/EventNavbar";
 const UpcomingEvent = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
@@ -58,7 +59,7 @@ const UpcomingEvent = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <NavBar />
+        <EventNavBar />
         <div className="events-page-desktop">
           <EventsHeader title={"Upcoming Event"} logo={spevents} />
           {/* <SponserE cardData={eventDetails.eventDetails} line={"Upcoming Event"} /> */}

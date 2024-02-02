@@ -9,6 +9,7 @@ import { NavBar } from "../../../components";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../../redux/actions/authActions";
+import EventNavBar from "../EventNavbar/EventNavbar";
 const EventProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const EventProfile = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <NavBar />
+        <EventNavBar />
         <div className="container my-3">
           <Tabs
             defaultActiveKey="profile"

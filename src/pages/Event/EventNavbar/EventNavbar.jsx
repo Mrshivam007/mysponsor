@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Navbar, Nav, NavLink, Container } from "react-bootstrap";
-// import banner from "../../assets/img/card/header_banner.png";
-import logo from "../../assets/img/logo/logo.png";
-// import card_bg from "../../assets/img/card/header-bg.png";
-import noProfilepic from "../../assets/img/emptyprofile2.jpg";
+import logo from "../../../assets/img/logo/logo.png";
+import noProfilepic from "../../../assets/img/emptyprofile2.jpg";
 import { AiOutlineClose } from "react-icons/ai"; // Import the close icon from react-icons library
-// import account from "../../assets/img/account.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../redux/actions/authActions";
+import { logout } from "../../../redux/actions/authActions";
 
-const NavBar = () => {
+const EventNavBar = () => {
   const [isSticky, setSticky] = useState(false);
   const auth = useSelector((state) => state.auth);
   const { userDetails } = auth;
@@ -171,26 +168,29 @@ const NavBar = () => {
           <Nav>
             <Nav.Link className="desktop-nav-item">
               <Link to={"/events"} style={{ color: "white" }}>
-                Sponsor Event
+                Your Event
               </Link>
             </Nav.Link>
             <Nav.Link className="desktop-nav-item">
-              <Link to={"/cc"} style={{ color: "white" }}>
-                Sponsor Content Creators
+              <Link to={"/sponsored_events"} style={{ color: "white" }}>
+                Your Sponsored Event
               </Link>
             </Nav.Link>
-            {/* <Nav.Link className="desktop-nav-item" href="#">
-              Events Near You
-            </Nav.Link> */}
-            <Nav.Link className="desktop-nav-item" href="#">
-              Top Events
+            <Nav.Link className="desktop-nav-item">
+            <Link to={"/create_event"} style={{ color: "white" }}>
+              List Event
+              </Link>
+            </Nav.Link>
+            <Nav.Link className="desktop-nav-item">
+            <Link to={"/update_UpcomingEvent"} style={{ color: "white" }}>
+              Update Event
+              </Link>
             </Nav.Link>
             <Nav.Link className="desktop-nav-item" href="#">
-              Top Content Creator
+            <Link to={"/delete_event"} style={{ color: "white" }}>
+              Delete Your Event
+              </Link>
             </Nav.Link>
-            {/* <Nav.Link className="desktop-nav-item" href="#">
-              List your event
-            </Nav.Link> */}
           </Nav>
         </div>
       </Navbar>
@@ -300,26 +300,22 @@ const NavBar = () => {
                 </div>
                 <div className="mobile-nav-content mt-4">
                   <Nav className="mobile-nav-items border-0">
-                    <NavLink className="mobile-nav-item">
-                    <Link to={"/events"}>
+                    <NavLink className="mobile-nav-item" href="about.html">
                       Sponsor Event
-                      </Link>
                     </NavLink>
-                    <NavLink className="mobile-nav-item">
-                    <Link to={"/content"}>
+                    <NavLink className="mobile-nav-item" href="index.html">
                       Sponsor Content
-                      </Link>
                     </NavLink>
-                    <NavLink className="mobile-nav-item">
+                    <NavLink className="mobile-nav-item" href="service.html">
                       Top Events
                     </NavLink>
-                    <NavLink className="mobile-nav-item">
+                    <NavLink className="mobile-nav-item" href="#">
                       My Account
                     </NavLink>
-                    <NavLink className="mobile-nav-item">
+                    <NavLink className="mobile-nav-item" href="#">
                       Payment Info
                     </NavLink>
-                    <NavLink className="mobile-nav-item">
+                    <NavLink className="mobile-nav-item" href="#">
                       ChatBot
                     </NavLink>
                   </Nav>
@@ -372,26 +368,22 @@ const NavBar = () => {
                 </div>
                 <div className="mobile-nav-content mt-4">
                   <Nav className="mobile-nav-items border-0">
-                  <NavLink className="mobile-nav-item">
-                    <Link to={"/events"}>
+                    <NavLink className="mobile-nav-item" href="about.html">
                       Sponsor Event
-                      </Link>
                     </NavLink>
-                    <NavLink className="mobile-nav-item">
-                    <Link to={"/content"}>
+                    <NavLink className="mobile-nav-item" href="index.html">
                       Sponsor Content
-                      </Link>
                     </NavLink>
-                    <NavLink className="mobile-nav-item">
+                    <NavLink className="mobile-nav-item" href="service.html">
                       Top Events
                     </NavLink>
-                    <NavLink className="mobile-nav-item">
+                    <NavLink className="mobile-nav-item" href="#">
                       My Account
                     </NavLink>
-                    <NavLink className="mobile-nav-item">
+                    <NavLink className="mobile-nav-item" href="#">
                       Payment Info
                     </NavLink>
-                    <NavLink className="mobile-nav-item">
+                    <NavLink className="mobile-nav-item" href="#">
                       ChatBot
                     </NavLink>
                   </Nav>
@@ -422,4 +414,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default EventNavBar;

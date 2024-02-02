@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import bgimage from "../../../assets/img/circle-bg.png";
 import spevents from "../../../assets/img/sponsor_events-logo.png";
 import calendar from "../../../assets/img/calendar.svg";
 import camera from "../../../assets/img/camera.svg";
+import { fetchContent } from "../../../redux/actions/contentAction";
+import { fetchEvent } from "../../../redux/actions/eventAction";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  NavBar,
   EventsHeader,
   Choice,
   Footer,
@@ -12,18 +14,29 @@ import {
   Banner,
   SponsorCC,
   MobileCards,
+  NavBar,
 } from "../../../components";
 import {
   ChoicePageCards,
   ContentCreators4,
   EventsCards,
 } from "../../../data/data";
-import "./choice-page.css";
 import { Link } from "react-router-dom";
 const SponsorChoice = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
+
+  const dispatch = useDispatch();
+  const ContentDetails = useSelector(state => state.content)
+  const EventDetails = useSelector(state => state.event)
+  const [successMessage, setSuccessMessage] = useState('');
+  useEffect(() => {
+    dispatch(fetchContent())
+    dispatch(fetchEvent())
+  },[])
+  console.log("Event", EventDetails);
+  console.log("Content", ContentDetails);
 
   return (
     <>
@@ -39,13 +52,13 @@ const SponsorChoice = () => {
         <EventsHeader title={"Sponsor Choice"} logo={spevents} />
         <div className="choice-page-desktop">
           <Choice />
-          <SponserE line={"Sponser Events Near You"} cardData={EventsCards} />
+          <SponserE line={"Sponser Events Near You"} cardData={EventDetails.eventDetails?.live_event} />
         </div>
         <div className="choice-page-desktop">
           <Banner />
         </div>
       </div>
-      <div className="choice-page-mobile">
+      {/* <div className="choice-page-mobile">
         <h3 className="font-weight-bolder pl-4 mb-3">Sponsor your choice</h3>
         <div className="container choice-boxes">
           <div className="row">
@@ -96,8 +109,8 @@ const SponsorChoice = () => {
             </p>
           </Link>
         </div>
-        <SponsorCC cardData={ContentCreators4} />
-      </div>
+        <SponsorCC cardData={ContentDetails.contentDetails?.live_content} />
+      </div> */}
       <Footer />
     </>
   );

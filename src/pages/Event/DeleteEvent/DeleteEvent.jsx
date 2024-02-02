@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Update_EventCard from "../Update_Event/Update_EventCard";
 import Delete_EventCard from "./DeleteEventCard";
 import Delete_MobileCards from "./DeleteEventMobileCard";
+import EventNavBar from "../EventNavbar/EventNavbar";
 const DeleteEvent = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
@@ -55,7 +56,7 @@ const DeleteEvent = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <NavBar />
+        <EventNavBar />
         <div className="events-page-desktop">
           <EventsHeader title={"Delete Your Listed Events"} logo={spevents} />
           {/* <SponserE cardData={eventDetails.eventDetails} line={"Upcoming Event"} /> */}

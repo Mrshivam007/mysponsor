@@ -1468,9 +1468,9 @@ a.text-dark:hover, a.text-dark:focus {
   box-shadow: 0 3px 12px rgba(95, 92, 120, 0.12);
 }
 
-.card-service .header {
+/* .card-service .header {
   margin-bottom: 24px;
-}
+} */
 
 .img-stack-element {
   position: relative;

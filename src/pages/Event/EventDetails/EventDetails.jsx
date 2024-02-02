@@ -8,6 +8,7 @@ import {
   SponserE,
 } from "../../../components/index.js";
 import { useLocation } from "react-router-dom";
+import EventNavBar from "../EventNavbar/EventNavbar.jsx";
 const EventDetails = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
@@ -25,7 +26,7 @@ const EventDetails = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <NavBar />
+        <EventNavBar />
         <MyEventsBox eventData={eventData} />
         {/* <SponserE cardData={EventsCards} /> */}
         <Footer />
