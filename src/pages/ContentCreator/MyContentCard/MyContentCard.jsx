@@ -108,12 +108,25 @@ const MyContentCard = ({ cardData, heading }) => {
                                 {data.location}
                               </span>
                             </h5>
-                            <h5 className="font-weight-bold">
+                            {/* <h5 className="font-weight-bold">
                               Video Preview:&nbsp;
                               <span className="font-weight-light">
                                 **Video Link Here**
                               </span>
-                            </h5>
+                            </h5> */}
+                            <div>
+                              {data.is_approval ? (
+                                <h4>
+                                  <i className="bi bi-check-circle-fill text-success"></i>
+                                  {" "}Approved
+                                </h4>
+                              ) : (
+                                <h4>
+                                  <i className="bi bi-clock-fill text-danger"></i>
+                                  {" "}Pending
+                                </h4>
+                              )}
+                            </div>
                             <div className="container text-white text-center d-flex justify-content-between px-0">
                               <div className="box myevents-box text-white">
                                 <h6
@@ -186,6 +199,23 @@ const MyContentCard = ({ cardData, heading }) => {
                             borderRadius: "10px",
                           }}
                         />
+                        <div className="content-text-overlay" style={{ justifyContent: 'start', alignItems: 'end' }}>
+                          <div className="heart d-flex justify-content-between mb-2">
+                            <div>
+                              {data.is_approval ? (
+                                <h4>
+                                  <i className="bi bi-check-circle-fill text-success"></i>
+                                  {/* {" "}Approved */}
+                                </h4>
+                              ) : (
+                                <h4>
+                                  <i className="bi bi-clock-fill text-danger"></i>
+                                  {/* {" "}Pending */}
+                                </h4>
+                              )}
+                            </div>
+                          </div>
+                        </div>
                         <div className="content-text-overlay">
                           <h4 className="font-weight-bold mb-0">
                             {data.title}

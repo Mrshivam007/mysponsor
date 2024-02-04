@@ -27,13 +27,21 @@ const ListContentForm = () => {
   const [content_platform, setContentplatform] = useState("");
   const [event_time, setEventTime] = useState("");
   const [price, setPrice] = useState("");
-  const [prices, setPrices] = useState("");
+  const [prices, setPrices] = useState({
+    banner: '',
+    led_screen: '',
+    bill_board: '',
+  });
   const [selectedItems, setSelectedItems] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const [thumbnail1, setThumbnail1] = useState(null);
   const [thumbnail2, setThumbnail2] = useState(null);
   const [thumbnail3, setThumbnail3] = useState(null);
+  const [thumbnail1Filename, setThumbnail1Filename] = useState('');
+  const [thumbnail2Filename, setThumbnail2Filename] = useState('');
+  const [thumbnail3Filename, setThumbnail3Filename] = useState('');
   const [video, setVideo] = useState("");
+  const [videoFilename, setVideoFilename] = useState('');
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const [errors, setErrors] = useState({});
@@ -42,20 +50,38 @@ const ListContentForm = () => {
   // console.log("This is content details", userDetails);
   // console.log("event error", errors);
   // For each thumbnail, you'll need a separate state and handler
+
+  const generateUniqueFilename = (originalFilename, index) => {
+    const extension = originalFilename.split('.').pop();
+    const uniqueFilename = `thumbnail${index + 1}_${Date.now()}.${extension}`;
+    return uniqueFilename;
+  };
+
+  // For each thumbnail, you'll need a separate state and handler
   const handleThumbnail1Change = (e) => {
     const file = e.target.files[0];
+    const uniqueFilename = generateUniqueFilename(file.name, 0);
+    
     setThumbnail1(file);
+    setThumbnail1Filename(uniqueFilename); // Save the unique filename in state
   };
 
   const handleThumbnail2Change = (e) => {
     const file = e.target.files[0];
+    const uniqueFilename = generateUniqueFilename(file.name, 1);
+
     setThumbnail2(file);
+    setThumbnail2Filename(uniqueFilename);
   };
 
   const handleThumbnail3Change = (e) => {
     const file = e.target.files[0];
+    const uniqueFilename = generateUniqueFilename(file.name, 2);
+
     setThumbnail3(file);
+    setThumbnail3Filename(uniqueFilename);
   };
+
   const handleVideoChange = (e) => {
     const file = e.target.files[0];
     setVideo(file);
@@ -73,25 +99,21 @@ const ListContentForm = () => {
     setPrices(updatedPrices);
   };
 
-  const handleSponsoringItemChange = (e) => {
-    const { value } = e.target;
-    let updatedSelectedItems = [...selectedItems];
-
-    if (updatedSelectedItems.includes(value)) {
-      updatedSelectedItems = updatedSelectedItems.filter(
-        (item) => item !== value
-      );
-    } else {
-      updatedSelectedItems.push(value);
-    }
-
-    setSelectedItems(updatedSelectedItems);
+  const handleSponsoringItemChange = (item) => {
+    setSelectedItems((prevSelectedItems) => {
+      if (prevSelectedItems.includes(item)) {
+        return prevSelectedItems.filter((selectedItem) => selectedItem !== item);
+      } else {
+        return [...prevSelectedItems, item];
+      }
+    });
   };
 
-  const handlePriceChange = (item, price) => {
-    const updatedPrices = { ...prices };
-    updatedPrices[item] = price;
-    setPrices(updatedPrices);
+  const handlePriceChange = (item, value) => {
+    setPrices((prevPrices) => ({
+      ...prevPrices,
+      [item]: value,
+    }));
   };
 
   const handleToggleDropdown = () => {
@@ -175,9 +197,9 @@ const ListContentForm = () => {
       formData.append("content_category", selectedCategory);
       formData.append("content_platform", selectedPlatform);
       // Append thumbnails with different keys
-      formData.append("thumbnail1", thumbnail1);
-      formData.append("thumbnail2", thumbnail2);
-      formData.append("thumbnail3", thumbnail3);
+      formData.append("thumbnail1", thumbnail1, thumbnail1Filename);
+      formData.append("thumbnail2", thumbnail2, thumbnail2Filename);
+      formData.append("thumbnail3", thumbnail3, thumbnail3Filename);
       formData.append("attach_video", video);
       try {
         // Make POST API call
@@ -266,74 +288,54 @@ const ListContentForm = () => {
                       </div>
                     </div>
 
-                    <div className="row form-group">
-                      <div className="col-md-12 mb-3 mb-md-0">
-                        {/* <select className="form-control" value={""}>
-                          <option className="text-muted">Enter category</option>
-                          <option>--select event category--</option>
-                        </select> */}
-                        {/* <input
-                          type="text"
-                          id="sponoring_item"
-                          value={sponsoring_item}
-                          onChange={(e) => setSponsoringItem(e.target.value)}
-                          className="form-control"
-                          placeholder="Enter Sponsoring Item"
-                        />
-                        {errors.sponsoring_item && <p className="error-msg">{errors.sponsoring_item}</p>} */}
+                    <div>
+                      <div className="row form-group">
+                        <div className="col-md-12 mb-3 mb-md-0">
+                          <div>
+                            <button
+                              type="button"
+                              style={{
+                                background: selectedItems.includes('banner') ? '#ccc' : '#fff',
+                                border: selectedItems.includes('banner') ? '2px solid gray' : '2px solid black',
+                              }}
+                              onClick={() => handleSponsoringItemChange('banner')}
+                            >
+                              Banner
+                            </button>
+                            <button
+                              type="button"
+                              style={{
+                                background: selectedItems.includes('led_screen') ? '#ccc' : '#fff',
+                                border: selectedItems.includes('led_screen') ? '2px solid gray' : '2px solid black',
+                              }}
+                              onClick={() => handleSponsoringItemChange('led_screen')}
+                            >
+                              LED Screen
+                            </button>
+                            <button
+                              type="button"
+                              style={{
+                                background: selectedItems.includes('bill_board') ? '#ccc' : '#fff',
+                                border: selectedItems.includes('bill_board') ? '2px solid gray' : '2px solid black',
+                              }}
+                              onClick={() => handleSponsoringItemChange('bill_board')}
+                            >
+                              Billboard
+                            </button>
 
-                        <div>
-                          <button
-                            type="button"
-                            onClick={handleToggleDropdown}
-                            style={{
-                              background: "#fff",
-                              border: "2px solid black",
-                            }}
-                          >
-                            Add Sponsoring Item
-                          </button>
-
-                          {showDropdown && (
-                            <div>
-                              <select
-                                multiple
-                                value={selectedItems}
-                                onChange={handleSponsoringItemChange}
-                                className="form-control"
-                                id="sponsoring_item"
-                                placeholder="Enter Sponsoring Item"
-                              >
-                                <option value="banner">Banner</option>
-                                <option value="led_screen">LED Screen</option>
-                                <option value="bill_board">Billboard</option>
-                              </select>
-
-                              {selectedItems.map((item) => (
+                            {selectedItems.map((item) => (
                                 <div key={item}>
                                   <input
                                     type="text"
                                     value={prices[item]}
-                                    onChange={(e) =>
-                                      handlePriceChange(item, e.target.value)
-                                    }
+                                    onChange={(e) => handlePriceChange(item, e.target.value)}
                                     className="form-control my-1"
-                                    placeholder={`Enter ${item.replace(
-                                      "_",
-                                      " "
-                                    )} Price`}
+                                    placeholder={`Enter ${item.replace('_', ' ')} Price`}
                                   />
                                 </div>
                               ))}
-                            </div>
-                          )}
+                          </div>
                         </div>
-                        {errors.selectedItems && (
-                          <p className="error-msg">{errors.selectedItems}</p>
-                        )}
-                        {prices == "" ? (
-                          <p className="error-msg">{errors.prices}</p>
-                        ) : null}
                       </div>
                     </div>
 

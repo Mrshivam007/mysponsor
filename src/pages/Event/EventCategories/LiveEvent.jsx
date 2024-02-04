@@ -9,7 +9,7 @@ import {
 import bgimage from "../../../assets/img/circle-bg.png";
 import spevents from "../../../assets/img/sponsor_events-logo.png";
 import { EventsCards, EventsPageCards } from "../../../data/data";
-import { fetchEvent, fetchEventbyId } from "../../../redux/actions/eventAction";
+import { fetchEvent, fetchEventbyId, fetchAllEvent } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux";
 import MyEventCard from "../MyEventCrad/MyEventCard";
 import EventMobileCard from "./EventMobileCards";
@@ -25,10 +25,10 @@ const LiveEvent = () => {
   const dispatch = useDispatch();
   const eventDetails = useSelector((state) => state.event);
   useEffect(() => {
-    dispatch(fetchEventbyId(userDetails.user_id));
+    dispatch(fetchAllEvent());
   }, []);
 
-  console.log("dynamic data", eventDetails.eventDetails);
+  console.log("dynamic data", eventDetails.eventAllDetails?.live_event);
   console.log("static data", EventsCards);
 
   return (
@@ -45,7 +45,7 @@ const LiveEvent = () => {
         <div className="events-page-desktop">
           <EventsHeader title={"Live Events"} logo={spevents} />
           {/* <SponserE cardData={eventDetails.eventDetails} line={"Live Events"} /> */}
-          <MyEventCard cardData={eventDetails.eventDetails?.live_event} />
+          <MyEventCard cardData={eventDetails?.eventAllDetails?.live_event} />
           {/* <SponserE cardData={EventsCards} line={"Concerts"} />
           <SponserE cardData={EventsCards} line={"Promotional Events"} />
           <SponserE cardData={EventsCards} line={"Sports Events"} />
@@ -56,7 +56,7 @@ const LiveEvent = () => {
         <div className="events-page-mobile">
           <EventMobileCard
             line={"Live Events"}
-            cardData={eventDetails.eventDetails?.live_event}
+            cardData={eventDetails?.eventAllDetails?.live_event}
           />
           <div
             className="btn d-block text-white font-weight-bolder"

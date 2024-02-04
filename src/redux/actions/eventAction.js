@@ -1,6 +1,6 @@
 import axios from 'axios';
 import apiurl from '../../constant/config';
-import { CREATE_EVENT_FAILED, CREATE_EVENT_REQUEST, CREATE_EVENT_SUCCESS, DELETE_EVENT_FAILED, DELETE_EVENT_REQUEST, DELETE_EVENT_SUCCESS, GET_EVENT_CATEGORY_FAILED, GET_EVENT_CATEGORY_REQUEST, GET_EVENT_CATEGORY_SUCCESS, GET_EVENT_FAILED, GET_EVENT_REQUEST, GET_EVENT_SUCCESS, UPDATE_EVENT_FAILED, UPDATE_EVENT_REQUEST, UPDATE_EVENT_SUCCESS } from '../constant';
+import { CREATE_EVENT_FAILED, CREATE_EVENT_REQUEST, CREATE_EVENT_SUCCESS, DELETE_EVENT_FAILED, DELETE_EVENT_REQUEST, DELETE_EVENT_SUCCESS, GET_ALL_EVENT_FAILED, GET_ALL_EVENT_REQUEST, GET_ALL_EVENT_SUCCESS, GET_EVENT_CATEGORY_FAILED, GET_EVENT_CATEGORY_REQUEST, GET_EVENT_CATEGORY_SUCCESS, GET_EVENT_FAILED, GET_EVENT_REQUEST, GET_EVENT_SUCCESS, UPDATE_EVENT_FAILED, UPDATE_EVENT_REQUEST, UPDATE_EVENT_SUCCESS } from '../constant';
 
 export const fetchEvent = () => async (dispatch) => {
     try {
@@ -28,6 +28,35 @@ export const fetchEvent = () => async (dispatch) => {
       });
     }
   };
+
+
+export const fetchAllEvent = () => async (dispatch) => {
+    try {
+      dispatch({ type: GET_ALL_EVENT_REQUEST });
+  
+      const access = JSON.parse(localStorage.getItem("access"));
+  
+      const { data } = await axios.get(
+        `${apiurl}/api/user/all-event/`,
+        {
+          headers: { Authorization: `Bearer ${access}` },
+        }
+      );  
+      dispatch({
+        type: GET_ALL_EVENT_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_ALL_EVENT_FAILED,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
 
 export const fetchEventbyId = (id) => async (dispatch) => {
     try {
@@ -109,8 +138,9 @@ export const fetchEventbyId = (id) => async (dispatch) => {
           error.response && error.response.data.message
             ? error.response.data.message
             : error.message,
-      });
-    }
+          });
+          console.log(error);
+        }
   };
 
 

@@ -34,31 +34,82 @@ const ContentHome = () => {
         {/* ---MOBILE VIEW--- */}
 
         <div className="mobile-view">
-          <h2 className="sponsor-mobile-text">Get your event listed</h2>
-          <div className="container choice-boxes my-3">
-            <div className="row">
-              <div className="col-6">
-                <Link to="/your_content">
-                  <div className="card-blog choice-box">
+          <h2 className="sponsor-mobile-text">Get your content listed</h2>
+          <div className="page-section">
+        <div className="container choice-container">
+          <div className="row" style={{ flexWrap: "nowrap" }}>
+            <div className="col-lg-6">
+              <Link to="/your_content">
+                <div
+                  className="card-service wow fadeInUp choice-card"
+                  style={{
+                    maxWidth: "100%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <div className="body choice-body choice-1 text-left">
+                    <h2 className="font-weight-bolder mb-0">Content</h2>
+                    <div className="card_line"></div>
+                    <p className="choice-para mt-2 text-left">
+                      We help you define your SEO objective & develop a
+                      realistic strategy with you
+                    </p>
+                    <button
+                      to="/your_content"
+                      className="choice-btn btn text-white py-1 font-weight-bold"
+                      style={{
+                        float: "left",
+                        backgroundColor: "#00448B",
+                        borderRadius: "15px",
+                      }}
+                    >
+                      Explore now
+                    </button>
+                  </div>
+                  <div
+                    className="header choice-img mb-0"
+                  >
                     <img src={calendar} alt="" />
-                    <p className="text-center text-white font-weight-bolder mb-0">
-                      Your Content
-                    </p>
                   </div>
-                </Link>
-              </div>
-              <div className="col-6">
-                <Link to="/sponsored_contents">
-                  <div className="card-blog choice-box">
+                </div>
+              </Link>
+            </div>
+            <div className="col-lg-6">
+              <Link to="/sponsored_contents">
+                <div
+                  className="card-service wow fadeInUp choice-card"
+                  style={{
+                    maxWidth: "100%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <div className="body choice-body choice-2 text-left">
+                    <h2 className="font-weight-bolder mb-0">
+                      Sponsored Content
+                    </h2>
+                    <div className="card_line"></div>
+                    <p className="choice-para mt-2 text-left">
+                      We help you define your SEO objective & develop a
+                      realistic strategy with you
+                    </p>
+                    <button
+                      to="/cc"
+                      className="choice-btn btn text-white py-1 font-weight-bold"
+                    >
+                      Explore now
+                    </button>
+                  </div>
+                  <div className="header choice-img mb-0">
                     <img src={camera} alt="" />
-                    <p className="text-center text-white font-weight-bolder mb-0">
-                      Sponsored Video
-                    </p>
                   </div>
-                </Link>
-              </div>
+                </div>
+              </Link>
             </div>
           </div>
+        </div>
+      </div>
         </div>
         {/* ---MOBILE VIEW END--- */}
         <div className="container">

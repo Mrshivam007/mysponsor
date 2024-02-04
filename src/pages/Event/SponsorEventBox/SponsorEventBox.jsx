@@ -56,18 +56,24 @@ const SponsorButton = ({ item, cardData, isSelected, onButtonClick }) => {
             <Container className="d-flex justify-content-center">
               {item.sponsoring_items === "banner" && (
                 <>
-                  <img
-                    className="w-100"
-                    src={banner_preview}
-                    alt="banner-preview"
-                  />
-                  <div className="banner-preview-container">
-                    <img
-                      src={apiurl + cardData?.banner_image}
-                      alt="banner-img-preview"
-                      style={{ width: "100%", height: "100%" }}
-                    />
-                  </div>
+                  {cardData?.banner_image ? (
+                    <>
+                      <img
+                        className="w-100"
+                        src={banner_preview}
+                        alt="banner-preview"
+                      />
+                      <div className="banner-preview-container">
+                        <img
+                          src={apiurl + cardData?.banner_image}
+                          alt="banner-img-preview"
+                          style={{ width: "100%", height: "100%" }}
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <p>Sponsoring items not available</p>
+                  )}
                 </>
               )}
               {item.sponsoring_items === "led_screen" && (
@@ -95,6 +101,43 @@ const SponsorButton = ({ item, cardData, isSelected, onButtonClick }) => {
                   </div>
                 </>
               )}
+              {/* {item.sponsoring_items === "led_screen" && (
+                <>
+                  {cardData?.led_image ? (
+                    <>
+                      <img
+                        className="w-100"
+                        src={banner_preview}
+                        alt="banner-preview"
+                      />
+                      <div className="led-preview-container">
+                        <img src={apiurl + cardData?.led_image} alt="" />
+                      </div>
+                    </>
+                  ) : (
+                    <p>Sponsoring items not available</p>
+                  )}
+
+                  {cardData?.led_video && (
+                    <>
+                      <Carousel controls={false}>
+                        <Carousel.Item interval={41000}>
+                          <video
+                            src={apiurl + cardData?.led_video}
+                            controls
+                            controlsList="nofullscreen"
+                          ></video>
+                        </Carousel.Item>
+                      </Carousel>
+                    </>
+                  )}
+
+                  {!cardData?.led_image && !cardData?.led_video && (
+                    <p>LED items not available</p>
+                  )}
+                </>
+              )} */}
+
             </Container>
           </Modal.Body>
           <Modal.Footer className="p-0">
@@ -252,7 +295,7 @@ const SponsorEventBox = (eventData) => {
               </div>
               <h5>
                 <i className="bi bi-cash text-success"></i>&nbsp;&nbsp;
-                <span className="text-md">{totalAmount}&lt;</span>
+                <span className="text-md">{cardData.amount}&lt;</span>
                 <br />
                 <i className="bi bi-people-fill text-danger"></i>&nbsp;&nbsp;
                 <span className="text-md">

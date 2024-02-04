@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import listevents from "../../../assets/img/list_events.png";
 import bgimage from "../../../assets/img/circle-bg.png";
 import { EventsHeader, Footer, NavBar } from "../../../components";
-import { fetchContent } from "../../../redux/actions/contentAction";
+import { fetchAllContent } from "../../../redux/actions/contentAction";
 import { useDispatch, useSelector } from "react-redux";
 import MyContentCard from "../MyContentCard/MyContentCard";
 const UpcomingContent = () => {
@@ -14,7 +14,7 @@ const UpcomingContent = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [deletionMessage, setDeletionMessage] = useState("");
   useEffect(() => {
-    dispatch(fetchContent());
+    dispatch(fetchAllContent());
   }, []);
   useEffect(() => {
     // Retrieve success message from sessionStorage
@@ -31,7 +31,7 @@ const UpcomingContent = () => {
     }
   }, []);
 
-  console.log("Content Data", ContentDetails.contentDetails);
+  console.log("Content Data", ContentDetails.contentAllDetails);
 
   return (
     <>
@@ -73,7 +73,7 @@ const UpcomingContent = () => {
         )}
         <MyContentCard
           heading={"My Upcoming Content"}
-          cardData={ContentDetails.contentDetails?.upcoming_content}
+          cardData={ContentDetails.contentAllDetails?.upcoming_content}
         />
         <Footer />
       </div>

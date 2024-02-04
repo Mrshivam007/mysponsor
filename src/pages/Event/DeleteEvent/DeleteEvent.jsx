@@ -9,7 +9,7 @@ import {
 import bgimage from "../../../assets/img/circle-bg.png";
 import spevents from "../../../assets/img/sponsor_events-logo.png";
 import { EventsCards, EventsPageCards } from "../../../data/data";
-import { fetchEvent, fetchEventbyId } from "../../../redux/actions/eventAction";
+import { fetchEvent, fetchEventbyId, fetchAllEvent } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux";
 import Update_EventCard from "../Update_Event/Update_EventCard";
 import Delete_EventCard from "./DeleteEventCard";
@@ -27,7 +27,7 @@ const DeleteEvent = () => {
   const eventDetails = useSelector((state) => state.event);
   const [successMessage, setSuccessMessage] = useState("");
   useEffect(() => {
-    dispatch(fetchEventbyId(userDetails.user_id))
+    dispatch(fetchAllEvent())
   }, []);
 
   useEffect(() => {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import listevents from "../../../assets/img/list_events.png";
 import bgimage from "../../../assets/img/circle-bg.png";
 import { EventsHeader, Footer, NavBar } from "../../../components";
-import { fetchContent } from "../../../redux/actions/contentAction";
+import { fetchContent, fetchAllContent } from "../../../redux/actions/contentAction";
 import { useDispatch, useSelector } from "react-redux";
 import MyContentCard from "../MyContentCard/MyContentCard";
 const LiveContent = () => {
@@ -14,7 +14,7 @@ const LiveContent = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [deletionMessage, setDeletionMessage] = useState("");
   useEffect(() => {
-    dispatch(fetchContent());
+    dispatch(fetchAllContent());
   }, []);
   useEffect(() => {
     // Retrieve success message from sessionStorage
@@ -31,7 +31,7 @@ const LiveContent = () => {
     }
   }, []);
 
-  console.log("Content Data", ContentDetails.contentDetails);
+  console.log("Content Data", ContentDetails?.contentAllDetails);
 
   return (
     <>
@@ -71,7 +71,7 @@ const LiveContent = () => {
             </div>
           </div>
         )}
-        <MyContentCard heading={"My Live Content"} cardData={ContentDetails.contentDetails?.live_content} />
+        <MyContentCard heading={"My Live Content"} cardData={ContentDetails.contentAllDetails?.live_content} />
         <Footer />
       </div>
     </>

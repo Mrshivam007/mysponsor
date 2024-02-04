@@ -9,7 +9,7 @@ import {
 import bgimage from "../../../assets/img/circle-bg.png";
 import spevents from "../../../assets/img/sponsor_events-logo.png";
 import { EventsCards, EventsPageCards } from "../../../data/data";
-import { fetchEvent, fetchEventbyId } from "../../../redux/actions/eventAction";
+import { fetchEvent, fetchEventbyId, fetchAllEvent } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux";
 import MyEventCard from "../MyEventCrad/MyEventCard";
 import { useLocation } from "react-router-dom";
@@ -28,7 +28,7 @@ const UpcomingEvent = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [deletionMessage, setDeletionMessage] = useState("");
   useEffect(() => {
-    dispatch(fetchEventbyId(userDetails.user_id));
+    dispatch(fetchAllEvent());
   }, []);
 
   useEffect(() => {
@@ -46,7 +46,7 @@ const UpcomingEvent = () => {
     }
   }, []);
 
-  console.log("dynamic data", eventDetails.eventDetails);
+  console.log("dynamic data", eventDetails?.eventAllDetails?.upcoming_event);
   console.log("static data", EventsCards);
 
   return (
@@ -85,7 +85,7 @@ const UpcomingEvent = () => {
               </div>
             </div>
           )}
-          <MyEventCard cardData={eventDetails.eventDetails?.upcoming_event} />
+          <MyEventCard cardData={eventDetails?.eventAllDetails?.upcoming_event} />
           {/* <SponserE cardData={EventsCards} line={"Concerts"} />
           <SponserE cardData={EventsCards} line={"Promotional Events"} />
           <SponserE cardData={EventsCards} line={"Sports Events"} />
@@ -94,9 +94,31 @@ const UpcomingEvent = () => {
           <SponserE cardData={EventsCards} line={"Reality Shows"} /> */}
         </div>
         <div className="events-page-mobile">
+        {successMessage && (
+            <div className="container">
+              <div
+                class="alert alert-success"
+                role="alert"
+                style={{ borderRadius: "10px" }}
+              >
+                {successMessage}
+              </div>
+            </div>
+          )}
+          {deletionMessage && (
+            <div className="container">
+              <div
+                class="alert alert-danger"
+                role="alert"
+                style={{ borderRadius: "10px" }}
+              >
+                {deletionMessage}
+              </div>
+            </div>
+          )}
           <EventMobileCard
             line={"Upcoming Event"}
-            cardData={eventDetails.eventDetails?.upcoming_event}
+            cardData={eventDetails?.eventAllDetails?.upcoming_event}
           />
           <div
             className="btn d-block text-white font-weight-bolder"

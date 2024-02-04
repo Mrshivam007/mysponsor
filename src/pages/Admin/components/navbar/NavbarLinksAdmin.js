@@ -17,6 +17,7 @@ import {
 import { ItemContent } from '../../components/menu/ItemContent';
 import { SearchBar } from '../../components/navbar/searchBar/SearchBar';
 import { SidebarResponsive } from '../../components/sidebar/Sidebar';
+import { logout } from '../../../../redux/actions/authActions';
 import PropTypes from 'prop-types';
 import React from 'react';
 // Assets
@@ -26,6 +27,8 @@ import { FaEthereum } from 'react-icons/fa';
 // import routes from 'routes.js';
 import routes from '../../routes';
 import { ThemeEditor } from './ThemeEditor';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 export default function HeaderLinks(props) {
 	const { secondary } = props;
 	// Chakra Color Mode
@@ -42,6 +45,12 @@ export default function HeaderLinks(props) {
 		'14px 17px 40px 4px rgba(112, 144, 176, 0.06)'
 	);
 	const borderButton = useColorModeValue('secondaryGray.500', 'whiteAlpha.200');
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const handleLogout = () => {
+		dispatch(logout());
+		navigate("/");
+	  };
 	return (
 		<Flex
 			w={{ sm: '100%', md: 'auto' }}
@@ -207,7 +216,7 @@ export default function HeaderLinks(props) {
 							color="red.400"
 							borderRadius="8px"
 							px="14px">
-							<Text fontSize="sm">Log out</Text>
+							<Text fontSize="sm" onClick={handleLogout}>Log out</Text>
 						</MenuItem>
 					</Flex>
 				</MenuList>

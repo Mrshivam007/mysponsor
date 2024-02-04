@@ -18,10 +18,10 @@ const MyEventCard = ({ cardData }) => {
   console.log(userDetails);
 
   const dispatch = useDispatch();
-  const eventDetails = useSelector((state) => state.event);
-  useEffect(() => {
-    dispatch(fetchEventbyId(userDetails.user_id));
-  }, []);
+  // const eventDetails = useSelector((state) => state.event);
+  // useEffect(() => {
+  //   dispatch(fetchEventbyId(userDetails.user_id));
+  // }, []);
   console.log(cardData);
 
   const navigate = useNavigate();
@@ -137,10 +137,24 @@ const MyEventCard = ({ cardData }) => {
                                   }}
                                 />
                               </div>
+
                               <h4>
                                 <i className="bi bi-people-fill text-danger"></i>
                                 &nbsp;&nbsp; {data.audience_expected}
                               </h4>
+                              <div>
+                                {data.is_approval ? (
+                                  <h4>
+                                    <i className="bi bi-check-circle-fill text-success"></i>
+                                    {" "}Approved
+                                  </h4>
+                                ) : (
+                                  <h4>
+                                    <i className="bi bi-clock-fill text-danger"></i>
+                                    {" "}Pending
+                                  </h4>
+                                )}
+                              </div>
 
                               <div className="container text-white text-center d-flex justify-content-between px-0">
                                 <div className="box myevents-box text-white">

@@ -169,7 +169,7 @@ const SponsoredEvent = () => {
                                   >
                                     Total amount sponsored
                                   </h6>
-                                  <h5>₹ 50,000</h5>
+                                  <h5>{data.amount}</h5>
                                 </div>
                               </div>
                             </div>

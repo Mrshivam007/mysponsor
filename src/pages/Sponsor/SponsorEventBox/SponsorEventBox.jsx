@@ -18,10 +18,10 @@ const SponsorButton = ({ item, preview, isSelected, onButtonClick }) => {
           style={{ backgroundColor: "#f2f2f2", borderRadius: "10px" }}
         >
           <h6 className="font-weight-bolder">{item.sponsoring_items}</h6>
-          <p>
+          {/* <p>
             <i className="bi bi-cash text-success"></i>
             <span>₹{item.price}</span>
-          </p>
+          </p> */}
         </div>
       </div>
     </>
@@ -211,7 +211,7 @@ const SponsorEventBox = (eventData) => {
               </div>
               <h5>
                 <i className="bi bi-cash text-success"></i>&nbsp;&nbsp;
-                <span className="text-md">{totalAmount}&lt;</span>
+                <span className="text-md">{cardData.amount}&lt;</span>
                 <br />
                 <i className="bi bi-people-fill text-danger"></i>&nbsp;&nbsp;
                 <span className="text-md">
