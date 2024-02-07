@@ -10,11 +10,18 @@ import { EventsHeader, Footer, NavBar } from "../../../components";
 import { Link } from "react-router-dom";
 import YourEvent from "../YourEvent/YourEvent";
 import EventNavBar from "../EventNavbar/EventNavbar";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 const EventHome = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
 
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      Simple tooltip
+    </Tooltip>
+  );
   return (
     <>
       <div
@@ -38,90 +45,95 @@ const EventHome = () => {
         <div className="mobile-view">
           <h2 className="sponsor-mobile-text">Get your event listed</h2>
           <div className="page-section">
-        {/* <h1 className="choice-heading">{line}</h1> */}
+            {/* <h1 className="choice-heading">{line}</h1> */}
 
-        <div className="container choice-container">
-          <div className="row" style={{ flexWrap: "nowrap" }}>
-            <div className="col-lg-6">
-              <Link to="/events">
-                <div
-                  className="card-service wow fadeInUp choice-card"
-                  style={{
-                    maxWidth: "100%",
-                    display: "flex",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <div className="body choice-body choice-1 text-left">
-                    <h2 className="font-weight-bolder mb-0">Events</h2>
-                    <div className="card_line"></div>
-                    <p className="choice-para mt-2 text-left">
-                      We help you define your SEO objective & develop a
-                      realistic strategy with you
-                    </p>
-                    <button
-                      to="/events"
-                      className="choice-btn btn text-white py-1 font-weight-bold"
+            <div className="container choice-container">
+              <div className="row" style={{ flexWrap: "nowrap" }}>
+                <div className="col-lg-6">
+                  <Link to="/events">
+                    <div
+                      className="card-service wow fadeInUp choice-card"
                       style={{
-                        float: "left",
-                        backgroundColor: "#00448B",
-                        borderRadius: "15px",
+                        maxWidth: "100%",
+                        display: "flex",
+                        justifyContent: "space-between",
                       }}
                     >
-                      Explore now
-                    </button>
-                  </div>
-                  <div
-                    className="header choice-img mb-0"
-                  >
-                    <img src={calendar} alt="" />
-                  </div>
+                      <div className="body choice-body choice-1 text-left">
+                        <h2 className="font-weight-bolder mb-0">Events</h2>
+                        <div className="card_line"></div>
+                        <p className="choice-para mt-2 text-left">
+                          We help you define your SEO objective & develop a
+                          realistic strategy with you
+                        </p>
+                        <button
+                          to="/events"
+                          className="choice-btn btn text-white py-1 font-weight-bold"
+                          style={{
+                            float: "left",
+                            backgroundColor: "#00448B",
+                            borderRadius: "15px",
+                          }}
+                        >
+                          Explore now
+                        </button>
+                      </div>
+                      <div className="header choice-img mb-0">
+                        <img src={calendar} alt="" />
+                      </div>
+                    </div>
+                  </Link>
                 </div>
-              </Link>
-            </div>
-            <div className="col-lg-6">
-              <Link to="/sponsored_events">
-                <div
-                  className="card-service wow fadeInUp choice-card"
-                  style={{
-                    maxWidth: "100%",
-                    display: "flex",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <div className="body choice-body choice-2 text-left">
-                    <h2 className="font-weight-bolder mb-0">
-                      Sponsored Event
-                    </h2>
-                    <div className="card_line"></div>
-                    <p className="choice-para mt-2 text-left">
-                      We help you define your SEO objective & develop a
-                      realistic strategy with you
-                    </p>
-                    <button
-                      to="/cc"
-                      className="choice-btn btn text-white py-1 font-weight-bold"
+                <div className="col-lg-6">
+                  <Link to="/sponsored_events">
+                    <div
+                      className="card-service wow fadeInUp choice-card"
+                      style={{
+                        maxWidth: "100%",
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
                     >
-                      Explore now
-                    </button>
-                  </div>
-                  <div className="header choice-img mb-0">
-                    <img src={camera} alt="" />
-                  </div>
+                      <div className="body choice-body choice-2 text-left">
+                        <h2 className="font-weight-bolder mb-0">
+                          Sponsored Event
+                        </h2>
+                        <div className="card_line"></div>
+                        <p className="choice-para mt-2 text-left">
+                          We help you define your SEO objective & develop a
+                          realistic strategy with you
+                        </p>
+                        <button
+                          to="/cc"
+                          className="choice-btn btn text-white py-1 font-weight-bold"
+                        >
+                          Explore now
+                        </button>
+                      </div>
+                      <div className="header choice-img mb-0">
+                        <img src={camera} alt="" />
+                      </div>
+                    </div>
+                  </Link>
                 </div>
-              </Link>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
         </div>
         {/* ---MOBILE VIEW END--- */}
         <div className="container">
-          <div className="list-events-box">
-            <h2>
-              List your event and get sponsored worldwide by different sponsors
-            </h2>
-          </div>
+          <OverlayTrigger
+            placement="bottom"
+            delay={{ show: 250, hide: 400 }}
+            overlay={renderTooltip}
+          >
+            <div className="list-events-box">
+              <h2>
+                List your event and get sponsored worldwide by different
+                sponsors
+              </h2>
+            </div>
+          </OverlayTrigger>
         </div>
         <div className="container events-home-cards mb-5">
           <div className="row">
@@ -139,10 +151,8 @@ const EventHome = () => {
                   <h5 className="card-text font-weight-bold">
                     Want your events sponsored?
                   </h5>
-                  <button
-                    className="btn text-white p-1 font-weight-bold mb-3"
-                  >
-                    <Link to={"create_event"} style={{color: 'white'}} >
+                  <button className="btn text-white p-1 font-weight-bold mb-3">
+                    <Link to={"create_event"} style={{ color: "white" }}>
                       List an Events
                     </Link>
                   </button>
@@ -163,11 +173,12 @@ const EventHome = () => {
                   <h5 className="card-text font-weight-bold">
                     Update Your Event
                   </h5>
-                  <button
-                    className="btn text-white p-1 font-weight-bold mb-3"
-                  >
-                    <Link to={"update_UpcomingEvent"} style={{color: 'white'}} >
-                    Update an Event
+                  <button className="btn text-white p-1 font-weight-bold mb-3">
+                    <Link
+                      to={"update_UpcomingEvent"}
+                      style={{ color: "white" }}
+                    >
+                      Update an Event
                     </Link>
                   </button>
                 </div>
@@ -187,11 +198,9 @@ const EventHome = () => {
                   <h5 className="card-text font-weight-bold">
                     Delete Your Event
                   </h5>
-                  <button
-                    className="btn text-white p-1 font-weight-bold mb-3"
-                  >
-                    <Link to={"delete_event"} style={{color: 'white'}}>
-                    Delete an Event
+                  <button className="btn text-white p-1 font-weight-bold mb-3">
+                    <Link to={"delete_event"} style={{ color: "white" }}>
+                      Delete an Event
                     </Link>
                   </button>
                 </div>

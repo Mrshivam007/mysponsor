@@ -6,6 +6,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createEvent } from "../../../redux/actions/eventAction";
 import { eventReducer } from "../../../redux/reducer/eventReducer";
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
 import { useNavigate } from "react-router-dom";
 import EventNavBar from "../EventNavbar/EventNavbar";
 
@@ -13,6 +15,15 @@ const ListeventsForm = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
+
+  const animatedComponents = makeAnimated();
+
+  const itemOptions = [
+    { value: "banner", label: "Banner" },
+    { value: "led_screen", label: "LED Screen" },
+    { value: "bill_board", label: "Bill Board" },
+  ];
+  const [itemSelection, setItemSelection] = useState([]);
 
   const [title, setTitle] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -26,30 +37,30 @@ const ListeventsForm = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [event_time, setEventTime] = useState("");
   const [price, setPrice] = useState("");
-  // const [prices, setPrices] = useState("");
+  const [prices, setPrices] = useState("");
   // const [showDropdown, setShowDropdown] = useState(false);
   // const [showDropdown, setShowDropdown] = useState(false);
   // const [selectedItems, setSelectedItems] = useState([]);
-  const [prices, setPrices] = useState({
-    banner: '',
-    led_screen: '',
-    bill_board: '',
-  });
+  // const [prices, setPrices] = useState({
+  //   banner: "",
+  //   led_screen: "",
+  //   bill_board: "",
+  // });
   const [selectedItems, setSelectedItems] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const [thumbnail1, setThumbnail1] = useState(null);
   const [thumbnail2, setThumbnail2] = useState(null);
   const [thumbnail3, setThumbnail3] = useState(null);
-  const [thumbnail1Filename, setThumbnail1Filename] = useState('');
-  const [thumbnail2Filename, setThumbnail2Filename] = useState('');
-  const [thumbnail3Filename, setThumbnail3Filename] = useState('');
+  const [thumbnail1Filename, setThumbnail1Filename] = useState("");
+  const [thumbnail2Filename, setThumbnail2Filename] = useState("");
+  const [thumbnail3Filename, setThumbnail3Filename] = useState("");
   const [video, setVideo] = useState("");
-  const [videoFilename, setVideoFilename] = useState('');
+  const [videoFilename, setVideoFilename] = useState("");
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const event = useSelector((state) => state.event);
   const [errors, setErrors] = useState({});
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const { createEventError, createEventDetails, loading } = event;
   const { userDetails } = auth;
   const navigate = useNavigate(); // Initialize useNavigate hook
@@ -59,7 +70,7 @@ const ListeventsForm = () => {
   // console.log("event data", createEventDetails?.thumbnail3?.[0] || createEventDetails?.thumbnail2?.[0] || createEventDetails?.thumbnail1?.[0]);
 
   const generateUniqueFilename = (originalFilename, index) => {
-    const extension = originalFilename.split('.').pop();
+    const extension = originalFilename.split(".").pop();
     const uniqueFilename = `thumbnail${index + 1}_${Date.now()}.${extension}`;
     return uniqueFilename;
   };
@@ -111,50 +122,41 @@ const ListeventsForm = () => {
   console.log(thumbnail2Filename);
   console.log(thumbnail3Filename);
 
+  const handleSponsoringItemChange = (itemSelection) => {
+    let updatedSelectedItems = itemSelection.map((item) => item.value);
+    console.log(updatedSelectedItems);
+    setItemSelection(updatedSelectedItems);
+  };
 
-
-  // const handleSponsoringItemChange = (e) => {
-  //   const { value } = e.target;
-  //   let updatedSelectedItems = [...selectedItems];
-
-  //   if (updatedSelectedItems.includes(value)) {
-  //     updatedSelectedItems = updatedSelectedItems.filter(
-  //       (item) => item !== value
-  //     );
-  //   } else {
-  //     updatedSelectedItems.push(value);
-  //   }
-
-  //   setSelectedItems(updatedSelectedItems);
-  // };
-
-  // const handlePriceChange = (item, price) => {
-  //   const updatedPrices = { ...prices };
-  //   updatedPrices[item] = price;
-  //   setPrices(updatedPrices);
-  // };
+  const handlePriceChange = (item, price) => {
+    const updatedPrices = { ...prices };
+    updatedPrices[item] = price;
+    setPrices(updatedPrices);
+  };
 
   // const handleToggleDropdown = (e) => {
   //   e.preventDefault();
   //   setShowDropdown(!showDropdown);
   // };
 
-  const handleSponsoringItemChange = (item) => {
-    setSelectedItems((prevSelectedItems) => {
-      if (prevSelectedItems.includes(item)) {
-        return prevSelectedItems.filter((selectedItem) => selectedItem !== item);
-      } else {
-        return [...prevSelectedItems, item];
-      }
-    });
-  };
+  // const handleSponsoringItemChange = (item) => {
+  //   setSelectedItems((prevSelectedItems) => {
+  //     if (prevSelectedItems.includes(item)) {
+  //       return prevSelectedItems.filter(
+  //         (selectedItem) => selectedItem !== item
+  //       );
+  //     } else {
+  //       return [...prevSelectedItems, item];
+  //     }
+  //   });
+  // };
 
-  const handlePriceChange = (item, value) => {
-    setPrices((prevPrices) => ({
-      ...prevPrices,
-      [item]: value,
-    }));
-  };
+  // const handlePriceChange = (item, value) => {
+  //   setPrices((prevPrices) => ({
+  //     ...prevPrices,
+  //     [item]: value,
+  //   }));
+  // };
 
   const validateForm = () => {
     const errorsObj = {};
@@ -219,7 +221,7 @@ const ListeventsForm = () => {
       formData.append("title", title);
 
       // Prepare sponsoring items array
-      const sponsoringItemsData = selectedItems.map((item) => ({
+      const sponsoringItemsData = itemSelection.map((item) => ({
         sponsoring_items: item,
         price: prices[item] || null,
         is_sponsored: false, // handle cases where price might be undefined or null
@@ -330,90 +332,54 @@ const ListeventsForm = () => {
                       </div>
                     </div>
 
-                    {/* <div className="row form-group">
+                    <div className="row form-group">
                       <div className="col-md-12 mb-3 mb-md-0">
-                        <div>
-                          <button
-                            type="button"
-                            style={{
-                              background: selectedItems.includes('banner') ? '#ccc' : '#fff',
-                              border: selectedItems.includes('banner') ? '2px solid gray' : '2px solid black',
-                            }}
-                            onClick={() => handleSponsoringItemChange('banner')}
-                          >
-                            Banner
-                          </button>
-                          <button
-                            type="button"
-                            style={{
-                              background: selectedItems.includes('led_screen') ? '#ccc' : '#fff',
-                              border: selectedItems.includes('led_screen') ? '2px solid gray' : '2px solid black',
-                            }}
-                            onClick={() => handleSponsoringItemChange('led_screen')}
-                          >
-                            LED Screen
-                          </button>
-                          <button
-                            type="button"
-                            style={{
-                              background: selectedItems.includes('bill_board') ? '#ccc' : '#fff',
-                              border: selectedItems.includes('bill_board') ? '2px solid gray' : '2px solid black',
-                            }}
-                            onClick={() => handleSponsoringItemChange('bill_board')}
-                          >
-                            Billboard
-                          </button>
-
-                          {showDropdown && (
-                            <div>
-                              {selectedItems.map((item) => (
-                                <div key={item}>
-                                  <input
-                                    type="text"
-                                    value={prices[item]}
-                                    onChange={(e) => handlePriceChange(item, e.target.value)}
-                                    className="form-control my-1"
-                                    placeholder={`Enter ${item.replace('_', ' ')} Price`}
-                                  />
-                                </div>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div> */}
-
-                    <div>
-                      <div className="row form-group">
-                        <div className="col-md-12 mb-3 mb-md-0">
-                          <div>
+                        {/* <div>
                             <button
                               type="button"
                               style={{
-                                background: selectedItems.includes('banner') ? '#ccc' : '#fff',
-                                border: selectedItems.includes('banner') ? '2px solid gray' : '2px solid black',
+                                background: selectedItems.includes("banner")
+                                  ? "#ccc"
+                                  : "#fff",
+                                border: selectedItems.includes("banner")
+                                  ? "2px solid gray"
+                                  : "2px solid black",
                               }}
-                              onClick={() => handleSponsoringItemChange('banner')}
+                              onClick={() =>
+                                handleSponsoringItemChange("banner")
+                              }
                             >
                               Banner
                             </button>
                             <button
                               type="button"
                               style={{
-                                background: selectedItems.includes('led_screen') ? '#ccc' : '#fff',
-                                border: selectedItems.includes('led_screen') ? '2px solid gray' : '2px solid black',
+                                background: selectedItems.includes("led_screen")
+                                  ? "#ccc"
+                                  : "#fff",
+                                border: selectedItems.includes("led_screen")
+                                  ? "2px solid gray"
+                                  : "2px solid black",
                               }}
-                              onClick={() => handleSponsoringItemChange('led_screen')}
+                              onClick={() =>
+                                handleSponsoringItemChange("led_screen")
+                              }
                             >
                               LED Screen
                             </button>
                             <button
                               type="button"
                               style={{
-                                background: selectedItems.includes('bill_board') ? '#ccc' : '#fff',
-                                border: selectedItems.includes('bill_board') ? '2px solid gray' : '2px solid black',
+                                background: selectedItems.includes("bill_board")
+                                  ? "#ccc"
+                                  : "#fff",
+                                border: selectedItems.includes("bill_board")
+                                  ? "2px solid gray"
+                                  : "2px solid black",
                               }}
-                              onClick={() => handleSponsoringItemChange('bill_board')}
+                              onClick={() =>
+                                handleSponsoringItemChange("bill_board")
+                              }
                             >
                               Billboard
                             </button>
@@ -423,14 +389,49 @@ const ListeventsForm = () => {
                                 <input
                                   type="text"
                                   value={prices[item]}
-                                  onChange={(e) => handlePriceChange(item, e.target.value)}
+                                  onChange={(e) =>
+                                    handlePriceChange(item, e.target.value)
+                                  }
                                   className="form-control my-1"
-                                  placeholder={`Enter ${item.replace('_', ' ')} Price`}
+                                  placeholder={`Enter ${item.replace(
+                                    "_",
+                                    " "
+                                  )} Price`}
                                 />
                               </div>
                             ))}
-                          </div>
+                          </div> */}
+                        <div>
+                          <Select
+                            closeMenuOnSelect={true}
+                            components={animatedComponents}
+                            onChange={handleSponsoringItemChange}
+                            isMulti
+                            options={itemOptions}
+                          />
+                          {itemSelection.map((item) => (
+                            <div key={item}>
+                              <input
+                                type="text"
+                                value={prices[item]}
+                                onChange={(e) =>
+                                  handlePriceChange(item, e.target.value)
+                                }
+                                className="form-control my-1"
+                                placeholder={`Enter ${item.replace(
+                                  "_",
+                                  " "
+                                )} Price`}
+                              />
+                            </div>
+                          ))}
                         </div>
+                        {errors.selectedItems && (
+                          <p className="error-msg">{errors.selectedItems}</p>
+                        )}
+                        {prices == "" ? (
+                          <p className="error-msg">{errors.prices}</p>
+                        ) : null}
                       </div>
                     </div>
 

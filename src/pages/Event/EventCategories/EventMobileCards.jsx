@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchEvent, fetchEventbyId } from "../../../redux/actions/eventAction";
-import heart from "../../../assets/img/heart2.svg";
 import apiurl from "../../../constant/config";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 const EventMobileCard = ({ line, cardData }) => {
   const auth = useSelector((state) => state.auth);
@@ -12,7 +13,7 @@ const EventMobileCard = ({ line, cardData }) => {
   const dispatch = useDispatch();
   const eventDetails = useSelector((state) => state.event);
   useEffect(() => {
-    dispatch(fetchEventbyId(userDetails.user_id))
+    dispatch(fetchEventbyId(userDetails.user_id));
   }, []);
 
   const navigate = useNavigate();
@@ -20,6 +21,27 @@ const EventMobileCard = ({ line, cardData }) => {
   const handleSponsorClick = (data) => {
     navigate("/myevent-details", { state: { eventData: data } });
   };
+
+  const renderTooltip1 = (props) => (
+    <Tooltip
+      id="button-tooltip"
+      {...props}
+      // style={{ backgroundColor: "mediumseagreen" }}
+    >
+      This Event is Admin Approved
+    </Tooltip>
+  );
+
+  const renderTooltip2 = (props) => (
+    <Tooltip
+      id="button-tooltip"
+      {...props}
+      // style={{ backgroundColor: "mediumseagreen" }}
+    >
+      This Event is Waiting for Admin Approval
+    </Tooltip>
+  );
+
   return (
     <>
       {/* <h2 className="sponsor-mobile-text">{line}</h2>
@@ -89,28 +111,42 @@ const EventMobileCard = ({ line, cardData }) => {
                             borderRadius: "10px",
                           }}
                         />
-                        <div className="content-text-overlay" style={{ justifyContent: 'start', alignItems: 'end' }}>
-                          <div className="heart d-flex justify-content-between mb-2">
+
+                        <div className="content-text-overlay">
+                          <div className="heart d-flex justify-content-end mb-2">
                             <div>
                               {data.is_approval ? (
-                                <h4>
-                                  <i className="bi bi-check-circle-fill text-success"></i>
-                                  {/* {" "}Approved */}
-                                </h4>
+                                <OverlayTrigger
+                                  placement="bottom-end"
+                                  delay={{ show: 250, hide: 400 }}
+                                  overlay={renderTooltip1}
+                                >
+                                  <h2>
+                                    <i className="bi bi-check-circle-fill text-success"></i>{" "}
+                                    {/* Approved */}
+                                  </h2>
+                                </OverlayTrigger>
                               ) : (
-                                <h4>
-                                  <i className="bi bi-clock-fill text-danger"></i>
-                                  {/* {" "}Pending */}
-                                </h4>
+                                <OverlayTrigger
+                                  placement="bottom-end"
+                                  delay={{ show: 250, hide: 400 }}
+                                  overlay={renderTooltip2}
+                                >
+                                  <h2>
+                                    <i className="bi bi-clock-fill text-danger"></i>{" "}
+                                    {/* Pending */}
+                                  </h2>
+                                </OverlayTrigger>
                               )}
                             </div>
                           </div>
-                        </div>
-                        <div className="content-text-overlay">
-                          <h4 className="font-weight-bold mb-0">
-                            {data.title}
-                          </h4>
-                          <h5>{data.location}</h5>
+
+                          <div>
+                            <h4 className="font-weight-bold mb-0">
+                              {data.title}
+                            </h4>
+                            <h5>{data.location}</h5>
+                          </div>
                         </div>
                       </div>
                       <div className="container">
