@@ -7,18 +7,20 @@ import { fetchSponsoredContent } from "../../../redux/actions/sponsorAction";
 import { useDispatch, useSelector } from "react-redux";
 import apiurl from "../../../constant/config";
 import { Link, useNavigate } from "react-router-dom";
+import SponsorNavbar from "../SponsorNavbar/SponsorNavbar";
 
 const SponsoredContent = () => {
   const auth = useSelector((state) => state.auth);
   const { userDetails } = auth;
   const sponsor_id = userDetails.user_id;
   const dispatch = useDispatch();
-  const contentDetails = useSelector((state) => state.sponsor);
   useEffect(() => {
     dispatch(fetchSponsoredContent(sponsor_id));
   }, []);
+  const contentDetails = useSelector((state) => state.sponsor);
+  console.log("getting data ", contentDetails);
   console.log("user details", auth);
-  const cardData = contentDetails.SponsoredContent;
+  const cardData = contentDetails?.SponsoredContent;
   console.log("Content details", cardData);
   const navigate = useNavigate();
 
@@ -35,8 +37,8 @@ const SponsoredContent = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <NavBar />
-        <EventsHeader title={"Your Sponsored Event!"} logo={listevents} />
+        <SponsorNavbar />
+        <EventsHeader title={"Your Sponsored Content!"} logo={listevents} />
         <h1></h1>
         <div className="desktop-view mt-4">
           <div className="container">

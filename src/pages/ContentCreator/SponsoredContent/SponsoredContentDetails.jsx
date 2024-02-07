@@ -29,7 +29,7 @@ const SponsoredContentDetails = () => {
         <NavBar />
         {/* <SponsorContentBox contentData={contentData} /> */}
         <SponsorContentBox contentData={contentData} />
-        <SponserE cardData={EventsCards} />
+        {/* <SponserE cardData={EventsCards} /> */}
         <Footer />
       </div>
     </>

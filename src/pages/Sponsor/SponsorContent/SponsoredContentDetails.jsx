@@ -10,6 +10,7 @@ import {
 import { useLocation } from "react-router-dom";
 import SponsorEventBox from "../SponsorEventBox/SponsorEventBox.jsx";
 import SponsorContentBox from "../SponsorContentBox/SponsorContentBox.jsx";
+import SponsorNavbar from "../SponsorNavbar/SponsorNavbar.jsx";
 const SponsoredContentDetails = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
@@ -27,9 +28,9 @@ const SponsoredContentDetails = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <NavBar />
+        <SponsorNavbar />
         <SponsorContentBox contentData={contentData} />
-        <SponserE cardData={EventsCards} />
+        {/* <SponserE cardData={EventsCards} /> */}
         <Footer />
       </div>
     </>

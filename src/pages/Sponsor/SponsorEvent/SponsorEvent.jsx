@@ -41,7 +41,6 @@ const SponsorEvents = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        {/* <NavBar /> */}
         <SponsorNavbar />
         <div className="events-page-desktop">
           <EventsHeader title={"Sponsor Events"} logo={spevents} />

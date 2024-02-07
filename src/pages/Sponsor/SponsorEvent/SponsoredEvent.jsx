@@ -7,6 +7,7 @@ import { fetchSponsoredEvent } from "../../../redux/actions/sponsorAction";
 import { useDispatch, useSelector } from "react-redux";
 import apiurl from "../../../constant/config";
 import { Link, useNavigate } from "react-router-dom";
+import SponsorNavbar from "../SponsorNavbar/SponsorNavbar";
 
 const SponsoredEvent = () => {
   const auth = useSelector((state) => state.auth);
@@ -35,7 +36,7 @@ const SponsoredEvent = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <NavBar />
+        <SponsorNavbar />
         <EventsHeader title={"Your Sponsored Event!"} logo={listevents} />
         <h1></h1>
         <div className="desktop-view mt-4">

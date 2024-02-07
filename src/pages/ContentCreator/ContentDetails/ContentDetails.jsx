@@ -23,7 +23,7 @@ const ContentDetails = () => {
       >
         <NavBar />
         <MyContentBox contentData={contentData} />
-        <SponserE cardData={EventsCards} />
+        {/* <SponserE cardData={EventsCards} /> */}
         <Footer />
       </div>
     </>

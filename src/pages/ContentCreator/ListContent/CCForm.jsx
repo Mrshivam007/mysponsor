@@ -28,9 +28,9 @@ const ListContentForm = () => {
   const [event_time, setEventTime] = useState("");
   const [price, setPrice] = useState("");
   const [prices, setPrices] = useState({
-    banner: '',
-    led_screen: '',
-    bill_board: '',
+    tag_ads: '',
+    sponsored_by: '',
+    reel_sponsored: '',
   });
   const [selectedItems, setSelectedItems] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -295,38 +295,38 @@ const ListContentForm = () => {
                             <button
                               type="button"
                               style={{
-                                background: selectedItems.includes('banner') ? '#ccc' : '#fff',
-                                border: selectedItems.includes('banner') ? '2px solid gray' : '2px solid black',
+                                background: selectedItems.includes('tag_ads') ? '#ccc' : '#fff',
+                                border: selectedItems.includes('tag_ads') ? '2px solid gray' : '2px solid black',
                               }}
-                              onClick={() => handleSponsoringItemChange('banner')}
+                              onClick={() => handleSponsoringItemChange('tag_ads')}
                             >
-                              Banner
+                              #Ads
                             </button>
                             <button
                               type="button"
                               style={{
-                                background: selectedItems.includes('led_screen') ? '#ccc' : '#fff',
-                                border: selectedItems.includes('led_screen') ? '2px solid gray' : '2px solid black',
+                                background: selectedItems.includes('sponsored_by') ? '#ccc' : '#fff',
+                                border: selectedItems.includes('sponsored_by') ? '2px solid gray' : '2px solid black',
                               }}
-                              onClick={() => handleSponsoringItemChange('led_screen')}
+                              onClick={() => handleSponsoringItemChange('sponsored_by')}
                             >
-                              LED Screen
+                              This video is sponsored by
                             </button>
                             <button
                               type="button"
                               style={{
-                                background: selectedItems.includes('bill_board') ? '#ccc' : '#fff',
-                                border: selectedItems.includes('bill_board') ? '2px solid gray' : '2px solid black',
+                                background: selectedItems.includes('reel_sponsored') ? '#ccc' : '#fff',
+                                border: selectedItems.includes('reel_sponsored') ? '2px solid gray' : '2px solid black',
                               }}
-                              onClick={() => handleSponsoringItemChange('bill_board')}
+                              onClick={() => handleSponsoringItemChange('reel_sponsored')}
                             >
-                              Billboard
+                              Reels Sponsore
                             </button>
 
                             {selectedItems.map((item) => (
                                 <div key={item}>
                                   <input
-                                    type="text"
+                                    type="number"
                                     value={prices[item]}
                                     onChange={(e) => handlePriceChange(item, e.target.value)}
                                     className="form-control my-1"

@@ -59,50 +59,19 @@ const SponsorButton = ({ item, cardData, isSelected, onButtonClick }) => {
             }}
           >
             <Container className="d-flex justify-content-center">
-              {item.sponsoring_content_items === "banner" && (
+              {item.sponsoring_content_items === "tag_ads" && (
                 <>
-                  <img src={banner_preview} alt="banner-preview" />
-                  <div style={{ position: "absolute", top: "70px" }}>
-                    <img
-                      src={apiurl + cardData?.banner_image}
-                      alt="banner-img-preview"
-                      style={{ width: "449px", height: "220px" }}
-                    />
-                  </div>
+                  <h1>{cardData?.tag_ads}</h1>
                 </>
               )}
-              {item.sponsoring_content_items === "led_screen" && (
+              {item.sponsoring_content_items === "sponsored_by" && (
                 <>
-                  <img src={banner_preview} alt="banner-preview" />
-
-                  <div
-                    style={{
-                      width: "449px",
-                      height: "220px",
-                      position: "absolute",
-                      top: "70px",
-                    }}
-                    data-bs-theme="dark"
-                  >
-                    <Carousel data-bs-theme="dark">
-                      <Carousel.Item interval={1000}>
-                        <img
-                          style={{ width: "100%", height: "220px" }}
-                          src={apiurl + cardData?.banner_image}
-                          alt=""
-                        />
-                      </Carousel.Item>
-                      <Carousel.Item interval={41000}>
-                        <video
-                          style={{ width: "100%", height: "220px" }}
-                          src={apiurl + cardData?.led_video}
-                          controls
-                          controlsList="nofullscreen"
-                          autoplay
-                        ></video>
-                      </Carousel.Item>
-                    </Carousel>
-                  </div>
+                <h1>{cardData?.sponsored_by}</h1>
+                </>
+              )}
+              {item.sponsoring_content_items === "reel_sponsored" && (
+                <>
+                <h1>{cardData?.reel_sponsored}</h1>
                 </>
               )}
             </Container>

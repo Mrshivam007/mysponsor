@@ -1,14 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
 import SponsorCalendarCard from "./SponsorCalendarCard";
-import { useEffect } from "react";
-import { fetchContent } from "../../../redux/actions/contentAction";
 
 const SponsorClaendar = () => {
-  const dispatch = useDispatch();
-  const ContentDetails = useSelector((state) => state.content);
-  useEffect(() => {
-    dispatch(fetchContent());
-  }, []);
+
   return (
     <>
       <div className="modal-dialog" style={{ display: 'flex', flexDirection: 'column', maxHeight: '80svh' }}>

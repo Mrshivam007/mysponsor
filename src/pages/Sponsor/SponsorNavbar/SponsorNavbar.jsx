@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Navbar, Nav, NavLink, Container } from "react-bootstrap";
-// import banner from "../../assets/img/card/header_banner.png";
 import logo from "../../../assets/img/logo/logo.png";
 import noProfilepic from "../../../assets/img/emptyprofile2.jpg";
-// import card_bg from "../../assets/img/card/header-bg.png";
 import { AiOutlineClose } from "react-icons/ai"; // Import the close icon from react-icons library
-// import account from "../../assets/img/account.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/actions/authActions";
@@ -52,31 +49,6 @@ const SponsorNavbar = () => {
           <Link to="/" className="navbar-brand">
             <img src={logo} alt="" />
           </Link>
-          {/* <div className="wrapper">
-            <div className="searchBar">
-              <input
-                id="searchQueryInput"
-                type="text"
-                name="searchQueryInput"
-                placeholder="Search"
-              />
-              <button
-                id="searchQuerySubmit"
-                type="submit"
-                name="searchQuerySubmit"
-              >
-                <svg
-                  style={{ width: "24px", height: "24px", margin: "auto" }}
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="white"
-                    d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div> */}
           {userDetails ? (
             <>
               <div className="box d-flex align-items-center justify-content-between">
@@ -194,9 +166,6 @@ const SponsorNavbar = () => {
                 Sponsor Content Creators
               </Link>
             </Nav.Link>
-            {/* <Nav.Link className="desktop-nav-item" href="#">
-              Events Near You
-            </Nav.Link> */}
             <Nav.Link className="desktop-nav-item" href="#">
               Top Events
             </Nav.Link>
@@ -254,7 +223,6 @@ const SponsorNavbar = () => {
                 style={{ fontSize: "28px", marginLeft: "-10px" }}
               ></span>
             </div>
-            {/* MODAL */}
             <div
               class="modal fade"
               id="exampleModal"
@@ -264,7 +232,6 @@ const SponsorNavbar = () => {
             >
               <SponsorClaendar />
             </div>
-            {/* MODAL-END */}
             <Link
               className="nav-link text-dark"
               to="/profile"

@@ -26,13 +26,13 @@ const SponsorButton = ({ item, preview, isSelected, onButtonClick }) => {
           <h6 className="font-weight-bolder">
             {item.sponsoring_content_items} <br />
           </h6>
-          <Button
+          {/* <Button
             className="px-2 py-1 rounded-pill"
             variant="primary"
             onClick={handleShow}
           >
             Preview
-          </Button>
+          </Button> */}
           {/* <!-- Modal --> */}
 
           <Modal
@@ -101,8 +101,13 @@ const SponsorEventBox = (contentData) => {
   const [bannerImage, setBannerImage] = useState(null);
   const [ledImage, setLedImage] = useState(null);
   const [ledVideo, setLedVideo] = useState(null);
-  const [billText, setBillText] = useState(null);
-  const { SponsoringItem, loading } = sponsor;
+  const [sponsored_by, setSponsored_by] = useState("");
+  const [pre_sponsored_by, setPre_Sponsored_by] = useState(cardData?.sponsored_by);
+  const [tag_ads, setTag_ads] = useState("");
+  const [pre_tag_ads, setPre_Tag_ads] = useState(cardData?.tag_ads);
+  const [reel_sponsored, setReel_sponsored] = useState("");
+  const [pre_reel_sponsored, setPre_Reel_sponsored] = useState(cardData?.reel_sponsored);
+  console.log("pre tag ads ", pre_tag_ads);
 
   console.log("Sponsoring Items", sponsoring_items);
 
@@ -126,10 +131,14 @@ const SponsorEventBox = (contentData) => {
     // if (Object.keys(errors).length === 0) {
     const formData = new FormData();
     formData.append("sponsor_id", cardData.content_sponsor_id);
-    formData.append("banner_image", bannerImage || "");
-    formData.append("led_image", ledImage || "");
-    formData.append("led_video", ledVideo || "");
-    formData.append("bill_text", "");
+    // formData.append("banner_image", bannerImage || "");
+    // formData.append("led_image", ledImage || "");
+    // formData.append("led_video", ledVideo || "");
+    // formData.append("bill_text", "");
+    formData.append("sponsored_by", sponsored_by || pre_sponsored_by);
+    formData.append("tag_ads", tag_ads || pre_tag_ads);
+    formData.append("reel_sponsored", reel_sponsored || pre_reel_sponsored);
+
     try {
       // Make POST API call
       await dispatch(updateContentSponsoringItem(formData));
@@ -315,10 +324,10 @@ const SponsorEventBox = (contentData) => {
             </div>
           </div>
           <h1 className="font-weight-bold d-none d-lg-block">
-            Add Photos & Videos
+            Add you sponsoring slogan or info
           </h1>
-          <h2 className="sponsor-mobile-text">Add Photos</h2>
-          <p>(atleast 3 photos & 1 video)</p>
+          {/* <h2 className="sponsor-mobile-text">Add Photos</h2> */}
+          {/* <p>(atleast 3 photos & 1 video)</p> */}
 
           {cardData?.sponsoring_content_items.map((item, index) => (
             <div
@@ -326,113 +335,60 @@ const SponsorEventBox = (contentData) => {
               className="box1 mt-2 d-flex justify-content-center"
               style={{ gap: "2%" }}
             >
-              {item.sponsoring_content_items === "banner" && (
+              {item.sponsoring_content_items === "tag_ads" && (
                 <div
                   className="box photo-box bg-white d-flex justify-content-center align-items-start p-3"
                   style={{ width: "40%" }}
                 >
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add Banner Image</h5>
+                    <h5 className="font-weight-bold">Add #Ads Text Info</h5>
                     <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleBannerImgChange}
-                      style={{ width: "74%", borderRadius: "0" }}
+                      type="text"
+                      id="title"
+                      value={tag_ads || pre_tag_ads}
+                      onChange={(e) => setTag_ads(e.target.value)}
+                      readOnly={pre_tag_ads ? true : false}
+                      className="form-control"
+                      placeholder="Enter #Tag Info"
                     />
-                    {apiurl + cardData?.banner_image &&
-                      bannerImage === null && (
-                        <div>
-                          <h2>Preview:</h2>
-                          <img
-                            src={
-                              apiurl + cardData?.banner_image ||
-                              URL.createObjectURL(bannerImage)
-                            }
-                            alt="Preview"
-                            width="200"
-                          />
-                        </div>
-                      )}
-                    {bannerImage && (
-                      <div>
-                        <h2>Preview:</h2>
-                        <img
-                          src={URL.createObjectURL(bannerImage)}
-                          alt="Preview"
-                          width="200"
-                        />
-                      </div>
-                    )}
                   </div>
                 </div>
               )}
-
-              {item.sponsoring_content_items === "led_screen" && (
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
+              {item.sponsoring_content_items === "sponsored_by" && (
+                <div
+                  className="box photo-box bg-white d-flex justify-content-center align-items-start p-3"
+                  style={{ width: "40%" }}
+                >
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add Led Image</h5>
+                    <h5 className="font-weight-bold">Add Sponsored By Text Info</h5>
                     <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleLedImgChange}
-                      style={{ width: "74%", borderRadius: "0" }}
+                      type="text"
+                      id="title"
+                      value={sponsored_by || pre_sponsored_by}
+                      onChange={(e) => setSponsored_by(e.target.value)}
+                      readOnly={pre_sponsored_by ? true : false}
+                      className="form-control"
+                      placeholder="Enter #Tag Info"
                     />
-                    {apiurl + cardData?.led_image && ledImage === null && (
-                      <div>
-                        <h2>Preview:</h2>
-                        <img
-                          src={apiurl + cardData?.led_image}
-                          alt="Preview"
-                          width="200"
-                        />
-                      </div>
-                    )}
-                    {ledImage && (
-                      <div>
-                        <h2>Preview:</h2>
-                        <img
-                          src={URL.createObjectURL(ledImage)}
-                          alt="Preview"
-                          width="200"
-                        />
-                      </div>
-                    )}
                   </div>
                 </div>
               )}
-
-              {item.sponsoring_content_items === "led_screen" && (
-                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
+              {item.sponsoring_content_items === "reel_sponsored" && (
+                <div
+                  className="box photo-box bg-white d-flex justify-content-center align-items-start p-3"
+                  style={{ width: "40%" }}
+                >
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add Led Video</h5>
+                    <h5 className="font-weight-bold">Add Reels Sponsored Text Info</h5>
                     <input
-                      type="file"
-                      accept="video/*"
-                      onChange={handleLedVidChange}
-                      style={{ width: "74%", borderRadius: "0" }}
+                      type="text"
+                      id="title"
+                      value={reel_sponsored || pre_reel_sponsored}
+                      onChange={(e) => setReel_sponsored(e.target.value)}
+                      readOnly={pre_reel_sponsored ? true : false}
+                      className="form-control"
+                      placeholder="Enter Reel Information Info"
                     />
-                    {apiurl + cardData?.banner_image && ledVideo == null && (
-                      <div>
-                        <h2>Preview:</h2>
-                        <video width="200" controls>
-                          <source
-                            src={apiurl + cardData?.led_video}
-                            type="video/mp4"
-                          />
-                          Your browser does not support the video tag.
-                        </video>
-                      </div>
-                    )}
-                    {ledVideo && (
-                      <div>
-                        <h2>Preview:</h2>
-                        <img
-                          src={URL.createObjectURL(ledVideo)}
-                          alt="Preview"
-                          width="200"
-                        />
-                      </div>
-                    )}
                   </div>
                 </div>
               )}
@@ -441,19 +397,19 @@ const SponsorEventBox = (contentData) => {
           {cardData?.sponsoring_content_items.map((item) => (
             <>
               {item.sponsoring_content_items === "banner" &&
-              !(bannerImage || apiurl + cardData?.banner_image) ? (
+                !(bannerImage || apiurl + cardData?.banner_image) ? (
                 <div className="alert alert-danger">
                   Upload an image to be displayed on the Banner
                 </div>
               ) : null}
               {item.sponsoring_content_items === "led_screen" &&
-              !(ledImage || apiurl + cardData?.led_image) ? (
+                !(ledImage || apiurl + cardData?.led_image) ? (
                 <div className="alert alert-danger">
                   Upload an image to be displayed on the LED
                 </div>
               ) : null}
               {item.sponsoring_content_items === "led_screen" &&
-              !(ledVideo || apiurl + cardData?.led_video) ? (
+                !(ledVideo || apiurl + cardData?.led_video) ? (
                 <div className="alert alert-danger">
                   Upload a video to be displayed on the LED
                 </div>
