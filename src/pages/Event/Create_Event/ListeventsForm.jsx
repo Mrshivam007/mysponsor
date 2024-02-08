@@ -679,13 +679,13 @@ const ListeventsForm = () => {
                         borderRadius: "10px",
                       }}
                     >
-                      <video
+                      {/* <video
                         src={URL.createObjectURL(video)}
                         alt="Preview"
                         autoPlay
                         loop
                         style={{ width: "100%", height: "auto" }}
-                      ></video>
+                      ></video> */}
                     </div>
                   </div>
                 )}

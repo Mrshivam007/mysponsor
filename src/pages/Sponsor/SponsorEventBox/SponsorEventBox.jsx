@@ -90,7 +90,7 @@ const SponsorEventBox = (eventData) => {
     formData.append("sponsor_id", cardData.sponsor_id);
     formData.append("banner_image", bannerImage, bannerImageFileName || "");
     formData.append("led_image", ledImage, ledImageFileName || "");
-    formData.append("led_video", ledVideo, ledVideoFileName || "");
+    formData.append("led_video", ledVideo || "");
     formData.append("bill_text", billText || preBillText);
     try {
       // Make POST API call
