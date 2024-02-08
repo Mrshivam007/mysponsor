@@ -29,9 +29,11 @@ import {
 } from "../pages/Sponsor";
 import SponsorContentPayment from "../pages/Sponsor/SponsorPayment/SponsorContentPayment";
 import SponsorNavbar from "../pages/Sponsor/SponsorNavbar/SponsorNavbar";
+import SponsorFooter from "../components/Footer/SponsorFooter";
 const SponsorRoutes = () => {
   return (
     <>
+    <SponsorNavbar />
       <Routes>
         <Route path="/" element={<SponsorHome />} />
         <Route path="/choice" element={<SponsorChoice />} />
@@ -72,6 +74,7 @@ const SponsorRoutes = () => {
         <Route path="/login" element={<Navigate to={"/"} />} />
         <Route path="/signup" element={<Navigate to={"/"} />} />
       </Routes>
+      <SponsorFooter />
     </>
   );
 };

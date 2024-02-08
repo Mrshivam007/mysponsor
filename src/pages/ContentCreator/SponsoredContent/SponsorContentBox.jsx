@@ -53,7 +53,7 @@ const SponsorButton = ({ item, cardData, isSelected, onButtonClick }) => {
           <Modal.Body
             className="p-0"
             style={{
-              backgroundImage: `url(${modalBackground})`,
+              // backgroundImage: `url(${modalBackground})`,
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
             }}
@@ -217,7 +217,7 @@ const SponsorContentBox = (contentData) => {
             <div className="col-6">
               <h4 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between">
                 {cardData.content_id.title}{" "}
-                <img src={heart} alt="" style={{ width: "7%" }} />
+                {/* <img src={heart} alt="" style={{ width: "7%" }} /> */}
               </h4>
               <h4>{cardData.content_id.location}</h4>
               <div className="star d-flex">
@@ -232,7 +232,7 @@ const SponsorContentBox = (contentData) => {
               </div>
               <h5>
                 <i className="bi bi-cash text-success"></i>&nbsp;&nbsp;
-                <span className="text-md">{totalAmount}&lt;</span>
+                <span className="text-md">{cardData.amount}&lt;</span>
                 <br />
                 <i className="bi bi-people-fill text-danger"></i>&nbsp;&nbsp;
                 <span className="text-md">
@@ -278,15 +278,7 @@ const SponsorContentBox = (contentData) => {
           <div className="container mt-2">
             <h5 className="font-weight-bold">Event Description: </h5>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Consequatur voluptates est perspiciatis voluptas dolorem quo quasi
-              sapiente magnam corporis fugiat? Culpa, dolores ullam? Alias nulla
-              libero rem praesentium consequuntur excepturi porro cupiditate
-              velit, vero harum id sequi, repellendus beatae voluptatibus
-              facilis minima in fugiat sunt animi qui? Voluptatem magni eos
-              mollitia. Obcaecati tempora vero fugiat dolorem aliquid officiis
-              necessitatibus consequuntur sit in, distinctio ipsam aperiam
-              cupiditate facilis, sint nesciunt quam!
+             {cardData?.content_id.description}
             </p>
           </div>
         </div>
@@ -313,7 +305,7 @@ const SponsorContentBox = (contentData) => {
           <div className="star d-flex pt-3">
             <h5>
               <i className="bi bi-cash text-success"></i>&nbsp;
-              {totalAmount}&nbsp;&nbsp;
+              {cardData.amount}&nbsp;&nbsp;
               <i className="bi bi-people-fill text-danger"></i>&nbsp;
               {cardData.content_id.audience_expected}&nbsp;&nbsp;
             </h5>
@@ -352,7 +344,7 @@ const SponsorContentBox = (contentData) => {
                     borderRadius: "5px",
                   }}
                 >
-                  {cardData.content_id.event_start_date}
+                  {cardData.content_id.content_start_date}
                 </span>
               </td>
               <td>
@@ -363,7 +355,7 @@ const SponsorContentBox = (contentData) => {
                     borderRadius: "5px",
                   }}
                 >
-                  {cardData.content_id.event_end_date}
+                  {cardData.content_id.content_end_date}
                 </span>
               </td>
             </tr>
@@ -397,13 +389,14 @@ const SponsorContentBox = (contentData) => {
                     item={item}
                     isSelected={selectedItems.includes(item)}
                     onButtonClick={handleButtonClick}
+                    cardData={cardData}
                   />
                 ))}
               </div>
             </div>
           </div>
         </div>
-        <h5 className="mt-2 font-weight-bold">Event Description: </h5>
+        <h5 className="mt-2 font-weight-bold">Content Description: </h5>
         <p>{cardData.content_id.description}</p>
       </div>
       {/* MOBILE VIEW END */}

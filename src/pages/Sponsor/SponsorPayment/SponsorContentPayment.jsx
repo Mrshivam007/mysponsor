@@ -11,6 +11,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { createSponsor } from "../../../redux/actions/sponsorAction";
 import apiurl from "../../../constant/config";
+import SponsorFooter from "../../../components/Footer/SponsorFooter";
 
 const SponsorContentPayment = () => {
   useEffect(() => {
@@ -133,7 +134,7 @@ const SponsorContentPayment = () => {
 
   return (
     <>
-      <SponsorNavbar />
+      
       <div
         className="sponsor-pay-bg"
         style={{
@@ -188,7 +189,7 @@ const SponsorContentPayment = () => {
             </p>
           </div>
         </div>
-        <Footer />
+        
       </div>
     </>
   );

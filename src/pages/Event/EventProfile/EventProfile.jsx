@@ -27,7 +27,7 @@ const EventProfile = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <EventNavBar />
+        
         <div className="container my-3">
           <Tabs
             defaultActiveKey="profile"
@@ -50,7 +50,7 @@ const EventProfile = () => {
             Logout
           </button>
         </div>
-        <Footer />
+        
       </div>
     </>
   );

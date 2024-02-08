@@ -254,7 +254,7 @@ const Update_EventCard = ({ cardData }) => {
               ))}
           </div>
         </div>
-        <Footer />
+        
       </div>
     </>
   );

@@ -142,11 +142,11 @@ const SponsorEventBox = (contentData) => {
     try {
       // Make POST API call
       await dispatch(updateContentSponsoringItem(formData));
-      // sessionStorage.setItem(
-      //   "successMessage",
-      //   "Promotion listed successfully!"
-      // );
-      // navigate("/events/upcoming_event"); // Replace '/' with the desired route for the home page
+      sessionStorage.setItem(
+        "successMessage",
+        "Promotion listed successfully!"
+      );
+      navigate("/sponsored_content"); // Replace '/' with the desired route for the home page
     } catch (error) {
       console.log("An error occurred during API calls:", error);
     }
@@ -254,19 +254,19 @@ const SponsorEventBox = (contentData) => {
                       borderRight: "1px solid rgba(255, 255, 255, 0.50)",
                     }}
                   >
-                    {cardData.content_id.event_start_date}
+                    {cardData.content_id.content_start_date}
                   </td>
-                  <td>{cardData.content_id.event_end_date}</td>
+                  <td>{cardData.content_id.content_end_date}</td>
                 </tr>
               </table>
             </div>
             <div className="col-6">
               <h4 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between">
                 {cardData.content_id.title}{" "}
-                <img src={heart} alt="" style={{ width: "7%" }} />
+                {/* <img src={heart} alt="" style={{ width: "7%" }} /> */}
               </h4>
               <h4>{cardData.content_id.location}</h4>
-              <div className="star d-flex">
+              {/* <div className="star d-flex">
                 <h5>
                   <i className="bi bi-star-fill text-warning"></i>&nbsp;
                   <i className="bi bi-star-fill text-warning"></i>&nbsp;
@@ -275,10 +275,10 @@ const SponsorEventBox = (contentData) => {
                   <i className="bi bi-star-fill text-white"></i>&nbsp;
                   <span className="text-sm text-muted">3482 reviews</span>
                 </h5>
-              </div>
+              </div> */}
               <h5>
                 <i className="bi bi-cash text-success"></i>&nbsp;&nbsp;
-                <span className="text-md">{totalAmount}&lt;</span>
+                <span className="text-md">{cardData.amount}&lt;</span>
                 <br />
                 <i className="bi bi-people-fill text-danger"></i>&nbsp;&nbsp;
                 <span className="text-md">
@@ -394,48 +394,18 @@ const SponsorEventBox = (contentData) => {
               )}
             </div>
           ))}
-          {cardData?.sponsoring_content_items.map((item) => (
-            <>
-              {item.sponsoring_content_items === "banner" &&
-                !(bannerImage || apiurl + cardData?.banner_image) ? (
-                <div className="alert alert-danger">
-                  Upload an image to be displayed on the Banner
-                </div>
-              ) : null}
-              {item.sponsoring_content_items === "led_screen" &&
-                !(ledImage || apiurl + cardData?.led_image) ? (
-                <div className="alert alert-danger">
-                  Upload an image to be displayed on the LED
-                </div>
-              ) : null}
-              {item.sponsoring_content_items === "led_screen" &&
-                !(ledVideo || apiurl + cardData?.led_video) ? (
-                <div className="alert alert-danger">
-                  Upload a video to be displayed on the LED
-                </div>
-              ) : null}
-            </>
-          ))}
-          <input
-            type="submit"
-            className="submit"
-            value="List Promotion"
-            onClick={handleSubmitClick}
-          />
+          <div className="container">
+            <input
+              type="submit"
+              className="btn btn-success submit py-1 px-3"
+              value="List Promotion"
+              onClick={handleSubmitClick}
+            />
+          </div>
 
           <div className="container mt-2">
-            <h5 className="font-weight-bold">Event Description: </h5>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Consequatur voluptates est perspiciatis voluptas dolorem quo quasi
-              sapiente magnam corporis fugiat? Culpa, dolores ullam? Alias nulla
-              libero rem praesentium consequuntur excepturi porro cupiditate
-              velit, vero harum id sequi, repellendus beatae voluptatibus
-              facilis minima in fugiat sunt animi qui? Voluptatem magni eos
-              mollitia. Obcaecati tempora vero fugiat dolorem aliquid officiis
-              necessitatibus consequuntur sit in, distinctio ipsam aperiam
-              cupiditate facilis, sint nesciunt quam!
-            </p>
+            <h5 className="font-weight-bold">Content Description: </h5>
+            <p>{cardData.content_id.description}</p>
           </div>
         </div>
       </div>
@@ -461,12 +431,12 @@ const SponsorEventBox = (contentData) => {
           <div className="star d-flex pt-3">
             <h5>
               <i className="bi bi-cash text-success"></i>&nbsp;
-              {totalAmount}&nbsp;&nbsp;
+              {cardData.amount}&nbsp;&nbsp;
               <i className="bi bi-people-fill text-danger"></i>&nbsp;
               {cardData.content_id.audience_expected}&nbsp;&nbsp;
             </h5>
           </div>
-          <div className="star d-flex">
+          {/* <div className="star d-flex">
             <h5>
               <i className="bi bi-star-fill text-warning"></i>&nbsp;
               <i className="bi bi-star-fill text-warning"></i>&nbsp;
@@ -475,7 +445,7 @@ const SponsorEventBox = (contentData) => {
               <i className="bi bi-star-fill text-white"></i>&nbsp;
               <span className="text-sm text-muted">3482 reviews</span>
             </h5>
-          </div>
+          </div> */}
         </div>
         <div className="container px-0">
           <table
@@ -500,7 +470,7 @@ const SponsorEventBox = (contentData) => {
                     borderRadius: "5px",
                   }}
                 >
-                  {cardData.content_id.event_start_date}
+                  {cardData.content_id.content_start_date}
                 </span>
               </td>
               <td>
@@ -511,7 +481,7 @@ const SponsorEventBox = (contentData) => {
                     borderRadius: "5px",
                   }}
                 >
-                  {cardData.content_id.event_end_date}
+                  {cardData.content_id.content_end_date}
                 </span>
               </td>
             </tr>
@@ -548,10 +518,89 @@ const SponsorEventBox = (contentData) => {
                   />
                 ))}
               </div>
+            
             </div>
           </div>
         </div>
-        <h5 className="mt-2 font-weight-bold">Event Description: </h5>
+        <div className="container">
+          <h2 className="sponsor-mobile-text pl-0">Add Photos</h2>
+          <p>(atleast 3 photos & 1 video)</p>
+
+          {cardData?.sponsoring_content_items.map((item, index) => (
+            <div
+              key={index}
+              className="box1 mt-2 d-flex justify-content-center"
+              style={{ gap: "2%" }}
+            >
+              {item.sponsoring_content_items === "tag_ads" && (
+                <div
+                  className="box photo-box bg-white d-flex justify-content-center align-items-start p-3"
+                  style={{ width: "90%" }}
+                >
+                  <div className="box text-center">
+                    <h5 className="font-weight-bold">Add #Ads Text Info</h5>
+                    <input
+                      type="text"
+                      id="title"
+                      value={tag_ads || pre_tag_ads}
+                      onChange={(e) => setTag_ads(e.target.value)}
+                      readOnly={pre_tag_ads ? true : false}
+                      className="form-control"
+                      placeholder="Enter #Tag Info"
+                    />
+                  </div>
+                </div>
+              )}
+              {item.sponsoring_content_items === "sponsored_by" && (
+                <div
+                  className="box photo-box bg-white d-flex justify-content-center align-items-start p-3"
+                  style={{ width: "90%" }}
+                >
+                  <div className="box text-center">
+                    <h5 className="font-weight-bold">Add Sponsored By Text Info</h5>
+                    <input
+                      type="text"
+                      id="title"
+                      value={sponsored_by || pre_sponsored_by}
+                      onChange={(e) => setSponsored_by(e.target.value)}
+                      readOnly={pre_sponsored_by ? true : false}
+                      className="form-control"
+                      placeholder="Enter #Tag Info"
+                    />
+                  </div>
+                </div>
+              )}
+              {item.sponsoring_content_items === "reel_sponsored" && (
+                <div
+                  className="box photo-box bg-white d-flex justify-content-center align-items-start p-3"
+                  style={{ width: "90%" }}
+                >
+                  <div className="box text-center">
+                    <h5 className="font-weight-bold">Add Reels Sponsored Text Info</h5>
+                    <input
+                      type="text"
+                      id="title"
+                      value={reel_sponsored || pre_reel_sponsored}
+                      onChange={(e) => setReel_sponsored(e.target.value)}
+                      readOnly={pre_reel_sponsored ? true : false}
+                      className="form-control"
+                      placeholder="Enter Reel Information Info"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+        <div className="container-md">
+          <input
+            type="submit"
+            className="btn btn-success submit py-1 px-3"
+            value="List Promotion"
+            onClick={handleSubmitClick}
+          />
+        </div>
+        <h5 className="mt-2 font-weight-bold">Content Description: </h5>
         <p>{cardData.content_id.description}</p>
       </div>
       {/* MOBILE VIEW END */}

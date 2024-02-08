@@ -9,6 +9,7 @@ import { createContent } from "../../../redux/actions/sponsorAction";
 import { eventReducer } from "../../../redux/reducer/eventReducer";
 import { useLocation, useNavigate } from "react-router-dom";
 import SponsorNavbar from "../SponsorNavbar/SponsorNavbar";
+import SponsorFooter from "../../../components/Footer/SponsorFooter";
 
 const SponsorContentForm = (props) => {
   useEffect(() => {
@@ -183,7 +184,7 @@ const SponsorContentForm = (props) => {
   };
   return (
     <>
-      <SponsorNavbar />
+      
       <div
         className="bg-form"
         style={{
@@ -483,7 +484,7 @@ const SponsorContentForm = (props) => {
           </div>
         </div>
       </div>
-      <Footer />
+      
     </>
   );
 };

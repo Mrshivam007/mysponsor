@@ -26,10 +26,10 @@ const EventDetails = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <EventNavBar />
+        
         <MyEventsBox eventData={eventData} />
         {/* <SponserE cardData={EventsCards} /> */}
-        <Footer />
+        
       </div>
     </>
   );

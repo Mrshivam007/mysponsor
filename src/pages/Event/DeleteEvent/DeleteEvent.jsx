@@ -56,7 +56,7 @@ const DeleteEvent = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <EventNavBar />
+        
         <div className="events-page-desktop">
           <EventsHeader title={"Delete Your Listed Events"} logo={spevents} />
           {/* <SponserE cardData={eventDetails.eventDetails} line={"Upcoming Event"} /> */}
@@ -89,7 +89,7 @@ const DeleteEvent = () => {
             Load More
           </div>
         </div>
-        <Footer />
+        
       </div>
     </>
   );

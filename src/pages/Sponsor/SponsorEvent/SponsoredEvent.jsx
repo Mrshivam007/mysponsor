@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import bgimage from "../../../assets/img/circle-bg.png";
 import cardImg from "../../../assets/img/my_events_img.png";
 import listevents from "../../../assets/img/list_events.png";
 import { EventsHeader, Footer, NavBar } from "../../../components";
-import { fetchSponsoredEvent } from "../../../redux/actions/sponsorAction";
+import { fetchSponsoredItem } from "../../../redux/actions/sponsorAction";
 import { useDispatch, useSelector } from "react-redux";
 import apiurl from "../../../constant/config";
 import { Link, useNavigate } from "react-router-dom";
 import SponsorNavbar from "../SponsorNavbar/SponsorNavbar";
+import SponsorFooter from "../../../components/Footer/SponsorFooter";
 
 const SponsoredEvent = () => {
   const auth = useSelector((state) => state.auth);
@@ -16,11 +17,25 @@ const SponsoredEvent = () => {
   const dispatch = useDispatch();
   const eventDetails = useSelector((state) => state.sponsor);
   useEffect(() => {
-    dispatch(fetchSponsoredEvent(sponsor_id));
+    dispatch(fetchSponsoredItem());
   }, []);
   console.log("user details", auth);
-  console.log("Event details", eventDetails);
-  const cardData = eventDetails.SponsoredEvent;
+  console.log("Event details", eventDetails.SponsoredItem?.sponsor_event);
+  const cardData = eventDetails.SponsoredItem?.sponsor_event;
+  const [successMessage, setSuccessMessage] = useState("");
+
+  useEffect(() => {
+    // Retrieve success message from sessionStorage
+    const message1 = sessionStorage.getItem("successMessage");
+    const message2 = sessionStorage.getItem("deletionMessage");
+    // Clear success message from sessionStorage
+    sessionStorage.removeItem("successMessage");
+
+    if (message1) {
+      setSuccessMessage(message1);
+    }
+  }, []);
+
   const navigate = useNavigate();
 
   const handleSponsorClick = (data) => {
@@ -36,8 +51,19 @@ const SponsoredEvent = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <SponsorNavbar />
+        
         <EventsHeader title={"Your Sponsored Event!"} logo={listevents} />
+        {successMessage && (
+            <div className="container">
+              <div
+                class="alert alert-success"
+                role="alert"
+                style={{ borderRadius: "10px" }}
+              >
+                {successMessage}
+              </div>
+            </div>
+          )}
         <h1></h1>
         <div className="desktop-view mt-4">
           <div className="container">
@@ -295,7 +321,7 @@ const SponsoredEvent = () => {
               })}
           </div>
         </div>
-        <Footer />
+        
       </div>
     </>
   );

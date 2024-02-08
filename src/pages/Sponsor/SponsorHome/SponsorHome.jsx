@@ -10,10 +10,11 @@ import {
     Footer,
   } from "../../../components";
 import SponsorNavbar from "../SponsorNavbar/SponsorNavbar";
+import SponsorFooter from "../../../components/Footer/SponsorFooter";
   const SponsorHome = () => {
     return (
       <>
-        <SponsorNavbar />
+        
         <Header />
         <Choice line={"Sponsor Your Choice"} />
         <div>
@@ -43,7 +44,8 @@ import SponsorNavbar from "../SponsorNavbar/SponsorNavbar";
         <Banner />
         <Categories line={"Categories"} />
         <SponserHome />
-        <Footer />
+        {/*  */}
+        
       </>
     );
   };

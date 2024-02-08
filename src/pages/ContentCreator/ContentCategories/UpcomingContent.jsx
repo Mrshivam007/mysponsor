@@ -43,7 +43,7 @@ const UpcomingContent = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <NavBar />
+        
         <EventsHeader
           title={"See your listed contents here "}
           logo={listevents}
@@ -75,7 +75,7 @@ const UpcomingContent = () => {
           heading={"My Upcoming Content"}
           cardData={ContentDetails.contentAllDetails?.upcoming_content}
         />
-        <Footer />
+        
       </div>
     </>
   );

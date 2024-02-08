@@ -1,28 +1,43 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import bgimage from "../../../assets/img/circle-bg.png";
 import cardImg from "../../../assets/img/my_events_img.png";
 import listevents from "../../../assets/img/list_events.png";
 import { EventsHeader, Footer, NavBar } from "../../../components";
-import { fetchSponsoredContent } from "../../../redux/actions/sponsorAction";
+import { fetchSponsoredItem } from "../../../redux/actions/sponsorAction";
 import { useDispatch, useSelector } from "react-redux";
 import apiurl from "../../../constant/config";
 import { Link, useNavigate } from "react-router-dom";
 import SponsorNavbar from "../SponsorNavbar/SponsorNavbar";
+import SponsorFooter from "../../../components/Footer/SponsorFooter";
 
 const SponsoredContent = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const auth = useSelector((state) => state.auth);
   const { userDetails } = auth;
   const sponsor_id = userDetails.user_id;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchSponsoredContent(sponsor_id));
+    dispatch(fetchSponsoredItem());
   }, []);
+  const [successMessage, setSuccessMessage] = useState("");
   const contentDetails = useSelector((state) => state.sponsor);
   console.log("getting data ", contentDetails);
   console.log("user details", auth);
-  const cardData = contentDetails?.SponsoredContent;
+  const cardData = contentDetails?.SponsoredItem?.sponsor_content;
   console.log("Content details", cardData);
   const navigate = useNavigate();
+  useEffect(() => {
+    // Retrieve success message from sessionStorage
+    const message1 = sessionStorage.getItem("successMessage");
+    // Clear success message from sessionStorage
+    sessionStorage.removeItem("successMessage");
+
+    if (message1) {
+      setSuccessMessage(message1);
+    }
+  }, []);
 
   const handleSponsorClick = (data) => {
     navigate("/sponsored_content_details", { state: { eventData: data } });
@@ -37,9 +52,20 @@ const SponsoredContent = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <SponsorNavbar />
+        
         <EventsHeader title={"Your Sponsored Content!"} logo={listevents} />
         <h1></h1>
+        {successMessage && (
+            <div className="container">
+              <div
+                class="alert alert-success"
+                role="alert"
+                style={{ borderRadius: "10px" }}
+              >
+                {successMessage}
+              </div>
+            </div>
+          )}
         <div className="desktop-view mt-4">
           <div className="container">
             {cardData &&
@@ -184,88 +210,100 @@ const SponsoredContent = () => {
         </div>
 
         <div className="mobile-view text-md">
-          <h2 className="sponsor-mobile-text">My Events</h2>
+          <h2 className="sponsor-mobile-text">My Sponsored Content</h2>
           <div className="container mb-4">
-            <div className="row">
-              <div className="col-12">
-                <div className="card myevents-card">
-                  <div className="post-thumb">
-                    <img src={cardImg} alt="" style={{ width: "100%" }} />
-                    <div className="text-overlay">
-                      <h4 className="font-weight-bold mb-0"></h4>
-                      <h5></h5>
-                    </div>
-                  </div>
-                  <div className="container">
-                    <div className="row d-flex">
-                      <div className="col-12">
-                        <div className="box">
-                          <h4 className="font-weight-bold">
-                            Event Sponsored for:
-                          </h4>
-                          <div className="d-flex justify-content-between text-lg">
-                            <span
-                              className="badge rounded-pill px-2 py-1"
-                              style={{ backgroundColor: "#72dfa8 " }}
-                            >
-                              Banner <i className="bi bi-check2-circle"></i>
-                            </span>
-                            <span
-                              className="badge rounded-pill px-2 py-1"
-                              style={{
-                                backgroundColor: "rgb(255 97 97)",
-                              }}
-                            >
-                              LED Screen <i class="bi bi-x-lg"></i>
-                            </span>
-                            <span
-                              className="badge rounded-pill px-2 py-1"
-                              style={{ backgroundColor: "rgb(255 97 97)" }}
-                            >
-                              Bill Board <i class="bi bi-x-lg"></i>
-                            </span>
-                          </div>
-                        </div>
-
-                        <div className="container text-lg text-white text-center d-flex my-2">
-                          <div
-                            className="box myevents-box"
+            {cardData &&
+              cardData.map((data) => {
+                return (
+                  <div className="row">
+                    <div className="col-12">
+                      <div className="card myevents-card">
+                        <div className="post-thumb">
+                          <img
+                            src={apiurl + data.content_id.thumbnail1}
+                            alt=""
                             style={{ width: "100%" }}
-                          >
-                            <p
-                              className="mb-1"
-                              style={{
-                                borderBottom:
-                                  "1px solid rgba(255, 255, 255, 0.30)",
-                              }}
-                            >
-                              Total amount sponsored
-                            </p>
-                            <p className="mb-1">₹50,000</p>
+                          />
+                          <div className="text-overlay">
+                            <h4 className="font-weight-bold mb-0"></h4>
+                            <h5></h5>
                           </div>
                         </div>
-                        <button
-                          className="btn py-1 px-3 font-weight-bold"
-                          style={{
-                            width: "100%",
-                            marginBottom: "2%",
-                            color: "#004EA9",
-                            backgroundColor: "white",
-                            border: "2px solid #004EA9",
-                            borderRadius: "10px",
-                          }}
-                        >
-                          Check Out Sponsors Details &nbsp;&nbsp; &gt;&gt;
-                        </button>
+                        <div className="container">
+                          <div className="row d-flex">
+                            <div className="col-12">
+                              <div className="box">
+                                <h4 className="font-weight-bold">
+                                  Content Sponsored for:
+                                </h4>
+                                <div className="d-flex justify-content-around text-lg">
+                                  {data.content_id.sponsoring_content_items
+                                    .filter((item) => item.is_sponsored) // Filter only items where is_sponsored is true
+                                    .map((item, index) => (
+                                      <span
+                                        key={index}
+                                        className={
+                                          "badge rounded-pill px-2 py-1 bg-success"
+                                        }
+                                      >
+                                        {item.sponsoring_content_items}
+                                        <i className="bi bi-check2-circle"></i>
+                                      </span>
+                                    ))}
+                                </div>
+                              </div>
+
+                              <div className="container text-lg text-white text-center d-flex my-2">
+                                <div
+                                  className="box myevents-box"
+                                  style={{ width: "100%" }}
+                                >
+                                  <p
+                                    className="mb-1"
+                                    style={{
+                                      borderBottom:
+                                        "1px solid rgba(255, 255, 255, 0.30)",
+                                    }}
+                                  >
+                                    Total amount sponsored
+                                  </p>
+                                  <p className="mb-1">
+                                    {data.content_id.sponsoring_content_items
+                                      .filter((item) => item.is_sponsored)
+                                      .reduce(
+                                        (total, item) =>
+                                          total + parseInt(item.price, 10),
+                                        0
+                                      )
+                                      .toLocaleString()}
+                                  </p>
+                                </div>
+                              </div>
+                              <button
+                                className="btn py-1 px-3 font-weight-bold"
+                                style={{
+                                  width: "100%",
+                                  marginBottom: "2%",
+                                  color: "#004EA9",
+                                  backgroundColor: "white",
+                                  border: "2px solid #004EA9",
+                                  borderRadius: "10px",
+                                }}
+                                onClick={() => handleSponsorClick(data)}
+                              >
+                                Check Out Sponsors Details &nbsp;&nbsp; &gt;&gt;
+                              </button>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
+                );
+              })}
           </div>
         </div>
-        <Footer />
+        
       </div>
     </>
   );

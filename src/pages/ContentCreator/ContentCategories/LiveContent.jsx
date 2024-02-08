@@ -43,7 +43,7 @@ const LiveContent = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <NavBar />
+        
         <EventsHeader
           title={"See your listed contents here "}
           logo={listevents}
@@ -72,7 +72,7 @@ const LiveContent = () => {
           </div>
         )}
         <MyContentCard heading={"My Live Content"} cardData={ContentDetails.contentAllDetails?.live_content} />
-        <Footer />
+        
       </div>
     </>
   );

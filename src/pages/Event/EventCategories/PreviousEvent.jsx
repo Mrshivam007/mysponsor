@@ -41,7 +41,7 @@ const PreviousEvent = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <EventNavBar />
+        
         <div className="events-page-desktop">
           <EventsHeader title={"Previous Events"} logo={spevents} />
           {/* <SponserE cardData={eventDetails.eventDetails} line={"Previous Events"} /> */}
@@ -69,7 +69,7 @@ const PreviousEvent = () => {
             Load More
           </div>
         </div>
-        <Footer />
+        
       </div>
     </>
   );

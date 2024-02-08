@@ -13,6 +13,7 @@ import { fetchContent } from "../../../redux/actions/contentAction";
 import { useDispatch, useSelector } from "react-redux";
 import ContentCard from "./ContentCard";
 import SponsorNavbar from "../SponsorNavbar/SponsorNavbar";
+import SponsorFooter from "../../../components/Footer/SponsorFooter";
 const SponsorContentC = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
@@ -38,7 +39,7 @@ const SponsorContentC = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <SponsorNavbar />
+        
         <EventsHeader title={"Sponsor Content Creators"} logo={cclogo} />
         <ContentCard
           line={"Sponsor content creators"}
@@ -57,7 +58,7 @@ const SponsorContentC = () => {
             cardData={ContentDetails.contentDetails?.past_content}
           />
         </div>
-        <Footer />
+        
       </div>
     </>
   );

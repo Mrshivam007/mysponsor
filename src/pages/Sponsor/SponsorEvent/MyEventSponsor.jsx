@@ -221,7 +221,7 @@ const MyEventSponsor = (eventData) => {
                 </span>
               </h4>
               <h4>{cardData.location}</h4>
-              <div className="star d-flex">
+              {/* <div className="star d-flex">
                 <h5>
                   <i class="bi bi-star-fill text-warning"></i>&nbsp;
                   <i class="bi bi-star-fill text-warning"></i>&nbsp;
@@ -230,7 +230,7 @@ const MyEventSponsor = (eventData) => {
                   <i class="bi bi-star-fill text-white"></i>&nbsp;
                   <span className="text-sm text-muted">3482 reviews</span>
                 </h5>
-              </div>
+              </div> */}
               <h5>
                 <i className="bi bi-cash text-success"></i>&nbsp;&nbsp;
                 <span className="text-md">{totalAmount}&lt;</span>
@@ -297,17 +297,7 @@ const MyEventSponsor = (eventData) => {
           </div>
           <div className="container mt-2">
             <h5 className="font-weight-bold">Event Description: </h5>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Consequatur voluptates est perspiciatis voluptas dolorem quo quasi
-              sapiente magnam corporis fugiat? Culpa, dolores ullam? Alias nulla
-              libero rem praesentium consequuntur excepturi porro cupiditate
-              velit, vero harum id sequi, repellendus beatae voluptatibus
-              facilis minima in fugiat sunt animi qui? Voluptatem magni eos
-              mollitia. Obcaecati tempora vero fugiat dolorem aliquid officiis
-              necessitatibus consequuntur sit in, distinctio ipsam aperiam
-              cupiditate facilis, sint nesciunt quam!
-            </p>
+            <p>{cardData.description}</p>
           </div>
         </div>
       </div>
@@ -353,7 +343,7 @@ const MyEventSponsor = (eventData) => {
               {cardData.audience_expected}&nbsp;&nbsp;
             </h5>
           </div>
-          <div className="star d-flex">
+          {/* <div className="star d-flex">
             <h5>
               <i class="bi bi-star-fill text-warning"></i>&nbsp;
               <i class="bi bi-star-fill text-warning"></i>&nbsp;
@@ -362,7 +352,7 @@ const MyEventSponsor = (eventData) => {
               <i class="bi bi-star-fill text-white"></i>&nbsp;
               <span className="text-sm text-muted">3482 reviews</span>
             </h5>
-          </div>
+          </div> */}
         </div>
         <div className="container px-0">
           <table

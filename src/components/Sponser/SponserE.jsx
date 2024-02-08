@@ -69,7 +69,7 @@ const SponserE = ({ line, cardData }) => {
                           <div className="post-date">
                             <h6>
                               <i className="bi bi-cash text-success"></i>
-                              <b> {data.price}</b>
+                              <b> {data.amount}</b>
                             </h6>
                           </div>
                         </div>

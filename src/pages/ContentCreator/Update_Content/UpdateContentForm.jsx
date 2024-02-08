@@ -223,7 +223,7 @@ const UpdateContent = () => {
 
   return (
     <>
-      <NavBar />
+      
       <div
         className="bg-form"
         style={{
@@ -680,7 +680,7 @@ const UpdateContent = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      
     </>
   );
 };

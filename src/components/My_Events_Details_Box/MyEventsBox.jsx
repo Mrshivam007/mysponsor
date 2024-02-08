@@ -128,10 +128,9 @@ const MyEventsBox = (eventData) => {
             <div className="col-6">
               <h4 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between">
                 {cardData.title}{" "}
-                <img src={heart} alt="" style={{ width: "7%" }} />
               </h4>
               <h4>{cardData.location}</h4>
-              <div className="star d-flex">
+              {/* <div className="star d-flex">
                 <h5>
                   <i class="bi bi-star-fill text-warning"></i>&nbsp;
                   <i class="bi bi-star-fill text-warning"></i>&nbsp;
@@ -140,7 +139,7 @@ const MyEventsBox = (eventData) => {
                   <i class="bi bi-star-fill text-white"></i>&nbsp;
                   <span className="text-sm text-muted">3482 reviews</span>
                 </h5>
-              </div>
+              </div> */}
               <h5>
                 <i className="bi bi-cash text-success"></i>&nbsp;&nbsp;
                 <span className="text-md">{totalAmount}&lt;</span>

@@ -26,11 +26,11 @@ const SponsoredContentDetails = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <NavBar />
+        
         {/* <SponsorContentBox contentData={contentData} /> */}
         <SponsorContentBox contentData={contentData} />
         {/* <SponserE cardData={EventsCards} /> */}
-        <Footer />
+        
       </div>
     </>
   );

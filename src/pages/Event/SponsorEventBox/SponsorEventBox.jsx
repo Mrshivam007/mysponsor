@@ -101,6 +101,11 @@ const SponsorButton = ({ item, cardData, isSelected, onButtonClick }) => {
                   </div>
                 </>
               )}
+              {item.sponsoring_items === "bill_board" && (
+                <>
+                  <h1>{cardData?.bill_text}</h1>
+                </>
+              )}
               {/* {item.sponsoring_items === "led_screen" && (
                 <>
                   {cardData?.led_image ? (
@@ -280,10 +285,10 @@ const SponsorEventBox = (eventData) => {
             <div className="col-6">
               <h4 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between">
                 {cardData.event_id.title}{" "}
-                <img src={heart} alt="" style={{ width: "7%" }} />
+                {/* <img src={heart} alt="" style={{ width: "7%" }} /> */}
               </h4>
               <h4>{cardData.event_id.location}</h4>
-              <div className="star d-flex">
+              {/* <div className="star d-flex">
                 <h5>
                   <i class="bi bi-star-fill text-warning"></i>&nbsp;
                   <i class="bi bi-star-fill text-warning"></i>&nbsp;
@@ -292,7 +297,7 @@ const SponsorEventBox = (eventData) => {
                   <i class="bi bi-star-fill text-white"></i>&nbsp;
                   <span className="text-sm text-muted">3482 reviews</span>
                 </h5>
-              </div>
+              </div> */}
               <h5>
                 <i className="bi bi-cash text-success"></i>&nbsp;&nbsp;
                 <span className="text-md">{cardData.amount}&lt;</span>
@@ -340,17 +345,7 @@ const SponsorEventBox = (eventData) => {
           </div>
           <div className="container mt-2">
             <h5 className="font-weight-bold">Event Description: </h5>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Consequatur voluptates est perspiciatis voluptas dolorem quo quasi
-              sapiente magnam corporis fugiat? Culpa, dolores ullam? Alias nulla
-              libero rem praesentium consequuntur excepturi porro cupiditate
-              velit, vero harum id sequi, repellendus beatae voluptatibus
-              facilis minima in fugiat sunt animi qui? Voluptatem magni eos
-              mollitia. Obcaecati tempora vero fugiat dolorem aliquid officiis
-              necessitatibus consequuntur sit in, distinctio ipsam aperiam
-              cupiditate facilis, sint nesciunt quam!
-            </p>
+            <p>{cardData.event_id.description}</p>
           </div>
         </div>
       </div>
@@ -391,12 +386,12 @@ const SponsorEventBox = (eventData) => {
           <div className="star d-flex pt-3">
             <h5>
               <i className="bi bi-cash text-success"></i>&nbsp;
-              {totalAmount}&nbsp;&nbsp;
+              {cardData.amount}&nbsp;&nbsp;
               <i className="bi bi-people-fill text-danger"></i>&nbsp;
               {cardData.event_id.audience_expected}&nbsp;&nbsp;
             </h5>
           </div>
-          <div className="star d-flex">
+          {/* <div className="star d-flex">
             <h5>
               <i class="bi bi-star-fill text-warning"></i>&nbsp;
               <i class="bi bi-star-fill text-warning"></i>&nbsp;
@@ -405,7 +400,7 @@ const SponsorEventBox = (eventData) => {
               <i class="bi bi-star-fill text-white"></i>&nbsp;
               <span className="text-sm text-muted">3482 reviews</span>
             </h5>
-          </div>
+          </div> */}
         </div>
         <div className="container px-0">
           <table

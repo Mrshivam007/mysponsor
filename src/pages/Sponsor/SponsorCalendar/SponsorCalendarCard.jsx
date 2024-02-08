@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { fetchSponsoredEvent } from "../../../redux/actions/sponsorAction";
+import { fetchSponsoredItem } from "../../../redux/actions/sponsorAction";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 const SponsorCalendarCard = () => {
@@ -9,11 +9,11 @@ const SponsorCalendarCard = () => {
   const dispatch = useDispatch();
   const eventDetails = useSelector(state => state.sponsor)
   useEffect(() => {
-    dispatch(fetchSponsoredEvent(sponsor_id))
+    dispatch(fetchSponsoredItem())
   }, [])
   console.log("user details", auth);
   console.log("Event details", eventDetails);
-  const cardData = eventDetails.SponsoredEvent;
+  const cardData = eventDetails.SponsoredItem?.sponsor_event;
   const navigate = useNavigate();
   console.log("calander Data", cardData);
   const handleSponsorClick = (data) => {

@@ -53,7 +53,7 @@ const Update_UpcomingContent = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <NavBar />
+        
         <div className="events-page-desktop">
           <EventsHeader title={"Update Listed Content"} logo={spevents} />
           {/* <SponserE cardData={eventDetails.eventDetails} line={"Upcoming Event"} /> */}
@@ -88,7 +88,7 @@ const Update_UpcomingContent = () => {
             Load More
           </div>
         </div>
-        <Footer />
+        
       </div>
     </>
   );

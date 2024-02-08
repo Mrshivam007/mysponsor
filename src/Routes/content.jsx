@@ -16,10 +16,13 @@ import {
   YourContent,
 } from "../pages/ContentCreator";
 import ContentProfile from "../pages/ContentCreator/ContentProfile/ContentProfile";
+import ContentNavBar from "../components/Navbar/ContentNavbar";
+import ContentFooter from "../components/Footer/ContentFooter";
 
 const ContentRoutes = () => {
   return (
     <>
+    <ContentNavBar />
       <Routes>
         <Route path="/" element={<CCHome />} />
         <Route path="/create_content" element={<CCForm />} />
@@ -55,6 +58,7 @@ const ContentRoutes = () => {
         <Route path="/login" element={<Navigate to={"/"} />} />
         <Route path="/signup" element={<Navigate to={"/"} />} />
       </Routes>
+      <ContentFooter />
     </>
   );
 };

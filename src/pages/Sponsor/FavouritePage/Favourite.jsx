@@ -27,10 +27,10 @@ const Favourite = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <SponsorNavbar />
+        
         <EventsHeader title={"Your Favourites are Here !!!"} logo={fav_logo} />
         <FavouriteEventCard cardData={eventDetails?.eventDetails?.live_event} />
-        <Footer />
+        
       </div>
     </>
   );

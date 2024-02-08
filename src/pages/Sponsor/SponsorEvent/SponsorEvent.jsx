@@ -12,6 +12,7 @@ import { EventsCards, EventsPageCards } from "../../../data/data";
 import { fetchEvent, fetchEventCategory } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux"
 import SponsorNavbar from "../SponsorNavbar/SponsorNavbar";
+import SponsorFooter from "../../../components/Footer/SponsorFooter";
 const SponsorEvents = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
@@ -41,7 +42,7 @@ const SponsorEvents = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <SponsorNavbar />
+        
         <div className="events-page-desktop">
           <EventsHeader title={"Sponsor Events"} logo={spevents} />
 
@@ -72,7 +73,7 @@ const SponsorEvents = () => {
             Load More
           </div>
         </div>
-        <Footer />
+        
       </div>
     </>
   );

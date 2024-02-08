@@ -40,7 +40,7 @@ const ListedContents = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <NavBar />
+        
         <EventsHeader
           title={"See your listed contents here "}
           logo={listevents}
@@ -52,7 +52,7 @@ const ListedContents = () => {
           </div>
         )}
         <MyContentCard cardData={ContentDetails.contentDetails} />
-        <Footer />
+        
       </div>
     </>
   );

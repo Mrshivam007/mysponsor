@@ -24,7 +24,7 @@ const ContentHome = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <NavBar />
+        
         {/* ---DESKTOP VIEW---  */}
         <div className="desktop-view">
           <EventsHeader title={"List Content"} logo={listevents} />
@@ -192,7 +192,7 @@ const ContentHome = () => {
             </div>
           </div>
         </div>
-        <Footer />
+        
       </div>
     </>
   );

@@ -56,7 +56,7 @@ const Update_UpcomingEvent = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <EventNavBar />
+        
         <div className="events-page-desktop">
           <EventsHeader title={"Update Your Listed Events"} logo={spevents} />
           {/* <SponserE cardData={eventDetails.eventDetails} line={"Upcoming Event"} /> */}

@@ -3,7 +3,7 @@ import bgimage from "../../../assets/img/circle-bg.png";
 import cardImg from "../../../assets/img/my_events_img.png";
 import listevents from "../../../assets/img/list_events.png";
 import { EventsHeader, Footer, NavBar } from "../../../components";
-import { fetchSponsoredContent } from "../../../redux/actions/sponsorAction";
+import { fetchSponsoredItem } from "../../../redux/actions/sponsorAction";
 import { useDispatch, useSelector } from "react-redux";
 import apiurl from "../../../constant/config";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,10 +15,10 @@ const SponsoredContent = () => {
   const dispatch = useDispatch();
   const contentDetails = useSelector((state) => state.sponsor);
   useEffect(() => {
-    dispatch(fetchSponsoredContent(sponsor_id));
+    dispatch(fetchSponsoredItem());
   }, []);
   console.log("user details", auth);
-  const cardData = contentDetails.SponsoredContent;
+  const cardData = contentDetails.SponsoredItem?.sponsor_content;
   console.log("Content details", cardData);
   const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ const SponsoredContent = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <NavBar />
+        
         <EventsHeader title={"Your Sponsored Content!"} logo={listevents} />
         <h1></h1>
         <div className="desktop-view mt-4">
@@ -261,6 +261,7 @@ const SponsoredContent = () => {
                                   border: "2px solid #004EA9",
                                   borderRadius: "10px",
                                 }}
+                                onClick={() => handleSponsorClick(data)}
                               >
                                 Check Out Sponsors Details &nbsp;&nbsp; &gt;&gt;
                               </button>
@@ -274,7 +275,7 @@ const SponsoredContent = () => {
               })}
           </div>
         </div>
-        <Footer />
+        
       </div>
     </>
   );

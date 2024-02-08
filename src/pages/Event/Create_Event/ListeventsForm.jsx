@@ -268,7 +268,7 @@ const ListeventsForm = () => {
   };
   return (
     <>
-      <EventNavBar />
+      
       <div
         className="bg-form"
         style={{
@@ -529,7 +529,7 @@ const ListeventsForm = () => {
                     <div className="row form-group">
                       <div className="col-md-12">
                         <input
-                          type="text"
+                          type="number"
                           id="subject"
                           value={audience}
                           onChange={(e) => setAudienceExpected(e.target.value)}
@@ -706,7 +706,7 @@ const ListeventsForm = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      
     </>
   );
 };

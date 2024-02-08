@@ -34,13 +34,13 @@ const InstagramContentSponsor = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <SponsorNavbar />
+        
         <EventsHeader title={"Instagram Content Creators"} logo={cclogo} />
         <ContentCard
           line={"Sponsor Instagram creators"}
           cardData={ContentDetails.contentCategory?.instagram}
         />
-        <Footer />
+        
       </div>
     </>
   );

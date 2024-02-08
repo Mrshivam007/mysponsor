@@ -96,7 +96,7 @@ const MyEventCard = ({ cardData }) => {
                                 {data.title}{" "}
                               </h3>
                               <h4>{data.location}</h4>
-                              <div className="star d-flex">
+                              {/* <div className="star d-flex">
                                 <h5>
                                   <i class="bi bi-star-fill text-warning"></i>
                                   &nbsp;
@@ -112,7 +112,7 @@ const MyEventCard = ({ cardData }) => {
                                     3482 reviews
                                   </span>
                                 </h5>
-                              </div>
+                              </div> */}
                               <p>{data.description}</p>
                             </div>
                           </div>
@@ -126,16 +126,6 @@ const MyEventCard = ({ cardData }) => {
                                     &nbsp;&nbsp; {totalSponsoringPrice}
                                   </h4>
                                 </span>
-                                <img
-                                  src={heart}
-                                  alt=""
-                                  style={{
-                                    width: "10%",
-                                    fill: "#FFF",
-                                    filter:
-                                      "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))",
-                                  }}
-                                />
                               </div>
 
                               <h4>

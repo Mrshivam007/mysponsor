@@ -34,13 +34,13 @@ const FacebookContentSponsor = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <SponsorNavbar />
+        
         <EventsHeader title={"Sponsor Facebook Creators"} logo={cclogo} />
         <ContentCard
           line={"Sponsor Facebook creators"}
           cardData={ContentDetails.contentCategory?.facebook}
         />
-        <Footer />
+        
       </div>
     </>
   );

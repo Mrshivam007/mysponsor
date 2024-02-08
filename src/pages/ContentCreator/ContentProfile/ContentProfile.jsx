@@ -26,7 +26,7 @@ const ContentProfile = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <NavBar />
+        
         <div className="container my-3">
           <Tabs
             defaultActiveKey="profile"
@@ -49,7 +49,7 @@ const ContentProfile = () => {
             Logout
           </button>
         </div>
-        <Footer />
+        
       </div>
     </>
   );

@@ -317,7 +317,7 @@ const Delete_EventCard = ({ cardData }) => {
               ))}
           </div>
         </div> */}
-        {/* <Footer /> */}
+        {/*  */}
       </div>
     </>
   );

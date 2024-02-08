@@ -19,6 +19,10 @@ const Login = () => {
   console.log(error);
 
   useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
+  }, []);
+
+  useEffect(() => {
     // Retrieve success message from sessionStorage
     const message = sessionStorage.getItem("successMessage");
 

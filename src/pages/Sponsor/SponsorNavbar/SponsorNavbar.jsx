@@ -201,7 +201,9 @@ const SponsorNavbar = () => {
             onClick={toggleNavbar}
           />
           <a className="navbar-brand">
+          <Link to="/" className="navbar-brand">
             <img src={logo} alt="Logo" />
+          </Link>
           </a>
           <div className="box d-flex">
             <div
@@ -264,7 +266,7 @@ const SponsorNavbar = () => {
                   <AiOutlineClose />
                 </div>
               </Container>
-              <div className="container nav-profile">
+              <div className="container nav-profile" style={{justifyContent: 'normal', gap: '2vh'}}>
                 <div
                   className="box"
                   style={{
@@ -281,10 +283,14 @@ const SponsorNavbar = () => {
                     style={{ borderRadius: "50px" }}
                   />
                 </div>
-                <div className="box text-white">
+                {/* <div className="box text-white">
                   <h3 className="mb-0 font-weight-bold">John Doe</h3>
                   <h6>Sponsor</h6>
-                </div>
+                </div> */}
+                <div className="box text-white">
+                    <h3 className="mb-0 font-weight-bold">{userDetails.firstname}</h3>
+                    <h6>{userDetails.lastname}</h6>
+                  </div>
               </div>
             </div>
             <div className="mobile-nav-content mt-4">
@@ -292,24 +298,33 @@ const SponsorNavbar = () => {
                 className="mobile-nav-items border-0"
                 style={{ gap: "20px" }}
               >
-                <Link to={"/sponsored_event"}>
-                  <div className="mobile-nav-item">My Sponsored Event</div>
+                <Link to={"/events"}>
+                  <div className="mobile-nav-item">Sponsor Event</div>
                 </Link>
+                <Link to={"/cc"}>
+
                 <div className="mobile-nav-item" href="index.html">
                   Sponsor Content
                 </div>
+                </Link>
                 <div className="mobile-nav-item" href="service.html">
                   Top Events
                 </div>
                 <div className="mobile-nav-item" href="#">
-                  My Account
+                  Top Content
                 </div>
+                <Link to={"/sponsored_event"}>
+
                 <div className="mobile-nav-item" href="#">
-                  Payment Info
+                  Your Sponsored Event
                 </div>
+                </Link>
+                <Link to={"/sponsored_content"}>
+
                 <div className="mobile-nav-item" href="#">
-                  ChatBot
+                Your Sponsored Content
                 </div>
+                </Link>
               </Nav>
             </div>
             <div className="text-success">

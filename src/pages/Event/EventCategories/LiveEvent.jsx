@@ -41,7 +41,7 @@ const LiveEvent = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <EventNavBar />
+        
         <div className="events-page-desktop">
           <EventsHeader title={"Live Events"} logo={spevents} />
           {/* <SponserE cardData={eventDetails.eventDetails} line={"Live Events"} /> */}
@@ -69,7 +69,7 @@ const LiveEvent = () => {
             Load More
           </div>
         </div>
-        <Footer />
+        
       </div>
     </>
   );

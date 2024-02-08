@@ -4,7 +4,7 @@ import bgimage from "../../../assets/img/circle-bg.png";
 import cardImg from "../../../assets/img/my_events_img.png";
 import listevents from "../../../assets/img/list_events.png";
 import { EventsHeader, Footer, NavBar } from "../../../components";
-import { fetchSponsoredEvent } from "../../../redux/actions/sponsorAction";
+import { fetchSponsoredItem } from "../../../redux/actions/sponsorAction";
 import { useDispatch, useSelector } from "react-redux";
 import apiurl from "../../../constant/config";
 import { Link, useNavigate } from "react-router-dom";
@@ -17,11 +17,11 @@ const SponsoredEvent = () => {
   const dispatch = useDispatch();
   const eventDetails = useSelector((state) => state.sponsor);
   useEffect(() => {
-    dispatch(fetchSponsoredEvent(sponsor_id));
+    dispatch(fetchSponsoredItem());
   }, []);
   console.log("user details", auth);
   console.log("Event details", eventDetails);
-  const cardData = eventDetails.SponsoredEvent;
+  const cardData = eventDetails?.SponsoredItem?.sponsor_event;
   const navigate = useNavigate();
 
   const handleSponsorClick = (data) => {
@@ -38,7 +38,7 @@ const SponsoredEvent = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <EventNavBar />
+        
         <EventsHeader title={"Your Sponsored Event!"} logo={listevents} />
         <div className="desktop-view sponsored-events mt-4">
           <div className="container">
@@ -262,7 +262,7 @@ const SponsoredEvent = () => {
                                   >
                                     Total amount sponsored
                                   </p>
-                                  <p className="mb-1">₹50,000</p>
+                                  <p className="mb-1">₹{data.amount}</p>
                                 </div>
                               </div>
                               <button
@@ -341,7 +341,7 @@ const SponsoredEvent = () => {
                                   >
                                     Total amount sponsored
                                   </p>
-                                  <p className="mb-1">₹50,000</p>
+                                  <p className="mb-1">₹{data.amount}</p>
                                 </div>
                               </div>
                               <button
@@ -445,7 +445,7 @@ const SponsoredEvent = () => {
                                   >
                                     Total amount sponsored
                                   </p>
-                                  <p className="mb-1">₹50,000</p>
+                                  <p className="mb-1">₹{data.amount}</p>
                                 </div>
                               </div>
                               <button
@@ -472,7 +472,7 @@ const SponsoredEvent = () => {
               })}
           </div>
         </div>
-        <Footer />
+        
       </div>
     </>
   );

@@ -42,26 +42,45 @@ const SponsorEventBox = (eventData) => {
   let totalAmount = 0;
   const sponsoring_items = cardData?.sponsoring_items || [];
   const [bannerImage, setBannerImage] = useState(null);
+  const [bannerImageFileName, setBannerImageFileName] = useState(null);
   const [ledImage, setLedImage] = useState(null);
+  const [ledImageFileName, setLedImageFileName] = useState(null);
   const [ledVideo, setLedVideo] = useState(null);
+  const [ledVideoFileName, setLedVideoFileName] = useState(null);
   const [billText, setBillText] = useState(null);
+  const [preBillText, setPreBillText] = useState(cardData?.bill_text);
+
   const { SponsoringItem, loading } = sponsor;
 
   console.log("Sponsoring Items", sponsoring_items);
   console.log("CardData", cardData);
   console.log("Sponsor Id ", userDetails?.user_id);
 
+  const generateUniqueFilename = (originalFilename, index) => {
+    const extension = originalFilename.split('.').pop();
+    const uniqueFilename = `thumbnail${index + 1}_${Date.now()}.${extension}`;
+    return uniqueFilename;
+  };
+
   const handleBannerImgChange = (e) => {
     const file = e.target.files[0];
+    const uniqueFilename = generateUniqueFilename(file.name, 0);
     setBannerImage(file);
+    setBannerImageFileName(uniqueFilename); // Save the unique filename in state
   };
+
   const handleLedImgChange = (e) => {
     const file = e.target.files[0];
+    const uniqueFilename = generateUniqueFilename(file.name, 0);
     setLedImage(file);
+    setLedImageFileName(uniqueFilename); // Save the unique filename in state
   };
+
   const handleLedVidChange = (e) => {
     const file = e.target.files[0];
+    const uniqueFilename = generateUniqueFilename(file.name, 0);
     setLedVideo(file);
+    setLedVideoFileName(uniqueFilename); // Save the unique filename in state
   };
 
   const handleSubmitClick = async (e) => {
@@ -69,18 +88,18 @@ const SponsorEventBox = (eventData) => {
     // if (Object.keys(errors).length === 0) {
     const formData = new FormData();
     formData.append("sponsor_id", cardData.sponsor_id);
-    formData.append("banner_image", bannerImage || "");
-    formData.append("led_image", ledImage || "");
-    formData.append("led_video", ledVideo || "");
-    formData.append("bill_text", "");
+    formData.append("banner_image", bannerImage, bannerImageFileName || "");
+    formData.append("led_image", ledImage, ledImageFileName || "");
+    formData.append("led_video", ledVideo, ledVideoFileName || "");
+    formData.append("bill_text", billText || preBillText);
     try {
       // Make POST API call
       await dispatch(updateSponsoringItem(formData));
-      // sessionStorage.setItem(
-      //   "successMessage",
-      //   "Promotion listed successfully!"
-      // );
-      // navigate("/events/upcoming_event"); // Replace '/' with the desired route for the home page
+      sessionStorage.setItem(
+        "successMessage",
+        "Promotion listed successfully!"
+      );
+      navigate("/sponsored_event"); // Replace '/' with the desired route for the home page
     } catch (error) {
       console.log("An error occurred during API calls:", error);
     }
@@ -132,6 +151,8 @@ const SponsorEventBox = (eventData) => {
       );
     }
   };
+
+
 
   return (
     <>
@@ -196,10 +217,10 @@ const SponsorEventBox = (eventData) => {
             <div className="col-6">
               <h4 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between">
                 {cardData.event_id.title}{" "}
-                <img src={heart} alt="" style={{ width: "7%" }} />
+                {/* <img src={heart} alt="" style={{ width: "7%" }} /> */}
               </h4>
               <h4>{cardData.event_id.location}</h4>
-              <div className="star d-flex">
+              {/* <div className="star d-flex">
                 <h5>
                   <i className="bi bi-star-fill text-warning"></i>&nbsp;
                   <i className="bi bi-star-fill text-warning"></i>&nbsp;
@@ -208,7 +229,7 @@ const SponsorEventBox = (eventData) => {
                   <i className="bi bi-star-fill text-white"></i>&nbsp;
                   <span className="text-sm text-muted">3482 reviews</span>
                 </h5>
-              </div>
+              </div> */}
               <h5>
                 <i className="bi bi-cash text-success"></i>&nbsp;&nbsp;
                 <span className="text-md">{cardData.amount}&lt;</span>
@@ -268,6 +289,27 @@ const SponsorEventBox = (eventData) => {
               className="box1 mt-2 d-flex justify-content-center"
               style={{ gap: "2%" }}
             >
+
+              {item.sponsoring_items === "bill_board" && (
+                <div
+                  className="box photo-box bg-white d-flex justify-content-center align-items-start p-3"
+                  style={{ width: "40%" }}
+                >
+                  <div className="box text-center">
+                    <h5 className="font-weight-bold">Add BillBoard Text Info</h5>
+                    <input
+                      type="text"
+                      id="BillText"
+                      value={billText || preBillText}
+                      onChange={(e) => setBillText(e.target.value)}
+                      readOnly={preBillText ? true : false}
+                      className="form-control"
+                      placeholder="Enter BillBoard Text"
+                    />
+                  </div>
+                </div>
+              )}
+
               {item.sponsoring_items === "banner" && (
                 <div
                   className="box photo-box bg-white d-flex justify-content-center align-items-start p-3"
@@ -391,19 +433,19 @@ const SponsorEventBox = (eventData) => {
           {cardData?.sponsoring_items.map((item) => (
             <>
               {item.sponsoring_items === "banner" &&
-              !(bannerImage || cardData?.banner_image) ? (
+                !(bannerImage || cardData?.banner_image) ? (
                 <div className="alert alert-danger">
                   Upload an image to be displayed on the Banner
                 </div>
               ) : null}
               {item.sponsoring_items === "led_screen" &&
-              !(ledImage || cardData?.led_image) ? (
+                !(ledImage || cardData?.led_image) ? (
                 <div className="alert alert-danger">
                   Upload an image to be displayed on the LED
                 </div>
               ) : null}
               {item.sponsoring_items === "led_screen" &&
-              !(ledVideo || cardData?.led_video) ? (
+                !(ledVideo || cardData?.led_video) ? (
                 <div className="alert alert-danger">
                   Upload a video to be displayed on the LED
                 </div>
@@ -477,7 +519,7 @@ const SponsorEventBox = (eventData) => {
               {cardData.event_id.audience_expected}&nbsp;&nbsp;
             </h5>
           </div>
-          <div className="star d-flex">
+          {/* <div className="star d-flex">
             <h5>
               <i className="bi bi-star-fill text-warning"></i>&nbsp;
               <i className="bi bi-star-fill text-warning"></i>&nbsp;
@@ -486,7 +528,7 @@ const SponsorEventBox = (eventData) => {
               <i className="bi bi-star-fill text-white"></i>&nbsp;
               <span className="text-sm text-muted">3482 reviews</span>
             </h5>
-          </div>
+          </div> */}
         </div>
         <div className="container px-0">
           <table
@@ -570,6 +612,25 @@ const SponsorEventBox = (eventData) => {
               key={index}
               className="box1 mt-2 d-flex justify-content-center"
             >
+              {item.sponsoring_items === "bill_board" && (
+                <div
+                  className="box photo-box bg-white d-flex justify-content-center align-items-start p-3"
+                  style={{ width: "100%" }}
+                >
+                  <div className="box text-center">
+                    <h5 className="font-weight-bold">Add BillBoard Text Info</h5>
+                    <input
+                      type="text"
+                      id="BillText"
+                      value={billText || preBillText}
+                      onChange={(e) => setBillText(e.target.value)}
+                      readOnly={preBillText ? true : false}
+                      className="form-control"
+                      placeholder="Enter BillBoard Text"
+                    />
+                  </div>
+                </div>
+              )}
               {item.sponsoring_items === "banner" && (
                 <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
                   <div className="box text-center">
@@ -687,19 +748,19 @@ const SponsorEventBox = (eventData) => {
           {cardData?.sponsoring_items.map((item) => (
             <>
               {item.sponsoring_items === "banner" &&
-              !(bannerImage || cardData?.banner_image) ? (
+                !(bannerImage || cardData?.banner_image) ? (
                 <div className="alert alert-danger">
                   Upload an image to be displayed on the Banner
                 </div>
               ) : null}
               {item.sponsoring_items === "led_screen" &&
-              !(ledImage || cardData?.led_image) ? (
+                !(ledImage || cardData?.led_image) ? (
                 <div className="alert alert-danger">
                   Upload an image to be displayed on the LED
                 </div>
               ) : null}
               {item.sponsoring_items === "led_screen" &&
-              !(ledVideo || cardData?.led_video) ? (
+                !(ledVideo || cardData?.led_video) ? (
                 <div className="alert alert-danger">
                   Upload a video to be displayed on the LED
                 </div>

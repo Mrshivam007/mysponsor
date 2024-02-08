@@ -59,10 +59,10 @@ const UpcomingEvent = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <EventNavBar />
+        
         <div className="events-page-desktop">
           <EventsHeader title={"Upcoming Event"} logo={spevents} />
-          {/* <SponserE cardData={eventDetails.eventDetails} line={"Upcoming Event"} /> */}
+          {/* <SponserE cardData={eventDetails?.eventAllDetails?.upcoming_event} line={"Upcoming Event"} /> */}
           {successMessage && (
             <div className="container">
               <div
@@ -131,7 +131,7 @@ const UpcomingEvent = () => {
             Load More
           </div>
         </div>
-        <Footer />
+        
       </div>
     </>
   );

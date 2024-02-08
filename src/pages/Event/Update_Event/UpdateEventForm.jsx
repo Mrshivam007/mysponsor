@@ -224,7 +224,7 @@ const UpdateEvent = () => {
 
   return (
     <>
-      <EventNavBar />
+      
       <div
         className="bg-form"
         style={{
@@ -720,7 +720,7 @@ const UpdateEvent = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      
     </>
   );
 };

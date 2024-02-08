@@ -204,7 +204,7 @@ const ListContentForm = () => {
       try {
         // Make POST API call
         await dispatch(createContent(formData));
-        sessionStorage.setItem("successMessage", "Class created successfully!");
+        sessionStorage.setItem("successMessage", "Content created successfully!");
         navigate("/your_content/upcoming_content"); // Replace '/' with the desired route for the home page
       } catch (error) {
         console.log("An error occurred during API calls:", error);
@@ -215,7 +215,7 @@ const ListContentForm = () => {
   };
   return (
     <>
-      <NavBar />
+      
       <div
         className="bg-form"
         style={{
@@ -432,7 +432,7 @@ const ListContentForm = () => {
                     <div className="row form-group gap-3">
                       <div className="col-md-12">
                         <input
-                          type="text"
+                          type="number"
                           id="subject"
                           value={audience}
                           onChange={(e) => setAudienceExpected(e.target.value)}
@@ -519,6 +519,7 @@ const ListContentForm = () => {
                         <div className="d-flex align-items-center justify-content-center">
                           <img
                             src={URL.createObjectURL(thumbnail2)}
+                            accept="image/*"
                             alt="Preview"
                             width="200"
                           />
@@ -547,6 +548,7 @@ const ListContentForm = () => {
                         <div className="d-flex align-items-center justify-content-center">
                           <img
                             src={URL.createObjectURL(thumbnail3)}
+                            accept="image/*"
                             alt="Preview"
                             width="200"
                           />
@@ -607,7 +609,7 @@ const ListContentForm = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      
     </>
   );
 };

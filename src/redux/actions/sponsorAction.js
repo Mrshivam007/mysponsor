@@ -1,6 +1,6 @@
 import axios from 'axios';
 import apiurl from '../../constant/config';
-import { CREATE_FAVORITE_SPONSOR_FAILED, CREATE_FAVORITE_SPONSOR_REQUEST, CREATE_FAVORITE_SPONSOR_SUCCESS, CREATE_SPONSORING_ITEM_FAILED, CREATE_SPONSORING_ITEM_REQUEST, CREATE_SPONSORING_ITEM_SUCCESS, CREATE_SPONSOR_CONTENT_FAILED, CREATE_SPONSOR_CONTENT_REQUEST, CREATE_SPONSOR_CONTENT_SUCCESS, CREATE_SPONSOR_FAILED, CREATE_SPONSOR_REQUEST, CREATE_SPONSOR_SUCCESS, DELETE_EVENT_FAILED, DELETE_EVENT_REQUEST, DELETE_EVENT_SUCCESS, GET_EVENT_FAILED, GET_EVENT_REQUEST, GET_EVENT_SUCCESS, GET_FAVORITE_EVENT_FAILED, GET_FAVORITE_EVENT_REQUEST, GET_FAVORITE_EVENT_SUCCESS, GET_SPONSORED_CONTANT_FAILED, GET_SPONSORED_CONTANT_REQUEST, GET_SPONSORED_CONTANT_SUCCESS, GET_SPONSORED_EVENT_FAILED, GET_SPONSORED_EVENT_REQUEST, GET_SPONSORED_EVENT_SUCCESS, UPDATE_EVENT_FAILED, UPDATE_EVENT_REQUEST, UPDATE_EVENT_SUCCESS } from '../constant';
+import { CREATE_FAVORITE_SPONSOR_FAILED, CREATE_FAVORITE_SPONSOR_REQUEST, CREATE_FAVORITE_SPONSOR_SUCCESS, CREATE_SPONSORING_ITEM_FAILED, CREATE_SPONSORING_ITEM_REQUEST, CREATE_SPONSORING_ITEM_SUCCESS, CREATE_SPONSOR_CONTENT_FAILED, CREATE_SPONSOR_CONTENT_REQUEST, CREATE_SPONSOR_CONTENT_SUCCESS, CREATE_SPONSOR_FAILED, CREATE_SPONSOR_REQUEST, CREATE_SPONSOR_SUCCESS, DELETE_EVENT_FAILED, DELETE_EVENT_REQUEST, DELETE_EVENT_SUCCESS, GET_EVENT_FAILED, GET_EVENT_REQUEST, GET_EVENT_SUCCESS, GET_FAVORITE_EVENT_FAILED, GET_FAVORITE_EVENT_REQUEST, GET_FAVORITE_EVENT_SUCCESS, GET_SPONSORED_CONTANT_FAILED, GET_SPONSORED_CONTANT_REQUEST, GET_SPONSORED_CONTANT_SUCCESS, GET_SPONSORED_CONTENT_BY_ID_FAILED, GET_SPONSORED_CONTENT_BY_ID_REQUEST, GET_SPONSORED_CONTENT_BY_ID_SUCCESS, GET_SPONSORED_EVENT_FAILED, GET_SPONSORED_EVENT_REQUEST, GET_SPONSORED_EVENT_SUCCESS, GET_SPONSORED_ITEM_FAILED, GET_SPONSORED_ITEM_REQUEST, GET_SPONSORED_ITEM_SUCCESS, UPDATE_EVENT_FAILED, UPDATE_EVENT_REQUEST, UPDATE_EVENT_SUCCESS } from '../constant';
 
 
 export const createSponsor = (formData) => async (dispatch) => {
@@ -224,6 +224,61 @@ export const fetchSponsoredEvent = (sponsor_id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_SPONSORED_EVENT_FAILED,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const fetchSponsoredContentById = (item_id) => async (dispatch) => {
+  try {
+    dispatch({ type: GET_SPONSORED_CONTENT_BY_ID_REQUEST });
+
+      const access = JSON.parse(localStorage.getItem("access"));
+
+    const { data } = await axios.get(
+      `${apiurl}/api/user/content-sponsor/${item_id}`,
+      {
+        headers: { Authorization: `Bearer ${access}` },
+      }
+    );
+    dispatch({
+      type: GET_SPONSORED_CONTENT_BY_ID_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_SPONSORED_CONTENT_BY_ID_FAILED,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+
+export const fetchSponsoredItem = () => async (dispatch) => {
+  try {
+    dispatch({ type: GET_SPONSORED_ITEM_REQUEST });
+
+      const access = JSON.parse(localStorage.getItem("access"));
+
+    const { data } = await axios.get(
+      `${apiurl}/api/user/sponsor/`,
+      {
+        headers: { Authorization: `Bearer ${access}` },
+      }
+    );
+    dispatch({
+      type: GET_SPONSORED_ITEM_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_SPONSORED_ITEM_FAILED,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

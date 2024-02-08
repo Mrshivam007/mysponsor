@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchEvent, fetchEventbyId } from "../../../redux/actions/eventAction";
 import heart from "../../../assets/img/heart2.svg";
 import apiurl from "../../../constant/config";
 
@@ -10,10 +9,7 @@ const EventMobileCard = ({ line, cardData }) => {
   const { userDetails } = auth;
   console.log(userDetails);
   const dispatch = useDispatch();
-  const eventDetails = useSelector((state) => state.event);
-  useEffect(() => {
-    dispatch(fetchEventbyId(userDetails.user_id))
-  }, []);
+
 
   const navigate = useNavigate();
 

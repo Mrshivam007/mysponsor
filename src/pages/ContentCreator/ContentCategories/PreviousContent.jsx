@@ -43,7 +43,7 @@ const PreviousContent = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <NavBar />
+        
         <EventsHeader
           title={"See your listed contents here "}
           logo={listevents}
@@ -72,7 +72,7 @@ const PreviousContent = () => {
           </div>
         )}
         <MyContentCard heading={"My Previous Content"} cardData={ContentDetails.contentDetails?.past_content} />
-        <Footer />
+        
       </div>
     </>
   );

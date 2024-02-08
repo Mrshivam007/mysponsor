@@ -25,7 +25,7 @@ const EventCategories = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <EventNavBar />
+        
         {/* ---DESKTOP VIEW---  */}
         <div className="desktop-view">
           <EventsHeader title={"Your Events"} logo={listevents} />
@@ -122,7 +122,7 @@ const EventCategories = () => {
             </div>
           </div>
         </div>
-        <Footer />
+        
       </div>
     </>
   );
