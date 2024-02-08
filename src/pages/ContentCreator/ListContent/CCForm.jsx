@@ -4,6 +4,8 @@ import { Footer, NavBar } from "../../../components";
 import backgroundimg from "../../../assets/img/circle-bg.png";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
 import { eventReducer } from "../../../redux/reducer/eventReducer";
 import { useNavigate } from "react-router-dom";
 import { createContent } from "../../../redux/actions/contentAction";
@@ -12,6 +14,15 @@ const ListContentForm = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
+
+  const animatedComponents = makeAnimated();
+
+  const itemOptions = [
+    { value: "tag_ads", label: "#ADS" },
+    { value: "sponsored_by", label: "Sponsored By" },
+    { value: "reel_sponsored", label: "Reel Sponsored" },
+  ];
+  const [itemSelection, setItemSelection] = useState([]);
 
   const [title, setTitle] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -27,21 +38,22 @@ const ListContentForm = () => {
   const [content_platform, setContentplatform] = useState("");
   const [event_time, setEventTime] = useState("");
   const [price, setPrice] = useState("");
-  const [prices, setPrices] = useState({
-    tag_ads: '',
-    sponsored_by: '',
-    reel_sponsored: '',
-  });
+  const [prices, setPrices] = useState("");
+  // const [prices, setPrices] = useState({
+  //   tag_ads: "",
+  //   sponsored_by: "",
+  //   reel_sponsored: "",
+  // });
   const [selectedItems, setSelectedItems] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const [thumbnail1, setThumbnail1] = useState(null);
   const [thumbnail2, setThumbnail2] = useState(null);
   const [thumbnail3, setThumbnail3] = useState(null);
-  const [thumbnail1Filename, setThumbnail1Filename] = useState('');
-  const [thumbnail2Filename, setThumbnail2Filename] = useState('');
-  const [thumbnail3Filename, setThumbnail3Filename] = useState('');
+  const [thumbnail1Filename, setThumbnail1Filename] = useState("");
+  const [thumbnail2Filename, setThumbnail2Filename] = useState("");
+  const [thumbnail3Filename, setThumbnail3Filename] = useState("");
   const [video, setVideo] = useState("");
-  const [videoFilename, setVideoFilename] = useState('');
+  const [videoFilename, setVideoFilename] = useState("");
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
   const [errors, setErrors] = useState({});
@@ -52,7 +64,7 @@ const ListContentForm = () => {
   // For each thumbnail, you'll need a separate state and handler
 
   const generateUniqueFilename = (originalFilename, index) => {
-    const extension = originalFilename.split('.').pop();
+    const extension = originalFilename.split(".").pop();
     const uniqueFilename = `thumbnail${index + 1}_${Date.now()}.${extension}`;
     return uniqueFilename;
   };
@@ -61,7 +73,7 @@ const ListContentForm = () => {
   const handleThumbnail1Change = (e) => {
     const file = e.target.files[0];
     const uniqueFilename = generateUniqueFilename(file.name, 0);
-    
+
     setThumbnail1(file);
     setThumbnail1Filename(uniqueFilename); // Save the unique filename in state
   };
@@ -99,22 +111,36 @@ const ListContentForm = () => {
     setPrices(updatedPrices);
   };
 
-  const handleSponsoringItemChange = (item) => {
-    setSelectedItems((prevSelectedItems) => {
-      if (prevSelectedItems.includes(item)) {
-        return prevSelectedItems.filter((selectedItem) => selectedItem !== item);
-      } else {
-        return [...prevSelectedItems, item];
-      }
-    });
+  const handleSponsoringItemChange = (itemSelection) => {
+    let updatedSelectedItems = itemSelection.map((item) => item.value);
+    console.log(updatedSelectedItems);
+    setItemSelection(updatedSelectedItems);
   };
 
-  const handlePriceChange = (item, value) => {
-    setPrices((prevPrices) => ({
-      ...prevPrices,
-      [item]: value,
-    }));
+  const handlePriceChange = (item, price) => {
+    const updatedPrices = { ...prices };
+    updatedPrices[item] = price;
+    setPrices(updatedPrices);
   };
+
+  // const handleSponsoringItemChange = (item) => {
+  //   setSelectedItems((prevSelectedItems) => {
+  //     if (prevSelectedItems.includes(item)) {
+  //       return prevSelectedItems.filter(
+  //         (selectedItem) => selectedItem !== item
+  //       );
+  //     } else {
+  //       return [...prevSelectedItems, item];
+  //     }
+  //   });
+  // };
+
+  // const handlePriceChange = (item, value) => {
+  //   setPrices((prevPrices) => ({
+  //     ...prevPrices,
+  //     [item]: value,
+  //   }));
+  // };
 
   const handleToggleDropdown = () => {
     setShowDropdown(!showDropdown);
@@ -176,7 +202,7 @@ const ListContentForm = () => {
     const isFormValid = validateForm();
     if (isFormValid) {
       // if (Object.keys(errors).length === 0) {
-      const sponsoringItemsData = selectedItems.map((item) => ({
+      const sponsoringItemsData = itemSelection.map((item) => ({
         sponsoring_content_items: item,
         price: prices[item] || null, // handle cases where price might be undefined or null
       }));
@@ -204,7 +230,10 @@ const ListContentForm = () => {
       try {
         // Make POST API call
         await dispatch(createContent(formData));
-        sessionStorage.setItem("successMessage", "Content created successfully!");
+        sessionStorage.setItem(
+          "successMessage",
+          "Content created successfully!"
+        );
         navigate("/your_content/upcoming_content"); // Replace '/' with the desired route for the home page
       } catch (error) {
         console.log("An error occurred during API calls:", error);
@@ -215,7 +244,6 @@ const ListContentForm = () => {
   };
   return (
     <>
-      
       <div
         className="bg-form"
         style={{
@@ -288,54 +316,110 @@ const ListContentForm = () => {
                       </div>
                     </div>
 
-                    <div>
-                      <div className="row form-group">
-                        <div className="col-md-12 mb-3 mb-md-0">
-                          <div>
+                    <div className="row form-group">
+                      <div className="col-md-12 mb-3 mb-md-0">
+                        {/* <div>
                             <button
                               type="button"
                               style={{
-                                background: selectedItems.includes('tag_ads') ? '#ccc' : '#fff',
-                                border: selectedItems.includes('tag_ads') ? '2px solid gray' : '2px solid black',
+                                background: selectedItems.includes("tag_ads")
+                                  ? "#ccc"
+                                  : "#fff",
+                                border: selectedItems.includes("tag_ads")
+                                  ? "2px solid gray"
+                                  : "2px solid black",
                               }}
-                              onClick={() => handleSponsoringItemChange('tag_ads')}
+                              onClick={() =>
+                                handleSponsoringItemChange("tag_ads")
+                              }
                             >
                               #Ads
                             </button>
                             <button
                               type="button"
                               style={{
-                                background: selectedItems.includes('sponsored_by') ? '#ccc' : '#fff',
-                                border: selectedItems.includes('sponsored_by') ? '2px solid gray' : '2px solid black',
+                                background: selectedItems.includes(
+                                  "sponsored_by"
+                                )
+                                  ? "#ccc"
+                                  : "#fff",
+                                border: selectedItems.includes("sponsored_by")
+                                  ? "2px solid gray"
+                                  : "2px solid black",
                               }}
-                              onClick={() => handleSponsoringItemChange('sponsored_by')}
+                              onClick={() =>
+                                handleSponsoringItemChange("sponsored_by")
+                              }
                             >
                               This video is sponsored by
                             </button>
                             <button
                               type="button"
                               style={{
-                                background: selectedItems.includes('reel_sponsored') ? '#ccc' : '#fff',
-                                border: selectedItems.includes('reel_sponsored') ? '2px solid gray' : '2px solid black',
+                                background: selectedItems.includes(
+                                  "reel_sponsored"
+                                )
+                                  ? "#ccc"
+                                  : "#fff",
+                                border: selectedItems.includes("reel_sponsored")
+                                  ? "2px solid gray"
+                                  : "2px solid black",
                               }}
-                              onClick={() => handleSponsoringItemChange('reel_sponsored')}
+                              onClick={() =>
+                                handleSponsoringItemChange("reel_sponsored")
+                              }
                             >
                               Reels Sponsore
                             </button>
 
                             {selectedItems.map((item) => (
-                                <div key={item}>
-                                  <input
-                                    type="number"
-                                    value={prices[item]}
-                                    onChange={(e) => handlePriceChange(item, e.target.value)}
-                                    className="form-control my-1"
-                                    placeholder={`Enter ${item.replace('_', ' ')} Price`}
-                                  />
-                                </div>
-                              ))}
-                          </div>
+                              <div key={item}>
+                                <input
+                                  type="number"
+                                  value={prices[item]}
+                                  onChange={(e) =>
+                                    handlePriceChange(item, e.target.value)
+                                  }
+                                  className="form-control my-1"
+                                  placeholder={`Enter ${item.replace(
+                                    "_",
+                                    " "
+                                  )} Price`}
+                                />
+                              </div>
+                            ))}
+                          </div> */}
+                        <div>
+                          <Select
+                            closeMenuOnSelect={true}
+                            components={animatedComponents}
+                            onChange={handleSponsoringItemChange}
+                            isMulti
+                            options={itemOptions}
+                          />
+                          {itemSelection.map((item) => (
+                            <div key={item}>
+                              <input
+                                type="text"
+                                value={prices[item]}
+                                onChange={(e) =>
+                                  handlePriceChange(item, e.target.value)
+                                }
+                                className="form-control my-1"
+                                placeholder={`Enter ${item.replace(
+                                  "_",
+                                  " "
+                                )} Price`}
+                              />
+                            </div>
+                          ))}
                         </div>
+                        {errors.selectedItems && (
+                          <p className="error-msg">{errors.selectedItems}</p>
+                        )}
+                        {prices == "" ? (
+                          <p className="error-msg">{errors.prices}</p>
+                        ) : null}
                       </div>
                     </div>
 
@@ -609,7 +693,6 @@ const ListContentForm = () => {
           </div>
         </div>
       </div>
-      
     </>
   );
 };

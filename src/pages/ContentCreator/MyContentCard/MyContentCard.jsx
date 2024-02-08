@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import apiurl from "../../../constant/config";
 import { Link, useNavigate } from "react-router-dom";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 const MyContentCard = ({ cardData, heading }) => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
@@ -13,6 +14,27 @@ const MyContentCard = ({ cardData, heading }) => {
   };
 
   console.log("content card data", cardData);
+
+  const renderTooltip1 = (props) => (
+    <Tooltip
+      id="button-tooltip"
+      {...props}
+      // style={{ backgroundColor: "mediumseagreen" }}
+    >
+      This Content is Admin Approved
+    </Tooltip>
+  );
+
+  const renderTooltip2 = (props) => (
+    <Tooltip
+      id="button-tooltip"
+      {...props}
+      // style={{ backgroundColor: "mediumseagreen" }}
+    >
+      This Content is Waiting for Admin Approval
+    </Tooltip>
+  );
+
   return (
     <>
       <div className="desktop-view">
@@ -117,13 +139,13 @@ const MyContentCard = ({ cardData, heading }) => {
                             <div>
                               {data.is_approval ? (
                                 <h4>
-                                  <i className="bi bi-check-circle-fill text-success"></i>
-                                  {" "}Approved
+                                  <i className="bi bi-check-circle-fill text-success"></i>{" "}
+                                  Approved
                                 </h4>
                               ) : (
                                 <h4>
-                                  <i className="bi bi-clock-fill text-danger"></i>
-                                  {" "}Pending
+                                  <i className="bi bi-clock-fill text-danger"></i>{" "}
+                                  Pending
                                 </h4>
                               )}
                             </div>
@@ -199,28 +221,41 @@ const MyContentCard = ({ cardData, heading }) => {
                             borderRadius: "10px",
                           }}
                         />
-                        <div className="content-text-overlay" style={{ justifyContent: 'start', alignItems: 'end' }}>
-                          <div className="heart d-flex justify-content-between mb-2">
+                        <div className="content-text-overlay">
+                          <div className="heart d-flex justify-content-end mb-2">
                             <div>
                               {data.is_approval ? (
-                                <h4>
-                                  <i className="bi bi-check-circle-fill text-success"></i>
-                                  {/* {" "}Approved */}
-                                </h4>
+                                <OverlayTrigger
+                                  placement="bottom-end"
+                                  delay={{ show: 250, hide: 400 }}
+                                  overlay={renderTooltip1}
+                                >
+                                  <h2>
+                                    <i className="bi bi-check-circle-fill text-success"></i>{" "}
+                                    {/* Approved */}
+                                  </h2>
+                                </OverlayTrigger>
                               ) : (
-                                <h4>
-                                  <i className="bi bi-clock-fill text-danger"></i>
-                                  {/* {" "}Pending */}
-                                </h4>
+                                <OverlayTrigger
+                                  placement="bottom-end"
+                                  delay={{ show: 250, hide: 400 }}
+                                  overlay={renderTooltip2}
+                                >
+                                  <h2>
+                                    <i className="bi bi-clock-fill text-danger"></i>{" "}
+                                    {/* Pending */}
+                                  </h2>
+                                </OverlayTrigger>
                               )}
                             </div>
                           </div>
-                        </div>
-                        <div className="content-text-overlay">
-                          <h4 className="font-weight-bold mb-0">
-                            {data.title}
-                          </h4>
-                          <h5>{data.content_platform}</h5>
+
+                          <div>
+                            <h4 className="font-weight-bold mb-0">
+                              {data.title}
+                            </h4>
+                            <h5>{data.location}</h5>
+                          </div>
                         </div>
                       </div>
                       <div className="container">

@@ -38,7 +38,7 @@ p {
 }
 
 .myevents-card .content-text-overlay {
-    text-align: start;
+    /* text-align: start;
     position: absolute;
     top: 0;
     left: 10px;
@@ -46,10 +46,25 @@ p {
     text-shadow: black 2px 2px;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: space-between;
     width: 94%;
     height: 72%;
     background-color: rgba(0, 0, 0, 0);
+    padding-left: 3%;
+    padding-bottom: 0; */
+    text-align: start;
+    position: absolute;
+    top: 0;
+    left: 10px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 94%;
+    height: 72%;
+    background: linear-gradient(180deg, rgb(0, 0, 0, 0)40%, rgb(0, 0, 0, 0.7)100%);
+    padding-left: 4%;
+    border-radius: 10px;
     padding-left: 3%;
     padding-bottom: 0;
 }

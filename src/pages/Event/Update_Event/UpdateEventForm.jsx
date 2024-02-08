@@ -8,11 +8,22 @@ import { eventReducer } from "../../../redux/reducer/eventReducer";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import apiurl from "../../../constant/config";
 import EventNavBar from "../EventNavbar/EventNavbar";
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
 
 const UpdateEvent = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
+
+  const animatedComponents = makeAnimated();
+
+  const itemOptions = [
+    { value: "banner", label: "Banner" },
+    { value: "led_screen", label: "LED Screen" },
+    { value: "bill_board", label: "Bill Board" },
+  ];
+  const [itemSelection, setItemSelection] = useState([]);
 
   const [title, setTitle] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -98,19 +109,31 @@ const UpdateEvent = () => {
     setPrices(updatedPrices);
   };
 
-  const handleSponsoringItemChange = (e) => {
-    const { value } = e.target;
-    let updatedSelectedItems = [...selectedItems];
+  // const handleSponsoringItemChange = (e) => {
+  //   const { value } = e.target;
+  //   let updatedSelectedItems = [...selectedItems];
 
-    if (updatedSelectedItems.includes(value)) {
-      updatedSelectedItems = updatedSelectedItems.filter(
-        (item) => item !== value
-      );
-    } else {
-      updatedSelectedItems.push(value);
-    }
+  //   if (updatedSelectedItems.includes(value)) {
+  //     updatedSelectedItems = updatedSelectedItems.filter(
+  //       (item) => item !== value
+  //     );
+  //   } else {
+  //     updatedSelectedItems.push(value);
+  //   }
 
-    setSelectedItems(updatedSelectedItems);
+  //   setSelectedItems(updatedSelectedItems);
+  // };
+
+  // const handlePriceChange = (item, price) => {
+  //   const updatedPrices = { ...prices };
+  //   updatedPrices[item] = price;
+  //   setPrices(updatedPrices);
+  // };
+
+  const handleSponsoringItemChange = (itemSelection) => {
+    let updatedSelectedItems = itemSelection.map((item) => item.value);
+    console.log(updatedSelectedItems);
+    setItemSelection(updatedSelectedItems);
   };
 
   const handlePriceChange = (item, price) => {
@@ -185,7 +208,7 @@ const UpdateEvent = () => {
       formData.append("title", eventData.title); // Ensure you're using eventData.title here
 
       // Prepare sponsoring items array
-      const sponsoringItemsData = selectedItems.map((item) => ({
+      const sponsoringItemsData = itemSelection.map((item) => ({
         sponsoring_items: item,
         price: prices[item] || null,
       }));
@@ -224,7 +247,6 @@ const UpdateEvent = () => {
 
   return (
     <>
-      
       <div
         className="bg-form"
         style={{
@@ -289,7 +311,7 @@ const UpdateEvent = () => {
 
                     <div className="row form-group">
                       <div className="col-md-12 mb-3 mb-md-0">
-                        <div>
+                        {/* <div>
                           <button
                             type="button"
                             onClick={handleToggleDropdown}
@@ -340,7 +362,38 @@ const UpdateEvent = () => {
                         )}
                         {errors.prices && (
                           <p className="error-msg">{errors.prices}</p>
+                        )} */}
+                        <div>
+                          <Select
+                            closeMenuOnSelect={true}
+                            components={animatedComponents}
+                            onChange={handleSponsoringItemChange}
+                            isMulti
+                            options={itemOptions}
+                          />
+                          {itemSelection.map((item) => (
+                            <div key={item}>
+                              <input
+                                type="text"
+                                value={prices[item]}
+                                onChange={(e) =>
+                                  handlePriceChange(item, e.target.value)
+                                }
+                                className="form-control my-1"
+                                placeholder={`Enter ${item.replace(
+                                  "_",
+                                  " "
+                                )} Price`}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                        {errors.selectedItems && (
+                          <p className="error-msg">{errors.selectedItems}</p>
                         )}
+                        {prices == "" ? (
+                          <p className="error-msg">{errors.prices}</p>
+                        ) : null}
                       </div>
                     </div>
 
@@ -720,7 +773,6 @@ const UpdateEvent = () => {
           </div>
         </div>
       </div>
-      
     </>
   );
 };

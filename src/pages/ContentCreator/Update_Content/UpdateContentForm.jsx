@@ -4,6 +4,8 @@ import backgroundimg from "../../../assets/img/circle-bg.png";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateContent } from "../../../redux/actions/contentAction";
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
 import { eventReducer } from "../../../redux/reducer/eventReducer";
 import { useLocation, useNavigate } from "react-router-dom";
 import apiurl from "../../../constant/config";
@@ -12,6 +14,15 @@ const UpdateContent = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
+
+  const animatedComponents = makeAnimated();
+
+  const itemOptions = [
+    { value: "tag_ads", label: "#ADS" },
+    { value: "sponsored_by", label: "Sponsored By" },
+    { value: "reel_sponsored", label: "Reel Sponsored" },
+  ];
+  const [itemSelection, setItemSelection] = useState([]);
 
   const [title, setTitle] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -100,19 +111,31 @@ const UpdateContent = () => {
     setPrices(updatedPrices);
   };
 
-  const handleSponsoringItemChange = (e) => {
-    const { value } = e.target;
-    let updatedSelectedItems = [...selectedItems];
+  // const handleSponsoringItemChange = (e) => {
+  //   const { value } = e.target;
+  //   let updatedSelectedItems = [...selectedItems];
 
-    if (updatedSelectedItems.includes(value)) {
-      updatedSelectedItems = updatedSelectedItems.filter(
-        (item) => item !== value
-      );
-    } else {
-      updatedSelectedItems.push(value);
-    }
+  //   if (updatedSelectedItems.includes(value)) {
+  //     updatedSelectedItems = updatedSelectedItems.filter(
+  //       (item) => item !== value
+  //     );
+  //   } else {
+  //     updatedSelectedItems.push(value);
+  //   }
 
-    setSelectedItems(updatedSelectedItems);
+  //   setSelectedItems(updatedSelectedItems);
+  // };
+
+  // const handlePriceChange = (item, price) => {
+  //   const updatedPrices = { ...prices };
+  //   updatedPrices[item] = price;
+  //   setPrices(updatedPrices);
+  // };
+
+  const handleSponsoringItemChange = (itemSelection) => {
+    let updatedSelectedItems = itemSelection.map((item) => item.value);
+    console.log(updatedSelectedItems);
+    setItemSelection(updatedSelectedItems);
   };
 
   const handlePriceChange = (item, price) => {
@@ -183,7 +206,7 @@ const UpdateContent = () => {
       formData.append("title", contentData.title); // Ensure you're using contentData.title here
 
       // Prepare sponsoring items array
-      const sponsoringItemsData = selectedItems.map((item) => ({
+      const sponsoringItemsData = itemSelection.map((item) => ({
         sponsoring_items: item,
         price: prices[item] || null,
       }));
@@ -223,7 +246,6 @@ const UpdateContent = () => {
 
   return (
     <>
-      
       <div
         className="bg-form"
         style={{
@@ -303,6 +325,113 @@ const UpdateContent = () => {
                         </select>
                         {selectedPlatform == "" ? (
                           <p className="error-msg">{errors.content_platform}</p>
+                        ) : null}
+                      </div>
+                    </div>
+
+                    <div className="row form-group">
+                      <div className="col-md-12 mb-3 mb-md-0">
+                        {/* <div>
+                            <button
+                              type="button"
+                              style={{
+                                background: selectedItems.includes("tag_ads")
+                                  ? "#ccc"
+                                  : "#fff",
+                                border: selectedItems.includes("tag_ads")
+                                  ? "2px solid gray"
+                                  : "2px solid black",
+                              }}
+                              onClick={() =>
+                                handleSponsoringItemChange("tag_ads")
+                              }
+                            >
+                              #Ads
+                            </button>
+                            <button
+                              type="button"
+                              style={{
+                                background: selectedItems.includes(
+                                  "sponsored_by"
+                                )
+                                  ? "#ccc"
+                                  : "#fff",
+                                border: selectedItems.includes("sponsored_by")
+                                  ? "2px solid gray"
+                                  : "2px solid black",
+                              }}
+                              onClick={() =>
+                                handleSponsoringItemChange("sponsored_by")
+                              }
+                            >
+                              This video is sponsored by
+                            </button>
+                            <button
+                              type="button"
+                              style={{
+                                background: selectedItems.includes(
+                                  "reel_sponsored"
+                                )
+                                  ? "#ccc"
+                                  : "#fff",
+                                border: selectedItems.includes("reel_sponsored")
+                                  ? "2px solid gray"
+                                  : "2px solid black",
+                              }}
+                              onClick={() =>
+                                handleSponsoringItemChange("reel_sponsored")
+                              }
+                            >
+                              Reels Sponsore
+                            </button>
+
+                            {selectedItems.map((item) => (
+                              <div key={item}>
+                                <input
+                                  type="number"
+                                  value={prices[item]}
+                                  onChange={(e) =>
+                                    handlePriceChange(item, e.target.value)
+                                  }
+                                  className="form-control my-1"
+                                  placeholder={`Enter ${item.replace(
+                                    "_",
+                                    " "
+                                  )} Price`}
+                                />
+                              </div>
+                            ))}
+                          </div> */}
+                        <div>
+                          <Select
+                            closeMenuOnSelect={true}
+                            components={animatedComponents}
+                            onChange={handleSponsoringItemChange}
+                            isMulti
+                            options={itemOptions}
+                          />
+                          {itemSelection.map((item) => (
+                            <div key={item}>
+                              <input
+                                type="text"
+                                value={prices[item]}
+                                onChange={(e) =>
+                                  handlePriceChange(item, e.target.value)
+                                }
+                                className="form-control my-1"
+                                placeholder={`Enter ${item.replace(
+                                  "_",
+                                  " "
+                                )} Price`}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                        {errors.selectedItems && (
+                          <p className="error-msg">{errors.selectedItems}</p>
+                        )}
+                        {prices == "" ? (
+                          <p className="error-msg">{errors.prices}</p>
                         ) : null}
                       </div>
                     </div>
@@ -680,7 +809,6 @@ const UpdateContent = () => {
           </div>
         </div>
       </div>
-      
     </>
   );
 };
