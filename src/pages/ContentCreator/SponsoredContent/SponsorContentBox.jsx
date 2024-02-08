@@ -66,12 +66,12 @@ const SponsorButton = ({ item, cardData, isSelected, onButtonClick }) => {
               )}
               {item.sponsoring_content_items === "sponsored_by" && (
                 <>
-                <h1>{cardData?.sponsored_by}</h1>
+                  <h1>{cardData?.sponsored_by}</h1>
                 </>
               )}
               {item.sponsoring_content_items === "reel_sponsored" && (
                 <>
-                <h1>{cardData?.reel_sponsored}</h1>
+                  <h1>{cardData?.reel_sponsored}</h1>
                 </>
               )}
             </Container>
@@ -185,7 +185,10 @@ const SponsorContentBox = (contentData) => {
                     <img
                       src={apiurl + data}
                       alt=""
-                      style={{ width: "100%", borderRadius: "15px" }}
+                      style={{
+                        width: "100%",
+                        borderRadius: "15px",
+                      }}
                     />
                   ))}
                 </Slider>
@@ -261,15 +264,17 @@ const SponsorContentBox = (contentData) => {
                   </div>
 
                   <div className="row mx-auto" style={{ width: "100%" }}>
-                    {cardData?.content_id.sponsoring_content_items.map((item, index) => (
-                      <SponsorButton
-                        key={index}
-                        item={item}
-                        isSelected={selectedItems.includes(item)}
-                        onButtonClick={handleButtonClick}
-                        cardData={cardData}
-                      />
-                    ))}
+                    {cardData?.content_id.sponsoring_content_items.map(
+                      (item, index) => (
+                        <SponsorButton
+                          key={index}
+                          item={item}
+                          isSelected={selectedItems.includes(item)}
+                          onButtonClick={handleButtonClick}
+                          cardData={cardData}
+                        />
+                      )
+                    )}
                   </div>
                 </div>
               </div>
@@ -277,9 +282,7 @@ const SponsorContentBox = (contentData) => {
           </div>
           <div className="container mt-2">
             <h5 className="font-weight-bold">Event Description: </h5>
-            <p>
-             {cardData?.content_id.description}
-            </p>
+            <p>{cardData?.content_id.description}</p>
           </div>
         </div>
       </div>
@@ -289,17 +292,33 @@ const SponsorContentBox = (contentData) => {
       <div className="container mobile-view">
         <h2 className="sponsor-mobile-text">{cardData.content_id.title}</h2>
         <div
-          className="post-thumb mt-4"
+          className="post-thumb w-100 mb-3"
           style={{
-            borderRadius: "15px",
-            boxShadow: "0px 2px 10px -2px rgba(0, 0, 0, 0.25)",
+            borderRadius: "20px",
+            boxShadow: "0px 2px 10px 0px rgba(0, 0, 0, 0.25)",
+            padding: "3%",
           }}
         >
-          <img
-            src={apiurl + cardData.content_id.thumbnail1}
-            alt=""
-            style={{ width: "100%" }}
-          />
+          <Carousel controls={false} autoplay>
+            {[
+              apiurl + cardData.content_id.thumbnail1,
+              apiurl + cardData.content_id.thumbnail2,
+              apiurl + cardData.content_id.thumbnail3,
+            ].map((item, index) => (
+              <Carousel.Item>
+                <img
+                  key={index}
+                  src={item}
+                  alt=""
+                  style={{
+                    width: "100%",
+                    height: "300px",
+                    borderRadius: "10px",
+                  }}
+                />
+              </Carousel.Item>
+            ))}
+          </Carousel>
         </div>
         <div className="container">
           <div className="star d-flex pt-3">
@@ -383,15 +402,17 @@ const SponsorContentBox = (contentData) => {
               </div>
 
               <div className="row mx-auto" style={{ width: "100%" }}>
-                {cardData.content_id.sponsoring_content_items.map((item, index) => (
-                  <SponsorButton
-                    key={index}
-                    item={item}
-                    isSelected={selectedItems.includes(item)}
-                    onButtonClick={handleButtonClick}
-                    cardData={cardData}
-                  />
-                ))}
+                {cardData.content_id.sponsoring_content_items.map(
+                  (item, index) => (
+                    <SponsorButton
+                      key={index}
+                      item={item}
+                      isSelected={selectedItems.includes(item)}
+                      onButtonClick={handleButtonClick}
+                      cardData={cardData}
+                    />
+                  )
+                )}
               </div>
             </div>
           </div>
