@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Navbar, Nav, NavLink, Container } from "react-bootstrap";
 // import banner from "../../assets/img/card/header_banner.png";
 import logo from "../../assets/img/logo/logo.png";
@@ -16,6 +16,7 @@ const NavBar = () => {
   const { userDetails } = auth;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const navRef = useRef();
   useEffect(() => {
     const handleScroll = () => {
       setSticky(window.scrollY > 0);
@@ -25,6 +26,19 @@ const NavBar = () => {
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -203,6 +217,7 @@ const NavBar = () => {
           flexDirection: "column",
           backgroundColor: "#004EA9",
         }}
+        ref={navRef}
       >
         <div className="container">
           <Navbar.Toggle
@@ -263,160 +278,176 @@ const NavBar = () => {
 
         {userDetails
           ? isOpen && (
-              <div className="mobile-nav-overlay">
-                <div
-                  className="box nav-profile-box w-100"
-                  style={{
-                    backgroundColor: "#004EA9",
-                  }}
-                >
-                  <Container className="justify-content-end p-1">
-                    <div className="close-icon" onClick={toggleNavbar}>
-                      <AiOutlineClose />
-                    </div>
-                  </Container>
-                  <div className="container nav-profile">
-                    <div
-                      className="box"
-                      style={{
-                        border: "3px solid #004ea9",
-                        borderRadius: "70px",
-                        filter: "drop-shadow(0px 2px 15px rgba(0, 0, 0, 0.25))",
-                      }}
-                    >
-                      <img
-                        src={noProfilepic}
-                        alt="myprofile"
-                        width="100"
-                        height="100"
-                        style={{ borderRadius: "50px" }}
-                      />
-                    </div>
-                    <div className="box text-white">
-                      <h3 className="mb-0 font-weight-bold">John Doe</h3>
-                      <h6>Sponsor</h6>
-                    </div>
+            <div className="mobile-nav-overlay">
+              <div
+                className="box nav-profile-box w-100"
+                style={{
+                  backgroundColor: "#004EA9",
+                }}
+              >
+                <Container className="justify-content-end p-1">
+                  <div className="close-icon" onClick={toggleNavbar}>
+                    <AiOutlineClose />
+                  </div>
+                </Container>
+                <div className="container nav-profile">
+                  <div
+                    className="box"
+                    style={{
+                      border: "3px solid #004ea9",
+                      borderRadius: "70px",
+                      filter: "drop-shadow(0px 2px 15px rgba(0, 0, 0, 0.25))",
+                    }}
+                  >
+                    <img
+                      src={noProfilepic}
+                      alt="myprofile"
+                      width="100"
+                      height="100"
+                      style={{ borderRadius: "50px" }}
+                    />
+                  </div>
+                  <div className="box text-white">
+                    <h3 className="mb-0 font-weight-bold">John Doe</h3>
+                    <h6>Sponsor</h6>
                   </div>
                 </div>
-                <div className="mobile-nav-content mt-4">
-                  <Nav className="mobile-nav-items border-0">
-                    <NavLink className="mobile-nav-item">
+              </div>
+              <div className="mobile-nav-content mt-4">
+                <Nav className="mobile-nav-items border-0">
+                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
+                  >
                     <Link to={"/events"}>
                       Sponsor Event
-                      </Link>
-                    </NavLink>
-                    <NavLink className="mobile-nav-item">
+                    </Link>
+                  </NavLink>
+                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
+                  >
                     <Link to={"/content"}>
                       Sponsor Content
-                      </Link>
-                    </NavLink>
-                    <NavLink className="mobile-nav-item">
-                      Top Events
-                    </NavLink>
-                    <NavLink className="mobile-nav-item">
-                      My Account
-                    </NavLink>
-                    <NavLink className="mobile-nav-item">
-                      Payment Info
-                    </NavLink>
-                    <NavLink className="mobile-nav-item">
-                      ChatBot
-                    </NavLink>
-                  </Nav>
-                </div>
-                <div className="text-success">
-                  <hr
-                    className="my-0"
-                    style={{
-                      border: "0",
-                      borderTop: "1px solid rgb(0,0,0,0.4)",
-                    }}
-                  />
-                </div>
-                <div className="container" style={{ paddingLeft: "10%" }}>
-                  <Nav className="mobile-nav-items border-0">
-                    <NavLink className="mobile-nav-item" href="about.html">
-                      Help Center
-                    </NavLink>
-                    <NavLink className="mobile-nav-item" href="about.html">
-                      Support
-                    </NavLink>
-                  </Nav>
-                </div>
+                    </Link>
+                  </NavLink>
+                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
+                  >
+                    Top Events
+                  </NavLink>
+                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
+                  >
+                    My Account
+                  </NavLink>
+                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
+                  >
+                    Payment Info
+                  </NavLink>
+                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
+                  >
+                    ChatBot
+                  </NavLink>
+                </Nav>
               </div>
-            )
-          : isOpen && (
-              <div className="mobile-nav-overlay">
-                <div
-                  className="box nav-profile-box w-100"
+              <div className="text-success">
+                <hr
+                  className="my-0"
                   style={{
-                    backgroundColor: "#004EA9",
+                    border: "0",
+                    borderTop: "1px solid rgb(0,0,0,0.4)",
                   }}
-                >
-                  <Container className="justify-content-end p-1">
-                    <div className="close-icon" onClick={toggleNavbar}>
-                      <AiOutlineClose />
-                    </div>
-                  </Container>
-                  <Container style={{ width: "100%", height: "141px" }}>
-                    <img
-                      src={logo}
-                      alt=""
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                      }}
-                    />
-                  </Container>
-                </div>
-                <div className="mobile-nav-content mt-4">
-                  <Nav className="mobile-nav-items border-0">
-                  <NavLink className="mobile-nav-item">
-                    <Link to={"/events"}>
-                      Sponsor Event
-                      </Link>
-                    </NavLink>
-                    <NavLink className="mobile-nav-item">
-                    <Link to={"/content"}>
-                      Sponsor Content
-                      </Link>
-                    </NavLink>
-                    <NavLink className="mobile-nav-item">
-                      Top Events
-                    </NavLink>
-                    <NavLink className="mobile-nav-item">
-                      My Account
-                    </NavLink>
-                    <NavLink className="mobile-nav-item">
-                      Payment Info
-                    </NavLink>
-                    <NavLink className="mobile-nav-item">
-                      ChatBot
-                    </NavLink>
-                  </Nav>
-                </div>
-                <div className="text-success">
-                  <hr
-                    className="my-0"
+                />
+              </div>
+              <div className="container" style={{ paddingLeft: "10%" }}>
+                <Nav className="mobile-nav-items border-0">
+                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
+                    href="about.html">
+                    Help Center
+                  </NavLink>
+                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
+                    href="about.html">
+                    Support
+                  </NavLink>
+                </Nav>
+              </div>
+            </div>
+          )
+          : isOpen && (
+            <div className="mobile-nav-overlay">
+              <div
+                className="box nav-profile-box w-100"
+                style={{
+                  backgroundColor: "#004EA9",
+                }}
+              >
+                <Container className="justify-content-end p-1">
+                  <div className="close-icon" onClick={toggleNavbar}>
+                    <AiOutlineClose />
+                  </div>
+                </Container>
+                <Container style={{ width: "100%", height: "141px" }}>
+                  <img
+                    src={logo}
+                    alt=""
                     style={{
-                      border: "0",
-                      borderTop: "1px solid rgb(0,0,0,0.4)",
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
                     }}
                   />
-                </div>
-                <div className="container" style={{ paddingLeft: "10%" }}>
-                  <Nav className="mobile-nav-items border-0">
-                    <NavLink className="mobile-nav-item" href="about.html">
-                      Help Center
-                    </NavLink>
-                    <NavLink className="mobile-nav-item" href="about.html">
-                      Support
-                    </NavLink>
-                  </Nav>
-                </div>
+                </Container>
               </div>
-            )}
+              <div className="mobile-nav-content mt-4">
+                <Nav className="mobile-nav-items border-0">
+                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
+                  >
+                    <Link to={"/events"}>
+                      Sponsor Event
+                    </Link>
+                  </NavLink>
+                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
+                  >
+                    <Link to={"/content"}>
+                      Sponsor Content
+                    </Link>
+                  </NavLink>
+                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
+                  >
+                    Top Events
+                  </NavLink>
+                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
+                  >
+                    My Account
+                  </NavLink>
+                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
+                  >
+                    Payment Info
+                  </NavLink>
+                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
+                  >
+                    ChatBot
+                  </NavLink>
+                </Nav>
+              </div>
+              <div className="text-success">
+                <hr
+                  className="my-0"
+                  style={{
+                    border: "0",
+                    borderTop: "1px solid rgb(0,0,0,0.4)",
+                  }}
+                />
+              </div>
+              <div className="container" style={{ paddingLeft: "10%" }}>
+                <Nav className="mobile-nav-items border-0">
+                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
+                    href="about.html">
+                    Help Center
+                  </NavLink>
+                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
+                    href="about.html">
+                    Support
+                  </NavLink>
+                </Nav>
+              </div>
+            </div>
+          )}
       </Navbar>
     </div>
   );

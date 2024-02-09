@@ -48,7 +48,7 @@ export const sponsorReducer = (state = {}, action) => {
         case CREATE_SPONSORING_ITEM_REQUEST:
             return { ...state, loading: true }
         case CREATE_SPONSORING_ITEM_SUCCESS:
-            return { loading: false, SponsoringItem: action.payload }
+            return { loading: false, SponsoringItemDetails: action.payload }
         case CREATE_SPONSORING_ITEM_FAILED:
             return { loading: false, SponsoringItemError: action.payload }
         default:

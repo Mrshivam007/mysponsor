@@ -35,7 +35,7 @@ const SponserE = ({ line, cardData }) => {
 
       <div className="container sponsor-container" id="sponser_layer">
         <div className="sponsor-desktop">
-          <div className="row my-5">
+          <div className="row">
             {/* <Slider {...settings}> */}
             {cardData &&
               cardData?.map((data) => (
@@ -103,7 +103,7 @@ const SponserE = ({ line, cardData }) => {
               ))}
 
             {/* </Slider> */}
-            <div className="container d-flex justify-content-center">
+            <div className="container d-flex justify-content-center" style={{paddingBottom: '2vh'}}>
               <Link to="/events">
                 <button
                   className="btn btn-outline-primary mt-4"

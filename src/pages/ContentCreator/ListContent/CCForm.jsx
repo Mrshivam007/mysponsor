@@ -262,7 +262,12 @@ const ListContentForm = () => {
         setErrorMessage("An error occurred during creating an content");
       }
     }
-  }, [createContentDetails]);
+    else if (createContentError) {
+      console.log("An error occurred while creating the event");
+      window.scroll(0, 0);
+      setErrorMessage("An error occurred during creating an content");
+    }
+  }, [createContentDetails, createContentError]);
   return (
     <>
       <div

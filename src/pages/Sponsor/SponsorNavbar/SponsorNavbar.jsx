@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Navbar, Nav, NavLink, Container } from "react-bootstrap";
 import logo from "../../../assets/img/logo/logo.png";
 import noProfilepic from "../../../assets/img/emptyprofile2.jpg";
@@ -14,6 +14,7 @@ const SponsorNavbar = () => {
   const { userDetails } = auth;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const navRef = useRef();
   useEffect(() => {
     const handleScroll = () => {
       setSticky(window.scrollY > 0);
@@ -23,6 +24,19 @@ const SponsorNavbar = () => {
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -91,7 +105,8 @@ const SponsorNavbar = () => {
                 <div
                   className="modal fade"
                   id="calendarModal"
-                  tabindex="-1"
+                  data-bs-backdrop="false"
+                  // tabindex="-1"
                   aria-labelledby="exampleModalLabel"
                   aria-hidden="true"
                 >
@@ -194,6 +209,7 @@ const SponsorNavbar = () => {
           flexDirection: "column",
           backgroundColor: "#004EA9",
         }}
+        ref={navRef}
       >
         <div className="container">
           <Navbar.Toggle
@@ -201,9 +217,9 @@ const SponsorNavbar = () => {
             onClick={toggleNavbar}
           />
           <a className="navbar-brand">
-          <Link to="/" className="navbar-brand">
-            <img src={logo} alt="Logo" />
-          </Link>
+            <Link to="/" className="navbar-brand">
+              <img src={logo} alt="Logo" />
+            </Link>
           </a>
           <div className="box d-flex">
             <div
@@ -266,7 +282,7 @@ const SponsorNavbar = () => {
                   <AiOutlineClose />
                 </div>
               </Container>
-              <div className="container nav-profile" style={{justifyContent: 'normal', gap: '2vh'}}>
+              <div className="container nav-profile" style={{ justifyContent: 'normal', gap: '2vh' }}>
                 <div
                   className="box"
                   style={{
@@ -288,9 +304,9 @@ const SponsorNavbar = () => {
                   <h6>Sponsor</h6>
                 </div> */}
                 <div className="box text-white">
-                    <h3 className="mb-0 font-weight-bold">{userDetails.firstname}</h3>
-                    <h6>{userDetails.lastname}</h6>
-                  </div>
+                  <h3 className="mb-0 font-weight-bold">{userDetails.firstname}</h3>
+                  <h6>{userDetails.lastname}</h6>
+                </div>
               </div>
             </div>
             <div className="mobile-nav-content mt-4">
@@ -299,31 +315,37 @@ const SponsorNavbar = () => {
                 style={{ gap: "20px" }}
               >
                 <Link to={"/events"}>
-                  <div className="mobile-nav-item">Sponsor Event</div>
+                  <div className="mobile-nav-item" onClick={toggleNavbar}
+                  >Sponsor Event</div>
                 </Link>
                 <Link to={"/cc"}>
 
-                <div className="mobile-nav-item" href="index.html">
-                  Sponsor Content
-                </div>
+                  <div className="mobile-nav-item" onClick={toggleNavbar}
+                    href="index.html">
+                    Sponsor Content
+                  </div>
                 </Link>
-                <div className="mobile-nav-item" href="service.html">
+                <div className="mobile-nav-item" onClick={toggleNavbar}
+                  href="service.html">
                   Top Events
                 </div>
-                <div className="mobile-nav-item" href="#">
+                <div className="mobile-nav-item" onClick={toggleNavbar}
+                  href="#">
                   Top Content
                 </div>
                 <Link to={"/sponsored_event"}>
 
-                <div className="mobile-nav-item" href="#">
-                  Your Sponsored Event
-                </div>
+                  <div className="mobile-nav-item" onClick={toggleNavbar}
+                    href="#">
+                    Your Sponsored Event
+                  </div>
                 </Link>
                 <Link to={"/sponsored_content"}>
 
-                <div className="mobile-nav-item" href="#">
-                Your Sponsored Content
-                </div>
+                  <div className="mobile-nav-item" onClick={toggleNavbar}
+                    href="#">
+                    Your Sponsored Content
+                  </div>
                 </Link>
               </Nav>
             </div>
@@ -335,10 +357,12 @@ const SponsorNavbar = () => {
             </div>
             <div className="container" style={{ paddingLeft: "10%" }}>
               <Nav className="mobile-nav-items border-0">
-                <NavLink className="mobile-nav-item" href="about.html">
+                <NavLink className="mobile-nav-item" onClick={toggleNavbar}
+                  href="about.html">
                   Help Center
                 </NavLink>
-                <NavLink className="mobile-nav-item" href="about.html">
+                <NavLink className="mobile-nav-item" onClick={toggleNavbar}
+                  href="about.html">
                   Support
                 </NavLink>
               </Nav>

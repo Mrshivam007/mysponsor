@@ -7,7 +7,7 @@ import Slider from "react-slick";
 import { useLocation, useNavigate } from "react-router-dom";
 import { updateSponsoringItem, updateContentSponsoringItem } from "../../../redux/actions/sponsorAction";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Container, Modal } from "react-bootstrap";
+import { Button, Carousel, Container, Modal } from "react-bootstrap";
 
 const SponsorButton = ({ item, preview, isSelected, onButtonClick }) => {
   const [show, setShow] = useState(false);
@@ -102,12 +102,14 @@ const SponsorEventBox = (contentData) => {
   const [ledImage, setLedImage] = useState(null);
   const [ledVideo, setLedVideo] = useState(null);
   const [sponsored_by, setSponsored_by] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [pre_sponsored_by, setPre_Sponsored_by] = useState(cardData?.sponsored_by);
   const [tag_ads, setTag_ads] = useState("");
   const [pre_tag_ads, setPre_Tag_ads] = useState(cardData?.tag_ads);
   const [reel_sponsored, setReel_sponsored] = useState("");
   const [pre_reel_sponsored, setPre_Reel_sponsored] = useState(cardData?.reel_sponsored);
   console.log("pre tag ads ", pre_tag_ads);
+  const { SponsoringItemDetails, SponsoringItemError, loading } = sponsor;
 
   console.log("Sponsoring Items", sponsoring_items);
 
@@ -142,11 +144,11 @@ const SponsorEventBox = (contentData) => {
     try {
       // Make POST API call
       await dispatch(updateContentSponsoringItem(formData));
-      sessionStorage.setItem(
-        "successMessage",
-        "Promotion listed successfully!"
-      );
-      navigate("/sponsored_content"); // Replace '/' with the desired route for the home page
+      // sessionStorage.setItem(
+      //   "successMessage",
+      //   "Promotion listed successfully!"
+      // );
+      // navigate("/sponsored_content"); // Replace '/' with the desired route for the home page
     } catch (error) {
       console.log("An error occurred during API calls:", error);
     }
@@ -207,14 +209,46 @@ const SponsorEventBox = (contentData) => {
     }
   };
 
+  useEffect(() => {
+    if (SponsoringItemDetails) {
+      if (SponsoringItemDetails.msg == "data put apply") {
+        sessionStorage.setItem(
+          "successMessage",
+          "Promotion listed successfully!"
+        ); 
+        navigate("/sponsored_content"); // Replace '/' with the desired route for the home page
+      } else {
+        console.log("An error occurred while posting the promotion");
+        window.scroll(0, 0);
+        setErrorMessage("An error occurred during posting an promotion");
+      }
+    } 
+    else if (SponsoringItemError) {
+      console.log("An error occurred while posting the promotion");
+        window.scroll(0, 0);
+        setErrorMessage("An error occurred during posting an promotion");
+    }
+  }, [SponsoringItemDetails, SponsoringItemError]);
+
   return (
     <>
       {/* DESKTOP VIEW  */}
       <div className="container payments-desktop desktop-view">
+      {errorMessage && (
+          <div className="container">
+            <div
+              className="alert alert-danger"
+              role="alert"
+              style={{ borderRadius: "10px" }}
+            >
+              {errorMessage}
+            </div>
+          </div>
+        )}
         <div className="pay-box">
           <div className="row row-cols-2">
             <div className="col-6">
-              <div
+            <div
                 className="post-thumb mb-3"
                 style={{
                   borderRadius: "20px",
@@ -222,19 +256,26 @@ const SponsorEventBox = (contentData) => {
                   padding: "3%",
                 }}
               >
-                <Slider {...settings}>
+                <Carousel controls={false}>
                   {[
-                    cardData.content_id.thumbnail1,
-                    cardData.content_id.thumbnail2,
-                    cardData.content_id.thumbnail3,
-                  ].map((data) => (
-                    <img
-                      src={apiurl + data}
-                      alt=""
-                      style={{ width: "100%", borderRadius: "15px" }}
-                    />
+                    apiurl + cardData.content_id.thumbnail1,
+                    apiurl + cardData.content_id.thumbnail2,
+                    apiurl + cardData.content_id.thumbnail3,
+                  ].map((item, index) => (
+                    <Carousel.Item>
+                      <img
+                        key={index}
+                        src={item}
+                        alt=""
+                        style={{
+                          width: "100%",
+                          height: "300px",
+                          borderRadius: "10px",
+                        }}
+                      />
+                    </Carousel.Item>
                   ))}
-                </Slider>
+                </Carousel>
               </div>
               <table
                 className="table table-borderless text-center text-white overflow-hidden"
@@ -413,6 +454,17 @@ const SponsorEventBox = (contentData) => {
 
       {/* MOBILE VIEW */}
       <div className="container mobile-view">
+      {errorMessage && (
+          <div className="container">
+            <div
+              className="alert alert-danger"
+              role="alert"
+              style={{ borderRadius: "10px" }}
+            >
+              {errorMessage}
+            </div>
+          </div>
+        )}
         <h2 className="sponsor-mobile-text">{cardData.content_id.title}</h2>
         <div
           className="post-thumb mt-4"

@@ -52,20 +52,20 @@ const SponsoredContent = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        
+
         <EventsHeader title={"Your Sponsored Content!"} logo={listevents} />
         <h1></h1>
         {successMessage && (
-            <div className="container">
-              <div
-                class="alert alert-success"
-                role="alert"
-                style={{ borderRadius: "10px" }}
-              >
-                {successMessage}
-              </div>
+          <div className="container">
+            <div
+              class="alert alert-success"
+              role="alert"
+              style={{ borderRadius: "10px" }}
+            >
+              {successMessage}
             </div>
-          )}
+          </div>
+        )}
         <div className="desktop-view mt-4">
           <div className="container">
             {cardData &&
@@ -81,13 +81,13 @@ const SponsoredContent = () => {
                         }}
                       >
                         <div className="row mx-0">
-                          <div className="col-3 p-3">
+                          <div className="col-3 p-3" style={{height: '32vh'}}>
                             <img
                               src={apiurl + data.content_id.thumbnail1}
                               alt=""
                               style={{
                                 width: "100%",
-                                height: "-webkit-fill-available",
+                                height: "28vh",
                               }}
                             />
                           </div>
@@ -197,16 +197,18 @@ const SponsoredContent = () => {
                 );
               })}
           </div>
-          <button
-            className="btn text-white py-1 px-4 font-weight-bold d-none d-md-block"
-            style={{
-              margin: "2% auto",
-              backgroundColor: "#004EA9",
-              borderRadius: "10px",
-            }}
-          >
-            Load More
-          </button>
+          <div style={{ paddingBottom: '2vh' }}>
+            <button
+              className="btn text-white py-1 px-4 font-weight-bold d-none d-md-block"
+              style={{
+                margin: "auto",
+                backgroundColor: "#004EA9",
+                borderRadius: "10px",
+              }}
+            >
+              Load More
+            </button>
+          </div>
         </div>
 
         <div className="mobile-view text-md">
@@ -303,7 +305,7 @@ const SponsoredContent = () => {
               })}
           </div>
         </div>
-        
+
       </div>
     </>
   );

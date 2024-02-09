@@ -25,12 +25,8 @@ const SponsorEvents = () => {
     dispatch(fetchEvent());
   }, []);
 
-  // function capitalizeFirstLetter(string) {
-  //   return string.charAt(0).toUpperCase() + string.slice(1);
-  // }
-
   console.log("static data", EventsCards);
-  const cardData = eventDetails.eventDetails.upcoming_event;
+  const cardData = eventDetails?.eventDetails?.upcoming_event;
   console.log("This is card data", cardData);
   return (
     <>

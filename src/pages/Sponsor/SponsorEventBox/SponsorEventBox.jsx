@@ -40,6 +40,7 @@ const SponsorEventBox = (eventData) => {
   console.log("event data02", cardData02);
   const cardData = cardData01 || cardData02;
   let totalAmount = 0;
+  const [errorMessage, setErrorMessage] = useState("");
   const sponsoring_items = cardData?.sponsoring_items || [];
   const [bannerImage, setBannerImage] = useState(null);
   const [bannerImageFileName, setBannerImageFileName] = useState(null);
@@ -50,7 +51,8 @@ const SponsorEventBox = (eventData) => {
   const [billText, setBillText] = useState(null);
   const [preBillText, setPreBillText] = useState(cardData?.bill_text);
 
-  const { SponsoringItem, loading } = sponsor;
+
+  const { SponsoringItemDetails, SponsoringItemError, loading } = sponsor;
 
   console.log("Sponsoring Items", sponsoring_items);
   console.log("CardData", cardData);
@@ -152,12 +154,46 @@ const SponsorEventBox = (eventData) => {
     }
   };
 
+  console.log("Success message ", SponsoringItemDetails);
 
+
+  useEffect(() => {
+    if (SponsoringItemDetails) {
+      if (SponsoringItemDetails.msg == "data put apply") {
+        console.log("Event created successfully");
+        sessionStorage.setItem(
+          "successMessage",
+          "Promotion listed successfully!"
+        ); 
+        navigate("/sponsored_event"); // Replace '/' with the desired route for the home page
+      } else {
+        console.log("An error occurred while posting the promotion");
+        window.scroll(0, 0);
+        setErrorMessage("An error occurred during posting an promotion");
+      }
+    }
+    else if (SponsoringItemError) {
+      console.log("An error occurred while posting the promotion");
+      window.scroll(0, 0);
+      setErrorMessage("An error occurred during posting an promotion");
+    }
+  }, [SponsoringItemDetails, SponsoringItemError]);
 
   return (
     <>
       {/* DESKTOP VIEW  */}
       <div className="container payments-desktop desktop-view">
+      {errorMessage && (
+          <div className="container">
+            <div
+              className="alert alert-danger"
+              role="alert"
+              style={{ borderRadius: "10px" }}
+            >
+              {errorMessage}
+            </div>
+          </div>
+        )}
         <div className="pay-box">
           <div className="row row-cols-2">
             <div className="col-6">
@@ -481,6 +517,17 @@ const SponsorEventBox = (eventData) => {
 
       {/* MOBILE VIEW */}
       <div className="container mobile-view sponsored-events-mobile">
+      {errorMessage && (
+          <div className="container">
+            <div
+              className="alert alert-danger"
+              role="alert"
+              style={{ borderRadius: "10px" }}
+            >
+              {errorMessage}
+            </div>
+          </div>
+        )}
         <h2 className="sponsor-mobile-text">{cardData.event_id.title}</h2>
         <div
           className="post-thumb mt-4"

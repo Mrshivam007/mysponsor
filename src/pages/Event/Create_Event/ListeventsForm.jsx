@@ -233,8 +233,8 @@ const ListeventsForm = () => {
       // formData.append("price", price);
       formData.append("event_category", selectedCategory);
       // Append thumbnails with different keys
-      formData.append("thumbnail1", thumbnail1, thumbnail1Filename);
-      // formData.append("thumbnail1", thumbnail1);
+      // formData.append("thumbnail1", thumbnail1, thumbnail1Filename);
+      formData.append("thumbnail1", thumbnail1);
       formData.append("thumbnail2", thumbnail2, thumbnail2Filename);
       formData.append("thumbnail3", thumbnail3, thumbnail3Filename);
       formData.append("attach_video", video);
@@ -278,7 +278,12 @@ const ListeventsForm = () => {
         setErrorMessage("An error occurred during creating an event");
       }
     }
-  }, [createEventDetails]);
+    else if (createEventError) {
+      console.log("An error occurred while creating the event");
+      window.scroll(0, 0);
+      setErrorMessage("An error occurred during creating an event");
+    }
+  }, [createEventDetails, createEventError]);
 
   return (
     <>

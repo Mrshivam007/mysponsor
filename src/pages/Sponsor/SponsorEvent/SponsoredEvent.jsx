@@ -205,16 +205,18 @@ const SponsoredEvent = () => {
                 );
               })}
           </div>
+          <div style={{paddingBottom: '2vh'}}>
           <button
             className="btn text-white py-1 px-4 font-weight-bold d-none d-md-block"
             style={{
-              margin: "2% auto",
+              margin: "auto",
               backgroundColor: "#004EA9",
               borderRadius: "10px",
             }}
           >
             Load More
           </button>
+          </div>
         </div>
 
         <div className="mobile-view text-md">
