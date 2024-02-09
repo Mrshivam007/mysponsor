@@ -29,7 +29,6 @@ const SponsorEvents = () => {
   //   return string.charAt(0).toUpperCase() + string.slice(1);
   // }
 
-  console.log("dynamic data", eventDetails.eventDetails.past_event);
   console.log("static data", EventsCards);
   const cardData = eventDetails.eventDetails.upcoming_event;
   console.log("This is card data", cardData);

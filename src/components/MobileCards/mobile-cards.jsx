@@ -49,6 +49,7 @@ const MobileCards = ({ line, cardData }) => {
                         margin: "0% 0% 5% 5%",
                         backgroundColor: "#004EA9",
                       }}
+                      onClick={() => handleSponsorClick(data)}
                     >
                       Sponsor
                     </button>
