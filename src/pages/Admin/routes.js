@@ -18,6 +18,8 @@ import EventManagement from "./views/admin/eventManagement"
 import EventApproval from "./views/admin/eventApprove"
 import ContentManagement from "./views/admin/contentManagement"
 import ContentApproval from "./views/admin/contentApprove"
+import EventPayment from "./views/admin/eventPayment"
+import ContentPayment from "./views/admin/ContentPayment"
 import RTL from "./views/admin/rtl";
 
 // Auth Imports
@@ -46,6 +48,13 @@ const routes = [
     component: EventApproval,
   },
   {
+    name: "Event Payment",
+    layout: "/admin",
+    path: "/payment_event",
+    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
+    component: EventPayment,
+  },
+  {
     name: "Content Management",
     layout: "/admin",
     path: "/content",
@@ -58,6 +67,13 @@ const routes = [
     path: "/approve_content",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: ContentApproval,
+  },
+  {
+    name: "Content Payment",
+    layout: "/admin",
+    path: "/payment_content",
+    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
+    component: ContentPayment,
   },
   {
     name: "NFT Marketplace",

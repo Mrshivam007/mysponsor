@@ -47,6 +47,11 @@ const ListContentForm = () => {
   const [errors, setErrors] = useState({});
   const { userDetails } = auth;
   const navigate = useNavigate(); // Initialize useNavigate hook
+  const [errorMessage, setErrorMessage] = useState('');
+  const content = useSelector((state) => state.content);
+  const { createContentError, createContentDetails, loading } = content;
+
+
   // console.log("This is content details", userDetails);
   // console.log("event error", errors);
   // For each thumbnail, you'll need a separate state and handler
@@ -61,7 +66,7 @@ const ListContentForm = () => {
   const handleThumbnail1Change = (e) => {
     const file = e.target.files[0];
     const uniqueFilename = generateUniqueFilename(file.name, 0);
-    
+
     setThumbnail1(file);
     setThumbnail1Filename(uniqueFilename); // Save the unique filename in state
   };
@@ -197,25 +202,42 @@ const ListContentForm = () => {
       formData.append("content_category", selectedCategory);
       formData.append("content_platform", selectedPlatform);
       // Append thumbnails with different keys
-      formData.append("thumbnail1", thumbnail1, thumbnail1Filename);
+      // formData.append("thumbnail1", thumbnail1, thumbnail1Filename);
+      formData.append("thumbnail1", thumbnail1);
       formData.append("thumbnail2", thumbnail2, thumbnail2Filename);
       formData.append("thumbnail3", thumbnail3, thumbnail3Filename);
       formData.append("attach_video", video);
       try {
         // Make POST API call
         await dispatch(createContent(formData));
-        sessionStorage.setItem("successMessage", "Content created successfully!");
-        navigate("/your_content/upcoming_content"); // Replace '/' with the desired route for the home page
+        // sessionStorage.setItem("successMessage", "Content created successfully!");
+        // navigate("/your_content/upcoming_content"); // Replace '/' with the desired route for the home page
       } catch (error) {
         console.log("An error occurred during API calls:", error);
+        window.scroll(0, 0);
+        setErrorMessage("An error occurred during creating an content");
       }
     } else {
       window.scroll(0, 0);
     }
   };
+
+  useEffect(() => {
+    if (createContentDetails) {
+      if (createContentDetails.msg == "data posted") {
+        console.log("Content created successfully");
+        sessionStorage.setItem("successMessage", "Content created successfully!");
+        navigate("/your_content/upcoming_content"); // Replace '/' with the desired route for the home page
+      } else {
+        console.log("An error occurred while creating the content");
+        window.scroll(0, 0);
+        setErrorMessage("An error occurred during creating an content");
+      }
+    }
+  }, [createContentDetails]);
   return (
     <>
-      
+
       <div
         className="bg-form"
         style={{
@@ -224,6 +246,17 @@ const ListContentForm = () => {
           backgroundImage: `url(${backgroundimg})`,
         }}
       >
+        {errorMessage && (
+          <div className="container">
+            <div
+              className="alert alert-danger"
+              role="alert"
+              style={{ borderRadius: "10px" }}
+            >
+              {errorMessage}
+            </div>
+          </div>
+        )}
         <div className="container event-form px-md-0">
           <div className="row">
             <div className="col-12 col-md-6 px-0">
@@ -324,16 +357,16 @@ const ListContentForm = () => {
                             </button>
 
                             {selectedItems.map((item) => (
-                                <div key={item}>
-                                  <input
-                                    type="number"
-                                    value={prices[item]}
-                                    onChange={(e) => handlePriceChange(item, e.target.value)}
-                                    className="form-control my-1"
-                                    placeholder={`Enter ${item.replace('_', ' ')} Price`}
-                                  />
-                                </div>
-                              ))}
+                              <div key={item}>
+                                <input
+                                  type="number"
+                                  value={prices[item]}
+                                  onChange={(e) => handlePriceChange(item, e.target.value)}
+                                  className="form-control my-1"
+                                  placeholder={`Enter ${item.replace('_', ' ')} Price`}
+                                />
+                              </div>
+                            ))}
                           </div>
                         </div>
                       </div>
@@ -609,7 +642,7 @@ const ListContentForm = () => {
           </div>
         </div>
       </div>
-      
+
     </>
   );
 };

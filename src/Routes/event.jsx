@@ -17,6 +17,7 @@ import {
 import EventProfile from "../pages/Event/EventProfile/EventProfile";
 import EventFooter from "../components/Footer/EventFooter";
 import EventNavBar from "../pages/Event/EventNavbar/EventNavbar";
+import EventPayment from "../pages/Event/EventPayment/EventPayment";
 const EventRoutes = () => {
   return (
     <>
@@ -41,6 +42,7 @@ const EventRoutes = () => {
         />
         <Route path="/update_event" element={<UpdateEvent />} />
         <Route path="/delete_event" element={<DeleteEvent />} />
+        <Route path="/payment" element={<EventPayment />} />
         <Route path="/profile" element={<EventProfile />} />
         <Route path="/login" element={<Navigate to={"/"} />} />
         <Route path="/signup" element={<Navigate to={"/"} />} />

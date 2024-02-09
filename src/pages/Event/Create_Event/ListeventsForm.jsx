@@ -55,7 +55,7 @@ const ListeventsForm = () => {
   const navigate = useNavigate(); // Initialize useNavigate hook
   console.log(userDetails);
   console.log("event error", createEventError);
-  console.log("event data", createEventDetails);
+  console.log("event data", createEventDetails?.msg);
   // console.log("event data", createEventDetails?.thumbnail3?.[0] || createEventDetails?.thumbnail2?.[0] || createEventDetails?.thumbnail1?.[0]);
 
   const generateUniqueFilename = (originalFilename, index) => {
@@ -237,6 +237,7 @@ const ListeventsForm = () => {
       formData.append("event_category", selectedCategory);
       // Append thumbnails with different keys
       formData.append("thumbnail1", thumbnail1, thumbnail1Filename);
+      // formData.append("thumbnail1", thumbnail1);
       formData.append("thumbnail2", thumbnail2, thumbnail2Filename);
       formData.append("thumbnail3", thumbnail3, thumbnail3Filename);
       formData.append("attach_video", video);
@@ -254,8 +255,9 @@ const ListeventsForm = () => {
       try {
         // Make POST API call
         await dispatch(createEvent(formData));
-        sessionStorage.setItem("successMessage", "Event created successfully!");
-        navigate("/events/upcoming_event");
+        // sessionStorage.setItem("successMessage", "Event created successfully!");
+        // navigate("/events/upcoming_event");
+        console.log("Details while creating events ", createEventDetails);
       } catch (error) {
         console.log("An error occurred during API call:", error);
         window.scroll(0, 0);
@@ -266,9 +268,24 @@ const ListeventsForm = () => {
       window.scroll(0, 0);
     }
   };
+
+  useEffect(() => {
+    if (createEventDetails) {
+      if (createEventDetails.msg == "data posted") {
+        console.log("Event created successfully");
+        sessionStorage.setItem("successMessage", "Event created successfully!");
+        navigate("/events/upcoming_event");
+      } else {
+        console.log("An error occurred while creating the event");
+        window.scroll(0, 0);
+        setErrorMessage("An error occurred during creating an event");
+      }
+    }
+  }, [createEventDetails]);
+
   return (
     <>
-      
+
       <div
         className="bg-form"
         style={{
@@ -706,7 +723,7 @@ const ListeventsForm = () => {
           </div>
         </div>
       </div>
-      
+
     </>
   );
 };

@@ -6,6 +6,8 @@ import DataTables from "../../views/admin/dataTables";
 import RTL from "../../views/admin/rtl";
 import Eventmanagement from "../../views/admin/eventManagement"
 import EventApproval from "../../views/admin/eventApprove"
+import EventPayment from "../../views/admin/eventPayment"
+import ContentPayment from "../../views/admin/ContentPayment"
 import ContentManagement from "../../views/admin/contentManagement"
 import ContentApproval from "../../views/admin/contentApprove"
 import UpdateEvent from "../../views/admin/eventManagement/components/UpdateEvent";
@@ -24,6 +26,8 @@ const AdminRoutes = () => {
         <Route path="/update_event" element={<UpdateEvent />} />
         <Route path="/admin/content" element={<ContentManagement />} />
         <Route path="/admin/approve_content" element={<ContentApproval />} />
+        <Route path="/admin/payment_content" element={<ContentPayment />} />
+        <Route path="/admin/payment_event" element={<EventPayment />} />
         <Route path="/update_content" element={<UpdateContent />} />
         <Route path="/admin/data-tables" element={<DataTables />} />
         <Route path="/admin/profile" element={<Profile />} />

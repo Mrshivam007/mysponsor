@@ -24,7 +24,7 @@ export const contentReducer = (state = {},action) => {
       case CREATE_CONTENT_REQUEST:
         return { ...state, loading: true }
       case CREATE_CONTENT_SUCCESS:
-        return { loading: false, createContent: action.payload }
+        return { loading: false, createContentDetails: action.payload }
       case CREATE_CONTENT_FAILED:
         return { loading: false, createContentError: action.payload }
       case UPDATE_CONTENT_REQUEST:

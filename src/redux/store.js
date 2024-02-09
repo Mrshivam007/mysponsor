@@ -5,6 +5,7 @@ import { contentReducer } from "./reducer/contentReducer";
 import { sponsorReducer } from "./reducer/sponsorReducer";
 import { profileReducer } from "./reducer/profileReducer";
 import { adminReducer } from "./reducer/adminReducer";
+import { paymentReducer } from "./reducer/paymentReducer";
 
 
 const reducer = combineReducers({
@@ -14,6 +15,7 @@ const reducer = combineReducers({
     sponsor: sponsorReducer,
     sponsorProfile: profileReducer,
     admin: adminReducer,
+    payment: paymentReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userDetails') ? JSON.parse(localStorage.getItem('userDetails')) : null;

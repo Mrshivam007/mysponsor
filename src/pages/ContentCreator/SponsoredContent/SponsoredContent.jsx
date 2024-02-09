@@ -35,7 +35,6 @@ const SponsoredContent = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        
         <EventsHeader title={"Your Sponsored Content!"} logo={listevents} />
         <h1></h1>
         <div className="desktop-view mt-4">
@@ -60,6 +59,7 @@ const SponsoredContent = () => {
                               style={{
                                 width: "100%",
                                 height: "100%",
+                                borderRadius: "10px",
                               }}
                             />
                           </div>
@@ -194,11 +194,17 @@ const SponsoredContent = () => {
                           <img
                             src={apiurl + data.content_id.thumbnail1}
                             alt=""
-                            style={{ width: "100%" }}
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              borderRadius: "10px",
+                            }}
                           />
                           <div className="text-overlay">
-                            <h4 className="font-weight-bold mb-0"></h4>
-                            <h5></h5>
+                            <h4 className="font-weight-bold mb-0">
+                              {data.content_id.title}
+                            </h4>
+                            <h5>{data.content_id.content_platform}</h5>
                           </div>
                         </div>
                         <div className="container">
@@ -240,7 +246,7 @@ const SponsoredContent = () => {
                                     Total amount sponsored
                                   </p>
                                   <p className="mb-1">
-                                    {data.content_id.sponsoring_content_items
+                                   ₹ {data.content_id.sponsoring_content_items
                                       .filter((item) => item.is_sponsored)
                                       .reduce(
                                         (total, item) =>
@@ -275,7 +281,6 @@ const SponsoredContent = () => {
               })}
           </div>
         </div>
-        
       </div>
     </>
   );
