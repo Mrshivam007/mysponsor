@@ -290,15 +290,17 @@ const NavBar = () => {
                     <AiOutlineClose />
                   </div>
                 </Container>
-                <div className="container nav-profile">
-                  <div
-                    className="box"
-                    style={{
-                      border: "3px solid #004ea9",
-                      borderRadius: "70px",
-                      filter: "drop-shadow(0px 2px 15px rgba(0, 0, 0, 0.25))",
-                    }}
-                  >
+                <div
+                  className="container nav-profile"
+                  style={{ paddingLeft: "0px", width: "100%", paddingRight: '2%', justifyContent: 'left' }}
+                >                  <div
+                  className="box"
+                  style={{
+                    border: "3px solid #004ea9",
+                    borderRadius: "70px",
+                    filter: "drop-shadow(0px 2px 15px rgba(0, 0, 0, 0.25))",
+                  }}
+                >
                     <img
                       src={noProfilepic}
                       alt="myprofile"

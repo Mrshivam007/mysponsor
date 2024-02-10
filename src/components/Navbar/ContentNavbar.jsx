@@ -298,7 +298,7 @@ const ContentNavBar = () => {
                 </Container>
                 <div
                   className="container nav-profile"
-                  style={{ paddingLeft: "0px", width: "100%" }}
+                  style={{ paddingLeft: "0px", width: "100%", paddingRight: '2%', justifyContent: 'left' }}
                 >
                   <div
                     className="box"

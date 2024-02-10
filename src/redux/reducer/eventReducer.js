@@ -4,7 +4,7 @@ import { CREATE_EVENT_FAILED, CREATE_EVENT_REQUEST, CREATE_EVENT_SUCCESS, GET_AL
 export const eventReducer = (state = {},action) => {
     switch(action.type) {
       case GET_EVENT_REQUEST:
-        return { ...state, loading: true }
+        return { ...state, eventDetailsLoading: true }
       case GET_EVENT_SUCCESS:
         return { loading: false, eventDetails: action.payload }
       case GET_EVENT_FAILED:

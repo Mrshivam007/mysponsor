@@ -1,0 +1,12 @@
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Set height of container to full viewport height */
+}
+
+.loading-svg {
+    width: 100px; /* Adjust the width of the SVG as needed */
+    height: 100px; /* Adjust the height of the SVG as needed */
+    /* Add any additional styling for the SVG here */
+}

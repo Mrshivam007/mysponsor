@@ -14,6 +14,8 @@ import {
   fetchEventCategory,
 } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux";
+import Loading from "../../../components/Loading/Loading";
+
 const SponsorEvents = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
@@ -21,34 +23,43 @@ const SponsorEvents = () => {
 
   const dispatch = useDispatch();
   const eventDetails = useSelector((state) => state.event);
+
   useEffect(() => {
     dispatch(fetchEvent());
   }, []);
 
-  console.log("static data", EventsCards);
-  const cardData = eventDetails?.eventDetails?.upcoming_event;
-  console.log("This is card data", cardData);
-  return (
-    <>
-      <div
-        className="events-bg"
-        style={{
-          width: "100%",
-          height: "auto",
-          backgroundImage: `url(${bgimage})`,
-        }}
-      >
-        <div className="events-page-desktop">
-          <EventsHeader title={"Sponsor Events"} logo={spevents} />
-          <SponserE cardData={cardData} />
-        </div>
+  const isLoading = () => {
+    return eventDetails.eventDetailsLoading;
+  };
 
-        <div className="events-page-mobile">
-          <MobileCards cardData={cardData} />
-          {/* <SponserE cardData={cardData} /> */}
-        </div>
-      </div>
-    </>
+  const cardData = eventDetails?.eventDetails?.upcoming_event;
+
+  return (
+    <div>
+      {isLoading() ? (
+        <Loading />
+      ) : (
+        <>
+          <div
+            className="events-bg"
+            style={{
+              width: "100%",
+              height: "auto",
+              backgroundImage: `url(${bgimage})`,
+            }}
+          >
+            <div className="events-page-desktop">
+              <EventsHeader title={"Sponsor Events"} logo={spevents} />
+              <SponserE cardData={cardData} />
+            </div>
+
+            <div className="events-page-mobile">
+              <MobileCards cardData={cardData} />
+            </div>
+          </div>
+        </>
+      )}
+    </div>
   );
 };
 

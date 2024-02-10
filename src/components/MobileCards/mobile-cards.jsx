@@ -6,11 +6,6 @@ import { fetchEvent } from "../../redux/actions/eventAction";
 import apiurl from "../../constant/config";
 
 const MobileCards = ({ line, cardData }) => {
-  const dispatch = useDispatch();
-  const eventDetails = useSelector((state) => state.event);
-  useEffect(() => {
-    dispatch(fetchEvent());
-  }, []);
 
   const navigate = useNavigate();
 
