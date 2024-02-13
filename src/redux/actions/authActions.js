@@ -1,6 +1,6 @@
 import axios from 'axios';
 import apiurl from '../../constant/config';
-import { AUTH_LOGIN_FAILED, AUTH_LOGIN_REQUEST, AUTH_LOGIN_SUCCESS, AUTH_LOGOUT, AUTH_SIGNUP_FAILED, AUTH_SIGNUP_REQUEST, AUTH_SIGNUP_SUCCESS, GET_PROFILE_FAILED, GET_PROFILE_REQUEST, GET_PROFILE_SUCCESS } from '../constant';
+import { AUTH_LOGIN_FAILED, AUTH_LOGIN_REQUEST, AUTH_LOGIN_SUCCESS, AUTH_LOGOUT, AUTH_SIGNUP_FAILED, AUTH_SIGNUP_REQUEST, AUTH_SIGNUP_SUCCESS, GET_PROFILE_FAILED, GET_PROFILE_REQUEST, GET_PROFILE_SUCCESS, GOOGLE_AUTH_LOGIN_FAILED, GOOGLE_AUTH_LOGIN_REQUEST, GOOGLE_AUTH_LOGIN_SUCCESS } from '../constant';
 
 
 
@@ -87,6 +87,35 @@ export const logout = () => (dispatch) => {
     localStorage.removeItem("userDetails");
     dispatch({ type: AUTH_LOGOUT });
 };
+
+export const googleLogin = (email, given_name, family_name) => async (dispatch) => {
+    try {
+      dispatch({ type: GOOGLE_AUTH_LOGIN_REQUEST });
+  
+      const { data } = await axios.post(`${apiurl}/api/user/google/`, {
+        email,
+        given_name,
+        family_name
+      });
+  
+      const payload = getPayload(data.user);
+      setToken(data.token);
+  
+      dispatch({
+        type: GOOGLE_AUTH_LOGIN_SUCCESS,
+        payload: payload,
+      });
+      console.log("Google login payload ",payload);
+    } catch (error) {
+      dispatch({
+        type: GOOGLE_AUTH_LOGIN_FAILED,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
 
 export const fetchUserProfile = () => async (dispatch) => {
     try {

@@ -121,12 +121,14 @@ const SponsorFooter = () => {
                   Sponsor Content
                 </button>
               </Link>
+              <Link to={"/about"}>
               <button
                 className="mob-footer-btn btn btn-primary"
                 style={{ width: "100%" }}
               >
                 About Us
               </button>
+              </Link>
             </div>
             {/* <!--Grid column--> */}
           </div>
@@ -142,14 +144,14 @@ const SponsorFooter = () => {
               style={{ borderRight: "1px solid rgba(255, 255, 255, 0.30)" }}
             >
               <p className="text-center text-xl mb-0">
-                <Link href="#!" className="text-white">
+                <Link to={"/about"} className="text-white">
                   About
                 </Link>
               </p>
             </div>
             <div className="col-lg-6 col-md-6">
               <p className="text-center text-xl mb-0">
-                <Link href="#!" className="text-white">
+                <Link to={"/contact"} className="text-white">
                   Contact Us
                 </Link>
               </p>

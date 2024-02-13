@@ -27,7 +27,7 @@ import AdminLayout from "../pages/Admin/layouts/admin/index"
 const Main = () => {
   const auth = useSelector((state) => state.auth);
   const { userDetails } = auth;
-  console.log(userDetails);
+  console.log("User Details ",userDetails);
   return (
     <>
       {userDetails ? (
