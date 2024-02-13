@@ -9,8 +9,6 @@ import {
 } from "../../../components/index.js";
 import { useLocation } from "react-router-dom";
 import SponsorEventBox from "../SponsorEventBox/SponsorEventBox.jsx";
-import SponsorNavbar from "../SponsorNavbar/SponsorNavbar.jsx";
-import SponsorFooter from "../../../components/Footer/SponsorFooter.jsx";
 const SponsoredEventDetails = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount

@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import MyEventCard from "../MyEventCrad/MyEventCard";
 import Update_EventCard from "./Update_EventCard";
 import Update_MobileCards from "./Update_MobileCard";
-import EventNavBar from "../EventNavbar/EventNavbar";
+import Loading from "../../../components/Loading/Loading";
 const Update_UpcomingEvent = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
@@ -27,7 +27,7 @@ const Update_UpcomingEvent = () => {
   const eventDetails = useSelector((state) => state.event);
   const [successMessage, setSuccessMessage] = useState("");
   useEffect(() => {
-    dispatch(fetchEventbyId(userDetails.user_id))
+    dispatch(fetchEventbyId(userDetails.user_id));
   }, []);
 
   useEffect(() => {
@@ -43,53 +43,67 @@ const Update_UpcomingEvent = () => {
     }
   }, []);
 
-  console.log("dynamic data", eventDetails.eventDetails);
+  const isLoading = () => {
+    return eventDetails?.loading;
+  };
+
+  console.log("update dynamic data", eventDetails);
   console.log("static data", EventsCards);
 
   return (
     <>
-      <div
-        className="events-bg"
-        style={{
-          width: "100%",
-          height: "auto",
-          backgroundImage: `url(${bgimage})`,
-        }}
-      >
-        
-        <div className="events-page-desktop">
-          <EventsHeader title={"Update Your Listed Events"} logo={spevents} />
-          {/* <SponserE cardData={eventDetails.eventDetails} line={"Upcoming Event"} /> */}
-          {successMessage && (
-            <div class="alert alert-success" role="alert">
-              {successMessage}
-            </div>
-          )}
-          <Update_EventCard cardData={eventDetails.eventDetails?.upcoming_event} />
-          {/* <SponserE cardData={EventsCards} line={"Concerts"} />
+      {isLoading() ? (
+        <Loading />
+      ) : (
+        <>
+          <div
+            className="events-bg"
+            style={{
+              width: "100%",
+              height: "auto",
+              backgroundImage: `url(${bgimage})`,
+            }}
+          >
+            <div className="events-page-desktop">
+              <EventsHeader
+                title={"Update Your Listed Events"}
+                logo={spevents}
+              />
+              {/* <SponserE cardData={eventDetails.eventDetails} line={"Upcoming Event"} /> */}
+              {successMessage && (
+                <div class="alert alert-success" role="alert">
+                  {successMessage}
+                </div>
+              )}
+              <Update_EventCard
+                cardData={eventDetails.eventDetails?.upcoming_event}
+              />
+              {/* <SponserE cardData={EventsCards} line={"Concerts"} />
           <SponserE cardData={EventsCards} line={"Promotional Events"} />
           <SponserE cardData={EventsCards} line={"Sports Events"} />
           <SponserE cardData={EventsCards} line={"Comedy Shows"} />
           <SponserE cardData={EventsCards} line={"Motivational Events"} />
           <SponserE cardData={EventsCards} line={"Reality Shows"} /> */}
-        </div>
-        <div className="events-page-mobile">
-          <Update_MobileCards
-            line={"Upcoming Event"}
-            cardData={eventDetails.eventDetails?.upcoming_event}
-          />
-          <div
-            className="btn d-block text-white font-weight-bolder"
-            style={{
-              margin: "5%",
-              borderRadius: "10px",
-              backgroundColor: "rgb(0, 78, 169)",
-            }}
-          >
-            Load More
+            </div>
+            <div className="events-page-mobile">
+              <Update_MobileCards
+                line={"Upcoming Event"}
+                cardData={eventDetails.eventDetails?.upcoming_event}
+              />
+              <div
+                className="btn d-block text-white font-weight-bolder"
+                style={{
+                  margin: "5%",
+                  borderRadius: "10px",
+                  backgroundColor: "rgb(0, 78, 169)",
+                }}
+              >
+                Load More
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
     </>
   );
 };

@@ -9,6 +9,7 @@ import { AiOutlineClose } from "react-icons/ai"; // Import the close icon from r
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/actions/authActions";
+import SponsorClaendar from "../../pages/Sponsor/SponsorCalendar/SponsorCalendar";
 
 const NavBar = () => {
   const [isSticky, setSticky] = useState(false);
@@ -36,9 +37,9 @@ const NavBar = () => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -53,6 +54,8 @@ const NavBar = () => {
     dispatch(logout());
     navigate("/");
   };
+
+  console.log("This is navbar details", userDetails);
 
   return (
     <div>
@@ -93,82 +96,191 @@ const NavBar = () => {
             </div> */}
           </div>
           {userDetails ? (
-            <>
-              {/* <Link
-                className="nav-link text-accent"
-                to={"favourites"}
-                style={{
-                  backgroundColor: "white",
-                  margin: "1vh",
-                  height: "40px",
-                  width: "40px",
-                  borderRadius: "50px",
-                }}
-              >
-                <span
-                  className="mai-heart"
-                  style={{ fontSize: "28px", marginLeft: "-10px" }}
-                ></span>
-              </Link> */}
-              {/* <a
-                className="nav-link"
-                href="#"
-                style={{
-                  backgroundColor: "white",
-                  margin: "1vh",
-                  height: "40px",
-                  width: "40px",
-                  color: "blue",
-                  borderRadius: "50px",
-                }}
-              >
-                <span
-                  className="mai-calendar"
-                  style={{ fontSize: "28px", marginLeft: "-10px" }}
-                ></span>
-              </a> */}
-              <div
-                className="nav-link"
-                style={{
-                  backgroundColor: "white",
-                  margin: "1vh",
-                  height: "40px",
-                  width: "40px",
-                  color: "black",
-                  borderRadius: "50px",
-                  cursor: "pointer",
-                }}
-                onClick={() => setOpenDropDown(!openDropDown)}
-              >
-                <span
-                  className="mai-people"
-                  style={{ fontSize: "28px", marginLeft: "-10px" }}
-                ></span>
-              </div>
-              <div className="dropdown">
-                {openDropDown ? (
-                  <ul
-                    className="dropdown-menu"
+            (userDetails?.user_type == "Event" && (
+              <>
+                <div
+                  className="nav-link"
+                  style={{
+                    backgroundColor: "white",
+                    margin: "1vh",
+                    height: "40px",
+                    width: "40px",
+                    color: "black",
+                    borderRadius: "50px",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setOpenDropDown(!openDropDown)}
+                >
+                  <span
+                    className="mai-people"
+                    style={{ fontSize: "28px", marginLeft: "-10px" }}
+                  ></span>
+                </div>
+                <div className="dropdown">
+                  {openDropDown ? (
+                    <ul
+                      className="dropdown-menu"
+                      style={{
+                        display: "block",
+                        width: "100%",
+                        left: "-75px",
+                        top: "20px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <li onClick={handleLogout}>
+                        <div className="dropdown-item">Logout</div>
+                      </li>
+                      <li>
+                        <Link to={"/profile"}>
+                          <div className="dropdown-item">Your Account</div>
+                        </Link>
+                      </li>
+                    </ul>
+                  ) : null}
+                </div>
+              </>
+            )) ||
+            (userDetails?.user_type == "Content" && (
+              <>
+                <div
+                  className="nav-link"
+                  style={{
+                    backgroundColor: "white",
+                    margin: "1vh",
+                    height: "40px",
+                    width: "40px",
+                    color: "black",
+                    borderRadius: "50px",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => setOpenDropDown(!openDropDown)}
+                >
+                  <span
+                    className="mai-people"
+                    style={{ fontSize: "28px", marginLeft: "-10px" }}
+                  ></span>
+                </div>
+                <div className="dropdown">
+                  {openDropDown ? (
+                    <ul
+                      className="dropdown-menu"
+                      style={{
+                        display: "block",
+                        width: "100%",
+                        left: "-75px",
+                        top: "20px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <li onClick={handleLogout}>
+                        <div className="dropdown-item">Logout</div>
+                      </li>
+                      <li>
+                        <Link to={"/profile"}>
+                          <div className="dropdown-item">Your Account</div>
+                        </Link>
+                      </li>
+                    </ul>
+                  ) : null}
+                </div>
+              </>
+            )) ||
+            (userDetails?.user_type == "Sponsor" && (
+              <>
+                <div className="box d-flex align-items-center justify-content-between">
+                  <Link
+                    className="nav-link text-accent"
+                    to="/favourites" // Use an absolute path
                     style={{
-                      display: "block",
-                      width: "100%",
-                      left: "-75px",
-                      top: "20px",
+                      backgroundColor: "white",
+                      margin: "1vh",
+                      height: "40px",
+                      width: "40px",
+                      borderRadius: "50px",
+                    }}
+                  >
+                    <span
+                      className="mai-heart "
+                      style={{ fontSize: "28px", marginLeft: "-10px" }}
+                    ></span>
+                  </Link>
+                  <div
+                    className="nav-link"
+                    data-bs-toggle="modal"
+                    data-bs-target="#calendarModal"
+                    data-bs-whatever="@mdo"
+                    style={{
+                      backgroundColor: "white",
+                      margin: "1vh",
+                      height: "40px",
+                      width: "40px",
+                      color: "blue",
+                      borderRadius: "50px",
                       cursor: "pointer",
                     }}
                   >
-                    <li onClick={handleLogout}>
-                      <div className="dropdown-item">Logout</div>
-                    </li>
-                    <li>
-                      <Link to={"/profile"}>
-                        <div className="dropdown-item">Your Account</div>
-                      </Link>
-                    </li>
-                  </ul>
-                ) : null}
-              </div>
-            </>
+                    <span
+                      className="mai-calendar"
+                      style={{ fontSize: "28px", marginLeft: "-10px" }}
+                    ></span>
+                  </div>
+                  <div
+                    className="modal fade"
+                    id="calendarModal"
+                    data-bs-backdrop="false"
+                    // tabindex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                  >
+                    <SponsorClaendar />
+                  </div>
+                  <div
+                    className="nav-link"
+                    style={{
+                      backgroundColor: "white",
+                      margin: "1vh",
+                      height: "40px",
+                      width: "40px",
+                      borderRadius: "50px",
+                      color: "black",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => setOpenDropDown(!openDropDown)}
+                  >
+                    <span
+                      className="mai-people"
+                      style={{ fontSize: "28px", marginLeft: "-10px" }}
+                    ></span>
+                  </div>
+                  <div className="dropdown">
+                    {openDropDown ? (
+                      <ul
+                        className="dropdown-menu"
+                        style={{
+                          display: "block",
+                          width: "100%",
+                          left: "-75px",
+                          top: "20px",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <li>
+                          <div className="dropdown-item" onClick={handleLogout}>
+                            Logout
+                          </div>
+                        </li>
+                        <li>
+                          <Link to={"/profile"}>
+                            <div className="dropdown-item">My Account</div>
+                          </Link>
+                        </li>
+                      </ul>
+                    ) : null}
+                  </div>
+                </div>
+              </>
+            ))
           ) : (
             <Link to={"/login"} className="link-banner btn btn-primary">
               Register
@@ -182,30 +294,134 @@ const NavBar = () => {
         style={{ backgroundColor: "#083C79" }}
       >
         <div className="container" style={{ placeContent: "center" }}>
-          <Nav>
-            <Nav.Link className="desktop-nav-item">
-              <Link to={"/events"} style={{ color: "white" }}>
-                Sponsor Event
-              </Link>
-            </Nav.Link>
-            <Nav.Link className="desktop-nav-item">
-              <Link to={"/cc"} style={{ color: "white" }}>
-                Sponsor Content Creators
-              </Link>
-            </Nav.Link>
-            {/* <Nav.Link className="desktop-nav-item" href="#">
+          {userDetails ? (
+            (userDetails?.user_type == "Event" && (
+              <Nav>
+                <Nav.Link className="desktop-nav-item">
+                  <Link to={"/events"} style={{ color: "white" }}>
+                    Your Event
+                  </Link>
+                </Nav.Link>
+                <Nav.Link className="desktop-nav-item">
+                  <Link to={"/sponsored_events"} style={{ color: "white" }}>
+                    Your Sponsored Event
+                  </Link>
+                </Nav.Link>
+                <Nav.Link className="desktop-nav-item">
+                  <Link to={"/create_event"} style={{ color: "white" }}>
+                    List Event
+                  </Link>
+                </Nav.Link>
+                <Nav.Link className="desktop-nav-item">
+                  <Link to={"/update_UpcomingEvent"} style={{ color: "white" }}>
+                    Update Event
+                  </Link>
+                </Nav.Link>
+                <Nav.Link className="desktop-nav-item" href="#">
+                  <Link to={"/delete_event"} style={{ color: "white" }}>
+                    Delete Your Event
+                  </Link>
+                </Nav.Link>
+                <Nav.Link className="desktop-nav-item">
+                  <Link to={"/payment"} style={{ color: "white" }}>
+                    My Events Payment
+                  </Link>
+                </Nav.Link>
+              </Nav>
+            )) ||
+            (userDetails?.user_type == "Content" && (
+              <Nav>
+                <Nav.Link className="desktop-nav-item">
+                  <Link to={"/your_content"} style={{ color: "white" }}>
+                    Your Content
+                  </Link>
+                </Nav.Link>
+                <Nav.Link className="desktop-nav-item">
+                  <Link to={"/sponsored_contents"} style={{ color: "white" }}>
+                    Your Sponsored Content
+                  </Link>
+                </Nav.Link>
+                <Nav.Link className="desktop-nav-item">
+                  <Link to={"/create_content"} style={{ color: "white" }}>
+                    List Content
+                  </Link>
+                </Nav.Link>
+                <Nav.Link className="desktop-nav-item">
+                  <Link
+                    to={"/update_UpcomingContent"}
+                    style={{ color: "white" }}
+                  >
+                    Update Content
+                  </Link>
+                </Nav.Link>
+                <Nav.Link className="desktop-nav-item" href="#">
+                  <Link to={"/delete_content"} style={{ color: "white" }}>
+                    Delete Your Content
+                  </Link>
+                </Nav.Link>
+                <Nav.Link className="desktop-nav-item">
+                  <Link to={"/payment"} style={{ color: "white" }}>
+                    My Contents Payment
+                  </Link>
+                </Nav.Link>
+              </Nav>
+            )) ||
+            (userDetails?.user_type == "Sponsor" && (
+              <Nav>
+                <Nav.Link className="desktop-nav-item">
+                  <Link to={"/events"} style={{ color: "white" }}>
+                    Sponsor Event
+                  </Link>
+                </Nav.Link>
+                <Nav.Link className="desktop-nav-item">
+                  <Link to={"/cc"} style={{ color: "white" }}>
+                    Sponsor Content Creators
+                  </Link>
+                </Nav.Link>
+                <Nav.Link className="desktop-nav-item" href="#">
+                  Top Events
+                </Nav.Link>
+                <Nav.Link className="desktop-nav-item" href="#">
+                  Top Content
+                </Nav.Link>
+                <Nav.Link className="desktop-nav-item" href="#">
+                  <Link to={"/sponsored_event"} style={{ color: "white" }}>
+                    Your Sponsored Event
+                  </Link>
+                </Nav.Link>
+                <Nav.Link className="desktop-nav-item" href="#">
+                  <Link to={"/sponsored_content"} style={{ color: "white" }}>
+                    Your Sponsored Content
+                  </Link>
+                </Nav.Link>
+              </Nav>
+            ))
+          ) : (
+            <Nav>
+              <Nav.Link className="desktop-nav-item">
+                <Link to={"/events"} style={{ color: "white" }}>
+                  Sponsor Event
+                </Link>
+              </Nav.Link>
+              <Nav.Link className="desktop-nav-item">
+                <Link to={"/cc"} style={{ color: "white" }}>
+                  Sponsor Content Creators
+                </Link>
+              </Nav.Link>
+              {/* <Nav.Link className="desktop-nav-item" href="#">
               Events Near You
             </Nav.Link> */}
-            <Nav.Link className="desktop-nav-item" href="#">
-              Top Events
-            </Nav.Link>
-            <Nav.Link className="desktop-nav-item" href="#">
-              Top Content Creator
-            </Nav.Link>
-            {/* <Nav.Link className="desktop-nav-item" href="#">
+              <Nav.Link className="desktop-nav-item" href="#">
+                Top Events
+              </Nav.Link>
+              <Nav.Link className="desktop-nav-item" href="#">
+                Top Content Creator
+              </Nav.Link>
+              {/* <Nav.Link className="desktop-nav-item" href="#">
               List your event
             </Nav.Link> */}
-          </Nav>
+            </Nav>
+          )}
         </div>
       </Navbar>
 
@@ -231,26 +447,100 @@ const NavBar = () => {
             <img src={logo} alt="Logo" />
           </a>
           {userDetails ? (
-            <>
-              <Link
-                to="/profile"
-                className="nav-link"
-                style={{
-                  backgroundColor: "white",
-                  margin: "1vh",
-                  height: "40px",
-                  width: "40px",
-                  color: "black",
-                  borderRadius: "50px",
-                  cursor: "pointer",
-                }}
-              >
-                <span
-                  className="mai-people"
-                  style={{ fontSize: "28px", marginLeft: "-10px" }}
-                ></span>
-              </Link>
-            </>
+            (userDetails?.user_type == "Event" && (
+              <>
+                <Link
+                  to="/profile"
+                  className="nav-link"
+                  style={{
+                    backgroundColor: "white",
+                    margin: "1vh",
+                    height: "40px",
+                    width: "40px",
+                    color: "black",
+                    borderRadius: "50px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <span
+                    className="mai-people"
+                    style={{ fontSize: "28px", marginLeft: "-10px" }}
+                  ></span>
+                </Link>
+              </>
+            )) ||
+            (userDetails?.user_type == "Content" && (
+              <>
+                <Link
+                  to="/profile"
+                  className="nav-link"
+                  style={{
+                    backgroundColor: "white",
+                    margin: "1vh",
+                    height: "40px",
+                    width: "40px",
+                    color: "black",
+                    borderRadius: "50px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <span
+                    className="mai-people"
+                    style={{ fontSize: "28px", marginLeft: "-10px" }}
+                  ></span>
+                </Link>
+              </>
+            )) ||
+            (userDetails?.user_type == "Sponsor" && (
+              <>
+                <div className="box d-flex">
+                  <div
+                    className="nav-link"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                    style={{
+                      backgroundColor: "white",
+                      margin: "1vh",
+                      height: "40px",
+                      width: "40px",
+                      color: "blue",
+                      borderRadius: "50px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <span
+                      className="mai-calendar"
+                      style={{ fontSize: "28px", marginLeft: "-10px" }}
+                    ></span>
+                  </div>
+                  <div
+                    class="modal fade"
+                    id="exampleModal"
+                    tabindex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                  >
+                    <SponsorClaendar />
+                  </div>
+                  <Link
+                    className="nav-link text-dark"
+                    to="/profile"
+                    style={{
+                      backgroundColor: "white",
+                      margin: "1vh",
+                      height: "40px",
+                      width: "40px",
+                      borderRadius: "50px",
+                    }}
+                  >
+                    <span
+                      className="mai-people"
+                      style={{ fontSize: "28px", marginLeft: "-10px" }}
+                    ></span>
+                  </Link>
+                </div>
+              </>
+            ))
           ) : (
             <>
               <Link to={"/login"} className="link-banner btn btn-primary">
@@ -258,198 +548,477 @@ const NavBar = () => {
               </Link>
             </>
           )}
-          {/* <Link
-            className="nav-link"
-            to={"/login"}
-            style={{
-              backgroundColor: "white",
-              margin: "1vh",
-              height: "40px",
-              width: "40px",
-              borderRadius: "50px",
-            }}
-          >
-            <span
-              className="mai-people"
-              style={{ fontSize: "28px", marginLeft: "-10px" }}
-            ></span>
-          </Link> */}
         </div>
 
         {userDetails
-          ? isOpen && (
-            <div className="mobile-nav-overlay">
-              <div
-                className="box nav-profile-box w-100"
-                style={{
-                  backgroundColor: "#004EA9",
-                }}
-              >
-                <Container className="justify-content-end p-1">
-                  <div className="close-icon" onClick={toggleNavbar}>
-                    <AiOutlineClose />
-                  </div>
-                </Container>
+          ? isOpen &&
+            ((userDetails?.user_type == "Event" && (
+              <div className="mobile-nav-overlay">
                 <div
-                  className="container nav-profile"
-                  style={{ paddingLeft: "0px", width: "100%", paddingRight: '2%', justifyContent: 'left' }}
-                >                  <div
-                  className="box"
+                  className="box nav-profile-box w-100"
                   style={{
-                    border: "3px solid #004ea9",
-                    borderRadius: "70px",
-                    filter: "drop-shadow(0px 2px 15px rgba(0, 0, 0, 0.25))",
+                    backgroundColor: "#004EA9",
                   }}
                 >
-                    <img
-                      src={noProfilepic}
-                      alt="myprofile"
-                      width="100"
-                      height="100"
-                      style={{ borderRadius: "50px" }}
-                    />
-                  </div>
-                  <div className="box text-white">
-                    <h3 className="mb-0 font-weight-bold">John Doe</h3>
-                    <h6>Sponsor</h6>
+                  <Container className="justify-content-end p-1">
+                    <div className="close-icon" onClick={toggleNavbar}>
+                      <AiOutlineClose />
+                    </div>
+                  </Container>
+                  <div
+                    className="container nav-profile"
+                    style={{
+                      paddingLeft: "0px",
+                      width: "100%",
+                      paddingRight: "2%",
+                      justifyContent: "left",
+                    }}
+                  >
+                    <div
+                      className="box"
+                      style={{
+                        border: "3px solid #004ea9",
+                        borderRadius: "70px",
+                        filter: "drop-shadow(0px 2px 15px rgba(0, 0, 0, 0.25))",
+                      }}
+                    >
+                      <img
+                        src={noProfilepic}
+                        alt="myprofile"
+                        width="100"
+                        height="100"
+                        style={{ borderRadius: "50px" }}
+                      />
+                    </div>
+                    <div className="box text-white">
+                      <h3 className="mb-0 font-weight-bold">
+                        {userDetails.firstname} <br />
+                        {userDetails.lastname}
+                      </h3>
+                      {/* <h6>Sponsor</h6> */}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="mobile-nav-content mt-4">
-                <Nav className="mobile-nav-items border-0">
-                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
-                  >
-                    <Link to={"/events"}>
-                      Sponsor Event
-                    </Link>
-                  </NavLink>
-                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
-                  >
-                    <Link to={"/content"}>
-                      Sponsor Content
-                    </Link>
-                  </NavLink>
-                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
-                  >
-                    Top Events
-                  </NavLink>
-                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
-                  >
-                    My Account
-                  </NavLink>
-                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
-                  >
-                    Payment Info
-                  </NavLink>
-                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
-                  >
-                    ChatBot
-                  </NavLink>
-                </Nav>
-              </div>
-              <div className="text-success">
-                <hr
-                  className="my-0"
-                  style={{
-                    border: "0",
-                    borderTop: "1px solid rgb(0,0,0,0.4)",
-                  }}
-                />
-              </div>
-              <div className="container" style={{ paddingLeft: "10%" }}>
-                <Nav className="mobile-nav-items border-0">
-                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
-                    href="about.html">
-                    Help Center
-                  </NavLink>
-                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
-                    href="about.html">
-                    Support
-                  </NavLink>
-                </Nav>
-              </div>
-            </div>
-          )
-          : isOpen && (
-            <div className="mobile-nav-overlay">
-              <div
-                className="box nav-profile-box w-100"
-                style={{
-                  backgroundColor: "#004EA9",
-                }}
-              >
-                <Container className="justify-content-end p-1">
-                  <div className="close-icon" onClick={toggleNavbar}>
-                    <AiOutlineClose />
-                  </div>
-                </Container>
-                <Container style={{ width: "100%", height: "141px" }}>
-                  <img
-                    src={logo}
-                    alt=""
+                <div className="mobile-nav-content mt-4">
+                  <Nav className="mobile-nav-items border-0">
+                    <Nav.Link
+                      className="mobile-nav-item"
+                      onClick={toggleNavbar}
+                    >
+                      <Link to={"/events"}>Your Event</Link>
+                    </Nav.Link>
+                    <Nav.Link
+                      className="mobile-nav-item"
+                      onClick={toggleNavbar}
+                    >
+                      <Link to={"/sponsored_events"}>Your Sponsored Event</Link>
+                    </Nav.Link>
+                    <Nav.Link
+                      className="mobile-nav-item"
+                      onClick={toggleNavbar}
+                    >
+                      <Link to={"/create_event"}>List Event</Link>
+                    </Nav.Link>
+                    <Nav.Link
+                      className="mobile-nav-item"
+                      onClick={toggleNavbar}
+                    >
+                      <Link to={"/update_UpcomingEvent"}>Update Event</Link>
+                    </Nav.Link>
+                    <Nav.Link
+                      className="mobile-nav-item"
+                      onClick={toggleNavbar}
+                      href="#"
+                    >
+                      <Link to={"/delete_event"}>Delete Your Event</Link>
+                    </Nav.Link>
+                    <Nav.Link
+                      className="mobile-nav-item"
+                      onClick={toggleNavbar}
+                    >
+                      <Link to={"/payment"}>My Events Payment</Link>
+                    </Nav.Link>
+                  </Nav>
+                </div>
+                <div className="text-success">
+                  <hr
+                    className="my-0"
                     style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
+                      border: "0",
+                      borderTop: "1px solid rgb(0,0,0,0.4)",
                     }}
                   />
-                </Container>
+                </div>
+                <div className="container" style={{ paddingLeft: "10%" }}>
+                  <Nav className="mobile-nav-items border-0">
+                    <NavLink
+                      className="mobile-nav-item"
+                      onClick={toggleNavbar}
+                      href="about.html"
+                    >
+                      Help Center
+                    </NavLink>
+                    <NavLink
+                      className="mobile-nav-item"
+                      onClick={toggleNavbar}
+                      href="about.html"
+                    >
+                      Support
+                    </NavLink>
+                  </Nav>
+                </div>
               </div>
-              <div className="mobile-nav-content mt-4">
-                <Nav className="mobile-nav-items border-0">
-                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
+            )) ||
+              (userDetails?.user_type == "Content" && (
+                <div className="mobile-nav-overlay">
+                  <div
+                    className="box nav-profile-box w-100"
+                    style={{
+                      backgroundColor: "#004EA9",
+                    }}
                   >
-                    <Link to={"/events"}>
-                      Sponsor Event
-                    </Link>
+                    <Container className="justify-content-end p-1">
+                      <div className="close-icon" onClick={toggleNavbar}>
+                        <AiOutlineClose />
+                      </div>
+                    </Container>
+                    <div
+                      className="container nav-profile"
+                      style={{
+                        paddingLeft: "0px",
+                        width: "100%",
+                        paddingRight: "2%",
+                        justifyContent: "left",
+                      }}
+                    >
+                      <div
+                        className="box"
+                        style={{
+                          border: "3px solid #004ea9",
+                          borderRadius: "70px",
+                          filter:
+                            "drop-shadow(0px 2px 15px rgba(0, 0, 0, 0.25))",
+                        }}
+                      >
+                        <img
+                          src={noProfilepic}
+                          alt="myprofile"
+                          width="100"
+                          height="100"
+                          style={{ borderRadius: "50px" }}
+                        />
+                      </div>
+                      <div className="box text-white">
+                        <h3 className="mb-0 font-weight-bold">
+                          {userDetails.firstname} <br />
+                          {userDetails.lastname}
+                        </h3>
+                        {/* <h6>Sponsor</h6> */}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mobile-nav-content mt-4">
+                    <Nav className="mobile-nav-items border-0">
+                      {/* <NavLink className="mobile-nav-item" href="about.html">
+                    Sponsor Event
                   </NavLink>
-                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
-                  >
-                    <Link to={"/content"}>
-                      Sponsor Content
-                    </Link>
+                  <NavLink className="mobile-nav-item" href="index.html">
+                    Sponsor Content
                   </NavLink>
-                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
-                  >
+                  <NavLink className="mobile-nav-item" href="service.html">
                     Top Events
                   </NavLink>
-                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
-                  >
+                  <NavLink className="mobile-nav-item" href="#">
                     My Account
                   </NavLink>
-                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
-                  >
+                  <NavLink className="mobile-nav-item" href="#">
                     Payment Info
                   </NavLink>
-                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
-                  >
+                  <NavLink className="mobile-nav-item" href="#">
                     ChatBot
-                  </NavLink>
-                </Nav>
-              </div>
-              <div className="text-success">
-                <hr
-                  className="my-0"
+                  </NavLink> */}
+                      <Nav.Link
+                        className="mobile-nav-item"
+                        onClick={toggleNavbar}
+                      >
+                        <Link to={"/your_content"}>Your Content</Link>
+                      </Nav.Link>
+                      <Nav.Link
+                        className="mobile-nav-item"
+                        onClick={toggleNavbar}
+                      >
+                        <Link to={"/sponsored_contents"}>
+                          Your Sponsored Content
+                        </Link>
+                      </Nav.Link>
+                      <Nav.Link
+                        className="mobile-nav-item"
+                        onClick={toggleNavbar}
+                      >
+                        <Link to={"/create_content"}>List Content</Link>
+                      </Nav.Link>
+                      <Nav.Link
+                        className="mobile-nav-item"
+                        onClick={toggleNavbar}
+                      >
+                        <Link to={"/update_UpcomingContent"}>
+                          Update Content
+                        </Link>
+                      </Nav.Link>
+                      <Nav.Link
+                        className="mobile-nav-item"
+                        onClick={toggleNavbar}
+                        href="#"
+                      >
+                        <Link to={"/delete_content"}>Delete Your Content</Link>
+                      </Nav.Link>
+                      <Nav.Link
+                        className="mobile-nav-item"
+                        onClick={toggleNavbar}
+                      >
+                        <Link to={"/payment"}>My Contents Payment</Link>
+                      </Nav.Link>
+                    </Nav>
+                  </div>
+                  <div className="text-success">
+                    <hr
+                      className="my-0"
+                      style={{
+                        border: "0",
+                        borderTop: "1px solid rgb(0,0,0,0.4)",
+                      }}
+                    />
+                  </div>
+                  <div className="container" style={{ paddingLeft: "10%" }}>
+                    <Nav className="mobile-nav-items border-0">
+                      <NavLink
+                        className="mobile-nav-item"
+                        onClick={toggleNavbar}
+                        href="about.html"
+                      >
+                        Help Center
+                      </NavLink>
+                      <NavLink
+                        className="mobile-nav-item"
+                        onClick={toggleNavbar}
+                        href="about.html"
+                      >
+                        Support
+                      </NavLink>
+                    </Nav>
+                  </div>
+                </div>
+              )) ||
+              (userDetails?.user_type == "Sponsor" && (
+                <div className="mobile-nav-overlay">
+                  <div
+                    className="box nav-profile-box w-100"
+                    style={{
+                      backgroundColor: "#004EA9",
+                    }}
+                  >
+                    <Container className="justify-content-end p-1">
+                      <div className="close-icon" onClick={toggleNavbar}>
+                        <AiOutlineClose />
+                      </div>
+                    </Container>
+                    <div
+                      className="container nav-profile"
+                      style={{
+                        paddingLeft: "0px",
+                        width: "100%",
+                        paddingRight: "2%",
+                        justifyContent: "left",
+                      }}
+                    >
+                      {" "}
+                      <div
+                        className="box"
+                        style={{
+                          border: "3px solid #004ea9",
+                          borderRadius: "70px",
+                          filter:
+                            "drop-shadow(0px 2px 15px rgba(0, 0, 0, 0.25))",
+                        }}
+                      >
+                        <img
+                          src={noProfilepic}
+                          alt="myprofile"
+                          width="100"
+                          height="100"
+                          style={{ borderRadius: "50px" }}
+                        />
+                      </div>
+                      {/* <div className="box text-white">
+                      <h3 className="mb-0 font-weight-bold">John Doe</h3>
+                      <h6>Sponsor</h6>
+                    </div> */}
+                      <div className="box text-white">
+                        <h3 className="mb-0 font-weight-bold">
+                          {userDetails.firstname}
+                        </h3>
+                        <h6>{userDetails.lastname}</h6>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mobile-nav-content mt-4">
+                    <Nav
+                      className="mobile-nav-items border-0"
+                      style={{ gap: "20px" }}
+                    >
+                      <Link to={"/events"}>
+                        <div className="mobile-nav-item" onClick={toggleNavbar}>
+                          Sponsor Event
+                        </div>
+                      </Link>
+                      <Link to={"/cc"}>
+                        <div
+                          className="mobile-nav-item"
+                          onClick={toggleNavbar}
+                          href="index.html"
+                        >
+                          Sponsor Content
+                        </div>
+                      </Link>
+                      <div
+                        className="mobile-nav-item"
+                        onClick={toggleNavbar}
+                        href="service.html"
+                      >
+                        Top Events
+                      </div>
+                      <div
+                        className="mobile-nav-item"
+                        onClick={toggleNavbar}
+                        href="#"
+                      >
+                        Top Content
+                      </div>
+                      <Link to={"/sponsored_event"}>
+                        <div
+                          className="mobile-nav-item"
+                          onClick={toggleNavbar}
+                          href="#"
+                        >
+                          Your Sponsored Event
+                        </div>
+                      </Link>
+                      <Link to={"/sponsored_content"}>
+                        <div
+                          className="mobile-nav-item"
+                          onClick={toggleNavbar}
+                          href="#"
+                        >
+                          Your Sponsored Content
+                        </div>
+                      </Link>
+                    </Nav>
+                  </div>
+                  <div className="text-success">
+                    <hr
+                      className="my-0"
+                      style={{
+                        border: "0",
+                        borderTop: "1px solid rgb(0,0,0,0.4)",
+                      }}
+                    />
+                  </div>
+                  <div className="container" style={{ paddingLeft: "10%" }}>
+                    <Nav className="mobile-nav-items border-0">
+                      <NavLink
+                        className="mobile-nav-item"
+                        onClick={toggleNavbar}
+                        href="about.html"
+                      >
+                        Help Center
+                      </NavLink>
+                      <NavLink
+                        className="mobile-nav-item"
+                        onClick={toggleNavbar}
+                        href="about.html"
+                      >
+                        Support
+                      </NavLink>
+                    </Nav>
+                  </div>
+                </div>
+              )))
+          : isOpen && (
+              <div className="mobile-nav-overlay">
+                <div
+                  className="box nav-profile-box w-100"
                   style={{
-                    border: "0",
-                    borderTop: "1px solid rgb(0,0,0,0.4)",
+                    backgroundColor: "#004EA9",
                   }}
-                />
+                >
+                  <Container className="justify-content-end p-1">
+                    <div className="close-icon" onClick={toggleNavbar}>
+                      <AiOutlineClose />
+                    </div>
+                  </Container>
+                  <Container style={{ width: "100%", height: "141px" }}>
+                    <img
+                      src={logo}
+                      alt=""
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                      }}
+                    />
+                  </Container>
+                </div>
+                <div className="mobile-nav-content mt-4">
+                  <Nav className="mobile-nav-items border-0">
+                    <NavLink className="mobile-nav-item" onClick={toggleNavbar}>
+                      <Link to={"/events"}>Sponsor Event</Link>
+                    </NavLink>
+                    <NavLink className="mobile-nav-item" onClick={toggleNavbar}>
+                      <Link to={"/content"}>Sponsor Content</Link>
+                    </NavLink>
+                    <NavLink className="mobile-nav-item" onClick={toggleNavbar}>
+                      Top Events
+                    </NavLink>
+                    <NavLink className="mobile-nav-item" onClick={toggleNavbar}>
+                      My Account
+                    </NavLink>
+                    <NavLink className="mobile-nav-item" onClick={toggleNavbar}>
+                      Payment Info
+                    </NavLink>
+                    <NavLink className="mobile-nav-item" onClick={toggleNavbar}>
+                      ChatBot
+                    </NavLink>
+                  </Nav>
+                </div>
+                <div className="text-success">
+                  <hr
+                    className="my-0"
+                    style={{
+                      border: "0",
+                      borderTop: "1px solid rgb(0,0,0,0.4)",
+                    }}
+                  />
+                </div>
+                <div className="container" style={{ paddingLeft: "10%" }}>
+                  <Nav className="mobile-nav-items border-0">
+                    <NavLink
+                      className="mobile-nav-item"
+                      onClick={toggleNavbar}
+                      href="about.html"
+                    >
+                      Help Center
+                    </NavLink>
+                    <NavLink
+                      className="mobile-nav-item"
+                      onClick={toggleNavbar}
+                      href="about.html"
+                    >
+                      Support
+                    </NavLink>
+                  </Nav>
+                </div>
               </div>
-              <div className="container" style={{ paddingLeft: "10%" }}>
-                <Nav className="mobile-nav-items border-0">
-                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
-                    href="about.html">
-                    Help Center
-                  </NavLink>
-                  <NavLink className="mobile-nav-item" onClick={toggleNavbar}
-                    href="about.html">
-                    Support
-                  </NavLink>
-                </Nav>
-              </div>
-            </div>
-          )}
+            )}
       </Navbar>
     </div>
   );

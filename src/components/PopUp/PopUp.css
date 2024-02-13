@@ -1,0 +1,54 @@
+.popup-container {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  .sparks-container {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .popup-content {
+    background-color: #4caf50;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .popup-message {
+    display: flex;
+    align-items: center;
+  }
+  
+  .cheers-animation {
+    font-size: 36px;
+    margin-right: 20px;
+    animation: cheers 2s infinite;
+  }
+  
+  @keyframes cheers {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  .message {
+    color: #fff;
+  }
+  

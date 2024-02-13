@@ -9,7 +9,6 @@ import cardImg3 from "../../../assets/img/list_events_card3.jpg";
 import { Choice, EventsHeader, Footer, NavBar } from "../../../components";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import EventNavBar from "../EventNavbar/EventNavbar";
 const EventCategories = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount

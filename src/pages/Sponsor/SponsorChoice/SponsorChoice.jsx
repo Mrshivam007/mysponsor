@@ -22,7 +22,6 @@ import {
   EventsCards,
 } from "../../../data/data";
 import { Link } from "react-router-dom";
-import SponsorNavbar from "../SponsorNavbar/SponsorNavbar";
 const SponsorChoice = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount

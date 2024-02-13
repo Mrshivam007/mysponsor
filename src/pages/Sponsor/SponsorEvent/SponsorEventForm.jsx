@@ -8,8 +8,6 @@ import { createEvent } from "../../../redux/actions/eventAction";
 import { createSponsor } from "../../../redux/actions/sponsorAction";
 import { eventReducer } from "../../../redux/reducer/eventReducer";
 import { useLocation, useNavigate } from "react-router-dom";
-import SponsorNavbar from "../SponsorNavbar/SponsorNavbar";
-import SponsorFooter from "../../../components/Footer/SponsorFooter";
 
 const SponsorEventForm = (props) => {
   useEffect(() => {

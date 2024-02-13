@@ -9,11 +9,15 @@ import {
 import bgimage from "../../../assets/img/circle-bg.png";
 import spevents from "../../../assets/img/sponsor_events-logo.png";
 import { EventsCards, EventsPageCards } from "../../../data/data";
-import { fetchEvent, fetchEventbyId, fetchAllEvent } from "../../../redux/actions/eventAction";
+import {
+  fetchEvent,
+  fetchEventbyId,
+  fetchAllEvent,
+} from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux";
 import MyEventCard from "../MyEventCrad/MyEventCard";
 import EventMobileCard from "./EventMobileCards";
-import EventNavBar from "../EventNavbar/EventNavbar";
+import Loading from "../../../components/Loading/Loading";
 const LiveEvent = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
@@ -28,49 +32,59 @@ const LiveEvent = () => {
     dispatch(fetchAllEvent());
   }, []);
 
-  console.log("dynamic data", eventDetails.eventAllDetails?.live_event);
+  const isLoading = () => {
+    return eventDetails?.loading;
+  };
+
+  console.log("dynamic data", eventDetails);
   console.log("static data", EventsCards);
 
   return (
     <>
-      <div
-        className="events-bg"
-        style={{
-          width: "100%",
-          height: "auto",
-          backgroundImage: `url(${bgimage})`,
-        }}
-      >
-        
-        <div className="events-page-desktop">
-          <EventsHeader title={"Live Events"} logo={spevents} />
-          {/* <SponserE cardData={eventDetails.eventDetails} line={"Live Events"} /> */}
-          <MyEventCard cardData={eventDetails?.eventAllDetails?.live_event} />
-          {/* <SponserE cardData={EventsCards} line={"Concerts"} />
-          <SponserE cardData={EventsCards} line={"Promotional Events"} />
-          <SponserE cardData={EventsCards} line={"Sports Events"} />
-          <SponserE cardData={EventsCards} line={"Comedy Shows"} />
-          <SponserE cardData={EventsCards} line={"Motivational Events"} />
-          <SponserE cardData={EventsCards} line={"Reality Shows"} /> */}
-        </div>
-        <div className="events-page-mobile">
-          <EventMobileCard
-            line={"Live Events"}
-            cardData={eventDetails?.eventAllDetails?.live_event}
-          />
+      {isLoading() ? (
+        <Loading />
+      ) : (
+        <>
           <div
-            className="btn d-block text-white font-weight-bolder"
+            className="events-bg"
             style={{
-              margin: "5%",
-              borderRadius: "10px",
-              backgroundColor: "rgb(0, 78, 169)",
+              width: "100%",
+              height: "auto",
+              backgroundImage: `url(${bgimage})`,
             }}
           >
-            Load More
+            <div className="events-page-desktop">
+              <EventsHeader title={"Live Events"} logo={spevents} />
+              {/* <SponserE cardData={eventDetails.eventDetails} line={"Live Events"} /> */}
+              <MyEventCard
+                cardData={eventDetails?.eventAllDetails?.live_event}
+              />
+              {/* <SponserE cardData={EventsCards} line={"Concerts"} />
+            <SponserE cardData={EventsCards} line={"Promotional Events"} />
+            <SponserE cardData={EventsCards} line={"Sports Events"} />
+            <SponserE cardData={EventsCards} line={"Comedy Shows"} />
+            <SponserE cardData={EventsCards} line={"Motivational Events"} />
+            <SponserE cardData={EventsCards} line={"Reality Shows"} /> */}
+            </div>
+            <div className="events-page-mobile">
+              <EventMobileCard
+                line={"Live Events"}
+                cardData={eventDetails?.eventAllDetails?.live_event}
+              />
+              <div
+                className="btn d-block text-white font-weight-bolder"
+                style={{
+                  margin: "5%",
+                  borderRadius: "10px",
+                  backgroundColor: "rgb(0, 78, 169)",
+                }}
+              >
+                Load More
+              </div>
+            </div>
           </div>
-        </div>
-        
-      </div>
+        </>
+      )}
     </>
   );
 };

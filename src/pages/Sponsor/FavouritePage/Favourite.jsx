@@ -3,7 +3,6 @@ import fav_logo from "../../../assets/img/favorite.png";
 import bgimage from "../../../assets/img/circle-bg.png";
 import { EventsHeader, Footer} from "../../../components";
 import { Tab, Tabs } from "react-bootstrap";
-import SponsorNavbar from "../SponsorNavbar/SponsorNavbar";
 import { fetchEvent } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux";
 import FavouriteEventCard from "./FavouriteEventCard";

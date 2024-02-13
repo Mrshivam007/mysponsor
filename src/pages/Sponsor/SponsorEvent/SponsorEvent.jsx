@@ -31,8 +31,9 @@ const SponsorEvents = () => {
   const isLoading = () => {
     return eventDetails.eventDetailsLoading;
   };
-
-  const cardData = eventDetails?.eventDetails?.upcoming_event;
+  console.log("Details is here", eventDetails);
+  const cardData1 = eventDetails?.eventDetails?.upcoming_event;
+  const cardData2 = eventDetails?.eventDetails?.live_event;
 
   return (
     <div>
@@ -50,11 +51,13 @@ const SponsorEvents = () => {
           >
             <div className="events-page-desktop">
               <EventsHeader title={"Sponsor Events"} logo={spevents} />
-              <SponserE cardData={cardData} />
+              <SponserE line={"Upcoming Events"} cardData={cardData1} />
+              <SponserE line={"Live Events"} cardData={cardData2} />
             </div>
 
             <div className="events-page-mobile">
-              <MobileCards cardData={cardData} />
+              <SponserE line={"Upcoming Events"} cardData={cardData1} />
+              <SponserE line={"Live Events"} cardData={cardData2} />
             </div>
           </div>
         </>

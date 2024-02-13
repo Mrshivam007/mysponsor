@@ -25,18 +25,18 @@ const Banner = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const EventDetails = useSelector(state => state.event)
-  const [successMessage, setSuccessMessage] = useState('');
+  const EventDetails = useSelector((state) => state.event);
+  const [successMessage, setSuccessMessage] = useState("");
   useEffect(() => {
-    dispatch(fetchEvent())
-  }, [])
+    dispatch(fetchEvent());
+  }, []);
   console.log("Event", EventDetails);
 
   const handleSponsorClick = (data) => {
     navigate("/myevent-details", { state: { eventData: data } });
   };
 
-  const cardData = EventDetails.eventDetails?.live_event;
+  const cardData = EventDetails.eventDetails?.upcoming_event;
 
   return (
     <>
@@ -47,7 +47,12 @@ const Banner = () => {
             <div className="page-section banner-info">
               <div
                 className="wrap banner-wrap bg-image"
-                style={{ height: "auto", backgroundImage: `url(${apiurl + data.thumbnail1})` }}
+                style={{
+                  height: "auto",
+                  backgroundImage: `linear-gradient(270deg, rgb(0, 0, 0, 0)40%, rgb(0, 0, 0, 0.7)100%),url(${
+                    apiurl + data.thumbnail1
+                  })`,
+                }}
               >
                 <div className="container" style={{ marginLeft: "4%" }}>
                   <div className="row align-items-center">
@@ -58,7 +63,9 @@ const Banner = () => {
                       </h2>
                       <h2 className="mobile-banner-heading title-section">
                         Rollin out loud <br />
-                        <span style={{ fontSize: "15px" }}>Miami 2023</span>{" "}
+                        <span style={{ fontSize: "15px" }}>
+                          Miami 2023
+                        </span>{" "}
                       </h2>
 
                       <p className="banner-para">
@@ -68,8 +75,12 @@ const Banner = () => {
                         {data.description}
                       </p>
                       <a className="banner-btn btn btn-primary">
-                        <span className="banner-btn-text" onClick={() => handleSponsorClick(data)}
-                        >Sponsor Now</span>
+                        <span
+                          className="banner-btn-text"
+                          onClick={() => handleSponsorClick(data)}
+                        >
+                          Sponsor Now
+                        </span>
                       </a>
                     </div>
                   </div>

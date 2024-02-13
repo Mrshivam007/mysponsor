@@ -2,13 +2,21 @@ import backgroundimg from "../../assets/img/circle-bg.png";
 import React, { useEffect, useState } from "react";
 import { Footer, NavBar } from "../../components";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { login } from "../../redux/actions/authActions";
-import { useDispatch, useSelector } from "react-redux"; 
+import { googleLogin, login } from "../../redux/actions/authActions";
+import { useDispatch, useSelector } from "react-redux";
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
+import { Button } from "react-bootstrap";
+import { jwtDecode } from "jwt-decode";
+
+
+
 
 const Login = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
@@ -34,14 +42,32 @@ const Login = () => {
     }
   }, []);
 
+  const handleSuccess = async (credentialResponse) => {
+    try {
+      const details = jwtDecode(credentialResponse.credential);
+      const { email, given_name, family_name } = details;
+
+      // Dispatch the action to send user details to the API
+      await dispatch(googleLogin(email, given_name, family_name));
+
+      sessionStorage.setItem("registerMessage", "Logged in successfully!");
+
+      console.log("Logged in successfully:", email, given_name, family_name);
+      // window.location.reload();
+    } catch (error) {
+      console.error("Error processing Google login:", error);
+    }
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
       const response = await dispatch(login(email, password));
       // Destructure the error from the response payload
+      sessionStorage.setItem("registerMessage", "Logged in successfully!");
       console.log(response);
-      console.log("Api Error",error);
-      console.log("Api response",response);
+      console.log("Api Error", error);
+      console.log("Api response", response);
       if (error.non_field_errors[0] === "Email or Password is not Valid") {
         const showMessage =
           "Your entered Email or Password is not valid";
@@ -63,7 +89,7 @@ const Login = () => {
       setShowMessage("An error occurred during login. Please try again.");
     }
   };
-  
+
 
   const handleEmailChange = (event) => {
     const newEmail = event.target.value;
@@ -89,6 +115,10 @@ const Login = () => {
       setPasswordError("");
       setIsDisabled(email.length === 0 || !email.includes("@"));
     }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
   };
   return (
     <>
@@ -140,14 +170,34 @@ const Login = () => {
                   <label class="text-black" for="subject">
                     Password
                   </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    value={password}
-                    onChange={handlePasswordChange}
-                    class="form-control"
-                    placeholder="Password"
-                  />
+                  <div style={{ position: "relative" }}>
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      id="subject"
+                      value={password}
+                      onChange={handlePasswordChange}
+                      className="form-control"
+                      placeholder="Password"
+                    />
+                    <span
+                      className="eye-icon"
+                      style={{
+                        position: "absolute",
+                        right: "10px",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                        cursor: "pointer",
+                      }}
+                      onClick={togglePasswordVisibility}
+                    >
+                      {/* Eye icon for displaying password */}
+                      {showPassword ? (
+                        <i className="bi bi-eye-slash-fill"></i>
+                      ) : (
+                        <i className="bi bi-eye-fill"></i>
+                      )}
+                    </span>
+                  </div>
                   <p style={{ color: "red" }}>{passwordError}</p>
                 </div>
               </div>
@@ -155,6 +205,41 @@ const Login = () => {
               <div class="row form-group mt-4">
                 <div class="col-md-12">
                   <input type="submit" value="Submit" class="btn btn-primary" />
+                  <Button
+                    fullWidth
+                    variant="outlined"
+                    sx={{
+                      mt: 3,
+                      mb: 2,
+                      borderColor: "#9D78BD",
+                      textTransform: "none",
+                      position: "relative",
+                    }}
+                  >
+                    <GoogleOAuthProvider clientId="876612212431-oibsejipeff345lvh9bk84d0gv92mk86.apps.googleusercontent.com">
+                      {" "}
+                      <div
+                        style={{
+                          position: "absolute",
+                          left: "10px",
+                          top: "50%",
+                          transform: "translateY(-50%)",
+                        }}
+                      >
+                        {/* <img
+                          src={google}
+                          alt="Google Icon"
+                          style={{ width: "24px" }}
+                        /> */}
+                      </div>
+                      <GoogleLogin
+                        onSuccess={handleSuccess}
+                        // onError={handleError}
+                        style={{ width: '10vh' }}
+                      />
+
+                    </GoogleOAuthProvider>
+                  </Button>
                   <Link style={{ float: "right" }}>Forgot password?</Link>
                 </div>
                 <div class="col-md-12 mt-4 text-lg">

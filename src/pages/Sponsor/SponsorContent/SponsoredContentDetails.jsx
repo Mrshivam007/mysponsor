@@ -12,8 +12,6 @@ import SponsorEventBox from "../SponsorEventBox/SponsorEventBox.jsx";
 import SponsorContentBox from "../SponsorContentBox/SponsorContentBox.jsx";
 import { fetchSponsoredContentById } from "../../../redux/actions/sponsorAction.js";
 import { useDispatch, useSelector } from "react-redux";
-import SponsorNavbar from "../SponsorNavbar/SponsorNavbar.jsx";
-import SponsorFooter from "../../../components/Footer/SponsorFooter.jsx";
 const SponsoredContentDetails = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
@@ -26,7 +24,7 @@ const SponsoredContentDetails = () => {
   }, []);
   const contentDetails = useSelector((state) => state.sponsor);
   // console.log("Data got from ID ",contentDetails);
-  console.log("Data for id ",contentData.content_sponsor_id);
+  console.log("Data for id ", contentData.content_sponsor_id);
   return (
     <>
       <div
@@ -37,10 +35,8 @@ const SponsoredContentDetails = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        
         <SponsorContentBox contentData={contentData} />
         {/* <SponserE cardData={EventsCards} /> */}
-        
       </div>
     </>
   );

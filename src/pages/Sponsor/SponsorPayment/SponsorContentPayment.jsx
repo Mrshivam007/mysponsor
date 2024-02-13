@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./payment.css";
 import bgimage from "../../../assets/img/circle-bg.png";
-import SponsorNavbar from "../SponsorNavbar/SponsorNavbar";
 import { Footer } from "../../../components";
 import SponsorpayCard from "./SponsorpayCard";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -11,7 +10,6 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { createSponsor } from "../../../redux/actions/sponsorAction";
 import apiurl from "../../../constant/config";
-import SponsorFooter from "../../../components/Footer/SponsorFooter";
 
 const SponsorContentPayment = () => {
   useEffect(() => {

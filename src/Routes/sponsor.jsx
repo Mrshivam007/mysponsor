@@ -28,12 +28,14 @@ import {
   YoutubeContentSponsor,
 } from "../pages/Sponsor";
 import SponsorContentPayment from "../pages/Sponsor/SponsorPayment/SponsorContentPayment";
-import SponsorNavbar from "../pages/Sponsor/SponsorNavbar/SponsorNavbar";
-import SponsorFooter from "../components/Footer/SponsorFooter";
+import About from "../components/About/About";
+import Contact from "../components/Contact/Contact";
+import ChatManage from "../components/ChatComponent/ChatManage";
+import { Footer, NavBar } from "../components";
 const SponsorRoutes = () => {
   return (
     <>
-    <SponsorNavbar />
+    <NavBar />
       <Routes>
         <Route path="/" element={<SponsorHome />} />
         <Route path="/choice" element={<SponsorChoice />} />
@@ -61,6 +63,7 @@ const SponsorRoutes = () => {
         <Route path="/events/upcoming_event" element={<UpcomingEvent />} />
         <Route path="/events/previous_event" element={<PreviousEvent />} />
         <Route path="/create_event" element={<ListeventsForm />} />
+        <Route path="/chat" element={<ChatManage />} />
         <Route
           path="/update_UpcomingEvent"
           element={<Update_UpcomingEvent />}
@@ -71,10 +74,12 @@ const SponsorRoutes = () => {
         <Route path="/profile" element={<SponsorProfile />} />
         <Route path="/sponsor_payment" element={<SponsorPayment />} />
         <Route path="/sponsor_content_payment" element={<SponsorContentPayment />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Navigate to={"/"} />} />
         <Route path="/signup" element={<Navigate to={"/"} />} />
       </Routes>
-      <SponsorFooter />
+      <Footer />
     </>
   );
 };

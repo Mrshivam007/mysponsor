@@ -9,7 +9,6 @@ import cardImg3 from "../../../assets/img/list_events_card3.jpg";
 import { EventsHeader, Footer, NavBar } from "../../../components";
 import { Link } from "react-router-dom";
 import YourEvent from "../YourEvent/YourEvent";
-import EventNavBar from "../EventNavbar/EventNavbar";
 const EventHome = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount

@@ -15,13 +15,12 @@ import {
   Update_UpcomingEvent,
 } from "../pages/Event";
 import EventProfile from "../pages/Event/EventProfile/EventProfile";
-import EventFooter from "../components/Footer/EventFooter";
-import EventNavBar from "../pages/Event/EventNavbar/EventNavbar";
 import EventPayment from "../pages/Event/EventPayment/EventPayment";
+import { Footer, NavBar } from "../components";
 const EventRoutes = () => {
   return (
     <>
-    <EventNavBar />
+      <NavBar />
       <Routes>
         <Route path="/" element={<EventHome />} />
         <Route path="/events" element={<EventCategories />} />
@@ -47,7 +46,7 @@ const EventRoutes = () => {
         <Route path="/login" element={<Navigate to={"/"} />} />
         <Route path="/signup" element={<Navigate to={"/"} />} />
       </Routes>
-      <EventFooter />
+      <Footer />
     </>
   );
 };

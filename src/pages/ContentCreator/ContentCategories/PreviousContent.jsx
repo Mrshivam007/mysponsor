@@ -5,6 +5,7 @@ import { EventsHeader, Footer, NavBar } from "../../../components";
 import { fetchContent } from "../../../redux/actions/contentAction";
 import { useDispatch, useSelector } from "react-redux";
 import MyContentCard from "../MyContentCard/MyContentCard";
+import Loading from "../../../components/Loading/Loading";
 const PreviousContent = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
@@ -31,49 +32,60 @@ const PreviousContent = () => {
     }
   }, []);
 
-  console.log("Content Data", ContentDetails.contentDetails);
+  console.log("Content Data", ContentDetails);
+
+  const isLoading = () => {
+    return ContentDetails?.loading;
+  };
 
   return (
     <>
-      <div
-        className="list-events-bg"
-        style={{
-          width: "100%",
-          height: "auto",
-          backgroundImage: `url(${bgimage})`,
-        }}
-      >
-        
-        <EventsHeader
-          title={"See your listed contents here "}
-          logo={listevents}
-        />
-        {/* <ContentCard /> */}
-        {successMessage && (
-          <div className="container">
-            <div
-              class="alert alert-success"
-              role="alert"
-              style={{ borderRadius: "10px" }}
-            >
-              {successMessage}
-            </div>
+      {isLoading() ? (
+        <Loading />
+      ) : (
+        <>
+          <div
+            className="list-events-bg"
+            style={{
+              width: "100%",
+              height: "auto",
+              backgroundImage: `url(${bgimage})`,
+            }}
+          >
+            <EventsHeader
+              title={"See your listed contents here "}
+              logo={listevents}
+            />
+            {/* <ContentCard /> */}
+            {successMessage && (
+              <div className="container">
+                <div
+                  class="alert alert-success"
+                  role="alert"
+                  style={{ borderRadius: "10px" }}
+                >
+                  {successMessage}
+                </div>
+              </div>
+            )}
+            {deletionMessage && (
+              <div className="container">
+                <div
+                  class="alert alert-danger"
+                  role="alert"
+                  style={{ borderRadius: "10px" }}
+                >
+                  {deletionMessage}
+                </div>
+              </div>
+            )}
+            <MyContentCard
+              heading={"My Previous Content"}
+              cardData={ContentDetails.contentDetails?.past_content}
+            />
           </div>
-        )}
-        {deletionMessage && (
-          <div className="container">
-            <div
-              class="alert alert-danger"
-              role="alert"
-              style={{ borderRadius: "10px" }}
-            >
-              {deletionMessage}
-            </div>
-          </div>
-        )}
-        <MyContentCard heading={"My Previous Content"} cardData={ContentDetails.contentDetails?.past_content} />
-        
-      </div>
+        </>
+      )}
     </>
   );
 };

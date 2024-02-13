@@ -10,7 +10,6 @@ import {
   SponserE,
 } from "../../../components";
 import { EventsCards } from "../../../data/data";
-import SponsorNavbar from "../SponsorNavbar/SponsorNavbar";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEvent } from "../../../redux/actions/eventAction";
 

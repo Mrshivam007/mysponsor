@@ -16,14 +16,13 @@ import {
   YourContent,
 } from "../pages/ContentCreator";
 import ContentProfile from "../pages/ContentCreator/ContentProfile/ContentProfile";
-import ContentNavBar from "../components/Navbar/ContentNavbar";
-import ContentFooter from "../components/Footer/ContentFooter";
 import ContentPayment from "../pages/ContentCreator/ContentPayment/ContentPayment";
+import { Footer, NavBar } from "../components";
 
 const ContentRoutes = () => {
   return (
     <>
-      <ContentNavBar />
+      <NavBar />
       <Routes>
         <Route path="/" element={<CCHome />} />
         <Route path="/create_content" element={<CCForm />} />
@@ -60,7 +59,7 @@ const ContentRoutes = () => {
         <Route path="/login" element={<Navigate to={"/"} />} />
         <Route path="/signup" element={<Navigate to={"/"} />} />
       </Routes>
-      <ContentFooter />
+      <Footer />
     </>
   );
 };

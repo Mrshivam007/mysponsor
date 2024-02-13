@@ -9,12 +9,16 @@ import {
 import bgimage from "../../../assets/img/circle-bg.png";
 import spevents from "../../../assets/img/sponsor_events-logo.png";
 import { EventsCards, EventsPageCards } from "../../../data/data";
-import { fetchEvent, fetchEventbyId, fetchAllEvent } from "../../../redux/actions/eventAction";
+import {
+  fetchEvent,
+  fetchEventbyId,
+  fetchAllEvent,
+} from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux";
 import MyEventCard from "../MyEventCrad/MyEventCard";
 import { useLocation } from "react-router-dom";
 import EventMobileCard from "./EventMobileCards";
-import EventNavBar from "../EventNavbar/EventNavbar";
+import Loading from "../../../components/Loading/Loading";
 const UpcomingEvent = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
@@ -46,93 +50,103 @@ const UpcomingEvent = () => {
     }
   }, []);
 
+  const isLoading = () => {
+    return eventDetails?.loading;
+  };
+
   console.log("dynamic data", eventDetails?.eventAllDetails?.upcoming_event);
   console.log("static data", EventsCards);
 
   return (
     <>
-      <div
-        className="events-bg"
-        style={{
-          width: "100%",
-          height: "auto",
-          backgroundImage: `url(${bgimage})`,
-        }}
-      >
-        
-        <div className="events-page-desktop">
-          <EventsHeader title={"Upcoming Event"} logo={spevents} />
-          {/* <SponserE cardData={eventDetails?.eventAllDetails?.upcoming_event} line={"Upcoming Event"} /> */}
-          {successMessage && (
-            <div className="container">
-              <div
-                class="alert alert-success"
-                role="alert"
-                style={{ borderRadius: "10px" }}
-              >
-                {successMessage}
-              </div>
-            </div>
-          )}
-          {deletionMessage && (
-            <div className="container">
-              <div
-                class="alert alert-danger"
-                role="alert"
-                style={{ borderRadius: "10px" }}
-              >
-                {deletionMessage}
-              </div>
-            </div>
-          )}
-          <MyEventCard cardData={eventDetails?.eventAllDetails?.upcoming_event} />
-          {/* <SponserE cardData={EventsCards} line={"Concerts"} />
+      {isLoading() ? (
+        <Loading />
+      ) : (
+        <>
+          <div
+            className="events-bg"
+            style={{
+              width: "100%",
+              height: "auto",
+              backgroundImage: `url(${bgimage})`,
+            }}
+          >
+            <div className="events-page-desktop">
+              <EventsHeader title={"Upcoming Event"} logo={spevents} />
+              {/* <SponserE cardData={eventDetails?.eventAllDetails?.upcoming_event} line={"Upcoming Event"} /> */}
+              {successMessage && (
+                <div className="container">
+                  <div
+                    class="alert alert-success"
+                    role="alert"
+                    style={{ borderRadius: "10px" }}
+                  >
+                    {successMessage}
+                  </div>
+                </div>
+              )}
+              {deletionMessage && (
+                <div className="container">
+                  <div
+                    class="alert alert-danger"
+                    role="alert"
+                    style={{ borderRadius: "10px" }}
+                  >
+                    {deletionMessage}
+                  </div>
+                </div>
+              )}
+              <MyEventCard
+                cardData={eventDetails?.eventAllDetails?.upcoming_event}
+              />
+              {/* <SponserE cardData={EventsCards} line={"Concerts"} />
           <SponserE cardData={EventsCards} line={"Promotional Events"} />
           <SponserE cardData={EventsCards} line={"Sports Events"} />
           <SponserE cardData={EventsCards} line={"Comedy Shows"} />
           <SponserE cardData={EventsCards} line={"Motivational Events"} />
           <SponserE cardData={EventsCards} line={"Reality Shows"} /> */}
-        </div>
-        <div className="events-page-mobile">
-        {successMessage && (
-            <div className="container">
+            </div>
+            <div className="events-page-mobile">
+              {successMessage && (
+                <div className="container">
+                  <div
+                    class="alert alert-success"
+                    role="alert"
+                    style={{ borderRadius: "10px" }}
+                  >
+                    {successMessage}
+                  </div>
+                </div>
+              )}
+              {deletionMessage && (
+                <div className="container">
+                  <div
+                    class="alert alert-danger"
+                    role="alert"
+                    style={{ borderRadius: "10px" }}
+                  >
+                    {deletionMessage}
+                  </div>
+                </div>
+              )}
+              <EventMobileCard
+                line={"Upcoming Event"}
+                cardData={eventDetails?.eventAllDetails?.upcoming_event}
+              />
               <div
-                class="alert alert-success"
-                role="alert"
-                style={{ borderRadius: "10px" }}
+                className="btn d-block text-white font-weight-bolder"
+                style={{
+                  margin: "5%",
+                  borderRadius: "10px",
+                  backgroundColor: "rgb(0, 78, 169)",
+                }}
               >
-                {successMessage}
+                Load More
               </div>
             </div>
-          )}
-          {deletionMessage && (
-            <div className="container">
-              <div
-                class="alert alert-danger"
-                role="alert"
-                style={{ borderRadius: "10px" }}
-              >
-                {deletionMessage}
-              </div>
-            </div>
-          )}
-          <EventMobileCard
-            line={"Upcoming Event"}
-            cardData={eventDetails?.eventAllDetails?.upcoming_event}
-          />
-          <div
-            className="btn d-block text-white font-weight-bolder"
-            style={{
-              margin: "5%",
-              borderRadius: "10px",
-              backgroundColor: "rgb(0, 78, 169)",
-            }}
-          >
-            Load More
           </div>
-        </div>
-        
-      </div>
+        </>
+      )}
     </>
   );
 };

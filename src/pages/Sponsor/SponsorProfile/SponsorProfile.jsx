@@ -2,14 +2,12 @@ import React from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import bgimage from "../../../assets/img/circle-bg.png";
 import Footer from "../../../components/Footer/Footer";
-import SponsorNavbar from "../SponsorNavbar/SponsorNavbar";
 import SponsorProfileInfo from "./SponsorProfileInfo";
 import SponsorSecurity from "./SponsorSecurity";
 import SponsorNotification from "./SponsorNotification";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../../redux/actions/authActions";
-import SponsorFooter from "../../../components/Footer/SponsorFooter";
 const SponsorProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();

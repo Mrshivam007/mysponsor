@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "../../ContentCreator/ListContent/form.css";
-import { Footer, NavBar } from "../../../components";
 import backgroundimg from "../../../assets/img/circle-bg.png";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +8,6 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { eventReducer } from "../../../redux/reducer/eventReducer";
 import { useNavigate } from "react-router-dom";
-import EventNavBar from "../EventNavbar/EventNavbar";
 
 const ListeventsForm = () => {
   useEffect(() => {

@@ -6,11 +6,13 @@ import { sponsorReducer } from "./reducer/sponsorReducer";
 import { profileReducer } from "./reducer/profileReducer";
 import { adminReducer } from "./reducer/adminReducer";
 import { paymentReducer } from "./reducer/paymentReducer";
+import { eventCategoryReducer } from "./reducer/eventCategoryReducer";
 
 
 const reducer = combineReducers({
     auth: authReducer,
     event: eventReducer,
+    eventCategory: eventCategoryReducer,
     content: contentReducer,
     sponsor: sponsorReducer,
     sponsorProfile: profileReducer,
