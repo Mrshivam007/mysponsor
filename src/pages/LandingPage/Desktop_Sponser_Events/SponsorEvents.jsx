@@ -55,7 +55,7 @@ const SponsorEvents = () => {
               backgroundImage: `url(${bgimage})`,
             }}
           >
-            <NavBar />
+            
             <div className="events-page-desktop">
               <EventsHeader title={"Sponsor Events"} logo={spevents} />
               <SponserE line={"Upcoming Events"} cardData={cardData1} />
@@ -67,7 +67,7 @@ const SponsorEvents = () => {
               <SponserE line={"Upcoming Events"} cardData={cardData1} />
               <SponserE line={"Live Events"} cardData={cardData2} />
             </div>
-            <Footer />
+            
           </div>
         </>
       )}

@@ -26,10 +26,10 @@ const ContentDetails = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <NavBar />
+        
         <MyContentBox contentData={contentData} />
         <SponserE cardData={EventsCards} />
-        <Footer />
+        
       </div>
     </>
   );

@@ -34,7 +34,7 @@ const YoutubeContent = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <NavBar />
+        
         <EventsHeader title={"Youtube Content"} logo={cclogo} />
         <ContentCard
           line={"Sponsor Youtube creators"}
@@ -50,7 +50,7 @@ const YoutubeContent = () => {
         <div className="cc-cards-mobile">
           <SponsorCC cardData={ContentCreators4} />
         </div> */}
-        <Footer />
+        
       </div>
     </>
   );

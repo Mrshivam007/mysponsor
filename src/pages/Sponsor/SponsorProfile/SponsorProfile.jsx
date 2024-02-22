@@ -8,6 +8,7 @@ import SponsorNotification from "./SponsorNotification";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../../redux/actions/authActions";
+import BnakAccountDetails from "./BankAccountDetails";
 const SponsorProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -40,6 +41,9 @@ const SponsorProfile = () => {
             </Tab>
             <Tab eventKey="notification" title="Notification">
               <SponsorNotification />
+            </Tab>
+            <Tab eventKey="bankDetails" title="Bank Details">
+              <BnakAccountDetails />
             </Tab>
           </Tabs>
         </div>

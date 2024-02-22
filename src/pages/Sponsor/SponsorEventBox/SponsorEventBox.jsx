@@ -44,6 +44,8 @@ const SponsorEventBox = (eventData) => {
   const sponsoring_items = cardData?.sponsoring_items || [];
   const [bannerImage, setBannerImage] = useState(null);
   const [bannerImageFileName, setBannerImageFileName] = useState(null);
+  const [billImage, setBillImage] = useState(null);
+  const [billImageFileName, setBillImageFileName] = useState(null);
   const [ledImage, setLedImage] = useState(null);
   const [ledImageFileName, setLedImageFileName] = useState(null);
   const [ledVideo, setLedVideo] = useState(null);
@@ -71,6 +73,13 @@ const SponsorEventBox = (eventData) => {
     setBannerImageFileName(uniqueFilename); // Save the unique filename in state
   };
 
+  const handleBillImgChange = (e) => {
+    const file = e.target.files[0];
+    const uniqueFilename = generateUniqueFilename(file.name, 0);
+    setBillImage(file);
+    setBillImageFileName(uniqueFilename); // Save the unique filename in state
+  };
+
   const handleLedImgChange = (e) => {
     const file = e.target.files[0];
     const uniqueFilename = generateUniqueFilename(file.name, 0);
@@ -87,25 +96,43 @@ const SponsorEventBox = (eventData) => {
 
   const handleSubmitClick = async (e) => {
     e.preventDefault();
-    // if (Object.keys(errors).length === 0) {
+    const sponsoringItems = cardData.sponsoring_items || []; // Ensure it's an array
+
     const formData = new FormData();
     formData.append("sponsor_id", cardData.sponsor_id);
-    formData.append("banner_image", bannerImage, bannerImageFileName || "");
-    formData.append("led_image", ledImage, ledImageFileName || "");
-    formData.append("led_video", ledVideo || "");
-    formData.append("bill_text", billText || preBillText);
+
+    // Check if each sponsoring item is included in the sponsoringItems array
+    sponsoringItems.map((item) => {
+      if (item.sponsoring_items === "banner") {
+        if (bannerImage != null){
+        formData.append("banner_image", bannerImage, bannerImageFileName || "");
+        }
+      } else if (item.sponsoring_items === "led_screen") {
+        if (ledImage != null){
+          formData.append("led_image", ledImage, ledImageFileName || "");
+        }
+        if (ledVideo != null){
+          formData.append("led_video", ledVideo, ledVideoFileName || "");
+        }
+      } else if (item.sponsoring_items === "bill_board") {
+          if (billImage != null){
+        formData.append("bill_board", billImage, billImageFileName || "");
+          }
+      }
+    });
+
+
     try {
       // Make POST API call
       await dispatch(updateSponsoringItem(formData));
-      sessionStorage.setItem(
-        "successMessage",
-        "Promotion listed successfully!"
-      );
-      navigate("/sponsored_event"); // Replace '/' with the desired route for the home page
+      sessionStorage.setItem("successMessage", "Promotion listed successfully!");
+      navigate("/sponsored_event"); // Adjust the navigation route as needed
     } catch (error) {
       console.log("An error occurred during API calls:", error);
     }
   };
+
+
 
   // useEffect(() => {
   //   // Retrieve success message from sessionStorage
@@ -164,7 +191,7 @@ const SponsorEventBox = (eventData) => {
         sessionStorage.setItem(
           "successMessage",
           "Promotion listed successfully!"
-        ); 
+        );
         navigate("/sponsored_event"); // Replace '/' with the desired route for the home page
       } else {
         console.log("An error occurred while posting the promotion");
@@ -183,7 +210,7 @@ const SponsorEventBox = (eventData) => {
     <>
       {/* DESKTOP VIEW  */}
       <div className="container payments-desktop desktop-view">
-      {errorMessage && (
+        {errorMessage && (
           <div className="container">
             <div
               className="alert alert-danger"
@@ -329,19 +356,38 @@ const SponsorEventBox = (eventData) => {
               {item.sponsoring_items === "bill_board" && (
                 <div
                   className="box photo-box bg-white d-flex justify-content-center align-items-start p-3"
-                  style={{ width: "40%" }}
+                  style={{ width: "50%" }}
                 >
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add BillBoard Text Info</h5>
+                    <h5 className="font-weight-bold">Add Bill-Board Image</h5>
                     <input
-                      type="text"
-                      id="BillText"
-                      value={billText || preBillText}
-                      onChange={(e) => setBillText(e.target.value)}
-                      readOnly={preBillText ? true : false}
-                      className="form-control"
-                      placeholder="Enter BillBoard Text"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleBillImgChange}
+                      style={{ width: "74%", borderRadius: "0" }}
                     />
+                    {cardData?.bill_board && billImage === null ? (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          className="mx-auto"
+                          src={apiurl + cardData?.bill_board}
+                          alt="Preview"
+                          width="200"
+                        />
+                      </div>
+                    ) : null}
+                    {billImage ? (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          className="mx-auto"
+                          src={URL.createObjectURL(billImage)}
+                          alt=""
+                          width="200"
+                        />
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               )}
@@ -480,19 +526,19 @@ const SponsorEventBox = (eventData) => {
                   Upload an image to be displayed on the LED
                 </div>
               ) : null}
-              {item.sponsoring_items === "led_screen" &&
+              {/* {item.sponsoring_items === "led_screen" &&
                 !(ledVideo || cardData?.led_video) ? (
                 <div className="alert alert-danger">
                   Upload a video to be displayed on the LED
                 </div>
-              ) : null}
+              ) : null} */}
             </>
           ))}
           <div className="container">
             <input
               type="submit"
               className="btn btn-success submit py-1 px-3"
-              value="List Promotion"
+              value="Update Promotion"
               onClick={handleSubmitClick}
             />
           </div>
@@ -517,7 +563,7 @@ const SponsorEventBox = (eventData) => {
 
       {/* MOBILE VIEW */}
       <div className="container mobile-view sponsored-events-mobile">
-      {errorMessage && (
+        {errorMessage && (
           <div className="container">
             <div
               className="alert alert-danger"
@@ -660,21 +706,40 @@ const SponsorEventBox = (eventData) => {
               className="box1 mt-2 d-flex justify-content-center"
             >
               {item.sponsoring_items === "bill_board" && (
-                <div
-                  className="box photo-box bg-white d-flex justify-content-center align-items-start p-3"
-                  style={{ width: "100%" }}
-                >
+                <div className="box photo-box bg-white d-flex justify-content-center align-items-start p-3">
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add BillBoard Text Info</h5>
+                    <h5 className="font-weight-bold">Add Bill-Board Image</h5>
                     <input
-                      type="text"
-                      id="BillText"
-                      value={billText || preBillText}
-                      onChange={(e) => setBillText(e.target.value)}
-                      readOnly={preBillText ? true : false}
-                      className="form-control"
-                      placeholder="Enter BillBoard Text"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleBillImgChange}
+                      style={{ width: "74%", borderRadius: "0" }}
                     />
+                    {cardData?.bill_board && billImage === null && (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          className="mx-auto"
+                          src={
+                            apiurl + cardData?.bill_board ||
+                            URL.createObjectURL(billImage)
+                          }
+                          alt="Preview"
+                          width="200"
+                        />
+                      </div>
+                    )}
+                    {billImage && (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          className="mx-auto"
+                          src={URL.createObjectURL(billImage)}
+                          alt="Preview"
+                          width="200"
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
@@ -819,7 +884,7 @@ const SponsorEventBox = (eventData) => {
           <input
             type="submit"
             className="btn btn-success submit py-1 px-3"
-            value="List Promotion"
+            value="Update Promotion"
             onClick={handleSubmitClick}
           />
         </div>

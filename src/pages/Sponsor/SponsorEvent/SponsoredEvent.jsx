@@ -8,8 +8,12 @@ import { useDispatch, useSelector } from "react-redux";
 import apiurl from "../../../constant/config";
 import { Link, useNavigate } from "react-router-dom";
 import Loading from "../../../components/Loading/Loading";
+import SuccessToast from "../../../components/Toast/Success";
 
 const SponsoredEvent = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
+  }, []);
   const auth = useSelector((state) => state.auth);
   const { userDetails } = auth;
   const sponsor_id = userDetails.user_id;
@@ -59,17 +63,7 @@ const SponsoredEvent = () => {
             }}
           >
             <EventsHeader title={"Your Sponsored Event!"} logo={listevents} />
-            {successMessage && (
-              <div className="container">
-                <div
-                  class="alert alert-success"
-                  role="alert"
-                  style={{ borderRadius: "10px" }}
-                >
-                  {successMessage}
-                </div>
-              </div>
-            )}
+            {successMessage && <SuccessToast message={successMessage} />}
             <h1></h1>
             <div className="desktop-view mt-4">
               <div className="container">

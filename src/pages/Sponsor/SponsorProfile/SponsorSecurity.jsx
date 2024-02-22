@@ -1,6 +1,97 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./profile.css";
+import { useDispatch, useSelector } from "react-redux";
+import { passwordReset } from "../../../redux/actions/authActions";
 const SponsorSecurity = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
+  }, []);
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [currentPasswordError, setCurrentPasswordError] = useState("");
+  const [password1, setPassword1] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [password1Error, setPassword1Error] = useState("");
+  const [password2Error, setPassword2Error] = useState("");
+  const [showMessage, setShowMessage] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errors, setErrors] = useState({});
+  const { passwordResetDetails, passwordResetError } = auth;
+
+  console.log("password reset error ", passwordResetError);
+  console.log("password reset detail ", passwordResetDetails);
+
+
+  const validateForm = () => {
+    const errorsObj = {};
+
+
+    if (password1.trim() === "") {
+      errorsObj.password1 = "New Password is required";
+    }
+    if (password2.trim() === "") {
+      errorsObj.password2 = "Confirm Password is required";
+    }
+
+    // ... validate other fields similarly
+    setErrors(errorsObj);
+    return Object.keys(errorsObj).length === 0;
+  };
+
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    const isFormValid = validateForm();
+    if (isFormValid) {
+
+      try {
+        await dispatch(passwordReset(password1, password2));
+        // Destructure the error from the response payload
+        sessionStorage.setItem("passwordMessage", "Password change successfully!");
+      } catch (error) {
+        // Handle any errors that occur during the dispatch
+        console.log("error message", error);
+        console.error("An error occurred during login:", error);
+        // Optionally, you can set an error message for the user
+        setShowMessage("An error occurred during login. Please try again.");
+      }
+    }
+  };
+
+  const handlePassword = (event) => {
+    const newPassword = event.target.value;
+    setPassword1(newPassword);
+
+    // Check password length
+    if (newPassword.length < 8) {
+      setPassword1Error("Password must be at least 8 characters long");
+      return;
+    }
+
+    // Check password strength
+    const hasAlphaNumeric = /^(?=.*[a-zA-Z])(?=.*[0-9])/.test(newPassword);
+    if (!hasAlphaNumeric) {
+      setPassword1Error("Password must contain both letters and numbers");
+      return;
+    }
+
+    setPassword1Error("");
+  };
+
+  const handleConfirmPassword = (event) => {
+    const newConfirmPassword = event.target.value;
+    setPassword2(newConfirmPassword);
+    if (newConfirmPassword !== password1) {
+      setPassword2Error("Passwords do not match");
+    } else {
+      setPassword2Error("");
+    }
+  };
+
+  console.log("User Details password ", auth);
+
   return (
     <>
       <div className="container-xl px-4 mt-4">
@@ -9,18 +100,19 @@ const SponsorSecurity = () => {
             <div className="card mb-4">
               <div className="card-header">Change Password</div>
               <div className="card-body">
-                <form>
-                  <div className="mb-3">
+                <form onSubmit={submitHandler}>
+                  {/* <div className="mb-3">
                     <label className="small mb-1" for="currentPassword">
                       Current Password
                     </label>
                     <input
                       className="form-control"
                       id="currentPassword"
+                      value={currentPassword}
                       type="password"
                       placeholder="Enter current password"
                     />
-                  </div>
+                  </div> */}
                   <div className="mb-3">
                     <label className="small mb-1" for="newPassword">
                       New Password
@@ -28,9 +120,18 @@ const SponsorSecurity = () => {
                     <input
                       className="form-control"
                       id="newPassword"
+                      value={password1}
+                      onChange={(e) => {
+                        setPassword1(e.target.value);
+                        handlePassword(e);
+                      }}
                       type="password"
                       placeholder="Enter new password"
                     />
+                    <p className="error-msg">{password1Error}</p>
+                    {errors.password == "" ? (
+                      <p className="error-msg">{errors.password}</p>
+                    ) : null}
                   </div>
                   <div className="mb-3">
                     <label className="small mb-1" for="confirmPassword">
@@ -39,11 +140,20 @@ const SponsorSecurity = () => {
                     <input
                       className="form-control"
                       id="confirmPassword"
+                      value={password2}
+                      onChange={(e) => {
+                        setPassword2(e.target.value);
+                        handleConfirmPassword(e);
+                      }}
                       type="password"
                       placeholder="Confirm new password"
                     />
+                    <p className="error-msg">{password2Error}</p>
+                    {errors.password2 == "" ? (
+                      <p className="error-msg">{errors.password2}</p>
+                    ) : null}
                   </div>
-                  <button className="btn btn-primary" type="button">
+                  <button className="btn btn-primary"  type="submit">
                     Save
                   </button>
                 </form>

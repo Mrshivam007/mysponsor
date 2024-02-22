@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import apiurl from "../../../constant/config";
 import { Link, useNavigate } from "react-router-dom";
 import Loading from "../../../components/Loading/Loading";
+import SuccessToast from "../../../components/Toast/Success";
 
 const SponsoredContent = () => {
   useEffect(() => {
@@ -61,17 +62,8 @@ const SponsoredContent = () => {
           >
             <EventsHeader title={"Your Sponsored Content!"} logo={listevents} />
             <h1></h1>
-            {successMessage && (
-              <div className="container">
-                <div
-                  class="alert alert-success"
-                  role="alert"
-                  style={{ borderRadius: "10px" }}
-                >
-                  {successMessage}
-                </div>
-              </div>
-            )}
+            {successMessage && <SuccessToast message={successMessage} />}
+
             <div className="desktop-view mt-4">
               <div className="container">
                 {cardData &&
@@ -143,7 +135,7 @@ const SponsoredContent = () => {
                                   </h4>
                                   <div className="d-flex justify-content-around text-lg mt-3">
                                     {data.content_id.sponsoring_content_items
-                                      .filter((item) => item.is_sponsored) // Filter only items where is_sponsored is true
+                                      // .filter((item) => item.is_sponsored) // Filter only items where is_sponsored is true
                                       .map((item, index) => (
                                         <span
                                           key={index}
@@ -187,14 +179,15 @@ const SponsoredContent = () => {
                                       Total amount sponsored
                                     </h6>
                                     <h5>
-                                      {data.content_id.sponsoring_content_items
+                                      {/* {data.content_id.sponsoring_content_items
                                         .filter((item) => item.is_sponsored)
                                         .reduce(
                                           (total, item) =>
                                             total + parseInt(item.price, 10),
                                           0
                                         )
-                                        .toLocaleString()}{" "}
+                                        .toLocaleString()}{" "} */}
+                                        {data.amount}
                                       {/* Display the sum of prices */}
                                     </h5>
                                   </div>
@@ -250,7 +243,7 @@ const SponsoredContent = () => {
                                     </h4>
                                     <div className="d-flex justify-content-around text-lg">
                                       {data.content_id.sponsoring_content_items
-                                        .filter((item) => item.is_sponsored) // Filter only items where is_sponsored is true
+                                        // .filter((item) => item.is_sponsored) // Filter only items where is_sponsored is true
                                         .map((item, index) => (
                                           <span
                                             key={index}
@@ -280,14 +273,7 @@ const SponsoredContent = () => {
                                         Total amount sponsored
                                       </p>
                                       <p className="mb-1">
-                                        {data.content_id.sponsoring_content_items
-                                          .filter((item) => item.is_sponsored)
-                                          .reduce(
-                                            (total, item) =>
-                                              total + parseInt(item.price, 10),
-                                            0
-                                          )
-                                          .toLocaleString()}
+                                        {data.amount}
                                       </p>
                                     </div>
                                   </div>

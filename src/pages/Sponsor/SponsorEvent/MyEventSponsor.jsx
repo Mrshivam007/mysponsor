@@ -28,10 +28,10 @@ const SponsorButton = ({ item, isSelected, onButtonClick }) => {
             isSelected
               ? { backgroundColor: "red", color: "white" }
               : {
-                  color: "rgb(0, 78, 169)",
-                  backgroundColor: "white",
-                  border: "2px solid rgb(0, 78, 169)",
-                }
+                color: "rgb(0, 78, 169)",
+                backgroundColor: "white",
+                border: "2px solid rgb(0, 78, 169)",
+              }
           }
         >
           {isSelected ? "Remove" : "Buy Now"}
@@ -130,6 +130,13 @@ const MyEventSponsor = (eventData) => {
   };
 
   const handleSponsorClick = () => {
+    const areItemsAvailable = selectedItems.length > 0 && selectedItems.every(item => item.sponsoring_items);
+
+    if (!areItemsAvailable) {
+      // Items are not available, do something like showing a message to the user
+      return;
+    }
+
     const selectedItemsData = {
       cardData,
       sponsoring_items: selectedItems.map((item) => item.sponsoring_items),
@@ -138,10 +145,11 @@ const MyEventSponsor = (eventData) => {
 
     navigate("/sponsor_payment", { state: selectedItemsData });
   };
+
   return (
     <>
       {/* DESKTOP VIEW  */}
-      <div className="container payments-desktop desktop-view">
+      <div className="container payments-desktop desktop-view" style={{ paddingBottom: '1%' }}>
         <div className="pay-box">
           <div className="row row-cols-2">
             <div className="col-6">
@@ -289,6 +297,7 @@ const MyEventSponsor = (eventData) => {
                     borderRadius: "10px",
                   }}
                   onClick={handleSponsorClick}
+                  disabled={selectedItems.length === 0 || !selectedItems.every(item => item.sponsoring_items)}
                 >
                   Sponsor
                 </button>
@@ -445,6 +454,7 @@ const MyEventSponsor = (eventData) => {
                 borderRadius: "10px",
               }}
               onClick={handleSponsorClick}
+              disabled={selectedItems.length === 0 || !selectedItems.every(item => item.sponsoring_items)}
             >
               Sponsor
             </button>

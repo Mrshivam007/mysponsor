@@ -13,10 +13,10 @@ const PaymentGateway = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <NavBar />
+        
         <SponsorPay />
         <SponserE line={"Festival Events"} cardData={EventsCards} />
-        <Footer />
+        
       </div>
     </>
   );

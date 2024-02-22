@@ -47,7 +47,7 @@ const SponsorContentC = () => {
               backgroundImage: `url(${bgimage})`,
             }}
           >
-            <NavBar />
+            
             <EventsHeader title={"Sponsor Content Creators"} logo={cclogo} />
             <ContentCard
               line={"Upcoming Content"}
@@ -71,7 +71,7 @@ const SponsorContentC = () => {
                 cardData={ContentDetails.contentDetails?.upcoming_content}
               />
             </div>
-            <Footer />
+            
           </div>
         </>
       )}

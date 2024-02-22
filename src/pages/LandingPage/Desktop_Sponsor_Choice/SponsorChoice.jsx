@@ -40,7 +40,7 @@ const SponsorChoice = () => {
 
   return (
     <>
-      <NavBar />
+      
       <div
         className="events-bg"
         style={{
@@ -111,7 +111,7 @@ const SponsorChoice = () => {
         </div>
         <SponsorCC cardData={ContentDetails.contentDetails?.live_content} />
       </div> */}
-      <Footer />
+      
     </>
   );
 };

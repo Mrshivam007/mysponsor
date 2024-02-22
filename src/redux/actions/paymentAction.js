@@ -1,6 +1,6 @@
 import axios from 'axios';
 import apiurl from '../../constant/config';
-import { APPROVE_CONTENT_PAYMENT_FAILED, APPROVE_CONTENT_PAYMENT_REQUEST, APPROVE_CONTENT_PAYMENT_SUCCESS, APPROVE_EVENT_PAYMENT_FAILED, APPROVE_EVENT_PAYMENT_REQUEST, APPROVE_EVENT_PAYMENT_SUCCESS, GET_PAYMENT_FAILED, GET_PAYMENT_REQUEST, GET_PAYMENT_SUCCESS } from '../constant';
+import { APPROVE_CONTENT_PAYMENT_FAILED, APPROVE_CONTENT_PAYMENT_REQUEST, APPROVE_CONTENT_PAYMENT_SUCCESS, APPROVE_EVENT_PAYMENT_FAILED, APPROVE_EVENT_PAYMENT_REQUEST, APPROVE_EVENT_PAYMENT_SUCCESS, GET_PAYMENT_FAILED, GET_PAYMENT_REQUEST, GET_PAYMENT_SUCCESS, GET_PAYMENT_TRANSACTION_FAILED, GET_PAYMENT_TRANSACTION_REQUEST, GET_PAYMENT_TRANSACTION_SUCCESS, GET_PAYMENT_WITHDRAW_FAILED, GET_PAYMENT_WITHDRAW_REQUEST, GET_PAYMENT_WITHDRAW_SUCCESS } from '../constant';
 
 export const getPaymentDetails = () => async (dispatch) => {
     try {
@@ -86,6 +86,59 @@ export const getPaymentDetails = () => async (dispatch) => {
       });
     }
   };
+  
+  export const getTransactionDetails = () => async (dispatch) => {
+    try {
+      dispatch({ type: GET_PAYMENT_TRANSACTION_REQUEST });
+  
+      const access = JSON.parse(localStorage.getItem("access"));
+  
+      const { data } = await axios.get(
+        `${apiurl}/api/razorpay/sponsor/event/transaction/`,
+        {
+          headers: { Authorization: `Bearer ${access}` },
+        }
+        );  
+        dispatch({
+          type: GET_PAYMENT_TRANSACTION_SUCCESS,
+          payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_PAYMENT_TRANSACTION_FAILED,
+        payload:
+        error.response && error.response.data.message
+        ? error.response.data.message
+            : error.message,
+          });
+    }
+  };
 
+  export const getContentTransactionDetails = () => async (dispatch) => {
+    try {
+      dispatch({ type: GET_PAYMENT_TRANSACTION_REQUEST });
+  
+      const access = JSON.parse(localStorage.getItem("access"));
+  
+      const { data } = await axios.get(
+        `${apiurl}/api/razorpay/sponsor/content/transaction/`,
+        {
+          headers: { Authorization: `Bearer ${access}` },
+        }
+        );  
+        dispatch({
+          type: GET_PAYMENT_TRANSACTION_SUCCESS,
+          payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: GET_PAYMENT_TRANSACTION_FAILED,
+        payload:
+        error.response && error.response.data.message
+        ? error.response.data.message
+            : error.message,
+          });
+    }
+  };
   
   

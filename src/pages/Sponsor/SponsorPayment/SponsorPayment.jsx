@@ -29,9 +29,13 @@ const SponsorPayment = () => {
   const total_amount = (Number(sponsoring_price) + Number(tax_amount)).toFixed(
     2
   );
+  const sponsor = useSelector((state) => state.sponsor);
+
   // const sponsoring_items = cardData?.sponsoring_items || [];
   const [bannerImage, setBannerImage] = useState(null);
   const [bannerImageFileName, setBannerImageFileName] = useState(null);
+  const [billImage, setBillImage] = useState(null);
+  const [billImageFileName, setBillImageFileName] = useState(null);
   const [ledImage, setLedImage] = useState(null);
   const [ledImageFileName, setLedImageFileName] = useState(null);
   const [ledVideo, setLedVideo] = useState(null);
@@ -44,6 +48,9 @@ const SponsorPayment = () => {
   }));
   const [showPayment, setShowPayment] = useState(true);
   console.log("formatting sponsoring item ", formattedSponsoringItems);
+  const { SponsoringItemDetails, SponsoringItemError, loading } = sponsor;
+
+
 
   const toggleForm = () => {
     setShowPayment((prev) => !prev);
@@ -56,8 +63,9 @@ const SponsorPayment = () => {
     for (const item of formattedSponsoringItems) {
       if (
         (item.sponsoring_items === 'banner' && !(bannerImage || cardData?.banner_image)) ||
-        (item.sponsoring_items === 'led_screen' && !(ledImage || cardData?.led_image)) ||
-        (item.sponsoring_items === 'led_screen' && !(ledVideo || cardData?.led_video))
+        (item.sponsoring_items === 'bill_board' && !(billImage || cardData?.bill_board)) ||
+        (item.sponsoring_items === 'led_screen' && !(ledImage || cardData?.led_image)) 
+        // (item.sponsoring_items === 'led_screen' && !(ledVideo || cardData?.led_video))
       ) {
         return false; // Sponsoring item is not filled
       }
@@ -69,10 +77,11 @@ const SponsorPayment = () => {
     const allFilled = checkSponsoringItems();
     if (!allFilled) {
       setError("One or more sponsoring items isn't filled.");
-      window.scroll(0,0)
+      window.scroll(0, 0)
     } else {
       setError(''); // Clear any previous error
       toggleForm();
+      window.scroll(0, 0)
     }
   };
 
@@ -90,6 +99,13 @@ const SponsorPayment = () => {
     setBannerImageFileName(uniqueFilename); // Save the unique filename in state
   };
 
+  const handleBillImgChange = (e) => {
+    const file = e.target.files[0];
+    const uniqueFilename = generateUniqueFilename(file.name, 0);
+    setBillImage(file);
+    setBillImageFileName(uniqueFilename); // Save the unique filename in state
+  };
+
   const handleLedImgChange = (e) => {
     const file = e.target.files[0];
     const uniqueFilename = generateUniqueFilename(file.name, 0);
@@ -104,185 +120,68 @@ const SponsorPayment = () => {
     setLedVideoFileName(uniqueFilename); // Save the unique filename in state
   };
 
-  const handleSubmitClick = async (e) => {
-    // e.preventDefault();
-    // if (Object.keys(errors).length === 0) {
-    const formData = new FormData();
-    formData.append("sponsor_id", cardData.sponsor_id);
-
-    // Iterate over formattedSponsoringItems
-    formattedSponsoringItems.forEach((item) => {
-      switch (item.sponsoring_items) {
-        case "banner":
-          formData.append("banner_image", bannerImage, bannerImageFileName || "");
-          break;
-        case "led_screen":
-          formData.append("led_image", ledImage, ledImageFileName || "");
-          formData.append("led_video", ledVideo || "");
-          break;
-        case "bill_board":
-          formData.append("bill_text", billText || preBillText);
-          break;
-        // Add more cases for other sponsoring item types if needed
-        default:
-          break;
-      }
-    });
-
-    try {
-      // Make POST API call
-      await dispatch(updateSponsoringItem(formData));
-      // sessionStorage.setItem(
-      //   "successMessage",
-      //   "Promotion listed successfully!"
-      // );
-      // navigate("/sponsored_event"); // Replace '/' with the desired route for the home page
-    } catch (error) {
-      console.log("An error occurred during API calls:", error);
-    }
-  };
-
-
-
   // complete order
   const complete_order = async (paymentID, orderID, signature) => {
-    // Prepare formData object
-    const formData = new FormData();
-    formData.append("payment_id", paymentID);
-    formData.append("order_id", orderID);
-    formData.append("signature", signature);
-    formData.append("amount", total_amount);
-    formData.append("event_user_id", cardData.user_id);
-    formData.append("event_id", cardData.event_id);
-    formData.append("sponsor_user_id", userDetails.user_id);
-    formData.append("sponsoring_items", JSON.stringify(formattedSponsoringItems));
-
-    // Add sponsoring items data based on formattedSponsoringItems
-    formattedSponsoringItems.forEach((item) => {
-      switch (item.sponsoring_items) {
-        case "banner":
-          formData.append("banner_image", bannerImage, bannerImageFileName || "");
-          break;
-        case "led_screen":
-          formData.append("led_image", ledImage, ledImageFileName || "");
-          formData.append("led_video", ledVideo, ledVideoFileName || "");
-          break;
-        case "bill_board":
-          formData.append("bill_text", billText || preBillText);
-          break;
-        // Add more cases for other sponsoring item types if needed
-        default:
-          break;
-      }
-    });
-
-    // Make POST API call
-    axios.post(`${apiurl}/api/razorpay/order/complete/`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
+    axios({
+      method: "post",
+      url: "http://127.0.0.1:8000/api/razorpay/order/complete/",
+      data: {
+        payment_id: paymentID,
+        order_id: orderID,
+        signature: signature,
+        amount: total_amount,
+        event_user_id: cardData.user_id,
+        event_id: cardData.event_id,
+        sponsor_user_id: userDetails.user_id,
+        sponsoring_items: formattedSponsoringItems,
       },
     })
       .then((response) => {
-        console.log(response.data.message);
+        console.log("All data ", response);
         if (response.data.message === "transaction created") {
-          sessionStorage.setItem("successMessage", "Event created successfully!");
+          console.log("handle submit click functon call here", response);
+          console.log("All data after crating the payment ", response);
+          const formData = new FormData();
+          // formData.append("sponsor_id", cardData.sponsor_id);
+          formData.append("sponsor_id", response.data?.sponsord_event?.sponsor_id);
+          formattedSponsoringItems.forEach((item) => {
+            switch (item.sponsoring_items) {
+              case "banner":
+                formData.append("banner_image", bannerImage, bannerImageFileName || "");
+                // formData.append("banner_image", bannerImage || "");
+                break;
+              case "led_screen":
+                formData.append("led_image", ledImage, ledImageFileName || "");
+                formData.append("led_video", ledVideo || "");
+                break;
+              case "bill_board":
+                formData.append("bill_board", billImage, billImageFileName || "");
+                break;
+              // Add more cases for other sponsoring item types if needed
+              default:
+                break;
+            }
+          });
+          // try {
+          //   dispatch(updateSponsoringItem(formData));
+          //   // sessionStorage.setItem("successMessage", "Class created successfully!");
+          //   // navigate("/sponsored_event"); // Replace '/' with the desired route for the home page
+          // } catch (error) {
+          //   console.log("An error occurred during API calls:", error);
+          // }
+          dispatch(updateSponsoringItem(formData));
+          sessionStorage.setItem(
+            "successMessage",
+            "Event Sponsored successfully!"
+          );
           navigate("/sponsored_event"); // Replace '/' with the desired route for the home page
+          // window.location.reload(); // Reload the page
         }
       })
       .catch((error) => {
         console.log(error.response.data);
       });
   };
-
-  // const createBannerImageData = (bannerImage, bannerImageFileName = "") => {
-  //   const banner_image = bannerImage || bannerImageFileName;
-  //   return { banner_image };
-  // };
-  // const complete_order = async (paymentID, orderID, signature) => {
-  //   axios({
-  //     method: "post",
-  //     // `${apiurl}/api/user/event/`
-  //     // url: "http://127.0.0.1:8000/api/razorpay/order/complete/",
-  //     url: `${apiurl}/api/razorpay/order/complete/`,
-  //     data: {
-  //       payment_id: paymentID,
-  //       order_id: orderID,
-  //       signature: signature,
-  //       amount: total_amount,
-  //       event_user_id: cardData.user_id,
-  //       event_id: cardData.event_id,
-  //       sponsor_user_id: userDetails.user_id,
-  //       sponsoring_items: formattedSponsoringItems,
-  //       banner_image: bannerImage,
-  //     },
-  //   })
-  //     .then((response) => {
-  //       console.log(response.data.message);
-  //       if (response.data.message === "transaction created") {
-  //         // dispatch(createSponsor());
-  //         // handleSubmitClick();
-  //         sessionStorage.setItem(
-  //           "successMessage",
-  //           "Event created successfully!"
-  //         );
-  //         navigate("/sponsored_event"); // Replace '/' with the desired route for the home page
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.response.data);
-  //     });
-  // };
-
-
-  // complete order
-  // const complete_order = async (paymentID, orderID, signature) => {
-  //   // Prepare formData object
-  //   const formData = new FormData();
-  //   formData.append("payment_id", paymentID);
-  //   formData.append("order_id", orderID);
-  //   formData.append("signature", signature);
-  //   formData.append("amount", total_amount);
-  //   formData.append("event_user_id", cardData.user_id);
-  //   formData.append("event_id", cardData.event_id);
-  //   formData.append("sponsor_user_id", userDetails.user_id);
-  //   formData.append("sponsoring_items", JSON.stringify(formattedSponsoringItems));
-
-  //   // Add sponsoring items data based on formattedSponsoringItems
-  //   formattedSponsoringItems.forEach((item) => {
-  //     switch (item.sponsoring_items) {
-  //       case "banner":
-  //         formData.append("banner_image", bannerImage, bannerImageFileName || "");
-  //         break;
-  //       case "led_screen":
-  //         formData.append("led_image", ledImage, ledImageFileName || "");
-  //         formData.append("led_video", ledVideo, ledVideoFileName || "");
-  //         break;
-  //       case "bill_board":
-  //         formData.append("bill_text", billText || preBillText);
-  //         break;
-  //       // Add more cases for other sponsoring item types if needed
-  //       default:
-  //         break;
-  //     }
-  //   });
-  //   try {
-  //     // Make POST API call
-  //     await dispatch(completeEventPayment(formData));
-  //     // sessionStorage.setItem(
-  //     //   "successMessage",
-  //     //   "Promotion listed successfully!"
-  //     // );
-  //     // navigate("/sponsored_event"); // Replace '/' with the desired route for the home page
-  //   } catch (error) {
-  //     console.log("An error occurred during API calls:", error);
-  //   }
-  // };
-
-
-
-
-
-
 
 
   const razorPay = () => {
@@ -347,6 +246,9 @@ const SponsorPayment = () => {
       });
   };
 
+  console.log("Sponsorign item detatils ", SponsoringItemDetails);
+  console.log("Sponsorign item error ", SponsoringItemError);
+
   return (
     <>
       <div>
@@ -371,19 +273,38 @@ const SponsorPayment = () => {
                 {item.sponsoring_items === "bill_board" && (
                   <div
                     className="box photo-box bg-white d-flex justify-content-center align-items-start p-3"
-                    style={{ width: "40%" }}
+                    style={{ width: "50%" }}
                   >
                     <div className="box text-center">
-                      <h5 className="font-weight-bold">Add BillBoard Text Info</h5>
+                      <h5 className="font-weight-bold">Add Bill-Board Image</h5>
                       <input
-                        type="text"
-                        id="BillText"
-                        value={billText || preBillText}
-                        onChange={(e) => setBillText(e.target.value)}
-                        readOnly={preBillText ? true : false}
-                        className="form-control"
-                        placeholder="Enter BillBoard Text"
+                        type="file"
+                        accept="image/*"
+                        onChange={handleBillImgChange}
+                        style={{ width: "74%", borderRadius: "0" }}
                       />
+                      {cardData?.bill_image && billImage === null ? (
+                        <div>
+                          <h2>Preview:</h2>
+                          <img
+                            className="mx-auto"
+                            src={apiurl + cardData?.bill_image}
+                            alt="Preview"
+                            width="200"
+                          />
+                        </div>
+                      ) : null}
+                      {billImage ? (
+                        <div>
+                          <h2>Preview:</h2>
+                          <img
+                            className="mx-auto"
+                            src={URL.createObjectURL(billImage)}
+                            alt=""
+                            width="200"
+                          />
+                        </div>
+                      ) : null}
                     </div>
                   </div>
                 )}
@@ -509,29 +430,7 @@ const SponsorPayment = () => {
               </div>
             ))}
 
-            {/* {formattedSponsoringItems.map((item, index) => (
-              <>
-                {item.sponsoring_items === "banner" &&
-                  !(bannerImage || cardData?.banner_image) ? (
-                  <div className="alert alert-danger">
-                    Upload an image to be displayed on the Banner
-                  </div>
-                ) : null}
-                {item.sponsoring_items === "led_screen" &&
-                  !(ledImage || cardData?.led_image) ? (
-                  <div className="alert alert-danger">
-                    Upload an image to be displayed on the LED
-                  </div>
-                ) : null}
-                {item.sponsoring_items === "led_screen" &&
-                  !(ledVideo || cardData?.led_video) ? (
-                  <div className="alert alert-danger">
-                    Upload a video to be displayed on the LED
-                  </div>
-                ) : null}
-              </>
-            ))} */}
-            <div className="container" style={{alignItems: 'center', padding: '2%'}}>
+            <div className="container" style={{ alignItems: 'center', padding: '2%' }}>
               <input
                 type="submit"
                 className="btn btn-primary submit py-1 px-3"
@@ -546,6 +445,7 @@ const SponsorPayment = () => {
             style={{
               width: "100%",
               height: "auto",
+              paddingBottom: '1%',
               backgroundImage: `url(${bgimage})`,
             }}
           >
@@ -578,8 +478,8 @@ const SponsorPayment = () => {
                   </span>
                 </div>
               </div>
-              <button className="category-btn btn mb-3" style={{ width: "100%" }}>
-                <p className="category-btn-text" onClick={razorPay}>
+              <button className="category-btn btn mb-3" onClick={razorPay} style={{ width: "100%" }}>
+                <p className="category-btn-text">
                   Sponsor
                 </p>
               </button>

@@ -4,6 +4,7 @@ import { Footer, NavBar } from "../../components";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { login, signup } from "../../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
+import SuccessToast from "../../components/Toast/Success";
 
 const SponsorLogin = () => {
     const dispatch = useDispatch();
@@ -114,48 +115,48 @@ const SponsorLogin = () => {
 
     const validateForm = () => {
         const errorsObj = {};
-    
+
         if (email.trim() === "") {
-          errorsObj.email = "email is required";
+            errorsObj.email = "email is required";
         }
         if (password.trim() === "") {
-          errorsObj.password = "password is required";
+            errorsObj.password = "password is required";
         }
         if (password2.trim() === "") {
-          errorsObj.password2 = "password2 is required";
+            errorsObj.password2 = "password2 is required";
         }
         if (firstname.trim() === "") {
-          errorsObj.firstname = "firstname is required";
+            errorsObj.firstname = "firstname is required";
         }
         if (lastname.trim() === "") {
-          errorsObj.lastname = "lastname is required";
+            errorsObj.lastname = "lastname is required";
         }
         // ... validate other fields similarly
         setErrors(errorsObj);
         return Object.keys(errorsObj).length === 0;
-      };
+    };
 
     const SignupsubmitHandler = (e) => {
         e.preventDefault();
         const isAdminValue = false; // Define is_admin as a separate variable
         const isFormValid = validateForm();
         if (isFormValid) {
-          dispatch(
-            signup(
-              email,
-              password,
-              firstname,
-              lastname,
-              password2,
-              user_type
-              // isAdminValue, // Pass isAdminValue as an argument instead of directly assigning within the function call
-            )
-          );
-          sessionStorage.setItem("successMessage", "Sign Up Successsfull!!!");
-          toggleForm()
-        //   navigate("/sponsor_login", { state: { cardData } });
+            dispatch(
+                signup(
+                    email,
+                    password,
+                    firstname,
+                    lastname,
+                    password2,
+                    user_type
+                    // isAdminValue, // Pass isAdminValue as an argument instead of directly assigning within the function call
+                )
+            );
+            sessionStorage.setItem("successMessage", "Sign Up Successsfull!!!");
+            toggleForm()
+            //   navigate("/sponsor_login", { state: { cardData } });
         }
-      };
+    };
 
     const handleEmailChange = (event) => {
         const newEmail = event.target.value;
@@ -195,13 +196,8 @@ const SponsorLogin = () => {
                             backgroundImage: `url(${backgroundimg})`,
                         }}
                     >
-                        {successMessage && (
-                            <div className="container">
-                                <div class="alert alert-success" role="alert">
-                                    {successMessage}
-                                </div>
-                            </div>
-                        )}
+                        {successMessage && <SuccessToast message={successMessage} />}
+
                         <div className="container">
                             <div className="box1">
                                 <form action="#" class="contact-form" onSubmit={submitHandler}>

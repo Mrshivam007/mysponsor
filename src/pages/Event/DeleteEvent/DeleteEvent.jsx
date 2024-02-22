@@ -19,6 +19,7 @@ import Update_EventCard from "../Update_Event/Update_EventCard";
 import Delete_EventCard from "./DeleteEventCard";
 import Delete_MobileCards from "./DeleteEventMobileCard";
 import Loading from "../../../components/Loading/Loading";
+import SuccessToast from "../../../components/Toast/Success";
 const DeleteEvent = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
@@ -74,11 +75,8 @@ const DeleteEvent = () => {
                 logo={spevents}
               />
               {/* <SponserE cardData={eventDetails.eventDetails} line={"Upcoming Event"} /> */}
-              {successMessage && (
-                <div class="alert alert-success" role="alert">
-                  {successMessage}
-                </div>
-              )}
+              {successMessage && <SuccessToast message={successMessage} />}
+
               <Delete_EventCard
                 cardData={eventDetails.eventDetails?.upcoming_event}
               />

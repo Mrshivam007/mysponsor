@@ -17,6 +17,11 @@ import {
 import EventProfile from "../pages/Event/EventProfile/EventProfile";
 import EventPayment from "../pages/Event/EventPayment/EventPayment";
 import { Footer, NavBar } from "../components";
+import EventFooter from "../components/Footer/EventFooter";
+import About from "../components/About/About";
+import Contact from "../components/Contact/Contact";
+import EventsPaymentDetails from "../components/EventWallet/EventsPaymentDetails";
+import EventWallet from "../components/EventWallet/EventWallet";
 const EventRoutes = () => {
   return (
     <>
@@ -41,12 +46,15 @@ const EventRoutes = () => {
         />
         <Route path="/update_event" element={<UpdateEvent />} />
         <Route path="/delete_event" element={<DeleteEvent />} />
-        <Route path="/payment" element={<EventPayment />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        {/* <Route path="/payment" element={<EventPayment />} /> */}
+        <Route path="/payment" element={<EventWallet />} />
         <Route path="/profile" element={<EventProfile />} />
         <Route path="/login" element={<Navigate to={"/"} />} />
         <Route path="/signup" element={<Navigate to={"/"} />} />
       </Routes>
-      <Footer />
+      <EventFooter />
     </>
   );
 };

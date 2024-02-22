@@ -18,6 +18,10 @@ import {
 import ContentProfile from "../pages/ContentCreator/ContentProfile/ContentProfile";
 import ContentPayment from "../pages/ContentCreator/ContentPayment/ContentPayment";
 import { Footer, NavBar } from "../components";
+import ContentFooter from "../components/Footer/ContentFooter";
+import About from "../components/About/About";
+import Contact from "../components/Contact/Contact";
+import ContentWallet from "../components/ContentWallet/ContentWallet";
 
 const ContentRoutes = () => {
   return (
@@ -52,14 +56,16 @@ const ContentRoutes = () => {
           path="/update_UpcomingContent"
           element={<Update_UpcomingContent />}
         />
-        <Route path="/payment" element={<ContentPayment />} />
+        <Route path="/payment" element={<ContentWallet />} />
         <Route path="/update_content" element={<UpdateContent />} />
         <Route path="/delete_content" element={<DeleteContent />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/profile" element={<ContentProfile />} />
         <Route path="/login" element={<Navigate to={"/"} />} />
         <Route path="/signup" element={<Navigate to={"/"} />} />
       </Routes>
-      <Footer />
+      <ContentFooter />
     </>
   );
 };

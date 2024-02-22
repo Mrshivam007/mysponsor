@@ -9,6 +9,7 @@ import ContentNotification from "./ContentNotification";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../../redux/actions/authActions";
+import BnakAccountDetails from "./BankAccountDetails";
 const ContentProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,6 +43,9 @@ const ContentProfile = () => {
             <Tab eventKey="notification" title="Notification">
               <ContentNotification />
             </Tab>
+            <Tab eventKey="bankDetails" title="Bank Details">
+              <BnakAccountDetails />
+            </Tab>
           </Tabs>
         </div>
         <div className="container px-3 pt-0 pb-3 d-sm-none">
@@ -49,7 +53,6 @@ const ContentProfile = () => {
             Logout
           </button>
         </div>
-        
       </div>
     </>
   );

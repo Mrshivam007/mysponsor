@@ -19,6 +19,7 @@ import MyEventCard from "../MyEventCrad/MyEventCard";
 import { useLocation } from "react-router-dom";
 import EventMobileCard from "./EventMobileCards";
 import Loading from "../../../components/Loading/Loading";
+import SuccessToast from "../../../components/Toast/Success";
 const UpcomingEvent = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
@@ -74,17 +75,8 @@ const UpcomingEvent = () => {
             <div className="events-page-desktop">
               <EventsHeader title={"Upcoming Event"} logo={spevents} />
               {/* <SponserE cardData={eventDetails?.eventAllDetails?.upcoming_event} line={"Upcoming Event"} /> */}
-              {successMessage && (
-                <div className="container">
-                  <div
-                    class="alert alert-success"
-                    role="alert"
-                    style={{ borderRadius: "10px" }}
-                  >
-                    {successMessage}
-                  </div>
-                </div>
-              )}
+              {successMessage && <SuccessToast message={successMessage} />}
+
               {deletionMessage && (
                 <div className="container">
                   <div
@@ -107,17 +99,8 @@ const UpcomingEvent = () => {
           <SponserE cardData={EventsCards} line={"Reality Shows"} /> */}
             </div>
             <div className="events-page-mobile">
-              {successMessage && (
-                <div className="container">
-                  <div
-                    class="alert alert-success"
-                    role="alert"
-                    style={{ borderRadius: "10px" }}
-                  >
-                    {successMessage}
-                  </div>
-                </div>
-              )}
+            {successMessage && <SuccessToast message={successMessage} />}
+
               {deletionMessage && (
                 <div className="container">
                   <div

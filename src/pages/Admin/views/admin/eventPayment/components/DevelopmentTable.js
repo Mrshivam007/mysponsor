@@ -239,55 +239,12 @@ export default function ManageTable(props) {
                         fontSize={{ sm: "14px" }}
                         minW={{ sm: "150px", md: "200px", lg: "auto" }}
                         borderColor='transparent'>
-                        {/* <ApproveButton
-                          me='100%'
-                          mb='50px'
-                          w='140px'
-                          minW='140px'
-                          mt={{ base: "20px", "2xl": "auto" }}
-                          variant='brand'
-                          fontWeight='500'
-                          onClick={() => handlePaymentApprove(data)}
-                          >
-                          
-                        </ApproveButton> */}
                         <Flex align='center'>
                           <Icon w='24px' h='24px' me='5px' color="green.500" as={MdCheckCircle} />
                           <Text color={textColor} fontSize='sm' fontWeight='700'>
                             Approved
                           </Text>
                         </Flex>
-                        {/* <Icon as={MdEdit} onClick={() => handleUpdation(data)}  color='secondaryGray.500' h='18px' w='32px' />
-                        <Icon as={MdDelete} onClick={handleShow} color='secondaryGray.500' h='18px' w='32px' /> */}
-                        <Modal
-                          show={show}
-                          onHide={handleClose}
-                          scrollable={true}
-                          style={{ zIndex: "2000" }}
-                        >
-                          <Modal.Header>
-                            <Modal.Title>
-                              Delete {data.title} ?
-                            </Modal.Title>
-                          </Modal.Header>
-                          <Modal.Body>
-                            Are you sure you want to delete this Content ?
-                          </Modal.Body>
-                          <Modal.Footer>
-                            <Button
-                              variant="primary"
-                              onClick={() => handlePaymentApprove(data)}
-                            >
-                              Yes
-                            </Button>
-                            <Button
-                              variant="secondary"
-                              onClick={handleClose}
-                            >
-                              No
-                            </Button>
-                          </Modal.Footer>
-                        </Modal>
                       </Td>
                     </Tr>
                   </Tbody>

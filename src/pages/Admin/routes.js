@@ -19,6 +19,7 @@ import EventApproval from "./views/admin/eventApprove"
 import ContentManagement from "./views/admin/contentManagement"
 import ContentApproval from "./views/admin/contentApprove"
 import EventPayment from "./views/admin/eventPayment"
+import PaymentWithdraw from "./views/admin/PaymentWithdraw"
 import ContentPayment from "./views/admin/ContentPayment"
 import RTL from "./views/admin/rtl";
 
@@ -53,6 +54,13 @@ const routes = [
     path: "/payment_event",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: EventPayment,
+  },
+  {
+    name: "Payment Withdraw",
+    layout: "/admin",
+    path: "/payment_withdraw",
+    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
+    component: PaymentWithdraw,
   },
   {
     name: "Content Management",

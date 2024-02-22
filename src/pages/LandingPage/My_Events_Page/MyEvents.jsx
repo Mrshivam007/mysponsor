@@ -20,7 +20,7 @@ const MyEvents = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <NavBar />
+        
         <div className="desktop-view">
           <div
             className="container"
@@ -210,7 +210,7 @@ const MyEvents = () => {
             </div>
           </div>
         </div>
-        <Footer />
+        
       </div>
     </>
   );

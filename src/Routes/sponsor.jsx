@@ -32,6 +32,10 @@ import About from "../components/About/About";
 import Contact from "../components/Contact/Contact";
 import ChatManage from "../components/ChatComponent/ChatManage";
 import { Footer, NavBar } from "../components";
+import EventCategoryCard from "../components/Categories/EventCategoryCard";
+import SponsorFooter from "../components/Footer/SponsorFooter";
+// import Success from "../components/Toast/Success";
+import SuccessToast from "../components/Toast/Success";
 const SponsorRoutes = () => {
   return (
     <>
@@ -56,6 +60,7 @@ const SponsorRoutes = () => {
         <Route path="/facebook" element={<FacebookContentSponsor />} />
         <Route path="/sponsor_eventForm" element={<SponsorEventForm />} />
         <Route path="/sponsor_contentForm" element={<SponsorContentForm />} />
+        <Route path="/eventCategory/:category" element={<EventCategoryCard />} />
         <Route path="/mycontent-details" element={<ContentDetails />} />
         <Route path="/myevent-details" element={<EventDetails />} />
         <Route path="/categories" element={<SponsorCategoryPage />} />
@@ -63,7 +68,8 @@ const SponsorRoutes = () => {
         <Route path="/events/upcoming_event" element={<UpcomingEvent />} />
         <Route path="/events/previous_event" element={<PreviousEvent />} />
         <Route path="/create_event" element={<ListeventsForm />} />
-        <Route path="/chat" element={<ChatManage />} />
+        {/* <Route path="/chat" element={<ChatManage />} /> */}
+        {/* <Route path="/toast" element={<SuccessToast />} /> */}
         <Route
           path="/update_UpcomingEvent"
           element={<Update_UpcomingEvent />}
@@ -79,7 +85,7 @@ const SponsorRoutes = () => {
         <Route path="/login" element={<Navigate to={"/"} />} />
         <Route path="/signup" element={<Navigate to={"/"} />} />
       </Routes>
-      <Footer />
+      <SponsorFooter />
     </>
   );
 };

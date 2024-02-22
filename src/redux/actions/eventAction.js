@@ -10,9 +10,9 @@ export const fetchEvent = () => async (dispatch) => {
   
       const { data } = await axios.get(
         `${apiurl}/api/user/event/`,
-        {
-          headers: { Authorization: `Bearer ${access}` },
-        }
+        // {
+        //   headers: { Authorization: `Bearer ${access}` },
+        // }
       );  
       dispatch({
         type: GET_EVENT_SUCCESS,

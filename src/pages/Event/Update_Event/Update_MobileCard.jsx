@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchEvent, fetchEventbyId } from "../../../redux/actions/eventAction";
 import apiurl from "../../../constant/config";
 
 const Update_MobileCards = ({ line, cardData }) => {
@@ -9,9 +8,7 @@ const Update_MobileCards = ({ line, cardData }) => {
   const { userDetails } = auth;
   console.log(userDetails);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchEventbyId(userDetails.user_id));
-  }, [dispatch]);
+
 
   const navigate = useNavigate();
 

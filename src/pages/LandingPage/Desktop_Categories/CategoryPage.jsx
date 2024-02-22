@@ -27,7 +27,7 @@ const CategoryPage = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        <NavBar />
+        
         <EventsHeader title={"Categories"} logo={catlogo} />
         <CatpageBox line={"Categories"} />
       </div>
@@ -40,7 +40,7 @@ const CategoryPage = () => {
       <div className="mobile-view mb-4">
         <SponserE cardData={EventsCards} />
       </div>
-      <Footer />
+      
     </>
   );
 };

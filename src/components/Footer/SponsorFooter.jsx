@@ -61,27 +61,7 @@ const SponsorFooter = () => {
                 </li>
               </ul>
             </div>
-            {/* Grid column end */}
-            {/* <!--Grid column--> */}
-            {/* <div className="col-lg-2 col-md-4 mt-0 mb-4 mb-md-0 text-lg-left text-md-center footer-desktop-links">
-              <h5 className="text-capitalize">Listing</h5>
 
-              <ul className="list-unstyled">
-                <li>
-                  <Link href="#!" className="text-white text-sm">
-                    List your event
-                  </Link>
-                </li>
-                <li style={{ margin: "4% 0 4% 0" }}>
-                  <Link href="#!" className="text-white text-sm">
-                    List content creator
-                  </Link>
-                </li>
-              </ul>
-              <br />
-            </div> */}
-            {/* Grid column end */}
-            {/* <!--Grid column--> */}
             <div className="col-lg-2 col-md-4 mb-4 mb-md-0 text-lg-left text-md-center footer-desktop-links">
               <h5 className="text-capitalize">Content creators</h5>
 
@@ -103,7 +83,6 @@ const SponsorFooter = () => {
                 </li>
               </ul>
             </div>
-            {/* Grid column end */}
             <div className="container">
               <Link to="/events">
                 <button
@@ -121,18 +100,17 @@ const SponsorFooter = () => {
                   Sponsor Content
                 </button>
               </Link>
+              <Link to={"/about"}>
               <button
                 className="mob-footer-btn btn btn-primary"
                 style={{ width: "100%" }}
               >
                 About Us
               </button>
+              </Link>
             </div>
-            {/* <!--Grid column--> */}
           </div>
-          {/* <!--Grid row--> */}
         </div>
-        {/* <!-- Grid container --> */}
 
         {/* <!-- New Row --> */}
         <div className="container mx-auto my-3 footer-desktop-links">
@@ -142,14 +120,14 @@ const SponsorFooter = () => {
               style={{ borderRight: "1px solid rgba(255, 255, 255, 0.30)" }}
             >
               <p className="text-center text-xl mb-0">
-                <Link href="#!" className="text-white">
+                <Link to={"/about"} className="text-white">
                   About
                 </Link>
               </p>
             </div>
             <div className="col-lg-6 col-md-6">
               <p className="text-center text-xl mb-0">
-                <Link href="#!" className="text-white">
+                <Link to={"/contact"} className="text-white">
                   Contact Us
                 </Link>
               </p>

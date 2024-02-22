@@ -12,6 +12,7 @@ import ContentManagement from "../../views/admin/contentManagement"
 import ContentApproval from "../../views/admin/contentApprove"
 import UpdateEvent from "../../views/admin/eventManagement/components/UpdateEvent";
 import UpdateContent from "../../views/admin/contentManagement/components/UpdateContent";
+import PaymentWithdraw from "../../views/admin/PaymentWithdraw"
 const AdminRoutes = () => {
   return (
     <>
@@ -28,6 +29,7 @@ const AdminRoutes = () => {
         <Route path="/admin/approve_content" element={<ContentApproval />} />
         <Route path="/admin/payment_content" element={<ContentPayment />} />
         <Route path="/admin/payment_event" element={<EventPayment />} />
+        <Route path="/admin/payment_withdraw" element={<PaymentWithdraw />} />
         <Route path="/update_content" element={<UpdateContent />} />
         <Route path="/admin/data-tables" element={<DataTables />} />
         <Route path="/admin/profile" element={<Profile />} />

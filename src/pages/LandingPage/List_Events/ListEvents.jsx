@@ -23,9 +23,10 @@ const ListEvents = () => {
           width: "100%",
           height: "auto",
           backgroundImage: `url(${bgimage})`,
+          paddingBottom: '1%',
         }}
       >
-        <NavBar />
+        
         {/* ---DESKTOP VIEW---  */}
         <div className="desktop-view">
           <EventsHeader title={"List Events"} logo={listevents} />
@@ -144,7 +145,7 @@ const ListEvents = () => {
             </div>
           </div>
         </div>
-        <Footer />
+        
       </div>
     </>
   );

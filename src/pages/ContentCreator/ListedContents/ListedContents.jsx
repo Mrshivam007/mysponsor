@@ -5,6 +5,7 @@ import { EventsHeader, Footer, NavBar } from "../../../components";
 import { fetchContent } from "../../../redux/actions/contentAction";
 import { useDispatch, useSelector } from "react-redux";
 import MyContentCard from "../MyContentCard/MyContentCard";
+import SuccessToast from "../../../components/Toast/Success";
 const ListedContents = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
@@ -38,6 +39,7 @@ const ListedContents = () => {
           width: "100%",
           height: "auto",
           backgroundImage: `url(${bgimage})`,
+          paddingBottom: '1%',
         }}
       >
         
@@ -46,11 +48,8 @@ const ListedContents = () => {
           logo={listevents}
         />
         {/* <ContentCard /> */}
-        {successMessage && (
-          <div class="alert alert-success" role="alert">
-            {successMessage}
-          </div>
-        )}
+        {successMessage && <SuccessToast message={successMessage} />}
+
         <MyContentCard cardData={ContentDetails.contentDetails} />
         
       </div>

@@ -9,6 +9,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import MyContentCard from "../MyContentCard/MyContentCard";
 import Loading from "../../../components/Loading/Loading";
+import SuccessToast from "../../../components/Toast/Success";
 const LiveContent = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
@@ -60,17 +61,8 @@ const LiveContent = () => {
               logo={listevents}
             />
             {/* <ContentCard /> */}
-            {successMessage && (
-              <div className="container">
-                <div
-                  class="alert alert-success"
-                  role="alert"
-                  style={{ borderRadius: "10px" }}
-                >
-                  {successMessage}
-                </div>
-              </div>
-            )}
+            {successMessage && <SuccessToast message={successMessage} />}
+
             {deletionMessage && (
               <div className="container">
                 <div

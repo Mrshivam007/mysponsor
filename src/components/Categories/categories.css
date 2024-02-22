@@ -107,6 +107,7 @@
 
   .category-row {
     flex-wrap: nowrap !important;
+    display: inline;
     margin-right: -8px !important;
   }
 
@@ -115,7 +116,7 @@
   }
 
   .box1 {
-    width: 100%;
+    width: 95%;
     margin-top: 5%;
     background: none;
     box-shadow: none;
@@ -123,7 +124,8 @@
   }
 
   .category-card1 {
-    padding-right: 2% !important;
+    /* padding-right: 2% !important; */
+    padding-left: 20px !important;
   }
 
   .category-card2 {

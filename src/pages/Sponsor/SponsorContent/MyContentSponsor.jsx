@@ -227,6 +227,7 @@ const MyContentSponsor = (contentData) => {
                     borderRadius: "10px",
                   }}
                   onClick={handleSponsorClick}
+                  disabled={selectedItems.length === 0 || !selectedItems.every(item => item.sponsoring_content_items)}
                 >
                   Sponsor
                 </button>
@@ -393,6 +394,7 @@ const MyContentSponsor = (contentData) => {
                 borderRadius: "10px",
               }}
               onClick={handleSponsorClick}
+              disabled={selectedItems.length === 0 || !selectedItems.every(item => item.sponsoring_content_items)}
             >
               Sponsor
             </button>

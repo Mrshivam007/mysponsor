@@ -22,6 +22,7 @@ const ContentHome = () => {
           width: "100%",
           height: "auto",
           backgroundImage: `url(${bgimage})`,
+          paddingBottom: '1%',
         }}
       >
         

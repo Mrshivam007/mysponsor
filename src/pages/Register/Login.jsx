@@ -8,6 +8,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 import { Button } from "react-bootstrap";
 import { jwtDecode } from "jwt-decode";
+import SuccessToast from "../../components/Toast/Success";
 
 
 
@@ -122,7 +123,6 @@ const Login = () => {
   };
   return (
     <>
-      <NavBar />
       <div
         className="bg-sponsor"
         style={{
@@ -131,13 +131,8 @@ const Login = () => {
           backgroundImage: `url(${backgroundimg})`,
         }}
       >
-        {successMessage && (
-          <div className="container">
-            <div class="alert alert-success" role="alert">
-              {successMessage}
-            </div>
-          </div>
-        )}
+                   {successMessage && <SuccessToast message={successMessage} />}
+
         <div className="container">
           <div className="box1">
             <form action="#" class="contact-form" onSubmit={submitHandler}>
@@ -165,7 +160,7 @@ const Login = () => {
                 </div>
               </div>
 
-              <div class="row form-group">
+              <div class="row form-group" style={{ marginBottom: '0px' }}>
                 <div class="col-md-12">
                   <label class="text-black" for="subject">
                     Password
@@ -201,54 +196,59 @@ const Login = () => {
                   <p style={{ color: "red" }}>{passwordError}</p>
                 </div>
               </div>
+              <div>
+                <Link style={{ float: "right" }}>Forgot password?</Link>
+              </div>
+              <div class="row form-group mt-4" style={{ textAlign: 'center' }}>
+                <div class="col-md-12" >
+                  <input type="submit" style={{ width: '50%' }} value="Submit" class="btn btn-primary" />
+                </div>
 
-              <div class="row form-group mt-4">
-                <div class="col-md-12">
-                  <input type="submit" value="Submit" class="btn btn-primary" />
-                  <Button
-                    fullWidth
-                    variant="outlined"
-                    sx={{
-                      mt: 3,
-                      mb: 2,
-                      borderColor: "#9D78BD",
-                      textTransform: "none",
-                      position: "relative",
+              </div>
+            </form>
+            <h2 class="title-section" style={{ textAlign: 'center' }}>Register with google as an Sponsor</h2>
+            {/* <div class="divider mx-auto"></div> */}
+            <div style={{ textAlign: 'center' }}>
+              <Button
+                fullWidth
+                variant="outlined"
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  borderColor: "#9D78BD",
+                  textTransform: "none",
+                  position: "relative",
+                }}
+              >
+                <GoogleOAuthProvider clientId="876612212431-oibsejipeff345lvh9bk84d0gv92mk86.apps.googleusercontent.com">
+                  {" "}
+                  <div
+                    style={{
+                      position: "absolute",
+                      left: "10px",
+                      top: "50%",
+                      transform: "translateY(-50%)",
                     }}
                   >
-                    <GoogleOAuthProvider clientId="876612212431-oibsejipeff345lvh9bk84d0gv92mk86.apps.googleusercontent.com">
-                      {" "}
-                      <div
-                        style={{
-                          position: "absolute",
-                          left: "10px",
-                          top: "50%",
-                          transform: "translateY(-50%)",
-                        }}
-                      >
-                        {/* <img
+                    {/* <img
                           src={google}
                           alt="Google Icon"
                           style={{ width: "24px" }}
                         /> */}
-                      </div>
-                      <GoogleLogin
-                        onSuccess={handleSuccess}
-                        // onError={handleError}
-                        style={{ width: '10vh' }}
-                      />
+                  </div>
+                  <GoogleLogin
+                    onSuccess={handleSuccess}
+                    // onError={handleError}
+                    style={{ width: '10vh' }}
+                  />
 
-                    </GoogleOAuthProvider>
-                  </Button>
-                  <Link style={{ float: "right" }}>Forgot password?</Link>
-                </div>
-                <div class="col-md-12 mt-4 text-lg">
-                  <p style={{ textAlign: "center" }}>
-                    Don't have an account? <Link to="/signup">Sign Up</Link>
-                  </p>
-                </div>
-              </div>
-            </form>
+                </GoogleOAuthProvider>
+              </Button>
+            </div>
+
+            <p style={{ textAlign: "center", marginBottom: '0%', marginTop: '4%' }}>
+              Don't have an account? <Link to="/signup">Sign Up</Link>
+            </p>
           </div>
         </div>
       </div>

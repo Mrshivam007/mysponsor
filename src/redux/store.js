@@ -7,6 +7,7 @@ import { profileReducer } from "./reducer/profileReducer";
 import { adminReducer } from "./reducer/adminReducer";
 import { paymentReducer } from "./reducer/paymentReducer";
 import { eventCategoryReducer } from "./reducer/eventCategoryReducer";
+import { paymentWithdrawReducer } from "./reducer/paymentWithdrawReducer";
 
 
 const reducer = combineReducers({
@@ -18,6 +19,7 @@ const reducer = combineReducers({
     sponsorProfile: profileReducer,
     admin: adminReducer,
     payment: paymentReducer,
+    paymentWithdraw: paymentWithdrawReducer
 })
 
 const userInfoFromStorage = localStorage.getItem('userDetails') ? JSON.parse(localStorage.getItem('userDetails')) : null;

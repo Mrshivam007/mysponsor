@@ -13,7 +13,7 @@ const SponsorButton = ({ item, preview, isSelected, onButtonClick }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  console.log(item);
+  console.log("Sponsoring item details ", item);
   console.log("This is the banner preview", preview);
   console.log("This is the type of banner preview", typeof preview);
   return (
@@ -24,7 +24,7 @@ const SponsorButton = ({ item, preview, isSelected, onButtonClick }) => {
           style={{ backgroundColor: "#f2f2f2", borderRadius: "10px" }}
         >
           <h6 className="font-weight-bolder">
-            {item.sponsoring_content_items} <br />
+            {item.sponsoring_items} <br />
           </h6>
           {/* <Button
             className="px-2 py-1 rounded-pill"
@@ -47,7 +47,7 @@ const SponsorButton = ({ item, preview, isSelected, onButtonClick }) => {
               closeButton
             >
               <Modal.Title id="contained-modal-title-vcenter">
-                {item.sponsoring_content_items} Preview
+                {item.sponsoring_items} Preview
               </Modal.Title>
             </Modal.Header>
             <Modal.Body
@@ -97,19 +97,31 @@ const SponsorEventBox = (contentData) => {
   console.log("event data02", cardData02);
   const cardData = cardData01 || cardData02;
   let totalAmount = 0;
-  const sponsoring_items = cardData?.sponsoring_items || [];
+  const sponsoring_items = cardData?.sponsoring_content_items || [];
   const [bannerImage, setBannerImage] = useState(null);
   const [ledImage, setLedImage] = useState(null);
   const [ledVideo, setLedVideo] = useState(null);
-  const [sponsored_by, setSponsored_by] = useState("");
+  // const [sponsored_by, setSponsored_by] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [pre_sponsored_by, setPre_Sponsored_by] = useState(cardData?.sponsored_by);
-  const [tag_ads, setTag_ads] = useState("");
+  // const [tag_ads, setTag_ads] = useState("");
   const [pre_tag_ads, setPre_Tag_ads] = useState(cardData?.tag_ads);
-  const [reel_sponsored, setReel_sponsored] = useState("");
+  // const [reel_sponsored, setReel_sponsored] = useState("");
   const [pre_reel_sponsored, setPre_Reel_sponsored] = useState(cardData?.reel_sponsored);
+  const [sponsored_by, setSponsored_by] = useState(null);
+  const [sponsored_byFileName, setSponsored_byFileName] = useState(null);
+  const [tag_ads, setTag_ads] = useState(null);
+  const [tag_adsFileName, setTag_adsFileName] = useState(null);
+  const [reel_sponsored, setReel_sponsored] = useState(null);
+  const [reel_sponsoredFileName, setReel_sponsoredFileName] = useState(null);
   console.log("pre tag ads ", pre_tag_ads);
   const { SponsoringItemDetails, SponsoringItemError, loading } = sponsor;
+
+  const formattedSponsoringItems = sponsoring_items.map((item) => ({
+    sponsoring_items: item.sponsoring_items,
+  }));
+
+  console.log("Content Formatting Sponsoring item ", formattedSponsoringItems);
 
   console.log("Sponsoring Items", sponsoring_items);
 
@@ -137,9 +149,31 @@ const SponsorEventBox = (contentData) => {
     // formData.append("led_image", ledImage || "");
     // formData.append("led_video", ledVideo || "");
     // formData.append("bill_text", "");
-    formData.append("sponsored_by", sponsored_by || pre_sponsored_by);
-    formData.append("tag_ads", tag_ads || pre_tag_ads);
-    formData.append("reel_sponsored", reel_sponsored || pre_reel_sponsored);
+    // formData.append("sponsored_by", sponsored_by || pre_sponsored_by);
+    // formData.append("tag_ads", tag_ads || pre_tag_ads);
+    // formData.append("reel_sponsored", reel_sponsored || pre_reel_sponsored);
+    formattedSponsoringItems.forEach((item) => {
+      switch (item.sponsoring_items) {
+        case "sponsored_by":
+          if (sponsored_by != null) {
+            formData.append("sponsored_by", sponsored_by, sponsored_byFileName || "");
+          }
+          break;
+        case "tag_ads":
+          if (tag_ads != tag_ads){
+            formData.append("tag_ads", tag_ads, tag_adsFileName || "");
+          }
+          break;
+        case "reel_sponsored":
+          if (reel_sponsored != null) {
+            formData.append("reel_sponsored", reel_sponsored, reel_sponsoredFileName || "");
+          }
+          break;
+        // Add more cases for other sponsoring item types if needed
+        default:
+          break;
+      }
+    });
 
     try {
       // Make POST API call
@@ -179,6 +213,34 @@ const SponsorEventBox = (contentData) => {
       totalAmount += parseFloat(item.price);
     }
   });
+
+  const generateUniqueFilename = (originalFilename, index) => {
+    const extension = originalFilename.split('.').pop();
+    const uniqueFilename = `thumbnail${index + 1}_${Date.now()}.${extension}`;
+    return uniqueFilename;
+  };
+
+  const handleSponsored_byChange = (e) => {
+    const file = e.target.files[0];
+    const uniqueFilename = generateUniqueFilename(file.name, 0);
+    setSponsored_by(file);
+    setSponsored_byFileName(uniqueFilename); // Save the unique filename in state
+  };
+
+  const handletag_adsChange = (e) => {
+    const file = e.target.files[0];
+    const uniqueFilename = generateUniqueFilename(file.name, 0);
+    setTag_ads(file);
+    setTag_adsFileName(uniqueFilename); // Save the unique filename in state
+  };
+
+  const handleReel_SponsoredChange = (e) => {
+    const file = e.target.files[0];
+    const uniqueFilename = generateUniqueFilename(file.name, 0);
+    setReel_sponsored(file);
+    setReel_sponsoredFileName(uniqueFilename); // Save the unique filename in state
+  };
+
   const settings = {
     infinite: true, // Loop the slider
     speed: 500, // Transition speed in milliseconds
@@ -215,26 +277,26 @@ const SponsorEventBox = (contentData) => {
         sessionStorage.setItem(
           "successMessage",
           "Promotion listed successfully!"
-        ); 
+        );
         navigate("/sponsored_content"); // Replace '/' with the desired route for the home page
       } else {
         console.log("An error occurred while posting the promotion");
         window.scroll(0, 0);
         setErrorMessage("An error occurred during posting an promotion");
       }
-    } 
+    }
     else if (SponsoringItemError) {
       console.log("An error occurred while posting the promotion");
-        window.scroll(0, 0);
-        setErrorMessage("An error occurred during posting an promotion");
+      window.scroll(0, 0);
+      setErrorMessage("An error occurred during posting an promotion");
     }
   }, [SponsoringItemDetails, SponsoringItemError]);
 
   return (
     <>
       {/* DESKTOP VIEW  */}
-      <div className="container payments-desktop desktop-view">
-      {errorMessage && (
+      <div className="container payments-desktop desktop-view" style={{ paddingBottom: '1%' }}>
+        {errorMessage && (
           <div className="container">
             <div
               className="alert alert-danger"
@@ -248,7 +310,7 @@ const SponsorEventBox = (contentData) => {
         <div className="pay-box">
           <div className="row row-cols-2">
             <div className="col-6">
-            <div
+              <div
                 className="post-thumb mb-3"
                 style={{
                   borderRadius: "20px",
@@ -365,9 +427,9 @@ const SponsorEventBox = (contentData) => {
             </div>
           </div>
           <h1 className="font-weight-bold d-none d-lg-block">
-            Add you sponsoring slogan or info
+            Add your sponsoring slogan or info
           </h1>
-          {/* <h2 className="sponsor-mobile-text">Add Photos</h2> */}
+          <h2 className="sponsor-mobile-text">Update Sponsoring Item</h2>
           {/* <p>(atleast 3 photos & 1 video)</p> */}
 
           {cardData?.sponsoring_content_items.map((item, index) => (
@@ -376,60 +438,117 @@ const SponsorEventBox = (contentData) => {
               className="box1 mt-2 d-flex justify-content-center"
               style={{ gap: "2%" }}
             >
-              {item.sponsoring_content_items === "tag_ads" && (
+              {item.sponsoring_items === "tag_ads" && (
                 <div
                   className="box photo-box bg-white d-flex justify-content-center align-items-start p-3"
-                  style={{ width: "40%" }}
+                  style={{ width: "50%" }}
                 >
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add #Ads Text Info</h5>
+                    <h5 className="font-weight-bold">Add Tag Ads Image</h5>
                     <input
-                      type="text"
-                      id="title"
-                      value={tag_ads || pre_tag_ads}
-                      onChange={(e) => setTag_ads(e.target.value)}
-                      readOnly={pre_tag_ads ? true : false}
-                      className="form-control"
-                      placeholder="Enter #Tag Info"
+                      type="file"
+                      accept="image/*"
+                      onChange={handletag_adsChange}
+                      style={{ width: "74%", borderRadius: "0" }}
                     />
+                    {cardData?.tag_ads && tag_ads === null ? (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          className="mx-auto"
+                          src={apiurl + cardData?.tag_ads}
+                          alt="Preview"
+                          width="200"
+                        />
+                      </div>
+                    ) : null}
+                    {tag_ads ? (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          className="mx-auto"
+                          src={URL.createObjectURL(tag_ads)}
+                          alt=""
+                          width="200"
+                        />
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               )}
-              {item.sponsoring_content_items === "sponsored_by" && (
+              {item.sponsoring_items === "sponsored_by" && (
                 <div
                   className="box photo-box bg-white d-flex justify-content-center align-items-start p-3"
-                  style={{ width: "40%" }}
+                  style={{ width: "50%" }}
                 >
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add Sponsored By Text Info</h5>
+                    <h5 className="font-weight-bold">Add Sponsored_by Image</h5>
                     <input
-                      type="text"
-                      id="title"
-                      value={sponsored_by || pre_sponsored_by}
-                      onChange={(e) => setSponsored_by(e.target.value)}
-                      readOnly={pre_sponsored_by ? true : false}
-                      className="form-control"
-                      placeholder="Enter #Tag Info"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleSponsored_byChange}
+                      style={{ width: "74%", borderRadius: "0" }}
                     />
+                    {cardData?.sponsored_by && sponsored_by === null ? (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          className="mx-auto"
+                          src={apiurl + cardData?.sponsored_by}
+                          alt="Preview"
+                          width="200"
+                        />
+                      </div>
+                    ) : null}
+                    {sponsored_by ? (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          className="mx-auto"
+                          src={URL.createObjectURL(sponsored_by)}
+                          alt=""
+                          width="200"
+                        />
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               )}
-              {item.sponsoring_content_items === "reel_sponsored" && (
+              {item.sponsoring_items === "reel_sponsored" && (
                 <div
                   className="box photo-box bg-white d-flex justify-content-center align-items-start p-3"
-                  style={{ width: "40%" }}
+                  style={{ width: "50%" }}
                 >
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add Reels Sponsored Text Info</h5>
+                    <h5 className="font-weight-bold">Add Reel Sponsored Image</h5>
                     <input
-                      type="text"
-                      id="title"
-                      value={reel_sponsored || pre_reel_sponsored}
-                      onChange={(e) => setReel_sponsored(e.target.value)}
-                      readOnly={pre_reel_sponsored ? true : false}
-                      className="form-control"
-                      placeholder="Enter Reel Information Info"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleReel_SponsoredChange}
+                      style={{ width: "74%", borderRadius: "0" }}
                     />
+                    {cardData?.reel_sponsored && reel_sponsored === null ? (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          className="mx-auto"
+                          src={apiurl + cardData?.reel_sponsored}
+                          alt="Preview"
+                          width="200"
+                        />
+                      </div>
+                    ) : null}
+                    {reel_sponsored ? (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          className="mx-auto"
+                          src={URL.createObjectURL(reel_sponsored)}
+                          alt=""
+                          width="200"
+                        />
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               )}
@@ -439,7 +558,7 @@ const SponsorEventBox = (contentData) => {
             <input
               type="submit"
               className="btn btn-success submit py-1 px-3"
-              value="List Promotion"
+              value="Update Promotion"
               onClick={handleSubmitClick}
             />
           </div>
@@ -454,7 +573,7 @@ const SponsorEventBox = (contentData) => {
 
       {/* MOBILE VIEW */}
       <div className="container mobile-view">
-      {errorMessage && (
+        {errorMessage && (
           <div className="container">
             <div
               className="alert alert-danger"
@@ -570,13 +689,13 @@ const SponsorEventBox = (contentData) => {
                   />
                 ))}
               </div>
-            
+
             </div>
           </div>
         </div>
         <div className="container">
-          <h2 className="sponsor-mobile-text pl-0">Add Photos</h2>
-          <p>(atleast 3 photos & 1 video)</p>
+          <h2 className="sponsor-mobile-text pl-0">Update Sponsoring Item</h2>
+          {/* <p>(atleast 3 photos & 1 video)</p> */}
 
           {cardData?.sponsoring_content_items.map((item, index) => (
             <div
@@ -584,60 +703,117 @@ const SponsorEventBox = (contentData) => {
               className="box1 mt-2 d-flex justify-content-center"
               style={{ gap: "2%" }}
             >
-              {item.sponsoring_content_items === "tag_ads" && (
+              {item.sponsoring_items === "tag_ads" && (
                 <div
                   className="box photo-box bg-white d-flex justify-content-center align-items-start p-3"
-                  style={{ width: "90%" }}
+                  style={{ width: "50%" }}
                 >
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add #Ads Text Info</h5>
+                    <h5 className="font-weight-bold">Add Tag Ads Image</h5>
                     <input
-                      type="text"
-                      id="title"
-                      value={tag_ads || pre_tag_ads}
-                      onChange={(e) => setTag_ads(e.target.value)}
-                      readOnly={pre_tag_ads ? true : false}
-                      className="form-control"
-                      placeholder="Enter #Tag Info"
+                      type="file"
+                      accept="image/*"
+                      onChange={handletag_adsChange}
+                      style={{ width: "74%", borderRadius: "0" }}
                     />
+                    {cardData?.tag_ads && tag_ads === null ? (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          className="mx-auto"
+                          src={apiurl + cardData?.tag_ads}
+                          alt="Preview"
+                          width="200"
+                        />
+                      </div>
+                    ) : null}
+                    {tag_ads ? (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          className="mx-auto"
+                          src={URL.createObjectURL(tag_ads)}
+                          alt=""
+                          width="200"
+                        />
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               )}
-              {item.sponsoring_content_items === "sponsored_by" && (
+              {item.sponsoring_items === "sponsored_by" && (
                 <div
                   className="box photo-box bg-white d-flex justify-content-center align-items-start p-3"
-                  style={{ width: "90%" }}
+                  style={{ width: "100%" }}
                 >
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add Sponsored By Text Info</h5>
+                    <h5 className="font-weight-bold">Add Sponsored_by Image</h5>
                     <input
-                      type="text"
-                      id="title"
-                      value={sponsored_by || pre_sponsored_by}
-                      onChange={(e) => setSponsored_by(e.target.value)}
-                      readOnly={pre_sponsored_by ? true : false}
-                      className="form-control"
-                      placeholder="Enter #Tag Info"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleSponsored_byChange}
+                      style={{ width: "74%", borderRadius: "0" }}
                     />
+                    {cardData?.sponsored_by && sponsored_by === null ? (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          className="mx-auto"
+                          src={apiurl + cardData?.sponsored_by}
+                          alt="Preview"
+                          width="200"
+                        />
+                      </div>
+                    ) : null}
+                    {sponsored_by ? (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          className="mx-auto"
+                          src={URL.createObjectURL(sponsored_by)}
+                          alt=""
+                          width="200"
+                        />
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               )}
-              {item.sponsoring_content_items === "reel_sponsored" && (
+              {item.sponsoring_items === "reel_sponsored" && (
                 <div
                   className="box photo-box bg-white d-flex justify-content-center align-items-start p-3"
-                  style={{ width: "90%" }}
+                  style={{ width: "50%" }}
                 >
                   <div className="box text-center">
-                    <h5 className="font-weight-bold">Add Reels Sponsored Text Info</h5>
+                    <h5 className="font-weight-bold">Add Reel Sponsored Image</h5>
                     <input
-                      type="text"
-                      id="title"
-                      value={reel_sponsored || pre_reel_sponsored}
-                      onChange={(e) => setReel_sponsored(e.target.value)}
-                      readOnly={pre_reel_sponsored ? true : false}
-                      className="form-control"
-                      placeholder="Enter Reel Information Info"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleReel_SponsoredChange}
+                      style={{ width: "74%", borderRadius: "0" }}
                     />
+                    {cardData?.reel_sponsored && reel_sponsored === null ? (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          className="mx-auto"
+                          src={apiurl + cardData?.reel_sponsored}
+                          alt="Preview"
+                          width="200"
+                        />
+                      </div>
+                    ) : null}
+                    {reel_sponsored ? (
+                      <div>
+                        <h2>Preview:</h2>
+                        <img
+                          className="mx-auto"
+                          src={URL.createObjectURL(reel_sponsored)}
+                          alt=""
+                          width="200"
+                        />
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               )}

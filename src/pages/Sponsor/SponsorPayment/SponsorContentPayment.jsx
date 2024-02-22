@@ -8,7 +8,7 @@ import useRazorpay from "react-razorpay";
 
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { createSponsor } from "../../../redux/actions/sponsorAction";
+import { completeEventPayment, createSponsor, updateContentSponsoringItem } from "../../../redux/actions/sponsorAction";
 import apiurl from "../../../constant/config";
 
 const SponsorContentPayment = () => {
@@ -22,24 +22,100 @@ const SponsorContentPayment = () => {
   console.log("Card Data", cardData);
   console.log("Price", sponsoring_price);
   console.log("Item", sponsoring_items);
-  const tax_amount = (sponsoring_price * 19) / 100;
+  const tax_amount = Math.ceil((sponsoring_price * 19) / 100);
   const auth = useSelector((state) => state.auth);
   const { userDetails } = auth;
   console.log("Sponsor_user_id ", userDetails.user_id);
   const total_amount = (Number(sponsoring_price) + Number(tax_amount)).toFixed(
     2
   );
+  const sponsor = useSelector((state) => state.sponsor);
+
+  // const sponsoring_items = cardData?.sponsoring_items || [];
+  const [sponsored_by, setSponsored_by] = useState("");
+  const [sponsored_byFileName, setSponsored_byFileName] = useState("");
+  const [tag_ads, setTag_ads] = useState("");
+  const [tag_adsFileName, setTag_adsFileName] = useState("");
+  const [reel_sponsored, setReel_sponsored] = useState("");
+  const [reel_sponsoredFileName, setReel_sponsoredFileName] = useState("");
+  const [pre_reel_sponsored, setPre_Reel_sponsored] = useState(cardData?.reel_sponsored);
+  const [pre_tag_ads, setPre_Tag_ads] = useState(cardData?.tag_ads);
+  const [pre_sponsored_by, setPre_Sponsored_by] = useState(cardData?.sponsored_by);
 
   const navigate = useNavigate(); // Initialize useNavigate hook
   const formattedSponsoringItems = sponsoring_items.map((item) => ({
-    sponsoring_content_items: item,
+    sponsoring_items: item,
   }));
+  const [showPayment, setShowPayment] = useState(true);
+  console.log("formatting sponsoring item ", formattedSponsoringItems);
+  const { SponsoringItemDetails, SponsoringItemError, loading } = sponsor;
+
+
+
+  const toggleForm = () => {
+    setShowPayment((prev) => !prev);
+  };
+
+  const [error, setError] = useState('');
+
+  const checkSponsoringItems = () => {
+    // Loop through sponsoring items and check if each item has necessary content
+    for (const item of formattedSponsoringItems) {
+      if (
+        (item.sponsoring_items === 'sponsored_by' && !(sponsored_by || cardData?.sponsored_by)) ||
+        (item.sponsoring_items === 'tag_ads' && !(tag_ads || cardData?.tag_ads)) ||
+        (item.sponsoring_items === 'reel_sponsored' && !(reel_sponsored || cardData?.reel_sponsored))
+      ) {
+        return false; // Sponsoring item is not filled
+      }
+    }
+    return true; // All sponsoring items are filled
+  };
+
+  const handleListPromotion = () => {
+    const allFilled = checkSponsoringItems();
+    if (!allFilled) {
+      setError("One or more sponsoring items isn't filled.");
+      window.scroll(0, 0)
+    } else {
+      setError(''); // Clear any previous error
+      toggleForm();
+      window.scroll(0, 0)
+    }
+  };
+
+
+  const generateUniqueFilename = (originalFilename, index) => {
+    const extension = originalFilename.split('.').pop();
+    const uniqueFilename = `thumbnail${index + 1}_${Date.now()}.${extension}`;
+    return uniqueFilename;
+  };
+
+  const handleSponsored_byChange = (e) => {
+    const file = e.target.files[0];
+    const uniqueFilename = generateUniqueFilename(file.name, 0);
+    setSponsored_by(file);
+    setSponsored_byFileName(uniqueFilename); // Save the unique filename in state
+  };
+
+  const handletag_adsChange = (e) => {
+    const file = e.target.files[0];
+    const uniqueFilename = generateUniqueFilename(file.name, 0);
+    setTag_ads(file);
+    setTag_adsFileName(uniqueFilename); // Save the unique filename in state
+  };
+
+  const handleReel_SponsoredChange = (e) => {
+    const file = e.target.files[0];
+    const uniqueFilename = generateUniqueFilename(file.name, 0);
+    setReel_sponsored(file);
+    setReel_sponsoredFileName(uniqueFilename); // Save the unique filename in state
+  };
 
   // complete order
   const complete_order = async (paymentID, orderID, signature) => {
     axios({
       method: "post",
-      // url: "http://127.0.0.1:8000/api/razorpay/content/order/complete/",
       url: `${apiurl}/api/razorpay/content/order/complete/`,
       data: {
         payment_id: paymentID,
@@ -53,20 +129,50 @@ const SponsorContentPayment = () => {
       },
     })
       .then((response) => {
-        console.log(response.data.message);
+        console.log("All data ", response);
         if (response.data.message === "transaction created") {
-          // dispatch(createSponsor());
+          console.log("handle submit click functon call here", response);
+          console.log("All data after crating the payment ", response);
+          const formData = new FormData();
+          // formData.append("sponsor_id", cardData.sponsor_id);
+          formData.append("sponsor_id", response.data?.sponsord_event?.content_sponsor_id);
+          formattedSponsoringItems.forEach((item) => {
+            switch (item.sponsoring_items) {
+              case "sponsored_by":
+                formData.append("sponsored_by", sponsored_by, sponsored_byFileName || "");
+                break;
+              case "tag_ads":
+                formData.append("tag_ads", tag_ads, tag_adsFileName || "");
+                break;
+              case "reel_sponsored":
+                formData.append("reel_sponsored", reel_sponsored, reel_sponsoredFileName || "");
+                break;
+              // Add more cases for other sponsoring item types if needed
+              default:
+                break;
+            }
+          });
+          // try {
+          //   dispatch(updateSponsoringItem(formData));
+          //   // sessionStorage.setItem("successMessage", "Class created successfully!");
+          //   // navigate("/sponsored_event"); // Replace '/' with the desired route for the home page
+          // } catch (error) {
+          //   console.log("An error occurred during API calls:", error);
+          // }
+          dispatch(updateContentSponsoringItem(formData));
           sessionStorage.setItem(
             "successMessage",
-            "Class created successfully!"
+            "Content Sponsored Successfully!"
           );
           navigate("/sponsored_content"); // Replace '/' with the desired route for the home page
+          // window.location.reload(); // Reload the page
         }
       })
       .catch((error) => {
         console.log(error.response.data);
       });
   };
+
 
   const razorPay = () => {
     //create order
@@ -130,65 +236,241 @@ const SponsorContentPayment = () => {
       });
   };
 
+  console.log("Sponsorign item detatils ", SponsoringItemDetails);
+  console.log("Sponsorign item error ", SponsoringItemError);
+
   return (
     <>
-      
-      <div
-        className="sponsor-pay-bg"
-        style={{
-          width: "100%",
-          height: "auto",
-          backgroundImage: `url(${bgimage})`,
-        }}
-      >
-        <div className="container">
-          <h2 className="sponsor-pay-text">Payment Gateway</h2>
-          <h2 className="sponsor-pay-mobile-text">Payment Gateway</h2>
-        </div>
-        <SponsorpayCard data={cardData} />
-        <div className="container">
-          <div className="box amount-info">
-            <div className="d-flex justify-content-between font-weight-bolder">
-              <h5>Sponsor Total</h5>
-              <h5>₹{sponsoring_price}</h5>
+      <div>
+        {showPayment ? (
+          // <h1 onClick={toggleForm}>Continue to Payment</h1>
+          <>
+            <h1 className="font-weight-bold d-none d-lg-block">
+              Add Photos & Videos
+            </h1>
+            <h2 className="sponsor-mobile-text">Add Photos</h2>
+            <p>(atleast 1 photo & 1 video)</p>
+
+            {error && <div className="alert alert-danger">{error}</div>}
+
+
+            {formattedSponsoringItems.map((item, index) => (
+              <div
+                key={index}
+                className="box1 mt-2 d-flex justify-content-center"
+                style={{ gap: "2%" }}
+              >
+                {item.sponsoring_items === "sponsored_by" && (
+                  <div
+                    className="box photo-box bg-white d-flex justify-content-center align-items-start p-3"
+                    style={{ width: "50%" }}
+                  >
+                    <div className="box text-center">
+                      <h5 className="font-weight-bold">Add Sponsored_by Image</h5>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleSponsored_byChange}
+                        style={{ width: "74%", borderRadius: "0" }}
+                      />
+                      {cardData?.sponsored_by && sponsored_by === null ? (
+                        <div>
+                          <h2>Preview:</h2>
+                          <img
+                            className="mx-auto"
+                            src={apiurl + cardData?.sponsored_by}
+                            alt="Preview"
+                            width="200"
+                          />
+                        </div>
+                      ) : null}
+                      {sponsored_by ? (
+                        <div>
+                          <h2>Preview:</h2>
+                          <img
+                            className="mx-auto"
+                            src={URL.createObjectURL(sponsored_by)}
+                            alt=""
+                            width="200"
+                          />
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                )}
+
+                {item.sponsoring_items === "reel_sponsored" && (
+                  <div
+                    className="box photo-box bg-white d-flex justify-content-center align-items-start p-3"
+                    style={{ width: "50%" }}
+                  >
+                    <div className="box text-center">
+                      <h5 className="font-weight-bold">Add Reel Sponsored Image</h5>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleReel_SponsoredChange}
+                        style={{ width: "74%", borderRadius: "0" }}
+                      />
+                      {cardData?.reel_sponsored && reel_sponsored === null ? (
+                        <div>
+                          <h2>Preview:</h2>
+                          <img
+                            className="mx-auto"
+                            src={apiurl + cardData?.reel_sponsored}
+                            alt="Preview"
+                            width="200"
+                          />
+                        </div>
+                      ) : null}
+                      {reel_sponsored ? (
+                        <div>
+                          <h2>Preview:</h2>
+                          <img
+                            className="mx-auto"
+                            src={URL.createObjectURL(reel_sponsored)}
+                            alt=""
+                            width="200"
+                          />
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                )}
+
+                {item.sponsoring_items === "tag_ads" && (
+                  <div
+                    className="box photo-box bg-white d-flex justify-content-center align-items-start p-3"
+                    style={{ width: "50%" }}
+                  >
+                    <div className="box text-center">
+                      <h5 className="font-weight-bold">Add Tag Ads Image</h5>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handletag_adsChange}
+                        style={{ width: "74%", borderRadius: "0" }}
+                      />
+                      {cardData?.tag_ads && tag_ads === null ? (
+                        <div>
+                          <h2>Preview:</h2>
+                          <img
+                            className="mx-auto"
+                            src={apiurl + cardData?.tag_ads}
+                            alt="Preview"
+                            width="200"
+                          />
+                        </div>
+                      ) : null}
+                      {tag_ads ? (
+                        <div>
+                          <h2>Preview:</h2>
+                          <img
+                            className="mx-auto"
+                            src={URL.createObjectURL(tag_ads)}
+                            alt=""
+                            width="200"
+                          />
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+
+            {formattedSponsoringItems.map((item, index) => (
+              <>
+                {item.sponsoring_items === "sponsored_by" &&
+                  !(sponsored_by || cardData?.sponsored_by) ? (
+                  <div className="alert alert-danger">
+                    Upload an image to be displayed on the Sponsored By
+                  </div>
+                ) : null}
+                {item.sponsoring_items === "tag_ads" &&
+                  !(tag_ads || cardData?.tag_ads) ? (
+                  <div className="alert alert-danger">
+                    Upload an image to be displayed on the Tag Ads
+                  </div>
+                ) : null}
+                {item.sponsoring_items === "reel_sponsored" &&
+                  !(reel_sponsored || cardData?.reel_sponsored) ? (
+                  <div className="alert alert-danger">
+                    Upload a video to be displayed on the Reel's
+                  </div>
+                ) : null}
+              </>
+            ))}
+            <div className="container" style={{ alignItems: 'center', padding: '2%' }}>
+              <input
+                type="submit"
+                className="btn btn-primary submit py-1 px-3"
+                value="Make Payment"
+                onClick={handleListPromotion}
+              />
             </div>
-            <div className="d-flex justify-content-between font-weight-bolder">
-              <h5>GST(19%)</h5>
-              <h5>+ ₹{tax_amount}</h5>
+          </>
+        ) : (
+          <div
+            className="sponsor-pay-bg"
+            style={{
+              width: "100%",
+              height: "auto",
+              paddingBottom: '1%',
+              backgroundImage: `url(${bgimage})`,
+            }}
+          >
+            <div className="container">
+              <h2 className="sponsor-pay-text">Payment Gateway</h2>
+              <h2 className="sponsor-pay-mobile-text">Payment Gateway</h2>
             </div>
-            <div className="d-flex justify-content-between font-weight-bolder">
-              <h5>Platform Fee</h5>
-              <h5>+ ₹0</h5>
+            <SponsorpayCard data={cardData} />
+            <div className="container">
+              <div className="box amount-info">
+                <div className="d-flex justify-content-between font-weight-bolder">
+                  <h5>Sponsor Total</h5>
+                  <h5>₹{sponsoring_price}</h5>
+                </div>
+                <div className="d-flex justify-content-between font-weight-bolder">
+                  <h5>GST(19%)</h5>
+                  <h5>+ ₹{tax_amount}</h5>
+                </div>
+                <div className="d-flex justify-content-between font-weight-bolder">
+                  <h5>Platform Fee</h5>
+                  <h5>+ ₹0</h5>
+                </div>
+              </div>
+              <hr style={{ borderTop: "1px solid #535353" }} />
+              <div className="box grand-total">
+                <h5 className="text-center">Grand Total</h5>
+                <div className="d-flex justify-content-center">
+                  <span className="bagde-pill text-white text-xl">
+                    ₹{total_amount}
+                  </span>
+                </div>
+              </div>
+              <button className="category-btn btn mb-3" style={{ width: "100%" }}>
+                <p className="category-btn-text" onClick={razorPay}>
+                  Sponsor
+                </p>
+              </button>
+              <div className="payment-description">
+                <p>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa
+                  adipisci voluptates esse ut impedit, assumenda quae nam
+                  voluptatum, ad temporibus dolore nobis eveniet dolor! Consequatur
+                  nulla saepe, nesciunt mollitia voluptates aut voluptatem id
+                  repudiandae dignissimos, voluptatibus tenetur expedita autem culpa
+                  nihil deleniti omnis? Iusto enim quae voluptate assumenda illo
+                  harum!
+                </p>
+              </div>
             </div>
+
           </div>
-          <hr style={{ borderTop: "1px solid #535353" }} />
-          <div className="box grand-total">
-            <h5 className="text-center">Grand Total</h5>
-            <div className="d-flex justify-content-center">
-              <span className="bagde-pill text-white text-xl">
-                ₹{total_amount}
-              </span>
-            </div>
-          </div>
-          <button className="category-btn btn mb-3" style={{ width: "100%" }}>
-            <p className="category-btn-text" onClick={razorPay}>
-              Sponsor
-            </p>
-          </button>
-          <div className="payment-description">
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa
-              adipisci voluptates esse ut impedit, assumenda quae nam
-              voluptatum, ad temporibus dolore nobis eveniet dolor! Consequatur
-              nulla saepe, nesciunt mollitia voluptates aut voluptatem id
-              repudiandae dignissimos, voluptatibus tenetur expedita autem culpa
-              nihil deleniti omnis? Iusto enim quae voluptate assumenda illo
-              harum!
-            </p>
-          </div>
-        </div>
-        
+        )}
       </div>
+
     </>
   );
 };

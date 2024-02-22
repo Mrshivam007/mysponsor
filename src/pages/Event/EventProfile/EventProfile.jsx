@@ -9,6 +9,7 @@ import { NavBar } from "../../../components";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../../redux/actions/authActions";
+import BnakAccountDetails from "./BankAccountDetails";
 const EventProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -41,6 +42,9 @@ const EventProfile = () => {
             </Tab>
             <Tab eventKey="notification" title="Notification">
               <EventNotification />
+            </Tab>
+            <Tab eventKey="bankDetails" title="Bank Details">
+              <BnakAccountDetails />
             </Tab>
           </Tabs>
         </div>

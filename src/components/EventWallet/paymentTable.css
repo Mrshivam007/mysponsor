@@ -1,0 +1,23 @@
+.mobile-view-row {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.mobile-view-row .expanded-row {
+  margin-top: 10px;
+}
+
+.expand-icon {
+  text-align: right;
+  cursor: pointer;
+}
+
+.expand-icon .bi {
+  font-size: 1.5rem;
+}
+
+.expand-icon .bi.expanded {
+  transform: rotate(90deg);
+}

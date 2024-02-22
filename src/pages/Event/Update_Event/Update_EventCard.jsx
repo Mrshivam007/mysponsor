@@ -5,7 +5,7 @@ import cardImg from "../../../assets/img/my_events_img.png";
 import bgimage from "../../../assets/img/circle-bg.png";
 import card_bg from "../../../assets/img/card/header-bg.png";
 import { Footer, NavBar } from "../../../components";
-import { fetchEvent, fetchEventbyId } from "../../../redux/actions/eventAction";
+import { fetchEvent } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux";
 import apiurl from "../../../constant/config";
 import { useNavigate } from "react-router-dom";
@@ -19,14 +19,12 @@ const Update_EventCard = ({ cardData }) => {
 
   const dispatch = useDispatch();
   const eventDetails = useSelector((state) => state.event);
-  useEffect(() => {
-    dispatch(fetchEventbyId(userDetails.user_id));
-  }, []);
 
   const navigate = useNavigate();
 
   const handleUpdation = (data) => {
     navigate("/update_event", { state: { eventData: data } });
+    window.location.reload()
   };
   return (
     <>

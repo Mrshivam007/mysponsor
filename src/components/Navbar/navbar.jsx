@@ -18,6 +18,22 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const navRef = useRef();
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutsideDropdown);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutsideDropdown);
+    };
+  }, []);
+
+  const handleClickOutsideDropdown = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setOpenDropDown(false);
+    }
+  };
+
+
   useEffect(() => {
     const handleScroll = () => {
       setSticky(window.scrollY > 0);
@@ -116,7 +132,7 @@ const NavBar = () => {
                     style={{ fontSize: "28px", marginLeft: "-10px" }}
                   ></span>
                 </div>
-                <div className="dropdown">
+                <div className="dropdown" ref={dropdownRef}>
                   {openDropDown ? (
                     <ul
                       className="dropdown-menu"
@@ -161,7 +177,7 @@ const NavBar = () => {
                     style={{ fontSize: "28px", marginLeft: "-10px" }}
                   ></span>
                 </div>
-                <div className="dropdown">
+                <div className="dropdown" ref={dropdownRef}>
                   {openDropDown ? (
                     <ul
                       className="dropdown-menu"
@@ -177,7 +193,7 @@ const NavBar = () => {
                         <div className="dropdown-item">Logout</div>
                       </li>
                       <li>
-                        <Link to={"/profile"}>
+                        <Link to={"/profile"} onClick={() => setOpenDropDown(!openDropDown)}>
                           <div className="dropdown-item">Your Account</div>
                         </Link>
                       </li>
@@ -253,7 +269,7 @@ const NavBar = () => {
                       style={{ fontSize: "28px", marginLeft: "-10px" }}
                     ></span>
                   </div>
-                  <div className="dropdown">
+                  <div className="dropdown" ref={dropdownRef}>
                     {openDropDown ? (
                       <ul
                         className="dropdown-menu"
@@ -271,7 +287,7 @@ const NavBar = () => {
                           </div>
                         </li>
                         <li>
-                          <Link to={"/profile"}>
+                          <Link to={"/profile"} onClick={() => setOpenDropDown(!openDropDown)}>
                             <div className="dropdown-item">My Account</div>
                           </Link>
                         </li>

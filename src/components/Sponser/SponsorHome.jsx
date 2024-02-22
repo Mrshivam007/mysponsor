@@ -29,9 +29,9 @@ const SponsorHome = () => {
           backgroundImage: `url(${backgroundimg})`,
         }}
       >
-        <SponserE line={"Sponsor Events Near You"} cardData={EventDetails.eventDetails?.live_event} />
+        <SponserE line={"Sponsor Events Near You"} cardData={EventDetails.eventDetails?.live_event.slice(0, 4)} />
         {/* <SponserCC line={"Sponsor Content Creators"} cardData={ContentCreators4} /> */}
-        <ContentCard line={"Sponsor Content Creators"} cardData={ContentDetails.contentDetails?.live_content} />
+        <ContentCard line={"Sponsor Content Creators"} cardData={ContentDetails.contentDetails?.live_content.slice(0, 4)} />
       </div>
     </>
   );

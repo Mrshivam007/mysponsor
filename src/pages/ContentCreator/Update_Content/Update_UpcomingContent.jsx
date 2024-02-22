@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Update_MobileCards from "./Update_MobileCard";
 import Update_ContentCard from "./Update_ContentCard";
 import Loading from "../../../components/Loading/Loading";
+import SuccessToast from "../../../components/Toast/Success";
 const Update_UpcomingContent = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
@@ -65,11 +66,8 @@ const Update_UpcomingContent = () => {
             <div className="events-page-desktop">
               <EventsHeader title={"Update Listed Content"} logo={spevents} />
               {/* <SponserE cardData={eventDetails.eventDetails} line={"Upcoming Event"} /> */}
-              {successMessage && (
-                <div class="alert alert-success" role="alert">
-                  {successMessage}
-                </div>
-              )}
+              {successMessage && <SuccessToast message={successMessage} />}
+
               <Update_ContentCard
                 cardData={contentDetails.contentDetails?.live_content}
               />

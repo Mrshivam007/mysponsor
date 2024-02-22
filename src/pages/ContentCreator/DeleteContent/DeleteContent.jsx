@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Delete_MobileCards from "./DeleteEventMobileCard";
 import DeleteContentCard from "./DeleteContentCard";
 import Loading from "../../../components/Loading/Loading";
+import SuccessToast from "../../../components/Toast/Success";
 const DeleteContent = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
@@ -60,11 +61,8 @@ const DeleteContent = () => {
                 logo={spevents}
               />
               {/* <SponserE cardData={contentDetails.contentDetails} line={"Upcoming Event"} /> */}
-              {successMessage && (
-                <div class="alert alert-success" role="alert">
-                  {successMessage}
-                </div>
-              )}
+              {successMessage && <SuccessToast message={successMessage} />}
+
               <DeleteContentCard
                 cardData={contentDetails.contentDetails?.past_content}
               />
