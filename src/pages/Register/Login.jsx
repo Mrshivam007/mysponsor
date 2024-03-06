@@ -4,14 +4,12 @@ import { Footer, NavBar } from "../../components";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { googleLogin, login } from "../../redux/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { GoogleLogin } from '@react-oauth/google';
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 import { Button } from "react-bootstrap";
 import { jwtDecode } from "jwt-decode";
 import SuccessToast from "../../components/Toast/Success";
-
-
-
+import "./loading.css";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -70,8 +68,7 @@ const Login = () => {
       console.log("Api Error", error);
       console.log("Api response", response);
       if (error.non_field_errors[0] === "Email or Password is not Valid") {
-        const showMessage =
-          "Your entered Email or Password is not valid";
+        const showMessage = "Your entered Email or Password is not valid";
         setShowMessage(showMessage);
       } else if (error === "Request failed with status code 400") {
         const showMessage = "Unable to Determine";
@@ -90,7 +87,6 @@ const Login = () => {
       setShowMessage("An error occurred during login. Please try again.");
     }
   };
-
 
   const handleEmailChange = (event) => {
     const newEmail = event.target.value;
@@ -143,7 +139,7 @@ const Login = () => {
                 </div>
               )}
 
-              <div class="row form-group" style={{ marginBottom: '0px' }}>
+              <div class="row form-group" style={{ marginBottom: "0px" }}>
                 <div class="col-md-12">
                   <label class="text-black" for="email">
                     Email
@@ -160,7 +156,7 @@ const Login = () => {
                 </div>
               </div>
 
-              <div class="row form-group" style={{ marginBottom: '0px' }}>
+              <div class="row form-group" style={{ marginBottom: "0px" }}>
                 <div class="col-md-12">
                   <label class="text-black" for="subject">
                     Password
@@ -199,16 +195,23 @@ const Login = () => {
               <div>
                 <Link style={{ float: "right" }}>Forgot password?</Link>
               </div>
-              <div class="row form-group mt-4" style={{ textAlign: 'center' }}>
-                <div class="col-md-12" >
-                  <input type="submit" style={{ width: '50%' }} value="Submit" class="btn btn-primary" />
+              <div class="row form-group mt-4" style={{ textAlign: "center" }}>
+                <div class="col-md-12">
+                  <input
+                    type="submit"
+                    style={{ width: "50%" }}
+                    value="Submit"
+                    class="btn btn-primary"
+                  />
                 </div>
-
               </div>
             </form>
-            <h2 class="title-section" style={{ textAlign: 'center' }}>Register with google as an Sponsor</h2>
+            {/* <h2 class="title-section" style={{ textAlign: 'center' }}>Register with google as an Sponsor</h2> */}
+            <div className="container">
+              <div class="line-text">Or</div>
+            </div>
             {/* <div class="divider mx-auto"></div> */}
-            <div style={{ textAlign: 'center' }}>
+            <div style={{ textAlign: "center" }}>
               <Button
                 fullWidth
                 variant="outlined"
@@ -239,15 +242,23 @@ const Login = () => {
                   <GoogleLogin
                     onSuccess={handleSuccess}
                     // onError={handleError}
-                    style={{ width: '10vh' }}
+                    style={{ width: "10vh" }}
                   />
-
                 </GoogleOAuthProvider>
               </Button>
             </div>
 
-            <p style={{ textAlign: "center", marginBottom: '0%', marginTop: '4%' }}>
-              Don't have an account? <Link style={{ fontWeight: 'bold', color: 'blue' }} to="/signup">Sign Up</Link>
+            <p
+              style={{
+                textAlign: "center",
+                marginBottom: "0%",
+                marginTop: "4%",
+              }}
+            >
+              Don't have an account?{" "}
+              <Link style={{ fontWeight: "bold", color: "blue" }} to="/signup">
+                Sign Up
+              </Link>
             </p>
           </div>
         </div>

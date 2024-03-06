@@ -1,33 +1,95 @@
 /* HTML: <div class="loader"></div> */
 .otpLoading {
-    width: 40px;
-    margin: auto;
-    aspect-ratio: 1;
-    --c: linear-gradient(#000 0 0);
-    --r1: radial-gradient(farthest-side at bottom,#000 93%,#0000);
-    --r2: radial-gradient(farthest-side at top   ,#000 93%,#0000);
-    background: 
-      var(--c) ,var(--r1),var(--r2),
-      var(--c) ,var(--r1),var(--r2),
-      var(--c) ,var(--r1),var(--r2);
-    background-repeat: no-repeat;
-    animation: l2 1s infinite alternate;
-  }
-  @keyframes l2 {
-    0%,25% {
-      background-size: 8px 0,8px 4px,8px 4px,8px 0,8px 4px,8px 4px,8px 0,8px 4px,8px 4px;
-      background-position: 0 50%,0 calc(50% - 2px),0 calc(50% + 2px),50% 50%,50% calc(50% - 2px),50% calc(50% + 2px),100% 50%,100% calc(50% - 2px),100% calc(50% + 2px);
+   width: 40px;
+   margin: auto;
+   aspect-ratio: 1;
+   --c: linear-gradient(#000 0 0);
+   --r1: radial-gradient(farthest-side at bottom, #000 93%, #0000);
+   --r2: radial-gradient(farthest-side at top, #000 93%, #0000);
+   background:
+      var(--c), var(--r1), var(--r2),
+      var(--c), var(--r1), var(--r2),
+      var(--c), var(--r1), var(--r2);
+   background-repeat: no-repeat;
+   animation: l2 1s infinite alternate;
+}
+
+@keyframes l2 {
+
+   0%,
+   25% {
+      background-size: 8px 0, 8px 4px, 8px 4px, 8px 0, 8px 4px, 8px 4px, 8px 0, 8px 4px, 8px 4px;
+      background-position: 0 50%, 0 calc(50% - 2px), 0 calc(50% + 2px), 50% 50%, 50% calc(50% - 2px), 50% calc(50% + 2px), 100% 50%, 100% calc(50% - 2px), 100% calc(50% + 2px);
    }
+
    50% {
-      background-size: 8px 100%,8px 4px,8px 4px,8px 0,8px 4px,8px 4px,8px 0,8px 4px,8px 4px;
-      background-position: 0 50%,0 calc(0% - 2px),0 calc(100% + 2px),50% 50%,50% calc(50% - 2px),50% calc(50% + 2px),100% 50%,100% calc(50% - 2px),100% calc(50% + 2px);
+      background-size: 8px 100%, 8px 4px, 8px 4px, 8px 0, 8px 4px, 8px 4px, 8px 0, 8px 4px, 8px 4px;
+      background-position: 0 50%, 0 calc(0% - 2px), 0 calc(100% + 2px), 50% 50%, 50% calc(50% - 2px), 50% calc(50% + 2px), 100% 50%, 100% calc(50% - 2px), 100% calc(50% + 2px);
    }
+
    75% {
-      background-size: 8px 100%,8px 4px,8px 4px,8px 100%,8px 4px,8px 4px,8px 0,8px 4px,8px 4px;
-      background-position: 0 50%,0 calc(0% - 2px),0 calc(100% + 2px),50% 50%,50% calc(0% - 2px),50% calc(100% + 2px),100% 50%,100% calc(50% - 2px),100% calc(50% + 2px);
+      background-size: 8px 100%, 8px 4px, 8px 4px, 8px 100%, 8px 4px, 8px 4px, 8px 0, 8px 4px, 8px 4px;
+      background-position: 0 50%, 0 calc(0% - 2px), 0 calc(100% + 2px), 50% 50%, 50% calc(0% - 2px), 50% calc(100% + 2px), 100% 50%, 100% calc(50% - 2px), 100% calc(50% + 2px);
    }
-   95%,100% {
-      background-size: 8px 100%,8px 4px, 8px 4px,8px 100%,8px 4px,8px 4px,8px 100%,8px 4px,8px 4px;
-      background-position: 0 50%,0 calc(0% - 2px),0 calc(100% + 2px),50% 50%,50% calc(0% - 2px),50% calc(100% + 2px),100% 50%,100% calc(0% - 2px),100% calc(100% + 2px);
+
+   95%,
+   100% {
+      background-size: 8px 100%, 8px 4px, 8px 4px, 8px 100%, 8px 4px, 8px 4px, 8px 100%, 8px 4px, 8px 4px;
+      background-position: 0 50%, 0 calc(0% - 2px), 0 calc(100% + 2px), 50% 50%, 50% calc(0% - 2px), 50% calc(100% + 2px), 100% 50%, 100% calc(0% - 2px), 100% calc(100% + 2px);
    }
-  }
+}
+
+/* .otp-main-container {
+   margin: 0 auto;
+   width: 600px;
+   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.12), 0 2px 4px 0 rgba(0, 0, 0, 0.24);
+   padding: 20px;
+   display: flex;
+   align-items: center;
+   flex-direction: column
+} */
+
+.otp-container {
+   display: flex;
+   justify-content: space-evenly;
+}
+
+.otp-input {
+   width: 13%;
+   height: 80px;
+   margin: 0 5px;
+   border: 2px solid #ccc;
+   border-radius: 5px;
+   font-size: 24px;
+   text-align: center;
+   outline: none;
+}
+
+.otp-input:focus {
+   border-color: #007bff;
+}
+
+.line-text {
+   width: 80%;
+   color: slategray;
+   margin: auto;
+   font-size: 1.3rem;
+   display: grid;
+   grid-template-columns: 1fr max-content 1fr;
+   grid-column-gap: 1.2rem;
+   align-items: center;
+}
+
+.line-text::before,
+.line-text::after {
+   content: "";
+   display: block;
+   height: 1px;
+   background-color: currentColor;
+}
+
+@media (max-width:576px) {
+   .otp-input {
+      width: 22%;
+   }
+}

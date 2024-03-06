@@ -1,14 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import backgroundimg from "../../assets/img/circle-bg.png";
-import axios from 'axios';
-import apiurl from '../../constant/config';
+import axios from "axios";
+import apiurl from "../../constant/config";
 import { Footer, NavBar } from "../../components";
 import { emailOtp, login, signup } from "../../redux/actions/authActions";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import "./loading.css"
-import OtpInput from 'react-otp-input';
-
+import "./loading.css";
+import OtpInput from "react-otp-input";
 
 const Signup = () => {
   useEffect(() => {
@@ -20,9 +19,9 @@ const Signup = () => {
   const [emailExistMsg, setemailExistMsg] = useState(false);
   const [otpMessage, setOtpMessage] = useState(false);
   const [showOtpInput, setShowOtpInput] = useState(false);
-  const [otp, setOtp] = useState('');
-  const [verificationError, setVerificationError] = useState('');
-  const [emailVerificationError, setEmailVerificationError] = useState('');
+  const [otp, setOtp] = useState("");
+  const [verificationError, setVerificationError] = useState("");
+  const [emailVerificationError, setEmailVerificationError] = useState("");
   const [isEmailFilled, setIsEmailFilled] = useState(false);
   const [isEmailVerified, setIsEmailVerified] = useState(false);
   const [password, setPassword] = useState("");
@@ -38,17 +37,12 @@ const Signup = () => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
-  const { userDetails, emailOtpDetails, userRegisterDetails, registerError } = auth;
+  const { userDetails, emailOtpDetails, userRegisterDetails, registerError } =
+    auth;
   const inputRefs = useRef([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [otpLoading, setOtpLoading] = useState(false);
   const [step, setStep] = useState(1);
-
-
-
-
-
-
 
   console.log("otp details ", emailOtpDetails);
   const validateForm = () => {
@@ -109,8 +103,6 @@ const Signup = () => {
   //   }
   // };
 
-
-
   // const submitHandler = async (e) => {
   //   e.preventDefault();
   //   const isFormValid = validateForm();
@@ -143,29 +135,57 @@ const Signup = () => {
   //   }
   // };
 
+  // OTP PART START
+  const [otpValues, setOtpValues] = useState(["", "", "", ""]);
+  const otpFieldsRef = useRef([]);
+
+  const handleInput = (index, value) => {
+    if (value.length > 1) {
+      return;
+    }
+    const newOtpValues = [...otpValues];
+    newOtpValues[index] = value;
+    setOtpValues(newOtpValues);
+    if (value.length === 1 && index < otpValues.length - 1) {
+      otpFieldsRef.current[index + 1].focus();
+    }
+  };
+
+  const handleBackspace = (index) => {
+    if (otpValues[index] !== "") {
+      const newOtpValues = [...otpValues];
+      newOtpValues[index] = "";
+      setOtpValues(newOtpValues);
+    } else if (index > 0) {
+      otpFieldsRef.current[index - 1].focus();
+    }
+  };
+
+  // OTP PART END
+
   const submitHandler = async (e) => {
     e.preventDefault();
-  
+
     // Validate password
     if (password.length < 8) {
       setPasswordError("Password must be at least 8 characters long");
       return;
     }
-  
+
     const hasAlphaNumeric = /^(?=.*[a-zA-Z])(?=.*[0-9])/.test(password);
     if (!hasAlphaNumeric) {
       setPasswordError("Password must contain both letters and numbers");
       return;
     }
-  
+
     if (password !== password2) {
       setConfirmPasswordError("Passwords do not match");
       return;
     }
-  
+
     // If password validation passes, proceed with form submission
     const isFormValid = validateForm();
-  
+
     if (isFormValid) {
       if (!isEmailFilled) {
         setEmailVerificationError("Please verify your email.");
@@ -175,17 +195,10 @@ const Signup = () => {
         setEmailVerificationError("Please verify your email.");
         return; // Exit early if email is not verified
       }
-  
+
       const isAdminValue = false;
       dispatch(
-        signup(
-          email,
-          password,
-          firstname,
-          lastname,
-          password2,
-          user_type
-        )
+        signup(email, password, firstname, lastname, password2, user_type)
       );
       sessionStorage.setItem("successMessage", "Sign Up Successsfull!!!");
       console.log("Register Message inside function ", userRegisterDetails);
@@ -193,7 +206,6 @@ const Signup = () => {
       // console.log("Signup Success");
     }
   };
-  
 
   useEffect(() => {
     if (userRegisterDetails) {
@@ -208,18 +220,17 @@ const Signup = () => {
         window.scroll(0, 0);
         setErrorMessage("An error occurred while Registration");
       }
-    }
-    else if (registerError) {
+    } else if (registerError) {
       console.log("An error occurred while creating the event");
       window.scroll(0, 0);
-      setErrorMessage(registerError?.email[0] || "An error occurred while Registration");
+      setErrorMessage(
+        registerError?.email[0] || "An error occurred while Registration"
+      );
     }
   }, [userRegisterDetails, registerError]);
 
   console.log("Register Message outside function ", userRegisterDetails);
   console.log("Register Error outside function ", registerError);
-
-
 
   // const emailOtpClick = async () => {
   //   setOtpLoading(true);
@@ -260,33 +271,31 @@ const Signup = () => {
         `${apiurl}/api/user/email/varification/`,
         { email }
       );
-      console.log('Response from emailOtp:', response.data);
-      if (response.data.message === 'OTP sent successfully') {
+      console.log("Response from emailOtp:", response.data);
+      if (response.data.message === "OTP sent successfully") {
         setOtpLoading(false);
         setShowOtpInput(true);
-        setemailExistMsg('');
+        setemailExistMsg("");
         setOtpMessage(response.data.message);
         setIsEmailFilled(true);
         setStep(step + 1); // Proceed to the next step upon successful OTP verification
-      } else if (response.data.msg === 'Email Is Already Exist') {
-        console.log('email already exist');
+      } else if (response.data.msg === "Email Is Already Exist") {
+        console.log("email already exist");
         setOtpLoading(false);
         setemailExistMsg(response.data.msg);
       } else {
         setOtpLoading(false);
         setShowOtpInput(false);
-        setemailExistMsg('');
-        setOtpMessage('');
+        setemailExistMsg("");
+        setOtpMessage("");
         setIsEmailFilled(false);
       }
     } catch (error) {
-      console.error('Error while calling emailOtp API:', error);
+      console.error("Error while calling emailOtp API:", error);
     }
   };
 
-
   console.log("exist message ", emailExistMsg);
-
 
   // const handleSubmitOtp = async () => {
   //   try {
@@ -313,38 +322,37 @@ const Signup = () => {
 
   const handleSubmitOtp = async () => {
     try {
-      const joinedOtp = otp.join(''); // Join OTP array into a single string
+      const joinedOtp = otpValues.join(""); // Join OTP array into a single string
       const response = await axios.post(
         `${apiurl}/api/user/otp/varify/`,
-        { email, otp: joinedOtp }, // Send the joined OTP string to the API
+        { email, otp: joinedOtp } // Send the joined OTP string to the API
       );
-      console.log('Response from emailOtpVerification:', response.data);
+      console.log("Response from emailOtpVerification:", response.data);
       if (response.data.msg === "Valid OTP") {
         setShowOtpInput(false);
         setEmailFilled(false);
         setVerificationError(false);
         setIsEmailVerified(true);
-        setOtpMessage('Email Verified');
+        setOtpMessage("Email Verified");
 
         // Proceed to the next step upon successful OTP verification
         setStep(step + 1);
-      }
-      else if (response.data.msg === "Invalid OTP") {
+      } else if (response.data.msg === "Invalid OTP") {
         // setShowOtpInput(false);
         // setEmailFilled(false);
         // setVerificationError(false);
         // setIsEmailVerified(true);
-        setVerificationError('Invalid Otp Entered.');
+        setVerificationError("Invalid Otp Entered.");
         // Proceed to the next step upon successful OTP verification
       }
       // Handle successful verification
     } catch (error) {
-      console.error('Error while verifying OTP:', error);
-      setVerificationError(error.response.data.message || 'An error occurred during verification.');
+      console.error("Error while verifying OTP:", error);
+      setVerificationError(
+        error.response.data.message || "An error occurred during verification."
+      );
     }
   };
-
-
 
   // const handleOtpChange = (e) => {
   //   setOtp(e.target.value);
@@ -364,13 +372,13 @@ const Signup = () => {
     setOtp(newOTP);
 
     // Focus next input
-    if (index < 3 && value !== '') {
+    if (index < 3 && value !== "") {
       inputRefs.current[index + 1].focus();
     }
   };
 
   const handleKeyDown = (e, index) => {
-    if (e.key === 'Backspace' && otp[index] === '' && index > 0) {
+    if (e.key === "Backspace" && otp[index] === "" && index > 0) {
       // Move focus to the previous input on backspace press
       inputRefs.current[index - 1].focus();
     }
@@ -449,23 +457,23 @@ const Signup = () => {
     const newErrors = {};
 
     if (!firstname.trim()) {
-      newErrors.firstname = 'First Name is required';
+      newErrors.firstname = "First Name is required";
       valid = false;
     }
 
     if (!lastname.trim()) {
-      newErrors.lastname = 'Last Name is required';
+      newErrors.lastname = "Last Name is required";
       valid = false;
     }
 
     if (!email.trim()) {
-      setEmailError('Please enter an email address');
+      setEmailError("Please enter an email address");
       valid = false;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setEmailError('Please enter a valid email address');
+      setEmailError("Please enter a valid email address");
       valid = false;
     } else {
-      setEmailError('');
+      setEmailError("");
     }
 
     setErrors(newErrors);
@@ -483,15 +491,14 @@ const Signup = () => {
     setStep(step - 1);
   };
 
-
   const renderStep = () => {
     switch (step) {
       case 1:
         return (
           <div>
-            <h2>Personal Information</h2>
+            <h2 className=" text-secondary ">Personal Information</h2>
             <div class="row form-group">
-              <div class="col-md-6 mb-3 mb-md-0">
+              <div class="col-md-12 mb-3 mb-md-0">
                 <label class="text-black" for="fname">
                   First Name
                 </label>
@@ -502,14 +509,16 @@ const Signup = () => {
                   value={firstname}
                   onChange={handleFirstName}
                   placeholder="First Name"
+                  disabled={user_type === "" ? true : false}
                 />
                 {errors.firstname == "" ? (
                   <p className="error-msg">{errors.firstname}</p>
                 ) : null}
-                {errors.firstname && <p className="error-msg">{errors.firstname}</p>}
-
+                {errors.firstname && (
+                  <p className="error-msg">{errors.firstname}</p>
+                )}
               </div>
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <label class="text-black" for="lname">
                   Last Name
                 </label>
@@ -520,12 +529,14 @@ const Signup = () => {
                   value={lastname}
                   onChange={handleLastName}
                   placeholder="Last Name"
+                  disabled={user_type === "" ? true : false}
                 />
                 {errors.lastname == "" ? (
                   <p className="error-msg">{errors.lastname}</p>
                 ) : null}
-                {errors.lastname && <p className="error-msg">{errors.lastname}</p>}
-
+                {errors.lastname && (
+                  <p className="error-msg">{errors.lastname}</p>
+                )}
               </div>
             </div>
 
@@ -541,22 +552,38 @@ const Signup = () => {
                   value={email}
                   onChange={handleEmailChange}
                   placeholder="Email"
+                  disabled={user_type === "" ? true : false}
                 />
 
                 <p className="error-msg">{emailError}</p>
-                {otpMessage && <p style={{ marginBottom: '0px', fontWeight: 'bold', color: 'green' }}>{otpMessage}</p>}
+                {otpMessage && (
+                  <p
+                    style={{
+                      marginBottom: "0px",
+                      fontWeight: "bold",
+                      color: "green",
+                    }}
+                  >
+                    {otpMessage}
+                  </p>
+                )}
                 {emailExistMsg && <p className="error-msg">{emailExistMsg}</p>}
                 {errors.email == "" ? (
                   <p className="error-msg">{errors.email}</p>
                 ) : null}
                 {errors.email && <p className="error-msg">{errors.email}</p>}
-                {emailFilled && (
+                {/* {emailFilled && (
                   <div>
-                    <a type="button" className="link-opacity-100" style={{ float: 'right', color: 'blue' }} onClick={emailOtpClick}>
+                    <a
+                      type="button"
+                      className="link-opacity-100"
+                      style={{ float: "right", color: "blue" }}
+                      onClick={emailOtpClick}
+                    >
                       Verify Email
                     </a>
                   </div>
-                )}
+                )} */}
               </div>
             </div>
             {/* Your form elements for personal information */}
@@ -565,20 +592,29 @@ const Signup = () => {
               onClick={nextStep}
               disabled={otpLoading}
             >
-              {otpLoading ? 'Processing...' : 'Next'}
+              {otpLoading ? (
+                <div>
+                  <div>Processing...</div>
+                  <div className="otpLoading"></div>
+                </div>
+              ) : (
+                <>
+                  <div>Next</div>
+                </>
+              )}
             </button>
           </div>
         );
       case 2:
         return (
           <div>
-            <h2>Account Information</h2>
+            <h2 className="text-secondary">Account Information</h2>
             <div className="row form-group">
               <div className="col-md-12">
                 <label className="text-black" htmlFor="otp">
                   Enter OTP
                 </label>
-                <div>
+                {/* <div>
                   {[0, 1, 2, 3].map((index) => (
                     <input
                       key={index}
@@ -592,12 +628,46 @@ const Signup = () => {
                       style={{ width: '50px', marginRight: '10px' }} // Adjust width and spacing as needed
                     />
                   ))}
+                </div> */}
+                <div className="otp-main-container">
+                  <div className="otp-container">
+                    {otpValues.map((value, index) => (
+                      <input
+                        key={index}
+                        type="text"
+                        maxLength="1"
+                        className="otp-input"
+                        value={value}
+                        onChange={(e) => handleInput(index, e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Backspace") {
+                            handleBackspace(index);
+                          }
+                        }}
+                        ref={(ref) => {
+                          otpFieldsRef.current[index] = ref;
+                        }}
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
-              {verificationError && <p className="error-msg">{verificationError}</p>}
+              {verificationError && (
+                <p className="error-msg">{verificationError}</p>
+              )}
             </div>
-            <button onClick={prevStep}>Previous</button>
-            <button type="button" className="btn btn-primary" onClick={handleSubmitOtp}>Submit OTP</button>
+            <div className="container d-flex justify-content-between">
+              <button className="btn btn-info" onClick={prevStep}>
+                Previous
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={handleSubmitOtp}
+              >
+                Submit OTP
+              </button>
+            </div>
             {/* Your form elements for account information */}
             {/* <button onClick={nextStep}>Next</button> */}
           </div>
@@ -652,16 +722,24 @@ const Signup = () => {
                 ) : null}
               </div>
             </div>
-            <button onClick={prevStep}>Previous</button>
-            <button type="button" className="btn btn-primary" onClick={submitHandler}>Submit</button>
+            <div className="container d-flex justify-content-between">
+              <button className="btn btn-info" onClick={prevStep}>
+                Previous
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={handleSubmitOtp}
+              >
+                Submit
+              </button>
+            </div>
           </div>
-          
         );
       default:
         return null;
     }
   };
-
 
   return (
     <>
@@ -686,36 +764,61 @@ const Signup = () => {
         )}
         <div className="container">
           <div className="box1">
+            <h2 class="mb-4 font-weight-medium text-secondary">Register</h2>
             <form action="#" class="contact-form" onSubmit={submitHandler}>
-              <h4 class="font-weight-medium text-secondary">Register as?</h4>
-              <div className="btn-group" role="group" aria-label="User Type">
-                <button
-                  type="button"
-                  className={`btn ${user_type === "Event" ? "btn-primary" : "btn-outline-primary"}`}
-                  onClick={handleUserType}
-                  value="Event"
-                >
-                  Event
-                </button>
-                <button
-                  type="button"
-                  className={`btn ${user_type === "Content" ? "btn-primary" : "btn-outline-primary"}`}
-                  onClick={handleUserType}
-                  value="Content"
-                >
-                  Content
-                </button>
-                <button
-                  type="button"
-                  className={`btn ${user_type === "Sponsor" ? "btn-primary" : "btn-outline-primary"}`}
-                  onClick={handleUserType}
-                  value="Sponsor"
-                >
-                  Sponsor
-                </button>
-                {/* Add more buttons for other options if needed */}
-              </div>
-              <h2 class="mb-4 font-weight-medium text-secondary">SignUp</h2>
+              {step == 1 && (
+                <>
+                  <h4 class="font-weight-medium text-secondary">
+                    Register yourself as:
+                  </h4>
+                  <div
+                    className="btn-group"
+                    role="group"
+                    aria-label="User Type"
+                  >
+                    <button
+                      type="button"
+                      className={`btn ${
+                        user_type === "Event"
+                          ? "btn-primary"
+                          : "btn-outline-primary"
+                      }`}
+                      onClick={handleUserType}
+                      value="Event"
+                    >
+                      Event
+                    </button>
+                    <button
+                      type="button"
+                      className={`btn ${
+                        user_type === "Content"
+                          ? "btn-primary"
+                          : "btn-outline-primary"
+                      }`}
+                      onClick={handleUserType}
+                      value="Content"
+                    >
+                      Content
+                    </button>
+                    <button
+                      type="button"
+                      className={`btn ${
+                        user_type === "Sponsor"
+                          ? "btn-primary"
+                          : "btn-outline-primary"
+                      }`}
+                      onClick={handleUserType}
+                      value="Sponsor"
+                    >
+                      Sponsor
+                    </button>
+                    {/* Add more buttons for other options if needed */}
+                  </div>
+                  {user_type == "" ? (
+                    <p className="text-danger">*Select a type to register*</p>
+                  ) : null}
+                </>
+              )}
 
               {renderStep()}
 
@@ -863,7 +966,13 @@ const Signup = () => {
                 </div> */}
                 <div class="col-md-12 mt-4 text-lg">
                   <p style={{ textAlign: "center" }}>
-                    Already have an account? <Link style={{ fontWeight: 'bold', color: 'blue' }} to="/login">Login</Link>
+                    Already have an account?{" "}
+                    <Link
+                      style={{ fontWeight: "bold", color: "blue" }}
+                      to="/login"
+                    >
+                      Login
+                    </Link>
                   </p>
                 </div>
               </div>
