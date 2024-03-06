@@ -68,7 +68,7 @@ const SponsoredEvent = () => {
             <div className="desktop-view mt-4">
               <div className="container">
                 {cardData &&
-                  cardData.map((data) => {
+                  cardData.slice().reverse().map((data) => {
                     return (
                       <div className="row">
                         <div className="col-12 mb-4">
@@ -112,7 +112,7 @@ const SponsoredEvent = () => {
                                     {data.event_id.title}
                                   </h3>
                                   <h4>{data.event_id.location}</h4>
-                                  <div className="star d-flex">
+                                  {/* <div className="star d-flex">
                                     <h5>
                                       <i className="bi bi-star-fill text-warning"></i>
                                       &nbsp;
@@ -128,7 +128,7 @@ const SponsoredEvent = () => {
                                         3482 reviews
                                       </span>
                                     </h5>
-                                  </div>
+                                  </div> */}
                                   <p>{data.event_id.description}</p>
                                 </div>
                               </div>
@@ -139,8 +139,8 @@ const SponsoredEvent = () => {
                                     Event Sponsored for:
                                   </h4>
                                   <div className="d-flex justify-content-around text-lg">
-                                    {data.event_id.sponsoring_items
-                                      .filter((item) => item.is_sponsored) // Filter only items where is_sponsored is true
+                                    {data.sponsoring_items
+                                      // .filter((item) => item.is_sponsored) // Filter only items where is_sponsored is true
                                       .map((item, index) => (
                                         <span
                                           key={index}
@@ -185,14 +185,7 @@ const SponsoredEvent = () => {
                                       </h6>
                                       <h5>
                                         ₹
-                                        {data.event_id.sponsoring_items
-                                          .filter((item) => item.is_sponsored)
-                                          .reduce(
-                                            (total, item) =>
-                                              total + parseInt(item.price, 10),
-                                            0
-                                          )
-                                          .toLocaleString()}{" "}
+                                        {data.amount}
                                         {/* Display the sum of prices */}
                                       </h5>
                                     </div>
@@ -223,8 +216,8 @@ const SponsoredEvent = () => {
             <div className="mobile-view text-md">
               <h2 className="sponsor-mobile-text">My Events</h2>
               <div className="container mb-4">
-                {cardData &&
-                  cardData.map((data) => {
+              {cardData &&
+                  cardData.slice().reverse().map((data) => {
                     return (
                       <div className="row">
                         <div className="col-12">
@@ -260,8 +253,8 @@ const SponsoredEvent = () => {
                                       Event Sponsored for:
                                     </h4>
                                     <div className="d-flex justify-content-around text-lg">
-                                      {data.event_id.sponsoring_items
-                                        .filter((item) => item.is_sponsored) // Filter only items where is_sponsored is true
+                                      {data.sponsoring_items
+                                        // .filter((item) => item.is_sponsored) // Filter only items where is_sponsored is true
                                         .map((item, index) => (
                                           <span
                                             key={index}
@@ -292,14 +285,7 @@ const SponsoredEvent = () => {
                                       </p>
                                       <p className="mb-1">
                                         ₹
-                                        {data.event_id.sponsoring_items
-                                          .filter((item) => item.is_sponsored)
-                                          .reduce(
-                                            (total, item) =>
-                                              total + parseInt(item.price, 10),
-                                            0
-                                          )
-                                          .toLocaleString()}
+                                       {data.amount}
                                       </p>
                                     </div>
                                   </div>

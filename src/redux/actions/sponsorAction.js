@@ -7,7 +7,7 @@ export const createSponsor = (formData) => async (dispatch) => {
   try {
     dispatch({ type: CREATE_SPONSOR_REQUEST });
 
-    //   const access = JSON.parse(localStorage.getItem("access"));
+      // const access = JSON.parse(localStorage.getItem("access"));
 
     const { data } = await axios.post(
       `${apiurl}/api/user/sponsor/`,

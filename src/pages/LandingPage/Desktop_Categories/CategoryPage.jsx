@@ -24,6 +24,7 @@ const CategoryPage = () => {
         style={{
           width: "100%",
           height: "auto",
+          paddingBottom: '1%',
           backgroundImage: `url(${bgimage})`,
         }}
       >
@@ -37,9 +38,9 @@ const CategoryPage = () => {
       <div className="container triangle-bg">
         <SponserE cardData={EventsCards} />
       </div>
-      <div className="mobile-view mb-4">
+      {/* <div className="mobile-view mb-4">
         <SponserE cardData={EventsCards} />
-      </div>
+      </div> */}
       
     </>
   );

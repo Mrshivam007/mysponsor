@@ -43,7 +43,7 @@ const EventMobileCard = ({ line, cardData }) => {
       <div className="container sponsor-cards-mobile">
         <div className="row row-cols-2 g-0">
           {cardData &&
-            cardData.map((data) => (
+            cardData.slice().reverse().map((data) => (
               <div className="col py-3" style={{paddingLeft: "8px", paddingRight: '8px'}}>
                 <div className="card-blog">
                   <div className="header">
@@ -83,7 +83,7 @@ const EventMobileCard = ({ line, cardData }) => {
         <h2 className="sponsor-mobile-text">{line}</h2>
         <div className="container mb-4">
           {cardData &&
-            cardData.map((data) => {
+            cardData.slice().reverse().map((data) => {
               let totalSponsoringPrice = 0;
               const sponsoring_items = data?.sponsoring_items || [];
 

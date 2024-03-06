@@ -6,12 +6,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateEvent } from "../../../redux/actions/eventAction";
 import { eventReducer } from "../../../redux/reducer/eventReducer";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import makeAnimated from "react-select/animated";
+import Select from "react-select";
 import apiurl from "../../../constant/config";
 
 const UpdateEvent = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
+
+  const animatedComponents = makeAnimated();
+
+  const itemOptions = [
+    { value: "banner", label: "Banner" },
+    { value: "led_screen", label: "LED Screen" },
+    { value: "bill_board", label: "Bill Board" },
+  ];
+
+  const [itemSelection, setItemSelection] = useState([]);
+
+
 
   const [title, setTitle] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -24,7 +38,7 @@ const UpdateEvent = () => {
   const [event_categories, setEventCategories] = useState("");
   const [event_time, setEventTime] = useState("");
   const [price, setPrice] = useState("");
-  const [prices, setPrices] = useState("");
+  const [prices, setPrices] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const [thumbnail1, setThumbnail1] = useState(null);
@@ -42,7 +56,7 @@ const UpdateEvent = () => {
   const [eventData, setEventData] = useState(
     data_location.state?.eventData || null
   );
-  console.log("update event data", eventData);
+  console.log("update event data", eventData.sponsoring_items);
   const [currentThumbnail1, setCurrentThumbnail1] = useState(
     eventData ? apiurl + eventData.thumbnail1 : null
   );
@@ -60,6 +74,25 @@ const UpdateEvent = () => {
     eventData.attach_video ? apiurl + eventData.attach_video : null
   );
   const [newVideo, setNewVideo] = useState(null);
+
+  useEffect(() => {
+    if (eventData && eventData.sponsoring_items) {
+      const selectedItems = eventData.sponsoring_items.map(item => ({ value: item.sponsoring_items, label: item.sponsoring_items }));
+      const itemPrices = {};
+      eventData.sponsoring_items.forEach(item => {
+        itemPrices[item.sponsoring_items] = item.price;
+      });
+      setItemSelection(selectedItems);
+      setPrices(itemPrices);
+    }
+  }, [eventData]);
+
+  const handlePriceChange = (item, price) => {
+    setPrices(prevPrices => ({
+      ...prevPrices,
+      [item]: price
+    }));
+  };
 
   useEffect(() => {
     setEventData(data_location.state?.eventData || null);
@@ -97,26 +130,17 @@ const UpdateEvent = () => {
     setPrices(updatedPrices);
   };
 
-  const handleSponsoringItemChange = (e) => {
-    const { value } = e.target;
-    let updatedSelectedItems = [...selectedItems];
-
-    if (updatedSelectedItems.includes(value)) {
-      updatedSelectedItems = updatedSelectedItems.filter(
-        (item) => item !== value
-      );
-    } else {
-      updatedSelectedItems.push(value);
-    }
-
-    setSelectedItems(updatedSelectedItems);
+  const handleSponsoringItemChange = (selectedItems) => {
+    console.log("Updated selected Items:", selectedItems);
+    setItemSelection(selectedItems);
   };
+  
 
-  const handlePriceChange = (item, price) => {
-    const updatedPrices = { ...prices };
-    updatedPrices[item] = price;
-    setPrices(updatedPrices);
-  };
+  // const handlePriceChange = (item, price) => {
+  //   const updatedPrices = { ...prices };
+  //   updatedPrices[item] = price;
+  //   setPrices(updatedPrices);
+  // };
 
   const handleToggleDropdown = () => {
     setShowDropdown(!showDropdown);
@@ -184,13 +208,14 @@ const UpdateEvent = () => {
       formData.append("title", eventData.title); // Ensure you're using eventData.title here
 
       // Prepare sponsoring items array
-      const sponsoringItemsData = selectedItems.map((item) => ({
-        sponsoring_items: item,
-        price: prices[item] || null,
+      const sponsoringItemsData = itemSelection.map((item) => ({
+        sponsoring_items: item.value,
+        price: prices[item.value] || null, // Access price using item.value
+        is_sponsored: false, // handle cases where price might be undefined or null
       }));
       formData.append("event_start_date", eventData.event_start_date);
       formData.append("event_end_date", eventData.event_end_date);
-      formData.append("event_time", eventData.event_time);
+      // formData.append("event_time", eventData.event_time);
       formData.append("sponsoring_items", JSON.stringify(sponsoringItemsData));
       formData.append("user_id", userDetails.user_id);
       formData.append("description", eventData.description);
@@ -223,7 +248,7 @@ const UpdateEvent = () => {
 
   return (
     <>
-      
+
       <div
         className="bg-form"
         style={{
@@ -286,7 +311,7 @@ const UpdateEvent = () => {
                       </div>
                     </div>
 
-                    <div className="row form-group">
+                    {/* <div className="row form-group">
                       <div className="col-md-12 mb-3 mb-md-0">
                         <div>
                           <button
@@ -340,6 +365,41 @@ const UpdateEvent = () => {
                         {errors.prices && (
                           <p className="error-msg">{errors.prices}</p>
                         )}
+                      </div>
+                    </div> */}
+
+                    <div className="row form-group">
+                      <div className="col-md-12 mb-3 mb-md-0">
+                        <div>
+                          <Select
+                            closeMenuOnSelect={true}
+                            components={animatedComponents}
+                            onChange={handleSponsoringItemChange}
+                            isMulti
+                            options={itemOptions}
+                            value={itemSelection}
+                          />
+                          {itemSelection.map((item) => (
+                            <div key={item.value}>
+                              <input
+                                type="text"
+                                value={prices[item.value] || ''}
+                                onChange={(e) =>
+                                  handlePriceChange(item.value, e.target.value)
+                                }
+                                className="form-control my-1"
+                                // placeholder={`Enter ${item.label.replace("_", " ") || "Price"}`}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                        {errors.selectedItems && (
+                          <p className="error-msg">{errors.selectedItems}</p>
+                        )}
+                        {/* Display error message if prices are not filled */}
+                        {Object.values(prices).some(price => price === '') ? (
+                          <p className="error-msg">{errors.prices}</p>
+                        ) : null}
                       </div>
                     </div>
 
@@ -719,7 +779,7 @@ const UpdateEvent = () => {
           </div>
         </div>
       </div>
-      
+
     </>
   );
 };

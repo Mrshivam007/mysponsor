@@ -24,10 +24,9 @@ const SponsorContentC = () => {
   useEffect(() => {
     dispatch(fetchContent());
   }, []);
-  console.log(
-    "Content Details past ",
-    ContentDetails.contentDetails?.past_content
-  );
+
+  console.log("Live Content ", ContentDetails.contentDetails?.live_content);
+
 
   const isLoading = () => {
     return ContentDetails?.loading;
@@ -44,34 +43,54 @@ const SponsorContentC = () => {
             style={{
               width: "100%",
               height: "auto",
+              paddingBottom: '1%',
               backgroundImage: `url(${bgimage})`,
             }}
           >
-            
+
             <EventsHeader title={"Sponsor Content Creators"} logo={cclogo} />
-            <ContentCard
-              line={"Upcoming Content"}
-              cardData={ContentDetails.contentDetails?.upcoming_content}
-            />
-            <ContentCard
-              line={"Live Content"}
-              cardData={ContentDetails.contentDetails?.live_content}
-            />
-            <SocialmediaBox />
-            <div className="cc-cards-desktop">
+            {/* <ContentCard
+              line={ContentDetails.contentDetails?.upcoming_content ? "Upcoming Contents" : "Upcoming Contents is not available"} cardData={ContentDetails.contentDetails?.upcoming_content}
+            /> */}
+            {ContentDetails.contentDetails?.upcoming_content && ContentDetails.contentDetails?.upcoming_content.length > 0 ? (
+              <ContentCard
+                line={ContentDetails.contentDetails?.upcoming_content ? "Upcoming Content" : "Upcoming Contents is not available"} cardData={ContentDetails.contentDetails?.upcoming_content}
+              />) : (
+              <>
+              </>
+            )}
+            {ContentDetails.contentDetails?.live_content && ContentDetails.contentDetails?.live_content.length > 0 ? (
+              <ContentCard
+                line={ContentDetails.contentDetails?.live_content ? "Live Content" : "Live Contents is not available"} cardData={ContentDetails.contentDetails?.live_content}
+              />) : (
+              <>
+              </>
+            )}
+
+            {/* <ContentCard
+              line={ContentDetails.contentDetails?.live_content ? "Live Content" : "Live Contents is not available"} cardData={ContentDetails.contentDetails?.live_content}
+            /> */}
+            {ContentDetails.contentDetails?.upcoming_content && ContentDetails.contentDetails?.upcoming_content.length > 0 ? (
+              <SocialmediaBox
+                cardData={ContentDetails.contentDetails?.upcoming_content}
+              />) : (
+              <>
+              </>
+            )}
+            {/* <SocialmediaBox cardData={ContentDetails.contentDetails?.upcoming_content} /> */}
+            {/* <div className="cc-cards-desktop">
               <ContentCard
                 line={"Upcoming Content"}
                 cardData={ContentDetails.contentDetails?.upcoming_content}
               />
             </div>
             <div className="cc-cards-mobile">
-              {/* <SponsorCC cardData={ContentCreators4} /> */}
               <ContentCard
                 line={"Upcoming Content"}
                 cardData={ContentDetails.contentDetails?.upcoming_content}
               />
-            </div>
-            
+            </div> */}
+
           </div>
         </>
       )}

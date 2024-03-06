@@ -9,7 +9,7 @@ import {
 import bgimage from "../../../assets/img/circle-bg.png";
 import spevents from "../../../assets/img/sponsor_events-logo.png";
 import { EventsCards, EventsPageCards } from "../../../data/data";
-import { fetchEvent, fetchEventbyId } from "../../../redux/actions/eventAction";
+import { fetchEvent, fetchAllEvent } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux";
 import MyEventCard from "../MyEventCrad/MyEventCard";
 import EventMobileCard from "./EventMobileCards";
@@ -25,7 +25,7 @@ const PreviousEvent = () => {
   const dispatch = useDispatch();
   const eventDetails = useSelector((state) => state.event);
   useEffect(() => {
-    dispatch(fetchEventbyId(userDetails.user_id));
+    dispatch(fetchAllEvent());
   }, []);
 
   const isLoading = () => {

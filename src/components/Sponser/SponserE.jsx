@@ -6,6 +6,7 @@ import "./sponser.css";
 import arrow from "../../assets/img/right-arrow.png";
 import { Link, useHistory, useNavigate } from "react-router-dom";
 import apiurl from "../../constant/config";
+import { useState } from "react";
 // import { cardData2 } from "../../data/data";
 const SponserE = ({ line, cardData }) => {
   const settings = {
@@ -18,6 +19,10 @@ const SponserE = ({ line, cardData }) => {
     nextArrow: null, // Hide the next arrow
   };
   console.log(cardData);
+  const [showAllCards, setShowAllCards] = useState(false);
+  const visibleCards = cardData ? (showAllCards ? cardData : cardData.slice(0, 4)) : [];
+
+
 
   const navigate = useNavigate();
 
@@ -37,89 +42,88 @@ const SponserE = ({ line, cardData }) => {
         <div className="sponsor-desktop">
           <div className="row">
             {/* <Slider {...settings}> */}
-            {cardData &&
-              cardData?.map((data) => (
-                <div key={data.id} className="col-lg-3 col-md-6 py-3">
-                  <div className="card-blog">
-                    <div className="header">
-                      <div className="post-thumb">
-                        <img
-                          src={apiurl + data.thumbnail1}
-                          alt=""
-                          style={{ width: "100%" }}
-                          className="sponser_card_img"
-                        />
-                        <div className="text-overlay">
-                          <p className="text-lg font-weight-bold mb-0">
-                            {data.title}
-                          </p>
-                          <p>{data.location}</p>
-                        </div>
+            {visibleCards.map((data) => (
+              <div key={data.id} className="col-lg-3 col-md-6 py-3">
+                <div className="card-blog">
+                  <div className="header">
+                    <div className="post-thumb">
+                      <img
+                        src={apiurl + data.thumbnail1}
+                        alt=""
+                        style={{ width: "100%" }}
+                        className="sponser_card_img"
+                      />
+                      <div className="text-overlay">
+                        <p className="text-lg font-weight-bold mb-0">
+                          {data.title}
+                        </p>
+                        <p>{data.location}</p>
                       </div>
                     </div>
-                    <div className="body text-center" style={{ padding: "1%" }}>
-                      <div className="row">
-                        <div
-                          className="col"
-                          style={{ borderRight: "1px solid #cfcfcf" }}
-                        >
-                          <span className="text-sm post-title">
-                            <a href="#">Price Band</a>
-                          </span>
-                          <div className="post-date">
-                            <h6>
-                              <i className="bi bi-cash text-success"></i>
-                              <b> {data.amount}</b>
-                            </h6>
-                          </div>
-                        </div>
-                        <div className="col">
-                          <span className="text-sm post-title">
-                            <a href="#">Audience</a>
-                          </span>
-                          <div className="post-date">
-                            <h6>
-                              <i className="bi bi-people-fill text-danger"></i>
-                              <b> {data.audience_expected}</b>
-                            </h6>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <button
-                      className="btn btn-primary mx-auto rounded-0"
-                      style={{
-                        width: "100%",
-                        backgroundColor: "#004EA9",
-                        fontWeight: "bold",
-                      }}
-                      onClick={() => handleSponsorClick(data)}
-                    >
-                      Sponsor Now
-                    </button>
                   </div>
-                </div>
-              ))}
+                  <div className="body text-center" style={{ padding: "1%" }}>
+                    <div className="row">
+                      <div
+                        className="col"
+                        style={{ borderRight: "1px solid #cfcfcf" }}
+                      >
+                        <span className="text-sm post-title">
+                          <a href="#">Price Band</a>
+                        </span>
+                        <div className="post-date">
+                          <h6>
+                            <i className="bi bi-cash text-success"></i>
+                            <b> {data.amount}</b>
+                          </h6>
+                        </div>
+                      </div>
+                      <div className="col">
+                        <span className="text-sm post-title">
+                          <a href="#">Audience</a>
+                        </span>
+                        <div className="post-date">
+                          <h6>
+                            <i className="bi bi-people-fill text-danger"></i>
+                            <b> {data.audience_expected}</b>
+                          </h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-            {/* </Slider> */}
-            <div className="container d-flex justify-content-center" style={{paddingBottom: '2vh'}}>
-              <Link to="/events">
+                  <button
+                    className="btn btn-primary mx-auto rounded-0"
+                    style={{
+                      width: "100%",
+                      backgroundColor: "#004EA9",
+                      fontWeight: "bold",
+                    }}
+                    onClick={() => handleSponsorClick(data)}
+                  >
+                    Sponsor Now
+                  </button>
+                </div>
+              </div>
+            ))}
+
+            {!showAllCards && cardData && cardData.length > 4 && (
+              <div className="container d-flex justify-content-center" style={{ paddingBottom: '2vh' }}>
                 <button
                   className="btn btn-outline-primary mt-4"
                   style={{
-                    borderRadius: "15px",
-                    border: "2px solid #004EA9",
-                    background: "#FFF",
-                    boxShadow: "0px 3px 10px 0px rgba(0, 0, 0, 0.18)",
-                    fontWeight: "bolder",
-                    color: "#004EA9",
+                    borderRadius: '15px',
+                    border: '2px solid #004EA9',
+                    background: '#FFF',
+                    boxShadow: '0px 3px 10px 0px rgba(0, 0, 0, 0.18)',
+                    fontWeight: 'bolder',
+                    color: '#004EA9',
                   }}
+                  onClick={() => setShowAllCards(true)}
                 >
                   See More
                 </button>
-              </Link>
-            </div>
+              </div>
+            )}
           </div>
         </div>
         <div className="landing-page sponsor-mobile">
@@ -141,7 +145,7 @@ const SponserE = ({ line, cardData }) => {
             <div className="col-lg-4" style={{ width: "76%" }}>
               <Slider {...settings}>
                 {cardData &&
-                  cardData.map((data) => (
+                  cardData.slice().reverse().map((data) => (
                     <div key={data.id} className="col-10 py-3">
                       <div className="card-blog">
                         <div className="header">

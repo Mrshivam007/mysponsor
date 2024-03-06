@@ -45,16 +45,27 @@ const SponsorContentC = () => {
             }}
           >
             <EventsHeader title={"Sponsor Content Creators"} logo={cclogo} />
-            <ContentCard
-              line={"Upcoming Content"}
-              cardData={ContentDetails.contentDetails?.upcoming_content}
-            />
-            <ContentCard
-              line={"Live Content"}
-              cardData={ContentDetails.contentDetails?.live_content}
-            />
-            <SocialmediaBox />
-            <div className="cc-cards-desktop">
+            {ContentDetails.contentDetails?.upcoming_content && ContentDetails.contentDetails?.upcoming_content.length > 0 ? (
+              <ContentCard
+                line={ContentDetails.contentDetails?.upcoming_content ? "Upcoming Content" : "Upcoming Contents is not available"} cardData={ContentDetails.contentDetails?.upcoming_content}
+              />) : (
+              <>
+              </>
+            )}
+            {ContentDetails.contentDetails?.live_content && ContentDetails.contentDetails?.live_content.length > 0 ? (
+              <ContentCard
+                line={ContentDetails.contentDetails?.live_content ? "Live Content" : "Live Contents is not available"} cardData={ContentDetails.contentDetails?.live_content}
+              />) : (
+              <>
+              </>
+            )}
+            {ContentDetails.contentDetails?.upcoming_content && ContentDetails.contentDetails?.upcoming_content.length > 0 ? (
+              <SocialmediaBox
+                cardData={ContentDetails.contentDetails?.upcoming_content}
+              />) : (
+              <>
+              </>
+            )}            {/* <div className="cc-cards-desktop">
               <ContentCard
                 line={"Sponsor Other Creators"}
                 cardData={ContentDetails.contentDetails?.upcoming_content}
@@ -65,7 +76,7 @@ const SponsorContentC = () => {
                 line={"Sponsor Other Creators"}
                 cardData={ContentDetails.contentDetails?.upcoming_content}
               />
-            </div>
+            </div> */}
           </div>
         </>
       )}

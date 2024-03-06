@@ -101,7 +101,7 @@ export default function ManageTable(props) {
   const handleDeletion = (data) => {
     dispatch(approveContent(data.content_id));
     sessionStorage.setItem("deletionMessage", "Your Content has been Approved!!");
-    navigate("/admin/approve_content");
+    navigate("/administrator/approve_content");
     window.location.reload();
   };
   console.log(liveContentData);

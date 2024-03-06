@@ -49,6 +49,7 @@ const FavouriteEventCard = ({ cardData }) => {
         style={{
           width: "100%",
           height: "auto",
+          paddingBottom: '1%',
           backgroundImage: `url(${bgimage})`,
         }}
       >
@@ -223,7 +224,7 @@ const FavouriteEventCard = ({ cardData }) => {
           <h2 className="sponsor-mobile-text">My Events</h2>
           <div className="container mb-4">
             {cardData &&
-              cardData.map((data) => (
+              cardData.slice().reverse().map((data) => (
                 <div className="row">
                   <div className="col-12">
                     <div className="card myevents-card">

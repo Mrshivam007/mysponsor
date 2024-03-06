@@ -49,9 +49,10 @@ const DeleteContent = () => {
         <>
           <div
             className="events-bg"
-            style={{
+                       style={{
               width: "100%",
               height: "auto",
+              paddingBottom: '1%',
               backgroundImage: `url(${bgimage})`,
             }}
           >
@@ -64,13 +65,13 @@ const DeleteContent = () => {
               {successMessage && <SuccessToast message={successMessage} />}
 
               <DeleteContentCard
-                cardData={contentDetails.contentDetails?.past_content}
+                cardData={contentDetails.contentDetails?.upcoming_content}
               />
             </div>
             <div className="events-page-mobile">
               <Delete_MobileCards
                 line={"Delete Your Content"}
-                cardData={contentDetails.contentDetails?.past_content}
+                cardData={contentDetails.contentDetails?.upcoming_content}
               />
               <div
                 className="btn d-block text-white font-weight-bolder"

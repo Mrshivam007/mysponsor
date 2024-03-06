@@ -15,6 +15,7 @@ import {
 } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../../components/Loading/Loading";
+import EventMobile from "./EventMobile";
 
 const SponsorEvents = () => {
   useEffect(() => {
@@ -51,13 +52,33 @@ const SponsorEvents = () => {
           >
             <div className="events-page-desktop">
               <EventsHeader title={"Sponsor Events"} logo={spevents} />
-              <SponserE line={"Upcoming Events"} cardData={cardData1} />
-              <SponserE line={"Live Events"} cardData={cardData2} />
+              {cardData2 && cardData2.length > 0 ? (
+                <SponserE line="Live Events" cardData={cardData2} />
+              ) : (
+                <>
+                </>)}
+              {cardData1 && cardData1.length > 0 ? (
+                <SponserE line="Upcoming Events" cardData={cardData1} />
+              ) : (
+                <>
+                </>)}
             </div>
 
             <div className="events-page-mobile">
-              <SponserE line={"Upcoming Events"} cardData={cardData1} />
-              <SponserE line={"Live Events"} cardData={cardData2} />
+              {/* <SponserE line={"Upcoming Events"} cardData={cardData1} /> */}
+              {cardData2 && cardData2.length > 0 ? (
+                <EventMobile line="Live Events" cardData={cardData2} />
+              ) : (
+                <>
+                </>
+              )}
+              {cardData1 && cardData1.length > 0 ? (
+                <EventMobile line="Upcoming Events" cardData={cardData1} />
+              ) : (
+                <>
+                </>
+              )}
+              {/* <SponserE line={"Live Events"} cardData={cardData2} /> */}
             </div>
           </div>
         </>

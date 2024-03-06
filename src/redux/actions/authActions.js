@@ -45,6 +45,7 @@ export const signup =
     async (dispatch) => {
       try {
         dispatch({ type: AUTH_SIGNUP_REQUEST });
+        console.log("using action file");
 
         const { data } = await axios.post(
           `${apiurl}/api/user/register/`,
@@ -61,27 +62,32 @@ export const signup =
             // user_id: user_id,
           }
         );
+        console.log(data);
 
         var payload = "";
         if (data.is_approve) {
           payload = getPayload(data);
           setToken(data.tokens);
         }
+        console.log(data);
 
         dispatch({
           type: AUTH_SIGNUP_SUCCESS,
-          payload: payload,
+          payload: data,
         });
+        console.log("register message inside action ", payload);
       } catch (error) {
         dispatch({
           type: AUTH_SIGNUP_FAILED,
-          payload:
-            error.response && error.response.data.message
-              ? error.response.data.message
-              : error.message,
+          payload: error.response.data.errors,
+            // error.response && error.response.data.errors
+            //   ? error.response.data.error
+            //   : error.error,
         });
+        console.log("getting error in action", payload);
       }
     };
+  
 
 export const emailOtp = (email) => async (dispatch) => {
 
@@ -91,7 +97,7 @@ export const emailOtp = (email) => async (dispatch) => {
     const { data } = await axios.post(
       `${apiurl}/api/user/email/varification/`,
       {
-       "email": email,
+        "email": email,
       }
     );
 
@@ -121,8 +127,8 @@ export const emailOtpVerification = (email, otp) => async (dispatch) => {
     const { data } = await axios.post(
       `${apiurl}/api/user/otp/varify/`,
       {
-       "email": email,
-       "otp": otp,
+        "email": email,
+        "otp": otp,
       },
       {
         headers: { Authorization: `Bearer ${access}` },

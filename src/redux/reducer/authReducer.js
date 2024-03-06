@@ -36,9 +36,9 @@ export const authReducer = (state = {},action) => {
       case AUTH_SIGNUP_REQUEST:
         return { ...state, loading: true }
       case AUTH_SIGNUP_SUCCESS:
-        return { loading: false, userDetails: action.payload }
+        return { loading: false, userRegisterDetails: action.payload }
       case AUTH_SIGNUP_FAILED:
-        return { loading: false, error: action.payload }
+        return { loading: false, registerError: action.payload }
       case AUTH_LOGOUT:
         return { userDetails: null }
       default:

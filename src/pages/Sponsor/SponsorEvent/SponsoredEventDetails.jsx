@@ -23,12 +23,13 @@ const SponsoredEventDetails = () => {
         style={{
           width: "100%",
           height: "auto",
+          paddingBottom: '1%',
           backgroundImage: `url(${bgimage})`,
         }}
       >
         
         <SponsorEventBox eventData={eventData} />
-        <SponserE cardData={EventsCards} />
+        {/* <SponserE cardData={EventsCards} /> */}
         
       </div>
     </>

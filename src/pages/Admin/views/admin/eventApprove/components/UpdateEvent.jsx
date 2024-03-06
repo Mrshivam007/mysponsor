@@ -207,7 +207,7 @@ const UpdateEvent = () => {
         // Make an API call to update the event using the existing event's ID
         await dispatch(updateEvent(eventData.event_id, formData)); // Assuming updateEvent action is available
         sessionStorage.setItem("eventUpdateMessage", "Event updated successfully!");
-        navigate("/admin/event"); // Replace with the desired route
+        navigate("/administrator/event"); // Replace with the desired route
       } catch (error) {
         console.log("An error occurred during API calls:", error);
       }

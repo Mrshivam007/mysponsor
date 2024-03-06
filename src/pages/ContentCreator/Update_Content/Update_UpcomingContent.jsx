@@ -60,6 +60,7 @@ const Update_UpcomingContent = () => {
             style={{
               width: "100%",
               height: "auto",
+              paddingBottom: '1%',
               backgroundImage: `url(${bgimage})`,
             }}
           >
@@ -69,7 +70,7 @@ const Update_UpcomingContent = () => {
               {successMessage && <SuccessToast message={successMessage} />}
 
               <Update_ContentCard
-                cardData={contentDetails.contentDetails?.live_content}
+                cardData={contentDetails.contentDetails?.upcoming_content}
               />
               {/* <SponserE cardData={EventsCards} line={"Concerts"} />
           <SponserE cardData={EventsCards} line={"Promotional Events"} />
@@ -81,7 +82,7 @@ const Update_UpcomingContent = () => {
             <div className="events-page-mobile">
               <Update_MobileCards
                 line={"Update My Content"}
-                cardData={contentDetails.contentDetails?.live_content}
+                cardData={contentDetails.contentDetails?.upcoming_content}
               />
               <div
                 className="btn d-block text-white font-weight-bolder"

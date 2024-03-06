@@ -97,7 +97,7 @@ export default function ManageTable(props) {
     console.log("event id for approval ", data.event_id);
     dispatch(approveEvent(data.event_id));
     sessionStorage.setItem("deletionMessage", "Your Event has been Approved!!");
-    navigate("/admin/approve_event");
+    navigate("/administrator/approve_event");
     window.location.reload();
   };
   console.log(liveEventData);

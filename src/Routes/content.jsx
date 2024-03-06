@@ -22,11 +22,13 @@ import ContentFooter from "../components/Footer/ContentFooter";
 import About from "../components/About/About";
 import Contact from "../components/Contact/Contact";
 import ContentWallet from "../components/ContentWallet/ContentWallet";
+import ErrorBoundary from "./ErrorBoundary";
 
 const ContentRoutes = () => {
   return (
     <>
       <NavBar />
+      <ErrorBoundary>
       <Routes>
         <Route path="/" element={<CCHome />} />
         <Route path="/create_content" element={<CCForm />} />
@@ -65,6 +67,7 @@ const ContentRoutes = () => {
         <Route path="/login" element={<Navigate to={"/"} />} />
         <Route path="/signup" element={<Navigate to={"/"} />} />
       </Routes>
+      </ErrorBoundary>
       <ContentFooter />
     </>
   );

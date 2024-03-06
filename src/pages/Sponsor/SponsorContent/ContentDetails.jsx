@@ -25,13 +25,14 @@ const ContentDetails = () => {
         style={{
           width: "100%",
           height: "auto",
+          paddingBottom: '1%',
           backgroundImage: `url(${bgimage})`,
         }}
       >
         
         {/* <SponsorContentBox contentData={contentData} /> */}
         <MyContentSponsor contentData={contentData} />
-        <SponserE cardData={EventsCards} />
+        {/* <SponserE cardData={EventsCards} /> */}
         
       </div>
     </>

@@ -94,7 +94,7 @@ export default function ManageTable(props) {
   const handleDeletion = (data) => {
     dispatch(deleteEvent(data.event_id));
     sessionStorage.setItem("deletionMessage", "Your Event has been Deleted!!!");
-    navigate("/admin/event");
+    navigate("/administrator/event");
     window.location.reload();
   };
   console.log(liveEventData);

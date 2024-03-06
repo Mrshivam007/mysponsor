@@ -27,6 +27,7 @@ import { Footer, NavBar } from "../components";
 import EventCategoryCard from "../components/Categories/EventCategoryCard";
 import About from "../components/About/About";
 import Contact from "../components/Contact/Contact";
+import ErrorBoundary from "./ErrorBoundary";
 
 const Main = () => {
   const auth = useSelector((state) => state.auth);
@@ -54,6 +55,7 @@ const Main = () => {
       ) : (
         <Router>
           <NavBar />
+          <ErrorBoundary>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
@@ -77,6 +79,7 @@ const Main = () => {
             <Route path="/signup" element={<Signup />} />
             <Route path="/sponsor_register" element={<SponsorRegister />} />
           </Routes>
+          </ErrorBoundary>
           <Footer />
         </Router>
       )}

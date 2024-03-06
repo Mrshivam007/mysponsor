@@ -113,12 +113,12 @@ const Footer = () => {
                   Sponsor Events
                 </button>
               </Link>
-              <Link to="/events">
+              <Link to="/cc">
                 <button
                   className="mob-footer-btn btn btn-primary"
                   style={{ width: "100%" }}
                 >
-                  List Events
+                  Sponsor Content
                 </button>
               </Link>
               <Link to={"/about"}>

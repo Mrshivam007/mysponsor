@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { fetchEvent } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux";
 import apiurl from "../../../constant/config";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,13 +6,6 @@ const Update_ContentCard = ({ cardData }) => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
-
-  const dispatch = useDispatch();
-  const ContentDetails = useSelector((state) => state.event);
-  useEffect(() => {
-    dispatch(fetchEvent());
-  }, []);
-
   const navigate = useNavigate();
 
   const handleUpdateClick = (data) => {
@@ -28,7 +20,15 @@ const Update_ContentCard = ({ cardData }) => {
       <div className="desktop-view">
         <div className="container">
           {cardData &&
-            cardData.map((data) => {
+            cardData.slice().reverse().map((data) => {
+              let totalSponsoringPrice = 0;
+              const sponsoring_items = data?.sponsoring_content_items || [];
+
+              sponsoring_items.forEach((item) => {
+                if (item && item.price) {
+                  totalSponsoringPrice += parseFloat(item.price);
+                }
+              });
               return (
                 <div className="row">
                   <div className="col-12 mb-4">
@@ -89,19 +89,19 @@ const Update_ContentCard = ({ cardData }) => {
                             <h5 className=" font-weight-bold">
                               Channel Subs:&nbsp;
                               <span className="font-weight-light">
-                                {data.audience_expected}
+                                {data.subscribers}
                               </span>
                             </h5>
                             <h5 className="font-weight-bold">
-                              Location:&nbsp;
+                              Video Reach:&nbsp;
                               <span className="font-weight-light">
-                                {data.location}
+                                {data.per_video_reach}
                               </span>
                             </h5>
                             <h5 className="font-weight-bold">
-                              Video Preview:&nbsp;
+                              Content Type:&nbsp;
                               <span className="font-weight-light">
-                                **Video Link Here**
+                                {data.content_category}
                               </span>
                             </h5>
                             <div className="container text-white text-center d-flex justify-content-between px-0">
@@ -115,7 +115,7 @@ const Update_ContentCard = ({ cardData }) => {
                                 >
                                   Your Bid
                                 </h6>
-                                <h5>₹ 50,000</h5>
+                                <h5>₹ {totalSponsoringPrice}</h5>
                               </div>
                               <div
                                 className="box myevents-box"
@@ -153,7 +153,7 @@ const Update_ContentCard = ({ cardData }) => {
         <h2 className="sponsor-mobile-text">My Events</h2>
         <div className="container mb-4">
           {cardData &&
-            cardData.map((data) => (
+            cardData.slice().reverse().map((data) => (
               <div className="row">
                 <div className="col-12">
                   <div className="card myevents-card">

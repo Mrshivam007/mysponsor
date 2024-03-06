@@ -22,10 +22,10 @@ const SponsorButton = ({ item, isSelected, onButtonClick }) => {
             isSelected
               ? { backgroundColor: "red", color: "white" }
               : {
-                  color: "rgb(0, 78, 169)",
-                  backgroundColor: "white",
-                  border: "2px solid rgb(0, 78, 169)",
-                }
+                color: "rgb(0, 78, 169)",
+                backgroundColor: "white",
+                border: "2px solid rgb(0, 78, 169)",
+              }
           }
         >
           {isSelected ? "Remove" : "Buy Now"}
@@ -138,28 +138,29 @@ const MyContentSponsor = (contentData) => {
                 }}
               >
                 <tr className="table-sm" style={{ background: "#004EA9" }}>
-                  <td>Start date</td>
-                  <td>End date</td>
+                  <td style={{ fontWeight: 'bold' }}>Content Posting Date</td>
+                  {/* <td>End date</td> */}
                 </tr>
                 <tr style={{ background: "rgba(0, 187, 255, 0.75)" }}>
                   <td
                     style={{
                       borderRight: "1px solid rgba(255, 255, 255, 0.50)",
+                      fontWeight: 'bold'
                     }}
                   >
-                    {cardData.content_start_date}
+                    {cardData.posting_date}
                   </td>
-                  <td>{cardData.content_end_date}</td>
+                  {/* <td>{cardData.content_end_date}</td> */}
                 </tr>
               </table>
             </div>
             <div className="col-6">
               <h4 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between">
                 {cardData.title}{" "}
-                <img src={heart} alt="" style={{ width: "7%" }} />
+                {/* <img src={heart} alt="" style={{ width: "7%" }} /> */}
               </h4>
               <h4>{cardData.location}</h4>
-              <div className="star d-flex">
+              {/* <div className="star d-flex">
                 <h5>
                   <i class="bi bi-star-fill text-warning"></i>&nbsp;
                   <i class="bi bi-star-fill text-warning"></i>&nbsp;
@@ -168,13 +169,13 @@ const MyContentSponsor = (contentData) => {
                   <i class="bi bi-star-fill text-white"></i>&nbsp;
                   <span className="text-sm text-muted">3482 reviews</span>
                 </h5>
-              </div>
+              </div> */}
               <h5>
                 <i className="bi bi-cash text-success"></i>&nbsp;&nbsp;
                 <span className="text-md">{totalAmount}&lt;</span>
                 <br />
                 <i className="bi bi-people-fill text-danger"></i>&nbsp;&nbsp;
-                <span className="text-md">{cardData.audience_expected}</span>
+                <span className="text-md">{cardData.per_video_reach}</span>
               </h5>
 
               <div className="row g-0">
@@ -227,9 +228,9 @@ const MyContentSponsor = (contentData) => {
                     borderRadius: "10px",
                   }}
                   onClick={handleSponsorClick}
-                  disabled={selectedItems.length === 0 || !selectedItems.every(item => item.sponsoring_content_items)}
+                  disabled={selectedItems.length === 0 || !selectedItems.every(item => item.sponsoring_content_items) || cardData.is_sponsored}
                 >
-                  Sponsor
+                  {cardData.is_sponsored ? "Content is Sponsored" : "Sponsor"}
                 </button>
               </div>
             </div>
@@ -237,15 +238,7 @@ const MyContentSponsor = (contentData) => {
           <div className="container mt-2">
             <h5 className="font-weight-bold">Event Description: </h5>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Consequatur voluptates est perspiciatis voluptas dolorem quo quasi
-              sapiente magnam corporis fugiat? Culpa, dolores ullam? Alias nulla
-              libero rem praesentium consequuntur excepturi porro cupiditate
-              velit, vero harum id sequi, repellendus beatae voluptatibus
-              facilis minima in fugiat sunt animi qui? Voluptatem magni eos
-              mollitia. Obcaecati tempora vero fugiat dolorem aliquid officiis
-              necessitatibus consequuntur sit in, distinctio ipsam aperiam
-              cupiditate facilis, sint nesciunt quam!
+              {cardData.description}
             </p>
           </div>
         </div>
@@ -289,10 +282,10 @@ const MyContentSponsor = (contentData) => {
               <i className="bi bi-cash text-success"></i>&nbsp;
               {totalAmount}&nbsp;&nbsp;
               <i className="bi bi-people-fill text-danger"></i>&nbsp;
-              {cardData.audience_expected}&nbsp;&nbsp;
+              {cardData.per_video_reach}&nbsp;&nbsp;
             </h5>
           </div>
-          <div className="star d-flex">
+          {/* <div className="star d-flex">
             <h5>
               <i class="bi bi-star-fill text-warning"></i>&nbsp;
               <i class="bi bi-star-fill text-warning"></i>&nbsp;
@@ -301,45 +294,31 @@ const MyContentSponsor = (contentData) => {
               <i class="bi bi-star-fill text-white"></i>&nbsp;
               <span className="text-sm text-muted">3482 reviews</span>
             </h5>
-          </div>
+          </div> */}
         </div>
         <div className="container px-0">
-          <table
-            className="table table-borderless text-center text-dark overflow-hidden"
+        <table
+            className="table table-borderless text-center text-white overflow-hidden"
             style={{
-              marginTop: "4%",
+              marginBottom: "4%",
               borderRadius: "10px",
-              backgroundColor: "white",
               boxShadow: "0px 2px 20px -3px rgba(0, 0, 0, 0.16)",
             }}
           >
-            <tr className="table-sm">
-              <td className="pb-0">From</td>
-              <td className="pb-0">To</td>
+            <tr className="table-sm" style={{ background: "#004EA9" }}>
+              <td style={{ fontWeight: 'bold' }}>Content Posting Date</td>
+              {/* <td>End date</td> */}
             </tr>
-            <tr className="table-sm">
-              <td>
-                <span
-                  style={{
-                    backgroundColor: "#E5E5E5",
-                    padding: "3%",
-                    borderRadius: "5px",
-                  }}
-                >
-                  {cardData.content_start_date}
-                </span>
+            <tr style={{ background: "rgba(0, 187, 255, 0.75)" }}>
+              <td
+                style={{
+                  borderRight: "1px solid rgba(255, 255, 255, 0.50)",
+                  fontWeight: 'bold'
+                }}
+              >
+                {cardData.posting_date}
               </td>
-              <td>
-                <span
-                  style={{
-                    backgroundColor: "#E5E5E5",
-                    padding: "3%",
-                    borderRadius: "5px",
-                  }}
-                >
-                  {cardData.content_end_date}
-                </span>
-              </td>
+              {/* <td>{cardData.content_end_date}</td> */}
             </tr>
           </table>
         </div>

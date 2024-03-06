@@ -106,7 +106,7 @@ export default function ManageTable(props) {
     console.log("Payment data Id", data.content_sponsor_id);
     dispatch(approveContentPayment(data.content_sponsor_id));
     sessionStorage.setItem("deletionMessage", "Event Payment has been Approved!!");
-    navigate("/admin/payment_content");
+    navigate("/administrator/payment_content");
     window.location.reload();
   };
   console.log(liveContentData);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import bgimage from "../../../assets/img/circle-bg.png";
 import Footer from "../../../components/Footer/Footer";
@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../../redux/actions/authActions";
 import BnakAccountDetails from "./BankAccountDetails";
+import ErrorToast from "../../../components/Toast/Error";
 const EventProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,6 +18,22 @@ const EventProfile = () => {
     dispatch(logout());
     navigate("/");
   };
+
+  const [withdrawError, setWithdrawError] = useState(null);
+
+  useEffect(() => {
+    const message1 = sessionStorage.getItem("withdrawError");
+    sessionStorage.removeItem("withdrawError");
+
+    if (message1) {
+      setWithdrawError(message1);
+    }
+  }, []);
+
+
+
+
+
   return (
     <>
       <div
@@ -24,10 +41,13 @@ const EventProfile = () => {
         style={{
           width: "100%",
           height: "auto",
+          paddingBottom: '1%',
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        
+        {withdrawError && <ErrorToast message={withdrawError} />}
+
+
         <div className="container my-3">
           <Tabs
             defaultActiveKey="profile"
@@ -53,7 +73,7 @@ const EventProfile = () => {
             Logout
           </button>
         </div>
-        
+
       </div>
     </>
   );

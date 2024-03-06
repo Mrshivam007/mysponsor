@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateContent } from "../../../redux/actions/contentAction";
 import { eventReducer } from "../../../redux/reducer/eventReducer";
 import { useLocation, useNavigate } from "react-router-dom";
+import makeAnimated from "react-select/animated";
+import Select from "react-select";
 import apiurl from "../../../constant/config";
 
 const UpdateContent = () => {
@@ -13,11 +15,24 @@ const UpdateContent = () => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
 
+  const animatedComponents = makeAnimated();
+
+  const itemOptions = [
+    { value: "tag_ads", label: "#ADS" },
+    { value: "sponsored_by", label: "Sponsored By" },
+    { value: "reel_sponsored", label: "Reel Sponsored" },
+  ];
+
+  const [itemSelection, setItemSelection] = useState([]);
+
   const [title, setTitle] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [event_date_time, setEventDateTime] = useState("");
   const [sponsoring_item, setSponsoringItem] = useState("");
+  const [postingDate, setPostingDate] = useState("");
+  const [subscriber, setSubscriber] = useState("");
+  const [perVideoReach, setPerVideoReach] = useState("");
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
   const [audience, setAudienceExpected] = useState("");
@@ -100,25 +115,28 @@ const UpdateContent = () => {
     setPrices(updatedPrices);
   };
 
-  const handleSponsoringItemChange = (e) => {
-    const { value } = e.target;
-    let updatedSelectedItems = [...selectedItems];
-
-    if (updatedSelectedItems.includes(value)) {
-      updatedSelectedItems = updatedSelectedItems.filter(
-        (item) => item !== value
-      );
-    } else {
-      updatedSelectedItems.push(value);
+  useEffect(() => {
+    if (contentData && contentData.sponsoring_content_items) {
+      const selectedItems = contentData.sponsoring_content_items.map(item => ({ value: item.sponsoring_content_items, label: item.sponsoring_content_items }));
+      const itemPrices = {};
+      contentData.sponsoring_content_items.forEach(item => {
+        itemPrices[item.sponsoring_content_items] = item.price;
+      });
+      setItemSelection(selectedItems);
+      setPrices(itemPrices);
     }
+  }, [contentData]);
 
-    setSelectedItems(updatedSelectedItems);
+  const handleSponsoringItemChange = (selectedItems) => {
+    console.log("Updated selected Items:", selectedItems);
+    setItemSelection(selectedItems);
   };
 
   const handlePriceChange = (item, price) => {
-    const updatedPrices = { ...prices };
-    updatedPrices[item] = price;
-    setPrices(updatedPrices);
+    setPrices(prevPrices => ({
+      ...prevPrices,
+      [item]: price
+    }));
   };
 
   const handleToggleDropdown = () => {
@@ -131,24 +149,33 @@ const UpdateContent = () => {
     if (title.trim() === "") {
       errorsObj.title = "Title is required";
     }
-    if (location.trim() === "") {
-      errorsObj.location = "Location is required";
+    // if (location.trim() === "") {
+    //   errorsObj.location = "Location is required";
+    // }
+    // if (startDate.trim() === "") {
+    //   errorsObj.startDate = "startDate is required";
+    // }
+    if (perVideoReach.trim() === "") {
+      errorsObj.perVideoReach = "perVideoReach is required";
     }
-    if (startDate.trim() === "") {
-      errorsObj.startDate = "startDate is required";
+    if (subscriber.trim() === "") {
+      errorsObj.subscriber = "subscriber is required";
     }
-    if (endDate.trim() === "") {
-      errorsObj.endDate = "endDate is required";
+    if (postingDate.trim() === "") {
+      errorsObj.postingDate = "postingDate is required";
     }
+    // if (endDate.trim() === "") {
+    //   errorsObj.endDate = "endDate is required";
+    // }
     if (!selectedItems) {
       errorsObj.selectedItems = "selectedItems is required";
     }
     if (!prices) {
       errorsObj.prices = "prices is required";
     }
-    if (audience.trim() === "") {
-      errorsObj.audience = "audience is required";
-    }
+    // if (audience.trim() === "") {
+    //   errorsObj.audience = "audience is required";
+    // }
     if (event_categories.trim() === "") {
       errorsObj.event_categories = "event_categories is required";
     }
@@ -183,18 +210,22 @@ const UpdateContent = () => {
       formData.append("title", contentData.title); // Ensure you're using contentData.title here
 
       // Prepare sponsoring items array
-      const sponsoringItemsData = selectedItems.map((item) => ({
-        sponsoring_items: item,
-        price: prices[item] || null,
+      const sponsoringItemsData = itemSelection.map((item) => ({
+        sponsoring_content_items: item.value,
+        price: prices[item.value] || null, // Access price using item.value
+        is_sponsored: false, // handle cases where price might be undefined or null
       }));
-      formData.append("event_start_date", contentData.event_start_date);
-      formData.append("event_end_date", contentData.event_end_date);
-      formData.append("event_time", contentData.event_time);
-      formData.append("sponsoring_items", JSON.stringify(sponsoringItemsData));
+      // formData.append("event_start_date", contentData.event_start_date);
+      // formData.append("event_end_date", contentData.event_end_date);
+      // formData.append("event_time", contentData.event_time);
+      formData.append("sponsoring_content_items", JSON.stringify(sponsoringItemsData));
       formData.append("user_id", userDetails.user_id);
       formData.append("description", contentData.description);
-      formData.append("location", contentData.location);
-      formData.append("audience_expected", contentData.audience_expected);
+      formData.append("subscribers", contentData.subscribers);
+      formData.append("per_video_reach", contentData.per_video_reach);
+      formData.append("posting_date", contentData.posting_date);
+      // formData.append("location", contentData.location);
+      // formData.append("audience_expected", contentData.audience_expected);
       // formData.append("price", price);
       formData.append("event_category", contentData.event_category);
       if (newThumbnail1 && newThumbnail1 !== currentThumbnail1) {
@@ -223,7 +254,7 @@ const UpdateContent = () => {
 
   return (
     <>
-      
+
       <div
         className="bg-form"
         style={{
@@ -308,7 +339,61 @@ const UpdateContent = () => {
                     </div>
 
                     <div className="row form-group">
-                      <div className="col-6">
+                      <div className="col-md-12 mb-3 mb-md-0">
+                        <div>
+                          <Select
+                            closeMenuOnSelect={true}
+                            components={animatedComponents}
+                            onChange={handleSponsoringItemChange}
+                            isMulti
+                            options={itemOptions}
+                            value={itemSelection}
+                          />
+                          {itemSelection.map((item) => (
+                            <div key={item.value}>
+                              <input
+                                type="text"
+                                value={prices[item.value] || ''}
+                                onChange={(e) =>
+                                  handlePriceChange(item.value, e.target.value)
+                                }
+                                className="form-control my-1"
+                              // placeholder={`Enter ${item.label.replace("_", " ") || "Price"}`}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                        {errors.selectedItems && (
+                          <p className="error-msg">{errors.selectedItems}</p>
+                        )}
+                        {/* Display error message if prices are not filled */}
+                        {Object.values(prices).some(price => price === '') ? (
+                          <p className="error-msg">{errors.prices}</p>
+                        ) : null}
+                      </div>
+                    </div>
+
+                    <div className="row form-group">
+                    <div className="col-md-12">
+                        <label className="font-weight-bold">Posting Date</label>
+                        <input
+                          type="date"
+                          id="start-date"
+                          value={
+                            contentData ? contentData.posting_date : ""
+                          } // Populate the input with contentData's startDate if it exists
+                          onChange={(e) =>
+                            setcontentData({
+                              ...contentData,
+                              posting_date: e.target.value,
+                            })
+                          }                          className="form-control"
+                        />
+                        {postingDate == "" ? (
+                          <p className="error-msg">{errors.postingDate}</p>
+                        ) : null}
+                      </div>
+                      {/* <div className="col-6">
                         <label className="font-weight-bold">Start Date</label>
                         <input
                           type="date"
@@ -349,7 +434,7 @@ const UpdateContent = () => {
                         {errors.endDate && (
                           <p className="error-msg">{errors.endDate}</p>
                         )}
-                      </div>
+                      </div> */}
                     </div>
                   </form>
                 </div>
@@ -389,7 +474,7 @@ const UpdateContent = () => {
                       </div>
                     </div>
 
-                    <div className="row form-group">
+                    {/* <div className="row form-group">
                       <div className="col-md-12">
                         <input
                           type="text"
@@ -408,6 +493,26 @@ const UpdateContent = () => {
                           <p className="error-msg">{errors.location}</p>
                         )}
                       </div>
+                    </div> */}
+                    <div className="row form-group">
+                      <div className="col-md-12">
+                        <input
+                          type="text"
+                          id="subscribers"
+                          value={contentData ? contentData.subscribers : ""} // Populate the input with contentData's subscribers if it exists
+                          onChange={(e) =>
+                            setcontentData({
+                              ...contentData,
+                              subscribers: e.target.value,
+                            })
+                          }
+                          className="form-control"
+                          placeholder="Enter Subscribers"
+                        />
+                        {errors.subscriber && (
+                          <p className="error-msg">{errors.subscriber}</p>
+                        )}
+                      </div>
                     </div>
 
                     <div className="row form-group gap-3">
@@ -417,19 +522,19 @@ const UpdateContent = () => {
                           type="text"
                           id="subject"
                           value={
-                            contentData ? contentData.audience_expected : ""
+                            contentData ? contentData.per_video_reach : ""
                           } // Populate the input with contentData's audience if it exists
                           onChange={(e) =>
                             setcontentData({
                               ...contentData,
-                              audience_expected: e.target.value,
+                              per_video_reach: e.target.value,
                             })
                           }
                           className="form-control"
-                          placeholder="Estimated audience"
+                          placeholder="Per Video Reach"
                         />
-                        {errors.audience && (
-                          <p className="error-msg">{errors.audience}</p>
+                        {errors.perVideoReach && (
+                          <p className="error-msg">{errors.perVideoReach}</p>
                         )}
                       </div>
                     </div>
@@ -680,7 +785,7 @@ const UpdateContent = () => {
           </div>
         </div>
       </div>
-      
+
     </>
   );
 };

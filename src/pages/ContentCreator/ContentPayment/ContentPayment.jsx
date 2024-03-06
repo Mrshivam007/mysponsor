@@ -38,9 +38,10 @@ const ContentPayment = () => {
         <>
           <div
             className="list-events-bg"
-            style={{
+                       style={{
               width: "100%",
               height: "auto",
+              paddingBottom: '1%',
               backgroundImage: `url(${bgimage})`,
             }}
           >
@@ -51,7 +52,7 @@ const ContentPayment = () => {
             <div className="desktop-view mt-4">
               <div className="container">
                 {cardData &&
-                  cardData.map((data) => {
+                  cardData.slice().reverse().map((data) => {
                     return (
                       <div className="row">
                         <div className="col-12 mb-4">
@@ -187,7 +188,7 @@ const ContentPayment = () => {
               </h2>
               <div className="container mb-4">
                 {cardData &&
-                  cardData.map((data) => {
+                  cardData.slice().reverse().map((data) => {
                     return (
                       <div className="row">
                         <div className="col-12">

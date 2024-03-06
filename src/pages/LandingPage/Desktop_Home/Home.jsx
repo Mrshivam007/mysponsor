@@ -37,7 +37,7 @@ const Home = () => {
       >
         Read More
       </a>
-      <Chatbot />
+      {/* <Chatbot /> */}
       <Banner />
       <Categories line={"Categories"} />
       <SponserHome />

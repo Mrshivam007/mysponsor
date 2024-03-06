@@ -202,18 +202,19 @@ const SponsorContentBox = (contentData) => {
                 }}
               >
                 <tr className="table-sm" style={{ background: "#004EA9" }}>
-                  <td>Start date</td>
-                  <td>End date</td>
+                  <td style={{ fontWeight: 'bold' }}>Content Posting Date</td>
+                  {/* <td>End date</td> */}
                 </tr>
                 <tr style={{ background: "rgba(0, 187, 255, 0.75)" }}>
                   <td
                     style={{
                       borderRight: "1px solid rgba(255, 255, 255, 0.50)",
+                      fontWeight: 'bold'
                     }}
                   >
-                    {cardData.content_id.content_start_date}
+                    {cardData.content_id.posting_date}
                   </td>
-                  <td>{cardData.content_id.content_end_date}</td>
+                  {/* <td>{cardData.content_end_date}</td> */}
                 </tr>
               </table>
             </div>
@@ -223,7 +224,7 @@ const SponsorContentBox = (contentData) => {
                 {/* <img src={heart} alt="" style={{ width: "7%" }} /> */}
               </h4>
               <h4>{cardData.content_id.location}</h4>
-              <div className="star d-flex">
+              {/* <div className="star d-flex">
                 <h5>
                   <i class="bi bi-star-fill text-warning"></i>&nbsp;
                   <i class="bi bi-star-fill text-warning"></i>&nbsp;
@@ -232,14 +233,14 @@ const SponsorContentBox = (contentData) => {
                   <i class="bi bi-star-fill text-white"></i>&nbsp;
                   <span className="text-sm text-muted">3482 reviews</span>
                 </h5>
-              </div>
+              </div> */}
               <h5>
                 <i className="bi bi-cash text-success"></i>&nbsp;&nbsp;
                 <span className="text-md">{cardData.amount}&lt;</span>
                 <br />
                 <i className="bi bi-people-fill text-danger"></i>&nbsp;&nbsp;
                 <span className="text-md">
-                  {cardData.content_id.audience_expected}
+                  {cardData.content_id.per_video_reach}
                 </span>
               </h5>
 
@@ -326,10 +327,10 @@ const SponsorContentBox = (contentData) => {
               <i className="bi bi-cash text-success"></i>&nbsp;
               {cardData.amount}&nbsp;&nbsp;
               <i className="bi bi-people-fill text-danger"></i>&nbsp;
-              {cardData.content_id.audience_expected}&nbsp;&nbsp;
+              {cardData.content_id.per_video_reach}&nbsp;&nbsp;
             </h5>
           </div>
-          <div className="star d-flex">
+          {/* <div className="star d-flex">
             <h5>
               <i class="bi bi-star-fill text-warning"></i>&nbsp;
               <i class="bi bi-star-fill text-warning"></i>&nbsp;
@@ -338,47 +339,33 @@ const SponsorContentBox = (contentData) => {
               <i class="bi bi-star-fill text-white"></i>&nbsp;
               <span className="text-sm text-muted">3482 reviews</span>
             </h5>
-          </div>
+          </div> */}
         </div>
         <div className="container px-0">
-          <table
-            className="table table-borderless text-center text-dark overflow-hidden"
-            style={{
-              marginTop: "4%",
-              borderRadius: "10px",
-              backgroundColor: "white",
-              boxShadow: "0px 2px 20px -3px rgba(0, 0, 0, 0.16)",
-            }}
-          >
-            <tr className="table-sm">
-              <td className="pb-0">From</td>
-              <td className="pb-0">To</td>
-            </tr>
-            <tr className="table-sm">
-              <td>
-                <span
-                  style={{
-                    backgroundColor: "#E5E5E5",
-                    padding: "3%",
-                    borderRadius: "5px",
-                  }}
-                >
-                  {cardData.content_id.content_start_date}
-                </span>
-              </td>
-              <td>
-                <span
-                  style={{
-                    backgroundColor: "#E5E5E5",
-                    padding: "3%",
-                    borderRadius: "5px",
-                  }}
-                >
-                  {cardData.content_id.content_end_date}
-                </span>
-              </td>
-            </tr>
-          </table>
+        <table
+                className="table table-borderless text-center text-white overflow-hidden"
+                style={{
+                  marginBottom: "4%",
+                  borderRadius: "10px",
+                  boxShadow: "0px 2px 20px -3px rgba(0, 0, 0, 0.16)",
+                }}
+              >
+                <tr className="table-sm" style={{ background: "#004EA9" }}>
+                  <td style={{ fontWeight: 'bold' }}>Content Posting Date</td>
+                  {/* <td>End date</td> */}
+                </tr>
+                <tr style={{ background: "rgba(0, 187, 255, 0.75)" }}>
+                  <td
+                    style={{
+                      borderRight: "1px solid rgba(255, 255, 255, 0.50)",
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    {cardData.content_id.posting_date}
+                  </td>
+                  {/* <td>{cardData.content_end_date}</td> */}
+                </tr>
+              </table>
         </div>
         <div className="container px-1">
           <div className="row g-0">

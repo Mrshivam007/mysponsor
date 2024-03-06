@@ -10,6 +10,9 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { completeEventPayment, createSponsor, updateContentSponsoringItem } from "../../../redux/actions/sponsorAction";
 import apiurl from "../../../constant/config";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import { ContentPaymentCheckout } from "./ContentPaymentCheckout";
 
 const SponsorContentPayment = () => {
   useEffect(() => {
@@ -41,6 +44,10 @@ const SponsorContentPayment = () => {
   const [pre_reel_sponsored, setPre_Reel_sponsored] = useState(cardData?.reel_sponsored);
   const [pre_tag_ads, setPre_Tag_ads] = useState(cardData?.tag_ads);
   const [pre_sponsored_by, setPre_Sponsored_by] = useState(cardData?.sponsored_by);
+  const [orderCreateError, setOrderCreateError] = useState("");
+  const [stripeSponsorId, setStripeSponsorId] = useState("");
+  const [stripePublishKey, setStripePublishKey] = useState("");
+  const [stripeClientSecret, setStripeClientSecret] = useState("");
 
   const navigate = useNavigate(); // Initialize useNavigate hook
   const formattedSponsoringItems = sponsoring_items.map((item) => ({
@@ -121,7 +128,8 @@ const SponsorContentPayment = () => {
         payment_id: paymentID,
         order_id: orderID,
         signature: signature,
-        amount: total_amount,
+        tax_amount: total_amount,
+        amount: sponsoring_price,
         content_user_id: cardData.user_id,
         content_id: cardData.content_id,
         sponsor_user_id: userDetails.user_id,
@@ -174,65 +182,125 @@ const SponsorContentPayment = () => {
   };
 
 
+  // const razorPay = () => {
+  //   //create order
+  //   axios({
+  //     method: "post",
+  //     // url: "http://127.0.0.1:8000/api/razorpay/order/create/",
+  //     url: `${apiurl}/api/razorpay/order/create/`,
+  //     data: {
+  //       amount: total_amount,
+  //       currency: "INR",
+  //     },
+  //   })
+  //     .then((response) => {
+  //       // get order id
+  //       console.log("response", response);
+  //       const order_id = response?.data?.data.id;
+  //       setOrderCreateError("");
+
+
+  //       // handle payment
+  //       const options = {
+  //         key: "rzp_test_kLJsk74wAsyTQm", // Enter the Key ID generated from the Dashboard
+  //         name: "MySponsor",
+  //         description: "Test Transaction",
+  //         image: "https://example.com/your_logo",
+  //         order_id: order_id, //This is a sample Order ID. Pass the `id` obtained in the response of createOrder().
+  //         handler: function (response) {
+  //           console.log("Complete Order", response);
+  //           //complete order
+  //           complete_order(
+  //             response.razorpay_payment_id,
+  //             response.razorpay_order_id,
+  //             response.razorpay_signature
+  //           );
+  //         },
+  //         // prefill: {
+  //         // name: "Piyush Garg",
+  //         // email: "youremail@example.com",
+  //         // contact: "9999999999",
+  //         // },
+  //         // notes: {
+  //         // address: "Razorpay Corporate Office",
+  //         // },
+  //         theme: {
+  //           color: "#3399cc",
+  //         },
+  //       };
+
+  //       const rzp1 = new window.Razorpay(options);
+  //       rzp1.on("payment.failed", function (response) {
+  //         alert(response.error.code);
+  //         alert(response.error.description);
+  //         alert(response.error.source);
+  //         alert(response.error.step);
+  //         alert(response.error.reason);
+  //         alert(response.error.metadata.order_id);
+  //         alert(response.error.metadata.payment_id);
+  //       });
+  //       rzp1.open();
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setOrderCreateError("Please Try Again");
+  //     });
+  // };
+
   const razorPay = () => {
-    //create order
+    const access = JSON.parse(localStorage.getItem("access"));
+    const formData = new FormData();
+
+    // Append other data to FormData
+    formData.append("tax_amount", total_amount);
+    formData.append("amount", sponsoring_price);
+    formData.append("content_user_id", cardData.user_id);
+    formData.append("content_id", cardData.content_id);
+    formData.append("sponsor_user_id", userDetails.user_id);
+    // formattedSponsoringItems.forEach((item) => {
+    //   formData.append("sponsoring_items", item.sponsoring_items);
+    // });
+    formData.append("sponsoring_content_items", JSON.stringify(formattedSponsoringItems));
+
+    // Append images for each sponsoring item
+    formattedSponsoringItems.forEach((item) => {
+      switch (item.sponsoring_items) {
+        case "sponsored_by":
+          formData.append("sponsored_by", sponsored_by, sponsored_byFileName || "");
+          break;
+        case "tag_ads":
+          formData.append("tag_ads", tag_ads, tag_adsFileName || "");
+          break;
+        case "reel_sponsored":
+          formData.append("reel_sponsored", reel_sponsored, reel_sponsoredFileName || "");
+          break;
+        // Add more cases for other sponsoring item types if needed
+        default:
+          break;
+      }
+    });
+
     axios({
       method: "post",
-      // url: "http://127.0.0.1:8000/api/razorpay/order/create/",
-      url: `${apiurl}/api/razorpay/order/create/`,
-      data: {
-        amount: total_amount,
-        currency: "INR",
+      url: `${apiurl}/api/razorpay/content/order/create/`,
+      data: formData,
+      headers: {
+        Authorization: `Bearer ${access}`,
+        "Content-Type": "multipart/form-data", // Important for FormData
       },
     })
       .then((response) => {
-        // get order id
         console.log("response", response);
-        const order_id = response?.data?.data.id;
-
-        // handle payment
-        const options = {
-          key: "rzp_test_YRuk8xeM74fPv0", // Enter the Key ID generated from the Dashboard
-          name: "MySponsor",
-          description: "Test Transaction",
-          image: "https://example.com/your_logo",
-          order_id: order_id, //This is a sample Order ID. Pass the `id` obtained in the response of createOrder().
-          handler: function (response) {
-            console.log("Complete Order", response);
-            //complete order
-            complete_order(
-              response.razorpay_payment_id,
-              response.razorpay_order_id,
-              response.razorpay_signature
-            );
-          },
-          // prefill: {
-          // name: "Piyush Garg",
-          // email: "youremail@example.com",
-          // contact: "9999999999",
-          // },
-          // notes: {
-          // address: "Razorpay Corporate Office",
-          // },
-          theme: {
-            color: "#3399cc",
-          },
-        };
-
-        const rzp1 = new window.Razorpay(options);
-        rzp1.on("payment.failed", function (response) {
-          alert(response.error.code);
-          alert(response.error.description);
-          alert(response.error.source);
-          alert(response.error.step);
-          alert(response.error.reason);
-          alert(response.error.metadata.order_id);
-          alert(response.error.metadata.payment_id);
-        });
-        rzp1.open();
+        // Store necessary information from response in state
+        setStripePublishKey(response.data.publish_key);
+        setStripeClientSecret(response.data.client_secret);
+        setStripeSponsorId(response.data.response.sponsord_content.content_sponsor_id)
+        // Open the modal after receiving the response
+        document.getElementById("paymentModalButton").click();
       })
       .catch((error) => {
         console.log(error);
+        setOrderCreateError("Please Try Again");
       });
   };
 
@@ -449,11 +517,61 @@ const SponsorContentPayment = () => {
                   </span>
                 </div>
               </div>
-              <button className="category-btn btn mb-3" style={{ width: "100%" }}>
-                <p className="category-btn-text" onClick={razorPay}>
+              <button className="category-btn btn mb-3" onClick={razorPay} style={{ width: "100%" }}>
+                <p className="category-btn-text">
                   Sponsor
                 </p>
               </button>
+
+              <button id="paymentModalButton" className="category-btn btn mb-3" style={{ width: "100%", display: "none" }} data-bs-toggle="modal" data-bs-target="#paymentModal">
+                <p className="category-btn-text">Sponsor</p>
+              </button>
+
+              <div className="modal fade" id="paymentModal" tabIndex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+                <div className="modal-dialog" style={{ margin: 0, width: '100%', height: '100vh', maxWidth: '100%', maxHeight: '100%' }}>
+
+                  <div className="modal-content" style={{ height: 'fit-content', minHeight: '100%' }}>
+
+                    <div className="modal-body">
+                      <div className="container">
+                        <h2 className="sponsor-pay-text">Payment Gateway</h2>
+                        <h2 className="sponsor-pay-mobile-text">Payment Gateway</h2>
+                      </div>
+                      <div className="container">
+
+                        <div className="box amount-info">
+                          <div className="d-flex justify-content-between font-weight-bolder">
+                            <h5>Sponsor Total</h5>
+                            <h5>₹{sponsoring_price}</h5>
+                          </div>
+                          <div className="d-flex justify-content-between font-weight-bolder">
+                            <h5>GST(19%)</h5>
+                            <h5>+ ₹{tax_amount}</h5>
+                          </div>
+                          <div className="d-flex justify-content-between font-weight-bolder">
+                            <h5>Platform Fee</h5>
+                            <h5>+ ₹0</h5>
+                          </div>
+                        </div>
+                        <hr style={{ borderTop: "1px solid #535353" }} />
+                        <div className="box grand-total">
+                          <h5 className="text-center">Grand Total</h5>
+                          <div className="d-flex justify-content-center">
+                            <span className="bagde-pill text-white text-xl">
+                              ₹{total_amount}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <Elements stripe={loadStripe(stripePublishKey)} options={{ clientSecret: stripeClientSecret }} >
+                        <ContentPaymentCheckout sponsorId={stripeSponsorId} />
+                      </Elements>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <p className="error-msg">{orderCreateError}</p>
               <div className="payment-description">
                 <p>
                   Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa

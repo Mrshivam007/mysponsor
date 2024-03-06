@@ -10,8 +10,6 @@ import bgimage from "../../../assets/img/circle-bg.png";
 import spevents from "../../../assets/img/sponsor_events-logo.png";
 import { EventsCards, EventsPageCards } from "../../../data/data";
 import {
-  fetchEvent,
-  fetchEventbyId,
   fetchAllEvent,
 } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -49,7 +47,7 @@ const UpcomingEvent = () => {
     } else if (message2) {
       setDeletionMessage(message2);
     }
-  }, []);
+  }, [successMessage]);
 
   const isLoading = () => {
     return eventDetails?.loading;
@@ -64,6 +62,18 @@ const UpcomingEvent = () => {
         <Loading />
       ) : (
         <>
+          {successMessage && <SuccessToast message={successMessage} />}
+          {deletionMessage && (
+            <div className="container">
+              <div
+                class="alert alert-danger"
+                role="alert"
+                style={{ borderRadius: "10px" }}
+              >
+                {deletionMessage}
+              </div>
+            </div>
+          )}
           <div
             className="events-bg"
             style={{
@@ -74,44 +84,11 @@ const UpcomingEvent = () => {
           >
             <div className="events-page-desktop">
               <EventsHeader title={"Upcoming Event"} logo={spevents} />
-              {/* <SponserE cardData={eventDetails?.eventAllDetails?.upcoming_event} line={"Upcoming Event"} /> */}
-              {successMessage && <SuccessToast message={successMessage} />}
-
-              {deletionMessage && (
-                <div className="container">
-                  <div
-                    class="alert alert-danger"
-                    role="alert"
-                    style={{ borderRadius: "10px" }}
-                  >
-                    {deletionMessage}
-                  </div>
-                </div>
-              )}
               <MyEventCard
                 cardData={eventDetails?.eventAllDetails?.upcoming_event}
               />
-              {/* <SponserE cardData={EventsCards} line={"Concerts"} />
-          <SponserE cardData={EventsCards} line={"Promotional Events"} />
-          <SponserE cardData={EventsCards} line={"Sports Events"} />
-          <SponserE cardData={EventsCards} line={"Comedy Shows"} />
-          <SponserE cardData={EventsCards} line={"Motivational Events"} />
-          <SponserE cardData={EventsCards} line={"Reality Shows"} /> */}
             </div>
             <div className="events-page-mobile">
-            {successMessage && <SuccessToast message={successMessage} />}
-
-              {deletionMessage && (
-                <div className="container">
-                  <div
-                    class="alert alert-danger"
-                    role="alert"
-                    style={{ borderRadius: "10px" }}
-                  >
-                    {deletionMessage}
-                  </div>
-                </div>
-              )}
               <EventMobileCard
                 line={"Upcoming Event"}
                 cardData={eventDetails?.eventAllDetails?.upcoming_event}

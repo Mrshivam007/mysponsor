@@ -40,7 +40,7 @@ const MyContentCard = ({ cardData, heading }) => {
       <div className="desktop-view">
         <div className="container">
           {cardData &&
-            cardData.map((data) => {
+            cardData.slice().reverse().map((data) => {
               let totalSponsoringPrice = 0;
               const sponsoring_items = data?.sponsoring_content_items || [];
 
@@ -198,7 +198,7 @@ const MyContentCard = ({ cardData, heading }) => {
         <h2 className="sponsor-mobile-text">{heading}</h2>
         <div className="container mb-4">
           {cardData &&
-            cardData.map((data) => {
+            cardData.slice().reverse().map((data) => {
               let totalSponsoringPrice = 0;
               const sponsoring_items = data?.sponsoring_content_items || [];
 

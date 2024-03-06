@@ -131,7 +131,7 @@ const Login = () => {
           backgroundImage: `url(${backgroundimg})`,
         }}
       >
-                   {successMessage && <SuccessToast message={successMessage} />}
+        {successMessage && <SuccessToast message={successMessage} />}
 
         <div className="container">
           <div className="box1">
@@ -143,7 +143,7 @@ const Login = () => {
                 </div>
               )}
 
-              <div class="row form-group">
+              <div class="row form-group" style={{ marginBottom: '0px' }}>
                 <div class="col-md-12">
                   <label class="text-black" for="email">
                     Email
@@ -220,7 +220,7 @@ const Login = () => {
                   position: "relative",
                 }}
               >
-                <GoogleOAuthProvider clientId="876612212431-oibsejipeff345lvh9bk84d0gv92mk86.apps.googleusercontent.com">
+                <GoogleOAuthProvider clientId="79933480626-2mokrgjd11tt8bslaopuhie4nt4csinv.apps.googleusercontent.com">
                   {" "}
                   <div
                     style={{
@@ -247,12 +247,11 @@ const Login = () => {
             </div>
 
             <p style={{ textAlign: "center", marginBottom: '0%', marginTop: '4%' }}>
-              Don't have an account? <Link to="/signup">Sign Up</Link>
+              Don't have an account? <Link style={{ fontWeight: 'bold', color: 'blue' }} to="/signup">Sign Up</Link>
             </p>
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

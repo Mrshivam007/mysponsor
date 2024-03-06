@@ -46,6 +46,7 @@ const EventPayment = () => {
             style={{
               width: "100%",
               height: "auto",
+              paddingBottom: '1%',
               backgroundImage: `url(${bgimage})`,
             }}
           >
@@ -56,7 +57,7 @@ const EventPayment = () => {
             <div className="desktop-view sponsored-events mt-4">
               <div className="container">
                 {cardData &&
-                  cardData.map((data) => {
+                  cardData.slice().reverse().map((data) => {
                     return (
                       <div className="row">
                         <div className="col-12 mb-4">
@@ -196,7 +197,7 @@ const EventPayment = () => {
             <div className="tablet-viewport">
               <div className="container mb-4">
                 {cardData &&
-                  cardData.map((data) => {
+                  cardData.slice().reverse().map((data) => {
                     return (
                       <div className="row">
                         <div className="col-12 col-md-6 mb-2">
@@ -379,7 +380,7 @@ const EventPayment = () => {
               <h2 className="sponsor-mobile-text">My Events Payment Status</h2>
               <div className="container mb-4">
                 {cardData &&
-                  cardData.map((data) => {
+                  cardData.slice().reverse().map((data) => {
                     return (
                       <div className="row">
                         <div className="col-12">

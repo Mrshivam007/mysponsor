@@ -6,7 +6,7 @@ import { EventsHeader } from "..";
 import { Button, Modal } from "react-bootstrap";
 import { getContentTransactionDetails } from "../../redux/actions/paymentAction";
 import { useDispatch, useSelector } from "react-redux";
-import ContentPaymentDetails from "../EventWallet/EventsPaymentDetails";
+import ContentPaymentDetails from "./ContentPaymentDetails";
 
 const ContentWallet = () => {
   const dispatch = useDispatch();

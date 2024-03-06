@@ -84,7 +84,7 @@ const SponsorHome = () => {
       >
         Read More
       </Link>
-      <Chatbot />
+      {/* <Chatbot /> */}
       <Banner />
       <Categories line={"Categories"} />
       <SponserHome />

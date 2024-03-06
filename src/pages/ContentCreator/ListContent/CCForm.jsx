@@ -26,10 +26,13 @@ const ListContentForm = () => {
 
   const [title, setTitle] = useState("");
   const [startDate, setStartDate] = useState("");
+  const [postingDate, setPostingDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [event_date_time, setEventDateTime] = useState("");
   const [sponsoring_item, setSponsoringItem] = useState("");
   const [description, setDescription] = useState("");
+  const [subscriber, setSubscriber] = useState("");
+  const [perVideoReach, setPerVideoReach] = useState("");
   const [location, setLocation] = useState("");
   const [audience, setAudienceExpected] = useState("");
   const [event_categories, setEventCategories] = useState("");
@@ -160,18 +163,27 @@ const ListContentForm = () => {
     if (title.trim() === "") {
       errorsObj.title = "Title is required";
     }
-    if (location.trim() === "") {
-      errorsObj.location = "Location is required";
+    // if (location.trim() === "") {
+    //   errorsObj.location = "Location is required";
+    // }
+    if (subscriber.trim() === "") {
+      errorsObj.subscriber = "subscriber is required";
     }
-    if (startDate.trim() === "") {
-      errorsObj.startDate = "startDate is required";
+    if (perVideoReach.trim() === "") {
+      errorsObj.perVideoReach = "perVideoReach is required";
     }
-    if (endDate.trim() === "") {
-      errorsObj.endDate = "endDate is required";
+    // if (startDate.trim() === "") {
+    //   errorsObj.startDate = "startDate is required";
+    // }
+    if (postingDate.trim() === "") {
+      errorsObj.postingDate = "postingDate is required";
     }
-    if (audience.trim() === "") {
-      errorsObj.audience = "audience is required";
-    }
+    // if (endDate.trim() === "") {
+    //   errorsObj.endDate = "endDate is required";
+    // }
+    // if (audience.trim() === "") {
+    //   errorsObj.audience = "audience is required";
+    // }
     if (selectedCategory === "") {
       errorsObj.content_categories = "Content Category is required";
     }
@@ -213,10 +225,13 @@ const ListContentForm = () => {
       const formData = new FormData();
       formData.append("title", title);
       formData.append("description", description);
-      formData.append("location", location);
-      formData.append("audience_expected", audience);
-      formData.append("content_start_date", startDate);
-      formData.append("content_end_date", endDate);
+      // formData.append("location", location);
+      formData.append("subscribers", subscriber);
+      formData.append("per_video_reach", perVideoReach);
+      // formData.append("audience_expected", audience);
+      formData.append("posting_date", postingDate);
+      // formData.append("content_start_date", startDate);
+      // formData.append("content_end_date", endDate);
       formData.append("content_time", event_time);
       formData.append(
         "sponsoring_content_items",
@@ -463,7 +478,19 @@ const ListContentForm = () => {
                     </div>
 
                     <div className="row form-group">
-                      <div className="col-6">
+                      <div className="col-md-12">
+                        <label className="font-weight-bold">Posting Date</label>
+                        <input
+                          type="date"
+                          id="start-date"
+                          onChange={(e) => setPostingDate(e.target.value)}
+                          className="form-control"
+                        />
+                        {postingDate == "" ? (
+                          <p className="error-msg">{errors.postingDate}</p>
+                        ) : null}
+                      </div>
+                      {/* <div className="col-6">
                         <label className="font-weight-bold">Start Date</label>
                         <input
                           type="date"
@@ -486,7 +513,7 @@ const ListContentForm = () => {
                         {endDate == "" ? (
                           <p className="error-msg">{errors.endDate}</p>
                         ) : null}
-                      </div>
+                      </div> */}
                     </div>
                   </form>
                 </div>
@@ -539,6 +566,36 @@ const ListContentForm = () => {
                     <div className="row form-group">
                       <div className="col-md-12">
                         <input
+                          type="number"
+                          id="subscriber"
+                          value={subscriber}
+                          onChange={(e) => setSubscriber(e.target.value)}
+                          className="form-control"
+                          placeholder="Enter your subscriber"
+                        />
+                        {subscriber == "" ? (
+                          <p className="error-msg">{errors.subscriber}</p>
+                        ) : null}
+                      </div>
+                    </div>
+                    <div className="row form-group">
+                      <div className="col-md-12">
+                        <input
+                          type="number"
+                          id="perVideoReach"
+                          value={perVideoReach}
+                          onChange={(e) => setPerVideoReach(e.target.value)}
+                          className="form-control"
+                          placeholder="Enter your Per Video Reach"
+                        />
+                        {perVideoReach == "" ? (
+                          <p className="error-msg">{errors.perVideoReach}</p>
+                        ) : null}
+                      </div>
+                    </div>
+                    {/* <div className="row form-group">
+                      <div className="col-md-12">
+                        <input
                           type="text"
                           id="location"
                           value={location}
@@ -550,9 +607,9 @@ const ListContentForm = () => {
                           <p className="error-msg">{errors.location}</p>
                         ) : null}
                       </div>
-                    </div>
+                    </div> */}
 
-                    <div className="row form-group gap-3">
+                    {/* <div className="row form-group gap-3">
                       <div className="col-md-12">
                         <input
                           type="number"
@@ -566,7 +623,7 @@ const ListContentForm = () => {
                           <p className="error-msg">{errors.audience}</p>
                         ) : null}
                       </div>
-                    </div>
+                    </div> */}
                   </form>
                 </div>
               </div>

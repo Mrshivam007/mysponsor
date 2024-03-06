@@ -41,7 +41,7 @@ export const profileReducer = (state = {}, action) => {
     case CREATE_BANK_DETAILS_REQUEST:
       return { ...state, loading: true }
     case CREATE_BANK_DETAILS_SUCCESS:
-      return { loading: false, createBankDetails: action.payload }
+      return { loading: false, createBankDetailResponse: action.payload }
     case CREATE_BANK_DETAILS_FAILED:
       return { loading: false, createBankDetailsError: action.payload }
     case GET_BANK_DETAILS_REQUEST:

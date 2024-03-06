@@ -6,8 +6,6 @@ import heart from "../../../assets/img/heart2.svg";
 import bgimage from "../../../assets/img/circle-bg.png";
 import {
   deleteEvent,
-  fetchEvent,
-  fetchEventbyId,
 } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux";
 import apiurl from "../../../constant/config";
@@ -36,10 +34,7 @@ const Delete_EventCard = ({ cardData }) => {
   };
 
   const dispatch = useDispatch();
-  const eventDetails = useSelector((state) => state.event);
-  useEffect(() => {
-    dispatch(fetchEventbyId(userDetails.user_id));
-  }, []);
+
 
   const navigate = useNavigate();
 
@@ -59,13 +54,14 @@ const Delete_EventCard = ({ cardData }) => {
         style={{
           width: "100%",
           height: "auto",
+          paddingBottom: '1%',
           backgroundImage: `url(${bgimage})`,
         }}
       >
         <div className="desktop-view">
           <div className="container">
             {cardData &&
-              cardData.map((data) => {
+              cardData.slice().reverse().map((data) => {
                 let totalSponsoringPrice = 0;
                 const sponsoring_items = data?.sponsoring_items || [];
 
@@ -251,7 +247,7 @@ const Delete_EventCard = ({ cardData }) => {
           <h2 className="sponsor-mobile-text">My Events</h2>
           <div className="container mb-4">
             {cardData &&
-              cardData.map((data) => (
+              cardData.slice().reverse().map((data) => (
                 <div className="row">
                   <div className="col-12">
                     <div className="card myevents-card">

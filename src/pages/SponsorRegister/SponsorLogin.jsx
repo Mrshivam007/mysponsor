@@ -185,7 +185,6 @@ const SponsorLogin = () => {
     };
     return (
         <>
-            <NavBar />
             <div>
                 {showLogin ? (
                     <div
@@ -388,7 +387,6 @@ const SponsorLogin = () => {
                 )}
             </div>
             {/* </div> */}
-            <Footer />
         </>
     );
 };

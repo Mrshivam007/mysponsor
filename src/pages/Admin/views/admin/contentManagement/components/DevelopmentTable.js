@@ -99,7 +99,7 @@ export default function ManageTable(props) {
   const handleDeletion = (data) => {
     dispatch(deleteContent(data.content_id));
     sessionStorage.setItem("deletionMessage", "Your Content has been Deleted!!!");
-    navigate("/admin/content");
+    navigate("/administrator/content");
     window.location.reload();
   };
   console.log(liveContentData);

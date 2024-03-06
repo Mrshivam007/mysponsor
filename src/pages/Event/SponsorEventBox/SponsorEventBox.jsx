@@ -404,41 +404,26 @@ const SponsorEventBox = (eventData) => {
         </div>
         <div className="container px-0">
           <table
-            className="table table-borderless text-center text-dark overflow-hidden"
+            className="table table-borderless text-center text-white overflow-hidden"
             style={{
-              marginTop: "4%",
+              marginBottom: "4%",
               borderRadius: "10px",
-              backgroundColor: "white",
               boxShadow: "0px 2px 20px -3px rgba(0, 0, 0, 0.16)",
             }}
           >
-            <tr className="table-sm">
-              <td className="pb-0">From</td>
-              <td className="pb-0">To</td>
+            <tr className="table-sm" style={{ background: "#004EA9" }}>
+              <td>Start date</td>
+              <td>End date</td>
             </tr>
-            <tr className="table-sm">
-              <td>
-                <span
-                  style={{
-                    backgroundColor: "#E5E5E5",
-                    padding: "3%",
-                    borderRadius: "5px",
-                  }}
-                >
-                  {cardData.event_id.event_start_date}
-                </span>
+            <tr style={{ background: "rgba(0, 187, 255, 0.75)" }}>
+              <td
+                style={{
+                  borderRight: "1px solid rgba(255, 255, 255, 0.50)",
+                }}
+              >
+                {cardData.event_id.event_start_date}
               </td>
-              <td>
-                <span
-                  style={{
-                    backgroundColor: "#E5E5E5",
-                    padding: "3%",
-                    borderRadius: "5px",
-                  }}
-                >
-                  {cardData.event_id.event_end_date}
-                </span>
-              </td>
+              <td>{cardData.event_id.event_end_date}</td>
             </tr>
           </table>
         </div>

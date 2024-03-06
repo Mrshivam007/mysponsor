@@ -10,8 +10,6 @@ import bgimage from "../../../assets/img/circle-bg.png";
 import spevents from "../../../assets/img/sponsor_events-logo.png";
 import { EventsCards, EventsPageCards } from "../../../data/data";
 import {
-  fetchEvent,
-  fetchEventbyId,
   fetchAllEvent,
 } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux";

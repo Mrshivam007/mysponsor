@@ -22,10 +22,12 @@ import About from "../components/About/About";
 import Contact from "../components/Contact/Contact";
 import EventsPaymentDetails from "../components/EventWallet/EventsPaymentDetails";
 import EventWallet from "../components/EventWallet/EventWallet";
+import ErrorBoundary from "./ErrorBoundary";
 const EventRoutes = () => {
   return (
     <>
       <NavBar />
+      <ErrorBoundary>
       <Routes>
         <Route path="/" element={<EventHome />} />
         <Route path="/events" element={<EventCategories />} />
@@ -54,6 +56,7 @@ const EventRoutes = () => {
         <Route path="/login" element={<Navigate to={"/"} />} />
         <Route path="/signup" element={<Navigate to={"/"} />} />
       </Routes>
+      </ErrorBoundary>
       <EventFooter />
     </>
   );

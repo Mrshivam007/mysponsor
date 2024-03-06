@@ -33,13 +33,14 @@ const Update_EventCard = ({ cardData }) => {
         style={{
           width: "100%",
           height: "auto",
+          paddingBottom: '1%',
           backgroundImage: `url(${bgimage})`,
         }}
       >
         <div className="desktop-view">
           <div className="container">
             {cardData &&
-              cardData.map((data) => {
+              cardData.slice().reverse().map((data) => {
                 let totalSponsoringPrice = 0;
                 const sponsoring_items = data?.sponsoring_items || [];
 
@@ -122,7 +123,7 @@ const Update_EventCard = ({ cardData }) => {
                                     &nbsp;&nbsp; {totalSponsoringPrice}
                                   </h4>
                                 </span>
-                                <img
+                                {/* <img
                                   src={heart}
                                   alt=""
                                   style={{
@@ -131,7 +132,7 @@ const Update_EventCard = ({ cardData }) => {
                                     filter:
                                       "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))",
                                   }}
-                                />
+                                /> */}
                               </div>
                               <h4>
                                 <i className="bi bi-people-fill text-danger"></i>
@@ -187,7 +188,7 @@ const Update_EventCard = ({ cardData }) => {
           <h2 className="sponsor-mobile-text">My Events</h2>
           <div className="container mb-4">
             {cardData &&
-              cardData.map((data) => (
+              cardData.slice().reverse().map((data) => (
                 <div className="row">
                   <div className="col-12">
                     <div className="card myevents-card">

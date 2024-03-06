@@ -104,20 +104,20 @@ const SponsorEventBox = (eventData) => {
     // Check if each sponsoring item is included in the sponsoringItems array
     sponsoringItems.map((item) => {
       if (item.sponsoring_items === "banner") {
-        if (bannerImage != null){
-        formData.append("banner_image", bannerImage, bannerImageFileName || "");
+        if (bannerImage != null) {
+          formData.append("banner_image", bannerImage, bannerImageFileName || "");
         }
       } else if (item.sponsoring_items === "led_screen") {
-        if (ledImage != null){
+        if (ledImage != null) {
           formData.append("led_image", ledImage, ledImageFileName || "");
         }
-        if (ledVideo != null){
+        if (ledVideo != null) {
           formData.append("led_video", ledVideo, ledVideoFileName || "");
         }
       } else if (item.sponsoring_items === "bill_board") {
-          if (billImage != null){
-        formData.append("bill_board", billImage, billImageFileName || "");
-          }
+        if (billImage != null) {
+          formData.append("bill_board", billImage, billImageFileName || "");
+        }
       }
     });
 
@@ -607,7 +607,8 @@ const SponsorEventBox = (eventData) => {
           <div className="star d-flex pt-3">
             <h5>
               <i className="bi bi-cash text-success"></i>&nbsp;
-              {totalAmount}&nbsp;&nbsp;
+              <span className="text-md">{cardData.amount}</span>
+              {" "}
               <i className="bi bi-people-fill text-danger"></i>&nbsp;
               {cardData.event_id.audience_expected}&nbsp;&nbsp;
             </h5>
@@ -625,41 +626,26 @@ const SponsorEventBox = (eventData) => {
         </div>
         <div className="container px-0">
           <table
-            className="table table-borderless text-center text-dark overflow-hidden"
+            className="table table-borderless text-center text-white overflow-hidden"
             style={{
-              marginTop: "4%",
+              marginBottom: "4%",
               borderRadius: "10px",
-              backgroundColor: "white",
               boxShadow: "0px 2px 20px -3px rgba(0, 0, 0, 0.16)",
             }}
           >
-            <tr className="table-sm">
-              <td className="pb-0">From</td>
-              <td className="pb-0">To</td>
+            <tr className="table-sm" style={{ background: "#004EA9" }}>
+              <td>Start date</td>
+              <td>End date</td>
             </tr>
-            <tr className="table-sm">
-              <td>
-                <span
-                  style={{
-                    backgroundColor: "#E5E5E5",
-                    padding: "3%",
-                    borderRadius: "5px",
-                  }}
-                >
-                  {cardData.event_id.event_start_date}
-                </span>
+            <tr style={{ background: "rgba(0, 187, 255, 0.75)" }}>
+              <td
+                style={{
+                  borderRight: "1px solid rgba(255, 255, 255, 0.50)",
+                }}
+              >
+                {cardData.event_id.event_start_date}
               </td>
-              <td>
-                <span
-                  style={{
-                    backgroundColor: "#E5E5E5",
-                    padding: "3%",
-                    borderRadius: "5px",
-                  }}
-                >
-                  {cardData.event_id.event_end_date}
-                </span>
-              </td>
+              <td>{cardData.event_id.event_end_date}</td>
             </tr>
           </table>
         </div>

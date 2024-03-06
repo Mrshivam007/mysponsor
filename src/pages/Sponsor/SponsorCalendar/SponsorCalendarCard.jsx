@@ -24,7 +24,7 @@ const SponsorCalendarCard = () => {
       <div className="row">
         <div className="col-12 mb-2">
           {cardData &&
-            cardData.map((data) => {
+            cardData.slice().reverse().map((data) => {
               const eventDate = new Date(data.event_id.event_start_date);
 
               // Options for formatting the date

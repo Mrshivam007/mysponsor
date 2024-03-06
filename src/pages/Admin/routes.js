@@ -20,6 +20,7 @@ import ContentManagement from "./views/admin/contentManagement"
 import ContentApproval from "./views/admin/contentApprove"
 import EventPayment from "./views/admin/eventPayment"
 import PaymentWithdraw from "./views/admin/PaymentWithdraw"
+import ContentPaymentWithdraw from "./views/admin/ContentPaymentWithdraw"
 import ContentPayment from "./views/admin/ContentPayment"
 import RTL from "./views/admin/rtl";
 
@@ -29,63 +30,70 @@ import SignInCentered from "./views/auth/signIn";
 const routes = [
   {
     name: "Main Dashboard",
-    layout: "/admin",
+    layout: "/administrator",
     path: "/default",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: MainDashboard,
   },
   {
     name: "Event Management",
-    layout: "/admin",
+    layout: "/administrator",
     path: "/event",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: EventManagement,
   },
   {
     name: "Event Approval",
-    layout: "/admin",
+    layout: "/administrator",
     path: "/approve_event",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: EventApproval,
   },
+  // {
+  //   name: "Event Payment",
+  //   layout: "/administrator",
+  //   path: "/payment_event",
+  //   icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
+  //   component: EventPayment,
+  // },
   {
-    name: "Event Payment",
-    layout: "/admin",
-    path: "/payment_event",
-    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
-    component: EventPayment,
-  },
-  {
-    name: "Payment Withdraw",
-    layout: "/admin",
+    name: "Event Payment Withdraw",
+    layout: "/administrator",
     path: "/payment_withdraw",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: PaymentWithdraw,
   },
   {
+    name: "Content Payment Withdraw",
+    layout: "/administrator",
+    path: "/payment_content_withdraw",
+    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
+    component: ContentPaymentWithdraw,
+  },
+  {
     name: "Content Management",
-    layout: "/admin",
+    layout: "/administrator",
     path: "/content",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: ContentManagement,
   },
   {
     name: "Content Approval",
-    layout: "/admin",
+    layout: "/administrator",
     path: "/approve_content",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: ContentApproval,
   },
-  {
-    name: "Content Payment",
-    layout: "/admin",
-    path: "/payment_content",
-    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
-    component: ContentPayment,
-  },
+  // {
+  //   name: "Content Payment",
+  //   layout: "/administrator",
+  //   path: "/payment_content",
+  //   icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
+  //   component: ContentPayment,
+  // },
   {
     name: "NFT Marketplace",
-    layout: "/admin",
+    layout: "/administrator",
     path: "/nft-marketplace",
     icon: (
       <Icon
@@ -100,14 +108,14 @@ const routes = [
   },
   {
     name: "Data Tables",
-    layout: "/admin",
+    layout: "/administrator",
     icon: <Icon as={MdBarChart} width='20px' height='20px' color='inherit' />,
     path: "/data-tables",
     component: DataTables,
   },
   {
     name: "Profile",
-    layout: "/admin",
+    layout: "/administrator",
     path: "/profile",
     icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
     component: Profile,

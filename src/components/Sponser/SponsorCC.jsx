@@ -17,7 +17,7 @@ const SponserCC = ({ line, cardData }) => {
       >
         <div className="row">
           {cardData &&
-            cardData.map((data) => (
+            cardData.slice().reverse().map((data) => (
               <div className="col-lg-6 col-sm-12 mb-3" key={data.id}>
                 <div
                   className="card"

@@ -13,6 +13,7 @@ import ContentApproval from "../../views/admin/contentApprove"
 import UpdateEvent from "../../views/admin/eventManagement/components/UpdateEvent";
 import UpdateContent from "../../views/admin/contentManagement/components/UpdateContent";
 import PaymentWithdraw from "../../views/admin/PaymentWithdraw"
+import ContentPaymentWithdraw from "../../views/admin/ContentPaymentWithdraw"
 const AdminRoutes = () => {
   return (
     <>
@@ -20,20 +21,21 @@ const AdminRoutes = () => {
       <Route path="/login" element={<Navigate to={"/"} />} />
         <Route path="/signup" element={<Navigate to={"/"} />} />
         <Route path="/" element={<MainDashboard />} />
-        <Route path="/admin/default" element={<MainDashboard />} />
-        <Route path="/admin/nft-marketplace" element={<NFTMarketplace />} />
-        <Route path="/admin/event" element={<Eventmanagement />} />
-        <Route path="/admin/approve_event" element={<EventApproval />} />
+        <Route path="/administrator/default" element={<MainDashboard />} />
+        <Route path="/administrator/nft-marketplace" element={<NFTMarketplace />} />
+        <Route path="/administrator/event" element={<Eventmanagement />} />
+        <Route path="/administrator/approve_event" element={<EventApproval />} />
         <Route path="/update_event" element={<UpdateEvent />} />
-        <Route path="/admin/content" element={<ContentManagement />} />
-        <Route path="/admin/approve_content" element={<ContentApproval />} />
-        <Route path="/admin/payment_content" element={<ContentPayment />} />
-        <Route path="/admin/payment_event" element={<EventPayment />} />
-        <Route path="/admin/payment_withdraw" element={<PaymentWithdraw />} />
+        <Route path="/administrator/content" element={<ContentManagement />} />
+        <Route path="/administrator/approve_content" element={<ContentApproval />} />
+        <Route path="/administrator/payment_content" element={<ContentPayment />} />
+        <Route path="/administrator/payment_event" element={<EventPayment />} />
+        <Route path="/administrator/payment_withdraw" element={<PaymentWithdraw />} />
+        <Route path="/administrator/payment_content_withdraw" element={<ContentPaymentWithdraw />} />
         <Route path="/update_content" element={<UpdateContent />} />
-        <Route path="/admin/data-tables" element={<DataTables />} />
-        <Route path="/admin/profile" element={<Profile />} />
-        <Route path="/admin/data-tables" element={<DataTables />} />
+        <Route path="/administrator/data-tables" element={<DataTables />} />
+        <Route path="/administrator/profile" element={<Profile />} />
+        <Route path="/administrator/data-tables" element={<DataTables />} />
         <Route path="/rtl/rtl-default" element={<RTL />} />
         {/* <Route path="/events" element={<EventCategories />} />
         <Route path="/sponsored_events" element={<SponsoredEvent />} />

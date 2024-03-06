@@ -5,7 +5,7 @@ import cardImg from "../../../assets/img/my_events_img.png";
 import bgimage from "../../../assets/img/circle-bg.png";
 import card_bg from "../../../assets/img/card/header-bg.png";
 import { Footer, NavBar } from "../../../components";
-import { fetchEvent, fetchEventbyId } from "../../../redux/actions/eventAction";
+import { fetchEvent } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux";
 import apiurl from "../../../constant/config";
 import { useNavigate } from "react-router-dom";
@@ -36,13 +36,14 @@ const MyEventCard = ({ cardData }) => {
         style={{
           width: "100%",
           height: "auto",
+          paddingBottom: '1%',
           backgroundImage: `url(${bgimage})`,
         }}
       >
         <div className="desktop-view">
           <div className="container">
             {cardData &&
-              cardData.map((data) => {
+              cardData.slice().reverse().map((data) => {
                 let totalSponsoringPrice = 0;
                 const sponsoring_items = data?.sponsoring_items || [];
 
@@ -199,7 +200,7 @@ const MyEventCard = ({ cardData }) => {
           <h2 className="sponsor-mobile-text">My Events</h2>
           <div className="container mb-4">
             {cardData &&
-              cardData.map((data) => (
+              cardData.slice().reverse().map((data) => (
                 <div className="row">
                   <div className="col-12">
                     <div className="card myevents-card">

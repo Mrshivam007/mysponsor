@@ -1,34 +1,71 @@
 import React, { useState } from "react";
+import heart from "../../assets/img/heart2.svg";
 import apiurl from "../../constant/config";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Carousel } from "react-bootstrap";
 
 const SponsorButton = ({ item, isSelected, onButtonClick }) => {
   return (
     <div className="col-4 px-1 px-md-2 my-3 text-center">
       <div
-        className="post-thumb text-dark py-1"
+        className="post-thumb text-dark py-2"
         style={{ backgroundColor: "#f2f2f2", borderRadius: "10px" }}
       >
         <h6 className="font-weight-bolder">
           {item.sponsoring_content_items} <br />
           <i className="bi bi-cash text-success"></i> ₹{item.price}
         </h6>
+        <button
+          className="badge-pill font-weight-bold w-100"
+          onClick={() => onButtonClick(item)}
+          style={
+            isSelected
+              ? { backgroundColor: "red", color: "white" }
+              : {
+                color: "rgb(0, 78, 169)",
+                backgroundColor: "white",
+                border: "2px solid rgb(0, 78, 169)",
+              }
+          }
+        >
+          {isSelected ? "Remove" : "Buy Now"}
+        </button>
       </div>
     </div>
   );
 };
 
 const MyContentBox = (contentData) => {
-  const cardData = contentData.contentData;
-  console.log("content data", cardData);
+  const cardData01 = contentData.contentData;
+  console.log("event data01", cardData01);
+  const location = useLocation();
+  const cardData02 = location.state && location.state.cardData;
+  console.log("event data02", cardData02);
+  const cardData = cardData01 || cardData02;
   let totalAmount = 0;
   const sponsoring_items = cardData?.sponsoring_content_items || [];
+
+  const navigate = useNavigate();
+
+  const handleSponsorLogin = () => {
+    // Assuming cardData is defined in your component state
+    // Navigate to the /sponsor_login route with cardData as state
+    navigate("/login");
+  };
 
   sponsoring_items.forEach((item) => {
     if (item && item.price) {
       totalAmount += parseFloat(item.price);
     }
   });
+  const settings = {
+    infinite: true, // Loop the slider
+    speed: 500, // Transition speed in milliseconds
+    slidesToShow: 1, // Number of slides to show at a time
+    slidesToScroll: 1, // Number of slides to scroll at a time
+    autoplay: true, // Auto-play the slider
+    autoplaySpeed: 3000, // Auto-play speed in milliseconds
+  };
 
   const [selectedItems, setSelectedItems] = useState([]);
   const [totalSponsoringPrice, setTotalSponsoringPrice] = useState(0);
@@ -49,6 +86,18 @@ const MyContentBox = (contentData) => {
         (prevTotal) => prevTotal + parseFloat(item.price)
       );
     }
+  };
+
+  const handleSponsorClick = () => {
+    const selectedItemsData = {
+      cardData,
+      sponsoring_items: selectedItems.map(
+        (item) => item.sponsoring_content_items
+      ),
+      sponsoring_price: totalSponsoringPrice.toFixed(2),
+    };
+
+    navigate("/sponsor_content_payment", { state: selectedItemsData });
   };
   return (
     <>
@@ -86,29 +135,55 @@ const MyContentBox = (contentData) => {
                   ))}
                 </Carousel>
               </div>
+              <table
+                className="table table-borderless text-center text-white overflow-hidden"
+                style={{
+                  marginBottom: "4%",
+                  borderRadius: "10px",
+                  boxShadow: "0px 2px 20px -3px rgba(0, 0, 0, 0.16)",
+                }}
+              >
+                <tr className="table-sm" style={{ background: "#004EA9" }}>
+                  <td style={{ fontWeight: 'bold' }}>Content Posting Date</td>
+                  {/* <td>End date</td> */}
+                </tr>
+                <tr style={{ background: "rgba(0, 187, 255, 0.75)" }}>
+                  <td
+                    style={{
+                      borderRight: "1px solid rgba(255, 255, 255, 0.50)",
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    {cardData.posting_date}
+                  </td>
+                  {/* <td>{cardData.content_end_date}</td> */}
+                </tr>
+              </table>
             </div>
             <div className="col-6">
-              <h4 className="mt-3 font-weight-bolder d-flex justify-content-between">
+              <h4 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between">
                 {cardData.title}{" "}
+                {/* <img src={heart} alt="" style={{ width: "7%" }} /> */}
               </h4>
-              <h5 className="font-weight-bold">
-                Your Platform Name:&nbsp;
-                <span className="font-weight-light">{cardData.price}</span>
+              <h4>{cardData.location}</h4>
+              {/* <div className="star d-flex">
+                <h5>
+                  <i class="bi bi-star-fill text-warning"></i>&nbsp;
+                  <i class="bi bi-star-fill text-warning"></i>&nbsp;
+                  <i class="bi bi-star-fill text-warning"></i>&nbsp;
+                  <i class="bi bi-star-fill text-warning"></i>&nbsp;
+                  <i class="bi bi-star-fill text-white"></i>&nbsp;
+                  <span className="text-sm text-muted">3482 reviews</span>
+                </h5>
+              </div> */}
+              <h5>
+                <i className="bi bi-cash text-success"></i>&nbsp;&nbsp;
+                <span className="text-md" style={{ fontWeight: 'bold' }}>{totalAmount}&lt;</span>
+                <br />
+                <i className="bi bi-people-fill text-danger"></i>&nbsp;&nbsp;
+                <span className="text-md" style={{ fontWeight: 'bold' }}>{cardData.per_video_reach}</span>
               </h5>
-              <h5 className="font-weight-bold">
-                Channel Subs:&nbsp;
-                <span className="font-weight-light">
-                  {cardData.audience_expected}
-                </span>
-              </h5>
-              <h5 className="font-weight-bold">
-                Location:&nbsp;
-                <span className="font-weight-light">{cardData.location}</span>
-              </h5>
-              <h5 className="font-weight-bold">
-                Video Preview:&nbsp;
-                <span className="font-weight-light">**Video Link Here**</span>
-              </h5>
+
               <div className="row g-0">
                 <div
                   className="box text-white"
@@ -126,7 +201,7 @@ const MyContentBox = (contentData) => {
                       borderBottom: "1px solid rgba(255, 255, 255, 0.20)",
                     }}
                   >
-                    Your Sponsoring items
+                    Sponsoring items
                   </div>
 
                   <div className="row mx-auto" style={{ width: "100%" }}>
@@ -139,37 +214,39 @@ const MyContentBox = (contentData) => {
                       />
                     ))}
                   </div>
+                  <div className="col-12">
+                    <div className="container py-3 px-0 text-start text-dark">
+                      <label className="text-white font-weight-bold">
+                        Total Amount Sponsored
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control w-100"
+                        value={`₹ ${totalSponsoringPrice.toFixed(2)}`}
+                        disabled
+                      />
+                    </div>
+                  </div>
                 </div>
+                <button
+                  className="btn w-100 text-center text-white font-weight-bold my-2"
+                  style={{
+                    backgroundColor: "rgb(0, 78, 169)",
+                    borderRadius: "10px",
+                  }}
+                  onClick={handleSponsorLogin}
+                // disabled={selectedItems.length === 0 || !selectedItems.every(item => item.sponsoring_content_items)}
+                >
+                  Sponsor
+                </button>
               </div>
             </div>
           </div>
-          <h6 className="font-weight-bold mt-2">Content publishing dates: </h6>
-          <table
-            className="table table-borderless text-center text-white overflow-hidden"
-            style={{
-              marginBottom: "4%",
-              borderRadius: "10px",
-              boxShadow: "0px 2px 20px -3px rgba(0, 0, 0, 0.16)",
-            }}
-          >
-            <tr className="table-sm" style={{ background: "#004EA9" }}>
-              <td>Start date</td>
-              <td>End date</td>
-            </tr>
-            <tr style={{ background: "rgba(0, 187, 255, 0.75)" }}>
-              <td
-                style={{
-                  borderRight: "1px solid rgba(255, 255, 255, 0.50)",
-                }}
-              >
-                {cardData.content_start_date}
-              </td>
-              <td>{cardData.content_end_date}</td>
-            </tr>
-          </table>
-          <div className="row p-3">
-            <h6 className="font-weight-bold">Video Description: </h6>
-            <p>{cardData.description}</p>
+          <div className="container mt-2">
+            <h5 className="font-weight-bold">Event Description: </h5>
+            <p>
+              {cardData.description}
+            </p>
           </div>
         </div>
       </div>
@@ -206,76 +283,53 @@ const MyContentBox = (contentData) => {
             ))}
           </Carousel>
         </div>
-
         <div className="container">
-          <div className="box py-3">
-            <h5 className="font-weight-bold">
-              Title:&nbsp;&nbsp;
-              <span className="font-weight-normal">{cardData.title}</span>
-            </h5>
-            <h5 className="font-weight-bold">
-              Platform:&nbsp;&nbsp;
-              <span className="font-weight-normal">
-                {cardData.content_platform}
-              </span>
-            </h5>
-            <h5 className="font-weight-bold">
-              Channel Subs:&nbsp;&nbsp;
-              <span className="font-weight-normal">
-                {cardData.audience_expected}
-              </span>
-            </h5>
-            <h5 className="font-weight-bold">
-              Location:&nbsp;&nbsp;
-              <span className="font-weight-normal">{cardData.location}</span>
-            </h5>
-            <h5 className="font-weight-bold">
-              Video Preview:&nbsp;&nbsp;
-              <span className="font-weight-normal">**Video Preview**</span>
+          <div className="star d-flex pt-3">
+            <h5>
+              <i className="bi bi-cash text-success"></i>&nbsp;
+              {totalAmount}&nbsp;&nbsp;
+              <i className="bi bi-people-fill text-danger"></i>&nbsp;
+              {cardData.per_video_reach}&nbsp;&nbsp;
             </h5>
           </div>
+          {/* <div className="star d-flex">
+            <h5>
+              <i class="bi bi-star-fill text-warning"></i>&nbsp;
+              <i class="bi bi-star-fill text-warning"></i>&nbsp;
+              <i class="bi bi-star-fill text-warning"></i>&nbsp;
+              <i class="bi bi-star-fill text-warning"></i>&nbsp;
+              <i class="bi bi-star-fill text-white"></i>&nbsp;
+              <span className="text-sm text-muted">3482 reviews</span>
+            </h5>
+          </div> */}
         </div>
-
-        <div className="container">
+        <div className="container px-0">
           <table
-            className="table table-borderless text-center text-dark overflow-hidden"
+            className="table table-borderless text-center text-white overflow-hidden"
             style={{
+              marginBottom: "4%",
               borderRadius: "10px",
-              backgroundColor: "white",
               boxShadow: "0px 2px 20px -3px rgba(0, 0, 0, 0.16)",
             }}
           >
-            <tr className="table-sm">
-              <td className="pb-0">From</td>
-              <td className="pb-0">To</td>
+            <tr className="table-sm" style={{ background: "#004EA9" }}>
+              <td style={{ fontWeight: 'bold' }}>Content Posting Date</td>
+              {/* <td>End date</td> */}
             </tr>
-            <tr className="table-sm">
-              <td>
-                <span
-                  style={{
-                    backgroundColor: "#E5E5E5",
-                    padding: "3%",
-                    borderRadius: "5px",
-                  }}
-                >
-                  {cardData.content_start_date}
-                </span>
+            <tr style={{ background: "rgba(0, 187, 255, 0.75)" }}>
+              <td
+                style={{
+                  borderRight: "1px solid rgba(255, 255, 255, 0.50)",
+                  fontWeight: 'bold'
+                }}
+              >
+                {cardData.posting_date}
               </td>
-              <td>
-                <span
-                  style={{
-                    backgroundColor: "#E5E5E5",
-                    padding: "3%",
-                    borderRadius: "5px",
-                  }}
-                >
-                  {cardData.content_end_date}
-                </span>
-              </td>
+              {/* <td>{cardData.content_end_date}</td> */}
             </tr>
           </table>
         </div>
-        <div className="container px-2 mb-3">
+        <div className="container px-1">
           <div className="row g-0">
             <div
               className="box text-white"
@@ -293,7 +347,7 @@ const MyContentBox = (contentData) => {
                   borderBottom: "1px solid rgba(255, 255, 255, 0.20)",
                 }}
               >
-                Your Sponsoring items
+                Sponsoring items
               </div>
 
               <div className="row mx-auto" style={{ width: "100%" }}>
@@ -306,9 +360,33 @@ const MyContentBox = (contentData) => {
                   />
                 ))}
               </div>
+              <div className="col-12">
+                <div className="container py-3 px-0 text-start text-dark">
+                  <label className="text-white font-weight-bold">
+                    Total Amount Sponsored
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control w-100"
+                    value={`₹ ${totalSponsoringPrice.toFixed(2)}`}
+                  />
+                </div>
+              </div>
             </div>
+            <button
+              className="btn w-100 text-center text-white font-weight-bold my-2"
+              style={{
+                backgroundColor: "rgb(0, 78, 169)",
+                borderRadius: "10px",
+              }}
+              onClick={handleSponsorLogin}
+              // disabled={selectedItems.length === 0 || !selectedItems.every(item => item.sponsoring_content_items)}
+            >
+              Sponsor
+            </button>
           </div>
         </div>
+        <h5 className="font-weight-bold">Content Description: </h5>
         <p>{cardData.description}</p>
       </div>
       {/* MOBILE VIEW END */}

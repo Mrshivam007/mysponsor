@@ -3,7 +3,7 @@ import bgimage from "../../../assets/img/circle-bg.png";
 import { EventsCards } from "../../../data/data.js";
 import { Footer, NavBar, SponserE } from "../../../components/index.js";
 import { useLocation } from "react-router-dom";
-import MyContentBox from "../../../components/My_Content_Details_Box/MyContentBox.jsx";
+import MyContentBox from "./MyContentBox.jsx";
 const ContentDetails = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
@@ -18,6 +18,7 @@ const ContentDetails = () => {
         style={{
           width: "100%",
           height: "auto",
+          paddingBottom: '1%',
           backgroundImage: `url(${bgimage})`,
         }}
       >

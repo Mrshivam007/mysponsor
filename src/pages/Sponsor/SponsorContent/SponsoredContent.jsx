@@ -67,7 +67,7 @@ const SponsoredContent = () => {
             <div className="desktop-view mt-4">
               <div className="container">
                 {cardData &&
-                  cardData.map((data) => {
+                  cardData.slice().reverse().map((data) => {
                     return (
                       <div className="row">
                         <div className="col-12 mb-4">
@@ -218,7 +218,7 @@ const SponsoredContent = () => {
               <h2 className="sponsor-mobile-text">My Sponsored Content</h2>
               <div className="container mb-4">
                 {cardData &&
-                  cardData.map((data) => {
+                  cardData.slice().reverse().map((data) => {
                     return (
                       <div className="row">
                         <div className="col-12">

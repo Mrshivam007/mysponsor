@@ -10,8 +10,6 @@ import bgimage from "../../../assets/img/circle-bg.png";
 import spevents from "../../../assets/img/sponsor_events-logo.png";
 import { EventsCards, EventsPageCards } from "../../../data/data";
 import {
-  fetchEvent,
-  fetchEventbyId,
   fetchAllEvent,
 } from "../../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -52,8 +50,8 @@ const DeleteEvent = () => {
     return eventDetails?.loading;
   };
 
-  console.log("dynamic data", eventDetails.eventDetails);
-  console.log("static data", EventsCards);
+  // console.log("dynamic data for deletion", eventDetails.eventAllDetails.upcoming_event);
+  // console.log("static data", EventsCards);
 
   return (
     <>
@@ -61,6 +59,7 @@ const DeleteEvent = () => {
         <Loading />
       ) : (
         <>
+          {successMessage && <SuccessToast message={successMessage} />}
           <div
             className="events-bg"
             style={{
@@ -75,10 +74,9 @@ const DeleteEvent = () => {
                 logo={spevents}
               />
               {/* <SponserE cardData={eventDetails.eventDetails} line={"Upcoming Event"} /> */}
-              {successMessage && <SuccessToast message={successMessage} />}
 
               <Delete_EventCard
-                cardData={eventDetails.eventDetails?.upcoming_event}
+                cardData={eventDetails?.eventAllDetails?.upcoming_event}
               />
               {/* <SponserE cardData={EventsCards} line={"Concerts"} />
             <SponserE cardData={EventsCards} line={"Promotional Events"} />
@@ -90,7 +88,7 @@ const DeleteEvent = () => {
             <div className="events-page-mobile">
               <Delete_MobileCards
                 line={"Delete Event"}
-                cardData={eventDetails.eventDetails?.upcoming_event}
+                cardData={eventDetails?.eventAllDetails?.upcoming_event}
               />
               <div
                 className="btn d-block text-white font-weight-bolder"

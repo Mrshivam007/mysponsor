@@ -3,6 +3,7 @@ import noProfilepic from "../../../assets/img/emptyprofile2.jpg";
 import "./profile.css";
 import { useDispatch, useSelector } from "react-redux";
 import { createBankDetails, getBankDetails } from "../../../redux/actions/profileAction";
+import SuccessToast from "../../../components/Toast/Success";
 const BnakAccountDetails = () => {
     useEffect(() => {
         window.scroll(0, 0);
@@ -15,10 +16,17 @@ const BnakAccountDetails = () => {
 
     console.log("Bank Account Details ", profileDetails.bankDetails
     );
+
+    const {createBankDetailResponse, createBankDetailsError} = profileDetails;
+
+    console.log("Create Bank details Response " , createBankDetailResponse);
+
     // const [businessName, setBusinessName] = useState('');
     const [AccountName, setAccountName] = useState('');
     const [ifscNo, setifscNo] = useState('');
     console.log(profileDetails?.sponsorDetails?.business_name);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
 
     const [AccountNo, setAccountNo] = useState(profileDetails?.sponsorDetails?.business_name || '');
 
@@ -62,9 +70,42 @@ const BnakAccountDetails = () => {
         }
     };
 
+    useEffect(() => {
+        if (createBankDetailResponse) {
+            if (createBankDetailResponse.msg == "Account created") {
+                console.log("Acccount created successfully");
+                sessionStorage.setItem("successMessage", "Account Details Added Successfully!");
+                // navigate("/events/upcoming_event");
+                dispatch(getBankDetails())
+                setSuccessMessage("Account Details Added")
+            } else {
+                // console.log("An error occurred while creating the event");
+                window.scroll(0, 0);
+                setErrorMessage("An error occurred during creating an event");
+            }
+        }
+        else if (createBankDetailsError) {
+            console.log("An error occurred while creating the event");
+            window.scroll(0, 0);
+            setErrorMessage("An error occurred during creating an event");
+        }
+    }, [createBankDetailResponse, createBankDetailsError]);
+
     return (
         <>
             <div className="container-xl px-4 mt-4">
+            {successMessage && <SuccessToast message={successMessage} />}
+                {errorMessage && (
+                    <div className="container">
+                        <div
+                            className="alert alert-danger"
+                            role="alert"
+                            style={{ borderRadius: "10px" }}
+                        >
+                            {errorMessage}
+                        </div>
+                    </div>
+                )}
                 <div>
                     <div className="card mb-4">
                         <div className="card-header">Bank Account Details</div>

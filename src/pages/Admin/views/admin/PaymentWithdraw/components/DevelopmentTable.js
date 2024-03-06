@@ -142,17 +142,17 @@ export default function ManageTable(props) {
     dispatch(ApproveWithdraw(id));
     // sessionStorage.setItem("deletionMessage", "Payment Withdraw has been Approved!!");
 
-    // navigate("/admin/payment_withdraw");
+    // navigate("/administrator/payment_withdraw");
     // window.location.reload();
   };
 
   useEffect(() => {
     console.log("getting message under useEffect ", approveWithdraw);
     if (approveWithdraw) {
-      if (approveWithdraw.msg == "withdra approved") {
+      if (approveWithdraw.msg == "event withdra approved") {
         console.log("Event created successfully");
         sessionStorage.setItem("deletionMessage", "Payment Withdraw has been Approved!!");
-        navigate("/admin/payment_withdraw");
+        navigate("/administrator/payment_withdraw");
         window.location.reload();
       } else {
         console.log("An error occurred while creating the event");
@@ -302,10 +302,9 @@ export default function ManageTable(props) {
                             </thead>
                             <tbody>
                               <tr>
-                                <td>Account Holder Name</td>
-                                <td>Acccount Number</td>
-                                <td>IFSC Code</td>
-                                <td>Bank Name</td>
+                                <td>{data.account_holder_name}</td>
+                                <td>{data.account_no}</td>
+                                <td>{data.ifsc_code}</td>
                                 {/* Add additional cells for extra details */}
                                 {/* Add as many cells as needed for the additional details */}
                               </tr>
@@ -436,9 +435,9 @@ export default function ManageTable(props) {
                             </thead>
                             <tbody>
                               <tr>
-                                <td>Account Holder Name</td>
-                                <td>Acccount Number</td>
-                                <td>IFSC Code</td>
+                                <td>{data.account_holder_name}</td>
+                                <td>{data.account_no}</td>
+                                <td>{data.ifsc_code}</td>
                                 <td>Bank Name</td>
                                 {/* Add additional cells for extra details */}
                                 {/* Add as many cells as needed for the additional details */}

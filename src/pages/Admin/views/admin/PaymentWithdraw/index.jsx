@@ -62,8 +62,8 @@ export default function Settings() {
       <DevelopmentTable
         columnsData={columnsDataDevelopment}
         tableData={tableDataDevelopment}
-        approvedWithdraw={paymentWithdrawDetails.paymentWithdrawDetails?.approval}
-        not_approvedWithdraw={paymentWithdrawDetails.paymentWithdrawDetails?.not_approval}
+        approvedWithdraw={paymentWithdrawDetails.paymentWithdrawDetails?.approval_event_withdra}
+        not_approvedWithdraw={paymentWithdrawDetails.paymentWithdrawDetails?.not_approval_event_withdra}
       />
       {/* <SimpleGrid
         mb='20px'

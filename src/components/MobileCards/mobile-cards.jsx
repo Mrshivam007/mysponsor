@@ -18,7 +18,7 @@ const MobileCards = ({ line, cardData }) => {
       <div className="container sponsor-cards-mobile">
         <div className="row row-cols-2 g-0">
           {cardData &&
-            cardData.map((data) => (
+            cardData.slice().reverse().map((data) => (
               <div className="col py-3">
                 <div className="card-blog">
                   <div className="header">

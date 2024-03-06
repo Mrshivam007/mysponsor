@@ -22,10 +22,10 @@ const SponsorButton = ({ item, isSelected, onButtonClick }) => {
             isSelected
               ? { backgroundColor: "red", color: "white" }
               : {
-                  color: "rgb(0, 78, 169)",
-                  backgroundColor: "white",
-                  border: "2px solid rgb(0, 78, 169)",
-                }
+                color: "rgb(0, 78, 169)",
+                backgroundColor: "white",
+                border: "2px solid rgb(0, 78, 169)",
+              }
           }
         >
           {isSelected ? "Remove" : "Buy Now"}
@@ -50,7 +50,7 @@ const MyEventSponsor = (eventData) => {
   const handleSponsorLogin = () => {
     // Assuming cardData is defined in your component state
     // Navigate to the /sponsor_login route with cardData as state
-    navigate("/sponsor_login", { state: { cardData } });
+    navigate("/login");
   };
 
   sponsoring_items.forEach((item) => {
@@ -144,10 +144,10 @@ const MyEventSponsor = (eventData) => {
             <div className="col-6">
               <h4 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between">
                 {cardData.title}{" "}
-                <img src={heart} alt="" style={{ width: "7%" }} />
+                {/* <img src={heart} alt="" style={{ width: "7%" }} /> */}
               </h4>
               <h4>{cardData.location}</h4>
-              <div className="star d-flex">
+              {/* <div className="star d-flex">
                 <h5>
                   <i class="bi bi-star-fill text-warning"></i>&nbsp;
                   <i class="bi bi-star-fill text-warning"></i>&nbsp;
@@ -156,7 +156,7 @@ const MyEventSponsor = (eventData) => {
                   <i class="bi bi-star-fill text-white"></i>&nbsp;
                   <span className="text-sm text-muted">3482 reviews</span>
                 </h5>
-              </div>
+              </div> */}
               <h5>
                 <i className="bi bi-cash text-success"></i>&nbsp;&nbsp;
                 <span className="text-md">{totalAmount}&lt;</span>
@@ -264,7 +264,7 @@ const MyEventSponsor = (eventData) => {
               {cardData.audience_expected}&nbsp;&nbsp;
             </h5>
           </div>
-          <div className="star d-flex">
+          {/* <div className="star d-flex">
             <h5>
               <i class="bi bi-star-fill text-warning"></i>&nbsp;
               <i class="bi bi-star-fill text-warning"></i>&nbsp;
@@ -273,45 +273,30 @@ const MyEventSponsor = (eventData) => {
               <i class="bi bi-star-fill text-white"></i>&nbsp;
               <span className="text-sm text-muted">3482 reviews</span>
             </h5>
-          </div>
+          </div> */}
         </div>
         <div className="container px-0">
           <table
-            className="table table-borderless text-center text-dark overflow-hidden"
+            className="table table-borderless text-center text-white overflow-hidden"
             style={{
-              marginTop: "4%",
+              marginBottom: "4%",
               borderRadius: "10px",
-              backgroundColor: "white",
               boxShadow: "0px 2px 20px -3px rgba(0, 0, 0, 0.16)",
             }}
           >
-            <tr className="table-sm">
-              <td className="pb-0">From</td>
-              <td className="pb-0">To</td>
+            <tr className="table-sm" style={{ background: "#004EA9" }}>
+              <td>Start date</td>
+              <td>End date</td>
             </tr>
-            <tr className="table-sm">
-              <td>
-                <span
-                  style={{
-                    backgroundColor: "#E5E5E5",
-                    padding: "3%",
-                    borderRadius: "5px",
-                  }}
-                >
-                  {cardData.event_start_date}
-                </span>
+            <tr style={{ background: "rgba(0, 187, 255, 0.75)" }}>
+              <td
+                style={{
+                  borderRight: "1px solid rgba(255, 255, 255, 0.50)",
+                }}
+              >
+                {cardData.event_start_date}
               </td>
-              <td>
-                <span
-                  style={{
-                    backgroundColor: "#E5E5E5",
-                    padding: "3%",
-                    borderRadius: "5px",
-                  }}
-                >
-                  {cardData.event_end_date}
-                </span>
-              </td>
+              <td>{cardData.event_end_date}</td>
             </tr>
           </table>
         </div>

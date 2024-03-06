@@ -5,11 +5,13 @@ import { Footer } from "../../../components";
 import SponsorpayCard from "./SponsorpayCard";
 import { useLocation, useNavigate } from "react-router-dom";
 import useRazorpay from "react-razorpay";
-
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { completeEventPayment, createSponsor, updateSponsoringItem } from "../../../redux/actions/sponsorAction";
 import apiurl from "../../../constant/config";
+import { PaymentCheckout } from "./PaymentCheckout";
 
 const SponsorPayment = () => {
   useEffect(() => {
@@ -42,6 +44,7 @@ const SponsorPayment = () => {
   const [ledVideoFileName, setLedVideoFileName] = useState(null);
   const [billText, setBillText] = useState(null);
   const [preBillText, setPreBillText] = useState(cardData?.bill_text);
+  const [orderCreateError, setOrderCreateError] = useState("");
   const navigate = useNavigate(); // Initialize useNavigate hook
   const formattedSponsoringItems = sponsoring_items.map((item) => ({
     sponsoring_items: item,
@@ -50,7 +53,9 @@ const SponsorPayment = () => {
   console.log("formatting sponsoring item ", formattedSponsoringItems);
   const { SponsoringItemDetails, SponsoringItemError, loading } = sponsor;
 
-
+  const [stripeSponsorId, setStripeSponsorId] = useState("");
+  const [stripePublishKey, setStripePublishKey] = useState("");
+  const [stripeClientSecret, setStripeClientSecret] = useState("");
 
   const toggleForm = () => {
     setShowPayment((prev) => !prev);
@@ -64,7 +69,7 @@ const SponsorPayment = () => {
       if (
         (item.sponsoring_items === 'banner' && !(bannerImage || cardData?.banner_image)) ||
         (item.sponsoring_items === 'bill_board' && !(billImage || cardData?.bill_board)) ||
-        (item.sponsoring_items === 'led_screen' && !(ledImage || cardData?.led_image)) 
+        (item.sponsoring_items === 'led_screen' && !(ledImage || cardData?.led_image))
         // (item.sponsoring_items === 'led_screen' && !(ledVideo || cardData?.led_video))
       ) {
         return false; // Sponsoring item is not filled
@@ -121,15 +126,71 @@ const SponsorPayment = () => {
   };
 
   // complete order
-  const complete_order = async (paymentID, orderID, signature) => {
+  // const complete_order = async (paymentID, orderID, signature) => {
+  //   axios({
+  //     method: "post",
+  //     // url: "http://127.0.0.1:8000/api/razorpay/order/complete/",
+  //     url: `${apiurl}/api/razorpay/order/complete/`,
+  //     data: {
+  //       payment_id: paymentID,
+  //       order_id: orderID,
+  //       signature: signature,
+  //       tax_amount: total_amount,
+  //       amount: sponsoring_price,
+  //       event_user_id: cardData.user_id,
+  //       event_id: cardData.event_id,
+  //       sponsor_user_id: userDetails.user_id,
+  //       sponsoring_items: formattedSponsoringItems,
+  //     },
+  //   })
+  //     .then((response) => {
+  //       console.log("All data ", response);
+  //       if (response.data.message === "transaction created") {
+  //         console.log("handle submit click functon call here", response);
+  //         console.log("All data after crating the payment ", response);
+  //         const formData = new FormData();
+  //         // formData.append("sponsor_id", cardData.sponsor_id);
+  //         formData.append("sponsor_id", response.data?.sponsord_event?.sponsor_id);
+  //         formattedSponsoringItems.forEach((item) => {
+  //           switch (item.sponsoring_items) {
+  //             case "banner":
+  //               formData.append("banner_image", bannerImage, bannerImageFileName || "");
+  //               // formData.append("banner_image", bannerImage || "");
+  //               break;
+  //             case "led_screen":
+  //               formData.append("led_image", ledImage, ledImageFileName || "");
+  //               formData.append("led_video", ledVideo || "");
+  //               break;
+  //             case "bill_board":
+  //               formData.append("bill_board", billImage, billImageFileName || "");
+  //               break;
+  //             // Add more cases for other sponsoring item types if needed
+  //             default:
+  //               break;
+  //           }
+  //         });
+  //         dispatch(updateSponsoringItem(formData));
+  //         sessionStorage.setItem(
+  //           "successMessage",
+  //           "Event Sponsored successfully!"
+  //         );
+  //         navigate("/sponsored_event"); // Replace '/' with the desired route for the home page
+  //         // window.location.reload(); // Reload the page
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.response.data);
+  //     });
+  // };
+
+  const complete_order = async () => {
     axios({
       method: "post",
-      url: "http://127.0.0.1:8000/api/razorpay/order/complete/",
+      // url: "http://127.0.0.1:8000/api/razorpay/order/complete/",
+      url: `${apiurl}/api/razorpay/order/complete/`,
       data: {
-        payment_id: paymentID,
-        order_id: orderID,
-        signature: signature,
-        amount: total_amount,
+        tax_amount: total_amount,
+        amount: sponsoring_price,
         event_user_id: cardData.user_id,
         event_id: cardData.event_id,
         sponsor_user_id: userDetails.user_id,
@@ -141,35 +202,6 @@ const SponsorPayment = () => {
         if (response.data.message === "transaction created") {
           console.log("handle submit click functon call here", response);
           console.log("All data after crating the payment ", response);
-          const formData = new FormData();
-          // formData.append("sponsor_id", cardData.sponsor_id);
-          formData.append("sponsor_id", response.data?.sponsord_event?.sponsor_id);
-          formattedSponsoringItems.forEach((item) => {
-            switch (item.sponsoring_items) {
-              case "banner":
-                formData.append("banner_image", bannerImage, bannerImageFileName || "");
-                // formData.append("banner_image", bannerImage || "");
-                break;
-              case "led_screen":
-                formData.append("led_image", ledImage, ledImageFileName || "");
-                formData.append("led_video", ledVideo || "");
-                break;
-              case "bill_board":
-                formData.append("bill_board", billImage, billImageFileName || "");
-                break;
-              // Add more cases for other sponsoring item types if needed
-              default:
-                break;
-            }
-          });
-          // try {
-          //   dispatch(updateSponsoringItem(formData));
-          //   // sessionStorage.setItem("successMessage", "Class created successfully!");
-          //   // navigate("/sponsored_event"); // Replace '/' with the desired route for the home page
-          // } catch (error) {
-          //   console.log("An error occurred during API calls:", error);
-          // }
-          dispatch(updateSponsoringItem(formData));
           sessionStorage.setItem(
             "successMessage",
             "Event Sponsored successfully!"
@@ -184,67 +216,203 @@ const SponsorPayment = () => {
   };
 
 
+  // const razorPay = () => {
+  //   //create order
+  //   axios({
+  //     method: "post",
+  //     // url: "http://127.0.0.1:8000/api/razorpay/order/create/",
+  //     url: `${apiurl}/api/razorpay/order/create/`,
+  //     data: {
+  //       amount: total_amount,
+  //       currency: "INR",
+  //     },
+  //   })
+  //     .then((response) => {
+  //       // get order id
+  //       console.log("response", response);
+  //       const order_id = response?.data?.data.id;
+
+  //       // handle payment
+  //       const options = {
+  //         key: "rzp_test_kLJsk74wAsyTQm", // Enter the Key ID generated from the Dashboard
+  //         name: "MySponsor",
+  //         description: "Test Transaction",
+  //         // image: "https://example.com/your_logo",
+  //         order_id: order_id, //This is a sample Order ID. Pass the `id` obtained in the response of createOrder().
+  //         handler: function (response) {
+  //           console.log("Complete Order", response);
+  //           // setOrderCreateError("");
+  //           //complete order
+  //           complete_order(
+  //             response.razorpay_payment_id,
+  //             response.razorpay_order_id,
+  //             response.razorpay_signature
+  //           );
+  //         },
+  //         theme: {
+  //           color: "#3399cc",
+  //         },
+  //         modal: {
+  //           escape: false,
+  //           backdropClose: false
+  //         }
+  //       };
+
+  //       const rzp1 = new window.Razorpay(options);
+  //       rzp1.on("payment.failed", function (response) {
+  //         alert(response.error.code);
+  //         // alert(response.error.description);
+  //         // alert(response.error.source);
+  //         // alert(response.error.step);
+  //         // alert(response.error.reason);
+  //         // alert(response.error.metadata.order_id);
+  //         // alert(response.error.metadata.payment_id);
+  //       });
+  //       rzp1.open();
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setOrderCreateError("Please Try Again");
+  //     });
+  // };
+
+
+  // const razorPay = () => {
+  //   axios({
+  //     method: "post",
+  //     url: `${apiurl}/api/razorpay/order/create/`,
+  //     data: {
+  //       amount: total_amount,
+  //       currency: "INR",
+  //     },
+  //   })
+  //     .then((response) => {
+  //       const order_id = response?.data?.data.id;
+
+  //       // Assuming you have retrieved all the necessary data for the form
+  //       const formData = {
+  //         key_id: "rzp_test_kLJsk74wAsyTQm",
+  //         amount: total_amount,
+  //         order_id: order_id,
+  //         name: "Acme Corp",
+  //         description: "A Wild Sheep Chase",
+  //         image: "https://cdn.razorpay.com/logos/BUVwvgaqVByGp2_large.jpg",
+  //         prefill: {
+  //           name: "Gaurav Kumar",
+  //           contact: "9123456780",
+  //           email: "gaurav.kumar@example.com",
+  //         },
+  //         notes: {
+  //           "shipping address": "L-16, The Business Centre, 61 Wellfield Road, New Delhi - 110001",
+  //         },
+  //         // callback_url: `${apiurl}/api/razorpay/order/complete/`,
+  //         // callback_url: "http://localhost:3000",
+  //         // callback_url: `${window.location.origin}/payment-complete`, // Navigate to frontend URL
+  //         callback_url: `${apiurl}/api/razorpay/order/complete/`, // Use your actual callback URL here
+  //         cancel_url: "https://example.com/payment-cancel",
+  //         // ...additionalData, // Spread the additional data into the formData
+  //       };
+
+  //       // Create a form element
+  //       const form = document.createElement("form");
+  //       form.method = "POST";
+  //       form.action = "https://api.razorpay.com/v1/checkout/embedded";
+
+  //       // Append input fields to the form
+  //       Object.entries(formData).forEach(([key, value]) => {
+  //         const input = document.createElement("input");
+  //         input.type = "hidden";
+  //         input.name = key;
+  //         input.value = value;
+  //         form.appendChild(input);
+  //       });
+
+  //       // Append the form to the document body and submit
+  //       document.body.appendChild(form);
+  //       form.submit();
+  //       // window.location.href = "http://localhost:3000";
+  //     })
+  //     .then(() => {
+  //       // Redirect to http://localhost:3000 after successful callback URL API call
+  //       window.location.href = "http://localhost:3000";
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setOrderCreateError("Please Try Again");
+  //     });
+  // };
+
+
   const razorPay = () => {
-    //create order
+    const access = JSON.parse(localStorage.getItem("access"));
+    const formData = new FormData();
+
+    // Append other data to FormData
+    formData.append("tax_amount", total_amount);
+    formData.append("amount", sponsoring_price);
+    formData.append("event_user_id", cardData.user_id);
+    formData.append("event_id", cardData.event_id);
+    formData.append("sponsor_user_id", userDetails.user_id);
+    // formattedSponsoringItems.forEach((item) => {
+    //   formData.append("sponsoring_items", item.sponsoring_items);
+    // });
+    formData.append("sponsoring_items", JSON.stringify(formattedSponsoringItems));
+
+    // Append images for each sponsoring item
+    formattedSponsoringItems.forEach((item) => {
+      switch (item.sponsoring_items) {
+        case "banner":
+          formData.append("banner_image", bannerImage, bannerImageFileName || "");
+          break;
+        case "led_screen":
+          formData.append("led_image", ledImage, ledImageFileName || "");
+          formData.append("led_video", ledVideo || "");
+          break;
+        case "bill_board":
+          formData.append("bill_board", billImage, billImageFileName || "");
+          break;
+        // Add more cases for other sponsoring item types if needed
+        default:
+          break;
+      }
+    });
+
     axios({
       method: "post",
-      // url: "http://127.0.0.1:8000/api/razorpay/order/create/",
       url: `${apiurl}/api/razorpay/order/create/`,
-      data: {
-        amount: total_amount,
-        currency: "INR",
+      data: formData,
+      headers: {
+        Authorization: `Bearer ${access}`,
+        "Content-Type": "multipart/form-data", // Important for FormData
       },
     })
       .then((response) => {
-        // get order id
         console.log("response", response);
-        const order_id = response?.data?.data.id;
-
-        // handle payment
-        const options = {
-          key: "rzp_test_YRuk8xeM74fPv0", // Enter the Key ID generated from the Dashboard
-          name: "MySponsor",
-          description: "Test Transaction",
-          image: "https://example.com/your_logo",
-          order_id: order_id, //This is a sample Order ID. Pass the `id` obtained in the response of createOrder().
-          handler: function (response) {
-            console.log("Complete Order", response);
-            //complete order
-            complete_order(
-              response.razorpay_payment_id,
-              response.razorpay_order_id,
-              response.razorpay_signature
-            );
-          },
-          // prefill: {
-          // name: "Piyush Garg",
-          // email: "youremail@example.com",
-          // contact: "9999999999",
-          // },
-          // notes: {
-          // address: "Razorpay Corporate Office",
-          // },
-          theme: {
-            color: "#3399cc",
-          },
-        };
-
-        const rzp1 = new window.Razorpay(options);
-        rzp1.on("payment.failed", function (response) {
-          alert(response.error.code);
-          alert(response.error.description);
-          alert(response.error.source);
-          alert(response.error.step);
-          alert(response.error.reason);
-          alert(response.error.metadata.order_id);
-          alert(response.error.metadata.payment_id);
-        });
-        rzp1.open();
+        // Store necessary information from response in state
+        setStripePublishKey(response.data.publish_key);
+        setStripeClientSecret(response.data.client_secret);
+        setStripeSponsorId(response.data.response.sponsord_event.sponsor_id)
+        // Open the modal after receiving the response
+        document.getElementById("paymentModalButton").click();
       })
       .catch((error) => {
         console.log(error);
+        setOrderCreateError("Please Try Again");
       });
   };
+
+
+
+  const options = {
+    mode: 'payment',
+    amount: 1099,
+    currency: 'inr',
+    // Fully customizable with appearance API.
+    appearance: {
+      /*...*/
+    },
+  };
+
 
   console.log("Sponsorign item detatils ", SponsoringItemDetails);
   console.log("Sponsorign item error ", SponsoringItemError);
@@ -483,6 +651,107 @@ const SponsorPayment = () => {
                   Sponsor
                 </p>
               </button>
+
+              <button id="paymentModalButton" className="category-btn btn mb-3" style={{ width: "100%", display: "none" }} data-bs-toggle="modal" data-bs-target="#paymentModal">
+                <p className="category-btn-text">Sponsor</p>
+              </button>
+
+
+              {/* {showPaymentModal && (
+                <div className="modal fade show" id="paymentModal" tabIndex="-1" aria-labelledby="paymentModalLabel" aria-modal="true" role="dialog">
+                  <div className="modal-dialog modal-dialog-centered" style={{ margin: 0, width: '100%', height: '100vh', maxWidth: '100%', maxHeight: '100%' }}>
+                    <div className="modal-content" style={{ height: 'fit-content', minHeight: '100%' }}>
+                      <div className="modal-body">
+                      
+                        <h2>Payment Gateway</h2>
+                        
+                        <Elements stripe={loadStripe(stripePublishKey)} options={{ clientSecret: stripeClientSecret }}>
+                          <PaymentCheckout />
+                        </Elements>
+                      </div>
+                      <button type="button" className="btn-close" onClick={handleCloseModal}></button>
+                    </div>
+                  </div>
+                </div>
+              )} */}
+
+
+              {/* <button className="category-btn btn mb-3" style={{ width: "100%" }} data-bs-toggle="modal" data-bs-target="#paymentModal">
+                <p className="category-btn-text">
+                  Sponsor
+                </p>
+              </button> */}
+              {/* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#paymentModal">
+                Launch demo modal
+              </button> */}
+
+              <div className="modal fade" id="paymentModal" tabIndex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+                <div className="modal-dialog" style={{ margin: 0, width: '100%', height: '100vh', maxWidth: '100%', maxHeight: '100%' }}>
+
+                  <div className="modal-content" style={{ height: 'fit-content', minHeight: '100%' }}>
+
+                    <div className="modal-body">
+                      <div className="container">
+                        <h2 className="sponsor-pay-text">Payment Gateway</h2>
+                        <h2 className="sponsor-pay-mobile-text">Payment Gateway</h2>
+                      </div>
+                      <div className="container">
+
+                        <div className="box amount-info">
+                          <div className="d-flex justify-content-between font-weight-bolder">
+                            <h5>Sponsor Total</h5>
+                            <h5>₹{sponsoring_price}</h5>
+                          </div>
+                          <div className="d-flex justify-content-between font-weight-bolder">
+                            <h5>GST(19%)</h5>
+                            <h5>+ ₹{tax_amount}</h5>
+                          </div>
+                          <div className="d-flex justify-content-between font-weight-bolder">
+                            <h5>Platform Fee</h5>
+                            <h5>+ ₹0</h5>
+                          </div>
+                        </div>
+                        <hr style={{ borderTop: "1px solid #535353" }} />
+                        <div className="box grand-total">
+                          <h5 className="text-center">Grand Total</h5>
+                          <div className="d-flex justify-content-center">
+                            <span className="bagde-pill text-white text-xl">
+                              ₹{total_amount}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <Elements stripe={loadStripe(stripePublishKey)} options={{ clientSecret: stripeClientSecret }} >
+                        <PaymentCheckout sponsorId={stripeSponsorId} />
+                      </Elements>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              {/* <Elements stripe={loadStripe("pk_test_51NerRiSIZdF1sMC7CLPR7CidRlCfKvD8HfIF4mz56gY4UJmVx3DDaTZuHxqfsui72Z5MWN0CNNFy00MtzSP98w4f00PHg7BWV1")} options={options} >
+                <PaymentCheckout />
+              </Elements> */}
+
+              {/* <PaymentCheckout /> */}
+
+              {/* <form method="POST" action="https://api.razorpay.com/v1/checkout/embedded">
+                <input type="hidden" name="key_id" value="YOUR_KEY_ID" />
+                <input type="hidden" name="amount" value='1001'/>
+                <input type="hidden" name="order_id" value="razorpay_order_id" />
+                <input type="hidden" name="name" value="Acme Corp" />
+                <input type="hidden" name="description" value="A Wild Sheep Chase" />
+                <input type="hidden" name="image" value="https://cdn.razorpay.com/logos/BUVwvgaqVByGp2_large.jpg" />
+                <input type="hidden" name="prefill[name]" value="Gaurav Kumar" />
+                <input type="hidden" name="prefill[contact]" value="9123456780" />
+                <input type="hidden" name="prefill[email]" value="gaurav.kumar@example.com" />
+                <input type="hidden" name="notes[shipping address]" value="L-16, The Business Centre, 61 Wellfield Road, New Delhi - 110001" />
+                <input type="hidden" name="callback_url" value="https://example.com/payment-callback" />
+                <input type="hidden" name="cancel_url" value="https://example.com/payment-cancel" />
+                <button>Submit</button>
+              </form> */}
+              <p className="error-msg">{orderCreateError}</p>
               <div className="payment-description">
                 <p>
                   Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa
@@ -494,11 +763,11 @@ const SponsorPayment = () => {
                   harum!
                 </p>
               </div>
-            </div>
+            </div >
 
-          </div>
+          </div >
         )}
-      </div>
+      </div >
 
     </>
   );
