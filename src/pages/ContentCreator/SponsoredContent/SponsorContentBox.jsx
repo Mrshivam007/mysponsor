@@ -58,7 +58,7 @@ const SponsorButton = ({ item, cardData, isSelected, onButtonClick }) => {
               backgroundSize: "cover",
             }}
           >
-            <Container className="d-flex justify-content-center">
+            {/* <Container className="d-flex justify-content-center">
               {item.sponsoring_content_items === "tag_ads" && (
                 <>
                   <h1>{cardData?.tag_ads}</h1>
@@ -74,26 +74,124 @@ const SponsorButton = ({ item, cardData, isSelected, onButtonClick }) => {
                   <h1>{cardData?.reel_sponsored}</h1>
                 </>
               )}
+            </Container> */}
+            <Container className="d-flex justify-content-center">
+              {item.sponsoring_content_items === "tag_ads" && (
+                <>
+                  {cardData?.tag_ads ? (
+                    <>
+                      <img
+                        className="w-100"
+                        src={banner_preview}
+                        alt="banner-preview"
+                      />
+                      <div className="banner-preview-container">
+                        <img
+                          src={cardData?.tag_ads}
+                          alt="banner-img-preview"
+                          style={{ width: "100%", height: "100%" }}
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <p>Sponsoring items not available</p>
+                  )}
+                </>
+              )}
+              {item.sponsoring_content_items === "sponsored_by" && (
+                <>
+                  <img
+                    className="w-100"
+                    src={banner_preview}
+                    alt="banner-preview"
+                  />
+
+                  <div className="banner-preview-container">
+                    <img
+                      src={cardData?.sponsored_by}
+                      alt="banner-img-preview"
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                  </div>
+                </>
+              )}
+              {item.sponsoring_content_items === "reel_sponsored" && (
+                <>
+                  <img
+                    className="w-100"
+                    src={banner_preview}
+                    alt="banner-preview"
+                  />
+
+                  <div className="banner-preview-container">
+                    <img
+                      src={cardData?.reel_sponsored}
+                      alt="banner-img-preview"
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                  </div>                </>
+              )}
+              {/* {item.sponsoring_items === "led_screen" && (
+                <>
+                  {cardData?.led_image ? (
+                    <>
+                      <img
+                        className="w-100"
+                        src={banner_preview}
+                        alt="banner-preview"
+                      />
+                      <div className="led-preview-container">
+                        <img src={cardData?.led_image} alt="" />
+                      </div>
+                    </>
+                  ) : (
+                    <p>Sponsoring items not available</p>
+                  )}
+
+                  {cardData?.led_video && (
+                    <>
+                      <Carousel controls={false}>
+                        <Carousel.Item interval={41000}>
+                          <video
+                            src={cardData?.led_video}
+                            controls
+                            controlsList="nofullscreen"
+                          ></video>
+                        </Carousel.Item>
+                      </Carousel>
+                    </>
+                  )}
+
+                  {!cardData?.led_image && !cardData?.led_video && (
+                    <p>LED items not available</p>
+                  )}
+                </>
+              )} */}
+
             </Container>
           </Modal.Body>
           <Modal.Footer className="p-0">
-            {item.sponsoring_content_items === "banner" && (
-              <a href={cardData?.banner_image} download>
+            {item.sponsoring_content_items === "tag_ads" && (
+              <a href={cardData?.tag_ads} download>
                 <Button className="p-2" variant="success">
-                  Download Banner Image
+                  Download Tag Ads Image
                 </Button>
               </a>
             )}
-            {item.sponsoring_content_items === "led_screen" && (
+            {item.sponsoring_content_items === "sponsored_by" && (
               <>
-                <a href={cardData?.led_image} download>
+                <a href={cardData?.sponsored_by} download>
                   <Button className="p-2" variant="success">
-                    Download LED Image
+                    Download Sponsored By Image
                   </Button>
                 </a>
-                <a href={cardData?.led_video} download>
+              </>
+            )}
+            {item.sponsoring_content_items === "reel_sponsored" && (
+              <>
+                <a href={cardData?.reel_sponsored} download>
                   <Button className="p-2" variant="success">
-                    Download LED Video
+                    Download Reel Sponsored Image
                   </Button>
                 </a>
               </>
@@ -183,7 +281,7 @@ const SponsorContentBox = (contentData) => {
                     cardData.content_id.thumbnail3,
                   ].map((data) => (
                     <img
-                      src={apiurl + data}
+                      src={data}
                       alt=""
                       style={{
                         width: "100%",
@@ -302,9 +400,9 @@ const SponsorContentBox = (contentData) => {
         >
           <Carousel controls={false} autoplay>
             {[
-              apiurl + cardData.content_id.thumbnail1,
-              apiurl + cardData.content_id.thumbnail2,
-              apiurl + cardData.content_id.thumbnail3,
+              cardData.content_id.thumbnail1,
+              cardData.content_id.thumbnail2,
+              cardData.content_id.thumbnail3,
             ].map((item, index) => (
               <Carousel.Item>
                 <img
@@ -342,30 +440,30 @@ const SponsorContentBox = (contentData) => {
           </div> */}
         </div>
         <div className="container px-0">
-        <table
-                className="table table-borderless text-center text-white overflow-hidden"
+          <table
+            className="table table-borderless text-center text-white overflow-hidden"
+            style={{
+              marginBottom: "4%",
+              borderRadius: "10px",
+              boxShadow: "0px 2px 20px -3px rgba(0, 0, 0, 0.16)",
+            }}
+          >
+            <tr className="table-sm" style={{ background: "#004EA9" }}>
+              <td style={{ fontWeight: 'bold' }}>Content Posting Date</td>
+              {/* <td>End date</td> */}
+            </tr>
+            <tr style={{ background: "rgba(0, 187, 255, 0.75)" }}>
+              <td
                 style={{
-                  marginBottom: "4%",
-                  borderRadius: "10px",
-                  boxShadow: "0px 2px 20px -3px rgba(0, 0, 0, 0.16)",
+                  borderRight: "1px solid rgba(255, 255, 255, 0.50)",
+                  fontWeight: 'bold'
                 }}
               >
-                <tr className="table-sm" style={{ background: "#004EA9" }}>
-                  <td style={{ fontWeight: 'bold' }}>Content Posting Date</td>
-                  {/* <td>End date</td> */}
-                </tr>
-                <tr style={{ background: "rgba(0, 187, 255, 0.75)" }}>
-                  <td
-                    style={{
-                      borderRight: "1px solid rgba(255, 255, 255, 0.50)",
-                      fontWeight: 'bold'
-                    }}
-                  >
-                    {cardData.content_id.posting_date}
-                  </td>
-                  {/* <td>{cardData.content_end_date}</td> */}
-                </tr>
-              </table>
+                {cardData.content_id.posting_date}
+              </td>
+              {/* <td>{cardData.content_end_date}</td> */}
+            </tr>
+          </table>
         </div>
         <div className="container px-1">
           <div className="row g-0">

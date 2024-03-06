@@ -163,9 +163,9 @@ const MyEventSponsor = (eventData) => {
               >
                 <Carousel controls={false}>
                   {[
-                    apiurl + cardData.thumbnail1,
-                    apiurl + cardData.thumbnail2,
-                    apiurl + cardData.thumbnail3,
+                    cardData.thumbnail1,
+                    cardData.thumbnail2,
+                    cardData.thumbnail3,
                   ].map((item, index) => (
                     <Carousel.Item>
                       <img
@@ -324,9 +324,9 @@ const MyEventSponsor = (eventData) => {
         >
           <Carousel controls={false}>
             {[
-              apiurl + cardData.thumbnail1,
-              apiurl + cardData.thumbnail2,
-              apiurl + cardData.thumbnail3,
+              cardData.thumbnail1,
+              cardData.thumbnail2,
+              cardData.thumbnail3,
             ].map((item, index) => (
               <Carousel.Item>
                 <img

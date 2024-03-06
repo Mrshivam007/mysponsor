@@ -27,7 +27,7 @@ const SponsorpayCard = (data) => {
                       }}
                     >
                       <img
-                        src={apiurl + data?.data?.thumbnail1}
+                        src={data?.data?.thumbnail1}
                         alt=""
                         style={{
                           width: "100%",
@@ -80,7 +80,7 @@ const SponsorpayCard = (data) => {
                 >
                   <div className="col-5 cc-img-container d-flex">
                     <img
-                      src={apiurl + data?.data?.thumbnail1}
+                      src={data?.data?.thumbnail1}
                       className="img-fluid rounded-start cc-img m-0"
                       alt=""
                     />

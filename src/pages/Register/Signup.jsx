@@ -592,17 +592,20 @@ const Signup = () => {
               onClick={nextStep}
               disabled={otpLoading}
             >
-              {otpLoading ? (
-                <div>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <div style={{ marginLeft: '0.5rem', display: 'inline-flex', alignItems: 'center' }}>
                   <div>Processing...</div>
                   <div className="otpLoading"></div>
-                </div>
-              ) : (
-                <>
-                  <div>Next</div>
-                </>
-              )}
+                </div>                {otpLoading && (
+                  <div style={{ marginLeft: '0.5rem', display: 'inline-flex', alignItems: 'center' }}>
+                    <div>Processing...</div>
+                    <div className="otpLoading"></div>
+                  </div>
+                )}
+              </div>
             </button>
+
+
           </div>
         );
       case 2:
@@ -778,11 +781,10 @@ const Signup = () => {
                   >
                     <button
                       type="button"
-                      className={`btn ${
-                        user_type === "Event"
-                          ? "btn-primary"
-                          : "btn-outline-primary"
-                      }`}
+                      className={`btn ${user_type === "Event"
+                        ? "btn-primary"
+                        : "btn-outline-primary"
+                        }`}
                       onClick={handleUserType}
                       value="Event"
                     >
@@ -790,11 +792,10 @@ const Signup = () => {
                     </button>
                     <button
                       type="button"
-                      className={`btn ${
-                        user_type === "Content"
-                          ? "btn-primary"
-                          : "btn-outline-primary"
-                      }`}
+                      className={`btn ${user_type === "Content"
+                        ? "btn-primary"
+                        : "btn-outline-primary"
+                        }`}
                       onClick={handleUserType}
                       value="Content"
                     >
@@ -802,11 +803,10 @@ const Signup = () => {
                     </button>
                     <button
                       type="button"
-                      className={`btn ${
-                        user_type === "Sponsor"
-                          ? "btn-primary"
-                          : "btn-outline-primary"
-                      }`}
+                      className={`btn ${user_type === "Sponsor"
+                        ? "btn-primary"
+                        : "btn-outline-primary"
+                        }`}
                       onClick={handleUserType}
                       value="Sponsor"
                     >

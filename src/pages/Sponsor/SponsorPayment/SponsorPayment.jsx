@@ -456,7 +456,7 @@ const SponsorPayment = () => {
                           <h2>Preview:</h2>
                           <img
                             className="mx-auto"
-                            src={apiurl + cardData?.bill_image}
+                            src={cardData?.bill_image}
                             alt="Preview"
                             width="200"
                           />
@@ -495,7 +495,7 @@ const SponsorPayment = () => {
                           <h2>Preview:</h2>
                           <img
                             className="mx-auto"
-                            src={apiurl + cardData?.banner_image}
+                            src={cardData?.banner_image}
                             alt="Preview"
                             width="200"
                           />
@@ -534,7 +534,7 @@ const SponsorPayment = () => {
                           <h2>Preview:</h2>
                           <img
                             className="mx-auto"
-                            src={apiurl + cardData?.led_image}
+                            src={cardData?.led_image}
                             alt=""
                             width="200"
                           />
@@ -573,7 +573,7 @@ const SponsorPayment = () => {
                           <h2>Preview:</h2>
                           <video width="200" controls className="mx-auto">
                             <source
-                              src={apiurl + cardData?.led_video}
+                              src={cardData?.led_video}
                               type="video/mp4"
                             />
                             Your browser does not support the video tag.

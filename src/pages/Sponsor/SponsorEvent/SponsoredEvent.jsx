@@ -90,7 +90,7 @@ const SponsoredEvent = () => {
                                   }}
                                 >
                                   <img
-                                    src={apiurl + data.event_id.thumbnail1}
+                                    src={data.event_id.thumbnail1}
                                     alt=""
                                     style={{
                                       width: "100%",
@@ -227,7 +227,7 @@ const SponsoredEvent = () => {
                               style={{ height: "40svh" }}
                             >
                               <img
-                                src={apiurl + data.event_id.thumbnail1}
+                                src={data.event_id.thumbnail1}
                                 alt=""
                                 style={{
                                   width: "100%",

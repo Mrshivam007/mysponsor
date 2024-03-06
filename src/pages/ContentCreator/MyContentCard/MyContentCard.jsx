@@ -70,7 +70,7 @@ const MyContentCard = ({ cardData, heading }) => {
                             }}
                           >
                             <img
-                              src={apiurl + data.thumbnail1}
+                              src={data.thumbnail1}
                               alt=""
                               style={{
                                 width: "100%",
@@ -213,7 +213,7 @@ const MyContentCard = ({ cardData, heading }) => {
                     <div className="card myevents-card">
                       <div className="post-thumb" style={{ height: "40svh" }}>
                         <img
-                          src={apiurl + data.thumbnail1}
+                          src={data.thumbnail1}
                           alt=""
                           style={{
                             width: "100%",

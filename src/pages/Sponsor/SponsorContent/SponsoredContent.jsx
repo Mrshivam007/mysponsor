@@ -84,7 +84,7 @@ const SponsoredContent = () => {
                                 style={{ height: "32vh" }}
                               >
                                 <img
-                                  src={apiurl + data.content_id.thumbnail1}
+                                  src={data.content_id.thumbnail1}
                                   alt=""
                                   style={{
                                     width: "100%",
@@ -225,7 +225,7 @@ const SponsoredContent = () => {
                           <div className="card myevents-card">
                             <div className="post-thumb">
                               <img
-                                src={apiurl + data.content_id.thumbnail1}
+                                src={data.content_id.thumbnail1}
                                 alt=""
                                 style={{ width: "100%" }}
                               />

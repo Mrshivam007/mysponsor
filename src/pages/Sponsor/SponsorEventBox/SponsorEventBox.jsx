@@ -234,9 +234,9 @@ const SponsorEventBox = (eventData) => {
               >
                 <Carousel controls={false}>
                   {[
-                    apiurl + cardData.event_id.thumbnail1,
-                    apiurl + cardData.event_id.thumbnail2,
-                    apiurl + cardData.event_id.thumbnail3,
+                    cardData.event_id.thumbnail1,
+                    cardData.event_id.thumbnail2,
+                    cardData.event_id.thumbnail3,
                   ].map((item, index) => (
                     <Carousel.Item>
                       <img
@@ -371,7 +371,7 @@ const SponsorEventBox = (eventData) => {
                         <h2>Preview:</h2>
                         <img
                           className="mx-auto"
-                          src={apiurl + cardData?.bill_board}
+                          src={cardData?.bill_board}
                           alt="Preview"
                           width="200"
                         />
@@ -410,7 +410,7 @@ const SponsorEventBox = (eventData) => {
                         <h2>Preview:</h2>
                         <img
                           className="mx-auto"
-                          src={apiurl + cardData?.banner_image}
+                          src={cardData?.banner_image}
                           alt="Preview"
                           width="200"
                         />
@@ -449,7 +449,7 @@ const SponsorEventBox = (eventData) => {
                         <h2>Preview:</h2>
                         <img
                           className="mx-auto"
-                          src={apiurl + cardData?.led_image}
+                          src={cardData?.led_image}
                           alt=""
                           width="200"
                         />
@@ -488,7 +488,7 @@ const SponsorEventBox = (eventData) => {
                         <h2>Preview:</h2>
                         <video width="200" controls className="mx-auto">
                           <source
-                            src={apiurl + cardData?.led_video}
+                            src={cardData?.led_video}
                             type="video/mp4"
                           />
                           Your browser does not support the video tag.
@@ -584,9 +584,9 @@ const SponsorEventBox = (eventData) => {
         >
           <Carousel controls={false}>
             {[
-              apiurl + cardData.event_id.thumbnail1,
-              apiurl + cardData.event_id.thumbnail2,
-              apiurl + cardData.event_id.thumbnail3,
+              cardData.event_id.thumbnail1,
+              cardData.event_id.thumbnail2,
+              cardData.event_id.thumbnail3,
             ].map((item, index) => (
               <Carousel.Item>
                 <img
@@ -707,7 +707,7 @@ const SponsorEventBox = (eventData) => {
                         <img
                           className="mx-auto"
                           src={
-                            apiurl + cardData?.bill_board ||
+                            cardData?.bill_board ||
                             URL.createObjectURL(billImage)
                           }
                           alt="Preview"
@@ -745,7 +745,7 @@ const SponsorEventBox = (eventData) => {
                         <img
                           className="mx-auto"
                           src={
-                            apiurl + cardData?.banner_image ||
+                            cardData?.banner_image ||
                             URL.createObjectURL(bannerImage)
                           }
                           alt="Preview"
@@ -783,7 +783,7 @@ const SponsorEventBox = (eventData) => {
                         <h2>Preview:</h2>
                         <img
                           className="mx-auto"
-                          src={apiurl + cardData?.led_image}
+                          src={cardData?.led_image}
                           alt="Preview"
                           width="200"
                         />
@@ -819,7 +819,7 @@ const SponsorEventBox = (eventData) => {
                         <h2>Preview:</h2>
                         <video width="200" controls className="mx-auto">
                           <source
-                            src={apiurl + cardData?.led_video}
+                            src={cardData?.led_video}
                             type="video/mp4"
                           />
                           Your browser does not support the video tag.

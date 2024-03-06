@@ -346,7 +346,7 @@ const SponsorContentPayment = () => {
                           <h2>Preview:</h2>
                           <img
                             className="mx-auto"
-                            src={apiurl + cardData?.sponsored_by}
+                            src={cardData?.sponsored_by}
                             alt="Preview"
                             width="200"
                           />
@@ -385,7 +385,7 @@ const SponsorContentPayment = () => {
                           <h2>Preview:</h2>
                           <img
                             className="mx-auto"
-                            src={apiurl + cardData?.reel_sponsored}
+                            src={cardData?.reel_sponsored}
                             alt="Preview"
                             width="200"
                           />
@@ -424,7 +424,7 @@ const SponsorContentPayment = () => {
                           <h2>Preview:</h2>
                           <img
                             className="mx-auto"
-                            src={apiurl + cardData?.tag_ads}
+                            src={cardData?.tag_ads}
                             alt="Preview"
                             width="200"
                           />

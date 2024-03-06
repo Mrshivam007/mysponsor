@@ -24,7 +24,7 @@ const MobileCards = ({ line, cardData }) => {
                   <div className="header">
                     <div className="post-thumb">
                       <img
-                        src={apiurl + data.thumbnail1}
+                        src={data.thumbnail1}
                         alt=""
                         style={{ width: "100%" }}
                         className="sponser_card_img"

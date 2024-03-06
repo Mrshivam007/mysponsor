@@ -42,7 +42,7 @@ const Update_ContentCard = ({ cardData }) => {
                       <div className="row mx-0">
                         <div className="col-3 p-3">
                           <img
-                            src={apiurl + data.thumbnail1}
+                            src={data.thumbnail1}
                             alt=""
                             style={{
                               width: "100%",
@@ -159,7 +159,7 @@ const Update_ContentCard = ({ cardData }) => {
                   <div className="card myevents-card">
                     <div className="post-thumb">
                       <img
-                        src={apiurl + data.thumbnail1}
+                        src={data.thumbnail1}
                         alt=""
                         style={{ width: "100%" }}
                       />

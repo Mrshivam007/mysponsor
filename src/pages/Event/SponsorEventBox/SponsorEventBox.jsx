@@ -65,7 +65,7 @@ const SponsorButton = ({ item, cardData, isSelected, onButtonClick }) => {
                       />
                       <div className="banner-preview-container">
                         <img
-                          src={apiurl + cardData?.banner_image}
+                          src={cardData?.banner_image}
                           alt="banner-img-preview"
                           style={{ width: "100%", height: "100%" }}
                         />
@@ -87,12 +87,12 @@ const SponsorButton = ({ item, cardData, isSelected, onButtonClick }) => {
                   <div className="led-preview-container">
                     <Carousel controls={false}>
                       <Carousel.Item interval={1000}>
-                        <img src={apiurl + cardData?.led_image} alt="" />
+                        <img src={cardData?.led_image} alt="" />
                       </Carousel.Item>
                       <Carousel.Item interval={41000}>
                         <video
                           // style={{ width: "100%", height: "100%" }}
-                          src={apiurl + cardData?.led_video}
+                          src={cardData?.led_video}
                           controls
                           controlsList="nofullscreen"
                         ></video>
@@ -103,8 +103,19 @@ const SponsorButton = ({ item, cardData, isSelected, onButtonClick }) => {
               )}
               {item.sponsoring_items === "bill_board" && (
                 <>
-                  <h1>{cardData?.bill_text}</h1>
-                </>
+                  <img
+                    className="w-100"
+                    src={banner_preview}
+                    alt="banner-preview"
+                  />
+
+                  <div className="banner-preview-container">
+                    <img
+                      src={cardData?.bill_text}
+                      alt="banner-img-preview"
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                  </div>                </>
               )}
               {/* {item.sponsoring_items === "led_screen" && (
                 <>
@@ -116,7 +127,7 @@ const SponsorButton = ({ item, cardData, isSelected, onButtonClick }) => {
                         alt="banner-preview"
                       />
                       <div className="led-preview-container">
-                        <img src={apiurl + cardData?.led_image} alt="" />
+                        <img src={cardData?.led_image} alt="" />
                       </div>
                     </>
                   ) : (
@@ -128,7 +139,7 @@ const SponsorButton = ({ item, cardData, isSelected, onButtonClick }) => {
                       <Carousel controls={false}>
                         <Carousel.Item interval={41000}>
                           <video
-                            src={apiurl + cardData?.led_video}
+                            src={cardData?.led_video}
                             controls
                             controlsList="nofullscreen"
                           ></video>
@@ -239,9 +250,9 @@ const SponsorEventBox = (eventData) => {
               >
                 <Carousel controls={false} autoplay>
                   {[
-                    apiurl + cardData.event_id.thumbnail1,
-                    apiurl + cardData.event_id.thumbnail2,
-                    apiurl + cardData.event_id.thumbnail3,
+                    cardData.event_id.thumbnail1,
+                    cardData.event_id.thumbnail2,
+                    cardData.event_id.thumbnail3,
                   ].map((item, index) => (
                     <Carousel.Item>
                       <img
@@ -363,9 +374,9 @@ const SponsorEventBox = (eventData) => {
         >
           <Carousel controls={false}>
             {[
-              apiurl + cardData.event_id.thumbnail1,
-              apiurl + cardData.event_id.thumbnail2,
-              apiurl + cardData.event_id.thumbnail3,
+              cardData.event_id.thumbnail1,
+              cardData.event_id.thumbnail2,
+              cardData.event_id.thumbnail3,
             ].map((item, index) => (
               <Carousel.Item>
                 <img

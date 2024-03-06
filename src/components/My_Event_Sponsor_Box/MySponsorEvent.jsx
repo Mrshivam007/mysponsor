@@ -110,7 +110,7 @@ const MyEventSponsor = (eventData) => {
                     cardData.thumbnail3,
                   ].map((data) => (
                     <img
-                      src={apiurl + data}
+                      src={data}
                       alt=""
                       style={{ width: "100%", borderRadius: "15px" }}
                     />
@@ -250,7 +250,7 @@ const MyEventSponsor = (eventData) => {
           }}
         >
           <img
-            src={apiurl + cardData.thumbnail1}
+            src={cardData.thumbnail1}
             alt=""
             style={{ width: "100%" }}
           />

@@ -75,7 +75,7 @@ const MyEventCard = ({ cardData }) => {
                               }}
                             >
                               <img
-                                src={apiurl + data.thumbnail1}
+                                src={data.thumbnail1}
                                 alt=""
                                 style={{
                                   width: "100%",
@@ -206,7 +206,7 @@ const MyEventCard = ({ cardData }) => {
                     <div className="card myevents-card">
                       <div className="post-thumb">
                         <img
-                          src={apiurl + data.thumbnail1}
+                          src={data.thumbnail1}
                           alt=""
                           style={{ width: "100%" }}
                         />

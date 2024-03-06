@@ -43,7 +43,7 @@ const SponsorContentBox = (contentData) => {
                     cardData.thumbnail3,
                   ].map((data) => (
                     <img
-                      src={apiurl + data}
+                      src={data}
                       alt=""
                       width="600"
                       height="300"
@@ -137,7 +137,7 @@ const SponsorContentBox = (contentData) => {
           }}
         >
           <img
-            src={apiurl + cardData.thumbnail1}
+            src={cardData.thumbnail1}
             alt=""
             style={{ width: "100%" }}
           />

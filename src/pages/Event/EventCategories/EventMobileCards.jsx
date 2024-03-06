@@ -49,7 +49,7 @@ const EventMobileCard = ({ line, cardData }) => {
                   <div className="header">
                     <div className="post-thumb" style={{height:"200px"}}>
                       <img
-                        src={apiurl + data.thumbnail1}
+                        src={data.thumbnail1}
                         alt=""
                         style={{ width: "100%",height:"100%" }}
                         className="sponser_card_img"
@@ -98,7 +98,7 @@ const EventMobileCard = ({ line, cardData }) => {
                     <div className="card myevents-card">
                       <div className="post-thumb" style={{ height: "40svh" }}>
                         <img
-                          src={apiurl + data.thumbnail1}
+                          src={data.thumbnail1}
                           alt=""
                           style={{
                             width: "100%",

@@ -56,7 +56,7 @@ const Delete_MobileCards = ({ line, cardData }) => {
                       style={{ width: "100%", height: "200px" }}
                     >
                       <img
-                        src={apiurl + data.thumbnail1}
+                        src={data.thumbnail1}
                         alt=""
                         style={{ width: "100%", height: "100%" }}
                         className="sponser_card_img"

@@ -320,9 +320,9 @@ const SponsorEventBox = (contentData) => {
               >
                 <Carousel controls={false}>
                   {[
-                    apiurl + cardData.content_id.thumbnail1,
-                    apiurl + cardData.content_id.thumbnail2,
-                    apiurl + cardData.content_id.thumbnail3,
+                    cardData.content_id.thumbnail1,
+                    cardData.content_id.thumbnail2,
+                    cardData.content_id.thumbnail3,
                   ].map((item, index) => (
                     <Carousel.Item>
                       <img
@@ -457,7 +457,7 @@ const SponsorEventBox = (contentData) => {
                         <h2>Preview:</h2>
                         <img
                           className="mx-auto"
-                          src={apiurl + cardData?.tag_ads}
+                          src={cardData?.tag_ads}
                           alt="Preview"
                           width="200"
                         />
@@ -495,7 +495,7 @@ const SponsorEventBox = (contentData) => {
                         <h2>Preview:</h2>
                         <img
                           className="mx-auto"
-                          src={apiurl + cardData?.sponsored_by}
+                          src={cardData?.sponsored_by}
                           alt="Preview"
                           width="200"
                         />
@@ -533,7 +533,7 @@ const SponsorEventBox = (contentData) => {
                         <h2>Preview:</h2>
                         <img
                           className="mx-auto"
-                          src={apiurl + cardData?.reel_sponsored}
+                          src={cardData?.reel_sponsored}
                           alt="Preview"
                           width="200"
                         />
@@ -594,7 +594,7 @@ const SponsorEventBox = (contentData) => {
           }}
         >
           <img
-            src={apiurl + cardData.content_id.thumbnail1}
+            src={cardData.content_id.thumbnail1}
             alt=""
             style={{ width: "100%" }}
           />
@@ -708,7 +708,7 @@ const SponsorEventBox = (contentData) => {
                         <h2>Preview:</h2>
                         <img
                           className="mx-auto"
-                          src={apiurl + cardData?.tag_ads}
+                          src={cardData?.tag_ads}
                           alt="Preview"
                           width="200"
                         />
@@ -746,7 +746,7 @@ const SponsorEventBox = (contentData) => {
                         <h2>Preview:</h2>
                         <img
                           className="mx-auto"
-                          src={apiurl + cardData?.sponsored_by}
+                          src={cardData?.sponsored_by}
                           alt="Preview"
                           width="200"
                         />
@@ -784,7 +784,7 @@ const SponsorEventBox = (contentData) => {
                         <h2>Preview:</h2>
                         <img
                           className="mx-auto"
-                          src={apiurl + cardData?.reel_sponsored}
+                          src={cardData?.reel_sponsored}
                           alt="Preview"
                           width="200"
                         />

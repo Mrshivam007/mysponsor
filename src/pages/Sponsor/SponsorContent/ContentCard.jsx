@@ -49,7 +49,7 @@ const ContentCard = ({ line, cardData }) => {
                 >
                   <div className="col-4 col-md-5 col-sm-4 cc-img-container d-flex">
                     <img
-                      src={apiurl + data.thumbnail1}
+                      src={data.thumbnail1}
                       className="img-fluid rounded-start cc-img"
                       alt=""
                     />
