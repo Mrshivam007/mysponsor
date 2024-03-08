@@ -42,6 +42,7 @@ const Signup = () => {
   const inputRefs = useRef([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [otpLoading, setOtpLoading] = useState(false);
+  const [signupLoading, setSignupLoading] = useState(false);
   const [step, setStep] = useState(1);
 
   console.log("otp details ", emailOtpDetails);
@@ -200,6 +201,7 @@ const Signup = () => {
       dispatch(
         signup(email, password, firstname, lastname, password2, user_type)
       );
+      setSignupLoading(true);
       sessionStorage.setItem("successMessage", "Sign Up Successsfull!!!");
       console.log("Register Message inside function ", userRegisterDetails);
       // navigate("/login");
@@ -218,10 +220,12 @@ const Signup = () => {
       } else {
         console.log("An error occurred while Registration");
         window.scroll(0, 0);
+        setSignupLoading(false);
         setErrorMessage("An error occurred while Registration");
       }
     } else if (registerError) {
       console.log("An error occurred while creating the event");
+      setSignupLoading(false);
       window.scroll(0, 0);
       setErrorMessage(
         registerError?.email[0] || "An error occurred while Registration"
@@ -572,40 +576,26 @@ const Signup = () => {
                   <p className="error-msg">{errors.email}</p>
                 ) : null}
                 {errors.email && <p className="error-msg">{errors.email}</p>}
-                {/* {emailFilled && (
-                  <div>
-                    <a
-                      type="button"
-                      className="link-opacity-100"
-                      style={{ float: "right", color: "blue" }}
-                      onClick={emailOtpClick}
-                    >
-                      Verify Email
-                    </a>
-                  </div>
-                )} */}
               </div>
             </div>
-            {/* Your form elements for personal information */}
+            <div className="container" style={{ alignItems: 'center'}}>
             <button
               className="btn btn-primary"
               onClick={nextStep}
               disabled={otpLoading}
+              style={{width: '50%'}}
             >
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <div style={{ marginLeft: '0.5rem', display: 'inline-flex', alignItems: 'center' }}>
-                  <div>Processing...</div>
-                  <div className="otpLoading"></div>
-                </div>                {otpLoading && (
+              <div style={{ alignItems: 'center' }}>
+                {!otpLoading && <div>Next</div>} {/* Conditionally render "Next" */}
+                {otpLoading && (
                   <div style={{ marginLeft: '0.5rem', display: 'inline-flex', alignItems: 'center' }}>
-                    <div>Processing...</div>
+                    <div className="mr-2">Processing...</div>
                     <div className="otpLoading"></div>
                   </div>
                 )}
               </div>
             </button>
-
-
+            </div>
           </div>
         );
       case 2:
@@ -617,21 +607,6 @@ const Signup = () => {
                 <label className="text-black" htmlFor="otp">
                   Enter OTP
                 </label>
-                {/* <div>
-                  {[0, 1, 2, 3].map((index) => (
-                    <input
-                      key={index}
-                      type="number"
-                      pattern="[0-9]*"
-                      maxLength="1"
-                      value={otp[index]}
-                      onChange={(e) => handleOtpChange(index, e.target.value)}
-                      onKeyDown={(e) => handleKeyDown(e, index)}
-                      ref={(input) => inputRefs.current.push(input)}
-                      style={{ width: '50px', marginRight: '10px' }} // Adjust width and spacing as needed
-                    />
-                  ))}
-                </div> */}
                 <div className="otp-main-container">
                   <div className="otp-container">
                     {otpValues.map((value, index) => (
@@ -659,20 +634,21 @@ const Signup = () => {
                 <p className="error-msg">{verificationError}</p>
               )}
             </div>
-            <div className="container d-flex justify-content-between">
-              <button className="btn btn-info" onClick={prevStep}>
-                Previous
-              </button>
+            <div className="container">
               <button
-                type="button"
+                type="submit"
                 className="btn btn-primary"
                 onClick={handleSubmitOtp}
+                style={{ marginBottom: '10px', width: '100%' }} // Add some bottom margin for spacing
               >
                 Submit OTP
               </button>
             </div>
-            {/* Your form elements for account information */}
-            {/* <button onClick={nextStep}>Next</button> */}
+            <div className="container">
+              <button className="btn btn-info" style={{ width: '100%' }} onClick={prevStep}>
+                Previous
+              </button>
+            </div>
           </div>
         );
       case 3:
@@ -725,16 +701,28 @@ const Signup = () => {
                 ) : null}
               </div>
             </div>
-            <div className="container d-flex justify-content-between">
-              <button className="btn btn-info" onClick={prevStep}>
-                Previous
-              </button>
+            <div className="container">
               <button
-                type="button"
                 className="btn btn-primary"
-                onClick={handleSubmitOtp}
+                type="submit"
+                onClick={submitHandler}
+                disabled={signupLoading}
+                style={{ marginBottom: '10px', width: '100%' }} // Add some bottom margin for spacing
               >
-                Submit
+                <div style={{ alignItems: 'center' }}>
+                  {!signupLoading && <div>Submit</div>} {/* Conditionally render "Next" */}
+                  {signupLoading && (
+                    <div style={{ marginLeft: '0.5rem', display: 'inline-flex', alignItems: 'center' }}>
+                      <div className="mr-2">Processing...</div>
+                      <div className="otpLoading"></div>
+                    </div>
+                  )}
+                </div>
+              </button>
+            </div>
+            <div className="container">
+              <button className="btn btn-info" style={{width: '100%'}} onClick={prevStep}>
+                Previous
               </button>
             </div>
           </div>

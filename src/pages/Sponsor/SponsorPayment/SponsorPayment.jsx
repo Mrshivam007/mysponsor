@@ -56,6 +56,8 @@ const SponsorPayment = () => {
   const [stripeSponsorId, setStripeSponsorId] = useState("");
   const [stripePublishKey, setStripePublishKey] = useState("");
   const [stripeClientSecret, setStripeClientSecret] = useState("");
+  const [createLoading, setCreateLoading] = useState(false);
+
 
   const toggleForm = () => {
     setShowPayment((prev) => !prev);
@@ -377,6 +379,7 @@ const SponsorPayment = () => {
       }
     });
 
+    setCreateLoading(true);
     axios({
       method: "post",
       url: `${apiurl}/api/razorpay/order/create/`,
@@ -396,6 +399,7 @@ const SponsorPayment = () => {
         document.getElementById("paymentModalButton").click();
       })
       .catch((error) => {
+        setCreateLoading(false);
         console.log(error);
         setOrderCreateError("Please Try Again");
       });
@@ -647,9 +651,15 @@ const SponsorPayment = () => {
                 </div>
               </div>
               <button className="category-btn btn mb-3" onClick={razorPay} style={{ width: "100%" }}>
-                <p className="category-btn-text">
-                  Sponsor
-                </p>
+                <div style={{ display: 'flex', placeContent: 'center' }}>
+                  {!createLoading && <div className="category-btn-text">Sponsor</div>} {/* Conditionally render "Next" */}
+                  {createLoading && (
+                    <div className="category-btn-text" style={{ marginLeft: '0.5rem', display: 'inline-flex', placeContent: 'center' }}>
+                      <div className="mr-2">Processing...</div>
+                      <div className="otpLoading"></div>
+                    </div>
+                  )}
+                </div>
               </button>
 
               <button id="paymentModalButton" className="category-btn btn mb-3" style={{ width: "100%", display: "none" }} data-bs-toggle="modal" data-bs-target="#paymentModal">

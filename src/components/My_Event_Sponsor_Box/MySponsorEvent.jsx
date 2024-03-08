@@ -50,7 +50,7 @@ const MyEventSponsor = (eventData) => {
   const handleSponsorLogin = () => {
     // Assuming cardData is defined in your component state
     // Navigate to the /sponsor_login route with cardData as state
-    navigate("/login");
+    navigate("/event_register");
   };
 
   sponsoring_items.forEach((item) => {

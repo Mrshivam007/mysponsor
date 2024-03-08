@@ -49,7 +49,7 @@ const Banner = () => {
                 className="wrap banner-wrap bg-image"
                 style={{
                   height: "auto",
-                  backgroundImage: `linear-gradient(270deg, rgb(0, 0, 0, 0)40%, rgb(0, 0, 0, 0.7)100%),url(${apiurl + data.thumbnail1
+                  backgroundImage: `linear-gradient(270deg, rgb(0, 0, 0, 0)40%, rgb(0, 0, 0, 0.7)100%),url(${data.thumbnail1
                     })`,
                 }}
               >

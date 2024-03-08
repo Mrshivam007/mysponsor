@@ -1,6 +1,6 @@
 import axios from 'axios';
 import apiurl from '../../constant/config';
-import { CREATE_EVENT_FAILED, CREATE_EVENT_REQUEST, CREATE_EVENT_SUCCESS, DELETE_EVENT_FAILED, DELETE_EVENT_REQUEST, DELETE_EVENT_SUCCESS, GET_ALL_EVENT_FAILED, GET_ALL_EVENT_REQUEST, GET_ALL_EVENT_SUCCESS, GET_EVENT_CATEGORY_FAILED, GET_EVENT_CATEGORY_REQUEST, GET_EVENT_CATEGORY_SUCCESS, GET_EVENT_FAILED, GET_EVENT_REQUEST, GET_EVENT_SUCCESS, UPDATE_EVENT_FAILED, UPDATE_EVENT_REQUEST, UPDATE_EVENT_SUCCESS } from '../constant';
+import { CREATE_EVENT_FAILED, CREATE_EVENT_REQUEST, CREATE_EVENT_SUCCESS, DELETE_EVENT_FAILED, DELETE_EVENT_REQUEST, DELETE_EVENT_SUCCESS, GET_ALL_EVENT_FAILED, GET_ALL_EVENT_REQUEST, GET_ALL_EVENT_SUCCESS, GET_EVENT_BY_ID_FAILED, GET_EVENT_BY_ID_REQUEST, GET_EVENT_BY_ID_SUCCESS, GET_EVENT_CATEGORY_FAILED, GET_EVENT_CATEGORY_REQUEST, GET_EVENT_CATEGORY_SUCCESS, GET_EVENT_FAILED, GET_EVENT_REQUEST, GET_EVENT_SUCCESS, UPDATE_EVENT_FAILED, UPDATE_EVENT_REQUEST, UPDATE_EVENT_SUCCESS } from '../constant';
 
 export const fetchEvent = () => async (dispatch) => {
     try {
@@ -60,7 +60,7 @@ export const fetchAllEvent = () => async (dispatch) => {
 
 export const fetchEventbyId = (id) => async (dispatch) => {
     try {
-      dispatch({ type: GET_EVENT_REQUEST });
+      dispatch({ type: GET_EVENT_BY_ID_REQUEST });
   
       const access = JSON.parse(localStorage.getItem("access"));
   
@@ -71,12 +71,12 @@ export const fetchEventbyId = (id) => async (dispatch) => {
         }
       );  
       dispatch({
-        type: GET_EVENT_SUCCESS,
+        type: GET_EVENT_BY_ID_SUCCESS,
         payload: data,
       });
     } catch (error) {
       dispatch({
-        type: GET_EVENT_FAILED,
+        type: GET_EVENT_BY_ID_FAILED,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message

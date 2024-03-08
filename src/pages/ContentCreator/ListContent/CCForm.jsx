@@ -65,6 +65,8 @@ const ListContentForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const content = useSelector((state) => state.content);
   const { createContentError, createContentDetails, loading } = content;
+  const [createLoading, setCreateLoading] = useState(false);
+
 
   // console.log("This is content details", userDetails);
   // console.log("event error", errors);
@@ -250,15 +252,19 @@ const ListContentForm = () => {
       try {
         // Make POST API call
         await dispatch(createContent(formData));
+        setCreateLoading(true);
         // sessionStorage.setItem("successMessage", "Content created successfully!");
         // navigate("/your_content/upcoming_content"); // Replace '/' with the desired route for the home page
       } catch (error) {
         console.log("An error occurred during API calls:", error);
+        setCreateLoading(false);
         window.scroll(0, 0);
         setErrorMessage("An error occurred during creating an content");
       }
     } else {
       window.scroll(0, 0);
+      setErrorMessage("An error occurred during creating an content");
+      setCreateLoading(false);
     }
   };
 
@@ -274,11 +280,13 @@ const ListContentForm = () => {
       } else {
         console.log("An error occurred while creating the content");
         window.scroll(0, 0);
+        setCreateLoading(false);
         setErrorMessage("An error occurred during creating an content");
       }
     }
     else if (createContentError) {
       console.log("An error occurred while creating the event");
+      setCreateLoading(false);
       window.scroll(0, 0);
       setErrorMessage("An error occurred during creating an content");
     }
@@ -773,12 +781,22 @@ const ListContentForm = () => {
                   </div>
                 )}
               </div>
-              <input
+              <button
+                className="btn btn-primary"
                 type="submit"
-                className="submit"
-                value="List Event"
+                disabled={createLoading}
                 onClick={handleSubmitClick}
-              />
+              >
+                <div style={{ display: 'flex', placeContent: 'center' }}>
+                  {!createLoading && <div>List Content</div>} {/* Conditionally render "Next" */}
+                  {createLoading && (
+                    <div style={{ marginLeft: '0.5rem', display: 'inline-flex', placeContent: 'center' }}>
+                      <div className="mr-2">Processing...</div>
+                      <div className="otpLoading"></div>
+                    </div>
+                  )}
+                </div>
+              </button>
               <button
                 className="btn btn-outline-primary mt-3"
                 onClick={handleDiscard}

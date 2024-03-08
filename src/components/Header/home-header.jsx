@@ -13,7 +13,7 @@ function Header() {
           style={{ height: "auto", backgroundImage: `url(${card_bg})` }}
         >
           <div className="row align-items-center flex-wrap-reverse h-100">
-            <div className=" banner-text-area col-md-8 wow fadeInLeft">
+          <div className=" banner-text-area col-md-8 wow fadeInLeft fade-up">
               <h3 className="subhead-banner">Welcome to India's first</h3>
               <h1 className="head-banner mb-4">Online Sponsoring Platform</h1>
               <p className="para-banner">
@@ -27,7 +27,7 @@ function Header() {
                 Sponsor Now
               </Link>
             </div>
-            <div className="img-container col-md-4 wow zoomIn">
+            <div className="img-container col-md-4 wow zoomIn fade-up">
               <div className="img-fluid text-center">
                 <img
                   className="header-card-logo"

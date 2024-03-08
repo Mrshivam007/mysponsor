@@ -8,17 +8,39 @@ import {
   NavBar,
   SponserE,
 } from "../../../components/index.js";
+
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import MyEventSponsor from "../../../components/My_Event_Sponsor_Box/MySponsorEvent.jsx";
+import { fetchEventbyId } from "../../../redux/actions/eventByIdAction.js";
+import Loading from "../../../components/Loading/Loading.jsx";
 const MyEventsDetail = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
   const location = useLocation();
   const eventData = location.state?.eventData || null;
-  console.log(eventData);
+  // console.log("getting id ",eventData.event_id);
+  const dispatch = useDispatch();
+  const eventId = eventData.event_id;
+  const eventById = useSelector((state) => state.eventById);
+  useEffect(() => {
+    dispatch(fetchEventbyId(eventId));
+  }, []);
+
+  console.log("getting data based on event id", eventById);
+  const isLoading = () => {
+    return eventById?.loading;
+  };
+  const Data = eventById?.eventById;
+  console.log("data getting ", Data);
+
   return (
     <>
+      {isLoading() ? (
+        <Loading />
+      ) : (
+        <>
       <div
         className="myevents-bg"
         style={{
@@ -28,10 +50,12 @@ const MyEventsDetail = () => {
           backgroundImage: `url(${bgimage})`,
         }}
       >
-        
-        <MyEventSponsor eventData={eventData} />
+
+        {Data && <MyEventSponsor eventData={Data} />}
         {/* <SponserE cardData={EventsCards} /> */}
       </div>
+      </>
+      )}
     </>
   );
 };

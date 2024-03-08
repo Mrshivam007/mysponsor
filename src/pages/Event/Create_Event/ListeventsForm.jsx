@@ -62,6 +62,7 @@ const ListeventsForm = () => {
   const { createEventError, createEventDetails, loading } = event;
   const { userDetails } = auth;
   const navigate = useNavigate(); // Initialize useNavigate hook
+  const [createLoading, setCreateLoading] = useState(false);
   console.log(userDetails);
   console.log("event error", createEventError);
   console.log("event data", createEventDetails?.msg);
@@ -250,11 +251,13 @@ const ListeventsForm = () => {
       try {
         // Make POST API call
         await dispatch(createEvent(formData));
+        setCreateLoading(true);
         // sessionStorage.setItem("successMessage", "Event created successfully!");
         // navigate("/events/upcoming_event");
         console.log("Details while creating events ", createEventDetails);
       } catch (error) {
         console.log("An error occurred during API call:", error);
+        setCreateLoading(false)
         window.scroll(0, 0);
         setErrorMessage("An error occurred during creating an event");
         // Handle error as needed
@@ -272,12 +275,14 @@ const ListeventsForm = () => {
         navigate("/events/upcoming_event");
       } else {
         console.log("An error occurred while creating the event");
+        setCreateLoading(false);
         window.scroll(0, 0);
         setErrorMessage("An error occurred during creating an event");
       }
     }
     else if (createEventError) {
       console.log("An error occurred while creating the event");
+      setCreateLoading(false);
       window.scroll(0, 0);
       setErrorMessage("An error occurred during creating an event");
     }
@@ -638,12 +643,44 @@ const ListeventsForm = () => {
                   </div>
                 )}
               </div>
-              <input
+              {/* <input
                 type="submit"
                 className="submit"
                 value="List Event"
                 onClick={handleSubmitClick}
+              /> */}
+              {/* <input
+                type="submit"
+                className="submit"
+                value={!createLoading ? "Processing..." : "List Event"}
+                onClick={handleSubmitClick}
+                disabled={createLoading}
               />
+              {!createLoading && (
+                <div style={{ marginLeft: '0.5rem', display: 'inline-flex', alignItems: 'center' }}>
+                  <div className="mr-2">Processing...</div>
+                  <div className="otpLoading"></div>
+                </div>
+              )} */}
+
+              <button
+                className="btn btn-primary"
+                type="submit"
+                disabled={createLoading}
+                onClick={handleSubmitClick}
+              >
+                <div style={{ display: 'flex', placeContent: 'center' }}>
+                  {!createLoading && <div>List Event</div>} {/* Conditionally render "Next" */}
+                  {createLoading && (
+                    <div style={{ marginLeft: '0.5rem', display: 'inline-flex', placeContent: 'center' }}>
+                      <div className="mr-2">Processing...</div>
+                      <div className="otpLoading"></div>
+                    </div>
+                  )}
+                </div>
+              </button>
+
+
               <button
                 className="btn btn-outline-primary mt-3"
                 onClick={() => navigate("/")}
