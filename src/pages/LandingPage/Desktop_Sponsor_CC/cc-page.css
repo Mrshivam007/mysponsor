@@ -2,6 +2,25 @@
     height: 100%;
 }
 
+.circle {
+    width: 10vw;
+    /* Set the width and height of the circle */
+    height: 15vh;
+    border-radius: 50%;
+    /* Make it a circle */
+    background-color: #f0f0f0;
+    /* Change this to desired background color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text {
+    max-width: 80%;
+    /* Set maximum width for text to ensure it doesn't overflow */
+    text-align: center;
+}
+
 @media (max-width:576px) {
     .events-bg {
         background-color: #EFEFEF;

@@ -2,14 +2,11 @@
 .otpLoading {
    width: 20px;
    margin: auto;
-   aspect-ratio: 1;
+   aspect-ratio: 2;
    --c: linear-gradient(#000 0 0);
    --r1: radial-gradient(farthest-side at bottom, #000 93%, #0000);
    --r2: radial-gradient(farthest-side at top, #000 93%, #0000);
-   background:
-      var(--c), var(--r1), var(--r2),
-      var(--c), var(--r1), var(--r2),
-      var(--c), var(--r1), var(--r2);
+   background: var(--c), var(--r1), var(--r2), var(--c), var(--r1), var(--r2), var(--c), var(--r1), var(--r2);
    background-repeat: no-repeat;
    animation: l2 1s infinite alternate;
 }
