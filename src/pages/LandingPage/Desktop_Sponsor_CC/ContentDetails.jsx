@@ -9,12 +9,21 @@ import {
 } from "../../../components/index.js";
 import { useLocation } from "react-router-dom";
 import MyContentBox from "../../../components/My_Content_Details_Box/MyContentBox.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchContentbyId } from "../../../redux/actions/contentByIdAction.js";
 const ContentDetails = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
   const location = useLocation();
   const contentData = location.state?.contentData || null;
+  const dispatch = useDispatch();
+  const contentId = contentData.content_id;
+  const contentById = useSelector((state) => state.contentById);
+  useEffect(() => {
+    dispatch(fetchContentbyId(contentId));
+  }, []);
+  console.log("getting content by id ", contentById);
   console.log(contentData);
   return (
     <>

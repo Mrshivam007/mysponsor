@@ -9,6 +9,7 @@ import { paymentReducer } from "./reducer/paymentReducer";
 import { eventCategoryReducer } from "./reducer/eventCategoryReducer";
 import { paymentWithdrawReducer } from "./reducer/paymentWithdrawReducer";
 import { eventByIdReducer } from "./reducer/eventByIdReducer";
+import { contentByIdReducer } from "./reducer/contentByIdReducer";
 
 
 const reducer = combineReducers({
@@ -16,6 +17,7 @@ const reducer = combineReducers({
     event: eventReducer,
     eventCategory: eventCategoryReducer,
     eventById: eventByIdReducer,
+    contentById: contentByIdReducer,
     content: contentReducer,
     sponsor: sponsorReducer,
     sponsorProfile: profileReducer,

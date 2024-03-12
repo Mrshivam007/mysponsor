@@ -43,7 +43,7 @@ const SponsorRoutes = () => {
   return (
     <>
       <NavBar />
-      <ErrorBoundary>
+      {/* <ErrorBoundary> */}
         <Routes>
           <Route path="/" element={<SponsorHome />} />
           <Route path="/choice" element={<SponsorChoice />} />
@@ -89,10 +89,12 @@ const SponsorRoutes = () => {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Navigate to={"/"} />} />
+          <Route path="/content_register" element={<Navigate to={"/mycontent-details"} />} />
+          <Route path="/event_register" element={<Navigate to={"/myevent-details"} />} />
           <Route path="/sponsor_login" element={<Navigate to={"/"} />} />
           <Route path="/signup" element={<Navigate to={"/"} />} />
         </Routes>
-      </ErrorBoundary>
+      {/* </ErrorBoundary> */}
       <SponsorFooter />
     </>
   );

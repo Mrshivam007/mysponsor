@@ -29,6 +29,8 @@ import About from "../components/About/About";
 import Contact from "../components/Contact/Contact";
 import ErrorBoundary from "./ErrorBoundary";
 import EventRegister from "../pages/EventRegister/EventRegister";
+import ContentRegister from "../pages/ContentRegister/ContentRegister";
+// import Panoramic from "../components/Panoramic/Panoramic";
 
 const Main = () => {
   const auth = useSelector((state) => state.auth);
@@ -80,6 +82,8 @@ const Main = () => {
             <Route path="/signup" element={<Signup />} />
             <Route path="/sponsor_register" element={<SponsorRegister />} />
             <Route path="/event_register" element={<EventRegister />} />
+            <Route path="/content_register" element={<ContentRegister />} />
+            {/* <Route path="/panoramic" element={<Panoramic />} /> */}
           </Routes>
           {/* </ErrorBoundary> */}
           <Footer />

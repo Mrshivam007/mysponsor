@@ -12,7 +12,7 @@ import SuccessToast from "../../components/Toast/Success";
 import axios from "axios";
 import apiurl from "../../constant/config";
 
-const EventRegister = () => {
+const ContentRegister = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
@@ -49,8 +49,8 @@ const EventRegister = () => {
     const [signUpMessage, setSignUpMessage] = useState(false);
     const location = useLocation();
     // const eventId = new URLSearchParams(location.search).get("eventId");
-    const eventId = location.state?.eventId || null;
-    console.log("got event id from landing page ", eventId);
+    const contentId = location.state?.contentId || null;
+    console.log("got event id from landing page ", contentId);
 
 
 
@@ -289,7 +289,7 @@ const EventRegister = () => {
               setShowMessage(showMessage);
             } else {
               setShowMessage(false);
-              navigate(`/myevent-details?eventId=${eventId}`);
+              navigate(`/mycontent-details?contentId=${contentId}`);
             }
         } catch (error) {
             // Handle any errors that occur during the dispatch
@@ -901,4 +901,4 @@ const EventRegister = () => {
     );
 };
 
-export default EventRegister;
+export default ContentRegister;

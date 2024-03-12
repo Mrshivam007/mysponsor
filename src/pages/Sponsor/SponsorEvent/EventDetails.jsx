@@ -9,13 +9,26 @@ import {
 } from "../../../components/index.js";
 import { useLocation } from "react-router-dom";
 import MyEventSponsor from "./MyEventSponsor.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchEventbyId } from "../../../redux/actions/eventByIdAction.js";
 const EventDetails = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
+  const dispatch = useDispatch();
   const location = useLocation();
   const eventData = location.state?.eventData || null;
-  console.log("Event data from id ",eventData);
+  const eventId = eventData?.event_id;
+  const eventIdbyUrl = new URLSearchParams(location.search).get("eventId");
+  const event_id = eventId || eventIdbyUrl
+  console.log("got event id from Url  ", eventIdbyUrl);
+  const eventById = useSelector((state) => state.eventById);
+  useEffect(() => {
+    if (event_id) {
+      dispatch(fetchEventbyId(event_id));
+    }
+  }, [event_id, dispatch]);
+  const Data = eventById?.eventById;
   return (
     <>
       <div
@@ -26,9 +39,8 @@ const EventDetails = () => {
           paddingBottom: '1%',
           backgroundImage: `url(${bgimage})`,
         }}
-      >
-        
-        <MyEventSponsor eventData={eventData} />
+      >        
+        {Data && <MyEventSponsor eventData={Data} />}
         {/* <SponserE cardData={EventsCards} /> */}
         
       </div>

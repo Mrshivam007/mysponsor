@@ -50,7 +50,9 @@ const MyContentBox = (contentData) => {
   const handleSponsorLogin = () => {
     // Assuming cardData is defined in your component state
     // Navigate to the /sponsor_login route with cardData as state
-    navigate("/login");
+    // navigate("/login");
+    const contentId = cardData.content_id;
+    navigate("/content_register", { state: { contentId: contentId } });
   };
 
   sponsoring_items.forEach((item) => {

@@ -272,7 +272,7 @@ const Signup = () => {
     setOtpLoading(true);
     try {
       const response = await axios.post(
-        `${apiurl}/api/user/email/varification/`,
+        `${apiurl}/api/user/email/verification/`,
         { email }
       );
       console.log("Response from emailOtp:", response.data);
@@ -298,37 +298,12 @@ const Signup = () => {
       console.error("Error while calling emailOtp API:", error);
     }
   };
-
   console.log("exist message ", emailExistMsg);
-
-  // const handleSubmitOtp = async () => {
-  //   try {
-  //     const joinedOtp = otp.join(''); // Join OTP array into a single string
-  //     const response = await axios.post(
-  //       `${apiurl}/api/user/otp/varify/`,
-  //       { email, otp: joinedOtp }, // Send the joined OTP string to the API
-  //     );
-  //     console.log('Response from emailOtpVerification:', response.data);
-  //     if (response.data.msg === "Valid OTP") {
-  //       setShowOtpInput(false);
-  //       setEmailFilled(false);
-  //       setVerificationError(false);
-  //       setIsEmailVerified(true);
-  //       setOtpMessage('Email Verified');
-  //       // Handle OTP verification success
-  //     }
-  //     // Handle successful verification
-  //   } catch (error) {
-  //     console.error('Error while verifying OTP:', error);
-  //     setVerificationError(error.response.data.message || 'An error occurred during verification.');
-  //   }
-  // };
-
   const handleSubmitOtp = async () => {
     try {
       const joinedOtp = otpValues.join(""); // Join OTP array into a single string
       const response = await axios.post(
-        `${apiurl}/api/user/otp/varify/`,
+        `${apiurl}/api/user/otp/verify/`,
         { email, otp: joinedOtp } // Send the joined OTP string to the API
       );
       console.log("Response from emailOtpVerification:", response.data);
@@ -800,158 +775,14 @@ const Signup = () => {
                     >
                       Sponsor
                     </button>
-                    {/* Add more buttons for other options if needed */}
                   </div>
                   {user_type == "" ? (
                     <p className="text-danger">*Select a type to register*</p>
                   ) : null}
                 </>
               )}
-
               {renderStep()}
-
-              {/* <div class="row form-group">
-                <div class="col-md-6 mb-3 mb-md-0">
-                  <label class="text-black" for="fname">
-                    First Name
-                  </label>
-                  <input
-                    type="text"
-                    id="fname"
-                    class="form-control"
-                    value={firstname}
-                    onChange={handleFirstName}
-                    placeholder="First Name"
-                  />
-                  {errors.firstname == "" ? (
-                    <p className="error-msg">{errors.firstname}</p>
-                  ) : null}
-                </div>
-                <div class="col-md-6">
-                  <label class="text-black" for="lname">
-                    Last Name
-                  </label>
-                  <input
-                    type="text"
-                    id="lname"
-                    class="form-control"
-                    value={lastname}
-                    onChange={handleLastName}
-                    placeholder="Last Name"
-                  />
-                  {errors.lastname == "" ? (
-                    <p className="error-msg">{errors.lastname}</p>
-                  ) : null}
-                </div>
-              </div>
-
-              <div class="row form-group">
-                <div class="col-md-12">
-                  <label class="text-black" for="email">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    class="form-control"
-                    value={email}
-                    onChange={handleEmailChange}
-                    placeholder="Email"
-                  />
-
-                  <p className="error-msg">{emailError}</p>
-                  {otpMessage && <p style={{ marginBottom: '0px', fontWeight: 'bold', color: 'green' }}>{otpMessage}</p>}
-                  {emailExistMsg && <p className="error-msg">{emailExistMsg}</p>}
-                  {errors.email == "" ? (
-                    <p className="error-msg">{errors.email}</p>
-                  ) : null}
-                  {emailFilled && (
-                    <div>
-                      <a type="button" className="link-opacity-100" style={{ float: 'right', color: 'blue' }} onClick={emailOtpClick}>
-                        Verify Email
-                      </a>
-                    </div>
-                  )}
-                </div>
-              </div>
-              {emailVerificationError && <p style={{ fontWeight: 'bold', color: 'red' }}>{emailVerificationError}</p>}
-              {otpLoading && <div class="otpLoading"></div>}
-              {showOtpInput && (
-                <div className="row form-group">
-                  <div className="col-md-12">
-                    <label className="text-black" htmlFor="otp">
-                      Enter OTP
-                    </label>
-                    <div>
-                      {[0, 1, 2, 3].map((index) => (
-                        <input
-                          key={index}
-                          type="number"
-                          pattern="[0-9]*"
-                          maxLength="1"
-                          value={otp[index]}
-                          onChange={(e) => handleOtpChange(index, e.target.value)}
-                          onKeyDown={(e) => handleKeyDown(e, index)}
-                          ref={(input) => inputRefs.current.push(input)}
-                          style={{ width: '50px', marginRight: '10px' }} // Adjust width and spacing as needed
-                        />
-                      ))}
-                    </div>
-                    <button type="button" className="link-opacity-100" style={{ float: 'right', color: 'blue' }} onClick={handleSubmitOtp}>Submit OTP</button>
-                  </div>
-                </div>
-              )}
-              {verificationError && <p>{verificationError}</p>}
-              <div class="row form-group">
-                <div class="col-md-12">
-                  <label class="text-black" for="subject">
-                    Password
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    class="form-control"
-                    value={password}
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                      handlePassword(e);
-                    }}
-                    placeholder="Password"
-                  />
-                  <p className="error-msg">{passwordError}</p>
-                  {errors.password == "" ? (
-                    <p className="error-msg">{errors.password}</p>
-                  ) : null}
-                </div>
-              </div>
-
-              <div class="row form-group">
-                <div class="col-md-12">
-                  <label class="text-black" for="message">
-                    Confirm Password
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    class="form-control"
-                    value={password2}
-                    onChange={(e) => {
-                      setPassword2(e.target.value);
-                      handleConfirmPassword(e);
-                    }}
-                    placeholder="Confirm Password"
-                  />
-                  <p className="error-msg">{ConfirmPasswordError}</p>
-                  {errors.password2 == "" ? (
-                    <p className="error-msg">{errors.password2}</p>
-                  ) : null}
-                </div>
-              </div> */}
-
               <div class="row form-group mt-4">
-                {/* <div class="col-md-12">
-                  <input type="submit" value="Submit" class="btn btn-primary" />
-                </div> */}
                 <div class="col-md-12 mt-4 text-lg">
                   <p style={{ textAlign: "center" }}>
                     Already have an account?{" "}

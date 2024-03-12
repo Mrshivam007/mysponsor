@@ -42,15 +42,17 @@ const MyEventSponsor = (eventData) => {
   const cardData02 = location.state && location.state.cardData;
   console.log("event data02", cardData02);
   const cardData = cardData01 || cardData02;
+  console.log("getting id to send on register ", cardData.event_id);
+  // const eventId = cardData.eventId;
   let totalAmount = 0;
   const sponsoring_items = cardData?.sponsoring_items || [];
 
   const navigate = useNavigate();
 
   const handleSponsorLogin = () => {
-    // Assuming cardData is defined in your component state
-    // Navigate to the /sponsor_login route with cardData as state
-    navigate("/event_register");
+    const eventId = cardData.event_id;
+    // navigate(`/event_register?eventId=${eventId}`);
+    navigate("/event_register", { state: { eventId: eventId } });
   };
 
   sponsoring_items.forEach((item) => {
