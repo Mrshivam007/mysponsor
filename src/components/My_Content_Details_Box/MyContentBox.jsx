@@ -52,6 +52,7 @@ const MyContentBox = (contentData) => {
     // Navigate to the /sponsor_login route with cardData as state
     // navigate("/login");
     const contentId = cardData.content_id;
+    localStorage.setItem('contentId', contentId);
     navigate("/content_register", { state: { contentId: contentId } });
   };
 

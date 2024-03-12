@@ -47,11 +47,6 @@ const ContentRegister = () => {
     const otpFieldsRef = useRef([]);
     const [signupLoading, setSignupLoading] = useState(false);
     const [signUpMessage, setSignUpMessage] = useState(false);
-    const location = useLocation();
-    // const eventId = new URLSearchParams(location.search).get("eventId");
-    const contentId = location.state?.contentId || null;
-    console.log("got event id from landing page ", contentId);
-
 
 
     const validatePersonalInfo = () => {
@@ -289,7 +284,7 @@ const ContentRegister = () => {
               setShowMessage(showMessage);
             } else {
               setShowMessage(false);
-              navigate(`/mycontent-details?contentId=${contentId}`);
+              // navigate(`/mycontent-details?contentId=${contentId}`);
             }
         } catch (error) {
             // Handle any errors that occur during the dispatch

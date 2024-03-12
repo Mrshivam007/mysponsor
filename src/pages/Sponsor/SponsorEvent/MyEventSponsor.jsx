@@ -45,6 +45,7 @@ const MyEventSponsor = (eventData) => {
   const cardData01 = eventData.eventData;
   const location = useLocation();
   const cardData02 = location.state && location.state.cardData;
+  console.log("Cards Data ", cardData02);
   const cardData = cardData01 || cardData02;
   console.log(cardData.event_id);
   let totalAmount = 0;

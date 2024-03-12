@@ -22,6 +22,8 @@ const EventDetails = () => {
   const eventIdbyUrl = new URLSearchParams(location.search).get("eventId");
   const event_id = eventId || eventIdbyUrl
   console.log("got event id from Url  ", eventIdbyUrl);
+  console.log("got event id from location  ", eventId);
+
   const eventById = useSelector((state) => state.eventById);
   useEffect(() => {
     if (event_id) {
@@ -29,6 +31,8 @@ const EventDetails = () => {
     }
   }, [event_id, dispatch]);
   const Data = eventById?.eventById;
+  console.log("Get data " ,Data);
+  console.log("Get id " ,event_id);
   return (
     <>
       <div
