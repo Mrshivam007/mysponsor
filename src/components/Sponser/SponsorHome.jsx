@@ -7,16 +7,17 @@ import { fetchContent } from "../../redux/actions/contentAction";
 import { fetchEvent } from "../../redux/actions/eventAction";
 import { useDispatch, useSelector } from "react-redux";
 import ContentCard from "../../pages/LandingPage/Desktop_Sponsor_CC/ContentCard";
+import CreatorCard from "../CreatorCard/CreatorCard";
 
 const SponsorHome = () => {
   const dispatch = useDispatch();
-  const ContentDetails = useSelector(state => state.content)
-  const EventDetails = useSelector(state => state.event)
-  const [successMessage, setSuccessMessage] = useState('');
+  const ContentDetails = useSelector((state) => state.content);
+  const EventDetails = useSelector((state) => state.event);
+  const [successMessage, setSuccessMessage] = useState("");
   useEffect(() => {
-    dispatch(fetchContent())
-    dispatch(fetchEvent())
-  }, [])
+    dispatch(fetchContent());
+    dispatch(fetchEvent());
+  }, []);
   console.log("Event", EventDetails);
   console.log("Content", ContentDetails);
 
@@ -29,10 +30,17 @@ const SponsorHome = () => {
           backgroundImage: `url(${backgroundimg})`,
         }}
       >
-        <SponserE line={"Sponsor Events Near You"} cardData={EventDetails.eventDetails?.live_event} />
+        <SponserE
+          line={"Sponsor Events Near You"}
+          cardData={EventDetails.eventDetails?.live_event}
+        />
 
         {/* <SponserCC line={"Sponsor Content Creators"} cardData={ContentCreators4} /> */}
-        <ContentCard line={"Sponsor Content Creators"} cardData={ContentDetails.contentDetails?.upcoming_content} />
+        <ContentCard
+          line={"Sponsor Content"}
+          cardData={ContentDetails.contentDetails?.upcoming_content}
+        />
+        <CreatorCard line={"Sponsor Content Creators"} />
       </div>
     </>
   );

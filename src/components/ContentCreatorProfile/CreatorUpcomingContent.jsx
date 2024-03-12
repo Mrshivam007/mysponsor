@@ -1,5 +1,5 @@
 import React from "react";
-import creator from "../../../assets/img/card/mobile-cards.jpg";
+import creator from "../../assets/img/card/mobile-cards.jpg";
 
 const CreatorUpcomingContent = () => {
   return (

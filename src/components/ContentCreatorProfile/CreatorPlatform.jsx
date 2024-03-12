@@ -1,13 +1,12 @@
-import youtube from "../../../assets/img/youtube.jpg";
-import X from "../../../assets/img/X-twitter.png";
-import twitch from "../../../assets/img/twitch.jpg";
-import facebook from "../../../assets/img/Facebook.png";
-import instagram from "../../../assets/img/instagram.jpg";
-import snapchat from "../../../assets/img/snapchat.jpg";
-import tiktok from "../../../assets/img/tiktok.jpg";
+import youtube from "../../assets/img/youtube.jpg";
+import X from "../../assets/img/X-twitter.jpg";
+import twitch from "../../assets/img/twitch.jpg";
+import facebook from "../../assets/img/Facebook.png";
+import instagram from "../../assets/img/instagram.jpg";
+import snapchat from "../../assets/img/snapchat.jpg";
+import tiktok from "../../assets/img/tiktok.jpg";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import logo from "../../../assets/img/channel-logo.png";
 import { Button, Modal } from "react-bootstrap";
 const CreatorPlatform = () => {
   const [show, setShow] = useState(false);

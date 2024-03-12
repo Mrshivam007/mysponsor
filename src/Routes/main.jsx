@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route, useRoutes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useRoutes,
+} from "react-router-dom";
 import {
   CategoryPage,
   FacebookContent,
@@ -22,7 +27,7 @@ import ContentDetails from "../pages/LandingPage/Desktop_Sponsor_CC/ContentDetai
 import SponsorLogin from "../pages/SponsorRegister/SponsorLogin";
 import SponsorRegister from "../pages/SponsorRegister/SponsorRegister";
 import SponsorRoutes from "./sponsor";
-import AdminLayout from "../pages/Admin/layouts/admin/index"
+import AdminLayout from "../pages/Admin/layouts/admin/index";
 import { Footer, NavBar } from "../components";
 import EventCategoryCard from "../components/Categories/EventCategoryCard";
 import About from "../components/About/About";
@@ -30,6 +35,7 @@ import Contact from "../components/Contact/Contact";
 import ErrorBoundary from "./ErrorBoundary";
 import EventRegister from "../pages/EventRegister/EventRegister";
 import ContentRegister from "../pages/ContentRegister/ContentRegister";
+import ContentCreatorProfile from "../components/ContentCreatorProfile/ContentCreatorProfile";
 // import Panoramic from "../components/Panoramic/Panoramic";
 
 const Main = () => {
@@ -51,8 +57,8 @@ const Main = () => {
               // <App />
               // <AdminRoutes />
               <AdminLayout />
-              // <ContentRoutes />
-            ) : null}
+            ) : // <ContentRoutes />
+            null}
           </Router>
         </>
       ) : (
@@ -70,7 +76,10 @@ const Main = () => {
             <Route path="/mycontent-details" element={<ContentDetails />} />
             <Route path="/choice" element={<SponsorChoice />} />
             <Route path="/categories" element={<CategoryPage />} />
-            <Route path="/eventCategory/:category" element={<EventCategoryCard />} />
+            <Route
+              path="/eventCategory/:category"
+              element={<EventCategoryCard />}
+            />
             <Route path="/payment" element={<PaymentGateway />} />
             <Route path="/myevents" element={<MyEvents />} />
             <Route path="/myevent-details" element={<MyEventDetails />} />
@@ -83,6 +92,10 @@ const Main = () => {
             <Route path="/sponsor_register" element={<SponsorRegister />} />
             <Route path="/event_register" element={<EventRegister />} />
             <Route path="/content_register" element={<ContentRegister />} />
+            <Route
+              path="/creator-profile"
+              element={<ContentCreatorProfile />}
+            />
             {/* <Route path="/panoramic" element={<Panoramic />} /> */}
           </Routes>
           {/* </ErrorBoundary> */}

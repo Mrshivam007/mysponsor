@@ -11,7 +11,6 @@ import {
 const Home = () => {
   return (
     <>
-      
       <Header />
       <Choice line={"Sponsor Your Choice"} />
       <div>
@@ -41,7 +40,6 @@ const Home = () => {
       <Banner />
       <Categories line={"Categories"} />
       <SponserHome />
-      
     </>
   );
 };

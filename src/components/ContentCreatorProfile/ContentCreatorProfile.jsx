@@ -1,6 +1,6 @@
-import React from "react";
-import item from "../../../assets/img/card/mobile-cards.jpg";
-import backgroundimg from "../../../assets/img/circle-bg.png";
+import React, { useEffect } from "react";
+import item from "../../assets/img/card/mobile-cards.jpg";
+import backgroundimg from "../../assets/img/circle-bg.png";
 import { Carousel, ProgressBar } from "react-bootstrap";
 import "./Creator.css";
 import RecommendationSection from "./Recommendation";
@@ -9,6 +9,9 @@ import Records from "./Records";
 import CreatorUpcomingContent from "./CreatorUpcomingContent";
 // import Test from "./test";
 const ContentCreatorProfile = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
+  }, []);
   const Stats = [
     {
       platform: "Youtube",
@@ -254,7 +257,6 @@ const ContentCreatorProfile = () => {
 
         {/* MOBILE VIEW */}
         <div className="container mobile-view">
-          <h2 className="sponsor-mobile-text">Mr. Beast</h2>
           <div
             className="post-thumb mt-4"
             style={{
@@ -283,7 +285,7 @@ const ContentCreatorProfile = () => {
               {/* ))} */}
             </Carousel>
           </div>
-
+          <h2 className="sponsor-mobile-text">Mr. Beast</h2>
           <div
             className="container bg-white"
             style={{
@@ -324,7 +326,9 @@ const ContentCreatorProfile = () => {
             <Records />
           </div>
           <div className="box">
-          <h2 className="sponsor-mobile-text">Upcoming Contents by Creator</h2>
+            <h2 className="sponsor-mobile-text">
+              Upcoming Contents by Creator
+            </h2>
             <CreatorUpcomingContent />
           </div>
         </div>
