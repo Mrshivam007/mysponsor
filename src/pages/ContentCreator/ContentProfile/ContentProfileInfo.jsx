@@ -284,7 +284,7 @@ const ContentProfileInfo = () => {
 
   return (
     <>
-      <div className="container-xl px-4 mt-4">
+      <div className="container-xl px-0">
         <div className="row">
           <div className="box1 form-photos-box mt-2 d-flex justify-content-center p-3" style={{ width: '100%' }}>
 
@@ -522,11 +522,11 @@ const ContentProfileInfo = () => {
                     <button className="btn btn-primary" onClick={handleAddMore}>Add More</button>
                     {/* <button className="btn btn-primary" onClick={handleSubmitClick}>Submit</button> */}
                   </div>
-                  <div className="mb-3">
+                  <div className="my-3">
                     <h2>
                     Social Media Container
                     </h2>
-                    <div className="container my-3">
+                    <div className="container p-0 my-3">
                       <Tabs
                         defaultActiveKey="profile"
                         id="uncontrolled-tab-example"

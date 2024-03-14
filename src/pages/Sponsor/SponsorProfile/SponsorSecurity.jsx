@@ -94,7 +94,7 @@ const SponsorSecurity = () => {
 
   return (
     <>
-      <div className="container-xl px-4 mt-4">
+      <div className="container-xl px-0">
         <div className="row">
           <div className="col-lg-8">
             <div className="card mb-4">
