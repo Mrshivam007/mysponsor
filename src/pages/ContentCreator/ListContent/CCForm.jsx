@@ -245,7 +245,7 @@ const ListContentForm = () => {
       formData.append("content_platform", selectedPlatform);
       // Append thumbnails with different keys
       // formData.append("thumbnail1", thumbnail1, thumbnail1Filename);
-      formData.append("thumbnail1", thumbnail1);
+      formData.append("thumbnail1", thumbnail1, thumbnail1Filename);
       formData.append("thumbnail2", thumbnail2, thumbnail2Filename);
       formData.append("thumbnail3", thumbnail3, thumbnail3Filename);
       formData.append("attach_video", video);
