@@ -28,7 +28,7 @@ const ContentDetails = () => {
     return contentById?.loading;
   };
   console.log("getting content by id ", contentById?.contentById?.[0]);
-  const Data = contentById?.contentById?.[0];
+  const Data = contentById?.contentById;
 
   console.log(contentData);
   return (

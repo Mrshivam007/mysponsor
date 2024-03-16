@@ -26,6 +26,9 @@ const ContentCreatorProfile = () => {
     dispatch(fetchCreatorbyId(creator_id));
   }, []);
   console.log("creator by id ", creatorById.creatorById?.upcoming_content);
+  const ContentData = creatorById.creatorById
+  console.log("Creator Data", ContentData);
+
   const Stats = [
     {
       platform: "Youtube",
