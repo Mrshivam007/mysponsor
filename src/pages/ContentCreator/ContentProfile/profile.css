@@ -67,3 +67,22 @@
     background-color: white;
     border-color: #f1e0e3;
 }
+
+.profile-head {
+    transform: translateY(5rem)
+}
+
+.profile img {
+    max-height: 150px;
+}
+
+@media (min-width: 576px) {
+    .profile img {
+        width: 100%;
+    }
+}
+
+.cover {
+    background-size: cover;
+    background-repeat: no-repeat
+}

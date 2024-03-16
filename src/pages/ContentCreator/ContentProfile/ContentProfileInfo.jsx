@@ -1,23 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import noProfilepic from "../../../assets/img/emptyprofile2.jpg";
 import noCover from "../../../assets/img/logo/logo.png";
 import noLogo from "../../../assets/img/your_logo.webp";
+import profilebg from "../../../assets/img/profileBG.jpg";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
 
 import { Tab, Tabs } from "react-bootstrap";
 import "./profile.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createContentProfile, createEventProfile, createSponsorProfile, getContentProfile, getEventProfile, getSponsorProfile } from "../../../redux/actions/profileAction";
+import {
+  createContentProfile,
+  createEventProfile,
+  createSponsorProfile,
+  getContentProfile,
+  getEventProfile,
+  getSponsorProfile,
+} from "../../../redux/actions/profileAction";
 const ContentProfileInfo = () => {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
   const dispatch = useDispatch();
-  const profileDetails = useSelector(state => state.sponsorProfile)
+  const profileDetails = useSelector((state) => state.sponsorProfile);
   useEffect(() => {
-    dispatch(getContentProfile())
-  }, [])
+    dispatch(getContentProfile());
+  }, []);
 
   const animatedComponents = makeAnimated();
 
@@ -34,7 +42,6 @@ const ContentProfileInfo = () => {
   //   { value: "Finance", label: "Finance" }
   // ];
 
-
   const [itemSelection, setItemSelection] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [itemOptions, setItemOptions] = useState([
@@ -47,7 +54,7 @@ const ContentProfileInfo = () => {
     { value: "Lifestyle", label: "Lifestyle" },
     { value: "Family", label: "Family" },
     { value: "Gaming", label: "Gaming" },
-    { value: "Finance", label: "Finance" }
+    { value: "Finance", label: "Finance" },
   ]);
 
   console.log("Sponsor Profile ", profileDetails);
@@ -80,6 +87,22 @@ const ContentProfileInfo = () => {
     return uniqueFilename;
   };
 
+  const hiddenFileInput1 = useRef(null);
+  const hiddenFileInput2 = useRef(null);
+  const hiddenFileInput3 = useRef(null);
+
+  const handleProfileClick = (e) => {
+    hiddenFileInput2.current.click();
+  };
+
+  const handleCoverClick = (e) => {
+    hiddenFileInput1.current.click();
+  };
+
+  const handleLogoClick = (e) => {
+    hiddenFileInput3.current.click();
+  };
+
   // For each thumbnail, you'll need a separate state and handler
   const handleProfileChange = (e) => {
     const file = e.target.files[0];
@@ -103,28 +126,26 @@ const ContentProfileInfo = () => {
     setLogoFileName(uniqueFilename); // Save the unique filename in state
   };
 
+  const [businessType, setBusinessType] = useState("");
+  const [contact, setContact] = useState("");
+  const [ytVideoType, setYtVideoType] = useState("");
+  const [subscriber, setSubscriber] = useState("");
+  const [youtubeLink, setYoutubeLink] = useState("");
+  const [perVideoReach, setPerVideoReach] = useState("");
+  const [instaFollowers, setInstaFollowers] = useState("");
+  const [instaPostType, setInstaPostType] = useState("");
+  const [instaPerPostLink, setInstaPerPostLink] = useState("");
+  const [instaLink, setInstaLink] = useState("");
+  const [faceFollowers, setFaceFollowers] = useState("");
+  const [facePostType, setFacePostType] = useState("");
+  const [perFacePostLink, setPerFacePostLink] = useState("");
+  const [faceLink, setfaceLink] = useState("");
 
-  const [businessType, setBusinessType] = useState('');
-  const [contact, setContact] = useState('');
-  const [ytVideoType, setYtVideoType] = useState('');
-  const [subscriber, setSubscriber] = useState('');
-  const [youtubeLink, setYoutubeLink] = useState('');
-  const [perVideoReach, setPerVideoReach] = useState('');
-  const [instaFollowers, setInstaFollowers] = useState('');
-  const [instaPostType, setInstaPostType] = useState('');
-  const [instaPerPostLink, setInstaPerPostLink] = useState('');
-  const [instaLink, setInstaLink] = useState('');
-  const [faceFollowers, setFaceFollowers] = useState('');
-  const [facePostType, setFacePostType] = useState('');
-  const [perFacePostLink, setPerFacePostLink] = useState('');
-  const [faceLink, setfaceLink] = useState('');
-
-  const [businessName, setBusinessName] = useState('');
+  const [businessName, setBusinessName] = useState("");
   const [collaborations, setCollaborations] = useState([]);
   const [youtubeData, setYoutubeData] = useState([]);
   const [instagramData, setInstagramData] = useState([]);
   const [facebookData, setFacebookData] = useState([]);
-
 
   useEffect(() => {
     if (profileDetails?.contentDetails?.channel_name) {
@@ -159,16 +180,20 @@ const ContentProfileInfo = () => {
       let recommendationItems;
       if (Array.isArray(profileDetails.contentDetails.recommendation)) {
         // If multiple recommendation items, map them to objects
-        recommendationItems = profileDetails.contentDetails.recommendation.map((item) => ({
-          label: item,
-          value: item
-        }));
+        recommendationItems = profileDetails.contentDetails.recommendation.map(
+          (item) => ({
+            label: item,
+            value: item,
+          })
+        );
       } else {
         // If only one recommendation item, create an array with one object
-        recommendationItems = [{
-          label: profileDetails.contentDetails.recommendation,
-          value: profileDetails.contentDetails.recommendation
-        }];
+        recommendationItems = [
+          {
+            label: profileDetails.contentDetails.recommendation,
+            value: profileDetails.contentDetails.recommendation,
+          },
+        ];
       }
       setItemSelection(recommendationItems);
 
@@ -177,7 +202,7 @@ const ContentProfileInfo = () => {
         ...prevOptions,
         ...recommendationItems.filter(
           (item) => !prevOptions.some((option) => option.value === item.value)
-        )
+        ),
       ]);
     }
 
@@ -187,9 +212,6 @@ const ContentProfileInfo = () => {
     //   console.log("get select item ", selectedItems);
     //   setItemSelection(selectedItems);
     // }
-
-
-
   }, [profileDetails]);
 
   const handleChange = (index, e) => {
@@ -219,45 +241,91 @@ const ContentProfileInfo = () => {
 
   const handleAddYoutube = (e) => {
     e.preventDefault();
-    setYoutubeData([...youtubeData, { video_type: '', subscribers: '', per_video_reach: '', youtube_link: '', location: '', description: '' }]);
+    setYoutubeData([
+      ...youtubeData,
+      {
+        video_type: "",
+        subscribers: "",
+        per_video_reach: "",
+        youtube_link: "",
+        location: "",
+        description: "",
+      },
+    ]);
   };
   const handleAddInstagram = (e) => {
     e.preventDefault();
-    setInstagramData([...instagramData, { post_type: '', followers: '', per_video_reach: '', instagram_link: '', location: '', description: '' }]);
+    setInstagramData([
+      ...instagramData,
+      {
+        post_type: "",
+        followers: "",
+        per_video_reach: "",
+        instagram_link: "",
+        location: "",
+        description: "",
+      },
+    ]);
   };
   const handleAddFacebook = (e) => {
     e.preventDefault();
-    setFacebookData([...facebookData, { post_type: '', followers: '', per_video_reach: '', facebook_link: '', location: '', description: '' }]);
+    setFacebookData([
+      ...facebookData,
+      {
+        post_type: "",
+        followers: "",
+        per_video_reach: "",
+        facebook_link: "",
+        location: "",
+        description: "",
+      },
+    ]);
   };
 
   const handleAddMore = (e) => {
     e.preventDefault();
-    setCollaborations([...collaborations, { company_name: '', collaboration_type: '', partnership_duration: '', description_activity: '' }]);
+    setCollaborations([
+      ...collaborations,
+      {
+        company_name: "",
+        collaboration_type: "",
+        partnership_duration: "",
+        description_activity: "",
+      },
+    ]);
   };
-
 
   console.log(profileDetails?.ContentDetails?.business_name);
-  const [profilePic, setProfilePic] = useState(null);
 
-  const handleFileInputChange = (e) => {
-    const file = e.target.files[0];
+  // const handlePfpChange = (e) => {
+  //   const file = e.target.files[0];
 
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfilePic(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setProfilePic(reader.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
 
+  // const handleFileInputChange = (e) => {
+  //   const file = e.target.files[0];
+
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setProfilePic(reader.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
 
   // const handleRecommendationChange = (itemSelection) => {
   //   let updatedSelectedItems = itemSelection.map((item) => item.value);
   //   console.log(updatedSelectedItems);
   //   // setItemSelection(updatedSelectedItems);
   // };
-
 
   const handleRecommendationChange = (selectedItems) => {
     setItemSelection(selectedItems);
@@ -272,12 +340,9 @@ const ContentProfileInfo = () => {
   //   },
   // ];
 
-
   const youtubeDataString = JSON.stringify(youtubeData);
   const instagramDataString = JSON.stringify(instagramData);
   const facebookDataString = JSON.stringify(facebookData);
-
-
 
   const auth = useSelector((state) => state.auth);
   const { userDetails } = auth;
@@ -287,9 +352,9 @@ const ContentProfileInfo = () => {
     e.preventDefault();
     const formData = new FormData();
     const recommendationItemsData = itemSelection.map((item) => ({
-      item
+      item,
     }));
-    const selectedItemsValues = itemSelection.map(item => item);
+    const selectedItemsValues = itemSelection.map((item) => item);
 
     formData.append("user_id", userDetails?.user_id);
     if (profile) {
@@ -327,7 +392,10 @@ const ContentProfileInfo = () => {
     //   formData.append("channel_logo", logo, logoFileName);
     // }
     formData.append("channel_name", businessName);
-    formData.append("contact_no", profileDetails?.contentDetails?.contact_no || contact);
+    formData.append(
+      "contact_no",
+      profileDetails?.contentDetails?.contact_no || contact
+    );
     // formData.append("youtube", youtubeDataString)
     formData.append("youtube", JSON.stringify(youtubeData));
     formData.append("instagram", JSON.stringify(instagramData));
@@ -337,15 +405,17 @@ const ContentProfileInfo = () => {
     // itemSelection.forEach((item, index) => {
     //   formData.append('recommendation', item);
     // });
-    const modifiedSelection = itemSelection.map(item => item.value.replace(/"/g, ''));
+    const modifiedSelection = itemSelection.map((item) =>
+      item.value.replace(/"/g, "")
+    );
 
     // Then append the modifiedSelection to FormData
-    formData.append('recommendation', JSON.stringify(modifiedSelection));
-    const pastCompanyData = collaborations.map(collaboration => ({
+    formData.append("recommendation", JSON.stringify(modifiedSelection));
+    const pastCompanyData = collaborations.map((collaboration) => ({
       company_name: collaboration.company_name,
       collaboration_type: collaboration.collaboration_type,
       partnership_duration: collaboration.partnership_duration,
-      description_activity: collaboration.description_activity
+      description_activity: collaboration.description_activity,
     }));
 
     formData.append("past_company", JSON.stringify(pastCompanyData));
@@ -368,80 +438,227 @@ const ContentProfileInfo = () => {
     <>
       <div className="container-xl px-0">
         <div className="row">
-          <div className="box1 form-photos-box mt-2 d-flex justify-content-center p-3" style={{ width: '100%' }}>
+          {/* <div className="desktop-view">
+            <div
+              className="box1 form-photos-box mt-2 d-flex justify-content-center p-3"
+              style={{ width: "100%" }}
+            >
+              <div className="col-xl-4">
+                <div className="card mb-4 mb-xl-0">
+                  <div className="card-header">Profile Picture</div>
+                  <div className="card-body text-center">
+                    <img
+                      className="img-account-profile rounded-circle mb-2 mx-auto"
+                      src={
+                        profile
+                          ? typeof profile === "string"
+                            ? profile
+                            : URL.createObjectURL(profile)
+                          : noProfilepic
+                      }
+                      // src={URL.createObjectURL(profile)}
+                      alt="Profile Pic"
+                    />
+                    <div className="small font-italic text-muted mb-4">
+                      Your Profile Image
+                    </div>
+                    <input
+                      className="mx-auto w-75"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleProfileChange}
+                      // disabled={!editable}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="col-xl-4">
+                <div className="card mb-4 mb-xl-0">
+                  <div className="card-header">Cover Page</div>
+                  <div className="card-body text-center">
+                    <img
+                      className="img-account-profile mb-2 mx-auto"
+                      style={{ width: "100%" }}
+                      // src={cover ? URL.createObjectURL(cover) : noCover}
+                      src={
+                        cover
+                          ? typeof cover === "string"
+                            ? cover
+                            : URL.createObjectURL(cover)
+                          : noCover
+                      }
+                      alt="Profile Pic"
+                    />
+                    <div className="small font-italic text-muted mb-4">
+                      Your Channel Cover Image
+                    </div>
+                    <input
+                      className="mx-auto w-75"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleCoverChange}
+                      // disabled={!editable} // Disable input field when not in editing mode
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="col-xl-4">
+                <div className="card mb-4 mb-xl-0">
+                  <div className="card-header">Profile Picture</div>
+                  <div className="card-body text-center">
+                    <img
+                      className="img-account-profile rounded-circle mb-2 mx-auto"
+                      // src={logo ? URL.createObjectURL(logo) : noLogo}
+                      src={
+                        logo
+                          ? typeof logo === "string"
+                            ? logo
+                            : URL.createObjectURL(logo)
+                          : noLogo
+                      }
+                      alt="Profile Pic"
+                    />
 
-            <div className="col-xl-4">
-              <div className="card mb-4 mb-xl-0">
-                <div className="card-header">Profile Picture</div>
-                <div className="card-body text-center">
-                  <img
-                    className="img-account-profile rounded-circle mb-2 mx-auto"
-                    src={profile ? (typeof profile === "string" ? profile : URL.createObjectURL(profile)) : noProfilepic}
-                    // src={URL.createObjectURL(profile)}
-                    alt="Profile Pic"
-                  />
-                  <div className="small font-italic text-muted mb-4">
-                    Your Profile Image
+                    <div className="small font-italic text-muted mb-4">
+                      Your Channel Logo
+                    </div>
+                    <input
+                      className="mx-auto w-75"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleLogoChange}
+                      // disabled={!editable} // Disable input field when not in editing mode
+                    />
                   </div>
-                  <input
-                    className="mx-auto w-75"
-                    type="file"
-                    accept="image/*"
-                    onChange={handleProfileChange}
-                  // disabled={!editable}
-                  />
                 </div>
               </div>
             </div>
-            <div className="col-xl-4">
-              <div className="card mb-4 mb-xl-0">
-                <div className="card-header">Cover Page</div>
-                <div className="card-body text-center">
-                  <img
-                    className="img-account-profile mb-2 mx-auto"
-                    style={{ width: '100%' }}
-                    // src={cover ? URL.createObjectURL(cover) : noCover}
-                    src={cover ? (typeof cover === "string" ? cover : URL.createObjectURL(cover)) : noCover}
-                    alt="Profile Pic"
-                  />
-                  <div className="small font-italic text-muted mb-4">
-                    Your Channel Cover Image
+          </div> */}
+          {/* PROFILE PICTURE SECTION */}
+          <div className="col-12">
+            {/* <div className="mobile-view"> */}
+            <div className="container">
+              <div className="row py-5">
+                <div className="col-12 mx-auto p-0">
+                  <div className="bg-white shadow rounded overflow-hidden">
+                    <div
+                      className="px-4 pt-0 pb-4 cover"
+                      style={{
+                        backgroundImage: `url(${
+                          cover
+                            ? typeof cover === "string"
+                              ? cover
+                              : URL.createObjectURL(cover)
+                            : profilebg
+                        })`,
+                      }}
+                    >
+                      <div
+                        className="edit-cover d-flex justify-content-end"
+                        style={{ padding: "3%" }}
+                      >
+                        <button
+                          className="btn"
+                          style={{
+                            backgroundColor: "#ffffff4a",
+                            backdropFilter: "blur(10px)",
+                            boxShadow: "0px 2px 20px -4px rgba(0, 0, 0, 0.25)",
+                            fontSize: "x-large",
+                            marginRight: "-8%",
+                            padding: "2% 5%",
+                          }}
+                          onClick={handleCoverClick}
+                        >
+                          <i class="bi bi-pencil-square"></i>
+                        </button>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleCoverChange}
+                          ref={hiddenFileInput1}
+                          style={{ display: "none" }}
+                        />
+                      </div>
+                      <div className="media align-items-end profile-head">
+                        <div className="profile mr-3">
+                          <img
+                            src={
+                              profile
+                                ? typeof profile === "string"
+                                  ? profile
+                                  : URL.createObjectURL(profile)
+                                : noProfilepic
+                            }
+                            alt="..."
+                            width="130"
+                            className="rounded mb-2 img-thumbnail"
+                          />
+                          {/* <button className="btn btn-outline-dark btn-sm btn-block">
+                            Edit profile
+                          </button> */}
+                          <button
+                            className="btn btn-outline-dark btn-sm btn-block"
+                            onClick={handleProfileClick}
+                          >
+                            Edit profile
+                          </button>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleProfileChange}
+                            ref={hiddenFileInput2}
+                            style={{ display: "none" }}
+                          />
+                          {/* <input type="file" /> */}
+                        </div>
+                        <div className="media-body">
+                          <h5 className="mt-0 mb-0">
+                            {userDetails?.firstname}&nbsp;
+                            {userDetails?.lastname}
+                          </h5>
+                          <p className="small mb-0">{businessName}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="container d-flex flex-column align-items-end">
+                      {/* <ul className="list-inline mb-0">
+                        <li className="list-inline-item">
+                          <h5 className="font-weight-bold mb-0 d-block">215</h5>
+                          <small className="text-muted">
+                            <i className="fas fa-image mr-1"></i>Photos
+                          </small>
+                        </li>
+                        <li className="list-inline-item">
+                          <h5 className="font-weight-bold mb-0 d-block">745</h5>
+                          <small className="text-muted">
+                            <i className="fas fa-user mr-1"></i>Followers
+                          </small>
+                        </li>
+                        <li className="list-inline-item">
+                          <h5 className="font-weight-bold mb-0 d-block">340</h5>
+                          <small className="text-muted">
+                            <i className="fas fa-user mr-1"></i>Following
+                          </small>
+                        </li>
+                      </ul> */}
+                      {/* <h4 className="mt-0 mb-0">Mark Williams</h4> */}
+                      {/* <p className="small mb-4">New York</p> */}
+                    </div>
+                    <div className="px-4 py-3 mt-5">
+                      {/* <h5 className="mb-0">About</h5>
+                      <div className="p-4 rounded shadow-sm bg-light">
+                        <p className="font-italic mb-0">Web Developer</p>
+                        <p className="font-italic mb-0">Lives in New York</p>
+                        <p className="font-italic mb-0">Photographer</p>
+                      </div> */}
+                    </div>
                   </div>
-                  <input
-                    className="mx-auto w-75"
-                    type="file"
-                    accept="image/*"
-                    onChange={handleCoverChange}
-                  // disabled={!editable} // Disable input field when not in editing mode
-                  />
                 </div>
               </div>
             </div>
-            <div className="col-xl-4">
-              <div className="card mb-4 mb-xl-0">
-                <div className="card-header">Profile Picture</div>
-                <div className="card-body text-center">
-                  <img
-                    className="img-account-profile rounded-circle mb-2 mx-auto"
-                    // src={logo ? URL.createObjectURL(logo) : noLogo}
-                    src={logo ? (typeof logo === "string" ? logo : URL.createObjectURL(logo)) : noLogo}
-                    alt="Profile Pic"
-                  />
-
-                  <div className="small font-italic text-muted mb-4">
-                    Your Channel Logo
-                  </div>
-                  <input
-                    className="mx-auto w-75"
-                    type="file"
-                    accept="image/*"
-                    onChange={handleLogoChange}
-                  // disabled={!editable} // Disable input field when not in editing mode
-                  />
-                </div>
-              </div>
-            </div>
+            {/* </div> */}
           </div>
+          {/* PROFILE PICTURE SECTION */}
           <div className="container">
             <div className="card mb-4">
               <div className="card-header">Account Details</div>
@@ -499,7 +716,7 @@ const ContentProfileInfo = () => {
                       placeholder="Enter your organization name"
                       value={businessName}
                       onChange={handleInputChange}
-                    // disabled={!editable} // Disable input field when not in editing mode
+                      // disabled={!editable} // Disable input field when not in editing mode
                     />
                   </div>
                   <div className="mb-3">
@@ -513,8 +730,8 @@ const ContentProfileInfo = () => {
                       placeholder="Enter your email address"
                       value={contact}
                       // disabled={!editable} // Disable input field when not in editing mode
-                      onChange={(e) => setContact(e.target.value)} />
-
+                      onChange={(e) => setContact(e.target.value)}
+                    />
                   </div>
                   <div className="mb-3">
                     <label className="small mb-1" for="inputEmailAddress">
@@ -529,21 +746,36 @@ const ContentProfileInfo = () => {
                       value={itemSelection}
                     />
                   </div>
-                  <div className="container mb-4 mt-4" style={{ textAlign: 'center' }}>
-                    <label className="large mb-2" style={{ fontWeight: 'bold', fontSize: '18px' }}>
-                      "Past Work Experience" or "Collaborative Partnerships" 
-                      </label>
+                  <div
+                    className="container mb-4 mt-4"
+                    style={{ textAlign: "center" }}
+                  >
+                    <label
+                      className="large mb-2"
+                      style={{ fontWeight: "bold", fontSize: "18px" }}
+                    >
+                      "Past Work Experience" or "Collaborative Partnerships"
+                    </label>
                   </div>
                   <div>
                     {collaborations.map((collaboration, index) => (
                       <div key={index}>
-                        <div className="box1 form-photos-box mt-2 justify-content-center p-3" style={{ width: '100%', zIndex: '0' }}>
-                          <label className="large mb-2" style={{ fontWeight: 'bold', fontSize: '18px' }}>
+                        <div
+                          className="box1 form-photos-box mt-2 justify-content-center p-3"
+                          style={{ width: "100%", zIndex: "0" }}
+                        >
+                          <label
+                            className="large mb-2"
+                            style={{ fontWeight: "bold", fontSize: "18px" }}
+                          >
                             Enter Previous Collaboration
                           </label>
                           <div className="row gx-3 mb-3">
                             <div className="col-md-6">
-                              <label className="small mb-1" htmlFor={`companyName_${index}`}>
+                              <label
+                                className="small mb-1"
+                                htmlFor={`companyName_${index}`}
+                              >
                                 Company Name
                               </label>
                               <input
@@ -551,14 +783,17 @@ const ContentProfileInfo = () => {
                                 id={`companyName_${index}`}
                                 type="text"
                                 placeholder="Enter company name"
-                                value={collaboration.company_name || ''}
+                                value={collaboration.company_name || ""}
                                 onChange={(e) => handleChange(index, e)}
                                 name="company_name"
-                              // disabled={!editable} // Disable input field when not in editing mode
+                                // disabled={!editable} // Disable input field when not in editing mode
                               />
                             </div>
                             <div className="col-md-6">
-                              <label className="small mb-1" htmlFor={`collaborationType_${index}`}>
+                              <label
+                                className="small mb-1"
+                                htmlFor={`collaborationType_${index}`}
+                              >
                                 Collaboration Type
                               </label>
                               <input
@@ -566,16 +801,18 @@ const ContentProfileInfo = () => {
                                 id={`collaborationType_${index}`}
                                 type="text"
                                 placeholder="Enter collaboration type"
-                                value={collaboration.collaboration_type || ''}
+                                value={collaboration.collaboration_type || ""}
                                 onChange={(e) => handleChange(index, e)}
                                 name="collaboration_type"
-                              // disabled={!editable} // Disable input field when not in editing mode
-
+                                // disabled={!editable} // Disable input field when not in editing mode
                               />
                             </div>
                           </div>
                           <div className="form-group">
-                            <label className="small mb-1" htmlFor={`partnershipDuration_${index}`}>
+                            <label
+                              className="small mb-1"
+                              htmlFor={`partnershipDuration_${index}`}
+                            >
                               Partnership Duration
                             </label>
                             <input
@@ -583,15 +820,17 @@ const ContentProfileInfo = () => {
                               id={`partnershipDuration_${index}`}
                               type="text"
                               placeholder="Enter partnership duration"
-                              value={collaboration.partnership_duration || ''}
+                              value={collaboration.partnership_duration || ""}
                               onChange={(e) => handleChange(index, e)}
                               name="partnership_duration"
-                            // disabled={!editable} // Disable input field when not in editing mode
-
+                              // disabled={!editable} // Disable input field when not in editing mode
                             />
                           </div>
                           <div className="form-group">
-                            <label className="small mb-1" htmlFor={`description_${index}`}>
+                            <label
+                              className="small mb-1"
+                              htmlFor={`description_${index}`}
+                            >
                               Description
                             </label>
                             <textarea
@@ -599,24 +838,28 @@ const ContentProfileInfo = () => {
                               id={`description_${index}`}
                               type="text"
                               placeholder="Enter description"
-                              value={collaboration.description_activity || ''}
+                              value={collaboration.description_activity || ""}
                               onChange={(e) => handleChange(index, e)}
                               name="description_activity"
                               col="30"
                               rows="5"
-                            // disabled={!editable} // Disable input field when not in editing mode
+                              // disabled={!editable} // Disable input field when not in editing mode
                             />
                           </div>
                         </div>
                       </div>
                     ))}
-                    <button className="btn btn-primary" style={{ width: '100%' }} onClick={handleAddMore}>Add Experience</button>
+                    <button
+                      className="btn btn-primary"
+                      style={{ width: "100%" }}
+                      onClick={handleAddMore}
+                    >
+                      Add Experience
+                    </button>
                     {/* <button className="btn btn-primary" onClick={handleSubmitClick}>Submit</button> */}
                   </div>
                   <div className="my-3">
-                    <h2>
-                      Social Media Container
-                    </h2>
+                    <h2>Social Media Container</h2>
                     <div className="container p-0 my-3">
                       <Tabs
                         defaultActiveKey="profile"
@@ -631,7 +874,10 @@ const ContentProfileInfo = () => {
                               <div key={index}>
                                 <div className="row gx-3 mb-3">
                                   <div className="col-md-6">
-                                    <label className="small mb-1" htmlFor={`inputVideoType_${index}`}>
+                                    <label
+                                      className="small mb-1"
+                                      htmlFor={`inputVideoType_${index}`}
+                                    >
                                       Video Type
                                     </label>
                                     <input
@@ -640,12 +886,21 @@ const ContentProfileInfo = () => {
                                       type="text"
                                       // disabled={!editable} // Disable input field when not in editing mode
                                       placeholder="Enter video type"
-                                      value={youtube.video_type || ''}
-                                      onChange={(e) => handleYoutubeChange(index, 'video_type', e.target.value)}
+                                      value={youtube.video_type || ""}
+                                      onChange={(e) =>
+                                        handleYoutubeChange(
+                                          index,
+                                          "video_type",
+                                          e.target.value
+                                        )
+                                      }
                                     />
                                   </div>
                                   <div className="col-md-6">
-                                    <label className="small mb-1" htmlFor={`inputSubscribers_${index}`}>
+                                    <label
+                                      className="small mb-1"
+                                      htmlFor={`inputSubscribers_${index}`}
+                                    >
                                       Subscribers
                                     </label>
                                     <input
@@ -654,14 +909,23 @@ const ContentProfileInfo = () => {
                                       type="text"
                                       // disabled={!editable} // Disable input field when not in editing mode
                                       placeholder="Enter subscribers"
-                                      value={youtube.subscribers || ''}
-                                      onChange={(e) => handleYoutubeChange(index, 'subscribers', e.target.value)}
+                                      value={youtube.subscribers || ""}
+                                      onChange={(e) =>
+                                        handleYoutubeChange(
+                                          index,
+                                          "subscribers",
+                                          e.target.value
+                                        )
+                                      }
                                     />
                                   </div>
                                 </div>
                                 <div className="row gx-3 mb-3">
                                   <div className="col-md-6">
-                                    <label className="small mb-1" htmlFor={`inputPerVideoReach_${index}`}>
+                                    <label
+                                      className="small mb-1"
+                                      htmlFor={`inputPerVideoReach_${index}`}
+                                    >
                                       Per Video Reach
                                     </label>
                                     <input
@@ -670,12 +934,21 @@ const ContentProfileInfo = () => {
                                       type="text"
                                       // disabled={!editable} // Disable input field when not in editing mode
                                       placeholder="Enter per video reach"
-                                      value={youtube.per_video_reach || ''}
-                                      onChange={(e) => handleYoutubeChange(index, 'per_video_reach', e.target.value)}
+                                      value={youtube.per_video_reach || ""}
+                                      onChange={(e) =>
+                                        handleYoutubeChange(
+                                          index,
+                                          "per_video_reach",
+                                          e.target.value
+                                        )
+                                      }
                                     />
                                   </div>
                                   <div className="col-md-6">
-                                    <label className="small mb-1" htmlFor={`inputYoutubeLink_${index}`}>
+                                    <label
+                                      className="small mb-1"
+                                      htmlFor={`inputYoutubeLink_${index}`}
+                                    >
                                       YouTube Link
                                     </label>
                                     <input
@@ -684,14 +957,23 @@ const ContentProfileInfo = () => {
                                       type="text"
                                       // disabled={!editable} // Disable input field when not in editing mode
                                       placeholder="Enter YouTube link"
-                                      value={youtube.youtube_link || ''}
-                                      onChange={(e) => handleYoutubeChange(index, 'youtube_link', e.target.value)}
+                                      value={youtube.youtube_link || ""}
+                                      onChange={(e) =>
+                                        handleYoutubeChange(
+                                          index,
+                                          "youtube_link",
+                                          e.target.value
+                                        )
+                                      }
                                     />
                                   </div>
                                 </div>
                                 <div className="row gx-3 mb-3">
                                   <div className="col-md-6">
-                                    <label className="small mb-1" htmlFor={`inputLocation_${index}`}>
+                                    <label
+                                      className="small mb-1"
+                                      htmlFor={`inputLocation_${index}`}
+                                    >
                                       Location
                                     </label>
                                     <input
@@ -700,12 +982,21 @@ const ContentProfileInfo = () => {
                                       type="text"
                                       // disabled={!editable} // Disable input field when not in editing mode
                                       placeholder="Enter location"
-                                      value={youtube.location || ''}
-                                      onChange={(e) => handleYoutubeChange(index, 'location', e.target.value)}
+                                      value={youtube.location || ""}
+                                      onChange={(e) =>
+                                        handleYoutubeChange(
+                                          index,
+                                          "location",
+                                          e.target.value
+                                        )
+                                      }
                                     />
                                   </div>
                                   <div className="col-md-6">
-                                    <label className="small mb-1" htmlFor={`inputDescription_${index}`}>
+                                    <label
+                                      className="small mb-1"
+                                      htmlFor={`inputDescription_${index}`}
+                                    >
                                       Description
                                     </label>
                                     <textarea
@@ -713,15 +1004,26 @@ const ContentProfileInfo = () => {
                                       id={`inputDescription_${index}`}
                                       placeholder="Enter description"
                                       // disabled={!editable} // Disable input field when not in editing mode
-                                      value={youtube.description || ''}
-                                      onChange={(e) => handleYoutubeChange(index, 'description', e.target.value)}
+                                      value={youtube.description || ""}
+                                      onChange={(e) =>
+                                        handleYoutubeChange(
+                                          index,
+                                          "description",
+                                          e.target.value
+                                        )
+                                      }
                                       rows="3"
                                     />
                                   </div>
                                 </div>
                               </div>
                             ))}
-                            <button className="btn btn-primary" onClick={handleAddYoutube}>Add YouTube Data</button>
+                            <button
+                              className="btn btn-primary"
+                              onClick={handleAddYoutube}
+                            >
+                              Add YouTube Data
+                            </button>
                           </div>
                         </Tab>
                         <Tab eventKey="security" title="Instagram">
@@ -731,7 +1033,10 @@ const ContentProfileInfo = () => {
                               <div key={index}>
                                 <div className="row gx-3 mb-3">
                                   <div className="col-md-6">
-                                    <label className="small mb-1" htmlFor={`inputVideoType_${index}`}>
+                                    <label
+                                      className="small mb-1"
+                                      htmlFor={`inputVideoType_${index}`}
+                                    >
                                       Video Type
                                     </label>
                                     <input
@@ -741,12 +1046,21 @@ const ContentProfileInfo = () => {
                                       // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter video type"
-                                      value={instagram.post_type || ''}
-                                      onChange={(e) => handleInstagramChange(index, 'post_type', e.target.value)}
+                                      value={instagram.post_type || ""}
+                                      onChange={(e) =>
+                                        handleInstagramChange(
+                                          index,
+                                          "post_type",
+                                          e.target.value
+                                        )
+                                      }
                                     />
                                   </div>
                                   <div className="col-md-6">
-                                    <label className="small mb-1" htmlFor={`inputSubscribers_${index}`}>
+                                    <label
+                                      className="small mb-1"
+                                      htmlFor={`inputSubscribers_${index}`}
+                                    >
                                       Subscribers
                                     </label>
                                     <input
@@ -756,14 +1070,23 @@ const ContentProfileInfo = () => {
                                       // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter followers"
-                                      value={instagram.followers || ''}
-                                      onChange={(e) => handleInstagramChange(index, 'followers', e.target.value)}
+                                      value={instagram.followers || ""}
+                                      onChange={(e) =>
+                                        handleInstagramChange(
+                                          index,
+                                          "followers",
+                                          e.target.value
+                                        )
+                                      }
                                     />
                                   </div>
                                 </div>
                                 <div className="row gx-3 mb-3">
                                   <div className="col-md-6">
-                                    <label className="small mb-1" htmlFor={`inputPerVideoReach_${index}`}>
+                                    <label
+                                      className="small mb-1"
+                                      htmlFor={`inputPerVideoReach_${index}`}
+                                    >
                                       Per Video Reach
                                     </label>
                                     <input
@@ -773,12 +1096,21 @@ const ContentProfileInfo = () => {
                                       // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter per video reach"
-                                      value={instagram.per_video_reach || ''}
-                                      onChange={(e) => handleInstagramChange(index, 'per_video_reach', e.target.value)}
+                                      value={instagram.per_video_reach || ""}
+                                      onChange={(e) =>
+                                        handleInstagramChange(
+                                          index,
+                                          "per_video_reach",
+                                          e.target.value
+                                        )
+                                      }
                                     />
                                   </div>
                                   <div className="col-md-6">
-                                    <label className="small mb-1" htmlFor={`inputYoutubeLink_${index}`}>
+                                    <label
+                                      className="small mb-1"
+                                      htmlFor={`inputYoutubeLink_${index}`}
+                                    >
                                       YouTube Link
                                     </label>
                                     <input
@@ -788,14 +1120,23 @@ const ContentProfileInfo = () => {
                                       // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter Instagram link"
-                                      value={instagram.instagram_link || ''}
-                                      onChange={(e) => handleInstagramChange(index, 'instagram_link', e.target.value)}
+                                      value={instagram.instagram_link || ""}
+                                      onChange={(e) =>
+                                        handleInstagramChange(
+                                          index,
+                                          "instagram_link",
+                                          e.target.value
+                                        )
+                                      }
                                     />
                                   </div>
                                 </div>
                                 <div className="row gx-3 mb-3">
                                   <div className="col-md-6">
-                                    <label className="small mb-1" htmlFor={`inputLocation_${index}`}>
+                                    <label
+                                      className="small mb-1"
+                                      htmlFor={`inputLocation_${index}`}
+                                    >
                                       Location
                                     </label>
                                     <input
@@ -805,12 +1146,21 @@ const ContentProfileInfo = () => {
                                       // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter location"
-                                      value={instagram.location || ''}
-                                      onChange={(e) => handleInstagramChange(index, 'location', e.target.value)}
+                                      value={instagram.location || ""}
+                                      onChange={(e) =>
+                                        handleInstagramChange(
+                                          index,
+                                          "location",
+                                          e.target.value
+                                        )
+                                      }
                                     />
                                   </div>
                                   <div className="col-md-6">
-                                    <label className="small mb-1" htmlFor={`inputDescription_${index}`}>
+                                    <label
+                                      className="small mb-1"
+                                      htmlFor={`inputDescription_${index}`}
+                                    >
                                       Description
                                     </label>
                                     <textarea
@@ -818,15 +1168,26 @@ const ContentProfileInfo = () => {
                                       id={`inputDescription_${index}`}
                                       placeholder="Enter description"
                                       // disabled={!editable} // Disable input field when not in editing mode
-                                      value={instagram.description || ''}
-                                      onChange={(e) => handleInstagramChange(index, 'description', e.target.value)}
+                                      value={instagram.description || ""}
+                                      onChange={(e) =>
+                                        handleInstagramChange(
+                                          index,
+                                          "description",
+                                          e.target.value
+                                        )
+                                      }
                                       rows="3"
                                     />
                                   </div>
                                 </div>
                               </div>
                             ))}
-                            <button className="btn btn-primary" onClick={handleAddInstagram}>Add Instagram Data</button>
+                            <button
+                              className="btn btn-primary"
+                              onClick={handleAddInstagram}
+                            >
+                              Add Instagram Data
+                            </button>
                           </div>
                         </Tab>
                         <Tab eventKey="notification" title="Facebook">
@@ -836,7 +1197,10 @@ const ContentProfileInfo = () => {
                               <div key={index}>
                                 <div className="row gx-3 mb-3">
                                   <div className="col-md-6">
-                                    <label className="small mb-1" htmlFor={`inputVideoType_${index}`}>
+                                    <label
+                                      className="small mb-1"
+                                      htmlFor={`inputVideoType_${index}`}
+                                    >
                                       Video Type
                                     </label>
                                     <input
@@ -846,12 +1210,21 @@ const ContentProfileInfo = () => {
                                       // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter video type"
-                                      value={facebook.post_type || ''}
-                                      onChange={(e) => handleFacebookChange(index, 'post_type', e.target.value)}
+                                      value={facebook.post_type || ""}
+                                      onChange={(e) =>
+                                        handleFacebookChange(
+                                          index,
+                                          "post_type",
+                                          e.target.value
+                                        )
+                                      }
                                     />
                                   </div>
                                   <div className="col-md-6">
-                                    <label className="small mb-1" htmlFor={`inputSubscribers_${index}`}>
+                                    <label
+                                      className="small mb-1"
+                                      htmlFor={`inputSubscribers_${index}`}
+                                    >
                                       Subscribers
                                     </label>
                                     <input
@@ -861,14 +1234,23 @@ const ContentProfileInfo = () => {
                                       // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter followers"
-                                      value={facebook.followers || ''}
-                                      onChange={(e) => handleFacebookChange(index, 'followers', e.target.value)}
+                                      value={facebook.followers || ""}
+                                      onChange={(e) =>
+                                        handleFacebookChange(
+                                          index,
+                                          "followers",
+                                          e.target.value
+                                        )
+                                      }
                                     />
                                   </div>
                                 </div>
                                 <div className="row gx-3 mb-3">
                                   <div className="col-md-6">
-                                    <label className="small mb-1" htmlFor={`inputPerVideoReach_${index}`}>
+                                    <label
+                                      className="small mb-1"
+                                      htmlFor={`inputPerVideoReach_${index}`}
+                                    >
                                       Per Video Reach
                                     </label>
                                     <input
@@ -878,12 +1260,21 @@ const ContentProfileInfo = () => {
                                       // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter per video reach"
-                                      value={facebook.per_video_reach || ''}
-                                      onChange={(e) => handleFacebookChange(index, 'per_video_reach', e.target.value)}
+                                      value={facebook.per_video_reach || ""}
+                                      onChange={(e) =>
+                                        handleFacebookChange(
+                                          index,
+                                          "per_video_reach",
+                                          e.target.value
+                                        )
+                                      }
                                     />
                                   </div>
                                   <div className="col-md-6">
-                                    <label className="small mb-1" htmlFor={`inputYoutubeLink_${index}`}>
+                                    <label
+                                      className="small mb-1"
+                                      htmlFor={`inputYoutubeLink_${index}`}
+                                    >
                                       YouTube Link
                                     </label>
                                     <input
@@ -893,14 +1284,23 @@ const ContentProfileInfo = () => {
                                       // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter facebook link"
-                                      value={facebook.facebook_link || ''}
-                                      onChange={(e) => handleFacebookChange(index, 'facebook_link', e.target.value)}
+                                      value={facebook.facebook_link || ""}
+                                      onChange={(e) =>
+                                        handleFacebookChange(
+                                          index,
+                                          "facebook_link",
+                                          e.target.value
+                                        )
+                                      }
                                     />
                                   </div>
                                 </div>
                                 <div className="row gx-3 mb-3">
                                   <div className="col-md-6">
-                                    <label className="small mb-1" htmlFor={`inputLocation_${index}`}>
+                                    <label
+                                      className="small mb-1"
+                                      htmlFor={`inputLocation_${index}`}
+                                    >
                                       Location
                                     </label>
                                     <input
@@ -910,12 +1310,21 @@ const ContentProfileInfo = () => {
                                       // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter location"
-                                      value={facebook.location || ''}
-                                      onChange={(e) => handleFacebookChange(index, 'location', e.target.value)}
+                                      value={facebook.location || ""}
+                                      onChange={(e) =>
+                                        handleFacebookChange(
+                                          index,
+                                          "location",
+                                          e.target.value
+                                        )
+                                      }
                                     />
                                   </div>
                                   <div className="col-md-6">
-                                    <label className="small mb-1" htmlFor={`inputDescription_${index}`}>
+                                    <label
+                                      className="small mb-1"
+                                      htmlFor={`inputDescription_${index}`}
+                                    >
                                       Description
                                     </label>
                                     <textarea
@@ -923,15 +1332,26 @@ const ContentProfileInfo = () => {
                                       id={`inputDescription_${index}`}
                                       placeholder="Enter description"
                                       // disabled={!editable} // Disable input field when not in editing mode
-                                      value={facebook.description || ''}
-                                      onChange={(e) => handleFacebookChange(index, 'description', e.target.value)}
+                                      value={facebook.description || ""}
+                                      onChange={(e) =>
+                                        handleFacebookChange(
+                                          index,
+                                          "description",
+                                          e.target.value
+                                        )
+                                      }
                                       rows="3"
                                     />
                                   </div>
                                 </div>
                               </div>
                             ))}
-                            <button className="btn btn-primary" onClick={handleAddFacebook}>Add Facebook Data</button>
+                            <button
+                              className="btn btn-primary"
+                              onClick={handleAddFacebook}
+                            >
+                              Add Facebook Data
+                            </button>
                           </div>
                         </Tab>
                       </Tabs>
@@ -949,7 +1369,14 @@ const ContentProfileInfo = () => {
                     )}
                   </div> */}
                   <div className="container">
-                    <button className="btn btn-primary" style={{ width: '100%' }} type="button" onClick={handleSubmitClick}>Save Changes</button>
+                    <button
+                      className="btn btn-primary"
+                      style={{ width: "100%" }}
+                      type="button"
+                      onClick={handleSubmitClick}
+                    >
+                      Save Changes
+                    </button>
                   </div>
                 </form>
               </div>
