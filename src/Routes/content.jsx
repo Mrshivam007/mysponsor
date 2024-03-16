@@ -28,7 +28,7 @@ const ContentRoutes = () => {
   return (
     <>
       <NavBar />
-      <ErrorBoundary>
+      {/* <ErrorBoundary> */}
       <Routes>
         <Route path="/" element={<CCHome />} />
         <Route path="/create_content" element={<CCForm />} />
@@ -67,7 +67,7 @@ const ContentRoutes = () => {
         <Route path="/login" element={<Navigate to={"/"} />} />
         <Route path="/signup" element={<Navigate to={"/"} />} />
       </Routes>
-      </ErrorBoundary>
+      {/* </ErrorBoundary> */}
       <ContentFooter />
     </>
   );

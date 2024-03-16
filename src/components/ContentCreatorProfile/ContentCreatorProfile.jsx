@@ -7,11 +7,25 @@ import RecommendationSection from "./Recommendation";
 import CreatorPlatform from "./CreatorPlatform";
 import Records from "./Records";
 import CreatorUpcomingContent from "./CreatorUpcomingContent";
+import { useLocation } from "react-router-dom";
+import { fetchCreatorbyId } from "../../redux/actions/creatorAction";
+import { useDispatch, useSelector } from "react-redux";
+import ContentCard from "../../pages/LandingPage/Desktop_Sponsor_CC/ContentCard";
 // import Test from "./test";
 const ContentCreatorProfile = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top of the page on component mount
   }, []);
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const contentData = location.state?.creatorData || null;
+  console.log("Creator Data ", contentData);
+  const creator_id = contentData?.user_id?.id
+  const creatorById = useSelector((state) => state.creator);
+  useEffect(() => {
+    dispatch(fetchCreatorbyId(creator_id));
+  }, []);
+  console.log("creator by id ", creatorById.creatorById?.upcoming_content);
   const Stats = [
     {
       platform: "Youtube",
@@ -132,108 +146,6 @@ const ContentCreatorProfile = () => {
                 </div>
               </div>
             </div>
-            {/* <div
-              className="container"
-              style={{
-                background: "#f2f2f2",
-                borderRadius: "15px",
-                padding: "3%",
-                marginBottom:"2%"
-              }}
-            >
-              <h2 className="text-center">Recommendations by the Creator</h2>
-              <div className="container">
-                <div className="row">
-                  {Circle.map((data) => (
-                    <div className="col-6 col-md-2">
-                      <div className="circle">
-                        <h6 className="text">{data}</h6>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div> */}
-            {/* <section id="features" class="features">
-              <div class="container">
-
-                <div class="row">
-                  <div class="col-lg-3 col-md-4 col-6 col-6">
-                    <div class="icon-box">
-                      <i class="bi bi-shop"></i>
-                      <h3><a href="">Lorem Ipsum</a></h3>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-6">
-                    <div class="icon-box">
-                      <i class="bi bi-bar-chart-line"></i>
-                      <h3><a href="">Dolor Sitema</a></h3>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-6 mt-4 mt-md-0">
-                    <div class="icon-box">
-                      <i class="bi bi-calendar-check"></i>
-                      <h3><a href="">Sed perspiciatis</a></h3>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-6 mt-4 mt-lg-0">
-                    <div class="icon-box">
-                      <i class="bi bi-brush"></i>
-                      <h3><a href="">Magni Dolores</a></h3>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-6 mt-4">
-                    <div class="icon-box">
-                      <i class="bi bi-database"></i>
-                      <h3><a href="">Nemo Enim</a></h3>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-6 mt-4">
-                    <div class="icon-box">
-                      <i class="bi bi-gradient"></i>
-                      <h3><a href="">Eiusmod Tempor</a></h3>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-6 mt-4">
-                    <div class="icon-box">
-                      <i class="bi bi-files"></i>
-                      <h3><a href="">Midela Teren</a></h3>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-6 mt-4">
-                    <div class="icon-box">
-                      <i class="bi bi-tag"></i>
-                      <h3><a href="">Pira Neve</a></h3>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-6 mt-4">
-                    <div class="icon-box">
-                      <i class="bi bi-anchor"></i>
-                      <h3><a href="">Dirada Pack</a></h3>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-6 mt-4">
-                    <div class="icon-box">
-                      <i class="bi bi-disc"></i>
-                      <h3><a href="">Moton Ideal</a></h3>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-6 mt-4">
-                    <div class="icon-box">
-                      <i class="bi bi-wifi"></i>
-                      <h3><a href="">Verdo Park</a></h3>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-6 mt-4">
-                    <div class="icon-box">
-                      <i class="bi bi-fingerprint"></i>
-                      <h3><a href="">Flavor Nivelanda</a></h3>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </section> */}
             <div className="container">
               <div class="line-text">Recommendation According to Stats</div>
             </div>
@@ -250,7 +162,11 @@ const ContentCreatorProfile = () => {
             <div className="container">
               <div class="line-text">Upcoming Contents from the Creator</div>
             </div>
-            <CreatorUpcomingContent />
+            {/* <CreatorUpcomingContent /> */}
+            <ContentCard
+              // line={"Creator Upcoming Content"}
+              cardData={creatorById.creatorById?.upcoming_content}
+            />
           </div>
         </div>
         {/* DESKTOP VIEW END  */}

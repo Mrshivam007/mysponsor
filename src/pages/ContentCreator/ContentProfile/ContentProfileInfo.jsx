@@ -21,7 +21,23 @@ const ContentProfileInfo = () => {
 
   const animatedComponents = makeAnimated();
 
-  const itemOptions = [
+  // const itemOptions = [
+  //   { value: "Health Care", label: "Health Care" },
+  //   { value: "Fashion", label: "Fashion" },
+  //   { value: "Sports", label: "Sports" },
+  //   { value: "Food", label: "Food" },
+  //   { value: "Travel", label: "Travel" },
+  //   { value: "Technology", label: "Technology" },
+  //   { value: "Lifestyle", label: "Lifestyle" },
+  //   { value: "Family", label: "Family" },
+  //   { value: "Gaming", label: "Gaming" },
+  //   { value: "Finance", label: "Finance" }
+  // ];
+
+
+  const [itemSelection, setItemSelection] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const [itemOptions, setItemOptions] = useState([
     { value: "Health Care", label: "Health Care" },
     { value: "Fashion", label: "Fashion" },
     { value: "Sports", label: "Sports" },
@@ -32,10 +48,7 @@ const ContentProfileInfo = () => {
     { value: "Family", label: "Family" },
     { value: "Gaming", label: "Gaming" },
     { value: "Finance", label: "Finance" }
-  ];
-
-
-  const [itemSelection, setItemSelection] = useState([]);
+  ]);
 
   console.log("Sponsor Profile ", profileDetails);
   const [editable, setEditable] = useState(false); // State to track whether editing mode is enabled
@@ -142,6 +155,40 @@ const ContentProfileInfo = () => {
     if (profileDetails?.contentDetails?.facebook) {
       setFacebookData(profileDetails.contentDetails.facebook);
     }
+    if (profileDetails?.contentDetails?.recommendation) {
+      let recommendationItems;
+      if (Array.isArray(profileDetails.contentDetails.recommendation)) {
+        // If multiple recommendation items, map them to objects
+        recommendationItems = profileDetails.contentDetails.recommendation.map((item) => ({
+          label: item,
+          value: item
+        }));
+      } else {
+        // If only one recommendation item, create an array with one object
+        recommendationItems = [{
+          label: profileDetails.contentDetails.recommendation,
+          value: profileDetails.contentDetails.recommendation
+        }];
+      }
+      setItemSelection(recommendationItems);
+
+      // Merge recommendation data with itemOptions
+      setItemOptions((prevOptions) => [
+        ...prevOptions,
+        ...recommendationItems.filter(
+          (item) => !prevOptions.some((option) => option.value === item.value)
+        )
+      ]);
+    }
+
+    // if (profileDetails?.contentDetails?.recommendation) {
+    //   const recommendationArray = profileDetails.contentDetails.recommendation.map(item => JSON.parse(item));
+    //   const selectedItems = recommendationArray.map(item => ({ value: item }));
+    //   console.log("get select item ", selectedItems);
+    //   setItemSelection(selectedItems);
+    // }
+
+
 
   }, [profileDetails]);
 
@@ -204,10 +251,16 @@ const ContentProfileInfo = () => {
     }
   };
 
-  const handleRecommendationChange = (itemSelection) => {
-    let updatedSelectedItems = itemSelection.map((item) => item.value);
-    console.log(updatedSelectedItems);
-    setItemSelection(updatedSelectedItems);
+
+  // const handleRecommendationChange = (itemSelection) => {
+  //   let updatedSelectedItems = itemSelection.map((item) => item.value);
+  //   console.log(updatedSelectedItems);
+  //   // setItemSelection(updatedSelectedItems);
+  // };
+
+
+  const handleRecommendationChange = (selectedItems) => {
+    setItemSelection(selectedItems);
   };
 
   // const youtubeData = [
@@ -240,15 +293,39 @@ const ContentProfileInfo = () => {
 
     formData.append("user_id", userDetails?.user_id);
     if (profile) {
-      formData.append("profil_pic", profile, profileFileName);
+      if (typeof profile === "string") {
+        // Append the profile URL directly
+        formData.append("profile_pic", profile); // Change the field name as needed
+      } else {
+        // Append the profile file with its name
+        formData.append("profile_pic", profile, profileFileName); // Change the field name as needed
+      }
     }
     if (cover) {
-      formData.append("cover_page", cover, coverFileName);
+      if (typeof cover === "string") {
+        // Append the cover URL directly
+        formData.append("cover_page", cover); // Change the field name as needed
+      } else {
+        // Append the cover file with its name
+        formData.append("cover_page", cover, coverFileName); // Change the field name as needed
+      }
     }
-
     if (logo) {
-      formData.append("channel_logo", logo, logoFileName);
+      if (typeof logo === "string") {
+        // Append the logo URL directly
+        formData.append("channel_logo", logo); // Change the field name as needed
+      } else {
+        // Append the logo file with its name
+        formData.append("channel_logo", logo, logoFileName); // Change the field name as needed
+      }
     }
+    // if (cover) {
+    //   formData.append("cover_page", cover, coverFileName);
+    // }
+
+    // if (logo) {
+    //   formData.append("channel_logo", logo, logoFileName);
+    // }
     formData.append("channel_name", businessName);
     formData.append("contact_no", profileDetails?.contentDetails?.contact_no || contact);
     // formData.append("youtube", youtubeDataString)
@@ -257,9 +334,13 @@ const ContentProfileInfo = () => {
     formData.append("facebook", JSON.stringify(facebookData));
     // formData.append("instagram", instagramDataString)
     // formData.append("facebook", facebookDataString)
-    itemSelection.forEach((item, index) => {
-      formData.append('recommendation', item);
-    });
+    // itemSelection.forEach((item, index) => {
+    //   formData.append('recommendation', item);
+    // });
+    const modifiedSelection = itemSelection.map(item => item.value.replace(/"/g, ''));
+
+    // Then append the modifiedSelection to FormData
+    formData.append('recommendation', JSON.stringify(modifiedSelection));
     const pastCompanyData = collaborations.map(collaboration => ({
       company_name: collaboration.company_name,
       collaboration_type: collaboration.collaboration_type,
@@ -281,6 +362,7 @@ const ContentProfileInfo = () => {
   };
 
   console.log(profileDetails?.contentDetails?.contact_no);
+  console.log("getting profile pic ", profile);
 
   return (
     <>
@@ -294,7 +376,8 @@ const ContentProfileInfo = () => {
                 <div className="card-body text-center">
                   <img
                     className="img-account-profile rounded-circle mb-2 mx-auto"
-                    src={profile ? URL.createObjectURL(profile) : noProfilepic}
+                    src={profile ? (typeof profile === "string" ? profile : URL.createObjectURL(profile)) : noProfilepic}
+                    // src={URL.createObjectURL(profile)}
                     alt="Profile Pic"
                   />
                   <div className="small font-italic text-muted mb-4">
@@ -305,7 +388,7 @@ const ContentProfileInfo = () => {
                     type="file"
                     accept="image/*"
                     onChange={handleProfileChange}
-                    disabled={!editable} // Disable input field when not in editing mode
+                  // disabled={!editable}
                   />
                 </div>
               </div>
@@ -317,7 +400,8 @@ const ContentProfileInfo = () => {
                   <img
                     className="img-account-profile mb-2 mx-auto"
                     style={{ width: '100%' }}
-                    src={cover ? URL.createObjectURL(cover) : noCover}
+                    // src={cover ? URL.createObjectURL(cover) : noCover}
+                    src={cover ? (typeof cover === "string" ? cover : URL.createObjectURL(cover)) : noCover}
                     alt="Profile Pic"
                   />
                   <div className="small font-italic text-muted mb-4">
@@ -328,7 +412,7 @@ const ContentProfileInfo = () => {
                     type="file"
                     accept="image/*"
                     onChange={handleCoverChange}
-                    disabled={!editable} // Disable input field when not in editing mode
+                  // disabled={!editable} // Disable input field when not in editing mode
                   />
                 </div>
               </div>
@@ -339,7 +423,8 @@ const ContentProfileInfo = () => {
                 <div className="card-body text-center">
                   <img
                     className="img-account-profile rounded-circle mb-2 mx-auto"
-                    src={logo ? URL.createObjectURL(logo) : noLogo}
+                    // src={logo ? URL.createObjectURL(logo) : noLogo}
+                    src={logo ? (typeof logo === "string" ? logo : URL.createObjectURL(logo)) : noLogo}
                     alt="Profile Pic"
                   />
 
@@ -351,7 +436,7 @@ const ContentProfileInfo = () => {
                     type="file"
                     accept="image/*"
                     onChange={handleLogoChange}
-                    disabled={!editable} // Disable input field when not in editing mode
+                  // disabled={!editable} // Disable input field when not in editing mode
                   />
                 </div>
               </div>
@@ -414,7 +499,7 @@ const ContentProfileInfo = () => {
                       placeholder="Enter your organization name"
                       value={businessName}
                       onChange={handleInputChange}
-                      disabled={!editable} // Disable input field when not in editing mode
+                    // disabled={!editable} // Disable input field when not in editing mode
                     />
                   </div>
                   <div className="mb-3">
@@ -427,7 +512,7 @@ const ContentProfileInfo = () => {
                       type="email"
                       placeholder="Enter your email address"
                       value={contact}
-                      disabled={!editable} // Disable input field when not in editing mode
+                      // disabled={!editable} // Disable input field when not in editing mode
                       onChange={(e) => setContact(e.target.value)} />
 
                   </div>
@@ -441,7 +526,13 @@ const ContentProfileInfo = () => {
                       onChange={handleRecommendationChange}
                       isMulti
                       options={itemOptions}
+                      value={itemSelection}
                     />
+                  </div>
+                  <div className="container mb-4 mt-4" style={{ textAlign: 'center' }}>
+                    <label className="large mb-2" style={{ fontWeight: 'bold', fontSize: '18px' }}>
+                      "Past Work Experience" or "Collaborative Partnerships" 
+                      </label>
                   </div>
                   <div>
                     {collaborations.map((collaboration, index) => (
@@ -463,7 +554,7 @@ const ContentProfileInfo = () => {
                                 value={collaboration.company_name || ''}
                                 onChange={(e) => handleChange(index, e)}
                                 name="company_name"
-                                disabled={!editable} // Disable input field when not in editing mode
+                              // disabled={!editable} // Disable input field when not in editing mode
                               />
                             </div>
                             <div className="col-md-6">
@@ -478,7 +569,7 @@ const ContentProfileInfo = () => {
                                 value={collaboration.collaboration_type || ''}
                                 onChange={(e) => handleChange(index, e)}
                                 name="collaboration_type"
-                                disabled={!editable} // Disable input field when not in editing mode
+                              // disabled={!editable} // Disable input field when not in editing mode
 
                               />
                             </div>
@@ -495,7 +586,7 @@ const ContentProfileInfo = () => {
                               value={collaboration.partnership_duration || ''}
                               onChange={(e) => handleChange(index, e)}
                               name="partnership_duration"
-                              disabled={!editable} // Disable input field when not in editing mode
+                            // disabled={!editable} // Disable input field when not in editing mode
 
                             />
                           </div>
@@ -513,18 +604,18 @@ const ContentProfileInfo = () => {
                               name="description_activity"
                               col="30"
                               rows="5"
-                              disabled={!editable} // Disable input field when not in editing mode
+                            // disabled={!editable} // Disable input field when not in editing mode
                             />
                           </div>
                         </div>
                       </div>
                     ))}
-                    <button className="btn btn-primary" onClick={handleAddMore}>Add More</button>
+                    <button className="btn btn-primary" style={{ width: '100%' }} onClick={handleAddMore}>Add Experience</button>
                     {/* <button className="btn btn-primary" onClick={handleSubmitClick}>Submit</button> */}
                   </div>
                   <div className="my-3">
                     <h2>
-                    Social Media Container
+                      Social Media Container
                     </h2>
                     <div className="container p-0 my-3">
                       <Tabs
@@ -547,7 +638,7 @@ const ContentProfileInfo = () => {
                                       className="form-control"
                                       id={`inputVideoType_${index}`}
                                       type="text"
-                                      disabled={!editable} // Disable input field when not in editing mode
+                                      // disabled={!editable} // Disable input field when not in editing mode
                                       placeholder="Enter video type"
                                       value={youtube.video_type || ''}
                                       onChange={(e) => handleYoutubeChange(index, 'video_type', e.target.value)}
@@ -561,7 +652,7 @@ const ContentProfileInfo = () => {
                                       className="form-control"
                                       id={`inputSubscribers_${index}`}
                                       type="text"
-                                      disabled={!editable} // Disable input field when not in editing mode
+                                      // disabled={!editable} // Disable input field when not in editing mode
                                       placeholder="Enter subscribers"
                                       value={youtube.subscribers || ''}
                                       onChange={(e) => handleYoutubeChange(index, 'subscribers', e.target.value)}
@@ -577,7 +668,7 @@ const ContentProfileInfo = () => {
                                       className="form-control"
                                       id={`inputPerVideoReach_${index}`}
                                       type="text"
-                                      disabled={!editable} // Disable input field when not in editing mode
+                                      // disabled={!editable} // Disable input field when not in editing mode
                                       placeholder="Enter per video reach"
                                       value={youtube.per_video_reach || ''}
                                       onChange={(e) => handleYoutubeChange(index, 'per_video_reach', e.target.value)}
@@ -591,7 +682,7 @@ const ContentProfileInfo = () => {
                                       className="form-control"
                                       id={`inputYoutubeLink_${index}`}
                                       type="text"
-                                      disabled={!editable} // Disable input field when not in editing mode
+                                      // disabled={!editable} // Disable input field when not in editing mode
                                       placeholder="Enter YouTube link"
                                       value={youtube.youtube_link || ''}
                                       onChange={(e) => handleYoutubeChange(index, 'youtube_link', e.target.value)}
@@ -607,7 +698,7 @@ const ContentProfileInfo = () => {
                                       className="form-control"
                                       id={`inputLocation_${index}`}
                                       type="text"
-                                      disabled={!editable} // Disable input field when not in editing mode
+                                      // disabled={!editable} // Disable input field when not in editing mode
                                       placeholder="Enter location"
                                       value={youtube.location || ''}
                                       onChange={(e) => handleYoutubeChange(index, 'location', e.target.value)}
@@ -621,7 +712,7 @@ const ContentProfileInfo = () => {
                                       className="form-control"
                                       id={`inputDescription_${index}`}
                                       placeholder="Enter description"
-                                      disabled={!editable} // Disable input field when not in editing mode
+                                      // disabled={!editable} // Disable input field when not in editing mode
                                       value={youtube.description || ''}
                                       onChange={(e) => handleYoutubeChange(index, 'description', e.target.value)}
                                       rows="3"
@@ -630,7 +721,7 @@ const ContentProfileInfo = () => {
                                 </div>
                               </div>
                             ))}
-                            {/* <button className="btn btn-primary" onClick={handleAddYoutube}>Add YouTube Data</button> */}
+                            <button className="btn btn-primary" onClick={handleAddYoutube}>Add YouTube Data</button>
                           </div>
                         </Tab>
                         <Tab eventKey="security" title="Instagram">
@@ -647,7 +738,7 @@ const ContentProfileInfo = () => {
                                       className="form-control"
                                       id={`inputVideoType_${index}`}
                                       type="text"
-                                      disabled={!editable} // Disable input field when not in editing mode
+                                      // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter video type"
                                       value={instagram.post_type || ''}
@@ -662,7 +753,7 @@ const ContentProfileInfo = () => {
                                       className="form-control"
                                       id={`inputSubscribers_${index}`}
                                       type="text"
-                                      disabled={!editable} // Disable input field when not in editing mode
+                                      // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter followers"
                                       value={instagram.followers || ''}
@@ -679,7 +770,7 @@ const ContentProfileInfo = () => {
                                       className="form-control"
                                       id={`inputPerVideoReach_${index}`}
                                       type="text"
-                                      disabled={!editable} // Disable input field when not in editing mode
+                                      // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter per video reach"
                                       value={instagram.per_video_reach || ''}
@@ -694,7 +785,7 @@ const ContentProfileInfo = () => {
                                       className="form-control"
                                       id={`inputYoutubeLink_${index}`}
                                       type="text"
-                                      disabled={!editable} // Disable input field when not in editing mode
+                                      // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter Instagram link"
                                       value={instagram.instagram_link || ''}
@@ -711,7 +802,7 @@ const ContentProfileInfo = () => {
                                       className="form-control"
                                       id={`inputLocation_${index}`}
                                       type="text"
-                                      disabled={!editable} // Disable input field when not in editing mode
+                                      // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter location"
                                       value={instagram.location || ''}
@@ -726,7 +817,7 @@ const ContentProfileInfo = () => {
                                       className="form-control"
                                       id={`inputDescription_${index}`}
                                       placeholder="Enter description"
-                                      disabled={!editable} // Disable input field when not in editing mode
+                                      // disabled={!editable} // Disable input field when not in editing mode
                                       value={instagram.description || ''}
                                       onChange={(e) => handleInstagramChange(index, 'description', e.target.value)}
                                       rows="3"
@@ -735,7 +826,7 @@ const ContentProfileInfo = () => {
                                 </div>
                               </div>
                             ))}
-                            {/* <button className="btn btn-primary" onClick={handleAddYoutube}>Add YouTube Data</button> */}
+                            <button className="btn btn-primary" onClick={handleAddInstagram}>Add Instagram Data</button>
                           </div>
                         </Tab>
                         <Tab eventKey="notification" title="Facebook">
@@ -752,7 +843,7 @@ const ContentProfileInfo = () => {
                                       className="form-control"
                                       id={`inputVideoType_${index}`}
                                       type="text"
-                                      disabled={!editable} // Disable input field when not in editing mode
+                                      // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter video type"
                                       value={facebook.post_type || ''}
@@ -767,7 +858,7 @@ const ContentProfileInfo = () => {
                                       className="form-control"
                                       id={`inputSubscribers_${index}`}
                                       type="text"
-                                      disabled={!editable} // Disable input field when not in editing mode
+                                      // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter followers"
                                       value={facebook.followers || ''}
@@ -784,7 +875,7 @@ const ContentProfileInfo = () => {
                                       className="form-control"
                                       id={`inputPerVideoReach_${index}`}
                                       type="text"
-                                      disabled={!editable} // Disable input field when not in editing mode
+                                      // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter per video reach"
                                       value={facebook.per_video_reach || ''}
@@ -799,7 +890,7 @@ const ContentProfileInfo = () => {
                                       className="form-control"
                                       id={`inputYoutubeLink_${index}`}
                                       type="text"
-                                      disabled={!editable} // Disable input field when not in editing mode
+                                      // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter facebook link"
                                       value={facebook.facebook_link || ''}
@@ -816,7 +907,7 @@ const ContentProfileInfo = () => {
                                       className="form-control"
                                       id={`inputLocation_${index}`}
                                       type="text"
-                                      disabled={!editable} // Disable input field when not in editing mode
+                                      // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter location"
                                       value={facebook.location || ''}
@@ -831,7 +922,7 @@ const ContentProfileInfo = () => {
                                       className="form-control"
                                       id={`inputDescription_${index}`}
                                       placeholder="Enter description"
-                                      disabled={!editable} // Disable input field when not in editing mode
+                                      // disabled={!editable} // Disable input field when not in editing mode
                                       value={facebook.description || ''}
                                       onChange={(e) => handleFacebookChange(index, 'description', e.target.value)}
                                       rows="3"
@@ -840,7 +931,7 @@ const ContentProfileInfo = () => {
                                 </div>
                               </div>
                             ))}
-                            {/* <button className="btn btn-primary" onClick={handleAddYoutube}>Add YouTube Data</button> */}
+                            <button className="btn btn-primary" onClick={handleAddFacebook}>Add Facebook Data</button>
                           </div>
                         </Tab>
                       </Tabs>
@@ -849,14 +940,17 @@ const ContentProfileInfo = () => {
                   {/* <button className="btn btn-primary" type="button" onClick={handleSubmitClick}>
                     Save changes
                   </button> */}
-                  <div>
-                      {!editable && ( // Show Edit button when not in editing mode
-                        <button className="btn btn-primary" onClick={handleEdit}>Edit</button>
-                      )}
-                      {editable && ( // Show Save button when in editing mode
-                        <button className="btn btn-primary" type="button" onClick={handleSubmitClick}>Save Changes</button>
-                      )}
-                    </div>
+                  {/* <div>
+                    {!editable && ( // Show Edit button when not in editing mode
+                      <button className="btn btn-primary" onClick={handleEdit}>Edit</button>
+                    )}
+                    {editable && ( // Show Save button when in editing mode
+                      <button className="btn btn-primary" type="button" onClick={handleSubmitClick}>Save Changes</button>
+                    )}
+                  </div> */}
+                  <div className="container">
+                    <button className="btn btn-primary" style={{ width: '100%' }} type="button" onClick={handleSubmitClick}>Save Changes</button>
+                  </div>
                 </form>
               </div>
             </div>
