@@ -360,7 +360,7 @@ const ContentProfileInfo = () => {
     if (profile) {
       if (typeof profile === "string") {
         // Append the profile URL directly
-        formData.append("profile_pic", profile); // Change the field name as needed
+        // formData.append("profile_pic", profile); // Change the field name as needed
       } else {
         // Append the profile file with its name
         formData.append("profile_pic", profile, profileFileName); // Change the field name as needed
@@ -369,7 +369,7 @@ const ContentProfileInfo = () => {
     if (cover) {
       if (typeof cover === "string") {
         // Append the cover URL directly
-        formData.append("cover_page", cover); // Change the field name as needed
+        // formData.append("cover_page", cover); // Change the field name as needed
       } else {
         // Append the cover file with its name
         formData.append("cover_page", cover, coverFileName); // Change the field name as needed
@@ -378,7 +378,7 @@ const ContentProfileInfo = () => {
     if (logo) {
       if (typeof logo === "string") {
         // Append the logo URL directly
-        formData.append("channel_logo", logo); // Change the field name as needed
+        // formData.append("channel_logo", logo); // Change the field name as needed
       } else {
         // Append the logo file with its name
         formData.append("channel_logo", logo, logoFileName); // Change the field name as needed
@@ -544,13 +544,12 @@ const ContentProfileInfo = () => {
                     <div
                       className="px-4 pt-0 pb-4 cover"
                       style={{
-                        backgroundImage: `url(${
-                          cover
+                        backgroundImage: `url(${cover
                             ? typeof cover === "string"
                               ? cover
                               : URL.createObjectURL(cover)
                             : profilebg
-                        })`,
+                          })`,
                       }}
                     >
                       <div
@@ -591,7 +590,13 @@ const ContentProfileInfo = () => {
                             }
                             alt="..."
                             width="130"
-                            className="rounded mb-2 img-thumbnail"
+                            style={{
+                              height: '16vh',
+                              width: '128px',
+                              borderRadius: '50%',
+                              overflow: 'hidden' // Ensure the border radius is applied
+                            }}
+                            className="mb-2 img-thumbnail"
                           />
                           {/* <button className="btn btn-outline-dark btn-sm btn-block">
                             Edit profile
@@ -716,7 +721,7 @@ const ContentProfileInfo = () => {
                       placeholder="Enter your organization name"
                       value={businessName}
                       onChange={handleInputChange}
-                      // disabled={!editable} // Disable input field when not in editing mode
+                    // disabled={!editable} // Disable input field when not in editing mode
                     />
                   </div>
                   <div className="mb-3">
@@ -786,7 +791,7 @@ const ContentProfileInfo = () => {
                                 value={collaboration.company_name || ""}
                                 onChange={(e) => handleChange(index, e)}
                                 name="company_name"
-                                // disabled={!editable} // Disable input field when not in editing mode
+                              // disabled={!editable} // Disable input field when not in editing mode
                               />
                             </div>
                             <div className="col-md-6">
@@ -804,7 +809,7 @@ const ContentProfileInfo = () => {
                                 value={collaboration.collaboration_type || ""}
                                 onChange={(e) => handleChange(index, e)}
                                 name="collaboration_type"
-                                // disabled={!editable} // Disable input field when not in editing mode
+                              // disabled={!editable} // Disable input field when not in editing mode
                               />
                             </div>
                           </div>
@@ -823,7 +828,7 @@ const ContentProfileInfo = () => {
                               value={collaboration.partnership_duration || ""}
                               onChange={(e) => handleChange(index, e)}
                               name="partnership_duration"
-                              // disabled={!editable} // Disable input field when not in editing mode
+                            // disabled={!editable} // Disable input field when not in editing mode
                             />
                           </div>
                           <div className="form-group">
@@ -843,7 +848,7 @@ const ContentProfileInfo = () => {
                               name="description_activity"
                               col="30"
                               rows="5"
-                              // disabled={!editable} // Disable input field when not in editing mode
+                            // disabled={!editable} // Disable input field when not in editing mode
                             />
                           </div>
                         </div>
