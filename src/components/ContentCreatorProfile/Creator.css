@@ -14,11 +14,18 @@
 }
 
 .features .icon-box {
-  display: flex;
-  align-items: center;
+  /* display: flex;
+  align-items: center; */
   padding: 20px;
   transition: ease-in-out 0.3s;
   box-shadow: 2px 0 35px 0 rgba(68, 88, 144, 0.12);
+  cursor: pointer;
+}
+
+.features .icon-box ul {
+  text-align: start;
+  padding: 2%;
+  margin-bottom: 0;
 }
 
 .features .icon-box i {
@@ -35,13 +42,11 @@
   font-size: 16px;
 }
 
-.features .icon-box h3 a {
-  color: #493c3e;
-  transition: ease-in-out 0.3s;
-}
 
-.features .icon-box:hover a {
+.features .icon-box:hover h3 {
   color: #e43c5c;
+  transition: ease-in-out 0.3s;
+
 }
 
 
@@ -114,4 +119,19 @@
 
 .services .icon-box:hover .icon i {
   color: #fff;
+}
+
+
+.media img {
+  width: 200px;
+  height: auto;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+
+@media (max-width:576px) {
+  .media img {
+    width: 130px;
+  }
 }

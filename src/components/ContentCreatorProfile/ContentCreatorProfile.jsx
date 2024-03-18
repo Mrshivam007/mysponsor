@@ -11,6 +11,10 @@ import { useLocation } from "react-router-dom";
 import { fetchCreatorbyId } from "../../redux/actions/creatorAction";
 import { useDispatch, useSelector } from "react-redux";
 import ContentCard from "../../pages/LandingPage/Desktop_Sponsor_CC/ContentCard";
+import profilebg from "../../assets/img/profileBG.jpg";
+import noProfilepic from "../../assets/img/emptyprofile2.jpg";
+import CreatorProfileMainBox from "./CreatorProfileMainBox";
+
 // import Test from "./test";
 const ContentCreatorProfile = () => {
   useEffect(() => {
@@ -20,13 +24,13 @@ const ContentCreatorProfile = () => {
   const dispatch = useDispatch();
   const contentData = location.state?.creatorData || null;
   console.log("Creator Data ", contentData);
-  const creator_id = contentData?.user_id?.id
+  const creator_id = contentData?.user_id?.id;
   const creatorById = useSelector((state) => state.creator);
   useEffect(() => {
     dispatch(fetchCreatorbyId(creator_id));
   }, []);
   console.log("creator by id ", creatorById.creatorById?.upcoming_content);
-  const ContentData = creatorById.creatorById
+  const ContentData = creatorById.creatorById;
   console.log("Creator Data", ContentData);
 
   const Stats = [
@@ -57,18 +61,18 @@ const ContentCreatorProfile = () => {
   ];
 
   const RecommendationData = [
-    { icon: "shop", title: "Lorem Ipsum", link: "#" },
-    { icon: "bar-chart-line", title: "Dolor Sitema", link: "#" },
-    { icon: "calendar-check", title: "Sed perspiciatis", link: "#" },
-    { icon: "brush", title: "Magni Dolores", link: "#" },
-    { icon: "database", title: "Nemo Enim", link: "#" },
-    { icon: "tag", title: "Eiusmod Tempor", link: "#" },
-    { icon: "files", title: "Midela Teren", link: "#" },
-    { icon: "tag", title: "Pira Neve", link: "#" },
-    { icon: "shop", title: "Dirada Pack", link: "#" },
-    { icon: "disc", title: "Moton Ideal", link: "#" },
-    { icon: "wifi", title: "Verdo Park", link: "#" },
-    { icon: "fingerprint", title: "Flavor Nivelanda", link: "#" },
+    { id: 1, icon: "shop", title: "Lorem Ipsum", link: "#" },
+    { id: 2, icon: "bar-chart-line", title: "Dolor Sitema", link: "#" },
+    { id: 3, icon: "calendar-check", title: "Sed perspiciatis", link: "#" },
+    { id: 4, icon: "brush", title: "Magni Dolores", link: "#" },
+    { id: 5, icon: "database", title: "Nemo Enim", link: "#" },
+    { id: 6, icon: "tag", title: "Eiusmod Tempor", link: "#" },
+    { id: 7, icon: "files", title: "Midela Teren", link: "#" },
+    { id: 8, icon: "tag", title: "Pira Neve", link: "#" },
+    { id: 9, icon: "shop", title: "Dirada Pack", link: "#" },
+    { id: 10, icon: "disc", title: "Moton Ideal", link: "#" },
+    { id: 11, icon: "wifi", title: "Verdo Park", link: "#" },
+    { id: 12, icon: "fingerprint", title: "Flavor Nivelanda", link: "#" },
     // Add more feature objects as needed
   ];
 
@@ -83,72 +87,12 @@ const ContentCreatorProfile = () => {
         }}
       >
         {/* DESKTOP VIEW  */}
-        <div className="container payments-desktop desktop-view">
-          <div className="pay-box">
-            <div className="row row-cols-2">
-              <div className="col">
-                <div
-                  className="post-thumb mb-3"
-                  style={{
-                    borderRadius: "20px",
-                    boxShadow: "0px 2px 10px 0px rgba(0, 0, 0, 0.25)",
-                    padding: "3%",
-                  }}
-                >
-                  <Carousel controls={false}>
-                    {/* {[
-                    cardData.thumbnail1,
-                    cardData.thumbnail2,
-                    cardData.thumbnail3,
-                  ].map((item, index) => ( */}
-                    <Carousel.Item>
-                      <img
-                        //   key={index}
-                        src={item}
-                        alt=""
-                        style={{
-                          width: "100%",
-                          height: "300px",
-                          borderRadius: "10px",
-                        }}
-                      />
-                    </Carousel.Item>
-                    {/* ))} */}
-                  </Carousel>
-                </div>
-              </div>
-              <div className="col">
-                <h2 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between">
-                  Mr. Beast
-                  {/* <img src={heart} alt="" style={{ width: "7%" }} /> */}
-                </h2>
-                <div
-                  className="container bg-white"
-                  style={{
-                    marginTop: "5%",
-                    padding: "2%",
-                    borderRadius: "15px",
-                  }}
-                >
-                  <h3 className="text-center">Stats</h3>
-                  <div className="row row-cols-2">
-                    {Stats.map((data) => (
-                      <>
-                        <div className="col" style={{ padding: "5%" }}>
-                          <h5>{data.platform}</h5>
-                          <ProgressBar
-                            variant={data.variant}
-                            animated
-                            now={data.progress}
-                            label={data.label}
-                          />
-                        </div>
-                      </>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div
+          className="container payments-desktop desktop-view"
+          style={{ maxWidth: "100%" }}
+        >
+          <CreatorProfileMainBox />
+          <div className="pay-box my-md-0">
             <div className="container">
               <div class="line-text">Recommendation According to Stats</div>
             </div>
@@ -176,39 +120,10 @@ const ContentCreatorProfile = () => {
 
         {/* MOBILE VIEW */}
         <div className="container mobile-view">
-          <div
-            className="post-thumb mt-4"
-            style={{
-              borderRadius: "15px",
-              boxShadow: "0px 2px 10px -2px rgba(0, 0, 0, 0.25)",
-            }}
-          >
-            <Carousel controls={false}>
-              {/* {[
-              cardData.thumbnail1,
-              cardData.thumbnail2,
-              cardData.thumbnail3,
-            ].map((item, index) => ( */}
-              <Carousel.Item>
-                <img
-                  //   key={index}
-                  src={item}
-                  alt=""
-                  style={{
-                    width: "100%",
-                    height: "300px",
-                    borderRadius: "10px",
-                  }}
-                />
-              </Carousel.Item>
-              {/* ))} */}
-            </Carousel>
-          </div>
-          <h2 className="sponsor-mobile-text">Mr. Beast</h2>
+          <CreatorProfileMainBox />
           <div
             className="container bg-white"
             style={{
-              marginTop: "5%",
               padding: "2%",
               borderRadius: "15px",
             }}
