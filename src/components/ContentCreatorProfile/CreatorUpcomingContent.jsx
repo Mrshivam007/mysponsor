@@ -1,61 +1,239 @@
 import React from "react";
-import creator from "../../assets/img/card/mobile-cards.jpg";
 
-const CreatorUpcomingContent = () => {
+const CreatorUpcomingContent = ({ type, typeimg }) => {
   return (
     <>
-      {/* Content Creator Layer */}
-      <div
-        className="sponsor-second-container container"
-        style={{ marginTop: "2rem", width: "100%" }}
-      >
-        <div className="row">
-          {[1, 2, 3, 4].map(() => (
-            <div className="col-lg-6 col-sm-12 mb-3 cc-card-col">
-              <div className="card h-auto">
-                <div
-                  className="row g-0"
-                  style={{ width: "auto", height: "100%" }}
-                >
-                  <div className="col-4 col-md-5 col-sm-4 cc-img-container d-flex">
+      <div className="desktop-view mt-4">
+        <h2 className="sponsor-text text-left">{type}</h2>
+        <div className="container">
+          {/* {cardData &&
+            cardData
+              .slice()
+              .reverse()
+              .map((data) => {
+                return ( */}
+          <div className="row">
+            <div className="col-12 mb-4">
+              <div
+                className="card"
+                style={{
+                  borderRadius: "20px",
+                  backgroundColor: "#efefef",
+                }}
+              >
+                <div className="row mx-0">
+                  <div className="col-3 p-3">
                     <img
-                      src={creator}
-                      className="img-fluid rounded-start cc-img"
+                      src={typeimg}
                       alt=""
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        borderRadius: "10px",
+                      }}
                     />
                   </div>
-                  <div className="col-6 col-md-5 col-sm-6 px-lg-0 d-flex align-items-center">
-                    <div className="card-body cc-card-body">
-                      <h5 className="card-title font-weight-bold d-inline">
-                        Mr. Beast
-                      </h5>
-                      <span className="card-text">Platform: Youtube</span>
-                      <span className="card-text">
-                        <i className="bi bi-cash text-success"></i>
-                        &nbsp;&nbsp; 100k
-                      </span>
-                      <p className="card-text">
-                        <i className="bi bi-people-fill text-danger"></i>
-                        &nbsp;&nbsp; 1M
+                  <div className="col-5 mt-2">
+                    <div
+                      className="box"
+                      style={{
+                        borderRight: "1px solid #acacac",
+                        height: "84%",
+                      }}
+                    >
+                      <h3 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between">
+                        Content 01
+                      </h3>
+                      <h4>Youtube</h4>
+                      {/* <div className="star d-flex">
+                                    <h5>
+                                      <i className="bi bi-star-fill text-warning"></i>
+                                      &nbsp;
+                                      <i className="bi bi-star-fill text-warning"></i>
+                                      &nbsp;
+                                      <i className="bi bi-star-fill text-warning"></i>
+                                      &nbsp;
+                                      <i className="bi bi-star-fill text-warning"></i>
+                                      &nbsp;
+                                      <i className="bi bi-star-fill text-white"></i>
+                                      &nbsp;
+                                      <span className="text-sm text-muted">
+                                        3482 reviews
+                                      </span>
+                                    </h5>
+                                  </div> */}
+                      <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Quidem tempore dolor vitae similique perferendis ullam
+                        non amet eveniet consequatur ab.
                       </p>
                     </div>
                   </div>
-                  <div className="col-2 col-md-2 col-sm-2 pl-lg-0 pr-0">
+
+                  <div className="col-4" style={{ padding: "2% 1% 2% 0" }}>
+                    <div className="box">
+                      <h4 className="font-weight-bold">
+                        Available Sponsor Options:
+                      </h4>
+                      <div className="d-flex justify-content-around text-lg mt-3">
+                        {/* {data.content_id.sponsoring_content_items
+                          // .filter((item) => item.is_sponsored) // Filter only items where is_sponsored is true
+                        .map((item, index) => ( */}
+
+                        <span
+                          // key={index}
+                          className={"badge rounded-pill px-2 py-1 bg-success"}
+                        >
+                          {type}
+                          <i className="bi bi-check2-circle"></i>
+                        </span>
+
+                        {/* ))} */}
+                      </div>
+                    </div>
                     <button
-                      className="btn btn-primary btn-block"
+                      className="btn py-1 px-3 font-weight-bold d-none d-md-block"
                       style={{
-                        height: "100%",
-                        borderRadius: "0px 18px 18px 0px",
-                        backgroundColor: "#004EA9",
+                        width: "100%",
+                        marginTop: "4%",
+                        color: "#004EA9",
+                        backgroundColor: "white",
+                        border: "2px solid #004EA9",
+                        borderRadius: "10px",
                       }}
+                      // onClick={() => handleSponsorClick(data)}
                     >
-                      <span className="text-xl">&gt;</span>
+                      Check Out Content Details &nbsp;&nbsp; &gt;&gt;
                     </button>
+                    <div className="container d-flex text-white text-center px-0 mt-2">
+                      <div
+                        className="box myevents-box text-white"
+                        style={{ width: "100%" }}
+                      >
+                        <h6
+                          style={{
+                            borderBottom: "1px solid rgba(255, 255, 255, 0.30)",
+                            padding: "2%",
+                          }}
+                        >
+                          {type} Price
+                        </h6>
+                        <h5>
+                          ₹50,000
+                          {/* Display the sum of prices */}
+                        </h5>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          ))}
+          </div>
+          {/* );
+              })} */}
+        </div>
+        <button
+          className="btn text-white py-1 px-4 font-weight-bold d-none d-md-block"
+          style={{
+            margin: "2% auto",
+            backgroundColor: "#004EA9",
+            borderRadius: "10px",
+          }}
+        >
+          Load More
+        </button>
+      </div>
+
+      <div className="mobile-view text-md">
+        <h2 className="sponsor-mobile-text">{type}</h2>
+        <div className="container mb-4 px-0">
+          {/* {cardData &&
+            cardData
+              .slice()
+              .reverse()
+              .map((data) => {
+                return ( */}
+          <div className="row">
+            <div className="col-12">
+              <div className="card myevents-card">
+                <div className="post-thumb">
+                  <img
+                    src={typeimg}
+                    alt=""
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      borderRadius: "10px",
+                    }}
+                  />
+                  <div className="text-overlay">
+                    <h4 className="font-weight-bold mb-0">Content 01</h4>
+                    <h5>Youtube</h5>
+                  </div>
+                </div>
+                <div className="container">
+                  <div className="row d-flex">
+                    <div className="col-12">
+                      <div className="box">
+                        <h4 className="font-weight-bold">
+                          Content Sponsored for:
+                        </h4>
+                        <div className="d-flex justify-content-around text-lg">
+                          {/* {data.content_id.sponsoring_content_items
+                            // .filter((item) => item.is_sponsored) // Filter only items where is_sponsored is true
+                            .map((item, index) => ( */}
+                          <span
+                            // key={index}
+                            className={
+                              "badge rounded-pill px-2 py-1 bg-success"
+                            }
+                          >
+                            {type}
+                            <i className="bi bi-check2-circle"></i>
+                          </span>
+                          {/* ))} */}
+                        </div>
+                      </div>
+
+                      <div className="container text-lg text-white text-center d-flex my-2">
+                        <div
+                          className="box myevents-box"
+                          style={{ width: "100%" }}
+                        >
+                          <p
+                            className="mb-1"
+                            style={{
+                              borderBottom:
+                                "1px solid rgba(255, 255, 255, 0.30)",
+                            }}
+                          >
+                            {type} Price
+                          </p>
+                          <p className="mb-1">₹50,000</p>
+                        </div>
+                      </div>
+                      <button
+                        className="btn py-1 px-2 font-weight-bold"
+                        style={{
+                          width: "100%",
+                          marginBottom: "2%",
+                          color: "#004EA9",
+                          backgroundColor: "white",
+                          border: "2px solid #004EA9",
+                          borderRadius: "10px",
+                        }}
+                        // onClick={() => handleSponsorClick(data)}
+                      >
+                        Check Out Content Details &nbsp;&nbsp; &gt;&gt;
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* );
+              })} */}
         </div>
       </div>
     </>

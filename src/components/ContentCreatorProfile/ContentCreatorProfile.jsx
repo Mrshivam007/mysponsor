@@ -14,7 +14,9 @@ import ContentCard from "../../pages/LandingPage/Desktop_Sponsor_CC/ContentCard"
 import profilebg from "../../assets/img/profileBG.jpg";
 import noProfilepic from "../../assets/img/emptyprofile2.jpg";
 import CreatorProfileMainBox from "./CreatorProfileMainBox";
-
+import tag_ads from "../../assets/img/sponsoring_items/#tag_ads.jpg";
+import reels_sponsored from "../../assets/img/sponsoring_items/reel_sponsored.jpg";
+import sponsored_by from "../../assets/img/sponsoring_items/sponsored_by.png";
 // import Test from "./test";
 const ContentCreatorProfile = () => {
   useEffect(() => {
@@ -132,13 +134,21 @@ const ContentCreatorProfile = () => {
             {/* <Test /> */}
             <Records />
             <div className="container">
-              <div class="line-text">Upcoming Contents from the Creator</div>
+              <div class="line-text">Available Sponsoring Items</div>
             </div>
-            {/* <CreatorUpcomingContent /> */}
-            <ContentCard
+            <CreatorUpcomingContent type={"#ads"} typeimg={tag_ads} />
+            <CreatorUpcomingContent
+              type={"reels sponsored"}
+              typeimg={reels_sponsored}
+            />
+            <CreatorUpcomingContent
+              type={"sponsored by"}
+              typeimg={sponsored_by}
+            />
+            {/* <ContentCard
               // line={"Creator Upcoming Content"}
               cardData={creatorById.creatorById?.upcoming_content}
-            />
+            /> */}
           </div>
         </div>
         {/* DESKTOP VIEW END  */}
@@ -155,16 +165,44 @@ const ContentCreatorProfile = () => {
           >
             {/* <h3 className="text-center">Stats</h3> */}
             <div className="row row-cols-2">
-              {Stats.map((data) => (
+              {Stats.map((data, index) => (
                 <>
-                  <div className="col" style={{ padding: "5%" }}>
-                    <h5>
-                    <i // Font Awesome icon
-                      className={`fab fa-${data.platform.toLowerCase()}`}
-                      style={{ marginRight: '10px', fontSize: '1.2rem' }}
-                    ></i>
-                    {data.platform}</h5>
-
+                  <div
+                    className={`col ${expanded === index ? "expanded" : ""}`}
+                    style={{ padding: "5%" }}
+                  >
+                    <h5 onClick={() => handleClick(index)}>
+                      <i // Font Awesome icon
+                        className={`fab fa-${data.platform.toLowerCase()}`}
+                        style={{ marginRight: "10px", fontSize: "1.2rem" }}
+                      ></i>
+                      {data.platform}
+                    </h5>
+                    {expanded === index && (
+                      <ul style={{ listStyleType: "none", padding: 0 }}>
+                        {/* Removed bullets and added padding */}
+                        <li>
+                          <span style={{ fontWeight: "bold" }}>
+                            Subscribers:
+                          </span>{" "}
+                          {data.subscribers}
+                        </li>
+                        <li>
+                          <span style={{ fontWeight: "bold" }}>Followers:</span>{" "}
+                          {data.followers}
+                        </li>
+                        <li>
+                          <span style={{ fontWeight: "bold" }}>
+                            Per {data.postType}:
+                          </span>{" "}
+                          {data.perVideo}
+                        </li>
+                        <li>
+                          <span style={{ fontWeight: "bold" }}>Category:</span>{" "}
+                          {data.category}
+                        </li>
+                      </ul>
+                    )}
                   </div>
                 </>
               ))}
@@ -185,10 +223,16 @@ const ContentCreatorProfile = () => {
             <Records />
           </div>
           <div className="box">
-            <h2 className="sponsor-mobile-text">
-              Upcoming Contents by Creator
-            </h2>
-            <CreatorUpcomingContent />
+            <h2 className="sponsor-mobile-text">Available Sponsoring Items</h2>
+            <CreatorUpcomingContent type={"#ads"} typeimg={tag_ads} />
+            <CreatorUpcomingContent
+              type={"reels sponsored"}
+              typeimg={reels_sponsored}
+            />
+            <CreatorUpcomingContent
+              type={"sponsored by"}
+              typeimg={sponsored_by}
+            />{" "}
           </div>
         </div>
         {/* MOBILE VIEW END */}
