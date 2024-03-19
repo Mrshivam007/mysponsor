@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import item from "../../assets/img/card/mobile-cards.jpg";
 import backgroundimg from "../../assets/img/circle-bg.png";
 import { Carousel, ProgressBar } from "react-bootstrap";
@@ -32,6 +32,11 @@ const ContentCreatorProfile = () => {
   console.log("creator by id ", creatorById.creatorById?.upcoming_content);
   const ContentData = creatorById.creatorById;
   console.log("Creator Data", ContentData);
+  const [expanded, setExpanded] = useState(null);
+
+  const handleClick = (index) => {
+    setExpanded(expanded === index ? null : index);
+  };
 
   const Stats = [
     {
@@ -39,24 +44,44 @@ const ContentCreatorProfile = () => {
       progress: 40,
       variant: "danger",
       label: "40%",
+      subscribers: 100000,
+      followers: 5000,
+      perVideo: "10k Views",
+      postType: "Video",
+      category: "Gaming",
     },
     {
       platform: "Instagram",
       progress: 60,
       variant: "primary",
       label: "60%",
+      subscribers: 200000,
+      followers: 8000,
+      perVideo: "5k Likes",
+      postType: "Image",
+      category: "Lifestyle",
     },
     {
       platform: "Twitter",
       progress: 75,
       variant: "info",
       label: "75%",
+      subscribers: 300000,
+      followers: 12000,
+      perVideo: "2k Retweets",
+      postType: "Tweet",
+      category: "News",
     },
     {
       platform: "Facebook",
       progress: 30,
       variant: "",
       label: "30%",
+      subscribers: 50000,
+      followers: 3000,
+      perVideo: "2k Shares",
+      postType: "Post",
+      category: "Entertainment",
     },
   ];
 
@@ -128,18 +153,18 @@ const ContentCreatorProfile = () => {
               borderRadius: "15px",
             }}
           >
-            <h3 className="text-center">Stats</h3>
+            {/* <h3 className="text-center">Stats</h3> */}
             <div className="row row-cols-2">
               {Stats.map((data) => (
                 <>
                   <div className="col" style={{ padding: "5%" }}>
-                    <h5>{data.platform}</h5>
-                    <ProgressBar
-                      variant={data.variant}
-                      animated
-                      now={data.progress}
-                      label={data.label}
-                    />
+                    <h5>
+                    <i // Font Awesome icon
+                      className={`fab fa-${data.platform.toLowerCase()}`}
+                      style={{ marginRight: '10px', fontSize: '1.2rem' }}
+                    ></i>
+                    {data.platform}</h5>
+
                   </div>
                 </>
               ))}
