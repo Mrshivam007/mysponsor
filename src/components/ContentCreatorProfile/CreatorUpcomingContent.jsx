@@ -13,7 +13,7 @@ const CreatorUpcomingContent = ({ type, typeimg, data }) => {
       <div className="desktop-view mt-4">
         <h2 className="sponsor-text text-left">{type}</h2>
         <div className="container">
-        {data !== undefined && data !== null && data.length > 0 ? (
+        {Array.isArray(data) && data.length > 0 ? (
             data
               .slice()
               .reverse()
