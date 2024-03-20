@@ -2,12 +2,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-const CreatorCard = ({ line, cardData }) => {
+const UpcomingContent = ({ line, cardData }) => {
   console.log(cardData);
   const navigate = useNavigate();
 
   const handleSponsorClick = (data) => {
-    navigate("/creator-profile", { state: { creatorData: data } });
+    navigate("/mycontent-details", { state: { contentData: data } });
   };
 
   const [showAllCards, setShowAllCards] = useState(false);
@@ -23,7 +23,7 @@ const CreatorCard = ({ line, cardData }) => {
 
       <div
         className="sponsor-second-container container"
-        style={{ marginTop: "4rem" }}
+        style={{ margin: "2rem 0rem", width: '100%' }}
       >
         <div className="row">
           {visibleCards.map((data) => (
@@ -38,7 +38,7 @@ const CreatorCard = ({ line, cardData }) => {
                 >
                   <div className="col-4 col-md-5 col-sm-4 cc-img-container d-flex">
                     <img
-                      src={data.profile_pic}
+                      src={data.thumbnail1}
                       className="img-fluid rounded-start cc-img"
                       alt=""
                     />
@@ -46,37 +46,18 @@ const CreatorCard = ({ line, cardData }) => {
                   <div className="col-6 col-md-5 col-sm-6 px-lg-0 d-flex align-items-center">
                     <div className="card-body cc-card-body">
                       <h5 className="card-title font-weight-bold d-inline">
-                        {data.channel_name}
+                        {data.title}
                       </h5>
-                      {/* <span className="card-text">
-                        Platform: {data.youtube ? 'YouTube' : ''} {" "}
-                        {data.instagram ? 'Instagram' : ''} {" "}
-                        {data.facebook ? 'Facebook' : ''} {" "}
-                      </span> */}
-                      <span className="card-text" style={{paddingBottom: '4px'}}>
-                        Platform:{" "}
-                        {((data.youtube && data.youtube.length > 0) ||
-                          (data.instagram && data.instagram.length > 0) ||
-                          (data.facebook && data.facebook.length > 0)) ? (
-                          <span>
-                            {data.youtube && data.youtube.length > 0 && 'YouTube'}{" "}
-                            {data.instagram && data.instagram.length > 0 && 'Instagram'}{" "}
-                            {data.facebook && data.facebook.length > 0 && 'Facebook'}
-                          </span>
-                        ) : (
-                          "Platform data not available"
-                        )}
+                      <span className="card-text">
+                        Platform: {data.content_platform}
                       </span>
-
-                      <span className="card-text" style={{paddingBottom: '4px'}}>
-                        {/* <i className="bi bi-cash text-success"></i> */}
-                        <i class="fa-solid fa-icons text-primary"></i>
-                        &nbsp;&nbsp; {data.recommendation && data.recommendation.join(', ')}
+                      <span className="card-text">
+                        <i className="bi bi-cash text-success"></i>
+                        &nbsp;&nbsp; {data.content_category}
                       </span>
-                      <p className="card-text" style={{paddingBottom: '4px'}}>
+                      <p className="card-text">
                         <i className="bi bi-people-fill text-danger"></i>
-                        &nbsp;&nbsp;  {data.youtube && data.youtube.length > 0 && data.youtube[0].subscribers}{" "}
-
+                        &nbsp;&nbsp; {data.per_video_reach}
                       </p>
                     </div>
                   </div>
@@ -121,4 +102,4 @@ const CreatorCard = ({ line, cardData }) => {
   );
 };
 
-export default CreatorCard;
+export default UpcomingContent;

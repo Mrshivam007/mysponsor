@@ -8,11 +8,32 @@ import tiktok from "../../assets/img/tiktok.jpg";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-const CreatorPlatform = () => {
+const CreatorPlatform = (data) => {
   const [show, setShow] = useState(false);
+  const [platformData, setPlatformData] = useState(null);
+
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handlePlatformClick = (platform) => {
+    let platformInfo;
+    switch (platform) {
+      case "youtube":
+        platformInfo = data.data.youtube[0];
+        break;
+      case "instagram":
+        platformInfo = data.data.instagram[0];
+        break;
+      case "facebook":
+        platformInfo = data.data.facebook[0];
+        break;
+      default:
+        platformInfo = null;
+    }
+    setPlatformData(platformInfo);
+    setShow(true);
+  };
+
+  console.log("Platform Data ", data.data);
   return (
     <>
       <div className="container">
@@ -34,7 +55,7 @@ const CreatorPlatform = () => {
                   backgroundColor: "#FF6762",
                   cursor: "pointer",
                 }}
-                onClick={handleShow}
+                onClick={() => handlePlatformClick("youtube")}
               >
                 {/* <Link to={"/youtube"}> */}
                 <div className="platform-img d-flex justify-content-center">
@@ -56,7 +77,9 @@ const CreatorPlatform = () => {
                   background: "linear-gradient(112deg ,#3871C9 , #FF6942 )",
                   cursor: "pointer",
                 }}
-                onClick={handleShow}
+                // onClick={handleShow}
+                onClick={() => handlePlatformClick("instagram")}
+
               >
                 {/* <Link to={"/instagram"}> */}
                 <div className="platform-img d-flex justify-content-center">
@@ -80,7 +103,9 @@ const CreatorPlatform = () => {
                   backgroundColor: "black",
                   cursor: "pointer",
                 }}
-                onClick={handleShow}
+                // onClick={handleShow}
+                onClick={() => handlePlatformClick("instagram")}
+
               >
                 <div className="platform-img d-flex justify-content-center">
                   <img
@@ -100,7 +125,9 @@ const CreatorPlatform = () => {
                   backgroundColor: "rgb(58 89 153)",
                   cursor: "pointer",
                 }}
-                onClick={handleShow}
+                // onClick={handleShow}
+                onClick={() => handlePlatformClick("facebook")}
+
               >
                 <div className="platform-img d-flex justify-content-center">
                   <img
@@ -123,7 +150,8 @@ const CreatorPlatform = () => {
         centered
       >
         <Modal.Body>
-          <div className="container">
+          {platformData && (
+            <div className="container">
             <h1 className="d-flex justify-content-between">
               <span>
                 <img
@@ -144,21 +172,16 @@ const CreatorPlatform = () => {
               <div className="row" style={{ rowGap: "20px" }}>
                 <div className="col-6 col-md-4">
                   <h5>Channel Name</h5>
-                  <p>Mr. Beast</p>
+                  <p>{platformData?.channel_name}</p>
                 </div>
                 <div className="col-6 col-md-4">
                   <h5>Channel Subscribers</h5>
-                  <p>110M</p>
+                  <p>{platformData?.subscribers}</p>
                 </div>
-                {/* <div className="col-6 col-md-4">
-                  <h5>Channel Logo</h5>
-                  <p>
-                    <img src={logo} alt="" width={20} />
-                  </p>
-                </div> */}
+              
                 <div className="col-6 col-md-4">
                   <h5>Average Views</h5>
-                  <p>500k per video</p>
+                  <p>{platformData?.per_video_reach} per video</p>
                 </div>
                 <div className="col-6 col-md-4">
                   <h5>Genre of posting</h5>
@@ -166,28 +189,27 @@ const CreatorPlatform = () => {
                 </div>
                 <div className="col-6 col-md-4">
                   <h5>Location</h5>
-                  <p>United States</p>
+                  <p>{platformData?.location}</p>
                 </div>
                 <div className="col-6 col-md-4">
                   <h5>Channel Link</h5>
                   <p>
-                    <a href="https://www.youtube.com/@MrBeast">
+                    {/* <a href="https://www.youtube.com/@MrBeast">
                       www.youtube.com/@MrBeast
-                    </a>
+                    </a> */}
+                    {platformData?.youtube_link}
                   </p>
                 </div>
                 <div className="col-12">
                   <h5>About</h5>
                   <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consequuntur tempora quas labore ipsam ad laborum maxime
-                    magni laboriosam, explicabo, ipsa ipsum? Qui, vel temporibus
-                    deserunt eos officiis alias nemo praesentium?
+                    {platformData?.description}
                   </p>
                 </div>
               </div>
             </div>
           </div>
+          )}
         </Modal.Body>
       </Modal>
     </>

@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import profilebg from "../../assets/img/profileBG.jpg";
 import noProfilepic from "../../assets/img/emptyprofile2.jpg";
 import { ProgressBar } from "react-bootstrap";
-const CreatorProfileMainBox = () => {
+const CreatorProfileMainBox = (data) => {
   const [expanded, setExpanded] = useState(null);
+  console.log("Profile data by prop ", data?.data);
 
   const handleClick = (index) => {
     setExpanded(expanded === index ? null : index);
@@ -67,16 +68,18 @@ const CreatorProfileMainBox = () => {
                 <div
                   className="px-4 pt-0 pb-4 cover"
                   style={{
-                    backgroundImage: `url(${profilebg})`,
+                    backgroundImage: `url(${data.data?.cover_page ? data.data?.cover_page : profilebg})`,
+                    height: '34vh'
                   }}
                 >
                   <div className="media align-items-end profile-head">
                     <div className="profile mr-3">
                       <img
-                        src={noProfilepic}
+                        src={data.data?.profile_pic ? data.data?.profile_pic : noProfilepic}
                         alt="..."
                         width="130"
                         className="mb-2 img-thumbnail"
+                        style={{ height: '30vh' }}
                       />
                     </div>
                   </div>
@@ -86,12 +89,11 @@ const CreatorProfileMainBox = () => {
                     <div className="col">
                       <div className="media-body">
                         <h3 className="font-weight-bolder mt-0">
-                          Mark Walberg
+                          {data.data?.user_id?.first_name} {' '}{data.data?.user_id?.last_name}
                         </h3>
-                        <h4>New York</h4>
+                        <h4>{data.data?.youtube[0]?.location}</h4>
                         <p className="mb-2">
-                          Entertainment, Comedy, Stand Up, Health Care
-                          Enthusiast
+                          {data.data?.recommendation && data.data?.recommendation.map(item => Object.keys(item)[0]).join(', ')}
                         </p>
                         <div
                           className="box d-flex justify-content-between"
@@ -121,7 +123,7 @@ const CreatorProfileMainBox = () => {
                       >
                         <h3 className="text-center">Stats</h3>
                         <div className="row row-cols-2" style={{ flexWrap: 'wrap', padding: '0% 4%' }}>
-                          {Stats.map((data, index) => (
+                          {['youtube', 'instagram', 'twitter', 'facebook'].map((platform, index) => (
                             <div
                               key={index}
                               className={`col ${expanded === index ? 'expanded' : ''}`}
@@ -133,24 +135,21 @@ const CreatorProfileMainBox = () => {
                                   style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
                                 >
                                   <i // Font Awesome icon
-                                    className={`fab fa-${data.platform.toLowerCase()}`}
+                                    className={`fab fa-${platform}`}
                                     style={{ marginRight: '10px', fontSize: '1.2rem' }}
                                   ></i>
-                                  {data.platform}
+                                  {platform}
                                 </h5>
                                 {expanded === index && (
                                   <ul style={{ listStyleType: 'none', padding: 0 }}> {/* Removed bullets and added padding */}
                                     <li>
-                                      <span style={{ fontWeight: 'bold' }}>Subscribers:</span> {data.subscribers}
+                                      <span style={{ fontWeight: 'bold' }}>{platform === 'youtube' ? 'Subscribers' : 'Followers'}:</span> {platform === 'youtube' ? data.data?.[platform][0]?.subscribers : data.data?.[platform][0]?.followers}
                                     </li>
                                     <li>
-                                      <span style={{ fontWeight: 'bold' }}>Followers:</span> {data.followers}
+                                      <span style={{ fontWeight: 'bold' }}>Per Video React:</span> {data.data?.[platform][0]?.per_video_reach}
                                     </li>
                                     <li>
-                                      <span style={{ fontWeight: 'bold' }}>Per {data.postType}:</span> {data.perVideo}
-                                    </li>
-                                    <li>
-                                      <span style={{ fontWeight: 'bold' }}>Category:</span> {data.category}
+                                      <span style={{ fontWeight: 'bold' }}>Category {data.data[platform].postType}:</span> {data.data?.[platform][0]?.video_type}
                                     </li>
                                   </ul>
                                 )}

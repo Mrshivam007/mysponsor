@@ -1,136 +1,119 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const CreatorUpcomingContent = ({ type, typeimg }) => {
+const CreatorUpcomingContent = ({ type, typeimg, data }) => {
+  const navigate = useNavigate();
+
+  const handleSponsorClick = (data) => {
+    navigate("/mycontent-details", { state: { contentData: data } });
+  };
   return (
     <>
       <div className="desktop-view mt-4">
         <h2 className="sponsor-text text-left">{type}</h2>
         <div className="container">
-          {/* {cardData &&
-            cardData
+        {data && data.length > 0 ? (
+            data
               .slice()
               .reverse()
               .map((data) => {
-                return ( */}
-          <div className="row">
-            <div className="col-12 mb-4">
-              <div
-                className="card"
-                style={{
-                  borderRadius: "20px",
-                  backgroundColor: "#efefef",
-                }}
-              >
-                <div className="row mx-0">
-                  <div className="col-3 p-3">
-                    <img
-                      src={typeimg}
-                      alt=""
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        borderRadius: "10px",
-                      }}
-                    />
-                  </div>
-                  <div className="col-5 mt-2">
-                    <div
-                      className="box"
-                      style={{
-                        borderRight: "1px solid #acacac",
-                        height: "84%",
-                      }}
-                    >
-                      <h3 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between">
-                        Content 01
-                      </h3>
-                      <h4>Youtube</h4>
-                      {/* <div className="star d-flex">
-                                    <h5>
-                                      <i className="bi bi-star-fill text-warning"></i>
-                                      &nbsp;
-                                      <i className="bi bi-star-fill text-warning"></i>
-                                      &nbsp;
-                                      <i className="bi bi-star-fill text-warning"></i>
-                                      &nbsp;
-                                      <i className="bi bi-star-fill text-warning"></i>
-                                      &nbsp;
-                                      <i className="bi bi-star-fill text-white"></i>
-                                      &nbsp;
-                                      <span className="text-sm text-muted">
-                                        3482 reviews
-                                      </span>
-                                    </h5>
-                                  </div> */}
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Quidem tempore dolor vitae similique perferendis ullam
-                        non amet eveniet consequatur ab.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="col-4" style={{ padding: "2% 1% 2% 0" }}>
-                    <div className="box">
-                      <h4 className="font-weight-bold">
-                        Available Sponsor Options:
-                      </h4>
-                      <div className="d-flex justify-content-around text-lg mt-3">
-                        {/* {data.content_id.sponsoring_content_items
-                          // .filter((item) => item.is_sponsored) // Filter only items where is_sponsored is true
-                        .map((item, index) => ( */}
-
-                        <span
-                          // key={index}
-                          className={"badge rounded-pill px-2 py-1 bg-success"}
-                        >
-                          {type}
-                          <i className="bi bi-check2-circle"></i>
-                        </span>
-
-                        {/* ))} */}
-                      </div>
-                    </div>
-                    <button
-                      className="btn py-1 px-3 font-weight-bold d-none d-md-block"
-                      style={{
-                        width: "100%",
-                        marginTop: "4%",
-                        color: "#004EA9",
-                        backgroundColor: "white",
-                        border: "2px solid #004EA9",
-                        borderRadius: "10px",
-                      }}
-                      // onClick={() => handleSponsorClick(data)}
-                    >
-                      Check Out Content Details &nbsp;&nbsp; &gt;&gt;
-                    </button>
-                    <div className="container d-flex text-white text-center px-0 mt-2">
+                return (
+                  <div className="row">
+                    <div className="col-12 mb-4">
                       <div
-                        className="box myevents-box text-white"
-                        style={{ width: "100%" }}
+                        className="card"
+                        style={{
+                          borderRadius: "20px",
+                          backgroundColor: "#efefef",
+                        }}
                       >
-                        <h6
-                          style={{
-                            borderBottom: "1px solid rgba(255, 255, 255, 0.30)",
-                            padding: "2%",
-                          }}
-                        >
-                          {type} Price
-                        </h6>
-                        <h5>
-                          ₹50,000
-                          {/* Display the sum of prices */}
-                        </h5>
+                        <div className="row mx-0">
+                          <div className="col-3 p-3">
+                            <img
+                              src={typeimg}
+                              alt=""
+                              style={{
+                                width: "100%",
+                                height: "100%",
+                                borderRadius: "10px",
+                              }}
+                            />
+                          </div>
+                          <div className="col-5 mt-2">
+                            <div
+                              className="box"
+                              style={{
+                                borderRight: "1px solid #acacac",
+                                height: "84%",
+                              }}
+                            >
+                              <h3 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between">
+                                {data.title}
+                              </h3>
+                              <h4> {data.content_platform[0]}</h4>
+                              <p>
+                                {data?.description}
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="col-4" style={{ padding: "2% 1% 2% 0" }}>
+                            <div className="box">
+                              <h4 className="font-weight-bold">
+                                Available Sponsor Options:
+                              </h4>
+                              <div className="d-flex justify-content-around text-lg mt-3">
+                                <span
+                                  className={"badge rounded-pill px-2 py-1 bg-success"}
+                                >
+                                  {type}
+                                  <i className="bi bi-check2-circle"></i>
+                                </span>
+                              </div>
+                            </div>
+                            <button
+                              className="btn py-1 px-3 font-weight-bold d-none d-md-block"
+                              style={{
+                                width: "100%",
+                                marginTop: "4%",
+                                color: "#004EA9",
+                                backgroundColor: "white",
+                                border: "2px solid #004EA9",
+                                borderRadius: "10px",
+                              }}
+                            onClick={() => handleSponsorClick(data)}
+                            >
+                              Check Out Content Details &nbsp;&nbsp; &gt;&gt;
+                            </button>
+                            <div className="container d-flex text-white text-center px-0 mt-2">
+                              <div
+                                className="box myevents-box text-white"
+                                style={{ width: "100%" }}
+                              >
+                                <h6
+                                  style={{
+                                    borderBottom: "1px solid rgba(255, 255, 255, 0.30)",
+                                    padding: "2%",
+                                  }}
+                                >
+                                  {type} Price
+                                </h6>
+                                <h5>
+                                  ₹50,000
+                                  {/* Display the sum of prices */}
+                                </h5>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* );
-              })} */}
+                );
+              })): (
+                <p>No data available</p>
+              )}             
+            
         </div>
         <button
           className="btn text-white py-1 px-4 font-weight-bold d-none d-md-block"
@@ -222,7 +205,7 @@ const CreatorUpcomingContent = ({ type, typeimg }) => {
                           border: "2px solid #004EA9",
                           borderRadius: "10px",
                         }}
-                        // onClick={() => handleSponsorClick(data)}
+                      // onClick={() => handleSponsorClick(data)}
                       >
                         Check Out Content Details &nbsp;&nbsp; &gt;&gt;
                       </button>

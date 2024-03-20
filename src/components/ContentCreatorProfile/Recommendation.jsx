@@ -1,55 +1,41 @@
 import React, { useState } from "react";
 
 function RecommendationSection({ recommendation }) {
-  const [openIndex, setOpenIndex] = useState(null);
+  const [openCategory, setOpenCategory] = useState(null);
 
-  const handleRecommendationClick = (id) => {
-    setOpenIndex(openIndex === id ? null : id);
+  const handleRecommendationClick = (category) => {
+    setOpenCategory(openCategory === category ? null : category);
   };
+  console.log("Recommendati data by prop ", recommendation);
+
   return (
-    <section
-      id="features"
-      className="features"
-      style={{ borderRadius: "15px" }}
-    >
+    <section id="features" className="features" style={{ borderRadius: "15px" }}>
       <div className="container">
         <div className="row">
-          {recommendation.map((feature, index) => (
-            <div
-              key={index}
-              className={`col-lg-${
-                openIndex === feature.id ? "6" : "3"
-              } col-md-4 col-${openIndex === feature.id ? "12" : "6"} mt-4`}
-            >
-              <div
-                className="icon-box"
-                onClick={() => handleRecommendationClick(feature.id)}
-              >
-                <div className="d-flex align-items-center justify-content-center">
-                  <i className={`bi bi-${feature.icon}`}></i>
-                  <h3>{feature.title}</h3>
+          {recommendation?.map((item, index) => {
+            const category = Object.keys(item)[0]; // Extracting the category name
+            const details = item[category].details; // Extracting details array
+
+            return (
+              <div key={index} className={`col-lg-${openCategory ? "6" : "3"} col-md-4 col-${openCategory ? "12" : "6"} mt-4`}>
+                <div className="icon-box" onClick={() => handleRecommendationClick(category)}>
+                  <div className="d-flex align-items-center justify-content-center">
+                    <i className={`bi bi-${item[category].icon.text}`}></i> {/* Using the icon from the category object */}
+                    <h3>{category}</h3> {/* Displaying category as title */}
+                  </div>
+                  {openCategory === category && (
+                    <>
+                      <ul>
+                        {details.map((detail, idx) => (
+                          <li key={idx}>{detail}</li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
                 </div>
-                {openIndex === feature.id && (
-                  <>
-                    <ul>
-                      <li>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Nihil, ea.
-                      </li>
-                      <li>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Nihil, ea.
-                      </li>
-                      <li>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Nihil, ea.
-                      </li>
-                    </ul>
-                  </>
-                )}
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

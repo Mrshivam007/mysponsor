@@ -17,6 +17,7 @@ import CreatorProfileMainBox from "./CreatorProfileMainBox";
 import tag_ads from "../../assets/img/sponsoring_items/#tag_ads.jpg";
 import reels_sponsored from "../../assets/img/sponsoring_items/reel_sponsored.jpg";
 import sponsored_by from "../../assets/img/sponsoring_items/sponsored_by.png";
+import UpcomingContent from "./UpcomingContent";
 // import Test from "./test";
 const ContentCreatorProfile = () => {
   useEffect(() => {
@@ -33,8 +34,14 @@ const ContentCreatorProfile = () => {
   }, []);
   console.log("creator by id ", creatorById.creatorById?.upcoming_content);
   const ContentData = creatorById.creatorById;
+  const profileData = creatorById.creatorById?.profile_details;
+  const upcoming_content = creatorById.creatorById?.upcoming_content;
+  console.log("Content Details ", profileData);
   console.log("Creator Data", ContentData);
   const [expanded, setExpanded] = useState(null);
+  const tag_ads = creatorById.creatorById?.sponsoring_items.tags;
+  const sponsored_by = creatorById.creatorById?.sponsoring_items.sponsored_by;
+  const reel_sponsored = creatorById.creatorById?.sponsoring_items.reel_sponsored;
 
   const handleClick = (index) => {
     setExpanded(expanded === index ? null : index);
@@ -103,6 +110,9 @@ const ContentCreatorProfile = () => {
     // Add more feature objects as needed
   ];
 
+  const RcommendationData = creatorById.creatorById?.profile_details?.recommendation;
+  console.log("Recommendation Data ", RcommendationData);
+
   return (
     <>
       <div
@@ -118,37 +128,42 @@ const ContentCreatorProfile = () => {
           className="container payments-desktop desktop-view"
           style={{ maxWidth: "100%" }}
         >
-          <CreatorProfileMainBox />
+          <CreatorProfileMainBox data={profileData} />
           <div className="pay-box my-md-0">
             <div className="container">
               <div class="line-text">Recommendation According to Stats</div>
             </div>
-            <RecommendationSection recommendation={RecommendationData} />
+            <RecommendationSection recommendation={RcommendationData} />
             <div className="container">
               <div class="line-text">Creator Platform</div>
             </div>
-            <CreatorPlatform />
+            <CreatorPlatform data={profileData} />
             <div className="container">
               <div class="line-text">Live & Past Records</div>
             </div>
             {/* <Test /> */}
             <Records />
             <div className="container">
+              <div class="line-text">Creator Upcoming Content</div>
+            </div>
+            <UpcomingContent
+              // line={"Sponsor Content"}
+              cardData={upcoming_content}
+            />
+            <div className="container">
               <div class="line-text">Available Sponsoring Items</div>
             </div>
-            <CreatorUpcomingContent type={"#ads"} typeimg={tag_ads} />
+            <CreatorUpcomingContent type={"#ads"} data={tag_ads} typeimg={tag_ads} />
             <CreatorUpcomingContent
               type={"reels sponsored"}
+              data={reels_sponsored}
               typeimg={reels_sponsored}
             />
             <CreatorUpcomingContent
               type={"sponsored by"}
               typeimg={sponsored_by}
+              data={sponsored_by}
             />
-            {/* <ContentCard
-              // line={"Creator Upcoming Content"}
-              cardData={creatorById.creatorById?.upcoming_content}
-            /> */}
           </div>
         </div>
         {/* DESKTOP VIEW END  */}
@@ -212,7 +227,7 @@ const ContentCreatorProfile = () => {
             <h2 className="sponsor-mobile-text">
               Recommendations by the Creator
             </h2>
-            <RecommendationSection recommendation={RecommendationData} />
+            <RecommendationSection recommendation={RcommendationData} />
           </div>
           <div className="box">
             <h2 className="sponsor-mobile-text">Platforms</h2>
