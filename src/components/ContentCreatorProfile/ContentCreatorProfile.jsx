@@ -154,11 +154,11 @@ const ContentCreatorProfile = () => {
               <div class="line-text">Available Sponsoring Items</div>
             </div>
             <CreatorUpcomingContent type={"#ads"} data={tag_ads} typeimg={tag_ads} />
-            <CreatorUpcomingContent
+            {/* <CreatorUpcomingContent
               type={"reels sponsored"}
               data={reels_sponsored}
               typeimg={reels_sponsored}
-            />
+            /> */}
             <CreatorUpcomingContent
               type={"sponsored by"}
               typeimg={sponsored_by}

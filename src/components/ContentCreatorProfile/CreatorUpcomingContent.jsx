@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const CreatorUpcomingContent = ({ type, typeimg, data }) => {
   const navigate = useNavigate();
+  console.log("PSonsoring Item data ", data);
 
   const handleSponsorClick = (data) => {
     navigate("/mycontent-details", { state: { contentData: data } });
@@ -12,7 +13,7 @@ const CreatorUpcomingContent = ({ type, typeimg, data }) => {
       <div className="desktop-view mt-4">
         <h2 className="sponsor-text text-left">{type}</h2>
         <div className="container">
-        {data && data.length > 0 ? (
+        {data !== undefined && data !== null && data.length > 0 ? (
             data
               .slice()
               .reverse()
@@ -100,7 +101,6 @@ const CreatorUpcomingContent = ({ type, typeimg, data }) => {
                                 </h6>
                                 <h5>
                                   ₹50,000
-                                  {/* Display the sum of prices */}
                                 </h5>
                               </div>
                             </div>
