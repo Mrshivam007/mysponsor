@@ -11,8 +11,36 @@
   .services {
     padding-bottom: 0px !important;
   }
+
+  .records-wrapper {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .card-wrapper {
+    min-width: 100% !important;
+  }
+
+  .add-box {
+    width: 100%;
+    padding: 0 !important;
+  }
+
+  .add-box p {
+    display: none;
+  }
 }
 
+.add-box {
+  background-color: rgb(255, 43, 102);
+  padding: 8% 2%;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.card-wrapper {
+  width: 90% !important;
+}
 
 .features .icon-box {
   /* display: flex;

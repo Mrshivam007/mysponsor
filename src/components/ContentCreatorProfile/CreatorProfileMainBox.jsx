@@ -68,18 +68,24 @@ const CreatorProfileMainBox = (data) => {
                 <div
                   className="px-4 pt-0 pb-4 cover"
                   style={{
-                    backgroundImage: `url(${data.data?.cover_page ? data.data?.cover_page : profilebg})`,
-                    height: '34vh'
+                    backgroundImage: `url(${
+                      data.data?.cover_page ? data.data?.cover_page : profilebg
+                    })`,
+                    height: "34vh",
                   }}
                 >
                   <div className="media align-items-end profile-head">
                     <div className="profile mr-3">
                       <img
-                        src={data.data?.profile_pic ? data.data?.profile_pic : noProfilepic}
+                        src={
+                          data.data?.profile_pic
+                            ? data.data?.profile_pic
+                            : noProfilepic
+                        }
                         alt="..."
                         width="130"
                         className="mb-2 img-thumbnail"
-                        style={{ height: '30vh' }}
+                        style={{ height: "30vh" }}
                       />
                     </div>
                   </div>
@@ -89,11 +95,15 @@ const CreatorProfileMainBox = (data) => {
                     <div className="col">
                       <div className="media-body">
                         <h3 className="font-weight-bolder mt-0">
-                          {data.data?.user_id?.first_name} {' '}{data.data?.user_id?.last_name}
+                          {data.data?.user_id?.first_name}{" "}
+                          {data.data?.user_id?.last_name}
                         </h3>
                         <h4>{data.data?.youtube[0]?.location}</h4>
                         <p className="mb-2">
-                          {data.data?.recommendation && data.data?.recommendation.map(item => Object.keys(item)[0]).join(', ')}
+                          {data.data?.recommendation &&
+                            data.data?.recommendation
+                              .map((item) => Object.keys(item)[0])
+                              .join(", ")}
                         </p>
                         <div
                           className="box d-flex justify-content-between"
@@ -116,46 +126,98 @@ const CreatorProfileMainBox = (data) => {
                           backgroundColor: "#f2f2f2",
                           padding: "2%",
                           borderRadius: "15px",
-                          display: 'flex', // Added flexbox for layout
-                          flexDirection: 'column', // Items stacked vertically
-                          alignItems: 'center', // Center items horizontally
+                          display: "flex", // Added flexbox for layout
+                          flexDirection: "column", // Items stacked vertically
+                          alignItems: "center", // Center items horizontally
                         }}
                       >
                         <h3 className="text-center">Stats</h3>
-                        <div className="row row-cols-2" style={{ flexWrap: 'wrap', padding: '0% 4%' }}>
-                          {['youtube', 'instagram', 'twitter', 'facebook'].map((platform, index) => (
-                            <div
-                              key={index}
-                              className={`col ${expanded === index ? 'expanded' : ''}`}
-                              style={{ padding: "5%", marginBottom: '10px' }}
-                            >
-                              <div className="content">
-                                <h5
-                                  onClick={() => handleClick(index)}
-                                  style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
-                                >
-                                  <i // Font Awesome icon
-                                    className={`fab fa-${platform}`}
-                                    style={{ marginRight: '10px', fontSize: '1.2rem' }}
-                                  ></i>
-                                  {platform}
-                                </h5>
-                                {expanded === index && (
-                                  <ul style={{ listStyleType: 'none', padding: 0 }}> {/* Removed bullets and added padding */}
-                                    <li>
-                                      <span style={{ fontWeight: 'bold' }}>{platform === 'youtube' ? 'Subscribers' : 'Followers'}:</span> {platform === 'youtube' ? data.data?.[platform][0]?.subscribers : data.data?.[platform][0]?.followers}
-                                    </li>
-                                    <li>
-                                      <span style={{ fontWeight: 'bold' }}>Per Video React:</span> {data.data?.[platform][0]?.per_video_reach}
-                                    </li>
-                                    <li>
-                                      <span style={{ fontWeight: 'bold' }}>Category {data.data[platform].postType}:</span> {data.data?.[platform][0]?.video_type}
-                                    </li>
-                                  </ul>
-                                )}
+                        <div
+                          className="row row-cols-2"
+                          style={{ flexWrap: "wrap", padding: "0% 4%" }}
+                        >
+                          {["youtube", "instagram", "twitter", "facebook"].map(
+                            (platform, index) => (
+                              <div
+                                key={index}
+                                className={`col ${
+                                  expanded === index ? "expanded" : ""
+                                }`}
+                                style={{ padding: "5%", marginBottom: "10px" }}
+                              >
+                                <div className="content">
+                                  <h5
+                                    onClick={() => handleClick(index)}
+                                    style={{
+                                      cursor: "pointer",
+                                      display: "flex",
+                                      alignItems: "center",
+                                    }}
+                                  >
+                                    <i // Font Awesome icon
+                                      className={`fab fa-${platform}`}
+                                      style={{
+                                        marginRight: "10px",
+                                        fontSize: "1.2rem",
+                                      }}
+                                    ></i>
+                                    {platform}
+                                  </h5>
+                                  {expanded === index &&
+                                    platform !=
+                                      "twitter" &&(
+                                        <ul
+                                          style={{
+                                            listStyleType: "none",
+                                            padding: 0,
+                                          }}
+                                        >
+                                          {" "}
+                                          {/* Removed bullets and added padding */}
+                                          <li>
+                                            <span
+                                              style={{ fontWeight: "bold" }}
+                                            >
+                                              {platform === "youtube"
+                                                ? "Subscribers"
+                                                : "Followers"}
+                                              :
+                                            </span>{" "}
+                                            {platform === "youtube"
+                                              ? data.data?.[platform][0]
+                                                  ?.subscribers
+                                              : data.data?.[platform][0]
+                                                  ?.followers}
+                                          </li>
+                                          <li>
+                                            <span
+                                              style={{ fontWeight: "bold" }}
+                                            >
+                                              Per Video React:
+                                            </span>{" "}
+                                            {
+                                              data.data?.[platform][0]
+                                                ?.per_video_reach
+                                            }
+                                          </li>
+                                          <li>
+                                            <span
+                                              style={{ fontWeight: "bold" }}
+                                            >
+                                              Category{" "}
+                                              {data.data[platform].postType}:
+                                            </span>{" "}
+                                            {
+                                              data.data?.[platform][0]
+                                                ?.video_type
+                                            }
+                                          </li>
+                                        </ul>
+                                      )}
+                                </div>
                               </div>
-                            </div>
-                          ))}
+                            )
+                          )}
                         </div>
                       </div>
                     </div>
