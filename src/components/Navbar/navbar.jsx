@@ -10,6 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/actions/authActions";
 import SponsorClaendar from "../../pages/Sponsor/SponsorCalendar/SponsorCalendar";
+import Notification from "../Notification/Notification";
 
 const NavBar = () => {
   const [isSticky, setSticky] = useState(false);
@@ -298,9 +299,12 @@ const NavBar = () => {
               </>
             ))
           ) : (
+            <>
             <Link to={"/login"} className="link-banner btn btn-primary">
               Register
             </Link>
+            <Notification />
+            </>
           )}
         </div>
       </Navbar>
@@ -568,6 +572,7 @@ const NavBar = () => {
               <Link to={"/login"} className="link-banner btn btn-primary">
                 Register
               </Link>
+              {/* <Notification /> */}
             </>
           )}
         </div>
