@@ -55,6 +55,13 @@ const CreatorProfileMainBox = (data) => {
       category: "Entertainment",
     },
   ];
+  const scrollToLocation = () => {
+    // Scroll to a specific position within the window
+    window.scrollTo({
+      top: 1800,
+      behavior: 'smooth'
+    });
+  };
   return (
     <>
       <div className="desktop-view">
@@ -68,9 +75,8 @@ const CreatorProfileMainBox = (data) => {
                 <div
                   className="px-4 pt-0 pb-4 cover"
                   style={{
-                    backgroundImage: `url(${
-                      data.data?.cover_page ? data.data?.cover_page : profilebg
-                    })`,
+                    backgroundImage: `url(${data.data?.cover_page ? data.data?.cover_page : profilebg
+                      })`,
                     height: "34vh",
                   }}
                 >
@@ -109,7 +115,7 @@ const CreatorProfileMainBox = (data) => {
                           className="box d-flex justify-content-between"
                           style={{ width: "40%" }}
                         >
-                          <button className="btn btn-primary rounded-pill">
+                          <button className="btn btn-primary rounded-pill" onClick={scrollToLocation}>
                             Sponsor
                           </button>
                           <button className="btn btn-outline-primary rounded-pill">
@@ -140,9 +146,8 @@ const CreatorProfileMainBox = (data) => {
                             (platform, index) => (
                               <div
                                 key={index}
-                                className={`col ${
-                                  expanded === index ? "expanded" : ""
-                                }`}
+                                className={`col ${expanded === index ? "expanded" : ""
+                                  }`}
                                 style={{ padding: "5%", marginBottom: "10px" }}
                               >
                                 <div className="content">
@@ -165,55 +170,60 @@ const CreatorProfileMainBox = (data) => {
                                   </h5>
                                   {expanded === index &&
                                     platform !=
-                                      "twitter" &&(
-                                        <ul
-                                          style={{
-                                            listStyleType: "none",
-                                            padding: 0,
-                                          }}
-                                        >
-                                          {" "}
-                                          {/* Removed bullets and added padding */}
-                                          <li>
-                                            <span
-                                              style={{ fontWeight: "bold" }}
-                                            >
-                                              {platform === "youtube"
-                                                ? "Subscribers"
-                                                : "Followers"}
-                                              :
-                                            </span>{" "}
+                                    "twitter" && (
+                                      <ul
+                                        style={{
+                                          listStyleType: "none",
+                                          padding: 0,
+                                        }}
+                                      >
+                                        {" "}
+                                        {/* Removed bullets and added padding */}
+                                        <li>
+                                          <span
+                                            style={{ fontWeight: "bold" }}
+                                          >
                                             {platform === "youtube"
-                                              ? data.data?.[platform][0]
-                                                  ?.subscribers
-                                              : data.data?.[platform][0]
-                                                  ?.followers}
-                                          </li>
-                                          <li>
-                                            <span
-                                              style={{ fontWeight: "bold" }}
-                                            >
-                                              Per Video React:
-                                            </span>{" "}
-                                            {
-                                              data.data?.[platform][0]
-                                                ?.per_video_reach
-                                            }
-                                          </li>
-                                          <li>
-                                            <span
-                                              style={{ fontWeight: "bold" }}
-                                            >
-                                              Category{" "}
-                                              {data.data[platform].postType}:
-                                            </span>{" "}
-                                            {
-                                              data.data?.[platform][0]
-                                                ?.video_type
-                                            }
-                                          </li>
-                                        </ul>
-                                      )}
+                                              ? "Subscribers"
+                                              : "Followers"}
+                                            :
+                                          </span>{" "}
+                                          {platform === "youtube"
+                                            ? data.data?.[platform][0]
+                                              ?.subscribers
+                                            : data.data?.[platform][0]
+                                              ?.followers}
+                                        </li>
+                                        <li>
+                                          <span
+                                            style={{ fontWeight: "bold" }}
+                                          >
+                                            Per Video React:
+                                          </span>{" "}
+                                          {
+                                            data.data?.[platform][0]
+                                              ?.per_video_reach
+                                          }
+                                        </li>
+                                        <li>
+                                          <span
+                                            style={{ fontWeight: "bold" }}
+                                          >
+                                            Category{" "}
+                                            {/* {data.data[platform].postType}: */}
+                                          </span>{" "}
+                                          {/* {
+                                            data.data?.[platform][0]
+                                              ?.video_type
+                                          } */}
+                                           {platform === "youtube"
+                                            ? data.data?.[platform][0]
+                                              ?.video_type
+                                            : data.data?.[platform][0]
+                                              ?.post_type}
+                                        </li>
+                                      </ul>
+                                    )}
                                 </div>
                               </div>
                             )

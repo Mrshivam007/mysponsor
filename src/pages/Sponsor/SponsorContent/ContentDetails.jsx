@@ -32,7 +32,7 @@ const ContentDetails = () => {
     dispatch(fetchContentbyId(content_id));
   }, []);
     console.log("getting content by id ", contentById?.contentById?.[0]);
-  const Data = contentById?.contentById?.[0];
+  const Data = contentById?.contentById;
 
   return (
 

@@ -11,6 +11,8 @@ import { Button, Modal } from "react-bootstrap";
 const CreatorPlatform = (data) => {
   const [show, setShow] = useState(false);
   const [platformData, setPlatformData] = useState(null);
+  const [platformType, setPlatformType] = useState('');
+
 
 
   const handleClose = () => setShow(false);
@@ -19,6 +21,7 @@ const CreatorPlatform = (data) => {
     switch (platform) {
       case "youtube":
         platformInfo = data.data.youtube[0];
+        platform = 'youtube'
         break;
       case "instagram":
         platformInfo = data.data.instagram[0];
@@ -30,6 +33,7 @@ const CreatorPlatform = (data) => {
         platformInfo = null;
     }
     setPlatformData(platformInfo);
+    setPlatformType(platform);
     setShow(true);
   };
 
@@ -152,63 +156,84 @@ const CreatorPlatform = (data) => {
         <Modal.Body>
           {platformData && (
             <div className="container">
-            <h1 className="d-flex justify-content-between">
-              <span>
-                <img
-                  src={youtube}
-                  alt=""
-                  style={{ width: "30%", height: "auto", display: "inline" }}
-                />
-                Youtube
-              </span>
-              <i
-                className="bi bi-x"
-                style={{ cursor: "pointer" }}
-                onClick={handleClose}
-              ></i>
-            </h1>
+              <h1 className="d-flex justify-content-between">
+                {platformType === "youtube" && (
+                  <span>
+                    <img
+                      src={youtube}
+                      alt=""
+                      style={{ width: "30%", height: "auto", display: "inline" }}
+                    />
+                    Youtube
+                  </span>
+                )}
 
-            <div className="container">
-              <div className="row" style={{ rowGap: "20px" }}>
-                <div className="col-6 col-md-4">
-                  <h5>Channel Name</h5>
-                  <p>{platformData?.channel_name}</p>
-                </div>
-                <div className="col-6 col-md-4">
-                  <h5>Channel Subscribers</h5>
-                  <p>{platformData?.subscribers}</p>
-                </div>
-              
-                <div className="col-6 col-md-4">
-                  <h5>Average Views</h5>
-                  <p>{platformData?.per_video_reach} per video</p>
-                </div>
-                <div className="col-6 col-md-4">
-                  <h5>Genre of posting</h5>
-                  <p>Entertainment, Thrill, Comedy, Sci-Fi</p>
-                </div>
-                <div className="col-6 col-md-4">
-                  <h5>Location</h5>
-                  <p>{platformData?.location}</p>
-                </div>
-                <div className="col-6 col-md-4">
-                  <h5>Channel Link</h5>
-                  <p>
-                    {/* <a href="https://www.youtube.com/@MrBeast">
+                {platformType === "instagram" && (
+                  <span>
+                    <img
+                      src={instagram}
+                      alt=""
+                      style={{ width: "30%", height: "auto", display: "inline" }}
+                    />
+                    Instagram
+                  </span>
+                )}
+                {/* <span>
+                  <img
+                    src={youtube}
+                    alt=""
+                    style={{ width: "30%", height: "auto", display: "inline" }}
+                  />
+                  Youtube
+                </span> */}
+                <i
+                  className="bi bi-x"
+                  style={{ cursor: "pointer" }}
+                  onClick={handleClose}
+                ></i>
+              </h1>
+
+              <div className="container">
+                <div className="row" style={{ rowGap: "20px" }}>
+                  <div className="col-6 col-md-4">
+                    <h5>Channel Name</h5>
+                    <p>{platformData?.channel_name}</p>
+                  </div>
+                  <div className="col-6 col-md-4">
+                    <h5>{platformType === "youtube" ? "Subscribers" : "Followers"}</h5>
+                    <p>{platformType === "youtube" ? platformData.subscribers : platformData.followers}</p>
+                  </div>
+
+                  <div className="col-6 col-md-4">
+                    <h5>Average Views</h5>
+                    <p>{platformData?.per_video_reach} per video</p>
+                  </div>
+                  <div className="col-6 col-md-4">
+                    <h5>Genre of posting</h5>
+                    <p>Entertainment, Thrill, Comedy, Sci-Fi</p>
+                  </div>
+                  <div className="col-6 col-md-4">
+                    <h5>Location</h5>
+                    <p>{platformData?.location}</p>
+                  </div>
+                  <div className="col-6 col-md-4">
+                    <h5>Channel Link</h5>
+                    <p>
+                      {/* <a href="https://www.youtube.com/@MrBeast">
                       www.youtube.com/@MrBeast
                     </a> */}
-                    {platformData?.youtube_link}
-                  </p>
-                </div>
-                <div className="col-12">
-                  <h5>About</h5>
-                  <p>
-                    {platformData?.description}
-                  </p>
+                      {platformData?.youtube_link}
+                    </p>
+                  </div>
+                  <div className="col-12">
+                    <h5>About</h5>
+                    <p>
+                      {platformData?.description}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
           )}
         </Modal.Body>
       </Modal>

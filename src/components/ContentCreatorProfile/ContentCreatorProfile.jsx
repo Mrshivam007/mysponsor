@@ -14,10 +14,11 @@ import ContentCard from "../../pages/LandingPage/Desktop_Sponsor_CC/ContentCard"
 import profilebg from "../../assets/img/profileBG.jpg";
 import noProfilepic from "../../assets/img/emptyprofile2.jpg";
 import CreatorProfileMainBox from "./CreatorProfileMainBox";
-import tag_ads from "../../assets/img/sponsoring_items/#tag_ads.jpg";
-import reels_sponsored from "../../assets/img/sponsoring_items/reel_sponsored.jpg";
-import sponsored_by from "../../assets/img/sponsoring_items/sponsored_by.png";
+import tag_ads_img from "../../assets/img/sponsoring_items/#tag_ads.jpg";
+import reels_sponsored_img from "../../assets/img/sponsoring_items/reel_sponsored.jpg";
+import sponsored_by_img from "../../assets/img/sponsoring_items/sponsored_by.png";
 import UpcomingContent from "./UpcomingContent";
+import SuccessToast from "../Toast/Success";
 // import Test from "./test";
 const ContentCreatorProfile = () => {
   useEffect(() => {
@@ -39,9 +40,9 @@ const ContentCreatorProfile = () => {
   console.log("Content Details ", profileData);
   console.log("Creator Data", ContentData);
   const [expanded, setExpanded] = useState(null);
-  const tag_ads = creatorById.creatorById?.sponsoring_items.tags;
-  const sponsored_by = creatorById.creatorById?.sponsoring_items.sponsored_by;
-  const reel_sponsored = creatorById.creatorById?.sponsoring_items.reel_sponsored;
+  const tag_ads = creatorById.creatorById?.sponsoring_items?.tags;
+  const sponsored_by = creatorById.creatorById?.sponsoring_items?.sponsored_by;
+  const reel_sponsored = creatorById.creatorById?.sponsoring_items?.reel_sponsored;
 
   const handleClick = (index) => {
     setExpanded(expanded === index ? null : index);
@@ -113,6 +114,16 @@ const ContentCreatorProfile = () => {
   const RcommendationData = creatorById.creatorById?.profile_details?.recommendation;
   console.log("Recommendation Data ", RcommendationData);
 
+  const handleScroll = () => {
+    // Scroll logic (similar to previous examples)
+    const upcomingContentElement = document.querySelector('.UpcomingContent');
+    if (upcomingContentElement) {
+      upcomingContentElement.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      console.error('UpcomingContent element not found');
+    }
+  };
+
   return (
     <>
       <div
@@ -142,7 +153,7 @@ const ContentCreatorProfile = () => {
               <div class="line-text">Live & Past Records</div>
             </div>
             {/* <Test /> */}
-            <Records />
+            <Records data={profileData} />
             <div className="container">
               <div class="line-text">Creator Upcoming Content</div>
             </div>
@@ -153,15 +164,15 @@ const ContentCreatorProfile = () => {
             <div className="container">
               <div class="line-text">Available Sponsoring Items</div>
             </div>
-            <CreatorUpcomingContent type={"#ads"} data={tag_ads} typeimg={tag_ads} />
+            <CreatorUpcomingContent type={"#ads"} data={tag_ads} typeimg={tag_ads_img} img={tag_ads_img} />
             <CreatorUpcomingContent
               type={"reels sponsored"}
-              data={reels_sponsored}
-              typeimg={reels_sponsored}
+              data={reel_sponsored}
+              typeimg={reels_sponsored_img}
             />
             <CreatorUpcomingContent
               type={"sponsored by"}
-              typeimg={sponsored_by}
+              typeimg={sponsored_by_img}
               data={sponsored_by}
             />
           </div>
@@ -239,10 +250,10 @@ const ContentCreatorProfile = () => {
           </div>
           <div className="box">
             <h2 className="sponsor-mobile-text">Available Sponsoring Items</h2>
-            <CreatorUpcomingContent type={"#ads"} typeimg={tag_ads} />
+            <CreatorUpcomingContent type={"#ads"} typeimg={tag_ads_img} />
             <CreatorUpcomingContent
               type={"reels sponsored"}
-              typeimg={reels_sponsored}
+              typeimg={reels_sponsored_img}
             />
             <CreatorUpcomingContent
               type={"sponsored by"}

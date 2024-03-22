@@ -1,13 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const CreatorUpcomingContent = ({ type, typeimg, data }) => {
+const CreatorUpcomingContent = ({ type, typeimg, data, img }) => {
   const navigate = useNavigate();
   console.log("PSonsoring Item data ", data);
 
   const handleSponsorClick = (data) => {
     navigate("/mycontent-details", { state: { contentData: data } });
   };
+
+  console.log("tag ads Images" , img);
   return (
     <>
       <div className="desktop-view mt-4">

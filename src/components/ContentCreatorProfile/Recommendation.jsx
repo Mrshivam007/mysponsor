@@ -20,7 +20,7 @@ function RecommendationSection({ recommendation }) {
               <div key={index} className={`col-lg-${openCategory ? "6" : "3"} col-md-4 col-${openCategory ? "12" : "6"} mt-4`}>
                 <div className="icon-box" onClick={() => handleRecommendationClick(category)}>
                   <div className="d-flex align-items-center justify-content-center">
-                    <i className={`bi bi-${item[category].icon.text}`}></i> {/* Using the icon from the category object */}
+                    <i className={`fa ${item[category].icon.text}`}></i> {/* Using the icon from the category object */}
                     <h3>{category}</h3> {/* Displaying category as title */}
                   </div>
                   {openCategory === category && (
