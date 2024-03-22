@@ -23,28 +23,28 @@ const Records = (data) => {
   const pastCompanies = [
     {
       company_name: "Company 1",
-      icon: "bi-shop",
-      description: "Description for Company 1",
-      url: "#"
+      // icon: "bi-shop",
+      description_activity: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt, laudantium libero dignissimos vero nulla eius pariatur, voluptas esse veniam illo ducimus blanditiis voluptates distinctio sequi sit odio nisi repudiandae! Consequuntur voluptatibus dolorum sed velit autem neque eaque esse, odit distinctio, quam veritatis repellendus, maxime minima accusantium quas iste molestiae exercitationem cumque? Nostrum, atque animi.",
+      partnership_duration: "3 month"
     },
-    {
-      company_name: "Company 2",
-      icon: "bi-people",
-      description: "Description for Company 2",
-      url: "#"
-    },
-    {
-      company_name: "Company 2",
-      icon: "bi-people",
-      description: "Description for Company 2",
-      url: "#"
-    },
-    {
-      company_name: "Company 2",
-      icon: "bi-people",
-      description: "Description for Company 2",
-      url: "#"
-    },
+    // {
+    //   company_name: "Company 2",
+    //   // icon: "bi-people",
+    //   description_activity: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt, laudantium libero dignissimos vero nulla eius pariatur, voluptas esse veniam illo ducimus blanditiis voluptates distinctio sequi sit odio nisi repudiandae! Consequuntur voluptatibus dolorum sed velit autem neque eaque esse, odit distinctio, quam veritatis repellendus, maxime minima accusantium quas iste molestiae exercitationem cumque? Nostrum, atque animi.",
+    //   partnership_duration: "1.5 month"
+    // },
+    // {
+    //   company_name: "Company 2",
+    //   icon: "bi-people",
+    //   description_activity: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt, laudantium libero dignissimos vero nulla eius pariatur, voluptas esse veniam illo ducimus blanditiis voluptates distinctio sequi sit odio nisi repudiandae! Consequuntur voluptatibus dolorum sed velit autem neque eaque esse, odit distinctio, quam veritatis repellendus, maxime minima accusantium quas iste molestiae exercitationem cumque? Nostrum, atque animi.",
+    //   partnership_duration: "20 days"
+    // },
+    // {
+    //   company_name: "Company 2",
+    //   icon: "bi-people",
+    //   description_activity: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt, laudantium libero dignissimos vero nulla eius pariatur, voluptas esse veniam illo ducimus blanditiis voluptates distinctio sequi sit odio nisi repudiandae! Consequuntur voluptatibus dolorum sed velit autem neque eaque esse, odit distinctio, quam veritatis repellendus, maxime minima accusantium quas iste molestiae exercitationem cumque? Nostrum, atque animi.",
+    //   partnership_duration: "3 days"
+    // },
     // Add more companies as needed
   ];
 
@@ -200,19 +200,26 @@ const Records = (data) => {
                   pastCompanies?.map((company, index) => (
                     <div key={index} className="card-wrapper d-flex align-items-stretch mb-lg-0">
                       <div className="icon-box" style={{ width: '100%' }}>
-                        <div className="icon">
-                          <i className={`bi ${company.icon}`}></i>
-                        </div>
+                        {/* <div className="icon"> */}
+                        <p className="description" style={{ marginBottom: '0%', textAlign: 'left' }}>
+                          {company.partnership_duration}
+                        </p>
+                        {/* <i className={`bi ${company.icon}`}></i> */}
+                        {/* </div> */}
                         <h4 className="title">
                           <a href={company.url}>{company.company_name}</a>
                         </h4>
-                        <p className="description">
+                        {/* <div>
+                          <h5 className="title" style={{ marginBottom: '4px', textAlign: 'left', padding: '0% 4%' }}>
+                            Type: {company.collaboration_type}
+                            <span style={{ float: 'right' }}>
+                              Duration: {company.partnership_duration}
+                            </span>
+                          </h5>
+                        </div> */}
+                        <p className="description" style={{ height: '14vh', overflowY: 'auto', scrollbarWidth: 'thin', scrollbarColor: 'red white' }}>
                           {company.description_activity}
                         </p>
-                        <div className="additional-info" style={{ fontSize: '14px', marginTop: '10px' }}>
-                          <p><strong>Type:</strong> {company.collaboration_type}</p>
-                          <p><strong>Duration:</strong> {company.partnership_duration}</p>
-                        </div>
                       </div>
                     </div>
                   ))
@@ -223,19 +230,21 @@ const Records = (data) => {
                       <div key={index} className="col-md-6">
                         <div className="card-wrapper d-flex align-items-stretch mb-lg-0">
                           <div className="icon-box" style={{ width: '100%' }}>
-                            <div className="icon">
+                            {/* <div className="icon">
                               <i className={`bi ${company.icon}`}></i>
-                            </div>
+                            </div> */}
+                            {/* <p className="description" style={{ height: '14vh' }}>
+                              {company.description_activity}
+                            </p>   */}
+                            <p className="description" style={{ marginBottom: '0%', textAlign: 'left' }}>
+                              {company.partnership_duration}
+                            </p>
                             <h4 className="title">
                               <a href={company.url}>{company.company_name}</a>
                             </h4>
-                            <p className="description">
+                            <p className="description" style={{ height: '14vh', overflowY: 'auto', scrollbarWidth: 'thin', scrollbarColor: 'red white' }}>
                               {company.description_activity}
                             </p>
-                            <div className="additional-info" style={{ fontSize: '14px', marginTop: '10px' }}>
-                              <p><strong>Type:</strong> {company.collaboration_type}</p>
-                              <p><strong>Duration:</strong> {company.partnership_duration}</p>
-                            </div>
                           </div>
                         </div>
                       </div>
@@ -247,20 +256,15 @@ const Records = (data) => {
                     {pastCompanies?.map((company, index) => (
                       <div className="card-wrapper d-flex align-items-stretch mb-lg-0">
                         <div className="icon-box">
-                          <div className="icon">
-                            <i className="bi bi-shop"></i>
-                          </div>
-                          <h4 className="title">
-                            <a href="">Lorem Ipsum</a>
-                          </h4>
-                          <p className="description">
-                            Voluptatum deleniti atque corrupti quos dolores et quas
-                            molestias excepturi
+                          <p className="description" style={{ marginBottom: '0%', textAlign: 'left' }}>
+                            {company.partnership_duration}
                           </p>
-                          <div className="additional-info" style={{ fontSize: '14px', marginTop: '10px' }}>
-                            <p><strong>Type:</strong> {company.collaboration_type}</p>
-                            <p><strong>Duration:</strong> {company.partnership_duration}</p>
-                          </div>
+                          <h4 className="title">
+                            <a href={company.url}>{company.company_name}</a>
+                          </h4>
+                          <p className="description" style={{ height: '14vh', overflowY: 'auto', scrollbarWidth: 'thin', scrollbarColor: 'red white' }}>
+                            {company.description_activity}
+                          </p>
                         </div>
                       </div>
                     ))}
