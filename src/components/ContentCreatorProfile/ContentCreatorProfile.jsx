@@ -14,6 +14,7 @@ import ContentCard from "../../pages/LandingPage/Desktop_Sponsor_CC/ContentCard"
 import profilebg from "../../assets/img/profileBG.jpg";
 import noProfilepic from "../../assets/img/emptyprofile2.jpg";
 import CreatorProfileMainBox from "./CreatorProfileMainBox";
+import tag_ads_new from "../../assets/img/sponsoring_items/tag_ads_new.jpeg";
 import tag_ads_img from "../../assets/img/sponsoring_items/#tag_ads.jpg";
 import reels_sponsored_img from "../../assets/img/sponsoring_items/reel_sponsored.jpg";
 import sponsored_by_img from "../../assets/img/sponsoring_items/sponsored_by.png";
@@ -37,12 +38,13 @@ const ContentCreatorProfile = () => {
   const ContentData = creatorById.creatorById;
   const profileData = creatorById.creatorById?.profile_details;
   const upcoming_content = creatorById.creatorById?.upcoming_content;
-  console.log("Content Details ", profileData);
+  console.log("Profile Data", profileData);
   console.log("Creator Data", ContentData);
   const [expanded, setExpanded] = useState(null);
   const tag_ads = creatorById.creatorById?.sponsoring_items?.tags;
   const sponsored_by = creatorById.creatorById?.sponsoring_items?.sponsored_by;
-  const reel_sponsored = creatorById.creatorById?.sponsoring_items?.reel_sponsored;
+  const reel_sponsored =
+    creatorById.creatorById?.sponsoring_items?.reel_sponsored;
 
   const handleClick = (index) => {
     setExpanded(expanded === index ? null : index);
@@ -111,16 +113,17 @@ const ContentCreatorProfile = () => {
     // Add more feature objects as needed
   ];
 
-  const RcommendationData = creatorById.creatorById?.profile_details?.recommendation;
+  const RcommendationData =
+    creatorById.creatorById?.profile_details?.recommendation;
   console.log("Recommendation Data ", RcommendationData);
 
   const handleScroll = () => {
     // Scroll logic (similar to previous examples)
-    const upcomingContentElement = document.querySelector('.UpcomingContent');
+    const upcomingContentElement = document.querySelector(".UpcomingContent");
     if (upcomingContentElement) {
-      upcomingContentElement.scrollIntoView({ behavior: 'smooth' });
+      upcomingContentElement.scrollIntoView({ behavior: "smooth" });
     } else {
-      console.error('UpcomingContent element not found');
+      console.error("UpcomingContent element not found");
     }
   };
 
@@ -164,7 +167,11 @@ const ContentCreatorProfile = () => {
             <div className="container">
               <div class="line-text">Available Sponsoring Items</div>
             </div>
-            <CreatorUpcomingContent type={"#ads"} data={tag_ads} typeimg={tag_ads_img} img={tag_ads_img} />
+            <CreatorUpcomingContent
+              type={"#ads"}
+              data={tag_ads}
+              typeimg={tag_ads_new}
+            />
             <CreatorUpcomingContent
               type={"reels sponsored"}
               data={reel_sponsored}
@@ -189,49 +196,82 @@ const ContentCreatorProfile = () => {
               borderRadius: "15px",
             }}
           >
-            {/* <h3 className="text-center">Stats</h3> */}
+            <h3 className="text-center">Stats</h3>
             <div className="row row-cols-2">
-              {Stats.map((data, index) => (
-                <>
-                  <div
-                    className={`col ${expanded === index ? "expanded" : ""}`}
-                    style={{ padding: "5%" }}
-                  >
-                    <h5 onClick={() => handleClick(index)}>
-                      <i // Font Awesome icon
-                        className={`fab fa-${data.platform.toLowerCase()}`}
-                        style={{ marginRight: "10px", fontSize: "1.2rem" }}
-                      ></i>
-                      {data.platform}
-                    </h5>
-                    {expanded === index && (
-                      <ul style={{ listStyleType: "none", padding: 0 }}>
-                        {/* Removed bullets and added padding */}
-                        <li>
-                          <span style={{ fontWeight: "bold" }}>
-                            Subscribers:
-                          </span>{" "}
-                          {data.subscribers}
-                        </li>
-                        <li>
-                          <span style={{ fontWeight: "bold" }}>Followers:</span>{" "}
-                          {data.followers}
-                        </li>
-                        <li>
-                          <span style={{ fontWeight: "bold" }}>
-                            Per {data.postType}:
-                          </span>{" "}
-                          {data.perVideo}
-                        </li>
-                        <li>
-                          <span style={{ fontWeight: "bold" }}>Category:</span>{" "}
-                          {data.category}
-                        </li>
-                      </ul>
-                    )}
-                  </div>
-                </>
-              ))}
+              {["youtube", "instagram", "twitter", "facebook"].map(
+                (platform, index) =>
+                  profileData?.[platform] &&
+                  profileData?.[platform].length > 0 && (
+                    <div
+                      key={index}
+                      className={`col ${expanded === index ? "expanded" : ""}`}
+                      style={{
+                        // padding: "5%",
+                        marginBottom: "10px",
+                      }}
+                    >
+                      <div className="content">
+                        <h5
+                          onClick={() => handleClick(index)}
+                          style={{
+                            cursor: "pointer",
+                            display: "flex",
+                            alignItems: "center",
+                          }}
+                        >
+                          <i // Font Awesome icon
+                            className={`fab fa-${platform}`}
+                            style={{
+                              marginRight: "10px",
+                              fontSize: "1.2rem",
+                            }}
+                          ></i>
+                          {platform}
+                        </h5>
+                        {expanded === index && platform != "twitter" && (
+                          <ul
+                            style={{
+                              listStyleType: "none",
+                              padding: 0,
+                            }}
+                          >
+                            {" "}
+                            {/* Removed bullets and added padding */}
+                            <li>
+                              <span style={{ fontWeight: "bold" }}>
+                                {platform === "youtube"
+                                  ? "Subscribers"
+                                  : "Followers"}
+                                :
+                              </span>{" "}
+                              {platform === "youtube"
+                                ? profileData?.[platform][0]?.subscribers
+                                : profileData?.[platform][0]?.followers}
+                            </li>
+                            <li>
+                              <span style={{ fontWeight: "bold" }}>
+                                Per Video Reach:
+                              </span>{" "}
+                              {profileData?.[platform][0]?.per_video_reach}
+                            </li>
+                            <li>
+                              <span style={{ fontWeight: "bold" }}>
+                                Category {/* {data.data[platform].postType}: */}
+                              </span>{" "}
+                              {/* {
+                                            data.[platform][0]
+                                              ?.video_type
+                                          } */}
+                              {platform === "youtube"
+                                ? profileData?.[platform][0]?.video_type
+                                : profileData?.[platform][0]?.post_type}
+                            </li>
+                          </ul>
+                        )}
+                      </div>
+                    </div>
+                  )
+              )}
             </div>
           </div>
           <div className="box my-2">
@@ -242,7 +282,7 @@ const ContentCreatorProfile = () => {
           </div>
           <div className="box">
             <h2 className="sponsor-mobile-text">Platforms</h2>
-            <CreatorPlatform />
+            <CreatorPlatform data={profileData} />
           </div>
           <div className="box">
             <h2 className="sponsor-mobile-text">Live & Past Activity</h2>
@@ -250,15 +290,21 @@ const ContentCreatorProfile = () => {
           </div>
           <div className="box">
             <h2 className="sponsor-mobile-text">Available Sponsoring Items</h2>
-            <CreatorUpcomingContent type={"#ads"} typeimg={tag_ads_img} />
+            <CreatorUpcomingContent
+              type={"#ads"}
+              data={tag_ads}
+              typeimg={tag_ads_new}
+            />
             <CreatorUpcomingContent
               type={"reels sponsored"}
+              data={reel_sponsored}
               typeimg={reels_sponsored_img}
             />
             <CreatorUpcomingContent
               type={"sponsored by"}
-              typeimg={sponsored_by}
-            />{" "}
+              typeimg={sponsored_by_img}
+              data={sponsored_by}
+            />
           </div>
         </div>
         {/* MOBILE VIEW END */}

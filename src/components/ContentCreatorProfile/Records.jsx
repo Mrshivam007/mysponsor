@@ -6,7 +6,10 @@ import Select from "react-select";
 import { Modal } from "react-bootstrap";
 import makeAnimated from "react-select/animated";
 import { useDispatch, useSelector } from "react-redux";
-import { creatorApproach, fetchCreatorbyId } from "../../redux/actions/creatorAction";
+import {
+  creatorApproach,
+  fetchCreatorbyId,
+} from "../../redux/actions/creatorAction";
 import SuccessToast from "../Toast/Success";
 const Records = (data) => {
   const [show, setShow] = useState(false);
@@ -24,8 +27,9 @@ const Records = (data) => {
     {
       company_name: "Company 1",
       // icon: "bi-shop",
-      description_activity: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt, laudantium libero dignissimos vero nulla eius pariatur, voluptas esse veniam illo ducimus blanditiis voluptates distinctio sequi sit odio nisi repudiandae! Consequuntur voluptatibus dolorum sed velit autem neque eaque esse, odit distinctio, quam veritatis repellendus, maxime minima accusantium quas iste molestiae exercitationem cumque? Nostrum, atque animi.",
-      partnership_duration: "3 month"
+      description_activity:
+        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt, laudantium libero dignissimos vero nulla eius pariatur, voluptas esse veniam illo ducimus blanditiis voluptates distinctio sequi sit odio nisi repudiandae! Consequuntur voluptatibus dolorum sed velit autem neque eaque esse, odit distinctio, quam veritatis repellendus, maxime minima accusantium quas iste molestiae exercitationem cumque? Nostrum, atque animi.",
+      partnership_duration: "3 month",
     },
     // {
     //   company_name: "Company 2",
@@ -85,7 +89,6 @@ const Records = (data) => {
   console.log("Getting success message ", creatorApproachDetails);
   console.log("Getting error message ", creatorApproachError);
 
-
   const handleSubmitClick = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -112,21 +115,23 @@ const Records = (data) => {
 
   useEffect(() => {
     if (creatorApproachDetails) {
-      if (creatorApproachDetails.msg == "The creator successfully makes contact.") {
+      if (
+        creatorApproachDetails.msg == "The creator successfully makes contact."
+      ) {
         // console.log("Content created successfully");
         // sessionStorage.setItem(
         //   "creatorApproachSuccess",
         //   "Your request sent to the creator!"
         // );
         setSuccessMessage("Your request sent to the creator!");
-        handleClose()
+        handleClose();
         // window.location.reload();
         // navigate("/your_content/upcoming_content"); // Replace '/' with the desired route for the home page
       } else {
         console.log("An error occurred while creating the content");
         // window.scroll(0, 0);
         // setCreateLoading(false);
-        handleClose()
+        handleClose();
         setErrorMessage("An error occurred during contacting the creator");
       }
     }
@@ -134,7 +139,7 @@ const Records = (data) => {
     if (successMessage) {
       // Set a timer to remove the success message after 3 seconds
       timer = setTimeout(() => {
-        setSuccessMessage('');
+        setSuccessMessage("");
       }, 5000);
     }
 
@@ -164,7 +169,6 @@ const Records = (data) => {
 
   const singleCompamny = pastCompanies && pastCompanies.length == 1;
   const doubleCompamny = pastCompanies && pastCompanies.length == 2;
-
 
   return (
     <>
@@ -198,10 +202,16 @@ const Records = (data) => {
                 {singleCompamny ? (
                   // Render individual card for single company
                   pastCompanies?.map((company, index) => (
-                    <div key={index} className="card-wrapper d-flex align-items-stretch mb-lg-0">
-                      <div className="icon-box" style={{ width: '100%' }}>
+                    <div
+                      key={index}
+                      className="card-wrapper d-flex align-items-stretch mb-lg-0"
+                    >
+                      <div className="icon-box" style={{ width: "100%" }}>
                         {/* <div className="icon"> */}
-                        <p className="description" style={{ marginBottom: '0%', textAlign: 'left' }}>
+                        <p
+                          className="description"
+                          style={{ marginBottom: "0%", textAlign: "left" }}
+                        >
                           {company.partnership_duration}
                         </p>
                         {/* <i className={`bi ${company.icon}`}></i> */}
@@ -217,7 +227,15 @@ const Records = (data) => {
                             </span>
                           </h5>
                         </div> */}
-                        <p className="description" style={{ height: '14vh', overflowY: 'auto', scrollbarWidth: 'thin', scrollbarColor: 'red white' }}>
+                        <p
+                          className="description"
+                          style={{
+                            height: "14vh",
+                            overflowY: "auto",
+                            scrollbarWidth: "thin",
+                            scrollbarColor: "red white",
+                          }}
+                        >
                           {company.description_activity}
                         </p>
                       </div>
@@ -229,20 +247,31 @@ const Records = (data) => {
                     {pastCompanies?.map((company, index) => (
                       <div key={index} className="col-md-6">
                         <div className="card-wrapper d-flex align-items-stretch mb-lg-0">
-                          <div className="icon-box" style={{ width: '100%' }}>
+                          <div className="icon-box" style={{ width: "100%" }}>
                             {/* <div className="icon">
                               <i className={`bi ${company.icon}`}></i>
                             </div> */}
                             {/* <p className="description" style={{ height: '14vh' }}>
                               {company.description_activity}
                             </p>   */}
-                            <p className="description" style={{ marginBottom: '0%', textAlign: 'left' }}>
+                            <p
+                              className="description"
+                              style={{ marginBottom: "0%", textAlign: "left" }}
+                            >
                               {company.partnership_duration}
                             </p>
                             <h4 className="title">
                               <a href={company.url}>{company.company_name}</a>
                             </h4>
-                            <p className="description" style={{ height: '14vh', overflowY: 'auto', scrollbarWidth: 'thin', scrollbarColor: 'red white' }}>
+                            <p
+                              className="description"
+                              style={{
+                                height: "14vh",
+                                overflowY: "auto",
+                                scrollbarWidth: "thin",
+                                scrollbarColor: "red white",
+                              }}
+                            >
                               {company.description_activity}
                             </p>
                           </div>
@@ -256,13 +285,24 @@ const Records = (data) => {
                     {pastCompanies?.map((company, index) => (
                       <div className="card-wrapper d-flex align-items-stretch mb-lg-0">
                         <div className="icon-box">
-                          <p className="description" style={{ marginBottom: '0%', textAlign: 'left' }}>
+                          <p
+                            className="description"
+                            style={{ marginBottom: "0%", textAlign: "left" }}
+                          >
                             {company.partnership_duration}
                           </p>
                           <h4 className="title">
                             <a href={company.url}>{company.company_name}</a>
                           </h4>
-                          <p className="description" style={{ height: '14vh', overflowY: 'auto', scrollbarWidth: 'thin', scrollbarColor: 'red white' }}>
+                          <p
+                            className="description"
+                            style={{
+                              height: "14vh",
+                              overflowY: "auto",
+                              scrollbarWidth: "thin",
+                              scrollbarColor: "red white",
+                            }}
+                          >
                             {company.description_activity}
                           </p>
                         </div>
@@ -270,9 +310,6 @@ const Records = (data) => {
                     ))}
                   </Slider>
                 )}
-
-
-
 
                 {/* <Slider {...settings}>
                   <div className="card-wrapper d-flex align-items-stretch mb-lg-0">
@@ -346,10 +383,9 @@ const Records = (data) => {
                     </div>
                   </div>
                 </Slider> */}
-
               </div>
 
-              <div className="col col-md-3 d-flex align-items-stretch mb-2 mb-lg-0 px-0">
+              <div className="col col-md-3 d-flex align-items-stretch mb-2 mb-md-0 px-0">
                 <div
                   className="add-box text-white text-center"
                   onClick={handleShow}
@@ -358,10 +394,7 @@ const Records = (data) => {
                     <i className="bi bi-plus-lg"></i>
                   </h1>
                   <h4 className="title">Add Your Company</h4>
-                  <p>
-                    Work with Content Creator 01 to add your company among the
-                    others
-                  </p>
+                  <p>Work with Content Creator 01</p>
                 </div>
               </div>
             </div>
@@ -375,25 +408,44 @@ const Records = (data) => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Body>
-          <div className="container">
-            <h1 className="d-flex justify-content-between">
-              <span>
-                {/* <img
+        <Modal.Header>
+          {/* <div className="box d-flex"> */}
+          <span className="record-modal-heading">
+            {/* <img
                   src={youtube}
                   alt=""
                   style={{ width: "30%", height: "auto", display: "inline" }}
                 /> */}
-                Request An Content Creator for Your Promotion
-              </span>
-              <i
+            Make a Content Request to the Creator
+          </span>
+          <h2>
+            <i
+              className="bi bi-x-circle"
+              style={{ cursor: "pointer" }}
+              onClick={handleClose}
+            ></i>
+          </h2>
+          {/* </div> */}
+        </Modal.Header>
+        <Modal.Body>
+          <div className="container px-0">
+            {/* <h1 className="d-flex justify-content-between"> */}
+            {/* <span className="record-modal-heading"> */}
+            {/* <img
+                  src={youtube}
+                  alt=""
+                  style={{ width: "30%", height: "auto", display: "inline" }}
+                /> */}
+            {/* Request An Content Creator for Your Promotion */}
+            {/* </span> */}
+            {/* <i
                 className="bi bi-x"
                 style={{ cursor: "pointer" }}
                 onClick={handleClose}
-              ></i>
-            </h1>
+              ></i> */}
+            {/* </h1> */}
 
-            <div className="container">
+            <div className="container px-0 my-2">
               {/* <div className="row" style={{ rowGap: "20px" }}> */}
               <div>
                 <label className="large" for="inputEmailAddress">
@@ -410,7 +462,7 @@ const Records = (data) => {
               </div>
               <div>
                 <label className="large" for="inputEmailAddress">
-                  PSonsoring Item
+                  Sponsoring Item
                 </label>
                 <Select
                   closeMenuOnSelect={true}
@@ -422,7 +474,9 @@ const Records = (data) => {
                 />
               </div>
             </div>
-            <button className="btn btn-success" onClick={handleSubmitClick}>Submit</button>
+            <button className="btn btn-success" onClick={handleSubmitClick}>
+              Submit
+            </button>
           </div>
           {/* </div> */}
         </Modal.Body>

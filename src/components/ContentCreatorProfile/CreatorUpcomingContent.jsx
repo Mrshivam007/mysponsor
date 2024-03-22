@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const CreatorUpcomingContent = ({ type, typeimg, data, img }) => {
+const CreatorUpcomingContent = ({ type, typeimg, data }) => {
   const navigate = useNavigate();
   console.log("PSonsoring Item data ", data);
 
@@ -9,13 +9,12 @@ const CreatorUpcomingContent = ({ type, typeimg, data, img }) => {
     navigate("/mycontent-details", { state: { contentData: data } });
   };
 
-  console.log("tag ads Images" , img);
   return (
     <>
       <div className="desktop-view mt-4">
         <h2 className="sponsor-text text-left">{type}</h2>
         <div className="container">
-        {Array.isArray(data) && data.length > 0 ? (
+          {Array.isArray(data) && data.length > 0 ? (
             data
               .slice()
               .reverse()
@@ -54,20 +53,23 @@ const CreatorUpcomingContent = ({ type, typeimg, data, img }) => {
                                 {data.title}
                               </h3>
                               <h4> {data.content_platform[0]}</h4>
-                              <p>
-                                {data?.description}
-                              </p>
+                              <p>{data?.description}</p>
                             </div>
                           </div>
 
-                          <div className="col-4" style={{ padding: "2% 1% 2% 0" }}>
+                          <div
+                            className="col-4"
+                            style={{ padding: "2% 1% 2% 0" }}
+                          >
                             <div className="box">
                               <h4 className="font-weight-bold">
                                 Available Sponsor Options:
                               </h4>
                               <div className="d-flex justify-content-around text-lg mt-3">
                                 <span
-                                  className={"badge rounded-pill px-2 py-1 bg-success"}
+                                  className={
+                                    "badge rounded-pill px-2 py-1 bg-success"
+                                  }
                                 >
                                   {type}
                                   <i className="bi bi-check2-circle"></i>
@@ -84,7 +86,7 @@ const CreatorUpcomingContent = ({ type, typeimg, data, img }) => {
                                 border: "2px solid #004EA9",
                                 borderRadius: "10px",
                               }}
-                            onClick={() => handleSponsorClick(data)}
+                              onClick={() => handleSponsorClick(data)}
                             >
                               Check Out Content Details &nbsp;&nbsp; &gt;&gt;
                             </button>
@@ -95,15 +97,14 @@ const CreatorUpcomingContent = ({ type, typeimg, data, img }) => {
                               >
                                 <h6
                                   style={{
-                                    borderBottom: "1px solid rgba(255, 255, 255, 0.30)",
+                                    borderBottom:
+                                      "1px solid rgba(255, 255, 255, 0.30)",
                                     padding: "2%",
                                   }}
                                 >
                                   {type} Price
                                 </h6>
-                                <h5>
-                                  ₹50,000
-                                </h5>
+                                <h5>₹50,000</h5>
                               </div>
                             </div>
                           </div>
@@ -112,10 +113,10 @@ const CreatorUpcomingContent = ({ type, typeimg, data, img }) => {
                     </div>
                   </div>
                 );
-              })): (
-                <p>No data available</p>
-              )}             
-            
+              })
+          ) : (
+            <p>No data available</p>
+          )}
         </div>
         <button
           className="btn text-white py-1 px-4 font-weight-bold d-none d-md-block"
@@ -132,93 +133,98 @@ const CreatorUpcomingContent = ({ type, typeimg, data, img }) => {
       <div className="mobile-view text-md">
         <h2 className="sponsor-mobile-text">{type}</h2>
         <div className="container mb-4 px-0">
-          {/* {cardData &&
-            cardData
+          {Array.isArray(data) && data.length > 0 ? (
+            data
               .slice()
               .reverse()
               .map((data) => {
-                return ( */}
-          <div className="row">
-            <div className="col-12">
-              <div className="card myevents-card">
-                <div className="post-thumb">
-                  <img
-                    src={typeimg}
-                    alt=""
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      borderRadius: "10px",
-                    }}
-                  />
-                  <div className="text-overlay">
-                    <h4 className="font-weight-bold mb-0">Content 01</h4>
-                    <h5>Youtube</h5>
-                  </div>
-                </div>
-                <div className="container">
-                  <div className="row d-flex">
+                return (
+                  <div className="row">
                     <div className="col-12">
-                      <div className="box">
-                        <h4 className="font-weight-bold">
-                          Content Sponsored for:
-                        </h4>
-                        <div className="d-flex justify-content-around text-lg">
-                          {/* {data.content_id.sponsoring_content_items
+                      <div className="card myevents-card">
+                        <div className="post-thumb">
+                          <img
+                            src={typeimg}
+                            alt=""
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              borderRadius: "10px",
+                            }}
+                          />
+                          <div className="text-overlay">
+                            <h4 className="font-weight-bold mb-0">
+                              {data.title}
+                            </h4>
+                            <h5>{data.content_platform[0]}</h5>
+                          </div>
+                        </div>
+                        <div className="container">
+                          <div className="row d-flex">
+                            <div className="col-12">
+                              <div className="box">
+                                <h4 className="font-weight-bold">
+                                  Content Sponsored for:
+                                </h4>
+                                <div className="d-flex justify-content-around text-lg">
+                                  {/* {data.content_id.sponsoring_content_items
                             // .filter((item) => item.is_sponsored) // Filter only items where is_sponsored is true
                             .map((item, index) => ( */}
-                          <span
-                            // key={index}
-                            className={
-                              "badge rounded-pill px-2 py-1 bg-success"
-                            }
-                          >
-                            {type}
-                            <i className="bi bi-check2-circle"></i>
-                          </span>
-                          {/* ))} */}
-                        </div>
-                      </div>
+                                  <span
+                                    // key={index}
+                                    className={
+                                      "badge rounded-pill px-2 py-1 bg-success"
+                                    }
+                                  >
+                                    {type}
+                                    <i className="bi bi-check2-circle"></i>
+                                  </span>
+                                  {/* ))} */}
+                                </div>
+                              </div>
 
-                      <div className="container text-lg text-white text-center d-flex my-2">
-                        <div
-                          className="box myevents-box"
-                          style={{ width: "100%" }}
-                        >
-                          <p
-                            className="mb-1"
-                            style={{
-                              borderBottom:
-                                "1px solid rgba(255, 255, 255, 0.30)",
-                            }}
-                          >
-                            {type} Price
-                          </p>
-                          <p className="mb-1">₹50,000</p>
+                              <div className="container text-lg text-white text-center d-flex my-2">
+                                <div
+                                  className="box myevents-box"
+                                  style={{ width: "100%" }}
+                                >
+                                  <p
+                                    className="mb-1"
+                                    style={{
+                                      borderBottom:
+                                        "1px solid rgba(255, 255, 255, 0.30)",
+                                    }}
+                                  >
+                                    {type} Price
+                                  </p>
+                                  <p className="mb-1">₹50,000</p>
+                                </div>
+                              </div>
+                              <button
+                                className="btn py-1 px-2 font-weight-bold"
+                                style={{
+                                  width: "100%",
+                                  marginBottom: "2%",
+                                  color: "#004EA9",
+                                  backgroundColor: "white",
+                                  border: "2px solid #004EA9",
+                                  borderRadius: "10px",
+                                }}
+                                onClick={() => handleSponsorClick(data)}
+                              >
+                                Check Out Content Details &nbsp;&nbsp; &gt;&gt;
+                              </button>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <button
-                        className="btn py-1 px-2 font-weight-bold"
-                        style={{
-                          width: "100%",
-                          marginBottom: "2%",
-                          color: "#004EA9",
-                          backgroundColor: "white",
-                          border: "2px solid #004EA9",
-                          borderRadius: "10px",
-                        }}
-                      // onClick={() => handleSponsorClick(data)}
-                      >
-                        Check Out Content Details &nbsp;&nbsp; &gt;&gt;
-                      </button>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* );
-              })} */}
+                );
+              })
+          ) : (
+            <p>No data available</p>
+          )}
         </div>
       </div>
     </>

@@ -4,7 +4,7 @@ import noProfilepic from "../../assets/img/emptyprofile2.jpg";
 import { ProgressBar } from "react-bootstrap";
 const CreatorProfileMainBox = (data) => {
   const [expanded, setExpanded] = useState(null);
-  console.log("Profile data by prop ", data?.data);
+  console.log("Profile data by prop ", data?.data?.instagram);
 
   const handleClick = (index) => {
     setExpanded(expanded === index ? null : index);
@@ -59,7 +59,7 @@ const CreatorProfileMainBox = (data) => {
     // Scroll to a specific position within the window
     window.scrollTo({
       top: 1800,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
   };
   return (
@@ -75,8 +75,9 @@ const CreatorProfileMainBox = (data) => {
                 <div
                   className="px-4 pt-0 pb-4 cover"
                   style={{
-                    backgroundImage: `url(${data.data?.cover_page ? data.data?.cover_page : profilebg
-                      })`,
+                    backgroundImage: `url(${
+                      data.data?.cover_page ? data.data?.cover_page : profilebg
+                    })`,
                     height: "34vh",
                   }}
                 >
@@ -115,7 +116,10 @@ const CreatorProfileMainBox = (data) => {
                           className="box d-flex justify-content-between"
                           style={{ width: "40%" }}
                         >
-                          <button className="btn btn-primary rounded-pill" onClick={scrollToLocation}>
+                          <button
+                            className="btn btn-primary rounded-pill"
+                            onClick={scrollToLocation}
+                          >
                             Sponsor
                           </button>
                           <button className="btn btn-outline-primary rounded-pill">
@@ -128,7 +132,7 @@ const CreatorProfileMainBox = (data) => {
                       <div
                         className="container"
                         style={{
-                          width: "80%",
+                          width: "100%",
                           backgroundColor: "#f2f2f2",
                           padding: "2%",
                           borderRadius: "15px",
@@ -140,93 +144,102 @@ const CreatorProfileMainBox = (data) => {
                         <h3 className="text-center">Stats</h3>
                         <div
                           className="row row-cols-2"
-                          style={{ flexWrap: "wrap", padding: "0% 4%" }}
+                          style={{
+                            width: "100%",
+                            // flexWrap: "wrap",
+                            padding: "0% 4%",
+                          }}
                         >
                           {["youtube", "instagram", "twitter", "facebook"].map(
-                            (platform, index) => (
-                              <div
-                                key={index}
-                                className={`col ${expanded === index ? "expanded" : ""
+                            (platform, index) =>
+                              data?.data?.[platform] &&
+                              data?.data?.[platform].length > 0 && (
+                                <div
+                                  key={index}
+                                  className={`col ${
+                                    expanded === index ? "expanded" : ""
                                   }`}
-                                style={{ padding: "5%", marginBottom: "10px" }}
-                              >
-                                <div className="content">
-                                  <h5
-                                    onClick={() => handleClick(index)}
-                                    style={{
-                                      cursor: "pointer",
-                                      display: "flex",
-                                      alignItems: "center",
-                                    }}
-                                  >
-                                    <i // Font Awesome icon
-                                      className={`fab fa-${platform}`}
+                                  style={{
+                                    // padding: "5%",
+                                    marginBottom: "10px",
+                                  }}
+                                >
+                                  <div className="content">
+                                    <h5
+                                      onClick={() => handleClick(index)}
                                       style={{
-                                        marginRight: "10px",
-                                        fontSize: "1.2rem",
+                                        cursor: "pointer",
+                                        display: "flex",
+                                        alignItems: "center",
                                       }}
-                                    ></i>
-                                    {platform}
-                                  </h5>
-                                  {expanded === index &&
-                                    platform !=
-                                    "twitter" && (
-                                      <ul
+                                    >
+                                      <i // Font Awesome icon
+                                        className={`fab fa-${platform}`}
                                         style={{
-                                          listStyleType: "none",
-                                          padding: 0,
+                                          marginRight: "10px",
+                                          fontSize: "1.2rem",
                                         }}
-                                      >
-                                        {" "}
-                                        {/* Removed bullets and added padding */}
-                                        <li>
-                                          <span
-                                            style={{ fontWeight: "bold" }}
-                                          >
+                                      ></i>
+                                      {platform}
+                                    </h5>
+                                    {expanded === index &&
+                                      platform != "twitter" && (
+                                        <ul
+                                          style={{
+                                            listStyleType: "none",
+                                            padding: 0,
+                                          }}
+                                        >
+                                          {" "}
+                                          {/* Removed bullets and added padding */}
+                                          <li>
+                                            <span
+                                              style={{ fontWeight: "bold" }}
+                                            >
+                                              {platform === "youtube"
+                                                ? "Subscribers"
+                                                : "Followers"}
+                                              :
+                                            </span>{" "}
                                             {platform === "youtube"
-                                              ? "Subscribers"
-                                              : "Followers"}
-                                            :
-                                          </span>{" "}
-                                          {platform === "youtube"
-                                            ? data.data?.[platform][0]
-                                              ?.subscribers
-                                            : data.data?.[platform][0]
-                                              ?.followers}
-                                        </li>
-                                        <li>
-                                          <span
-                                            style={{ fontWeight: "bold" }}
-                                          >
-                                            Per Video React:
-                                          </span>{" "}
-                                          {
-                                            data.data?.[platform][0]
-                                              ?.per_video_reach
-                                          }
-                                        </li>
-                                        <li>
-                                          <span
-                                            style={{ fontWeight: "bold" }}
-                                          >
-                                            Category{" "}
-                                            {/* {data.data[platform].postType}: */}
-                                          </span>{" "}
-                                          {/* {
+                                              ? data.data?.[platform][0]
+                                                  ?.subscribers
+                                              : data.data?.[platform][0]
+                                                  ?.followers}
+                                          </li>
+                                          <li>
+                                            <span
+                                              style={{ fontWeight: "bold" }}
+                                            >
+                                              Per Video Reach:
+                                            </span>{" "}
+                                            {
+                                              data.data?.[platform][0]
+                                                ?.per_video_reach
+                                            }
+                                          </li>
+                                          <li>
+                                            <span
+                                              style={{ fontWeight: "bold" }}
+                                            >
+                                              Category{" "}
+                                              {/* {data.data[platform].postType}: */}
+                                            </span>{" "}
+                                            {/* {
                                             data.data?.[platform][0]
                                               ?.video_type
                                           } */}
-                                           {platform === "youtube"
-                                            ? data.data?.[platform][0]
-                                              ?.video_type
-                                            : data.data?.[platform][0]
-                                              ?.post_type}
-                                        </li>
-                                      </ul>
-                                    )}
+                                            {platform === "youtube"
+                                              ? data.data?.[platform][0]
+                                                  ?.video_type
+                                              : data.data?.[platform][0]
+                                                  ?.post_type}
+                                          </li>
+                                        </ul>
+                                      )}
+                                  </div>
                                 </div>
-                              </div>
-                            )
+                              )
                           )}
                         </div>
                       </div>

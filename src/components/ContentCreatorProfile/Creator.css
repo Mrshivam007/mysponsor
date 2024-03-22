@@ -29,6 +29,10 @@
   .add-box p {
     display: none;
   }
+
+  .record-modal-heading {
+    font-size: large !important;
+  }
 }
 
 .add-box {
@@ -40,6 +44,10 @@
 
 .card-wrapper {
   width: 90% !important;
+}
+
+.record-modal-heading {
+  font-size: x-large;
 }
 
 .features .icon-box {
