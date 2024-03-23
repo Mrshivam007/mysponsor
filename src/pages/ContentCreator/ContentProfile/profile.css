@@ -77,13 +77,15 @@
     max-height: 200px;
 }
 
-@media (min-width: 576px) {
-    .profile img {
-        width: 100%;
-    }
-}
 
 .cover {
     background-size: cover;
     background-repeat: no-repeat
+}
+
+@media (min-width: 576px) {
+    .profile img {
+        width: 100%;
+    }
+
 }

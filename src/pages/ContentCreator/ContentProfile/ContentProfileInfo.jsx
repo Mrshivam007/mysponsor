@@ -81,7 +81,8 @@ const ContentProfileInfo = () => {
   const [youtube_shorts, setYoutube_shorts] = useState(null);
   const [youtube_shortsFileName, setYoutube_shortsFileName] = useState(null);
   const [insta_profile_pic, setInsta_profile_pic] = useState(null);
-  const [insta_profile_picFileName, setInsta_profile_picFileName] = useState(null);
+  const [insta_profile_picFileName, setInsta_profile_picFileName] =
+    useState(null);
   const [fb_profile_pic, setFb_profile_pic] = useState(null);
   const [fb_profile_picFileName, setFb_profile_picFileName] = useState(null);
   const [cover, setCover] = useState(null);
@@ -199,11 +200,9 @@ const ContentProfileInfo = () => {
   const [instagramData, setInstagramData] = useState([]);
   const [facebookData, setFacebookData] = useState([]);
 
-
   const handleLocationChange = (e) => {
     setLocation(e.target.value);
   };
-
 
   useEffect(() => {
     if (profileDetails?.contentDetails?.channel_name) {
@@ -454,7 +453,11 @@ const ContentProfileInfo = () => {
         // formData.append("youtube_shorts_pic", youtube_shorts); // Change the field name as needed
       } else {
         // Append the youtube_shorts file with its name
-        formData.append("youtube_shorts", youtube_shorts, youtube_shortsFileName); // Change the field name as needed
+        formData.append(
+          "youtube_shorts",
+          youtube_shorts,
+          youtube_shortsFileName
+        ); // Change the field name as needed
       }
     }
     if (insta_profile_pic) {
@@ -463,7 +466,11 @@ const ContentProfileInfo = () => {
         // formData.append("insta_profile_pic_pic", insta_profile_pic); // Change the field name as needed
       } else {
         // Append the insta_profile_pic file with its name
-        formData.append("insta_profile_pic", insta_profile_pic, insta_profile_picFileName); // Change the field name as needed
+        formData.append(
+          "insta_profile_pic",
+          insta_profile_pic,
+          insta_profile_picFileName
+        ); // Change the field name as needed
       }
     }
     if (fb_profile_pic) {
@@ -472,7 +479,11 @@ const ContentProfileInfo = () => {
         // formData.append("fb_profile_pic_pic", fb_profile_pic); // Change the field name as needed
       } else {
         // Append the fb_profile_pic file with its name
-        formData.append("fb_profile_pic", fb_profile_pic, fb_profile_picFileName); // Change the field name as needed
+        formData.append(
+          "fb_profile_pic",
+          fb_profile_pic,
+          fb_profile_picFileName
+        ); // Change the field name as needed
       }
     }
     if (cover) {
@@ -647,49 +658,132 @@ const ContentProfileInfo = () => {
           {/* PROFILE PICTURE SECTION */}
           <div className="col-12">
             {/* <div className="mobile-view"> */}
-            <div className="container">
-              <div className="row py-5">
-                <div className="col-12 mx-auto p-0">
-                  <div className="bg-white shadow rounded overflow-hidden">
-                    <div
-                      className="px-4 pt-0 pb-4 cover"
-                      style={{
-                        backgroundImage: `url(${cover
-                          ? typeof cover === "string"
-                            ? cover
-                            : URL.createObjectURL(cover)
-                          : profilebg
-                          })`,
-                      }}
-                    >
-                      <div
-                        className="edit-cover d-flex justify-content-end"
-                        style={{ padding: "3%" }}
-                      >
-                        <button
-                          className="btn"
-                          style={{
-                            backgroundColor: "#ffffff4a",
-                            backdropFilter: "blur(10px)",
-                            boxShadow: "0px 2px 20px -4px rgba(0, 0, 0, 0.25)",
-                            fontSize: "x-large",
-                            marginRight: "-8%",
-                            padding: "2% 5%",
-                          }}
-                          onClick={handleCoverClick}
-                        >
-                          <i class="bi bi-pencil-square"></i>
-                        </button>
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={handleCoverChange}
-                          ref={hiddenFileInput1}
-                          style={{ display: "none" }}
-                        />
+            <div className="container px-0">
+              <div className="desktop-view">
+                <div className="row py-5">
+                  <div className="col-4 mx-auto p-0">
+                    <div className="bg-white shadow rounded overflow-hidden">
+                      <div className="px-4 pt-0 pb-4 cover">
+                        <div className="media align-items-end profile-head">
+                          <div className="profile my-3">
+                            <img
+                              src={
+                                profile
+                                  ? typeof profile === "string"
+                                    ? profile
+                                    : URL.createObjectURL(profile)
+                                  : noProfilepic
+                              }
+                              alt="..."
+                              width="130"
+                              style={{
+                                height: "180px",
+                                width: "180px",
+                                borderRadius: "50%",
+                                overflow: "hidden", // Ensure the border radius is applied
+                              }}
+                              className="mb-2 img-thumbnail"
+                            />
+                            {/* <button className="btn btn-outline-dark btn-sm btn-block">
+                            Edit profile
+                          </button> */}
+                            <button
+                              className="btn btn-outline-dark btn-sm btn-block"
+                              onClick={handleProfileClick}
+                            >
+                              Edit profile
+                            </button>
+                            <input
+                              type="file"
+                              accept="image/*"
+                              onChange={handleProfileChange}
+                              ref={hiddenFileInput2}
+                              style={{ display: "none" }}
+                            />
+                            {/* <input type="file" /> */}
+                          </div>
+                        </div>
+                        <div className="media-body text-center">
+                          <h3 className="mt-0 mb-0">
+                            {userDetails?.firstname}&nbsp;
+                            {userDetails?.lastname}
+                          </h3>
+                          <h5>
+                            Content Creator &nbsp;
+                            <i
+                              class="bi bi-patch-check-fill"
+                              style={{ color: "#007bff" }}
+                            ></i>
+                          </h5>
+                          <p className="mb-0">{userDetails?.email}</p>
+                        </div>
                       </div>
+                    </div>
+                  </div>
+                  <div className="col-8">
+                    <div className="card mx-0 mb-4">
+                      <div className="card-header">Account Details</div>
+                      <div className="card-body p-2">
+                        <form>
+                          <div className="row gx-3 mb-3">
+                            <div className="col-md-12">
+                              <label
+                                className="small mb-1"
+                                for="inputFirstName"
+                              >
+                                First name
+                              </label>
+                              <input
+                                className="form-control"
+                                id="inputFirstName"
+                                type="text"
+                                placeholder="Enter your first name"
+                                value={userDetails?.firstname}
+                                readOnly
+                              />
+                            </div>
+                            <div className="col-md-12">
+                              <label className="small mb-1" for="inputLastName">
+                                Last name
+                              </label>
+                              <input
+                                className="form-control"
+                                id="inputLastName"
+                                type="text"
+                                placeholder="Enter your last name"
+                                value={userDetails?.lastname}
+                                readOnly
+                              />
+                            </div>
+                          </div>
+                          <div className="mb-3">
+                            <label
+                              className="small mb-1"
+                              for="inputEmailAddress"
+                            >
+                              Email address
+                            </label>
+                            <input
+                              className="form-control"
+                              id="inputEmailAddress"
+                              type="email"
+                              placeholder="Enter your email address"
+                              value={userDetails?.email}
+                              readOnly
+                            />
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mobile-view">
+                <div className="box mx-auto p-0">
+                  <div className="bg-white shadow rounded overflow-hidden">
+                    <div className="px-4 pt-0 pb-4 cover">
                       <div className="media align-items-end profile-head">
-                        <div className="profile mr-3">
+                        <div className="profile my-3">
                           <img
                             src={
                               profile
@@ -701,10 +795,10 @@ const ContentProfileInfo = () => {
                             alt="..."
                             width="130"
                             style={{
-                              height: '16vh',
-                              width: '128px',
-                              borderRadius: '50%',
-                              overflow: 'hidden' // Ensure the border radius is applied
+                              height: "180px",
+                              width: "180px",
+                              borderRadius: "50%",
+                              overflow: "hidden", // Ensure the border radius is applied
                             }}
                             className="mb-2 img-thumbnail"
                           />
@@ -726,46 +820,21 @@ const ContentProfileInfo = () => {
                           />
                           {/* <input type="file" /> */}
                         </div>
-                        <div className="media-body">
-                          <h5 className="mt-0 mb-0">
-                            {userDetails?.firstname}&nbsp;
-                            {userDetails?.lastname}
-                          </h5>
-                          <p className="small mb-0">{businessName}</p>
-                        </div>
                       </div>
-                    </div>
-                    <div className="container d-flex flex-column align-items-end">
-                      {/* <ul className="list-inline mb-0">
-                        <li className="list-inline-item">
-                          <h5 className="font-weight-bold mb-0 d-block">215</h5>
-                          <small className="text-muted">
-                            <i className="fas fa-image mr-1"></i>Photos
-                          </small>
-                        </li>
-                        <li className="list-inline-item">
-                          <h5 className="font-weight-bold mb-0 d-block">745</h5>
-                          <small className="text-muted">
-                            <i className="fas fa-user mr-1"></i>Followers
-                          </small>
-                        </li>
-                        <li className="list-inline-item">
-                          <h5 className="font-weight-bold mb-0 d-block">340</h5>
-                          <small className="text-muted">
-                            <i className="fas fa-user mr-1"></i>Following
-                          </small>
-                        </li>
-                      </ul> */}
-                      {/* <h4 className="mt-0 mb-0">Mark Williams</h4> */}
-                      {/* <p className="small mb-4">New York</p> */}
-                    </div>
-                    <div className="px-4 py-3 mt-5">
-                      {/* <h5 className="mb-0">About</h5>
-                      <div className="p-4 rounded shadow-sm bg-light">
-                        <p className="font-italic mb-0">Web Developer</p>
-                        <p className="font-italic mb-0">Lives in New York</p>
-                        <p className="font-italic mb-0">Photographer</p>
-                      </div> */}
+                      <div className="media-body text-center">
+                        <h3 className="mt-0">
+                          {userDetails?.firstname}&nbsp;
+                          {userDetails?.lastname}
+                        </h3>
+                        <h5>
+                          Content Creator &nbsp;
+                          <i
+                            class="bi bi-patch-check-fill"
+                            style={{ color: "#007bff" }}
+                          ></i>
+                        </h5>
+                        <p className="mb-0">{userDetails?.email}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -775,50 +844,52 @@ const ContentProfileInfo = () => {
           </div>
           {/* PROFILE PICTURE SECTION */}
           <div className="container">
-            <div className="card mb-4">
+            <div className="card mx-0 mb-4">
               <div className="card-header">Account Details</div>
-              <div className="card-body">
+              <div className="card-body p-2">
                 <form>
-                  <div className="row gx-3 mb-3">
-                    <div className="col-md-6">
-                      <label className="small mb-1" for="inputFirstName">
-                        First name
+                  <div className="mobile-view">
+                    <div className="row gx-3 mb-3">
+                      <div className="col-md-6">
+                        <label className="small mb-1" for="inputFirstName">
+                          First name
+                        </label>
+                        <input
+                          className="form-control"
+                          id="inputFirstName"
+                          type="text"
+                          placeholder="Enter your first name"
+                          value={userDetails?.firstname}
+                          readOnly
+                        />
+                      </div>
+                      <div className="col-md-6">
+                        <label className="small mb-1" for="inputLastName">
+                          Last name
+                        </label>
+                        <input
+                          className="form-control"
+                          id="inputLastName"
+                          type="text"
+                          placeholder="Enter your last name"
+                          value={userDetails?.lastname}
+                          readOnly
+                        />
+                      </div>
+                    </div>
+                    <div className="mb-3">
+                      <label className="small mb-1" for="inputEmailAddress">
+                        Email address
                       </label>
                       <input
                         className="form-control"
-                        id="inputFirstName"
-                        type="text"
-                        placeholder="Enter your first name"
-                        value={userDetails?.firstname}
+                        id="inputEmailAddress"
+                        type="email"
+                        placeholder="Enter your email address"
+                        value={userDetails?.email}
                         readOnly
                       />
                     </div>
-                    <div className="col-md-6">
-                      <label className="small mb-1" for="inputLastName">
-                        Last name
-                      </label>
-                      <input
-                        className="form-control"
-                        id="inputLastName"
-                        type="text"
-                        placeholder="Enter your last name"
-                        value={userDetails?.lastname}
-                        readOnly
-                      />
-                    </div>
-                  </div>
-                  <div className="mb-3">
-                    <label className="small mb-1" for="inputEmailAddress">
-                      Email address
-                    </label>
-                    <input
-                      className="form-control"
-                      id="inputEmailAddress"
-                      type="email"
-                      placeholder="Enter your email address"
-                      value={userDetails?.email}
-                      readOnly
-                    />
                   </div>
                   {/* <div className="mb-3">
                     <label className="small mb-1" htmlFor="inputEmailAddress">
@@ -845,7 +916,7 @@ const ContentProfileInfo = () => {
                       placeholder="Enter your location"
                       value={location}
                       onChange={handleLocationChange}
-                    // disabled={!editable} // Disable input field when not in editing mode
+                      // disabled={!editable} // Disable input field when not in editing mode
                     />
                   </div>
                   <div className="mb-3">
@@ -915,7 +986,7 @@ const ContentProfileInfo = () => {
                                 value={collaboration.company_name || ""}
                                 onChange={(e) => handleChange(index, e)}
                                 name="company_name"
-                              // disabled={!editable} // Disable input field when not in editing mode
+                                // disabled={!editable} // Disable input field when not in editing mode
                               />
                             </div>
                             <div className="col-md-6">
@@ -933,7 +1004,7 @@ const ContentProfileInfo = () => {
                                 value={collaboration.collaboration_type || ""}
                                 onChange={(e) => handleChange(index, e)}
                                 name="collaboration_type"
-                              // disabled={!editable} // Disable input field when not in editing mode
+                                // disabled={!editable} // Disable input field when not in editing mode
                               />
                             </div>
                           </div>
@@ -952,7 +1023,7 @@ const ContentProfileInfo = () => {
                               value={collaboration.partnership_duration || ""}
                               onChange={(e) => handleChange(index, e)}
                               name="partnership_duration"
-                            // disabled={!editable} // Disable input field when not in editing mode
+                              // disabled={!editable} // Disable input field when not in editing mode
                             />
                           </div>
                           <div className="form-group">
@@ -972,7 +1043,7 @@ const ContentProfileInfo = () => {
                               name="description_activity"
                               col="30"
                               rows="5"
-                            // disabled={!editable} // Disable input field when not in editing mode
+                              // disabled={!editable} // Disable input field when not in editing mode
                             />
                           </div>
                         </div>
@@ -1001,13 +1072,27 @@ const ContentProfileInfo = () => {
                             <h2>YouTube Data</h2>
                             {/* <div className="desktop-view"> */}
                             <div
-                              className="box1 form-photos-box mt-2 d-flex justify-content-center p-3"
-                              style={{ width: "100%", height: 'auto' }}
+                              className="box1 form-photos-box mt-2 mb-0 d-flex flex-row justify-content-center p-md-3"
+                              style={{
+                                width: "100%",
+                                height: "auto",
+                                background: "none",
+                                boxShadow: "none",
+                                margin: "0",
+                                padding: "0",
+                                border: "0",
+                                gap: "5px",
+                              }}
                             >
-                              <div className="col-xl-4">
-                                <div className="card mb-4 mb-xl-0">
-                                  <div className="card-header">Youtube Profile Pic</div>
-                                  <div className="card-body text-center">
+                              <div className="col-xl-4 p-0">
+                                <div
+                                  className="card mb-4 mx-0 mb-xl-0"
+                                  style={{ boxShadow: "none" }}
+                                >
+                                  <div className="card-header text-center p-2">
+                                    Youtube Profile Pic
+                                  </div>
+                                  <div className="card-body p-1 text-center">
                                     <img
                                       className="img-account-profile mb-2 mx-auto"
                                       style={{ width: "100%" }}
@@ -1029,24 +1114,44 @@ const ContentProfileInfo = () => {
                                       type="file"
                                       accept="image/*"
                                       onChange={handleYoutubePicChange}
-                                    // disabled={!editable} // Disable input field when not in editing mode
+                                      // disabled={!editable} // Disable input field when not in editing mode
                                     />
                                   </div>
                                 </div>
                               </div>
-                              <div className="col-xl-4">
-                                <div className="card mb-4 mb-xl-0">
-                                  <div className="card-header">Youtube Shorts Clip</div>
-                                  <div className="card-body text-center">
-                                    {youtube_shorts && typeof youtube_shorts !== "string" ? (
-                                      <video controls autoPlay className="mx-auto w-75">
-                                        <source src={URL.createObjectURL(youtube_shorts)} type="video/mp4" />
-                                        Your browser does not support the video tag.
+                              <div className="col-xl-4 p-0">
+                                <div
+                                  className="card mb-4 mx-0 mb-xl-0"
+                                  style={{ boxShadow: "none" }}
+                                >
+                                  <div className="card-header text-center p-2">
+                                    Youtube Shorts Clip
+                                  </div>
+                                  <div className="card-body p-1 text-center">
+                                    {youtube_shorts &&
+                                    typeof youtube_shorts !== "string" ? (
+                                      <video
+                                        controls
+                                        autoPlay
+                                        className="mx-auto w-75"
+                                      >
+                                        <source
+                                          src={URL.createObjectURL(
+                                            youtube_shorts
+                                          )}
+                                          type="video/mp4"
+                                        />
+                                        Your browser does not support the video
+                                        tag.
                                       </video>
                                     ) : (
                                       <img
                                         className="img-account-profile rounded-circle mb-2 mx-auto"
-                                        src={youtube_shorts ? youtube_shorts : noLogo}
+                                        src={
+                                          youtube_shorts
+                                            ? youtube_shorts
+                                            : noLogo
+                                        }
                                         alt="Profile Pic"
                                       />
                                     )}
@@ -1063,7 +1168,6 @@ const ContentProfileInfo = () => {
                                   </div>
                                 </div>
                               </div>
-
                             </div>
                             {/* </div> */}
                             {youtubeData.map((youtube, index) => (
@@ -1249,12 +1353,19 @@ const ContentProfileInfo = () => {
                           <div>
                             <h2>Instagram Data</h2>
                             <div
-                              className="box1 form-photos-box mt-2 d-flex justify-content-center p-3"
-                              style={{ width: "100%", height: 'auto' }}
+                              className="box1 form-photos-box mt-2 mb-0 d-flex justify-content-center p-3"
+                              style={{
+                                width: "100%",
+                                height: "auto",
+                                background: "none",
+                                boxShadow: "none",
+                              }}
                             >
                               <div className="col-xl-4">
                                 <div className="card mb-4 mb-xl-0">
-                                  <div className="card-header">Instagram Profile Pic</div>
+                                  <div className="card-header">
+                                    Instagram Profile Pic
+                                  </div>
                                   <div className="card-body text-center">
                                     <img
                                       className="img-account-profile mb-2 mx-auto"
@@ -1262,9 +1373,12 @@ const ContentProfileInfo = () => {
                                       // src={cover ? URL.createObjectURL(cover) : noCover}
                                       src={
                                         insta_profile_pic
-                                          ? typeof insta_profile_pic === "string"
+                                          ? typeof insta_profile_pic ===
+                                            "string"
                                             ? insta_profile_pic
-                                            : URL.createObjectURL(insta_profile_pic)
+                                            : URL.createObjectURL(
+                                                insta_profile_pic
+                                              )
                                           : noLogo
                                       }
                                       alt="Profile Pic"
@@ -1277,7 +1391,7 @@ const ContentProfileInfo = () => {
                                       type="file"
                                       accept="image/*"
                                       onChange={handleInstaPicChange}
-                                    // disabled={!editable} // Disable input field when not in editing mode
+                                      // disabled={!editable} // Disable input field when not in editing mode
                                     />
                                   </div>
                                 </div>
@@ -1471,12 +1585,19 @@ const ContentProfileInfo = () => {
                           <div>
                             <h2>Facebook Data</h2>
                             <div
-                              className="box1 form-photos-box mt-2 d-flex justify-content-center p-3"
-                              style={{ width: "100%", height: 'auto' }}
+                              className="box1 form-photos-box mt-2 mb-0 d-flex justify-content-center p-3"
+                              style={{
+                                width: "100%",
+                                height: "auto",
+                                background: "none",
+                                boxShadow: "none",
+                              }}
                             >
                               <div className="col-xl-4">
                                 <div className="card mb-4 mb-xl-0">
-                                  <div className="card-header">Facebook Profile Pic</div>
+                                  <div className="card-header">
+                                    Facebook Profile Pic
+                                  </div>
                                   <div className="card-body text-center">
                                     <img
                                       className="img-account-profile mb-2 mx-auto"
@@ -1486,7 +1607,9 @@ const ContentProfileInfo = () => {
                                         fb_profile_pic
                                           ? typeof fb_profile_pic === "string"
                                             ? fb_profile_pic
-                                            : URL.createObjectURL(fb_profile_pic)
+                                            : URL.createObjectURL(
+                                                fb_profile_pic
+                                              )
                                           : noLogo
                                       }
                                       alt="Profile Pic"
@@ -1499,7 +1622,7 @@ const ContentProfileInfo = () => {
                                       type="file"
                                       accept="image/*"
                                       onChange={handleFbPicChange}
-                                    // disabled={!editable} // Disable input field when not in editing mode
+                                      // disabled={!editable} // Disable input field when not in editing mode
                                     />
                                   </div>
                                 </div>
