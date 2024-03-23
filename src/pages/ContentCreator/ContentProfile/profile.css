@@ -69,7 +69,8 @@
 }
 
 .profile-head {
-    transform: translateY(5rem)
+    justify-content: center;
+    align-items: center;
 }
 
 .profile img {

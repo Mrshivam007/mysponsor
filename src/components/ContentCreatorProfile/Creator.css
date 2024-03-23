@@ -160,15 +160,15 @@
 
 
 .media img {
-  width: 200px;
+  width: 180px;
   height: auto;
   border-radius: 50%;
   overflow: hidden;
 }
 
 
-@media (max-width:576px) {
+/* @media (max-width:576px) {
   .media img {
     width: 130px;
   }
-}
+} */

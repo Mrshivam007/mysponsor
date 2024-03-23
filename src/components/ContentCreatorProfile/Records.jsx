@@ -31,24 +31,27 @@ const Records = (data) => {
         "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt, laudantium libero dignissimos vero nulla eius pariatur, voluptas esse veniam illo ducimus blanditiis voluptates distinctio sequi sit odio nisi repudiandae! Consequuntur voluptatibus dolorum sed velit autem neque eaque esse, odit distinctio, quam veritatis repellendus, maxime minima accusantium quas iste molestiae exercitationem cumque? Nostrum, atque animi.",
       partnership_duration: "3 month",
     },
-    // {
-    //   company_name: "Company 2",
-    //   // icon: "bi-people",
-    //   description_activity: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt, laudantium libero dignissimos vero nulla eius pariatur, voluptas esse veniam illo ducimus blanditiis voluptates distinctio sequi sit odio nisi repudiandae! Consequuntur voluptatibus dolorum sed velit autem neque eaque esse, odit distinctio, quam veritatis repellendus, maxime minima accusantium quas iste molestiae exercitationem cumque? Nostrum, atque animi.",
-    //   partnership_duration: "1.5 month"
-    // },
-    // {
-    //   company_name: "Company 2",
-    //   icon: "bi-people",
-    //   description_activity: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt, laudantium libero dignissimos vero nulla eius pariatur, voluptas esse veniam illo ducimus blanditiis voluptates distinctio sequi sit odio nisi repudiandae! Consequuntur voluptatibus dolorum sed velit autem neque eaque esse, odit distinctio, quam veritatis repellendus, maxime minima accusantium quas iste molestiae exercitationem cumque? Nostrum, atque animi.",
-    //   partnership_duration: "20 days"
-    // },
-    // {
-    //   company_name: "Company 2",
-    //   icon: "bi-people",
-    //   description_activity: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt, laudantium libero dignissimos vero nulla eius pariatur, voluptas esse veniam illo ducimus blanditiis voluptates distinctio sequi sit odio nisi repudiandae! Consequuntur voluptatibus dolorum sed velit autem neque eaque esse, odit distinctio, quam veritatis repellendus, maxime minima accusantium quas iste molestiae exercitationem cumque? Nostrum, atque animi.",
-    //   partnership_duration: "3 days"
-    // },
+    {
+      company_name: "Company 2",
+      // icon: "bi-people",
+      description_activity:
+        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt, laudantium libero dignissimos vero nulla eius pariatur, voluptas esse veniam illo ducimus blanditiis voluptates distinctio sequi sit odio nisi repudiandae! Consequuntur voluptatibus dolorum sed velit autem neque eaque esse, odit distinctio, quam veritatis repellendus, maxime minima accusantium quas iste molestiae exercitationem cumque? Nostrum, atque animi.",
+      partnership_duration: "1.5 month",
+    },
+    {
+      company_name: "Company 2",
+      // icon: "bi-people",
+      description_activity:
+        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt, laudantium libero dignissimos vero nulla eius pariatur, voluptas esse veniam illo ducimus blanditiis voluptates distinctio sequi sit odio nisi repudiandae! Consequuntur voluptatibus dolorum sed velit autem neque eaque esse, odit distinctio, quam veritatis repellendus, maxime minima accusantium quas iste molestiae exercitationem cumque? Nostrum, atque animi.",
+      partnership_duration: "20 days",
+    },
+    {
+      company_name: "Company 2",
+      icon: "bi-people",
+      description_activity:
+        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt, laudantium libero dignissimos vero nulla eius pariatur, voluptas esse veniam illo ducimus blanditiis voluptates distinctio sequi sit odio nisi repudiandae! Consequuntur voluptatibus dolorum sed velit autem neque eaque esse, odit distinctio, quam veritatis repellendus, maxime minima accusantium quas iste molestiae exercitationem cumque? Nostrum, atque animi.",
+      partnership_duration: "3 days",
+    },
     // Add more companies as needed
   ];
 
@@ -153,6 +156,9 @@ const Records = (data) => {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    pauseOnHover: true,
     responsive: [
       {
         breakpoint: 480,
@@ -162,6 +168,9 @@ const Records = (data) => {
           speed: 500,
           slidesToShow: 1,
           slidesToScroll: 1,
+          autoplay: true,
+          autoplaySpeed: 2000,
+          pauseOnHover: true,
         },
       },
     ],

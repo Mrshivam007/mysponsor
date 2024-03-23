@@ -144,10 +144,10 @@ const ContentCreatorProfile = () => {
         >
           <CreatorProfileMainBox data={profileData} />
           <div className="pay-box my-md-0">
-            <div className="container">
+            {/* <div className="container">
               <div class="line-text">Recommendation According to Stats</div>
             </div>
-            <RecommendationSection recommendation={RcommendationData} />
+            <RecommendationSection recommendation={RcommendationData} /> */}
             <div className="container">
               <div class="line-text">Creator Platform</div>
             </div>
@@ -287,6 +287,13 @@ const ContentCreatorProfile = () => {
           <div className="box">
             <h2 className="sponsor-mobile-text">Live & Past Activity</h2>
             <Records />
+          </div>
+          <div className="box">
+            <h2 className="sponsor-mobile-text">Creator Upcoming Content</h2>
+            <UpcomingContent
+              // line={"Sponsor Content"}
+              cardData={upcoming_content}
+            />
           </div>
           <div className="box">
             <h2 className="sponsor-mobile-text">Available Sponsoring Items</h2>

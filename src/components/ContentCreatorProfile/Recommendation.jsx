@@ -17,7 +17,7 @@ function RecommendationSection({ recommendation }) {
             const details = item[category].details; // Extracting details array
 
             return (
-              <div key={index} className={`col-lg-${openCategory ? "6" : "3"} col-md-4 col-${openCategory ? "12" : "6"} mt-4`}>
+              <div key={index} className={`col-lg-6 col-md-4 col-${openCategory ? "12" : "6"} mt-4`}>
                 <div className="icon-box" onClick={() => handleRecommendationClick(category)}>
                   <div className="d-flex align-items-center justify-content-center">
                     <i className={`fa ${item[category].icon.text}`}></i> {/* Using the icon from the category object */}

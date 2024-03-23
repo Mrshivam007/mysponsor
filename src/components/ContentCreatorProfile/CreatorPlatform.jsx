@@ -105,7 +105,7 @@ const CreatorPlatform = (data) => {
                   cursor: "pointer",
                 }}
                 // onClick={handleShow}
-                onClick={() => handlePlatformClick("instagram")}
+                onClick={() => handlePlatformClick("X")}
               >
                 <div className="platform-img d-flex justify-content-center">
                   <img
@@ -179,6 +179,34 @@ const CreatorPlatform = (data) => {
                 Instagram
               </span>
             )}
+            {platformType === "facebook" && (
+              <span>
+                <img
+                  src={facebook}
+                  alt=""
+                  style={{
+                    width: "20%",
+                    height: "auto",
+                    display: "inline",
+                  }}
+                />
+                &nbsp;Facebook
+              </span>
+            )}
+            {platformType === "X" && (
+              <span>
+                <img
+                  src={X}
+                  alt=""
+                  style={{
+                    width: "20%",
+                    height: "auto",
+                    display: "inline",
+                  }}
+                />
+                &nbsp;&nbsp;X
+              </span>
+            )}
           </h2>
           <h2>
             <i
@@ -189,10 +217,10 @@ const CreatorPlatform = (data) => {
           </h2>
         </Modal.Header>
         <Modal.Body>
-          {platformData && (
+          {platformData ? (
             <div className="container">
               {/* <h2 className="d-flex justify-content-between"> */}
-                {/* {platformType === "youtube" && (
+              {/* {platformType === "youtube" && (
                   <span>
                     <img
                       src={youtube}
@@ -221,7 +249,7 @@ const CreatorPlatform = (data) => {
                     Instagram
                   </span>
                 )} */}
-                {/* <span>
+              {/* <span>
                   <img
                     src={youtube}
                     alt=""
@@ -229,7 +257,7 @@ const CreatorPlatform = (data) => {
                   />
                   Youtube
                 </span> */}
-                {/* <i
+              {/* <i
                   className="bi bi-x"
                   style={{ cursor: "pointer" }}
                   onClick={handleClose}
@@ -281,6 +309,10 @@ const CreatorPlatform = (data) => {
                 </div>
               </div>
             </div>
+          ) : (
+            <>
+              <h3 className="text-center">No Data Available</h3>
+            </>
           )}
         </Modal.Body>
       </Modal>
