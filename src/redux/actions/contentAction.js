@@ -88,12 +88,12 @@ export const fetchContentPlatform = () => async (dispatch) => {
     try {
       dispatch({ type: CREATE_CONTENT_REQUEST });
   
-    //   const access = JSON.parse(localStorage.getItem("access"));
+      const access = JSON.parse(localStorage.getItem("access"));
   
       const { data } = await axios.post(
         `${apiurl}/api/user/content/`,
         formData,
-        // { headers: { Authorization: `Bearer ${access}` } }
+        { headers: { Authorization: `Bearer ${access}` } }
       );
       console.log(data.status);
   

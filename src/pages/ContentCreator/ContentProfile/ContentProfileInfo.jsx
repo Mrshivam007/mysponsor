@@ -332,6 +332,8 @@ const ContentProfileInfo = () => {
       {
         post_type: "",
         followers: "",
+        followings: "",
+        posts: "",
         per_video_reach: "",
         instagram_link: "",
         channel_name: "",
@@ -1429,7 +1431,7 @@ const ContentProfileInfo = () => {
                                       className="small mb-1"
                                       htmlFor={`inputSubscribers_${index}`}
                                     >
-                                      Subscribers
+                                      Followers
                                     </label>
                                     <input
                                       className="form-control"
@@ -1443,6 +1445,54 @@ const ContentProfileInfo = () => {
                                         handleInstagramChange(
                                           index,
                                           "followers",
+                                          e.target.value
+                                        )
+                                      }
+                                    />
+                                  </div>
+                                  <div className="col-md-6">
+                                    <label
+                                      className="small mb-1"
+                                      htmlFor={`inputSubscribers_${index}`}
+                                    >
+                                      Following
+                                    </label>
+                                    <input
+                                      className="form-control"
+                                      id={`inputSubscribers_${index}`}
+                                      type="text"
+                                      // disabled={!editable} // Disable input field when not in editing mode
+
+                                      placeholder="Enter Following"
+                                      value={instagram.following || ""}
+                                      onChange={(e) =>
+                                        handleInstagramChange(
+                                          index,
+                                          "following",
+                                          e.target.value
+                                        )
+                                      }
+                                    />
+                                  </div>
+                                  <div className="col-md-6">
+                                    <label
+                                      className="small mb-1"
+                                      htmlFor={`inputSubscribers_${index}`}
+                                    >
+                                      Posts
+                                    </label>
+                                    <input
+                                      className="form-control"
+                                      id={`inputSubscribers_${index}`}
+                                      type="text"
+                                      // disabled={!editable} // Disable input field when not in editing mode
+
+                                      placeholder="Enter posts"
+                                      value={instagram.posts || ""}
+                                      onChange={(e) =>
+                                        handleInstagramChange(
+                                          index,
+                                          "posts",
                                           e.target.value
                                         )
                                       }

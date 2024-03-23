@@ -176,8 +176,8 @@ const Records = (data) => {
     ],
   };
 
-  const singleCompamny = pastCompanies && pastCompanies.length == 1;
-  const doubleCompamny = pastCompanies && pastCompanies.length == 2;
+  const singleCompamny = past_company && past_company.length == 1;
+  const doubleCompamny = past_company && past_company.length == 2;
 
   return (
     <>
@@ -210,7 +210,7 @@ const Records = (data) => {
               <div className={`col col-md-9 px-0`}>
                 {singleCompamny ? (
                   // Render individual card for single company
-                  pastCompanies?.map((company, index) => (
+                  past_company?.map((company, index) => (
                     <div
                       key={index}
                       className="card-wrapper d-flex align-items-stretch mb-lg-0"
@@ -253,7 +253,7 @@ const Records = (data) => {
                 ) : doubleCompamny ? (
                   // Render a different UI for two companies
                   <div className="row">
-                    {pastCompanies?.map((company, index) => (
+                    {past_company?.map((company, index) => (
                       <div key={index} className="col-md-6">
                         <div className="card-wrapper d-flex align-items-stretch mb-lg-0">
                           <div className="icon-box" style={{ width: "100%" }}>
@@ -291,7 +291,7 @@ const Records = (data) => {
                 ) : (
                   // Render a different UI for other cases
                   <Slider {...settings}>
-                    {pastCompanies?.map((company, index) => (
+                    {past_company?.map((company, index) => (
                       <div className="card-wrapper d-flex align-items-stretch mb-lg-0">
                         <div className="icon-box">
                           <p

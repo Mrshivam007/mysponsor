@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dropdown, Badge, Button, Toast } from 'react-bootstrap';
+import { getNotification } from '../../redux/actions/notificationAction';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Notification() {
   const [notifications, setNotifications] = useState([
@@ -7,6 +9,14 @@ function Notification() {
     { id: 2, heading: 'Reminder', description: 'Don\'t forget your appointment at 3:00 PM.', dateTime: '5min ago' },
     { id: 3, heading: 'Alert', description: 'System maintenance scheduled for tomorrow.', dateTime: '1day ago' }
   ]);
+
+  const dispatch = useDispatch();
+  const Notification = useSelector((state) => state.notification);
+  useEffect(() => {
+    dispatch(getNotification());
+  }, []);
+  console.log("Notification Messages ", Notification?.notificationDetails);
+
 
   const clearNotification = (id) => {
     setNotifications(notifications.filter(notification => notification.id !== id));

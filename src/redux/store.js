@@ -11,6 +11,7 @@ import { paymentWithdrawReducer } from "./reducer/paymentWithdrawReducer";
 import { eventByIdReducer } from "./reducer/eventByIdReducer";
 import { contentByIdReducer } from "./reducer/contentByIdReducer";
 import { creatorReducer } from "./reducer/creatorReducer";
+import { notificationReducer } from "./reducer/notificationReducer";
 
 
 const reducer = combineReducers({
@@ -25,7 +26,8 @@ const reducer = combineReducers({
     sponsorProfile: profileReducer,
     admin: adminReducer,
     payment: paymentReducer,
-    paymentWithdraw: paymentWithdrawReducer
+    paymentWithdraw: paymentWithdrawReducer,
+    notification: notificationReducer
 })
 
 const userInfoFromStorage = localStorage.getItem('userDetails') ? JSON.parse(localStorage.getItem('userDetails')) : null;

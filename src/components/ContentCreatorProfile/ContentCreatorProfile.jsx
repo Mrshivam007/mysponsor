@@ -188,7 +188,7 @@ const ContentCreatorProfile = () => {
 
         {/* MOBILE VIEW */}
         <div className="container mobile-view">
-          <CreatorProfileMainBox />
+          <CreatorProfileMainBox data={profileData} />
           <div
             className="container bg-white"
             style={{

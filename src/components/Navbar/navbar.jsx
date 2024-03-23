@@ -178,6 +178,7 @@ const NavBar = () => {
                     style={{ fontSize: "28px", marginLeft: "-10px" }}
                   ></span>
                 </div>
+                <Notification />
                 <div className="dropdown" ref={dropdownRef}>
                   {openDropDown ? (
                     <ul
