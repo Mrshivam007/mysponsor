@@ -6,13 +6,13 @@ export const fetchContent = () => async (dispatch) => {
     try {
       dispatch({ type: GET_CONTENT_REQUEST });
   
-    //   const access = JSON.parse(localStorage.getItem("access"));
+      const access = JSON.parse(localStorage.getItem("access"));
   
       const { data } = await axios.get(
         `${apiurl}/api/user/content/`,
-        // {
-        //   headers: { Authorization: `Bearer ${access}` },
-        // }
+        {
+          headers: { Authorization: `Bearer ${access}` },
+        }
       );  
       dispatch({
         type: GET_CONTENT_SUCCESS,

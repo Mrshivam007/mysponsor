@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Dropdown, Badge, Button, Toast } from 'react-bootstrap';
-import { getNotification } from '../../redux/actions/notificationAction';
+import { getNotification, clearNotification, clearAllNotification } from '../../redux/actions/notificationAction';
 import { useDispatch, useSelector } from 'react-redux';
 
 function Notification() {
@@ -17,13 +17,21 @@ function Notification() {
   }, []);
   console.log("Notification Messages ", Notification?.notificationDetails);
 
+  const dynamicNotification = Notification?.notificationDetails;
 
-  const clearNotification = (id) => {
-    setNotifications(notifications.filter(notification => notification.id !== id));
-  };
 
-  const clearAllNotifications = () => {
-    setNotifications([]);
+  // const clearNotification = (id) => {
+  //   setNotifications(notifications.filter(notification => notification.id !== id));
+  // };
+
+  const closeNotification = (id) => {
+    // Assuming dispatch is properly provided by Redux store
+    // dispatch({ id }); // Dispatch an action to clear the notification
+    dispatch(clearNotification(id))
+  }
+
+  const closeAllNotification = () => {
+    dispatch(clearAllNotification());
   };
 
   const handleNotificationClose = (e, id) => {
@@ -35,32 +43,32 @@ function Notification() {
     <Dropdown>
       <Dropdown.Toggle variant="link" id="dropdown-basic" style={{ color: 'white' }}>
         <span className="fa fa-bell fa-lg"></span>
-        {notifications.length > 0 && <Badge pill variant="danger">{notifications.length}</Badge>}
+        {dynamicNotification?.length > 0 && <Badge pill variant="danger">{dynamicNotification?.length}</Badge>}
       </Dropdown.Toggle>
 
       <Dropdown.Menu className="dropdown-menu-right">
         <Dropdown.Header>Notifications</Dropdown.Header>
-        {notifications.map(notification => (
+        {dynamicNotification?.map(notification => (
           <div key={notification.id}>
             <Dropdown.Item onClick={(e) => e.stopPropagation()}>
               <Toast onClose={(e) => handleNotificationClose(e, notification.id)}>
                 <Toast.Header closeButton={false}>
                   <strong className="me-auto">{notification.heading}</strong>
-                  {/* <Button variant="link" onClick={(e) => handleNotificationClose(e, notification.id)} className="notification-close"> */}
                   <div style={{ marginLeft: 'auto' }}>
-                    <span style={{ paddingRight: '10px', fontSize: '14px' }}>{notification.dateTime}</span>
-                    <span className="fa fa-times notification-close" style={{ fontSize: '16px' }} onClick={(e) => handleNotificationClose(e, notification.id)}></span>
-                    {/* </Button> */}
+                    <span style={{ paddingRight: '10px', fontSize: '14px' }}>{notification.time_since}</span>
+                    <span className="fa fa-times notification-close" style={{ fontSize: '16px' }} onClick={() => closeNotification(notification.id)}></span>
                   </div>
                 </Toast.Header>
-                <Toast.Body>{notification.description}</Toast.Body>
+                <Toast.Body style={{ fontSize: '14px', lineHeight: '1.2' }}>
+                  {notification.message}
+                </Toast.Body>
               </Toast>
             </Dropdown.Item>
           </div>
         ))}
         {notifications.length === 0 && <Dropdown.Item>No new notifications</Dropdown.Item>}
         <Dropdown.Divider />
-        <Dropdown.Item onClick={clearAllNotifications}>Clear All</Dropdown.Item>
+        <Dropdown.Item onClick={closeAllNotification}>Clear All</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );

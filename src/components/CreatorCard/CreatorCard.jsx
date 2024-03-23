@@ -53,7 +53,7 @@ const CreatorCard = ({ line, cardData }) => {
                         {data.instagram ? 'Instagram' : ''} {" "}
                         {data.facebook ? 'Facebook' : ''} {" "}
                       </span> */}
-                      <span className="card-text" style={{paddingBottom: '4px'}}>
+                      <span className="card-text" style={{ paddingBottom: '4px' }}>
                         Platform:{" "}
                         {((data.youtube && data.youtube.length > 0) ||
                           (data.instagram && data.instagram.length > 0) ||
@@ -68,12 +68,23 @@ const CreatorCard = ({ line, cardData }) => {
                         )}
                       </span>
 
-                      <span className="card-text" style={{paddingBottom: '4px'}}>
+                      <span className="card-text" style={{ paddingBottom: '4px' }}>
                         {/* <i className="bi bi-cash text-success"></i> */}
                         <i class="fa-solid fa-icons text-primary"></i>
-                        &nbsp;&nbsp; {data.recommendation && data.recommendation.join(', ')}
+                        &nbsp;&nbsp;
+                        {data.recommendation && (
+                          <span>
+                            {data.recommendation.map((item, index) => (
+                              <span key={index}>
+                                {Object.keys(item)[0]} {/* Accessing the first key of the object */}
+                                {index !== data.recommendation.length - 1 && ', '} {/* Adding comma if not the last item */}
+                              </span>
+                            ))}
+                          </span>
+                        )}
                       </span>
-                      <p className="card-text" style={{paddingBottom: '4px'}}>
+
+                      <p className="card-text" style={{ paddingBottom: '4px' }}>
                         <i className="bi bi-people-fill text-danger"></i>
                         &nbsp;&nbsp;  {data.youtube && data.youtube.length > 0 && data.youtube[0].subscribers}{" "}
 

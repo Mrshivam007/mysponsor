@@ -64,7 +64,7 @@ const Main = () => {
       ) : (
         <Router>
           <NavBar />
-          {/* <ErrorBoundary> */}
+          <ErrorBoundary>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
@@ -98,7 +98,7 @@ const Main = () => {
             />
             {/* <Route path="/panoramic" element={<Panoramic />} /> */}
           </Routes>
-          {/* </ErrorBoundary> */}
+          </ErrorBoundary>
           <Footer />
         </Router>
       )}
