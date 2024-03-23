@@ -109,11 +109,11 @@ const CreatorProfileMainBox = (data) => {
     const count = getNumberOfSocialMediaPlatforms();
     switch (count) {
       case 1:
-        return "col-lg-12";
+        return "col-12";
       case 2:
-        return "col-lg-6";
+        return "col-6";
       default:
-        return "col-lg-4";
+        return "col-6";
     }
   };
 
@@ -132,9 +132,9 @@ const CreatorProfileMainBox = (data) => {
                   >
                     <div
                       className="p-3 cover"
-                    // style={{
-                    //   backgroundImage: `url(${profilebg})`,
-                    // }}
+                      // style={{
+                      //   backgroundImage: `url(${profilebg})`,
+                      // }}
                     >
                       <div className="media profile-head">
                         <div className="profile">
@@ -152,53 +152,130 @@ const CreatorProfileMainBox = (data) => {
                         <div className="col">
                           <div className="text-center media-body">
                             <h3 className="font-weight-bolder mt-0">
-                              {UserData?.first_name} {" "} {UserData?.last_name}
+                              {UserData?.first_name} {UserData?.last_name}&nbsp;
+                              <i
+                                class="bi bi-patch-check-fill"
+                                style={{ color: "#007bff" }}
+                              ></i>
                             </h3>
-                            <h className="font-weight-bolder mt-0">
+                            <h4 className="font-weight-bolder mt-0">
                               {ProfileData?.location}
-                            </h>
+                            </h4>
                             {/* <h4>New York</h4> */}
                             {/* <p className="mb-2">
                               Entertainment, Comedy, Stand Up, Health Care
                               Enthusiast
                             </p> */}
-                            <div className="box" style={{ backgroundColor: "#f2f2f2", borderRadius: "10px", padding: "3% 0%", margin: "4% 0" }}>
+                            <div
+                              className="box"
+                              style={{
+                                backgroundColor: "#f2f2f2",
+                                borderRadius: "10px",
+                                padding: "3% 0%",
+                                margin: "4% 0",
+                              }}
+                            >
                               <h5>Socail Media</h5>
-                              <section id="features" className="features" style={{ padding: '0%' }}>
+                              <section
+                                id="features"
+                                className="features"
+                                style={{ padding: "0%" }}
+                              >
                                 <div className="container">
                                   <div className="row">
                                     {ProfileData?.youtube.length > 0 && (
-                                      <div className={getColumnClass() + " col-md-6"}>
+                                      <div
+                                        className={
+                                          getColumnClass() + " col-md-6"
+                                        }
+                                      >
                                         <div className="card">
-                                          <div className="card-body text-center" style={{ padding: '4%' }}>
-                                            <i className="bi bi-youtube" style={{ fontSize: "2rem", color: "#ff0000" }}></i>
-                                            <p style={{ fontSize: '14px' }}><a href="#">YouTube</a></p>
+                                          <div
+                                            className="card-body text-center"
+                                            style={{ padding: "4%" }}
+                                          >
+                                            <i
+                                              className="bi bi-youtube"
+                                              style={{
+                                                fontSize: "2rem",
+                                                color: "#ff0000",
+                                              }}
+                                            ></i>
+                                            <p style={{ fontSize: "14px" }}>
+                                              <a href="#">YouTube</a>
+                                            </p>
                                           </div>
                                         </div>
                                       </div>
                                     )}
                                     {ProfileData?.instagram.length > 0 && (
-                                      <div className={getColumnClass() + " col-md-6"}>
-                                        <div className="card" style={{ backgroundImage: "linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80)", color: "#fff" }}>
-                                          <div className="card-body text-center" style={{ padding: '4%' }}>
-                                            <i className="bi bi-instagram" style={{ fontSize: "2rem" }}></i>
-                                            <p style={{ fontSize: '14px' }}><a href="#" style={{ color: "#fff" }}>Instagram</a></p>
+                                      <div
+                                        className={
+                                          getColumnClass() + " col-md-6"
+                                        }
+                                      >
+                                        <div
+                                          className="card"
+                                          style={{
+                                            backgroundImage:
+                                              "linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80)",
+                                            color: "#fff",
+                                          }}
+                                        >
+                                          <div
+                                            className="card-body text-center"
+                                            style={{ padding: "4%" }}
+                                          >
+                                            <i
+                                              className="bi bi-instagram"
+                                              style={{ fontSize: "2rem" }}
+                                            ></i>
+                                            <p style={{ fontSize: "14px" }}>
+                                              <a
+                                                href="#"
+                                                style={{ color: "#fff" }}
+                                              >
+                                                Instagram
+                                              </a>
+                                            </p>
                                           </div>
                                         </div>
                                       </div>
                                     )}
                                     {ProfileData?.facebook.length > 0 && (
-                                      <div className={getColumnClass() + " col-md-6"}>
-                                        <div className="card" style={{ backgroundColor: "#1877F2", color: "#fff" }}>
-                                          <div className="card-body text-center" style={{ padding: '4%' }}>
-                                            <i className="bi bi-facebook" style={{ fontSize: "2rem" }}></i>
-                                            <p style={{ fontSize: '14px' }}><a href="#" style={{ color: "#fff" }}>Facebook</a></p>
+                                      <div
+                                        className={
+                                          getColumnClass() + " col-md-6"
+                                        }
+                                      >
+                                        <div
+                                          className="card"
+                                          style={{
+                                            backgroundColor: "#1877F2",
+                                            color: "#fff",
+                                          }}
+                                        >
+                                          <div
+                                            className="card-body text-center"
+                                            style={{ padding: "4%" }}
+                                          >
+                                            <i
+                                              className="bi bi-facebook"
+                                              style={{ fontSize: "2rem" }}
+                                            ></i>
+                                            <p style={{ fontSize: "14px" }}>
+                                              <a
+                                                href="#"
+                                                style={{ color: "#fff" }}
+                                              >
+                                                Facebook
+                                              </a>
+                                            </p>
                                           </div>
                                         </div>
                                       </div>
                                     )}
                                   </div>
-
                                 </div>
                               </section>
                             </div>
@@ -225,9 +302,9 @@ const CreatorProfileMainBox = (data) => {
                   >
                     <div
                       className="p-3 cover"
-                    // style={{
-                    //   backgroundImage: `url(${profilebg})`,
-                    // }}
+                      // style={{
+                      //   backgroundImage: `url(${profilebg})`,
+                      // }}
                     >
                       <div className="media profile-head">
                         <div className="profile">
@@ -348,8 +425,9 @@ const CreatorProfileMainBox = (data) => {
                       data?.data?.[platform].length > 0 && (
                         <div
                           key={index}
-                          className={`col ${expanded === index ? "expanded" : ""
-                            }`}
+                          className={`col ${
+                            expanded === index ? "expanded" : ""
+                          }`}
                           style={{
                             // padding: "5%",
                             marginBottom: "10px",
@@ -437,9 +515,9 @@ const CreatorProfileMainBox = (data) => {
                   >
                     <div
                       className="p-3 cover"
-                    // style={{
-                    //   backgroundImage: `url(${profilebg})`,
-                    // }}
+                      // style={{
+                      //   backgroundImage: `url(${profilebg})`,
+                      // }}
                     >
                       <div className="media profile-head">
                         <div className="profile">
@@ -457,7 +535,11 @@ const CreatorProfileMainBox = (data) => {
                         <div className="col">
                           <div className="text-center media-body">
                             <h3 className="font-weight-bolder mt-0">
-                              {UserData?.first_name} {" "} {UserData?.last_name}
+                              {UserData?.first_name} {UserData?.last_name}&nbsp;
+                              <i
+                                class="bi bi-patch-check-fill"
+                                style={{ color: "#007bff" }}
+                              ></i>
                             </h3>
                             <h className="font-weight-bolder mt-0">
                               {ProfileData?.location}
@@ -467,43 +549,119 @@ const CreatorProfileMainBox = (data) => {
                               Entertainment, Comedy, Stand Up, Health Care
                               Enthusiast
                             </p> */}
-                            <div className="box" style={{ backgroundColor: "#f2f2f2", borderRadius: "10px", padding: "3% 0%", margin: "4% 0" }}>
+                            <div
+                              className="box"
+                              style={{
+                                backgroundColor: "#f2f2f2",
+                                borderRadius: "10px",
+                                padding: "3% 0%",
+                                margin: "4% 0",
+                              }}
+                            >
                               <h5>Socail Media</h5>
-                              <section id="features" className="features" style={{ padding: '0%' }}>
+                              <section
+                                id="features"
+                                className="features"
+                                style={{
+                                  padding: "0%",
+                                  backgroundColor: "unset",
+                                }}
+                              >
                                 <div className="container">
                                   <div className="row">
                                     {ProfileData?.youtube.length > 0 && (
-                                      <div className={getColumnClass() + " col-md-6"}>
+                                      <div
+                                        className={
+                                          getColumnClass() + " col-md-6"
+                                        }
+                                      >
                                         <div className="card">
-                                          <div className="card-body text-center" style={{ padding: '4%' }}>
-                                            <i className="bi bi-youtube" style={{ fontSize: "2rem", color: "#ff0000" }}></i>
-                                            <p style={{ fontSize: '14px' }}><a href="#">YouTube</a></p>
+                                          <div
+                                            className="card-body text-center"
+                                            style={{ padding: "4%" }}
+                                          >
+                                            <i
+                                              className="bi bi-youtube"
+                                              style={{
+                                                fontSize: "2rem",
+                                                color: "#ff0000",
+                                              }}
+                                            ></i>
+                                            <p style={{ fontSize: "14px" }}>
+                                              <a href="#">YouTube</a>
+                                            </p>
                                           </div>
                                         </div>
                                       </div>
                                     )}
                                     {ProfileData?.instagram.length > 0 && (
-                                      <div className={getColumnClass() + " col-md-6"}>
-                                        <div className="card" style={{ backgroundImage: "linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80)", color: "#fff" }}>
-                                          <div className="card-body text-center" style={{ padding: '4%' }}>
-                                            <i className="bi bi-instagram" style={{ fontSize: "2rem" }}></i>
-                                            <p style={{ fontSize: '14px' }}><a href="#" style={{ color: "#fff" }}>Instagram</a></p>
+                                      <div
+                                        className={
+                                          getColumnClass() + " col-md-6"
+                                        }
+                                      >
+                                        <div
+                                          className="card"
+                                          style={{
+                                            backgroundImage:
+                                              "linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80)",
+                                            color: "#fff",
+                                          }}
+                                        >
+                                          <div
+                                            className="card-body text-center"
+                                            style={{ padding: "4%" }}
+                                          >
+                                            <i
+                                              className="bi bi-instagram"
+                                              style={{ fontSize: "2rem" }}
+                                            ></i>
+                                            <p style={{ fontSize: "14px" }}>
+                                              <a
+                                                href="#"
+                                                style={{ color: "#fff" }}
+                                              >
+                                                Instagram
+                                              </a>
+                                            </p>
                                           </div>
                                         </div>
                                       </div>
                                     )}
                                     {ProfileData?.facebook.length > 0 && (
-                                      <div className={getColumnClass() + " col-md-6"}>
-                                        <div className="card" style={{ backgroundColor: "#1877F2", color: "#fff" }}>
-                                          <div className="card-body text-center" style={{ padding: '4%' }}>
-                                            <i className="bi bi-facebook" style={{ fontSize: "2rem" }}></i>
-                                            <p style={{ fontSize: '14px' }}><a href="#" style={{ color: "#fff" }}>Facebook</a></p>
+                                      <div
+                                        className={
+                                          getColumnClass() + " col-md-6"
+                                        }
+                                      >
+                                        <div
+                                          className="card"
+                                          style={{
+                                            backgroundColor: "#1877F2",
+                                            color: "#fff",
+                                          }}
+                                        >
+                                          <div
+                                            className="card-body text-center"
+                                            style={{ padding: "4%" }}
+                                          >
+                                            <i
+                                              className="bi bi-facebook"
+                                              style={{ fontSize: "2rem" }}
+                                            ></i>
+                                            <p style={{ fontSize: "14px" }}>
+                                              <a
+                                                href="#"
+                                                style={{ color: "#fff" }}
+                                              >
+                                                Facebook
+                                              </a>
+                                            </p>
                                           </div>
                                         </div>
                                       </div>
                                     )}
                                   </div>
-
                                 </div>
                               </section>
                             </div>
@@ -530,9 +688,9 @@ const CreatorProfileMainBox = (data) => {
                   >
                     <div
                       className="p-3 cover"
-                    // style={{
-                    //   backgroundImage: `url(${profilebg})`,
-                    // }}
+                      // style={{
+                      //   backgroundImage: `url(${profilebg})`,
+                      // }}
                     >
                       <div className="media profile-head">
                         <div className="profile">
@@ -550,13 +708,11 @@ const CreatorProfileMainBox = (data) => {
                         <div className="col">
                           <div className="text-center media-body">
                             <h3 className="font-weight-bolder mt-0">
-                              {/* {UserData?.first_name} {" "} {UserData?.last_name} */}
-                              Shivam Soni
+                              {ProfileData?.instagram[0]?.channel_name}
                             </h3>
                             {/* <h4>New York</h4> */}
                             <p className="mb-2">
-                              Entertainment, Comedy, Stand Up, Health Care
-                              Enthusiast
+                              {ProfileData?.instagram[0]?.description}
                             </p>
                             <div
                               className="box"
@@ -572,17 +728,17 @@ const CreatorProfileMainBox = (data) => {
                                   <h6 className="font-weight-bold">
                                     Followers
                                   </h6>
-                                  <p>150M</p>
+                                  <p>{ProfileData?.instagram[0]?.followers}</p>
                                 </div>
                                 <div className="col-4">
                                   <h6 className="font-weight-bold">
                                     Following
                                   </h6>
-                                  <p>500</p>
+                                  <p>{ProfileData?.instagram[0]?.following}</p>
                                 </div>
                                 <div className="col-4">
-                                  <h6 className="font-weight-bold">Views</h6>
-                                  <p>100k</p>
+                                  <h6 className="font-weight-bold">Posts</h6>
+                                  <p>{ProfileData?.instagram[0]?.posts}</p>
                                 </div>
                               </div>
                             </div>
