@@ -76,6 +76,14 @@ const ContentProfileInfo = () => {
 
   const [profile, setProfile] = useState(null);
   const [profileFileName, setProfileFileName] = useState(null);
+  const [youtube_logo, setYoutube_logo] = useState(null);
+  const [youtube_logoFileName, setYoutube_logoFileName] = useState(null);
+  const [youtube_shorts, setYoutube_shorts] = useState(null);
+  const [youtube_shortsFileName, setYoutube_shortsFileName] = useState(null);
+  const [insta_profile_pic, setInsta_profile_pic] = useState(null);
+  const [insta_profile_picFileName, setInsta_profile_picFileName] = useState(null);
+  const [fb_profile_pic, setFb_profile_pic] = useState(null);
+  const [fb_profile_picFileName, setFb_profile_picFileName] = useState(null);
   const [cover, setCover] = useState(null);
   const [coverFileName, setCoverFileName] = useState(null);
   const [logo, setLogo] = useState(null);
@@ -90,15 +98,29 @@ const ContentProfileInfo = () => {
   const hiddenFileInput1 = useRef(null);
   const hiddenFileInput2 = useRef(null);
   const hiddenFileInput3 = useRef(null);
+  const hiddenFileInput4 = useRef(null);
+  const hiddenFileInput5 = useRef(null);
+  const hiddenFileInput6 = useRef(null);
+  const hiddenFileInput7 = useRef(null);
 
   const handleProfileClick = (e) => {
     hiddenFileInput2.current.click();
   };
-
+  const handleYoutubeLogoClick = (e) => {
+    hiddenFileInput4.current.click();
+  };
+  const handleYoutubeShortsClick = (e) => {
+    hiddenFileInput5.current.click();
+  };
+  const handleInstaPicClick = (e) => {
+    hiddenFileInput6.current.click();
+  };
+  const handleFbPicClick = (e) => {
+    hiddenFileInput7.current.click();
+  };
   const handleCoverClick = (e) => {
     hiddenFileInput1.current.click();
   };
-
   const handleLogoClick = (e) => {
     hiddenFileInput3.current.click();
   };
@@ -111,6 +133,35 @@ const ContentProfileInfo = () => {
     setProfile(file);
     setProfileFileName(uniqueFilename); // Save the unique filename in state
   };
+  const handleYoutubePicChange = (e) => {
+    const file = e.target.files[0];
+    const uniqueFilename = generateUniqueFilename(file.name, 0);
+
+    setYoutube_logo(file);
+    setYoutube_logoFileName(uniqueFilename); // Save the unique filename in state
+  };
+  const handleYoutubeShortChange = (e) => {
+    const file = e.target.files[0];
+    const uniqueFilename = generateUniqueFilename(file.name, 0);
+
+    setYoutube_shorts(file);
+    setYoutube_shortsFileName(uniqueFilename); // Save the unique filename in state
+  };
+  const handleInstaPicChange = (e) => {
+    const file = e.target.files[0];
+    const uniqueFilename = generateUniqueFilename(file.name, 0);
+
+    setInsta_profile_pic(file);
+    setInsta_profile_picFileName(uniqueFilename); // Save the unique filename in state
+  };
+  const handleFbPicChange = (e) => {
+    const file = e.target.files[0];
+    const uniqueFilename = generateUniqueFilename(file.name, 0);
+
+    setFb_profile_pic(file);
+    setFb_profile_picFileName(uniqueFilename); // Save the unique filename in state
+  };
+
   const handleCoverChange = (e) => {
     const file = e.target.files[0];
     const uniqueFilename = generateUniqueFilename(file.name, 0);
@@ -142,14 +193,24 @@ const ContentProfileInfo = () => {
   const [faceLink, setfaceLink] = useState("");
 
   const [businessName, setBusinessName] = useState("");
+  const [location, setLocation] = useState("");
   const [collaborations, setCollaborations] = useState([]);
   const [youtubeData, setYoutubeData] = useState([]);
   const [instagramData, setInstagramData] = useState([]);
   const [facebookData, setFacebookData] = useState([]);
 
+
+  const handleLocationChange = (e) => {
+    setLocation(e.target.value);
+  };
+
+
   useEffect(() => {
     if (profileDetails?.contentDetails?.channel_name) {
       setBusinessName(profileDetails.contentDetails.channel_name);
+    }
+    if (profileDetails?.contentDetails?.location) {
+      setLocation(profileDetails.contentDetails.location);
     }
     // Initialize collaborations state with data from profileDetails
     if (profileDetails?.contentDetails?.past_company) {
@@ -157,6 +218,18 @@ const ContentProfileInfo = () => {
     }
     if (profileDetails?.contentDetails?.profile_pic) {
       setProfile(profileDetails.contentDetails.profile_pic);
+    }
+    if (profileDetails?.contentDetails?.youtube_logo) {
+      setYoutube_logo(profileDetails.contentDetails.youtube_logo);
+    }
+    if (profileDetails?.contentDetails?.youtube_shorts) {
+      setYoutube_shorts(profileDetails.contentDetails.youtube_shorts);
+    }
+    if (profileDetails?.contentDetails?.insta_profile_pic) {
+      setInsta_profile_pic(profileDetails.contentDetails.insta_profile_pic);
+    }
+    if (profileDetails?.contentDetails?.fb_profile_pic) {
+      setFb_profile_pic(profileDetails.contentDetails.fb_profile_pic);
     }
     if (profileDetails?.contentDetails?.cover_page) {
       setCover(profileDetails.contentDetails.cover_page);
@@ -248,7 +321,7 @@ const ContentProfileInfo = () => {
         subscribers: "",
         per_video_reach: "",
         youtube_link: "",
-        location: "",
+        channel_name: "",
         description: "",
       },
     ]);
@@ -262,7 +335,7 @@ const ContentProfileInfo = () => {
         followers: "",
         per_video_reach: "",
         instagram_link: "",
-        location: "",
+        channel_name: "",
         description: "",
       },
     ]);
@@ -276,7 +349,7 @@ const ContentProfileInfo = () => {
         followers: "",
         per_video_reach: "",
         facebook_link: "",
-        location: "",
+        channel_name: "",
         description: "",
       },
     ]);
@@ -366,6 +439,42 @@ const ContentProfileInfo = () => {
         formData.append("profile_pic", profile, profileFileName); // Change the field name as needed
       }
     }
+    if (youtube_logo) {
+      if (typeof youtube_logo === "string") {
+        // Append the youtube_logo URL directly
+        // formData.append("youtube_logo_pic", youtube_logo); // Change the field name as needed
+      } else {
+        // Append the youtube_logo file with its name
+        formData.append("youtube_logo", youtube_logo, youtube_logoFileName); // Change the field name as needed
+      }
+    }
+    if (youtube_shorts) {
+      if (typeof youtube_shorts === "string") {
+        // Append the youtube_shorts URL directly
+        // formData.append("youtube_shorts_pic", youtube_shorts); // Change the field name as needed
+      } else {
+        // Append the youtube_shorts file with its name
+        formData.append("youtube_shorts", youtube_shorts, youtube_shortsFileName); // Change the field name as needed
+      }
+    }
+    if (insta_profile_pic) {
+      if (typeof insta_profile_pic === "string") {
+        // Append the insta_profile_pic URL directly
+        // formData.append("insta_profile_pic_pic", insta_profile_pic); // Change the field name as needed
+      } else {
+        // Append the insta_profile_pic file with its name
+        formData.append("insta_profile_pic", insta_profile_pic, insta_profile_picFileName); // Change the field name as needed
+      }
+    }
+    if (fb_profile_pic) {
+      if (typeof fb_profile_pic === "string") {
+        // Append the fb_profile_pic URL directly
+        // formData.append("fb_profile_pic_pic", fb_profile_pic); // Change the field name as needed
+      } else {
+        // Append the fb_profile_pic file with its name
+        formData.append("fb_profile_pic", fb_profile_pic, fb_profile_picFileName); // Change the field name as needed
+      }
+    }
     if (cover) {
       if (typeof cover === "string") {
         // Append the cover URL directly
@@ -392,6 +501,7 @@ const ContentProfileInfo = () => {
     //   formData.append("channel_logo", logo, logoFileName);
     // }
     formData.append("channel_name", businessName);
+    formData.append("location", location);
     formData.append(
       "contact_no",
       profileDetails?.contentDetails?.contact_no || contact
@@ -441,7 +551,7 @@ const ContentProfileInfo = () => {
           {/* <div className="desktop-view">
             <div
               className="box1 form-photos-box mt-2 d-flex justify-content-center p-3"
-              style={{ width: "100%" }}
+              style={{ width: "100%", height: 'auto' }}
             >
               <div className="col-xl-4">
                 <div className="card mb-4 mb-xl-0">
@@ -497,7 +607,7 @@ const ContentProfileInfo = () => {
                       type="file"
                       accept="image/*"
                       onChange={handleCoverChange}
-                      // disabled={!editable} // Disable input field when not in editing mode
+                    // disabled={!editable} // Disable input field when not in editing mode
                     />
                   </div>
                 </div>
@@ -527,7 +637,7 @@ const ContentProfileInfo = () => {
                       type="file"
                       accept="image/*"
                       onChange={handleLogoChange}
-                      // disabled={!editable} // Disable input field when not in editing mode
+                    // disabled={!editable} // Disable input field when not in editing mode
                     />
                   </div>
                 </div>
@@ -545,10 +655,10 @@ const ContentProfileInfo = () => {
                       className="px-4 pt-0 pb-4 cover"
                       style={{
                         backgroundImage: `url(${cover
-                            ? typeof cover === "string"
-                              ? cover
-                              : URL.createObjectURL(cover)
-                            : profilebg
+                          ? typeof cover === "string"
+                            ? cover
+                            : URL.createObjectURL(cover)
+                          : profilebg
                           })`,
                       }}
                     >
@@ -710,7 +820,7 @@ const ContentProfileInfo = () => {
                       readOnly
                     />
                   </div>
-                  <div className="mb-3">
+                  {/* <div className="mb-3">
                     <label className="small mb-1" htmlFor="inputEmailAddress">
                       Channel Name
                     </label>
@@ -721,6 +831,20 @@ const ContentProfileInfo = () => {
                       placeholder="Enter your organization name"
                       value={businessName}
                       onChange={handleInputChange}
+                    // disabled={!editable} // Disable input field when not in editing mode
+                    />
+                  </div> */}
+                  <div className="mb-3">
+                    <label className="small mb-1" htmlFor="inputEmailAddress">
+                      Location
+                    </label>
+                    <input
+                      className="form-control"
+                      id="inputEmailAddress"
+                      type="text"
+                      placeholder="Enter your location"
+                      value={location}
+                      onChange={handleLocationChange}
                     // disabled={!editable} // Disable input field when not in editing mode
                     />
                   </div>
@@ -875,6 +999,73 @@ const ContentProfileInfo = () => {
                           {/* YouTube section */}
                           <div>
                             <h2>YouTube Data</h2>
+                            {/* <div className="desktop-view"> */}
+                            <div
+                              className="box1 form-photos-box mt-2 d-flex justify-content-center p-3"
+                              style={{ width: "100%", height: 'auto' }}
+                            >
+                              <div className="col-xl-4">
+                                <div className="card mb-4 mb-xl-0">
+                                  <div className="card-header">Youtube Profile Pic</div>
+                                  <div className="card-body text-center">
+                                    <img
+                                      className="img-account-profile mb-2 mx-auto"
+                                      style={{ width: "100%" }}
+                                      // src={cover ? URL.createObjectURL(cover) : noCover}
+                                      src={
+                                        youtube_logo
+                                          ? typeof youtube_logo === "string"
+                                            ? youtube_logo
+                                            : URL.createObjectURL(youtube_logo)
+                                          : noLogo
+                                      }
+                                      alt="Profile Pic"
+                                    />
+                                    <div className="small font-italic text-muted mb-4">
+                                      Your Youtube logo
+                                    </div>
+                                    <input
+                                      className="mx-auto w-75"
+                                      type="file"
+                                      accept="image/*"
+                                      onChange={handleYoutubePicChange}
+                                    // disabled={!editable} // Disable input field when not in editing mode
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="col-xl-4">
+                                <div className="card mb-4 mb-xl-0">
+                                  <div className="card-header">Youtube Shorts Clip</div>
+                                  <div className="card-body text-center">
+                                    {youtube_shorts && typeof youtube_shorts !== "string" ? (
+                                      <video controls autoPlay className="mx-auto w-75">
+                                        <source src={URL.createObjectURL(youtube_shorts)} type="video/mp4" />
+                                        Your browser does not support the video tag.
+                                      </video>
+                                    ) : (
+                                      <img
+                                        className="img-account-profile rounded-circle mb-2 mx-auto"
+                                        src={youtube_shorts ? youtube_shorts : noLogo}
+                                        alt="Profile Pic"
+                                      />
+                                    )}
+
+                                    <div className="small font-italic text-muted mb-4">
+                                      Your Youtube Shorts Clip
+                                    </div>
+                                    <input
+                                      className="mx-auto w-75"
+                                      type="file"
+                                      accept="video/*"
+                                      onChange={handleYoutubeShortChange}
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
+                            {/* </div> */}
                             {youtubeData.map((youtube, index) => (
                               <div key={index}>
                                 <div className="row gx-3 mb-3">
@@ -974,7 +1165,7 @@ const ContentProfileInfo = () => {
                                   </div>
                                 </div>
                                 <div className="row gx-3 mb-3">
-                                  <div className="col-md-6">
+                                  {/* <div className="col-md-6">
                                     <label
                                       className="small mb-1"
                                       htmlFor={`inputLocation_${index}`}
@@ -992,6 +1183,29 @@ const ContentProfileInfo = () => {
                                         handleYoutubeChange(
                                           index,
                                           "location",
+                                          e.target.value
+                                        )
+                                      }
+                                    />
+                                  </div> */}
+                                  <div className="col-md-6">
+                                    <label
+                                      className="small mb-1"
+                                      htmlFor={`inputchannel_name_${index}`}
+                                    >
+                                      Channel Name
+                                    </label>
+                                    <input
+                                      className="form-control"
+                                      id={`inputchannel_name_${index}`}
+                                      type="text"
+                                      // disabled={!editable} // Disable input field when not in editing mode
+                                      placeholder="Enter Channel Name"
+                                      value={youtube.channel_name || ""}
+                                      onChange={(e) =>
+                                        handleYoutubeChange(
+                                          index,
+                                          "channel_name",
                                           e.target.value
                                         )
                                       }
@@ -1034,6 +1248,41 @@ const ContentProfileInfo = () => {
                         <Tab eventKey="security" title="Instagram">
                           <div>
                             <h2>Instagram Data</h2>
+                            <div
+                              className="box1 form-photos-box mt-2 d-flex justify-content-center p-3"
+                              style={{ width: "100%", height: 'auto' }}
+                            >
+                              <div className="col-xl-4">
+                                <div className="card mb-4 mb-xl-0">
+                                  <div className="card-header">Instagram Profile Pic</div>
+                                  <div className="card-body text-center">
+                                    <img
+                                      className="img-account-profile mb-2 mx-auto"
+                                      style={{ width: "100%" }}
+                                      // src={cover ? URL.createObjectURL(cover) : noCover}
+                                      src={
+                                        insta_profile_pic
+                                          ? typeof insta_profile_pic === "string"
+                                            ? insta_profile_pic
+                                            : URL.createObjectURL(insta_profile_pic)
+                                          : noLogo
+                                      }
+                                      alt="Profile Pic"
+                                    />
+                                    <div className="small font-italic text-muted mb-4">
+                                      Your Instagram Profile Photo
+                                    </div>
+                                    <input
+                                      className="mx-auto w-75"
+                                      type="file"
+                                      accept="image/*"
+                                      onChange={handleInstaPicChange}
+                                    // disabled={!editable} // Disable input field when not in editing mode
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                             {instagramData.map((instagram, index) => (
                               <div key={index}>
                                 <div className="row gx-3 mb-3">
@@ -1137,7 +1386,7 @@ const ContentProfileInfo = () => {
                                   </div>
                                 </div>
                                 <div className="row gx-3 mb-3">
-                                  <div className="col-md-6">
+                                  {/* <div className="col-md-6">
                                     <label
                                       className="small mb-1"
                                       htmlFor={`inputLocation_${index}`}
@@ -1156,6 +1405,29 @@ const ContentProfileInfo = () => {
                                         handleInstagramChange(
                                           index,
                                           "location",
+                                          e.target.value
+                                        )
+                                      }
+                                    />
+                                  </div> */}
+                                  <div className="col-md-6">
+                                    <label
+                                      className="small mb-1"
+                                      htmlFor={`inputchannel_name_${index}`}
+                                    >
+                                      Channel Name
+                                    </label>
+                                    <input
+                                      className="form-control"
+                                      id={`inputchannel_name_${index}`}
+                                      type="text"
+                                      // disabled={!editable} // Disable input field when not in editing mode
+                                      placeholder="Enter Channel Name"
+                                      value={instagram.channel_name || ""}
+                                      onChange={(e) =>
+                                        handleInstagramChange(
+                                          index,
+                                          "channel_name",
                                           e.target.value
                                         )
                                       }
@@ -1197,7 +1469,42 @@ const ContentProfileInfo = () => {
                         </Tab>
                         <Tab eventKey="notification" title="Facebook">
                           <div>
-                            <h2>Instagram Data</h2>
+                            <h2>Facebook Data</h2>
+                            <div
+                              className="box1 form-photos-box mt-2 d-flex justify-content-center p-3"
+                              style={{ width: "100%", height: 'auto' }}
+                            >
+                              <div className="col-xl-4">
+                                <div className="card mb-4 mb-xl-0">
+                                  <div className="card-header">Facebook Profile Pic</div>
+                                  <div className="card-body text-center">
+                                    <img
+                                      className="img-account-profile mb-2 mx-auto"
+                                      style={{ width: "100%" }}
+                                      // src={cover ? URL.createObjectURL(cover) : noCover}
+                                      src={
+                                        fb_profile_pic
+                                          ? typeof fb_profile_pic === "string"
+                                            ? fb_profile_pic
+                                            : URL.createObjectURL(fb_profile_pic)
+                                          : noLogo
+                                      }
+                                      alt="Profile Pic"
+                                    />
+                                    <div className="small font-italic text-muted mb-4">
+                                      Your Facebook Profile Photo
+                                    </div>
+                                    <input
+                                      className="mx-auto w-75"
+                                      type="file"
+                                      accept="image/*"
+                                      onChange={handleFbPicChange}
+                                    // disabled={!editable} // Disable input field when not in editing mode
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                             {facebookData.map((facebook, index) => (
                               <div key={index}>
                                 <div className="row gx-3 mb-3">
@@ -1301,7 +1608,7 @@ const ContentProfileInfo = () => {
                                   </div>
                                 </div>
                                 <div className="row gx-3 mb-3">
-                                  <div className="col-md-6">
+                                  {/* <div className="col-md-6">
                                     <label
                                       className="small mb-1"
                                       htmlFor={`inputLocation_${index}`}
@@ -1320,6 +1627,29 @@ const ContentProfileInfo = () => {
                                         handleFacebookChange(
                                           index,
                                           "location",
+                                          e.target.value
+                                        )
+                                      }
+                                    />
+                                  </div> */}
+                                  <div className="col-md-6">
+                                    <label
+                                      className="small mb-1"
+                                      htmlFor={`inputchannel_name_${index}`}
+                                    >
+                                      Channel Name
+                                    </label>
+                                    <input
+                                      className="form-control"
+                                      id={`inputchannel_name_${index}`}
+                                      type="text"
+                                      // disabled={!editable} // Disable input field when not in editing mode
+                                      placeholder="Enter Channel Name"
+                                      value={facebook.channel_name || ""}
+                                      onChange={(e) =>
+                                        handleFacebookChange(
+                                          index,
+                                          "channel_name",
                                           e.target.value
                                         )
                                       }
