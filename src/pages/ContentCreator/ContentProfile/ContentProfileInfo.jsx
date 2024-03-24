@@ -1208,7 +1208,7 @@ const ContentProfileInfo = () => {
                                     <input
                                       className="form-control"
                                       id={`inputSubscribers_${index}`}
-                                      type="text"
+                                      type="number"
                                       // disabled={!editable} // Disable input field when not in editing mode
                                       placeholder="Enter subscribers"
                                       value={youtube.subscribers || ""}
@@ -1233,7 +1233,7 @@ const ContentProfileInfo = () => {
                                     <input
                                       className="form-control"
                                       id={`inputPerVideoReach_${index}`}
-                                      type="text"
+                                      type="number"
                                       // disabled={!editable} // Disable input field when not in editing mode
                                       placeholder="Enter per video reach"
                                       value={youtube.per_video_reach || ""}
@@ -1436,7 +1436,7 @@ const ContentProfileInfo = () => {
                                     <input
                                       className="form-control"
                                       id={`inputSubscribers_${index}`}
-                                      type="text"
+                                      type="number"
                                       // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter followers"
@@ -1460,7 +1460,7 @@ const ContentProfileInfo = () => {
                                     <input
                                       className="form-control"
                                       id={`inputSubscribers_${index}`}
-                                      type="text"
+                                      type="number"
                                       // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter Following"
@@ -1484,7 +1484,7 @@ const ContentProfileInfo = () => {
                                     <input
                                       className="form-control"
                                       id={`inputSubscribers_${index}`}
-                                      type="text"
+                                      type="number"
                                       // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter posts"
@@ -1505,12 +1505,12 @@ const ContentProfileInfo = () => {
                                       className="small mb-1"
                                       htmlFor={`inputPerVideoReach_${index}`}
                                     >
-                                      Per Video Reach
+                                      Per Post Reach
                                     </label>
                                     <input
                                       className="form-control"
                                       id={`inputPerVideoReach_${index}`}
-                                      type="text"
+                                      type="number"
                                       // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter per video reach"
@@ -1529,7 +1529,7 @@ const ContentProfileInfo = () => {
                                       className="small mb-1"
                                       htmlFor={`inputYoutubeLink_${index}`}
                                     >
-                                      YouTube Link
+                                      Instagram Link
                                     </label>
                                     <input
                                       className="form-control"
@@ -1579,7 +1579,7 @@ const ContentProfileInfo = () => {
                                       className="small mb-1"
                                       htmlFor={`inputchannel_name_${index}`}
                                     >
-                                      Channel Name
+                                      User Name
                                     </label>
                                     <input
                                       className="form-control"
@@ -1710,12 +1710,12 @@ const ContentProfileInfo = () => {
                                       className="small mb-1"
                                       htmlFor={`inputSubscribers_${index}`}
                                     >
-                                      Subscribers
+                                      Followers
                                     </label>
                                     <input
                                       className="form-control"
                                       id={`inputSubscribers_${index}`}
-                                      type="text"
+                                      type="number"
                                       // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter followers"
@@ -1736,12 +1736,12 @@ const ContentProfileInfo = () => {
                                       className="small mb-1"
                                       htmlFor={`inputPerVideoReach_${index}`}
                                     >
-                                      Per Video Reach
+                                      Per Post Reach
                                     </label>
                                     <input
                                       className="form-control"
                                       id={`inputPerVideoReach_${index}`}
-                                      type="text"
+                                      type="number"
                                       // disabled={!editable} // Disable input field when not in editing mode
 
                                       placeholder="Enter per video reach"
@@ -1760,7 +1760,7 @@ const ContentProfileInfo = () => {
                                       className="small mb-1"
                                       htmlFor={`inputYoutubeLink_${index}`}
                                     >
-                                      YouTube Link
+                                      Profile Link
                                     </label>
                                     <input
                                       className="form-control"
@@ -1810,7 +1810,7 @@ const ContentProfileInfo = () => {
                                       className="small mb-1"
                                       htmlFor={`inputchannel_name_${index}`}
                                     >
-                                      Channel Name
+                                      User Name
                                     </label>
                                     <input
                                       className="form-control"

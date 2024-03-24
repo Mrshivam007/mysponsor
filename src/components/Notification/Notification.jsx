@@ -19,16 +19,26 @@ function Notification() {
 
   const dynamicNotification = Notification?.notificationDetails;
 
+  const { clearNotificationDetails } = Notification;
+
+  console.log("clear notification success message", clearNotificationDetails);
+
+
 
   // const clearNotification = (id) => {
   //   setNotifications(notifications.filter(notification => notification.id !== id));
   // };
 
   const closeNotification = (id) => {
-    // Assuming dispatch is properly provided by Redux store
-    // dispatch({ id }); // Dispatch an action to clear the notification
-    dispatch(clearNotification(id))
-  }
+        // Dispatch an action to clear the notification
+      dispatch(clearNotification(id));
+  };
+
+  useEffect(() => {
+    if (clearNotificationDetails) {
+      dispatch(getNotification());
+    }
+  }, [clearNotificationDetails, dispatch]);
 
   const closeAllNotification = () => {
     dispatch(clearAllNotification());
@@ -53,7 +63,7 @@ function Notification() {
             <Dropdown.Item onClick={(e) => e.stopPropagation()}>
               <Toast onClose={(e) => handleNotificationClose(e, notification.id)}>
                 <Toast.Header closeButton={false}>
-                  <strong className="me-auto">{notification.heading}</strong>
+                  <strong className="me-auto">{notification.title}</strong>
                   <div style={{ marginLeft: 'auto' }}>
                     <span style={{ paddingRight: '10px', fontSize: '14px' }}>{notification.time_since}</span>
                     <span className="fa fa-times notification-close" style={{ fontSize: '16px' }} onClick={() => closeNotification(notification.id)}></span>
