@@ -3,6 +3,10 @@
   padding-bottom: 20px;
 }
 
+.slider-height{
+  height: 80vh;
+}
+
 @media (max-width:576px) {
   .features {
     background-color: white;

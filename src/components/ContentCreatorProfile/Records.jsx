@@ -454,38 +454,49 @@ const Records = (data) => {
               ></i> */}
             {/* </h1> */}
 
-            <div className="container px-0 my-2">
-              {/* <div className="row" style={{ rowGap: "20px" }}> */}
-              <div>
-                <label className="large" for="inputEmailAddress">
-                  Business Type
-                </label>
-                <Select
-                  closeMenuOnSelect={true}
-                  components={animatedComponents}
-                  onChange={handleBusinessChange}
-                  isMulti
-                  options={businessType}
-                  value={businessSelection}
-                />
-              </div>
-              <div>
-                <label className="large" for="inputEmailAddress">
-                  Sponsoring Item
-                </label>
-                <Select
-                  closeMenuOnSelect={true}
-                  components={animatedComponents}
-                  onChange={handleSponsorChange}
-                  isMulti
-                  options={sponsoringItem}
-                  value={sponsorSelection}
-                />
-              </div>
-            </div>
-            <button className="btn btn-success" onClick={handleSubmitClick}>
-              Submit
-            </button>
+            {userDetails?.user_type === "Sponsor" ? (
+              <>
+                <div className="container px-0 my-2">
+                  {/* <div className="row" style={{ rowGap: "20px" }}> */}
+                  <div>
+                    <label className="large" for="inputEmailAddress">
+                      Business Type
+                    </label>
+                    <Select
+                      closeMenuOnSelect={true}
+                      components={animatedComponents}
+                      onChange={handleBusinessChange}
+                      isMulti
+                      options={businessType}
+                      value={businessSelection}
+                    />
+                  </div>
+                  <div>
+                    <label className="large" for="inputEmailAddress">
+                      Sponsoring Item
+                    </label>
+                    <Select
+                      closeMenuOnSelect={true}
+                      components={animatedComponents}
+                      onChange={handleSponsorChange}
+                      isMulti
+                      options={sponsoringItem}
+                      value={sponsorSelection}
+                    />
+                  </div>
+                </div>
+                <button className="btn btn-success" onClick={handleSubmitClick}>
+                  Submit
+                </button>
+              </>
+            ) : (
+              <>
+                <div className="container px-0 my-2">
+                  {/* <div className="row" style={{ rowGap: "20px" }}> */}
+                  "Unlock the potential to connect with creators by registering as a sponsor today."
+                </div>
+              </>
+            )}
           </div>
           {/* </div> */}
         </Modal.Body>

@@ -14,12 +14,17 @@ export const ContentConfirmation = () => {
 
   useEffect(() => {
     const sponsorId = new URLSearchParams(location.search).get('sponsorId');
+    const access = JSON.parse(localStorage.getItem("access"));
+
 
     const complete_order = async () => {
       if (!apiCalled) { // Check if API has already been called
         try {
           const response = await axios.post(`${apiurl}/api/razorpay/content/order/complete/`, {
             content_sponsor_id: parseInt(sponsorId),
+            headers: {
+              Authorization: `Bearer ${access}`,
+            },
           });
 
           console.log("All data ", response);

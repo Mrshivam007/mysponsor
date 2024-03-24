@@ -190,7 +190,7 @@ const ContentCreatorProfile = () => {
         <div className="container mobile-view">
           <CreatorProfileMainBox data={profileData} />
           <div
-            className="container bg-white"
+            className="container bg-white mt-4"
             style={{
               padding: "2%",
               borderRadius: "15px",
@@ -286,7 +286,7 @@ const ContentCreatorProfile = () => {
           </div>
           <div className="box">
             <h2 className="sponsor-mobile-text">Live & Past Activity</h2>
-            <Records />
+            <Records data={profileData} />
           </div>
           <div className="box">
             <h2 className="sponsor-mobile-text">Creator Upcoming Content</h2>

@@ -46,7 +46,7 @@ const CreatorCard = ({ line, cardData }) => {
                   <div className="col-6 col-md-5 col-sm-6 px-lg-0 d-flex align-items-center">
                     <div className="card-body cc-card-body">
                       <h5 className="card-title font-weight-bold d-inline">
-                        {data.channel_name}
+                        {data?.user_id?.first_name} {" "} {data?.user_id?.last_name}
                       </h5>
                       {/* <span className="card-text">
                         Platform: {data.youtube ? 'YouTube' : ''} {" "}

@@ -125,16 +125,15 @@ const CreatorProfileMainBox = (data) => {
             <div className="col-5">
               <div className="slick-container">
                 <Slider {...settings}>
-                  {/* {[1, 2].map(() => ( */}
                   <div
-                    className="bg-white shadow overflow-hidden"
+                    className="bg-white shadow overflow-hidden slider-height"
                     style={{ borderRadius: "15px" }}
                   >
                     <div
                       className="p-3 cover"
-                      // style={{
-                      //   backgroundImage: `url(${profilebg})`,
-                      // }}
+                    // style={{
+                    //   backgroundImage: `url(${profilebg})`,
+                    // }}
                     >
                       <div className="media profile-head">
                         <div className="profile">
@@ -279,103 +278,94 @@ const CreatorProfileMainBox = (data) => {
                                 </div>
                               </section>
                             </div>
-
-                            <div
-                              className="box d-flex justify-content-between"
-                              style={{ width: "100%" }}
-                            >
-                              <button className="btn btn-primary rounded-pill">
-                                Sponsor
-                              </button>
-                              <button className="btn btn-outline-primary rounded-pill">
-                                Check Out Profile
-                              </button>
-                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div
-                    className="bg-white shadow overflow-hidden"
-                    style={{ borderRadius: "15px" }}
-                  >
+                  {ProfileData?.instagram?.length > 0 ? (
                     <div
-                      className="p-3 cover"
+                      className="bg-white shadow overflow-hidden slider-height"
+                      style={{ borderRadius: "15px", height: '80vh' }}
+                    >
+                      <div
+                        className="p-3 cover"
                       // style={{
                       //   backgroundImage: `url(${profilebg})`,
                       // }}
-                    >
-                      <div className="media profile-head">
-                        <div className="profile">
-                          <img
-                            src={noProfilepic}
-                            alt="..."
-                            width="180"
-                            className="img-thumbnail"
-                          />
+                      >
+                        <div className="media profile-head">
+                          <div className="profile">
+                            <img
+                              src={noProfilepic}
+                              alt="..."
+                              width="180"
+                              className="img-thumbnail"
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="box p-3">
-                      <div className="row">
-                        <div className="col">
-                          <div className="text-center media-body">
-                            <h3 className="font-weight-bolder mt-0">
-                              {/* {UserData?.first_name} {" "} {UserData?.last_name} */}
-                              {/* Shivam Soni */}
-                              {ProfileData?.instagram[0]?.channel_name}
-                            </h3>
-                            {/* <h4>New York</h4> */}
-                            <p className="mb-2">
-                              {ProfileData?.instagram[0]?.description}
-                            </p>
-                            <div
-                              className="box"
-                              style={{
-                                backgroundColor: "#f2f2f2",
-                                borderRadius: "10px",
-                                padding: "3% 0%",
-                                margin: "4% 0",
-                              }}
-                            >
-                              <div className="row">
-                                <div className="col-4">
-                                  <h6 className="font-weight-bold">
-                                    Followers
-                                  </h6>
-                                  <p>{ProfileData?.instagram[0]?.followers}</p>
-                                </div>
-                                <div className="col-4">
-                                  <h6 className="font-weight-bold">
-                                    Following
-                                  </h6>
-                                  <p>{ProfileData?.instagram[0]?.following}</p>
-                                </div>
-                                <div className="col-4">
-                                  <h6 className="font-weight-bold">Posts</h6>
-                                  <p>{ProfileData?.instagram[0]?.posts}</p>
+                      <div className="box p-3">
+                        <div className="row">
+                          <div className="col">
+                            <div className="text-center media-body">
+                              <h3 className="font-weight-bolder mt-0">
+                                {/* {UserData?.first_name} {" "} {UserData?.last_name} */}
+                                {/* Shivam Soni */}
+                                {ProfileData?.instagram[0]?.channel_name}
+                              </h3>
+                              {/* <h4>New York</h4> */}
+                              <p className="mb-2">
+                                {ProfileData?.instagram[0]?.description}
+                              </p>
+                              <div
+                                className="box"
+                                style={{
+                                  backgroundColor: "#f2f2f2",
+                                  borderRadius: "10px",
+                                  padding: "3% 0%",
+                                  margin: "4% 0",
+                                }}
+                              >
+                                <div className="row">
+                                  <div className="col-4">
+                                    <h6 className="font-weight-bold">
+                                      Followers
+                                    </h6>
+                                    <p>{ProfileData?.instagram[0]?.followers}</p>
+                                  </div>
+                                  <div className="col-4">
+                                    <h6 className="font-weight-bold">
+                                      Following
+                                    </h6>
+                                    <p>{ProfileData?.instagram[0]?.following}</p>
+                                  </div>
+                                  <div className="col-4">
+                                    <h6 className="font-weight-bold">Posts</h6>
+                                    <p>{ProfileData?.instagram[0]?.posts}</p>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                            <div
-                              className="box d-flex justify-content-between"
-                              style={{ width: "100%" }}
-                            >
-                              <button className="btn btn-primary rounded-pill">
-                                Sponsor
-                              </button>
-                              <button className="btn btn-outline-primary rounded-pill">
-                                Check Out Profile
-                              </button>
+                              <div
+                                className="box d-flex justify-content-between"
+                                style={{ width: "100%" }}
+                              >
+                                <button className="btn btn-primary rounded-pill">
+                                  Sponsor
+                                </button>
+                                <button className="btn btn-outline-primary rounded-pill">
+                                  Check Out Profile
+                                </button>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  {/* ))} */}
-                  <div className="box">
+                  ) : (
+                    null
+                  )}
+                  <div className="box slider-height">
                     {ProfileData?.youtube_shorts ? (
                       <video
                         src={ProfileData.youtube_shorts}
@@ -398,6 +388,9 @@ const CreatorProfileMainBox = (data) => {
               </div>
             </div>
             <div className="col-7">
+              <div className="container mt-4">
+                <div class="line-text">Creator Stats</div>
+              </div>
               <div
                 className="container"
                 style={{
@@ -425,9 +418,8 @@ const CreatorProfileMainBox = (data) => {
                       data?.data?.[platform].length > 0 && (
                         <div
                           key={index}
-                          className={`col ${
-                            expanded === index ? "expanded" : ""
-                          }`}
+                          className={`col ${expanded === index ? "expanded" : ""
+                            }`}
                           style={{
                             // padding: "5%",
                             marginBottom: "10px",
@@ -440,6 +432,7 @@ const CreatorProfileMainBox = (data) => {
                                 cursor: "pointer",
                                 display: "flex",
                                 alignItems: "center",
+                                placeContent: 'center'
                               }}
                             >
                               <i // Font Awesome icon
@@ -454,49 +447,40 @@ const CreatorProfileMainBox = (data) => {
                             {expanded === index && platform != "twitter" && (
                               <ul
                                 style={{
-                                  listStyleType: "none",
                                   padding: 0,
+                                  paddingLeft: '20px', // Adding left padding for bullet points
                                 }}
                               >
-                                {" "}
-                                {/* Removed bullets and added padding */}
-                                <li>
-                                  <span style={{ fontWeight: "bold" }}>
-                                    {platform === "youtube"
-                                      ? "Subscribers"
-                                      : "Followers"}
+                                <li style={{ listStyleType: 'disc' }}> {/* Use disc as bullet points */}
+                                  <span style={{ fontWeight: 'bold' }}>
+                                    {platform === 'youtube' ? 'Subscribers' : 'Followers'}
                                     :
-                                  </span>{" "}
-                                  {platform === "youtube"
+                                  </span>{' '}
+                                  {platform === 'youtube'
                                     ? data.data?.[platform][0]?.subscribers
                                     : data.data?.[platform][0]?.followers}
                                 </li>
-                                <li>
-                                  <span style={{ fontWeight: "bold" }}>
-                                    Per Video Reach:
-                                  </span>{" "}
+                                <li style={{ listStyleType: 'disc' }}> {/* Use disc as bullet points */}
+                                  <span style={{ fontWeight: 'bold' }}>Per Video Reach:</span>{' '}
                                   {data.data?.[platform][0]?.per_video_reach}
                                 </li>
-                                <li>
-                                  <span style={{ fontWeight: "bold" }}>
-                                    Category{" "}
-                                    {/* {data.data[platform].postType}: */}
-                                  </span>{" "}
-                                  {/* {
-                                            data.data?.[platform][0]
-                                              ?.video_type
-                                          } */}
-                                  {platform === "youtube"
+                                <li style={{ listStyleType: 'disc' }}> {/* Use disc as bullet points */}
+                                  <span style={{ fontWeight: 'bold' }}>Category:</span>{' '}
+                                  {platform === 'youtube'
                                     ? data.data?.[platform][0]?.video_type
                                     : data.data?.[platform][0]?.post_type}
                                 </li>
                               </ul>
+
                             )}
                           </div>
                         </div>
                       )
                   )}
                 </div>
+              </div>
+              <div className="container mt-4">
+                <div class="line-text">Recommendation</div>
               </div>
               <RecommendationSection recommendation={RecommendationData} />
             </div>
@@ -510,14 +494,14 @@ const CreatorProfileMainBox = (data) => {
               <div className="slick-container" style={{ maxHeight: "71svh" }}>
                 <Slider {...settings}>
                   <div
-                    className="bg-white shadow overflow-hidden"
+                    className="bg-white shadow overflow-hidden slider-height"
                     style={{ borderRadius: "15px" }}
                   >
                     <div
                       className="p-3 cover"
-                      // style={{
-                      //   backgroundImage: `url(${profilebg})`,
-                      // }}
+                    // style={{
+                    //   backgroundImage: `url(${profilebg})`,
+                    // }}
                     >
                       <div className="media profile-head">
                         <div className="profile">
@@ -665,107 +649,100 @@ const CreatorProfileMainBox = (data) => {
                                 </div>
                               </section>
                             </div>
-
-                            <div
-                              className="box d-flex justify-content-between"
-                              style={{ width: "100%" }}
-                            >
-                              <button className="btn btn-primary rounded-pill">
-                                Sponsor
-                              </button>
-                              <button className="btn btn-outline-primary rounded-pill">
-                                Check Out Profile
-                              </button>
-                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div
-                    className="bg-white shadow overflow-hidden"
-                    style={{ borderRadius: "15px" }}
-                  >
+                  {ProfileData?.instagram?.length > 0 ? (
                     <div
-                      className="p-3 cover"
+                      className="bg-white shadow overflow-hidden slider-height"
+                      style={{ borderRadius: "15px" }}
+                    >
+                      <div
+                        className="p-3 cover"
                       // style={{
                       //   backgroundImage: `url(${profilebg})`,
                       // }}
-                    >
-                      <div className="media profile-head">
-                        <div className="profile">
-                          <img
-                            src={noProfilepic}
-                            alt="..."
-                            width="180"
-                            className="img-thumbnail"
-                          />
+                      >
+                        <div className="media profile-head">
+                          <div className="profile">
+                            <img
+                              src={noProfilepic}
+                              alt="..."
+                              width="180"
+                              className="img-thumbnail"
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="box p-3">
-                      <div className="row">
-                        <div className="col">
-                          <div className="text-center media-body">
-                            <h3 className="font-weight-bolder mt-0">
-                              {ProfileData?.instagram[0]?.channel_name}
-                            </h3>
-                            {/* <h4>New York</h4> */}
-                            <p className="mb-2">
-                              {ProfileData?.instagram[0]?.description}
-                            </p>
-                            <div
-                              className="box"
-                              style={{
-                                backgroundColor: "#f2f2f2",
-                                borderRadius: "10px",
-                                padding: "3% 0%",
-                                margin: "4% 0",
-                              }}
-                            >
-                              <div className="row">
-                                <div className="col-4">
-                                  <h6 className="font-weight-bold">
-                                    Followers
-                                  </h6>
-                                  <p>{ProfileData?.instagram[0]?.followers}</p>
-                                </div>
-                                <div className="col-4">
-                                  <h6 className="font-weight-bold">
-                                    Following
-                                  </h6>
-                                  <p>{ProfileData?.instagram[0]?.following}</p>
-                                </div>
-                                <div className="col-4">
-                                  <h6 className="font-weight-bold">Posts</h6>
-                                  <p>{ProfileData?.instagram[0]?.posts}</p>
+                      <div className="box p-3">
+                        <div className="row">
+                          <div className="col">
+                            <div className="text-center media-body">
+                              <h3 className="font-weight-bolder mt-0">
+                                {/* {UserData?.first_name} {" "} {UserData?.last_name} */}
+                                {/* Shivam Soni */}
+                                {ProfileData?.instagram[0]?.channel_name}
+                              </h3>
+                              {/* <h4>New York</h4> */}
+                              <p className="mb-2">
+                                {ProfileData?.instagram[0]?.description}
+                              </p>
+                              <div
+                                className="box"
+                                style={{
+                                  backgroundColor: "#f2f2f2",
+                                  borderRadius: "10px",
+                                  padding: "3% 0%",
+                                  margin: "4% 0",
+                                }}
+                              >
+                                <div className="row">
+                                  <div className="col-4">
+                                    <h6 className="font-weight-bold">
+                                      Followers
+                                    </h6>
+                                    <p>{ProfileData?.instagram[0]?.followers}</p>
+                                  </div>
+                                  <div className="col-4">
+                                    <h6 className="font-weight-bold">
+                                      Following
+                                    </h6>
+                                    <p>{ProfileData?.instagram[0]?.following}</p>
+                                  </div>
+                                  <div className="col-4">
+                                    <h6 className="font-weight-bold">Posts</h6>
+                                    <p>{ProfileData?.instagram[0]?.posts}</p>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                            <div
-                              className="box d-flex justify-content-between"
-                              style={{ width: "100%" }}
-                            >
-                              <button className="btn btn-primary rounded-pill">
-                                Sponsor
-                              </button>
-                              <button className="btn btn-outline-primary rounded-pill">
-                                Check Out Profile
-                              </button>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="box">
-                    <video
-                      src={short}
-                      autoPlay
-                      muted
-                      loop
-                      style={{ width: "100%", maxHeight: "71svh" }}
-                    ></video>
+                  ) : (
+                    null
+                  )}
+                  <div className="box slider-height">
+                    {ProfileData?.youtube_shorts ? (
+                      <video
+                        src={ProfileData.youtube_shorts}
+                        autoPlay
+                        muted
+                        loop
+                        style={{ width: "100%", maxHeight: "79vh" }}
+                      ></video>
+                    ) : (
+                      <video
+                        src={short}
+                        autoPlay
+                        muted
+                        loop
+                        style={{ width: "100%", maxHeight: "79vh" }}
+                      ></video>
+                    )}
                   </div>
                 </Slider>
               </div>
