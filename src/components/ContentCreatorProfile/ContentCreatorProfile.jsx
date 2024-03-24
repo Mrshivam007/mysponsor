@@ -167,21 +167,27 @@ const ContentCreatorProfile = () => {
             <div className="container">
               <div class="line-text">Available Sponsoring Items</div>
             </div>
-            <CreatorUpcomingContent
-              type={"#ads"}
-              data={tag_ads}
-              typeimg={tag_ads_new}
-            />
-            <CreatorUpcomingContent
-              type={"reels sponsored"}
-              data={reel_sponsored}
-              typeimg={reels_sponsored_img}
-            />
-            <CreatorUpcomingContent
-              type={"sponsored by"}
-              typeimg={sponsored_by_img}
-              data={sponsored_by}
-            />
+            {tag_ads && (
+              <CreatorUpcomingContent
+                type={"#ads"}
+                data={tag_ads}
+                typeimg={tag_ads_new}
+              />
+            )}
+            {reel_sponsored && (
+              <CreatorUpcomingContent
+                type={"reels sponsored"}
+                data={reel_sponsored}
+                typeimg={reels_sponsored_img}
+              />
+            )}
+            {sponsored_by_img && (
+              <CreatorUpcomingContent
+                type={"sponsored by"}
+                typeimg={sponsored_by_img}
+                data={sponsored_by}
+              />
+            )}
           </div>
         </div>
         {/* DESKTOP VIEW END  */}
@@ -190,7 +196,7 @@ const ContentCreatorProfile = () => {
         <div className="container mobile-view">
           <CreatorProfileMainBox data={profileData} />
           <div
-            className="container bg-white mt-4"
+            className="container bg-white mt-5"
             style={{
               padding: "2%",
               borderRadius: "15px",
@@ -217,6 +223,7 @@ const ContentCreatorProfile = () => {
                             cursor: "pointer",
                             display: "flex",
                             alignItems: "center",
+                            justifyContent: "center",
                           }}
                         >
                           <i // Font Awesome icon
@@ -297,21 +304,27 @@ const ContentCreatorProfile = () => {
           </div>
           <div className="box">
             <h2 className="sponsor-mobile-text">Available Sponsoring Items</h2>
-            <CreatorUpcomingContent
-              type={"#ads"}
-              data={tag_ads}
-              typeimg={tag_ads_new}
-            />
-            <CreatorUpcomingContent
-              type={"reels sponsored"}
-              data={reel_sponsored}
-              typeimg={reels_sponsored_img}
-            />
-            <CreatorUpcomingContent
-              type={"sponsored by"}
-              typeimg={sponsored_by_img}
-              data={sponsored_by}
-            />
+            {tag_ads && (
+              <CreatorUpcomingContent
+                type={"#ads"}
+                data={tag_ads}
+                typeimg={tag_ads_new}
+              />
+            )}
+            {reel_sponsored && (
+              <CreatorUpcomingContent
+                type={"reels sponsored"}
+                data={reel_sponsored}
+                typeimg={reels_sponsored_img}
+              />
+            )}
+            {sponsored_by_img && (
+              <CreatorUpcomingContent
+                type={"sponsored by"}
+                typeimg={sponsored_by_img}
+                data={sponsored_by}
+              />
+            )}
           </div>
         </div>
         {/* MOBILE VIEW END */}

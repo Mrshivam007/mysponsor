@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const CreatorUpcomingContent = ({ type, typeimg, data }) => {
   const navigate = useNavigate();
-  console.log("PSonsoring Item data ", data);
+  console.log("Sponsoring Item data ", data);
 
   const handleSponsorClick = (data) => {
     navigate("/mycontent-details", { state: { contentData: data } });
@@ -118,16 +118,6 @@ const CreatorUpcomingContent = ({ type, typeimg, data }) => {
             <p>No data available</p>
           )}
         </div>
-        <button
-          className="btn text-white py-1 px-4 font-weight-bold d-none d-md-block"
-          style={{
-            margin: "2% auto",
-            backgroundColor: "#004EA9",
-            borderRadius: "10px",
-          }}
-        >
-          Load More
-        </button>
       </div>
 
       <div className="mobile-view text-md">

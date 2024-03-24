@@ -1,0 +1,10 @@
+.dropdown-menu-right {
+    width: 380px;
+}
+
+@media (max-width:576px) {
+    .dropdown-menu-right {
+        width: 94vw !important;
+        transform: translateX(21%);
+    }
+}

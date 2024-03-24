@@ -126,14 +126,14 @@ const CreatorProfileMainBox = (data) => {
               <div className="slick-container">
                 <Slider {...settings}>
                   <div
-                    className="bg-white shadow overflow-hidden slider-height"
+                    className="bg-white overflow-hidden slider-height"
                     style={{ borderRadius: "15px" }}
                   >
                     <div
                       className="p-3 cover"
-                    // style={{
-                    //   backgroundImage: `url(${profilebg})`,
-                    // }}
+                      // style={{
+                      //   backgroundImage: `url(${profilebg})`,
+                      // }}
                     >
                       <div className="media profile-head">
                         <div className="profile">
@@ -285,14 +285,14 @@ const CreatorProfileMainBox = (data) => {
                   </div>
                   {ProfileData?.instagram?.length > 0 ? (
                     <div
-                      className="bg-white shadow overflow-hidden slider-height"
-                      style={{ borderRadius: "15px", height: '80vh' }}
+                      className="bg-white overflow-hidden slider-height"
+                      style={{ borderRadius: "15px", height: "80vh" }}
                     >
                       <div
                         className="p-3 cover"
-                      // style={{
-                      //   backgroundImage: `url(${profilebg})`,
-                      // }}
+                        // style={{
+                        //   backgroundImage: `url(${profilebg})`,
+                        // }}
                       >
                         <div className="media profile-head">
                           <div className="profile">
@@ -332,13 +332,17 @@ const CreatorProfileMainBox = (data) => {
                                     <h6 className="font-weight-bold">
                                       Followers
                                     </h6>
-                                    <p>{ProfileData?.instagram[0]?.followers}</p>
+                                    <p>
+                                      {ProfileData?.instagram[0]?.followers}
+                                    </p>
                                   </div>
                                   <div className="col-4">
                                     <h6 className="font-weight-bold">
                                       Following
                                     </h6>
-                                    <p>{ProfileData?.instagram[0]?.following}</p>
+                                    <p>
+                                      {ProfileData?.instagram[0]?.following}
+                                    </p>
                                   </div>
                                   <div className="col-4">
                                     <h6 className="font-weight-bold">Posts</h6>
@@ -346,25 +350,12 @@ const CreatorProfileMainBox = (data) => {
                                   </div>
                                 </div>
                               </div>
-                              <div
-                                className="box d-flex justify-content-between"
-                                style={{ width: "100%" }}
-                              >
-                                <button className="btn btn-primary rounded-pill">
-                                  Sponsor
-                                </button>
-                                <button className="btn btn-outline-primary rounded-pill">
-                                  Check Out Profile
-                                </button>
-                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  ) : (
-                    null
-                  )}
+                  ) : null}
                   <div className="box slider-height">
                     {ProfileData?.youtube_shorts ? (
                       <video
@@ -418,8 +409,9 @@ const CreatorProfileMainBox = (data) => {
                       data?.data?.[platform].length > 0 && (
                         <div
                           key={index}
-                          className={`col ${expanded === index ? "expanded" : ""
-                            }`}
+                          className={`col ${
+                            expanded === index ? "expanded" : ""
+                          }`}
                           style={{
                             // padding: "5%",
                             marginBottom: "10px",
@@ -432,7 +424,7 @@ const CreatorProfileMainBox = (data) => {
                                 cursor: "pointer",
                                 display: "flex",
                                 alignItems: "center",
-                                placeContent: 'center'
+                                placeContent: "center",
                               }}
                             >
                               <i // Font Awesome icon
@@ -448,30 +440,41 @@ const CreatorProfileMainBox = (data) => {
                               <ul
                                 style={{
                                   padding: 0,
-                                  paddingLeft: '20px', // Adding left padding for bullet points
+                                  paddingLeft: "20px", // Adding left padding for bullet points
                                 }}
                               >
-                                <li style={{ listStyleType: 'disc' }}> {/* Use disc as bullet points */}
-                                  <span style={{ fontWeight: 'bold' }}>
-                                    {platform === 'youtube' ? 'Subscribers' : 'Followers'}
+                                <li style={{ listStyleType: "disc" }}>
+                                  {" "}
+                                  {/* Use disc as bullet points */}
+                                  <span style={{ fontWeight: "bold" }}>
+                                    {platform === "youtube"
+                                      ? "Subscribers"
+                                      : "Followers"}
                                     :
-                                  </span>{' '}
-                                  {platform === 'youtube'
+                                  </span>{" "}
+                                  {platform === "youtube"
                                     ? data.data?.[platform][0]?.subscribers
                                     : data.data?.[platform][0]?.followers}
                                 </li>
-                                <li style={{ listStyleType: 'disc' }}> {/* Use disc as bullet points */}
-                                  <span style={{ fontWeight: 'bold' }}>Per Video Reach:</span>{' '}
+                                <li style={{ listStyleType: "disc" }}>
+                                  {" "}
+                                  {/* Use disc as bullet points */}
+                                  <span style={{ fontWeight: "bold" }}>
+                                    Per Video Reach:
+                                  </span>{" "}
                                   {data.data?.[platform][0]?.per_video_reach}
                                 </li>
-                                <li style={{ listStyleType: 'disc' }}> {/* Use disc as bullet points */}
-                                  <span style={{ fontWeight: 'bold' }}>Category:</span>{' '}
-                                  {platform === 'youtube'
+                                <li style={{ listStyleType: "disc" }}>
+                                  {" "}
+                                  {/* Use disc as bullet points */}
+                                  <span style={{ fontWeight: "bold" }}>
+                                    Category:
+                                  </span>{" "}
+                                  {platform === "youtube"
                                     ? data.data?.[platform][0]?.video_type
                                     : data.data?.[platform][0]?.post_type}
                                 </li>
                               </ul>
-
                             )}
                           </div>
                         </div>
@@ -494,14 +497,14 @@ const CreatorProfileMainBox = (data) => {
               <div className="slick-container" style={{ maxHeight: "71svh" }}>
                 <Slider {...settings}>
                   <div
-                    className="bg-white shadow overflow-hidden slider-height"
+                    className="bg-white overflow-hidden slider-height"
                     style={{ borderRadius: "15px" }}
                   >
                     <div
                       className="p-3 cover"
-                    // style={{
-                    //   backgroundImage: `url(${profilebg})`,
-                    // }}
+                      // style={{
+                      //   backgroundImage: `url(${profilebg})`,
+                      // }}
                     >
                       <div className="media profile-head">
                         <div className="profile">
@@ -656,14 +659,14 @@ const CreatorProfileMainBox = (data) => {
                   </div>
                   {ProfileData?.instagram?.length > 0 ? (
                     <div
-                      className="bg-white shadow overflow-hidden slider-height"
+                      className="bg-white overflow-hidden slider-height"
                       style={{ borderRadius: "15px" }}
                     >
                       <div
                         className="p-3 cover"
-                      // style={{
-                      //   backgroundImage: `url(${profilebg})`,
-                      // }}
+                        // style={{
+                        //   backgroundImage: `url(${profilebg})`,
+                        // }}
                       >
                         <div className="media profile-head">
                           <div className="profile">
@@ -703,13 +706,17 @@ const CreatorProfileMainBox = (data) => {
                                     <h6 className="font-weight-bold">
                                       Followers
                                     </h6>
-                                    <p>{ProfileData?.instagram[0]?.followers}</p>
+                                    <p>
+                                      {ProfileData?.instagram[0]?.followers}
+                                    </p>
                                   </div>
                                   <div className="col-4">
                                     <h6 className="font-weight-bold">
                                       Following
                                     </h6>
-                                    <p>{ProfileData?.instagram[0]?.following}</p>
+                                    <p>
+                                      {ProfileData?.instagram[0]?.following}
+                                    </p>
                                   </div>
                                   <div className="col-4">
                                     <h6 className="font-weight-bold">Posts</h6>
@@ -722,9 +729,7 @@ const CreatorProfileMainBox = (data) => {
                         </div>
                       </div>
                     </div>
-                  ) : (
-                    null
-                  )}
+                  ) : null}
                   <div className="box slider-height">
                     {ProfileData?.youtube_shorts ? (
                       <video
