@@ -759,11 +759,11 @@ const NavBar = () => {
                         />
                       </div>
                       <div className="box text-white">
-                        <h3 className="mb-0 font-weight-bold">
-                          {userDetails.firstname} <br />
+                        <h4 className="mb-0 font-weight-bold">
+                          {userDetails.firstname}
+                          <br />
                           {userDetails.lastname}
-                        </h3>
-                        {/* <h6>Sponsor</h6> */}
+                        </h4>
                       </div>
                     </div>
                   </div>

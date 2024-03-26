@@ -3,7 +3,7 @@
   padding-bottom: 20px;
 }
 
-.slider-height{
+.slider-height {
   height: 80vh;
 }
 
@@ -39,6 +39,7 @@
   }
 }
 
+
 .add-box {
   background-color: rgb(255, 43, 102);
   padding: 8% 2%;
@@ -48,6 +49,10 @@
 
 .card-wrapper {
   width: 90% !important;
+}
+
+.available-content{
+  width: 100% !important;
 }
 
 .record-modal-heading {

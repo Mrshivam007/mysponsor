@@ -83,7 +83,7 @@ function Notification() {
         )}
       </Dropdown.Toggle>
 
-      <Dropdown.Menu className="dropdown-menu-right">
+      <Dropdown.Menu className="dropdown-menu-right" style={{overflow:"clip"}}>
         <Dropdown.Header>Notifications</Dropdown.Header>
         {dynamicNotification?.map((notification) => (
           <div key={notification.id}>
@@ -91,12 +91,15 @@ function Notification() {
               <Toast
                 onClose={(e) => handleNotificationClose(e, notification.id)}
               >
-                <Toast.Header closeButton={false}>
+                <Toast.Header
+                  closeButton={false}
+                  style={{ whiteSpace: "normal" }}
+                >
                   <strong className="me-auto">{notification.title}</strong>
                   <div style={{ marginLeft: "auto" }}>
-                    <span style={{ paddingRight: "10px", fontSize: "14px" }}>
+                    {/* <span style={{ paddingRight: "10px", fontSize: "14px" }}>
                       {notification.time_since}
-                    </span>
+                    </span> */}
                     <span
                       className="fa fa-times notification-close"
                       style={{ fontSize: "16px" }}
@@ -113,6 +116,16 @@ function Notification() {
                 >
                   {notification.message}
                 </Toast.Body>
+                <span
+                  style={{
+                    display: "block",
+                    padding: "0 2%",
+                    fontSize: "14px",
+                    textAlign: "end",
+                  }}
+                >
+                  {notification.time_since}
+                </span>
               </Toast>
             </Dropdown.Item>
           </div>

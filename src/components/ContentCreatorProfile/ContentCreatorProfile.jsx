@@ -15,7 +15,6 @@ import profilebg from "../../assets/img/profileBG.jpg";
 import noProfilepic from "../../assets/img/emptyprofile2.jpg";
 import CreatorProfileMainBox from "./CreatorProfileMainBox";
 import tag_ads_new from "../../assets/img/sponsoring_items/tag_ads_new.jpeg";
-import tag_ads_img from "../../assets/img/sponsoring_items/#tag_ads.jpg";
 import reels_sponsored_img from "../../assets/img/sponsoring_items/reel_sponsored.jpg";
 import sponsored_by_img from "../../assets/img/sponsoring_items/sponsored_by.png";
 import UpcomingContent from "./UpcomingContent";
@@ -167,27 +166,7 @@ const ContentCreatorProfile = () => {
             <div className="container">
               <div class="line-text">Available Sponsoring Items</div>
             </div>
-            {tag_ads && (
-              <CreatorUpcomingContent
-                type={"#ads"}
-                data={tag_ads}
-                typeimg={tag_ads_new}
-              />
-            )}
-            {reel_sponsored && (
-              <CreatorUpcomingContent
-                type={"reels sponsored"}
-                data={reel_sponsored}
-                typeimg={reels_sponsored_img}
-              />
-            )}
-            {sponsored_by_img && (
-              <CreatorUpcomingContent
-                type={"sponsored by"}
-                typeimg={sponsored_by_img}
-                data={sponsored_by}
-              />
-            )}
+            <CreatorUpcomingContent />
           </div>
         </div>
         {/* DESKTOP VIEW END  */}
@@ -304,27 +283,7 @@ const ContentCreatorProfile = () => {
           </div>
           <div className="box">
             <h2 className="sponsor-mobile-text">Available Sponsoring Items</h2>
-            {tag_ads && (
-              <CreatorUpcomingContent
-                type={"#ads"}
-                data={tag_ads}
-                typeimg={tag_ads_new}
-              />
-            )}
-            {reel_sponsored && (
-              <CreatorUpcomingContent
-                type={"reels sponsored"}
-                data={reel_sponsored}
-                typeimg={reels_sponsored_img}
-              />
-            )}
-            {sponsored_by_img && (
-              <CreatorUpcomingContent
-                type={"sponsored by"}
-                typeimg={sponsored_by_img}
-                data={sponsored_by}
-              />
-            )}
+            <CreatorUpcomingContent />
           </div>
         </div>
         {/* MOBILE VIEW END */}

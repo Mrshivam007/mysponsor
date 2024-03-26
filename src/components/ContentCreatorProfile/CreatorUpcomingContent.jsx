@@ -1,4 +1,7 @@
 import React from "react";
+import "../MobileCards/mobile-cards.css";
+import thumbnail from "../../assets/img/sponsoring_items/short-thumbnail.jpg";
+import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const CreatorUpcomingContent = ({ type, typeimg, data }) => {
@@ -12,209 +15,342 @@ const CreatorUpcomingContent = ({ type, typeimg, data }) => {
   return (
     <>
       <div className="desktop-view mt-4">
-        <h2 className="sponsor-text text-left">{type}</h2>
-        <div className="container">
-          {Array.isArray(data) && data.length > 0 ? (
-            data
-              .slice()
-              .reverse()
-              .map((data) => {
-                return (
-                  <div className="row">
-                    <div className="col-12 mb-4">
-                      <div
-                        className="card"
-                        style={{
-                          borderRadius: "20px",
-                          backgroundColor: "#efefef",
-                        }}
-                      >
-                        <div className="row mx-0">
-                          <div className="col-3 p-3">
-                            <img
-                              src={typeimg}
-                              alt=""
-                              style={{
-                                width: "100%",
-                                height: "100%",
-                                borderRadius: "10px",
-                              }}
-                            />
-                          </div>
-                          <div className="col-5 mt-2">
-                            <div
-                              className="box"
-                              style={{
-                                borderRight: "1px solid #acacac",
-                                height: "84%",
-                              }}
-                            >
-                              <h3 className="mb-0 mt-3 font-weight-bolder d-flex justify-content-between">
-                                {data.title}
-                              </h3>
-                              <h4> {data.content_platform[0]}</h4>
-                              <p>{data?.description}</p>
-                            </div>
-                          </div>
-
-                          <div
-                            className="col-4"
-                            style={{ padding: "2% 1% 2% 0" }}
+        <div className="pay-box my-md-0 w-100 p-2">
+          <div className="box d-flex justify-content-between">
+            <h1
+              className="font-weight-bold text-left"
+              style={{ letterSpacing: "3px", fontSize: "xxx-large" }}
+            >
+              Shorts
+            </h1>
+            <div
+              className="box bg-white d-flex align-items-center px-2"
+              style={{
+                transform: "translate(2%,-14%)",
+                borderRadius: "0 18px 0 0",
+              }}
+            >
+              <ul className="list-unstyled d-flex mb-0" style={{ gap: "15px" }}>
+                <li>
+                  <h5>
+                    <i className="fa fa-bowl-food"></i>&nbsp;Food
+                  </h5>
+                </li>
+                <li>
+                  <h5>
+                    <i className="fa fa-train"></i>&nbsp;Travel
+                  </h5>
+                </li>
+                <li>
+                  <h5>
+                    <i className="fa fa-gamepad"></i>&nbsp;Gaming
+                  </h5>
+                </li>
+                <li>
+                  <h5>
+                    <i className="fa fa-football"></i>&nbsp;Sports
+                  </h5>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="container my-2 p-0">
+            <div className="row">
+              <div className="col-3">
+                <section id="services" class="services py-0 h-100">
+                  <div className="records-wrapper container px-0 h-100">
+                    <div className="available-content card-wrapper h-100">
+                      <div className="icon-box h-100">
+                        <h3
+                          className="title mb-2"
+                          style={{ fontSize: "1.8rem" }}
+                        >
+                          <a href="">YT Shorts</a>
+                        </h3>
+                        <h4 className="title mb-2">
+                          <a href="">
+                            Price:{" "}
+                            <span className="font-weight-light">₹2000</span>
+                          </a>
+                        </h4>
+                        <h4 className="title mb-2">
+                          <a href="">Description</a>
+                        </h4>
+                        <p className="description">
+                          Duis aute irure dolor in reprehenderit in voluptate
+                          velit esse cillum dolore Lorem ipsum dolor sit amet
+                          consectetur, adipisicing elit. Labore, minus.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+              <div className="col-2">
+                <div className="container px-0 h-100">
+                  <div className="card h-100">
+                    <div
+                      className="card-body d-flex align-items-end justify-content-center h-100 p-2"
+                      style={{
+                        background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.6) 90%),url(${thumbnail})`,
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "center",
+                        backgroundSize: "contain",
+                      }}
+                    >
+                      <h4 className="text-center text-white">#your_ad</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-7">
+                <div
+                  className="row row-cols-2 h-100"
+                  style={{ rowGap: "20px" }}
+                >
+                  <div className="col">
+                    <div
+                      className="card h-100"
+                      style={{ backgroundColor: "#f2f2f2" }}
+                    >
+                      <div className="card-body p-2">
+                        <h3 className="text-center">Stats</h3>
+                        <ul
+                          style={{
+                            padding: 0,
+                            paddingLeft: "20px",
+                            listStyle: "none", // Adding left padding for bullet points
+                          }}
+                        >
+                          <li>
+                            <span style={{ fontWeight: "bold" }}>
+                              Subscribers:&nbsp;
+                            </span>
+                            5000
+                          </li>
+                          <li>
+                            <span style={{ fontWeight: "bold" }}>
+                              Per Video Reach:&nbsp;
+                            </span>
+                            1000
+                          </li>
+                          <li>
+                            <span style={{ fontWeight: "bold" }}>
+                              Category:&nbsp;
+                            </span>
+                            Horror
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col">
+                    <div
+                      className="card h-100 text-white"
+                      style={{ backgroundColor: "rgb(255, 43, 102)" }}
+                    >
+                      <div className="card-body p-2 d-flex flex-column justify-content-center">
+                        <h1 className="text-center">
+                          <i className="bi bi-plus-lg"></i>
+                        </h1>
+                        <h4 className="text-center">Request a Negotiation</h4>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col">
+                    {/* <div className="card h-100 bg-danger">
+                    <div className="card-body d-flex justify-content-center align-items-center p-2">
+                      <h3 className="text-center">
+                        Booked&nbsp;<i className="bi bi-x-circle"></i>
+                      </h3>
+                    </div>
+                  </div> */}
+                    <div className="card h-100 bg-success">
+                      <div className="card-body d-flex justify-content-center align-items-center p-2">
+                        <h3 className="text-center text-white">
+                          Available&nbsp;<i className="bi bi-check2-circle"></i>
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col">
+                    <div className="card h-100">
+                      <div className="card-body p-2">
+                        <h4 className="text-center">Customize Campaign</h4>
+                        <div className="box d-flex">
+                          <Button
+                            className="p-2 mx-auto"
+                            variant="primary"
+                            size="sm"
+                            disabled
                           >
-                            <div className="box">
-                              <h4 className="font-weight-bold">
-                                Available Sponsor Options:
-                              </h4>
-                              <div className="d-flex justify-content-around text-lg mt-3">
-                                <span
-                                  className={
-                                    "badge rounded-pill px-2 py-1 bg-success"
-                                  }
-                                >
-                                  {type}
-                                  <i className="bi bi-check2-circle"></i>
-                                </span>
-                              </div>
-                            </div>
-                            <button
-                              className="btn py-1 px-3 font-weight-bold d-none d-md-block"
-                              style={{
-                                width: "100%",
-                                marginTop: "4%",
-                                color: "#004EA9",
-                                backgroundColor: "white",
-                                border: "2px solid #004EA9",
-                                borderRadius: "10px",
-                              }}
-                              onClick={() => handleSponsorClick(data)}
-                            >
-                              Check Out Content Details &nbsp;&nbsp; &gt;&gt;
-                            </button>
-                            <div className="container d-flex text-white text-center px-0 mt-2">
-                              <div
-                                className="box myevents-box text-white"
-                                style={{ width: "100%" }}
-                              >
-                                <h6
-                                  style={{
-                                    borderBottom:
-                                      "1px solid rgba(255, 255, 255, 0.30)",
-                                    padding: "2%",
-                                  }}
-                                >
-                                  {type} Price
-                                </h6>
-                                <h5>₹50,000</h5>
-                              </div>
-                            </div>
-                          </div>
+                            Coming Soon
+                          </Button>
                         </div>
                       </div>
                     </div>
                   </div>
-                );
-              })
-          ) : (
-            <p>No data available</p>
-          )}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="mobile-view text-md">
-        <h2 className="sponsor-mobile-text">{type}</h2>
-        <div className="container mb-4 px-0">
-          {Array.isArray(data) && data.length > 0 ? (
-            data
-              .slice()
-              .reverse()
-              .map((data) => {
-                return (
-                  <div className="row">
-                    <div className="col-12">
-                      <div className="card myevents-card">
-                        <div className="post-thumb">
-                          <img
-                            src={typeimg}
-                            alt=""
-                            style={{
-                              width: "100%",
-                              height: "100%",
-                              borderRadius: "10px",
-                            }}
-                          />
-                          <div className="text-overlay">
-                            <h4 className="font-weight-bold mb-0">
-                              {data.title}
-                            </h4>
-                            <h5>{data.content_platform[0]}</h5>
-                          </div>
-                        </div>
-                        <div className="container">
-                          <div className="row d-flex">
-                            <div className="col-12">
-                              <div className="box">
-                                <h4 className="font-weight-bold">
-                                  Content Sponsored for:
-                                </h4>
-                                <div className="d-flex justify-content-around text-lg">
-                                  {/* {data.content_id.sponsoring_content_items
-                            // .filter((item) => item.is_sponsored) // Filter only items where is_sponsored is true
-                            .map((item, index) => ( */}
-                                  <span
-                                    // key={index}
-                                    className={
-                                      "badge rounded-pill px-2 py-1 bg-success"
-                                    }
-                                  >
-                                    {type}
-                                    <i className="bi bi-check2-circle"></i>
-                                  </span>
-                                  {/* ))} */}
-                                </div>
-                              </div>
-
-                              <div className="container text-lg text-white text-center d-flex my-2">
-                                <div
-                                  className="box myevents-box"
-                                  style={{ width: "100%" }}
-                                >
-                                  <p
-                                    className="mb-1"
-                                    style={{
-                                      borderBottom:
-                                        "1px solid rgba(255, 255, 255, 0.30)",
-                                    }}
-                                  >
-                                    {type} Price
-                                  </p>
-                                  <p className="mb-1">₹50,000</p>
-                                </div>
-                              </div>
-                              <button
-                                className="btn py-1 px-2 font-weight-bold"
-                                style={{
-                                  width: "100%",
-                                  marginBottom: "2%",
-                                  color: "#004EA9",
-                                  backgroundColor: "white",
-                                  border: "2px solid #004EA9",
-                                  borderRadius: "10px",
-                                }}
-                                onClick={() => handleSponsorClick(data)}
-                              >
-                                Check Out Content Details &nbsp;&nbsp; &gt;&gt;
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+        <div className="box d-flex justify-content-between my-4">
+          <h1 className="sponsor-mobile-text text-left m-0">Shorts</h1>
+          <div className="box bg-white d-flex align-items-center p-2">
+            <ul className="list-unstyled d-flex mb-0" style={{ gap: "20px" }}>
+              <li>
+                <h6 className="mb-0" style={{ fontSize: "12px" }}>
+                  <i className="fa fa-bowl-food"></i>&nbsp;Food
+                </h6>
+              </li>
+              <li>
+                <h6 className="mb-0" style={{ fontSize: "12px" }}>
+                  <i className="fa fa-train"></i>&nbsp;Travel
+                </h6>
+              </li>
+              <li>
+                <h6 className="mb-0" style={{ fontSize: "12px" }}>
+                  <i className="fa fa-gamepad"></i>&nbsp;Gaming
+                </h6>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="container my-2 p-0">
+          <div className="row mb-2">
+            <div className="col-6">
+              <section id="services" class="services py-0 h-100">
+                <div className="records-wrapper container px-0 h-100">
+                  <div className="available-content card-wrapper h-100">
+                    <div className="icon-box h-100">
+                      <h3 className="title mb-2" style={{ fontSize: "20px" }}>
+                        <a href="">YT Shorts</a>
+                      </h3>
+                      <h4 className="title mb-2" style={{ fontSize: "12px" }}>
+                        <a href="">
+                          Price:&nbsp;
+                          <span className="font-weight-light">₹2000</span>
+                        </a>
+                      </h4>
+                      <h4 className="title mb-2" style={{ fontSize: "12px" }}>
+                        <a href="">Description</a>
+                      </h4>
+                      <p className="description" style={{ fontSize: "10px" }}>
+                        Duis aute irure dolor in reprehenderit in voluptate
+                        velit esse cillum dolore Lorem ipsum dolor sit amet
+                        consectetur, adipisicing elit. Labore, minus.
+                      </p>
                     </div>
                   </div>
-                );
-              })
-          ) : (
-            <p>No data available</p>
-          )}
+                </div>
+              </section>
+            </div>
+            <div className="col-6">
+              <div className="container px-0 h-100">
+                <div className="card h-100">
+                  <div
+                    className="card-body d-flex align-items-end justify-content-center h-100 p-2"
+                    style={{
+                      background: `linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.6) 90%),url(${thumbnail})`,
+                      backgroundRepeat: "no-repeat",
+                      backgroundPosition: "center",
+                      backgroundSize: "contain",
+                    }}
+                  >
+                    <h4 className="text-center text-white">#your_ad</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="row row-cols-2 h-100" style={{ rowGap: "10px" }}>
+            <div className="col">
+              <div
+                className="card m-0 h-100"
+                style={{ backgroundColor: "#f2f2f2" }}
+              >
+                <div className="card-body p-2">
+                  <h5 className="text-center">Stats</h5>
+                  <ul
+                    style={{
+                      padding: 0,
+                      marginBottom: 0,
+                      listStyle: "none", // Adding left padding for bullet points
+                    }}
+                  >
+                    <li>
+                      <span style={{ fontWeight: "bold" }}>
+                        Subscribers:&nbsp;
+                      </span>
+                      5000
+                    </li>
+                    <li>
+                      <span style={{ fontWeight: "bold" }}>
+                        Per Video Reach:&nbsp;
+                      </span>
+                      1000
+                    </li>
+                    <li>
+                      <span style={{ fontWeight: "bold" }}>
+                        Category:&nbsp;
+                      </span>
+                      Horror
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div className="col">
+              <div
+                className="card m-0 h-100 text-white"
+                style={{ backgroundColor: "rgb(255, 43, 102)" }}
+              >
+                <div className="card-body p-2 d-flex flex-column justify-content-center">
+                  <h2 className="text-center">
+                    <i className="bi bi-plus-lg"></i>
+                  </h2>
+                  <h5 className="text-center">Request a Negotiation</h5>
+                </div>
+              </div>
+            </div>
+            <div className="col">
+              {/* <div className="card m-0 h-100 bg-danger">
+                    <div className="card-body d-flex justify-content-center align-items-center p-2">
+                      <h4 className="text-center">
+                        Booked&nbsp;<i className="bi bi-x-circle"></i>
+                      </h4>
+                    </div>
+                  </div> */}
+              <div className="card m-0 h-100 bg-success">
+                <div className="card-body d-flex justify-content-center align-items-center p-2">
+                  <h4 className="text-center text-white">
+                    Available&nbsp;<i className="bi bi-check2-circle"></i>
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div className="col">
+              <div className="card m-0 h-100">
+                <div className="card-body p-2">
+                  <h6 className="text-center">Customize Campaign</h6>
+                  <div className="box d-flex">
+                    <Button
+                      className="p-1 mx-auto rounded-pill"
+                      variant="primary"
+                      size="sm"
+                      disabled
+                    >
+                      Coming Soon
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>
