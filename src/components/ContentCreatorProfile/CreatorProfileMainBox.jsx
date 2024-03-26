@@ -6,6 +6,16 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import RecommendationSection from "./Recommendation";
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import "./slide.css"
+
+// import required modules
+import { EffectCoverflow, Pagination } from 'swiper/modules';
 const CreatorProfileMainBox = (data) => {
   const [expanded, setExpanded] = useState(null);
   console.log("Profile data by prop ", data?.data);
@@ -124,26 +134,57 @@ const CreatorProfileMainBox = (data) => {
           <div className="row py-5">
             <div className="col-5">
               <div className="slick-container">
-                <Slider {...settings}>
+                {/* <Slider {...settings}> */}
+                <Swiper
+                  effect={'coverflow'}
+                  grabCursor={true}
+                  centeredSlides={true}
+                  slidesPerView={'auto'}
+                  coverflowEffect={{
+                    rotate: 50,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 1,
+                    slideShadows: true,
+                  }}
+                  pagination={true}
+                  modules={[EffectCoverflow, Pagination]}
+                  className="mySwiper"
+                  style={{height: '88vh'}}
+                >
+                          <SwiperSlide>
+
                   <div
                     className="bg-white overflow-hidden slider-height"
                     style={{ borderRadius: "15px" }}
                   >
                     <div
                       className="p-3 cover"
-                      // style={{
-                      //   backgroundImage: `url(${profilebg})`,
-                      // }}
+                    // style={{
+                    //   backgroundImage: `url(${profilebg})`,
+                    // }}
                     >
                       <div className="media profile-head">
-                        <div className="profile">
-                          <img
-                            src={noProfilepic}
-                            alt="..."
-                            width="180"
-                            className="img-thumbnail"
-                          />
-                        </div>
+                        {/* {ProfileData?.channel_logo ? (
+                          <div className="profile">
+                            <img
+                              src={ProfileData?.channel_logo}
+                              alt="..."
+                              width="180"
+                              height="160"
+                              className="img-thumbnail"
+                            />
+                          </div>
+                        ) : ( */}
+                          <div className="profile">
+                            <img
+                              src={noProfilepic}
+                              alt="..."
+                              width="180"
+                              className="img-thumbnail"
+                            />
+                          </div>
+                        {/* )} */}
                       </div>
                     </div>
                     <div className="box p-3">
@@ -283,6 +324,8 @@ const CreatorProfileMainBox = (data) => {
                       </div>
                     </div>
                   </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
                   {ProfileData?.instagram?.length > 0 ? (
                     <div
                       className="bg-white overflow-hidden slider-height"
@@ -290,19 +333,31 @@ const CreatorProfileMainBox = (data) => {
                     >
                       <div
                         className="p-3 cover"
-                        // style={{
-                        //   backgroundImage: `url(${profilebg})`,
-                        // }}
+                      // style={{
+                      //   backgroundImage: `url(${profilebg})`,
+                      // }}
                       >
                         <div className="media profile-head">
-                          <div className="profile">
-                            <img
-                              src={noProfilepic}
-                              alt="..."
-                              width="180"
-                              className="img-thumbnail"
-                            />
-                          </div>
+                          {ProfileData?.insta_profile_pic ? (
+                            <div className="profile">
+                              <img
+                                src={ProfileData?.insta_profile_pic}
+                                alt="..."
+                                width="180"
+                                height="160"
+                                className="img-thumbnail"
+                              />
+                            </div>
+                          ) : (
+                            <div className="profile">
+                              <img
+                                src={noProfilepic}
+                                alt="..."
+                                width="180"
+                                className="img-thumbnail"
+                              />
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div className="box p-3">
@@ -356,6 +411,8 @@ const CreatorProfileMainBox = (data) => {
                       </div>
                     </div>
                   ) : null}
+                  </SwiperSlide>
+                  <SwiperSlide>
                   <div className="box slider-height">
                     {ProfileData?.youtube_shorts ? (
                       <video
@@ -375,7 +432,9 @@ const CreatorProfileMainBox = (data) => {
                       ></video>
                     )}
                   </div>
-                </Slider>
+                  </SwiperSlide>
+                  </Swiper>
+                  {/* </Slider> */}
               </div>
             </div>
             <div className="col-7">
@@ -409,9 +468,8 @@ const CreatorProfileMainBox = (data) => {
                       data?.data?.[platform].length > 0 && (
                         <div
                           key={index}
-                          className={`col ${
-                            expanded === index ? "expanded" : ""
-                          }`}
+                          className={`col ${expanded === index ? "expanded" : ""
+                            }`}
                           style={{
                             // padding: "5%",
                             marginBottom: "10px",
@@ -502,19 +560,31 @@ const CreatorProfileMainBox = (data) => {
                   >
                     <div
                       className="p-3 cover"
-                      // style={{
-                      //   backgroundImage: `url(${profilebg})`,
-                      // }}
+                    // style={{
+                    //   backgroundImage: `url(${profilebg})`,
+                    // }}
                     >
                       <div className="media profile-head">
-                        <div className="profile">
-                          <img
-                            src={noProfilepic}
-                            alt="..."
-                            width="180"
-                            className="img-thumbnail"
-                          />
-                        </div>
+                        {ProfileData?.channel_logo ? (
+                          <div className="profile">
+                            <img
+                              src={ProfileData?.channel_logo}
+                              alt="..."
+                              width="180"
+                              height="160"
+                              className="img-thumbnail"
+                            />
+                          </div>
+                        ) : (
+                          <div className="profile">
+                            <img
+                              src={noProfilepic}
+                              alt="..."
+                              width="180"
+                              className="img-thumbnail"
+                            />
+                          </div>
+                        )}
                       </div>
                     </div>
                     <div className="box p-3">
@@ -664,19 +734,31 @@ const CreatorProfileMainBox = (data) => {
                     >
                       <div
                         className="p-3 cover"
-                        // style={{
-                        //   backgroundImage: `url(${profilebg})`,
-                        // }}
+                      // style={{
+                      //   backgroundImage: `url(${profilebg})`,
+                      // }}
                       >
                         <div className="media profile-head">
-                          <div className="profile">
-                            <img
-                              src={noProfilepic}
-                              alt="..."
-                              width="180"
-                              className="img-thumbnail"
-                            />
-                          </div>
+                          {ProfileData?.insta_profile_pic ? (
+                            <div className="profile">
+                              <img
+                                src={ProfileData?.insta_profile_pic}
+                                alt="..."
+                                width="180"
+                                height="160"
+                                className="img-thumbnail"
+                              />
+                            </div>
+                          ) : (
+                            <div className="profile">
+                              <img
+                                src={noProfilepic}
+                                alt="..."
+                                width="180"
+                                className="img-thumbnail"
+                              />
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div className="box p-3">

@@ -19,6 +19,8 @@ import reels_sponsored_img from "../../assets/img/sponsoring_items/reel_sponsore
 import sponsored_by_img from "../../assets/img/sponsoring_items/sponsored_by.png";
 import UpcomingContent from "./UpcomingContent";
 import SuccessToast from "../Toast/Success";
+import LiveAndPast from "./LiveAndPastActivity";
+import Sliding from "./SlideComponent";
 // import Test from "./test";
 const ContentCreatorProfile = () => {
   useEffect(() => {
@@ -142,6 +144,8 @@ const ContentCreatorProfile = () => {
           style={{ maxWidth: "100%" }}
         >
           <CreatorProfileMainBox data={profileData} />
+          {/* <Sliding /> */}
+          
           <div className="pay-box my-md-0">
             {/* <div className="container">
               <div class="line-text">Recommendation According to Stats</div>
@@ -152,13 +156,19 @@ const ContentCreatorProfile = () => {
             </div>
             <CreatorPlatform data={profileData} />
             <div className="container">
-              <div class="line-text">Live & Past Records</div>
+              <div class="line-text">Creator Past Company</div>
             </div>
             {/* <Test /> */}
+            
             <Records data={profileData} />
+            <div className="container">
+              <div class="line-text">Live & Past Records</div>
+            </div>
+            <LiveAndPast />
             <div className="container">
               <div class="line-text">Creator Upcoming Content</div>
             </div>
+
             <UpcomingContent
               // line={"Sponsor Content"}
               cardData={upcoming_content}
@@ -166,7 +176,7 @@ const ContentCreatorProfile = () => {
             <div className="container">
               <div class="line-text">Available Sponsoring Items</div>
             </div>
-            <CreatorUpcomingContent />
+            <CreatorUpcomingContent cardData={upcoming_content} />
           </div>
         </div>
         {/* DESKTOP VIEW END  */}

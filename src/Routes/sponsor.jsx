@@ -44,7 +44,7 @@ const SponsorRoutes = () => {
   return (
     <>
       <NavBar />
-      <ErrorBoundary>
+      {/* <ErrorBoundary> */}
       <Routes>
         <Route path="/" element={<SponsorHome />} />
         <Route path="/choice" element={<SponsorChoice />} />
@@ -108,7 +108,7 @@ const SponsorRoutes = () => {
         <Route path="/sponsor_login" element={<Navigate to={"/"} />} />
         <Route path="/signup" element={<Navigate to={"/"} />} />
       </Routes>
-      </ErrorBoundary>
+      {/* </ErrorBoundary> */}
       <SponsorFooter />
     </>
   );
